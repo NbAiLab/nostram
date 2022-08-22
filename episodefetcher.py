@@ -75,7 +75,7 @@ if __name__ == '__main__':
     for i in inputlist:
         currentserie=ef.getseries(i)
         noseasons=ef.getmetadataforseries(currentserie)
-        for i in range(1,noseasons):
+        for i in range(1,noseasons+1):
             result=ef.getprograms(currentserie, i)
             for r in result:
                 print("serie" +currentserie + " sesong: " + str(i) + " id: " + str(r))
