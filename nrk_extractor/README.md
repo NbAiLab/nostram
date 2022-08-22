@@ -9,6 +9,9 @@ Specification for the internal format used when extracting text from OCR documen
 
 ## Book example (one for each book)
 ```bash
+
+
+
 "id": "digibok_2006080900001" # The original digibook id - have to be unique for each jsonl line
 "doc_type": "book" # The type of material. Newspaper or book
 "ocr_date": "20191224" #Date for scanning in the format yyyymmdd. Set to N/A if not in mods post.
