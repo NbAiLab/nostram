@@ -70,9 +70,14 @@ class episodefetcher:
         return resultlist
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--inputids', help='list of id's'')
+
+    args = parser.parse_args()
+
     ef=episodefetcher()
-    inputlist=["DNPR63700111","DNPR63700111"]
-    for i in inputlist:
+    inputlist=args.inputids
+    for i in inputlist.split(","):
         currentserie=ef.getseries(i)
         noseasons=ef.getmetadataforseries(currentserie)
         for i in range(1,noseasons+1):
