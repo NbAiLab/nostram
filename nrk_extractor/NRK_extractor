@@ -359,6 +359,7 @@ if __name__ == "__main__":
         raise SystemExit(0)
 
     info = extractor.dump_at(options.src, options.dst)
+    print(info)
 
     try:
         next_id = info["info"]["_embedded"]["next"]["id"]
