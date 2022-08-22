@@ -71,7 +71,7 @@ class episodefetcher:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--inputids', help='list of id's'')
+    parser.add_argument('--inputids', help="list of id's")
 
     args = parser.parse_args()
 
