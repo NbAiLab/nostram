@@ -10,6 +10,7 @@ Specification for the internal format used when extracting text from OCR documen
 ## Book example (one for each book)
 ```bash
 
+**** Fix this tomorrow
 
 
 "id": "digibok_2006080900001" # The original digibook id - have to be unique for each jsonl line
