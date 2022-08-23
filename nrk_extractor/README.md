@@ -10,11 +10,12 @@ All keys are lowercase and used undercasing for space. The values should be in t
 ```bash
 
 "id": "DNPR63700111_130664_131324" # The format is the pragramid_starttime(ms)_stoptime(ms).
-"program_id": "DNPR63700111" # Available as "id" in the episode meta-file.
-"category_id": "barn" # Available from the season meta-file as "category"->"id".
 "start_time": 130664 # The time in ms from the start of the episode file.
 "end_time": 131324 # The time in ms from the start of the episode file.
 "duration": 660 # Convenience field made from "end_time - start_time" in ms. 
+
+"program_id": "DNPR63700111" # Available as "id" in the episode meta-file.
+"category_id": "barn" # Available from the season meta-file as "category"->"id".
 "source": "NRK TV" # Set manually for each source. 
 "title": "Kråkeklubben" # Available from "preplay"->"titles"->"title"
 "subtitle": "1. havet" # Available from "preplay"->"titles"->"title"
@@ -23,7 +24,7 @@ All keys are lowercase and used undercasing for space. The values should be in t
 "ondemand_from": "2012-03-21T18:21:00+01:00" # Available from "availability"->"onDemand"->"from".
 "ondemand_to": "9999-12-31T00:00:00+01:00" # Available from "availability"->"onDemand"->"to".
 "external_embedding_allowed": true # # Available from "availability"->"externalEmbeddingAllowed". Boolean true or false.
-"subtitle": "subtitle text" # Subtitle text if this is available. If empty, the key should be dropdded.
+"subtitle_text": "the actual subtitle text" # Subtitle text if this is available. If empty, the key should be dropdded.
 
 ```
 
