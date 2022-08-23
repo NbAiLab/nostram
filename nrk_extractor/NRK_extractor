@@ -305,32 +305,40 @@ class NRKExtractor():
         return subtitles
     
     def save_jsonlines(self, subtitles, destination, info):
+        def build_entry(item, info):
+            entry = {
+                    "id": info["id"]+"_"+str(int(item["start"]*100))+"_"+str(int(item["end"]*100)),
+                    "start_time": int(item["start"]*100),
+                    "end_time": int(item["end"]*100),
+                    "duration": int((item["end"] - item["start"])*100),
+                    "program_id": info["id"],
+                    "source": "NRK TV",
+                    "category": info["manifest"]["statistics"]["luna"]["data"]["category"],
+                    "title": info["info"]["preplay"]["titles"]["title"],
+                    "availability_information": info["info"]["availability"]["information"],
+                    "is_geoblocked":info["info"]["availability"]['isGeoBlocked'],
+                    "on_demand_from":info["info"]["availability"]["onDemand"]["from"],
+                    "on_demand_to":info["info"]["availability"]["onDemand"]["to"],
+                    "external_embedding_allowed":info["info"]["availability"]['externalEmbeddingAllowed'],
+                    "subtitle": info["info"]["preplay"]["titles"]["subtitle"],
+                    "audio": {"path": info["audio"]}
+                }
+            return entry
+
         # Save segments
         with open(destination, "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.segments):
-                entry = {
-                    "sentence_id": idx,
-                    "start_time": item["start"],
-                    "end_time": item["end"],
-                    "duration": item["end"] - item["start"],
-                    "audio": {"path": info["audio"]}
-                }
+                entry = build_entry(item,info)
                 f.write(json.dumps(entry) + "\n")
 
         # Save subtitles
-        destination = destination.replace(".jsonl","_subtitles.jsonl")
-        with open(destination, "w") as f:
+        with open(destination.replace(".jsonl","_subtitles.jsonl"), "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
-                entry = {
-                    "sentence_id": idx,
-                    "start_time": item["start"],
-                    "end_time": item["end"],
-                    "duration": item["end"] - item["start"],
-                    "sentence_text": item["text"].replace("<br>", "\n"),
-                    "audio": {"path": info["audio"]}
-                }
+                entry = build_entry(item,info)
+                sub = {"subtitle_text": item["text"].replace("<br>", "\n")}
+                entry = {**entry,**sub}
                 f.write(json.dumps(entry) + "\n")
 
 
