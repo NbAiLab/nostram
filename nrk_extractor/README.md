@@ -7,6 +7,7 @@ The code extracts both audio-files and sub-titles from NRK.
 # JSON Lines Format
 All keys are lowercase and used undercasing for space. The values should be in typical printing format, including utf-8 characters.
 
+```bash
 
 "id": "DNPR63700111_130664_131324" # The format is the pragramid_starttime(ms)_stoptime(ms).
 "programid": "DNPR63700111" # Available as "id" in the episode meta-file
