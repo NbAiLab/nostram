@@ -24,7 +24,7 @@ All keys are lowercase and used undercasing for space. The values should be in t
 "is_geoblocked": false # Available from "availability"->"isGeoBlocked". Boolean true or false.
 "on_demand_from": "2012-03-21T18:21:00+01:00" # Available from "availability"->"onDemand"->"from".
 "on_demand_to": "9999-12-31T00:00:00+01:00" # Available from "availability"->"onDemand"->"to".
-"external_embedding_allowed": true # # Available from "availability"->"externalEmbeddingAllowed". Boolean true or false.
+"external_embedding_allowed": true # Available from "availability"->"externalEmbeddingAllowed". Boolean true or false.
 
 #For subtitled version only
 "subtitle_text": "the actual subtitle text" # Subtitle text if this is available. If empty, the key should be dropdded.
