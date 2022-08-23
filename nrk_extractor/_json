@@ -166,14 +166,14 @@ class NRKExtractor():
 
         subtitles_destination = os.path.splitext(info["audio"])[0] + ".jsonl"
         
+
         if os.path.exists(subtitles_destination):
             return info
 
         subtitles = self.load_subtitles(info["subtitles"])
         subtitles = self.resync(info["audio"], subtitles,  options)
-        print(subtitles)
         self.find_good_areas(subtitles)
-        
+       
         print("***SAVING")
         self.save_jsonlines(subtitles, subtitles_destination, info)
 
@@ -305,7 +305,11 @@ class NRKExtractor():
         return subtitles
     
     def save_jsonlines(self, subtitles, destination, info):
-        # Save segments
+        breakpoint()
+        print(destination)
+        print("saving first")
+        
+        #Write segments
         with open(destination, "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.segments):
@@ -316,11 +320,14 @@ class NRKExtractor():
                     "duration": item["end"] - item["start"],
                     "audio": {"path": info["audio"]}
                 }
-                f.write(json.dumps(entry) + "\n")
+                f.write(json.dumps(entry) + "\n")        
 
-        # Save subtitles
-        destination = destination.replace(".jsonl","_subtitles.jsonl")
-        with open(destination, "w") as f:
+
+        #Write the subtitles
+
+        print("saving next")
+        subtitles_destination = destination.replace(".jsonl","_subtitles.jsonl")
+        with open(subtitles_destination, "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = {
