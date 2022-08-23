@@ -358,6 +358,10 @@ if __name__ == "__main__":
                         help="If given, how many next episodes to download (if available)",
                         default=1)
 
+    parser.add_argument("-t", "--total", dest="all_episodes",
+                        help="Downloads all episodes in all seasons in the entire serie",
+                        action="store_true", default=False)
+                    
     parser.add_argument("-a", "--aggressive", dest="aggressive", help="How aggressive (0-3, 3 is most aggressive), default 1", default=1)
     parser.add_argument("--min_cps", dest="min_cps", help="Minimum CPS", default=0)
     parser.add_argument("--max_cps", dest="max_cps", help="Maximum CPS", default=0)
@@ -387,13 +391,28 @@ if __name__ == "__main__":
         print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
-    info = extractor.dump_at(options.src, options.dst)
-    #print(info)
+    if options.all_episodes and int(options.num_episodes)>1:
+        print("Please do not use the -r and the -t option together.")
+        raise SystemExit(0)
 
-    try:
-        next_id = info["info"]["_embedded"]["next"]["id"]
-        for i in range(1, int(options.num_episodes)):
+    
+    if options.all_episodes:
+        try:
+            ##get an episode from the serie where this is an episode
+            next_id = 3333 ###Freddy this is where the generator output goes
             info = extractor.dump_at(next_id, options.dst)
+    
+        except Exception:
+            next_id = None
+
+    else:
+        #If not all 
+        info = extractor.dump_at(options.src, options.dst)
+
+        try:
             next_id = info["info"]["_embedded"]["next"]["id"]
-    except Exception:
-        next_id = None        
+            for i in range(1, int(options.num_episodes)):
+                info = extractor.dump_at(next_id, options.dst)
+                next_id = info["info"]["_embedded"]["next"]["id"]
+        except Exception:
+            next_id = None        
