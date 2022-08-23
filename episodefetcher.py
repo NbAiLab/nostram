@@ -110,6 +110,19 @@ class episodefetcher:
         for episode in self.episodelist:
             yield episode
 
+    def getepisodemetadata(self,episode):
+        data = {}
+        programinforeq = "https://psapi.nrk.no/playback/metadata/program/" + episode
+        resp = self.geturl(programinforeq)
+        resultingjsonprogram = resp.json()
+
+        currentserie=self.getseries(episode)
+        seriesinforeq=""
+
+        data["program_id"]=episode
+        return data
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--inputids', help="list of id's")
