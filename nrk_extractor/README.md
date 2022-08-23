@@ -17,12 +17,12 @@ All keys are lowercase and used undercasing for space. The values should be in t
 "source": "NRK TV" # Set manually for each source. 
 "title": "Kråkeklubben" # Available from "preplay"->"titles"->"title"
 "subtitle": "1. havet" # Available from "preplay"->"titles"->"title"
-"availability_information": "Usually empty" # Available from "availability"->"information". If empty, key should be dropdded
+"availability_information": "Usually empty" # Available from "availability"->"information". If empty, the key should be dropdded
 "availability_isgeoblocked": "false" # Available from "availability"->"isGeoBlocked". Encoded as string here, "true" or "false"
 "ondemand_from": "2012-03-21T18:21:00+01:00" # Available from "availability"->"onDemand"->"from".
 "ondemand_to": "9999-12-31T00:00:00+01:00" # Available from "availability"->"onDemand"->"to".
 "externalembeddingallowed": "true" # # Available from "availability"->"externalEmbeddingAllowed". Encoded as string here, "true" or "false"
-
+"subtitle": "subtitle text" # Subtitle text if this is available. If empty, the key should be dropdded.
 
 ```
 
