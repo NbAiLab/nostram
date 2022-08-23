@@ -9,7 +9,7 @@ All keys are lowercase and used undercasing for space. The values should be in t
 
 ```bash
 
-"id": "DNPR63700111_130664_131324" # The format is the pragramid_starttime(ms)_stoptime(ms).
+"id": "DNPR63700111_130664_131324" # The format is "program_id" + "start_time" + "end_time".
 "start_time": 130664 # The time in ms from the start of the episode file.
 "end_time": 131324 # The time in ms from the start of the episode file.
 "duration": 660 # Convenience field made from "end_time - start_time" in ms. 
