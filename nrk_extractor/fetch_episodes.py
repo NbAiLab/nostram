@@ -99,10 +99,10 @@ class episodefetcher:
             if self.isseries(i)== False:
                 self.episodelist.append(i)
             else:
-                currentserie = ef.getseries(i)
-                theseasons = ef.getmetadataforseries(currentserie)
+                currentserie = self.getseries(i)
+                theseasons = self.getmetadataforseries(currentserie)
                 for i in theseasons:
-                    result = ef.getprograms(currentserie, i)
+                    result = self.getprograms(currentserie, i)
                     for r in result:
                         self.episodelist.append(r)
                         #print("serie" + currentserie + " sesong: " + str(i) + " id: " + str(r))
