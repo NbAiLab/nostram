@@ -65,7 +65,7 @@ class NRKExtractor():
         res["info"] = json.loads(r.text)
         
         if not bool(res["info"]["playable"]):
-            raise Exception("No playable info '%s'" % murl)
+            res["info"]["playable"] = "Unknown"
 
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
             raise Exception("Bad info block from '%s'" % murl)
@@ -393,6 +393,8 @@ if __name__ == "__main__":
 
         print(json.dumps(info, indent=" "))
         raise SystemExit(0)
+
+    print("* Starting toprocess "+options.src)
 
     if options.all_episodes and int(options.num_episodes)>1:
         print("Please do not use the -r and the -t option together.")
