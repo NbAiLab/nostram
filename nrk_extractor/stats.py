@@ -7,11 +7,11 @@ import pandas as pd
 
 def main(args):
     df = pd.read_json(args.jsonl, lines=True)
-    programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count'])
+    programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
     programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
     programs_detailed = programs_detailed.drop(columns=['sum'])
 
-    programs = df.groupby(["title"])['duration'].agg(['sum','count'])
+    programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
     programs['hours'] = (programs['sum']/100/3600).round(1)
     programs = programs.drop(columns=['sum'])
     
@@ -19,9 +19,9 @@ def main(args):
 
     
     with open('stats.md', 'w') as f:
-        f.write(programs.to_markdown())
+        f.write(programs.to_markdown(index=False))
         f.write("\n\n")
-        f.write(programs_detailed.to_markdown())
+        f.write(programs_detailed.to_markdown(index=False))
 
 
     #breakpoint()
