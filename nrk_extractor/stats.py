@@ -14,8 +14,17 @@ def main(args):
     programs = df.groupby(["title"])['duration'].agg(['sum','count'])
     programs['hours'] = (programs['sum']/100/3600).round(1)
     programs = programs.drop(columns=['sum'])
+    
 
-    breakpoint()
+
+    
+    with open('stats.md', 'w') as f:
+        f.write(programs.to_markdown())
+        f.write("\n\n")
+        f.write(programs_detailed.to_markdown())
+
+
+    #breakpoint()
     #with jsonlines.open(args.jsonl) as reader:
     #   for line in reader:
     #        print(line)
