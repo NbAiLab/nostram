@@ -27,14 +27,13 @@ def main(args):
         programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
         programs['hours'] = (programs['sum']/100/3600).round(1)
         programs = programs.drop(columns=['sum'])
-        programs.rename(columns={"count": "segments"})
+        programs = programs.rename(columns={"count": "segments"})
 
         programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
         programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
         programs_detailed = programs_detailed.drop(columns=['sum'])
-        programs_detailed.rename(columns={"count": "segments"})
+        programs_detailed = programs_detailed.rename(columns={"count": "segments"})
         
-        breakpoint()
         if s == segments_list:
             save_file = "stats.md"
             title="# NRK Programs Processed\n"
