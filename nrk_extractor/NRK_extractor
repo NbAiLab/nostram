@@ -63,6 +63,9 @@ class NRKExtractor():
             raise Exception("Failed to load metadata from '%s'" % murl)
 
         res["info"] = json.loads(r.text)
+        
+        if not bool(res["info"]["playable"]):
+            raise Exception("No playable info '%s'" % murl)
 
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
             raise Exception("Bad info block from '%s'" % murl)
