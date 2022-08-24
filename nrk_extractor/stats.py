@@ -1,38 +1,62 @@
 
 import json
 import sys
+import os
 import jsonlines
 from argparse import ArgumentParser
 import pandas as pd
+import glob
+
+
 
 def main(args):
-    df = pd.read_json(args.jsonl, lines=True)
-    programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
-    programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
-    programs_detailed = programs_detailed.drop(columns=['sum'])
+    json_pattern = os.path.join(args.directory,'*.jsonl')
+    file_list = glob.glob(json_pattern)
+    segments_list = [x for x in file_list if not '_subtitles' in x]
+    subtitles_list = [x for x in file_list if '_subtitles' in x]
+   
 
-    programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
-    programs['hours'] = (programs['sum']/100/3600).round(1)
-    programs = programs.drop(columns=['sum'])
+    for s in [segments_list,subtitles_list]:
+        dfs = []
+        for file in s:
+            data = pd.read_json(file, lines=True) # read data frame from json file
+            dfs.append(data) # append the data frame to the list
     
-
-
+        df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
     
-    with open('stats.md', 'w') as f:
-        f.write(programs.to_markdown(index=False))
-        f.write("\n\n")
-        f.write(programs_detailed.to_markdown(index=False))
+        programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
+        programs['hours'] = (programs['sum']/100/3600).round(1)
+        programs = programs.drop(columns=['sum'])
+        programs.rename(columns={"count": "segments"})
 
+        programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
+        programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
+        programs_detailed = programs_detailed.drop(columns=['sum'])
+        programs_detailed.rename(columns={"count": "segments"})
 
-    #breakpoint()
-    #with jsonlines.open(args.jsonl) as reader:
-    #   for line in reader:
-    #        print(line)
+        if s == "segment_list":
+            save_file = "stats.md"
+            title="# NRK Programs Processed"
+        else:
+            save_file = "stats_subtitles.ms"
+            title="# NRK Subtitles Extracted"
+
+        with open(save_file, 'w') as f:
+            f.write("# NRK Programs Processed")
+            f.write(programs.to_markdown(index=False))
+            f.write("\n\n")
+            f.write("<details><summary>View detailed summary</summary>")
+            f.write("## Detailed View")
+            f.write(programs_detailed.to_markdown(index=False))
+            f.write("</details>")
+        
+        print(save_file+" written to disk")
+    
 
 def parse_args():
     # Parse commandline
     parser = ArgumentParser()
-    parser.add_argument("-f", "--file", dest="jsonl", help="Json-lines file to analyse", required=True)
+    parser.add_argument("-d", "--directory", dest="directory", help="Directory to Json-lines file to analyse", required=True)
     args = parser.parse_args()
     return args
 
