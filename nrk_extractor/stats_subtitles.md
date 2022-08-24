@@ -1,4 +1,5 @@
-# NRK Programs Processed| title                         |   count |   hours |
+# NRK Subtitles Extracted
+| title                         |   count |   hours |
 |:------------------------------|--------:|--------:|
 | Alle sammen sammen            |    8030 |     9.8 |
 | Borgen skole                  |    3020 |     4.2 |
@@ -15,7 +16,9 @@
 | Stjernestøv                   |    3721 |     4.6 |
 | U                             |     180 |     0.2 |
 
-<details><summary>View detailed summary</summary>## Detailed View| title                         | program_id   | subtitle                                           | category     |   count |   hours |
+<details><summary>View detailed summary</summary>
+## Detailed View
+| title                         | program_id   | subtitle                                           | category     |   count |   hours |
 |:------------------------------|:-------------|:---------------------------------------------------|:-------------|--------:|--------:|
 | Alle sammen sammen            | MSUB22000113 | 1. episode                                         | barn         |     321 |     0.4 |
 | Alle sammen sammen            | MSUB22000114 | 1. episode                                         | barn         |     365 |     0.4 |
