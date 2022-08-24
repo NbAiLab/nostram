@@ -33,7 +33,8 @@ def main(args):
         programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
         programs_detailed = programs_detailed.drop(columns=['sum'])
         programs_detailed = programs_detailed.rename(columns={"count": "segments"})
-        
+       
+        breakpoint()
         if s == segments_list:
             save_file = "stats.md"
             title="# NRK Programs Processed\n"
