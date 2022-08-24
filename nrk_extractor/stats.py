@@ -34,11 +34,11 @@ def main(args):
         programs_detailed = programs_detailed.drop(columns=['sum'])
         programs_detailed.rename(columns={"count": "segments"})
 
-        if s == "segment_list":
+        if s == segments_list:
             save_file = "stats.md"
             title="# NRK Programs Processed"
         else:
-            save_file = "stats_subtitles.ms"
+            save_file = "stats_subtitles.md"
             title="# NRK Subtitles Extracted"
 
         with open(save_file, 'w') as f:
