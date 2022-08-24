@@ -36,19 +36,19 @@ def main(args):
 
         if s == segments_list:
             save_file = "stats.md"
-            title="# NRK Programs Processed"
+            title="# NRK Programs Processed\n"
         else:
             save_file = "stats_subtitles.md"
-            title="# NRK Subtitles Extracted"
+            title="# NRK Subtitles Extracted\n"
 
         with open(save_file, 'w') as f:
-            f.write("# NRK Programs Processed")
+            f.write(title)
             f.write(programs.to_markdown(index=False))
             f.write("\n\n")
-            f.write("<details><summary>View detailed summary</summary>")
-            f.write("## Detailed View")
+            f.write("<details><summary>View detailed summary</summary>\n")
+            f.write("## Detailed View\n")
             f.write(programs_detailed.to_markdown(index=False))
-            f.write("</details>")
+            f.write("</details>\n")
         
         print(save_file+" written to disk")
     
