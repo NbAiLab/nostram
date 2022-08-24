@@ -33,6 +33,7 @@ def main(args):
         programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
         programs_detailed = programs_detailed.drop(columns=['sum'])
         programs_detailed.rename(columns={"count": "segments"})
+        
 
         if s == segments_list:
             save_file = "stats.md"
@@ -45,11 +46,11 @@ def main(args):
             f.write(title)
             f.write(programs.to_markdown(index=False))
             f.write("\n\n")
+            f.write(f"\n**A total of {round(df['duration'].sum()/100/3600,1)} hours in the dataset**")
             f.write("<details><summary>View detailed summary</summary>\n")
             f.write("## Detailed View\n")
             f.write(programs_detailed.to_markdown(index=False))
             f.write("</details>\n")
-        
         print(save_file+" written to disk")
     
 

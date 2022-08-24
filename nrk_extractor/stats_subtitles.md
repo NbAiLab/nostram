@@ -16,7 +16,8 @@
 | Stjernestøv                   |    3721 |     4.6 |
 | U                             |     180 |     0.2 |
 
-<details><summary>View detailed summary</summary>
+
+**A total of 53.6 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                         | program_id   | subtitle                                           | category     |   count |   hours |
 |:------------------------------|:-------------|:---------------------------------------------------|:-------------|--------:|--------:|
