@@ -20,7 +20,7 @@ import sys
 from argparse import ArgumentParser
 from detect_voice import VoiceDetector
 from sub_parser import SubParser
-
+from fetch_episodes import episodefetcher
 
 """
 META: https://psapi.nrk.no/programs/PRHO04004903
@@ -395,15 +395,14 @@ if __name__ == "__main__":
         print("Please do not use the -r and the -t option together.")
         raise SystemExit(0)
 
-    
     if options.all_episodes:
-        try:
-            ##get an episode from the serie where this is an episode
-            next_id = 3333 ###Freddy this is where the generator output goes
-            info = extractor.dump_at(next_id, options.dst)
-    
-        except Exception:
-            next_id = None
+        ef=episodefetcher()
+        ef.episodebuilder(options.src)
+        
+        for i in ef.episodegenerator():
+            info = extractor.dump_at(i, options.dst)
+        
+        next_id = None
 
     else:
         #If not all 
