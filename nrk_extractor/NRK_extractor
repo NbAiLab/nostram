@@ -45,7 +45,7 @@ class NRKExtractor():
         """
         Resolve NRK urls based on a url or an ID
         """
-
+        print("url:" + str(url_or_id))
         if url_or_id.startswith("http"):
             r = re.match("https://.*/(.*)/avspiller", url_or_id)
             if r:
@@ -64,7 +64,7 @@ class NRKExtractor():
         r = requests.get(murl)
         if r.status_code != 200:
             raise Exception("Failed to load metadata from '%s'" % murl)
-
+        #print(r.json()["vtt"])
         res["info"] = json.loads(r.text)
         
         if not bool(res["info"]["playable"]):
@@ -135,9 +135,14 @@ class NRKExtractor():
         if os.path.exists(target) and os.stat(target).st_size > 0:
             print("  Subtitle already present at '%s'" % target)
             return
+        #print(info)
+        #exit(-1)
+        if "vtt" not in info or info["vtt"] == None:
+            print("VTT url" + str(target))
+            print ("Missing VTT url for '%s'" % target)
+            #raise Exception("Missing VTT url for '%s'" % target)
+            return
 
-        if "vtt" not in info:
-            raise Exception("Missing VTT url for '%s'" % target)
         print("  Extracting subtitles to %s" % target)
         r = requests.get(info["vtt"])
         if r.status_code != 200:
