@@ -7,7 +7,7 @@ Licensed under GPL v3
 """
 
 import re
-
+import os.path
 
 class SubParser:
     """Parse VTT/SRT files."""
@@ -24,6 +24,9 @@ class SubParser:
         return ts
 
     def load_srt(self, filename, default_who=None):
+        if os.path.exists(filename) == False:
+            return None
+
         with open(filename, "rb") as f:
 
             start = end = None
