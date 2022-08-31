@@ -13,14 +13,14 @@
 | Linus i Svingen               |       1256 |     1.2 |
 | Livet                         |       9166 |    11.7 |
 | Megafon                       |       1342 |     1.9 |
-| Newton                        |        197 |     0.2 |
-| Planetpatruljen               |        569 |     0.8 |
+| Newton                        |       6128 |     8.3 |
+| Planetpatruljen               |       9302 |    11.2 |
 | SKAM                          |      10599 |    13.3 |
 | Stjernestøv                   |       3721 |     4.6 |
 | U                             |        180 |     0.2 |
 
 
-**A total of 66.4 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 84.9 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                         | program_id   | subtitle                                           | category     |   segments |   hours |
 |:------------------------------|:-------------|:---------------------------------------------------|:-------------|-----------:|--------:|
@@ -246,13 +246,130 @@
 | Megafon                       | MSUB07001413 | Megafon: Til topps og Oliver                       | barn         |        239 |     0.4 |
 | Megafon                       | MSUB07001513 | Megafon: 3Dprinter og sjarken                      | barn         |        261 |     0.4 |
 | Megafon                       | MSUB07001613 | Megafon: Adopsjon                                  | barn         |        181 |     0.3 |
+| Newton                        | DMPP21000121 | Stian må passe Anton!                              | barn         |        232 |     0.3 |
+| Newton                        | DMPP21000221 | Krasjtester bil fra 15 meter!                      | barn         |        132 |     0.1 |
+| Newton                        | DMPP21000321 | Lyst til å gjøre som Dennis?                       | barn         |        103 |     0.1 |
+| Newton                        | DMPP21000421 | Hvem takler kulde best?                            | barn         |        236 |     0.3 |
+| Newton                        | DMPP21000521 | Lager snø av kokende vann!                         | barn         |         90 |     0.1 |
+| Newton                        | DMPP21000621 | Lær å bli den raskeste i akebakken!                | barn         |        120 |     0.2 |
+| Newton                        | DMPP21000721 | Potetgull med svette!                              | barn         |        146 |     0.2 |
+| Newton                        | DMPP21000821 | Hvem lager den største eksplosjonen?               | barn         |        193 |     0.2 |
+| Newton                        | DMPP21000921 | Newtons store mysterium!                           | barn         |         95 |     0.1 |
+| Newton                        | DMPP21001021 | Slik blir du god i gaming! (1:2)                   | barn         |        223 |     0.3 |
+| Newton                        | DMPP21001121 | Gaming er bra for deg! (2:2)                       | barn         |        197 |     0.3 |
+| Newton                        | DMPP21001321 | Knuse glass med stemmen?                           | barn         |        120 |     0.2 |
+| Newton                        | DMPP21001421 | Lag din egen softis!                               | barn         |         47 |     0.1 |
+| Newton                        | DMPP21001521 | Dårligere enn en 10-åring? (1:4)                   | barn         |         98 |     0.1 |
+| Newton                        | DMPP21001621 | Faller gjennom isen! (2:4)                         | barn         |        114 |     0.2 |
+| Newton                        | DMPP21001721 | Under militær kommando! (3:4)                      | barn         |        259 |     0.3 |
+| Newton                        | DMPP21001821 | Den store styrkeprøven! (4:4)                      | barn         |        106 |     0.2 |
+| Newton                        | DMPP21001921 | Lag din egen regnbue!                              | barn         |         51 |     0.1 |
+| Newton                        | DMPP21002021 | Norges største kanelsnurr?                         | barn         |        127 |     0.2 |
+| Newton                        | DMPP21002121 | Lag din egen vulkan!                               | barn         |         64 |     0.1 |
+| Newton                        | DMPP21002321 | Slukes av et svart hull!                           | barn         |         72 |     0.1 |
+| Newton                        | DMPP21002421 | Bry deg! (musikkvideo)                             | barn         |         39 |     0   |
+| Newton                        | DMPP21002621 | Bli med Dennis på innspilling!                     | barn         |         82 |     0.1 |
+| Newton                        | DMPP21002721 | Hele Norge synger «Bry deg»                        | barn         |         39 |     0   |
+| Newton                        | DMPP21002821 | Vaskemaskin i hodet?                               | barn         |         93 |     0.1 |
+| Newton                        | DMPP21002921 | Bli med dronen til værs!                           | barn         |         17 |     0   |
+| Newton                        | DMPP21003021 | Ikke gjør dette på innspilling!!!                  | barn         |         68 |     0.1 |
+| Newton                        | DMPP21003620 | Bli med inn i skrekkens hus!                       | barn         |        127 |     0.2 |
+| Newton                        | DMPP21003720 | Verdens merkeligste høneprosjekt?                  | barn         |        100 |     0.2 |
+| Newton                        | DMPP21500122 | Må spise griseører!                                | barn         |        198 |     0.3 |
+| Newton                        | DMPP21500222 | Challenge: Hva er i boksen?!                       | barn         |        161 |     0.2 |
+| Newton                        | DMPP21500322 | Hukommelse-challenge!                              | barn         |        149 |     0.2 |
+| Newton                        | DMPP21500422 | Gøy når rektor tryner?!                            | barn         |        137 |     0.2 |
+| Newton                        | DMPP21500522 | Hvem spytter lengst?                               | barn         |         98 |     0.1 |
+| Newton                        | DMPP21500622 | Hvem kommer lengst på tynn is?                     | barn         |        127 |     0.2 |
+| Newton                        | DMPP21500722 | Norges sterkeste er for svak!                      | barn         |         87 |     0.1 |
+| Newton                        | DMPP21500822 | Lager vulkaneksplosjon!                            | barn         |         90 |     0.1 |
+| Newton                        | DMPP21500922 | Lær magi og triks!                                 | barn         |        105 |     0.1 |
+| Newton                        | DMPP21501022 | Sterkere mat for hver dag!                         | barn         |        184 |     0.3 |
+| Newton                        | DMPP21501122 | Verdens sterkeste challenge!                       | barn         |        175 |     0.2 |
+| Newton                        | DMPP21501322 | Lag ditt eget timeglass!                           | barn         |         42 |     0.1 |
+| Newton                        | DMPP21501422 | 5 ting som ikke er sant!                           | barn         |         50 |     0.1 |
+| Newton                        | DMPP21501522 | Tidenes flaueste challenge!                        | barn         |        204 |     0.3 |
+| Newton                        | DMPP21501622 | Lag din egen sprettball!                           | barn         |         60 |     0.1 |
+| Newton                        | DMPP21501722 | Sprøyter med kunnskap!                             | barn         |         90 |     0.1 |
+| Newton                        | DMPP21501822 | Kan de lure en politihund?                         | barn         |        152 |     0.2 |
+| Newton                        | DMPP21501922 | 12 timer med skjerm i trynet!                      | barn         |        223 |     0.3 |
+| Newton                        | DMPP21502022 | Lag slush på 5 min!                                | barn         |         49 |     0.1 |
+| Newton                        | DMPP21502222 | Ane blir hypnotisert!                              | barn         |        160 |     0.2 |
 | Newton                        | DMPP21502322 | Prosjekt kylling!                                  | barn         |        197 |     0.2 |
+| Planetpatruljen               | DNPR63000116 | 1. Bilkjøring                                      | barn         |        132 |     0.2 |
+| Planetpatruljen               | DNPR63000216 | 2. Klesbyttedag                                    | barn         |        157 |     0.2 |
+| Planetpatruljen               | DNPR63000316 | 3. Søppelbrenning                                  | barn         |        144 |     0.2 |
+| Planetpatruljen               | DNPR63000416 | 4. Plast                                           | barn         |        148 |     0.2 |
+| Planetpatruljen               | DNPR63000516 | 5. Matsøppel                                       | barn         |        156 |     0.2 |
+| Planetpatruljen               | DNPR63000616 | 6. Oljesøl                                         | barn         |        146 |     0.2 |
+| Planetpatruljen               | DNPR63000716 | 7. Hugge ned trær                                  | barn         |        137 |     0.2 |
+| Planetpatruljen               | DNPR63000816 | 8. Sykkel                                          | barn         |        149 |     0.2 |
+| Planetpatruljen               | DNPR63000916 | 9. Pante flasker                                   | barn         |        162 |     0.2 |
+| Planetpatruljen               | DNPR63001116 | 2. Måser                                           | barn         |        143 |     0.2 |
+| Planetpatruljen               | DNPR63001216 | 3. Froskeegg                                       | barn         |        148 |     0.2 |
+| Planetpatruljen               | DNPR63001316 | 4. Tang                                            | barn         |        147 |     0.2 |
+| Planetpatruljen               | DNPR63001416 | 5. Humle                                           | barn         |        139 |     0.2 |
+| Planetpatruljen               | DNPR63001516 | 6. Maurtue                                         | barn         |        152 |     0.2 |
+| Planetpatruljen               | DNPR63001616 | 7. Meitemark                                       | barn         |        134 |     0.2 |
+| Planetpatruljen               | DNPR63001716 | 8. Død fugl                                        | barn         |        146 |     0.2 |
+| Planetpatruljen               | DNPR63001816 | 9. Sopp                                            | barn         |        128 |     0.2 |
+| Planetpatruljen               | DNRR63000118 | 1. Plastspesial - plastflasker                     | barn         |         52 |     0.1 |
+| Planetpatruljen               | DNRR63000119 | 2. Biller                                          | barn         |        146 |     0.2 |
+| Planetpatruljen               | DNRR63000120 | 1. Ikke grav ned søppel                            | barn         |        172 |     0.2 |
+| Planetpatruljen               | DNRR63000121 | 1. Voksenparken                                    | barn         |        186 |     0.2 |
 | Planetpatruljen               | DNRR63000122 | 2. Spar strøm                                      | barn         |        156 |     0.2 |
+| Planetpatruljen               | DNRR63000218 | 2. Plastspesial - sjokoladepapir                   | barn         |         77 |     0.1 |
+| Planetpatruljen               | DNRR63000219 | 3. Mygg                                            | barn         |        152 |     0.2 |
+| Planetpatruljen               | DNRR63000220 | 2. Plast på bål                                    | barn         |        127 |     0.1 |
 | Planetpatruljen               | DNRR63000222 | 4. Ikke sløs vann                                  | barn         |        151 |     0.2 |
+| Planetpatruljen               | DNRR63000318 | 3. Plastspesial - fiskesnøre                       | barn         |         65 |     0.1 |
+| Planetpatruljen               | DNRR63000319 | 4. Fluer                                           | barn         |        131 |     0.2 |
+| Planetpatruljen               | DNRR63000320 | 3. Plukk opp hundebæsjen                           | barn         |        130 |     0.2 |
+| Planetpatruljen               | DNRR63000321 | 3. Trøbbel i fjæra                                 | barn         |        168 |     0.2 |
 | Planetpatruljen               | DNRR63000322 | 6. Bruk beina                                      | barn         |        132 |     0.2 |
+| Planetpatruljen               | DNRR63000418 | 4. Plastspesial - plastpose                        | barn         |         47 |     0.1 |
+| Planetpatruljen               | DNRR63000419 | 5. Humler                                          | barn         |        131 |     0.2 |
+| Planetpatruljen               | DNRR63000420 | 4. Brukte malingsspann                             | barn         |        130 |     0.2 |
+| Planetpatruljen               | DNRR63000421 | 4. Pøbelplanter                                    | barn         |        183 |     0.2 |
+| Planetpatruljen               | DNRR63000518 | 5. Plastspesial - nylontau                         | barn         |         57 |     0.1 |
+| Planetpatruljen               | DNRR63000519 | 7. Metallavfall                                    | barn         |        140 |     0.2 |
+| Planetpatruljen               | DNRR63000520 | 6. Allemannsretten                                 | barn         |        154 |     0.2 |
+| Planetpatruljen               | DNRR63000521 | 5. Hekketrøbbel                                    | barn         |        159 |     0.2 |
+| Planetpatruljen               | DNRR63000618 | 1. Skogbrannfare                                   | barn         |        102 |     0.1 |
+| Planetpatruljen               | DNRR63000619 | 8. Plastavfall                                     | barn         |        170 |     0.2 |
+| Planetpatruljen               | DNRR63000620 | 7. Brusbokser i naturen                            | barn         |        149 |     0.2 |
+| Planetpatruljen               | DNRR63000621 | 6. Redd myra!                                      | barn         |        174 |     0.2 |
+| Planetpatruljen               | DNRR63000718 | 2. Søppel i naturen                                | barn         |        146 |     0.2 |
+| Planetpatruljen               | DNRR63000719 | 9. Elektrisk avfall                                | barn         |        157 |     0.2 |
+| Planetpatruljen               | DNRR63000721 | 7. Trøbbel for hegra                               | barn         |        196 |     0.2 |
+| Planetpatruljen               | DNRR63000818 | 3. Mate fugler med loff                            | barn         |        129 |     0.1 |
+| Planetpatruljen               | DNRR63000819 | 10. Pappavfall                                     | barn         |        144 |     0.2 |
+| Planetpatruljen               | DNRR63000820 | 9. Glass i naturen                                 | barn         |        125 |     0.2 |
+| Planetpatruljen               | DNRR63000821 | 8. Trøbbel i tjernet                               | barn         |        161 |     0.2 |
+| Planetpatruljen               | DNRR63000918 | 4. Fuglereir                                       | barn         |        123 |     0.2 |
+| Planetpatruljen               | DNRR63000919 | 12. Granulat                                       | barn         |        158 |     0.2 |
+| Planetpatruljen               | DNRR63000920 | 11. Skjæra er også viktig                          | barn         |        131 |     0.2 |
+| Planetpatruljen               | DNRR63000921 | 9. Blomsterengtrøbbel                              | barn         |        188 |     0.2 |
 | Planetpatruljen               | DNRR63000922 | 3. Planettips: spar støm                           | barn         |         43 |     0.1 |
+| Planetpatruljen               | DNRR63001018 | 5. Vepsebol                                        | barn         |        134 |     0.2 |
+| Planetpatruljen               | DNRR63001019 | 13. Gjenbruk                                       | barn         |        140 |     0.2 |
+| Planetpatruljen               | DNRR63001020 | 12. Bruk beina                                     | barn         |        123 |     0.2 |
 | Planetpatruljen               | DNRR63001022 | 5. Planettips: bruk mindre vann                    | barn         |         31 |     0   |
+| Planetpatruljen               | DNRR63001118 | 6. Engangsgrill                                    | barn         |        124 |     0.1 |
+| Planetpatruljen               | DNRR63001119 | 14. Ting i do                                      | barn         |        115 |     0.1 |
+| Planetpatruljen               | DNRR63001120 | 13. Ikke kast mat                                  | barn         |        138 |     0.2 |
 | Planetpatruljen               | DNRR63001122 | 7. Planettips: dyresafari                          | barn         |         34 |     0   |
+| Planetpatruljen               | DNRR63001218 | 7. Sette ut kjæledyr                               | barn         |        141 |     0.2 |
+| Planetpatruljen               | DNRR63001219 | 15. Søppel i snø                                   | barn         |        127 |     0.1 |
+| Planetpatruljen               | DNRR63001318 | 8. Kongekrabbe                                     | barn         |        133 |     0.2 |
+| Planetpatruljen               | DNRR63001319 | 1. Musikkvideo: Småkryp                            | barn         |         36 |     0   |
+| Planetpatruljen               | DNRR63001320 | 5. Musikkvideo: Det står om livet                  | barn         |         35 |     0   |
+| Planetpatruljen               | DNRR63001418 | 9. Brukte batteri                                  | barn         |        133 |     0.2 |
+| Planetpatruljen               | DNRR63001419 | 6. Musikkvideo: Kildesortering                     | barn         |         28 |     0   |
+| Planetpatruljen               | DNRR63001420 | 10. Musikkvideo: Naturen er for alle               | barn         |         25 |     0   |
+| Planetpatruljen               | DNRR63001518 | 10. Farlig avfall i do                             | barn         |        124 |     0.2 |
+| Planetpatruljen               | DNRR63001519 | 11. Musikkvideo: Gave til en venn                  | barn         |         27 |     0   |
+| Planetpatruljen               | DNRR63001520 | 14. Musikkvideo: Spis oss, ikke kast oss           | barn         |         22 |     0   |
 | Planetpatruljen               | DNRR63001522 | 1. Planetpatruljen musikkvideo                     | barn         |         22 |     0   |
 | SKAM                          | MSUB19120116 | 1. episode                                         | drama-serier |         12 |     0   |
 | SKAM                          | MSUB19120216 | 2. episode                                         | drama-serier |        168 |     0.2 |
