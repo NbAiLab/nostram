@@ -74,12 +74,20 @@ class episodefetcher:
     def getprograms(self,title,seasonsnr):
         #print(title)
         programinforeq = "https://psapi.nrk.no/tv/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
+        # Needs to be like this for radio
+        programinforeq = "https://psapi.nrk.no/radio/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
+
+
         resp = self.geturl(programinforeq)
-        #print(programinforeq)
-        #exit(-1)
+        print(resp.json())
+        exit(-1)
+        
+        pere - jeg er her
+
         #print(resp)
         #print(resp.json())
         resultingjson =[]
+
         if "episodes" in resp.json()["_embedded"]:
             resultingjson = resp.json()["_embedded"]["episodes"]
         else:
@@ -100,6 +108,7 @@ class episodefetcher:
                 self.episodelist.append(i)
             else:
                 currentserie = self.getseries(i)
+                print(currentserie)
                 theseasons = self.getmetadataforseries(currentserie)
                 for i in theseasons:
                     result = self.getprograms(currentserie, i)
