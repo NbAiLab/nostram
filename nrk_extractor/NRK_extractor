@@ -69,9 +69,11 @@ class NRKExtractor():
         
         if not bool(res["info"]["playable"]):
             res["info"]["playable"] = "Unknown"
+        
 
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
-            raise Exception("Bad info block from '%s'" % murl)
+            return None
+            #raise Exception("Bad info block from '%s'" % murl)
 
         murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
         r = requests.get(murl)
@@ -155,6 +157,10 @@ class NRKExtractor():
         start_time = time.time()
         print("Processing", id)
         info = self.resolve_urls(id)
+        
+        #Debug
+        if not info:
+            return None
 
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
