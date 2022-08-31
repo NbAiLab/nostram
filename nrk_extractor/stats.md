@@ -6,8 +6,18 @@
 | Barnas supershow                       |       4905 |     3.9 |
 | Borgen skole                           |      20361 |     7   |
 | Distriktsnyheter Innlandet             |       1727 |     1.7 |
-| Distriktsnyheter Rogaland              |        657 |     0.7 |
+| Distriktsnyheter Midtnytt              |       2538 |     2   |
+| Distriktsnyheter Møre og Romsdal       |       1638 |     1.7 |
+| Distriktsnyheter Nordland              |       3444 |     3.8 |
+| Distriktsnyheter Nordnytt              |       1332 |     1.4 |
+| Distriktsnyheter Oslo og Viken         |       2665 |     2.5 |
+| Distriktsnyheter Rogaland              |       3614 |     3.5 |
 | Distriktsnyheter Sørlandet             |       1201 |     1.1 |
+| Distriktsnyheter Vestfold og Telemark  |       1661 |     1.7 |
+| Distriktsnyheter Vestlandsrevyen       |        558 |     0.6 |
+| Distriktsnyheter Østafjells            |        793 |     0.7 |
+| Distriktsnyheter Østfold               |       1011 |     1   |
+| Distriktsnyheter Østlandssendingen     |       1659 |     1.9 |
 | Fin fredag                             |       3528 |     2.7 |
 | Fjortis                                |       6059 |     2.1 |
 | Frida                                  |      10836 |     2.6 |
@@ -16,12 +26,13 @@
 | Halvsju                                |     258245 |   118.4 |
 | Heia Norge                             |     156810 |    72.6 |
 | Jul i svingen - Helene Bøksle          |         50 |     0.1 |
-| Klassen                                |      45119 |    17.4 |
+| Klassen                                |     103504 |    39.8 |
 | Kråkeklubben                           |      13131 |     8.3 |
 | Leirskolen                             |       5567 |     2.3 |
 | Linus i Svingen                        |       5763 |     2.4 |
 | Livet                                  |      38863 |    14.6 |
-| Megafon                                |       6016 |     3.4 |
+| Megafon                                |      93013 |    51.2 |
+| Midt i smørøyet                        |     126062 |    53   |
 | Newton                                 |      13190 |     9.7 |
 | Planetpatruljen                        |      19402 |    12.1 |
 | SKAM                                   |      52402 |    13.6 |
@@ -31,7 +42,7 @@
 | Vaffelhjarte                           |       4907 |     1.8 |
 
 
-**A total of 327.3 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 470.5 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                                  | program_id   | subtitle                                                 | category     |   segments |   hours |
 |:---------------------------------------|:-------------|:---------------------------------------------------------|:-------------|-----------:|--------:|
@@ -131,9 +142,99 @@
 | Distriktsnyheter Innlandet             | DKIN99082522 | 25. august kl. 22.55                                     | nyheter      |         72 |     0.1 |
 | Distriktsnyheter Innlandet             | DKIN99082922 | Mandag kl. 23.15                                         | nyheter      |         76 |     0.1 |
 | Distriktsnyheter Innlandet             | DKIN99083022 | I går kl. 22.55                                          | nyheter      |         82 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL98081922 | 19. august                                               | nyheter      |        171 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL98082222 | 22. august kl. 19.45                                     | nyheter      |        294 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL98082322 | 23. august kl. 19.45                                     | nyheter      |        283 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL98082422 | 24. august kl. 19.45                                     | nyheter      |        271 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL98082522 | 25. august kl. 19.45                                     | nyheter      |        264 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL98082622 | Fredag                                                   | nyheter      |        156 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL98082922 | Mandag kl. 19.45                                         | nyheter      |        284 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL98083022 | I går kl. 19.45                                          | nyheter      |        250 |     0.2 |
+| Distriktsnyheter Midtnytt              | DKTL99082222 | 22. august kl. 23.15                                     | nyheter      |         97 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL99082322 | 23. august kl. 23.00                                     | nyheter      |        100 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL99082422 | 24. august kl. 22.55                                     | nyheter      |         96 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL99082522 | 25. august kl. 22.55                                     | nyheter      |         99 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL99082922 | Mandag kl. 23.15                                         | nyheter      |         94 |     0.1 |
+| Distriktsnyheter Midtnytt              | DKTL99083022 | I går kl. 22.55                                          | nyheter      |         79 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98082322 | 23. august kl. 19.45                                     | nyheter      |        235 |     0.2 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98082422 | 24. august kl. 19.45                                     | nyheter      |        227 |     0.2 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98082522 | 25. august kl. 19.45                                     | nyheter      |        176 |     0.2 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98082622 | Fredag                                                   | nyheter      |        132 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98082922 | Mandag kl. 19.45                                         | nyheter      |        192 |     0.2 |
+| Distriktsnyheter Møre og Romsdal       | DKMR98083022 | I går kl. 19.45                                          | nyheter      |        261 |     0.2 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99082222 | 22. august kl. 23.15                                     | nyheter      |         61 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99082322 | 23. august kl. 23.00                                     | nyheter      |         63 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99082422 | 24. august kl. 22.55                                     | nyheter      |         59 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99082522 | 25. august kl. 22.55                                     | nyheter      |         60 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99082922 | Mandag kl. 23.15                                         | nyheter      |         92 |     0.1 |
+| Distriktsnyheter Møre og Romsdal       | DKMR99083022 | I går kl. 22.55                                          | nyheter      |         80 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO98080922 | 9. august                                                | nyheter      |        174 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081022 | 10. august                                               | nyheter      |        189 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081122 | 11. august                                               | nyheter      |        204 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081222 | 12. august                                               | nyheter      |        128 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO98081522 | 15. august                                               | nyheter      |        133 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081622 | 16. august                                               | nyheter      |        206 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081722 | 17. august                                               | nyheter      |        259 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081822 | 18. august                                               | nyheter      |        225 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98081922 | 19. august                                               | nyheter      |        135 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO98082222 | 22. august kl. 19.45                                     | nyheter      |        197 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98082322 | 23. august kl. 19.45                                     | nyheter      |        171 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98082422 | 24. august kl. 19.45                                     | nyheter      |        268 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98082522 | 25. august kl. 19.45                                     | nyheter      |        225 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98082622 | Fredag                                                   | nyheter      |        126 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO98082922 | Mandag kl. 19.45                                         | nyheter      |        222 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO98083022 | I går kl. 19.45                                          | nyheter      |        190 |     0.2 |
+| Distriktsnyheter Nordland              | DKNO99082222 | 22. august kl. 23.15                                     | nyheter      |         56 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO99082322 | 23. august kl. 23.00                                     | nyheter      |         64 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO99082422 | 24. august kl. 22.55                                     | nyheter      |         78 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO99082522 | 25. august kl. 22.55                                     | nyheter      |         63 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO99082922 | Mandag kl. 23.15                                         | nyheter      |         79 |     0.1 |
+| Distriktsnyheter Nordland              | DKNO99083022 | I går kl. 22.55                                          | nyheter      |         52 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR98082422 | 24. august kl. 19.45                                     | nyheter      |        221 |     0.2 |
+| Distriktsnyheter Nordnytt              | DKTR98082522 | 25. august kl. 19.45                                     | nyheter      |        173 |     0.2 |
+| Distriktsnyheter Nordnytt              | DKTR98082622 | Fredag                                                   | nyheter      |        137 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR98082922 | Mandag kl. 19.45                                         | nyheter      |        245 |     0.2 |
+| Distriktsnyheter Nordnytt              | DKTR98083022 | I går kl. 19.45                                          | nyheter      |        186 |     0.2 |
+| Distriktsnyheter Nordnytt              | DKTR99082322 | 23. august kl. 23.00                                     | nyheter      |         81 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR99082422 | 24. august kl. 22.55                                     | nyheter      |         83 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR99082522 | 25. august kl. 22.55                                     | nyheter      |         67 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR99082922 | Mandag kl. 23.15                                         | nyheter      |         75 |     0.1 |
+| Distriktsnyheter Nordnytt              | DKTR99083022 | I går kl. 22.55                                          | nyheter      |         64 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV98081722 | 17. august                                               | nyheter      |        219 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98081822 | 18. august                                               | nyheter      |        241 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98081922 | 19. august                                               | nyheter      |        134 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082222 | 22. august kl. 19.45                                     | nyheter      |        220 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082322 | 23. august kl. 19.45                                     | nyheter      |        248 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082422 | 24. august kl. 19.45                                     | nyheter      |        196 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082522 | 25. august kl. 19.45                                     | nyheter      |        246 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082622 | Fredag                                                   | nyheter      |        158 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV98082922 | Mandag kl. 19.45                                         | nyheter      |        264 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV98083022 | I går kl. 19.45                                          | nyheter      |        215 |     0.2 |
+| Distriktsnyheter Oslo og Viken         | DKOV99082222 | 22. august kl. 23.15                                     | nyheter      |         91 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV99082322 | 23. august kl. 23.00                                     | nyheter      |         80 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV99082422 | 24. august kl. 22.55                                     | nyheter      |         71 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV99082522 | 25. august kl. 22.55                                     | nyheter      |         95 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV99082922 | Mandag kl. 23.15                                         | nyheter      |         78 |     0.1 |
+| Distriktsnyheter Oslo og Viken         | DKOV99083022 | I går kl. 22.55                                          | nyheter      |        109 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO98081022 | 10. august                                               | nyheter      |        225 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081122 | 11. august                                               | nyheter      |        216 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081222 | 12. august                                               | nyheter      |        120 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO98081522 | 15. august                                               | nyheter      |        231 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081622 | 16. august                                               | nyheter      |        222 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081722 | 17. august                                               | nyheter      |        212 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081822 | 18. august                                               | nyheter      |        235 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98081922 | 19. august                                               | nyheter      |        141 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO98082222 | 22. august kl. 19.45                                     | nyheter      |        267 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98082322 | 23. august kl. 19.45                                     | nyheter      |        225 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98082422 | 24. august kl. 19.45                                     | nyheter      |        204 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO98082522 | 25. august kl. 19.45                                     | nyheter      |        310 |     0.2 |
 | Distriktsnyheter Rogaland              | DKRO98082622 | Fredag                                                   | nyheter      |        119 |     0.1 |
 | Distriktsnyheter Rogaland              | DKRO98082922 | Mandag kl. 19.45                                         | nyheter      |        179 |     0.2 |
 | Distriktsnyheter Rogaland              | DKRO98083022 | I går kl. 19.45                                          | nyheter      |        248 |     0.2 |
+| Distriktsnyheter Rogaland              | DKRO99082222 | 22. august kl. 23.15                                     | nyheter      |         87 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO99082322 | 23. august kl. 23.00                                     | nyheter      |         70 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO99082422 | 24. august kl. 22.55                                     | nyheter      |         74 |     0.1 |
+| Distriktsnyheter Rogaland              | DKRO99082522 | 25. august kl. 22.55                                     | nyheter      |        118 |     0.1 |
 | Distriktsnyheter Rogaland              | DKRO99082922 | Mandag kl. 23.15                                         | nyheter      |         56 |     0.1 |
 | Distriktsnyheter Rogaland              | DKRO99083022 | I går kl. 22.55                                          | nyheter      |         55 |     0.1 |
 | Distriktsnyheter Sørlandet             | DKSL98082522 | 25. august kl. 19.45                                     | nyheter      |        253 |     0.2 |
@@ -144,6 +245,55 @@
 | Distriktsnyheter Sørlandet             | DKSL99082522 | 25. august kl. 22.55                                     | nyheter      |         58 |     0.1 |
 | Distriktsnyheter Sørlandet             | DKSL99082922 | Mandag kl. 23.15                                         | nyheter      |         68 |     0.1 |
 | Distriktsnyheter Sørlandet             | DKSL99083022 | I går kl. 22.55                                          | nyheter      |         62 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98082322 | 23. august kl. 19.45                                     | nyheter      |        213 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98082422 | 24. august kl. 19.45                                     | nyheter      |        217 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98082522 | 25. august kl. 19.45                                     | nyheter      |        218 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98082622 | Fredag                                                   | nyheter      |        137 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98082922 | Mandag kl. 19.45                                         | nyheter      |        201 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT98083022 | I går kl. 19.45                                          | nyheter      |        226 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99082222 | 22. august kl. 23.15                                     | nyheter      |         84 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99082322 | 23. august kl. 23.00                                     | nyheter      |         77 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99082422 | 24. august kl. 22.55                                     | nyheter      |         64 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99082522 | 25. august kl. 22.55                                     | nyheter      |         70 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99082922 | Mandag kl. 23.15                                         | nyheter      |         83 |     0.1 |
+| Distriktsnyheter Vestfold og Telemark  | DKVT99083022 | I går kl. 22.55                                          | nyheter      |         71 |     0.1 |
+| Distriktsnyheter Vestlandsrevyen       | DKHO98082922 | Mandag kl. 19.45                                         | nyheter      |        231 |     0.2 |
+| Distriktsnyheter Vestlandsrevyen       | DKHO98083022 | I går kl. 19.45                                          | nyheter      |        179 |     0.2 |
+| Distriktsnyheter Vestlandsrevyen       | DKHO99082922 | Mandag kl. 23.15                                         | nyheter      |         70 |     0.1 |
+| Distriktsnyheter Vestlandsrevyen       | DKHO99083022 | I går kl. 22.55                                          | nyheter      |         78 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE97121919 | 19. desember 2019 kl. 22.55                              | nyheter      |         60 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE98121919 | 19. desember 2019 kl. 20.55                              | nyheter      |        103 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE99122019 | 20. desember 2019                                        | nyheter      |        173 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE99122319 | 23. desember 2019                                        | nyheter      |        135 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE99122719 | 27. desember 2019                                        | nyheter      |        162 |     0.1 |
+| Distriktsnyheter Østafjells            | DKTE99123019 | 30. desember 2019                                        | nyheter      |        160 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS97121819 | 18. desember 2019 kl. 22.55                              | nyheter      |         68 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS97121919 | 19. desember 2019 kl. 22.55                              | nyheter      |         48 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS98121819 | 18. desember 2019 kl. 20.55                              | nyheter      |         77 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS98121919 | 19. desember 2019 kl. 20.55                              | nyheter      |         57 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS99121919 | 19. desember 2019 kl. 18.50                              | nyheter      |        117 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS99122019 | 20. desember 2019                                        | nyheter      |        125 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS99122319 | 23. desember 2019                                        | nyheter      |        195 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS99122719 | 27. desember 2019                                        | nyheter      |        128 |     0.1 |
+| Distriktsnyheter Østfold               | DKOS99123019 | 30. desember 2019                                        | nyheter      |        196 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA97121619 | 16. desember 2019 kl. 22.55                              | nyheter      |         62 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA97121719 | 17. desember 2019 kl. 22.55                              | nyheter      |         45 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA97121819 | 18. desember 2019 kl. 22.55                              | nyheter      |         42 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA97121919 | 19. desember 2019 kl. 22.55                              | nyheter      |         43 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA98121219 | 12. desember 2019 kl. 20.55                              | nyheter      |         56 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA98121619 | 16. desember 2019 kl. 20.55                              | nyheter      |         58 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA98121719 | 17. desember 2019 kl. 20.55                              | nyheter      |         74 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA98121819 | 18. desember 2019 kl. 20.55                              | nyheter      |         74 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA98121919 | 19. desember 2019 kl. 20.55                              | nyheter      |         56 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99121319 | 13. desember 2019                                        | nyheter      |        136 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99121619 | 16. desember 2019 kl. 18.50                              | nyheter      |        119 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99121719 | 17. desember 2019 kl. 18.50                              | nyheter      |        128 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99121819 | 18. desember 2019 kl. 18.50                              | nyheter      |        138 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99121919 | 19. desember 2019 kl. 18.50                              | nyheter      |        112 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99122019 | 20. desember 2019                                        | nyheter      |        136 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99122319 | 23. desember 2019                                        | nyheter      |        109 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99122719 | 27. desember 2019                                        | nyheter      |        121 |     0.1 |
+| Distriktsnyheter Østlandssendingen     | DKOA99123019 | 30. desember 2019                                        | nyheter      |        150 |     0.1 |
 | Fin fredag                             | MSUB20000613 | 12. april 2013                                           | barn         |        445 |     0.4 |
 | Fin fredag                             | MSUB20000713 | 19. april 2013                                           | barn         |        501 |     0.4 |
 | Fin fredag                             | MSUB20000813 | 26. april 2013                                           | barn         |        524 |     0.4 |
@@ -519,6 +669,16 @@
 | Heia Norge                             | FSTL20002094 | Finale i UNDER 17                                        | nyheter      |        751 |     1   |
 | Jul i svingen - Helene Bøksle          | MKTV13100320 |                                                          | kultur       |         50 |     0.1 |
 | Klassen                                | MSUE10005020 | 19. Julefesten                                           | barn         |        454 |     0.2 |
+| Klassen                                | MSUE10006120 | 64. Klassen leirskolen: Velkommen                        | barn         |        279 |     0.2 |
+| Klassen                                | MSUE10006220 | 65. Klassen leirskolen: Rebus                            | barn         |        514 |     0.2 |
+| Klassen                                | MSUE10006320 | 66. Klassen leirskolen: Spøkelseshistorier               | barn         |        434 |     0.1 |
+| Klassen                                | MSUE10006420 | 67. Klassen leirskolen: Baren                            | barn         |        378 |     0.1 |
+| Klassen                                | MSUE10006520 | 68. Klassen leirskolen: Kjærlighetstreet                 | barn         |        462 |     0.2 |
+| Klassen                                | MSUE10006620 | 69. Klassen leirskolen: Pranks                           | barn         |        269 |     0.2 |
+| Klassen                                | MSUE10006720 | 70. Klassen leirskolen: Kysset                           | barn         |        322 |     0.2 |
+| Klassen                                | MSUE10006820 | 71. Klassen leirskolen: Pappa                            | barn         |        444 |     0.2 |
+| Klassen                                | MSUE10006920 | 72. Klassen leirskolen: Tivoli                           | barn         |        428 |     0.2 |
+| Klassen                                | MSUE10007020 | 73. Klassen leirskolen: Klassen min                      | barn         |        465 |     0.3 |
 | Klassen                                | MSUE11000120 | 1. Første Prankdag                                       | barn         |        347 |     0.2 |
 | Klassen                                | MSUE11000220 | 2. Klassens Konge                                        | barn         |        346 |     0.2 |
 | Klassen                                | MSUE11000320 | 3. Alvorlig syk                                          | barn         |        385 |     0.2 |
@@ -571,40 +731,146 @@
 | Klassen                                | MSUE11005020 | 54. Desperat                                             | barn         |        357 |     0.1 |
 | Klassen                                | MSUE11005120 | 55. Solveig og Levi, del 1                               | barn         |        430 |     0.1 |
 | Klassen                                | MSUE11005220 | 56. Solveig og Levi, del 2                               | barn         |        485 |     0.2 |
+| Klassen                                | MSUE13000118 | 1. Ny i klassen                                          | barn         |        335 |     0.1 |
 | Klassen                                | MSUE13000121 | 1. Levis liste del 1                                     | barn         |        406 |     0.2 |
+| Klassen                                | MSUE13000218 | 2. Gruppebildet                                          | barn         |        317 |     0.1 |
 | Klassen                                | MSUE13000221 | 2. Levis liste del 2                                     | barn         |        460 |     0.2 |
+| Klassen                                | MSUE13000318 | 3. Late Mathias                                          | barn         |        406 |     0.2 |
 | Klassen                                | MSUE13000321 | 3. Den kjekke vikaren                                    | barn         |        360 |     0.2 |
+| Klassen                                | MSUE13000418 | 4. Eldre kjæreste                                        | barn         |        290 |     0.1 |
 | Klassen                                | MSUE13000421 | 5. Har Jørgen X-faktor?                                  | barn         |        464 |     0.2 |
+| Klassen                                | MSUE13000518 | 6. Adrians date                                          | barn         |        331 |     0.1 |
 | Klassen                                | MSUE13000521 | 6. Influenseren                                          | barn         |        376 |     0.2 |
+| Klassen                                | MSUE13000618 | 7. Ikke klå                                              | barn         |        289 |     0.1 |
 | Klassen                                | MSUE13000621 | 7. Hatet av alle                                         | barn         |        308 |     0.1 |
+| Klassen                                | MSUE13000718 | 5. Noe på g                                              | barn         |        352 |     0.1 |
 | Klassen                                | MSUE13000721 | 8. Å være sist                                           | barn         |        350 |     0.1 |
+| Klassen                                | MSUE13000818 | 8. Utviklingssamtalen                                    | barn         |        311 |     0.1 |
 | Klassen                                | MSUE13000821 | 9. Rivalene                                              | barn         |        570 |     0.2 |
+| Klassen                                | MSUE13000918 | 9. Kjærestetyven del 1                                   | barn         |        322 |     0.1 |
 | Klassen                                | MSUE13000921 | 10. Hettegenseren del 1                                  | barn         |        555 |     0.2 |
+| Klassen                                | MSUE13001018 | 10. Kjærestetyven del 2                                  | barn         |        387 |     0.1 |
 | Klassen                                | MSUE13001021 | 11. Hettegenseren del 2                                  | barn         |        405 |     0.1 |
+| Klassen                                | MSUE13001118 | 11. Hermans hemmelighet                                  | barn         |        316 |     0.1 |
 | Klassen                                | MSUE13001121 | 12. Gi og ta                                             | barn         |        398 |     0.2 |
+| Klassen                                | MSUE13001218 | 12. Ikke til salgs                                       | barn         |        347 |     0.1 |
 | Klassen                                | MSUE13001221 | 13. Vikaren del 1                                        | barn         |        384 |     0.2 |
+| Klassen                                | MSUE13001318 | 13. Det første kysset                                    | barn         |        350 |     0.1 |
 | Klassen                                | MSUE13001321 | 14. Trene?                                               | barn         |        371 |     0.2 |
+| Klassen                                | MSUE13001418 | 14. Løgnen                                               | barn         |        421 |     0.1 |
 | Klassen                                | MSUE13001421 | 15. Vikaren del 2                                        | barn         |        427 |     0.2 |
+| Klassen                                | MSUE13001518 | 15. Hermegåsa                                            | barn         |        347 |     0.1 |
 | Klassen                                | MSUE13001521 | 16. Hvordan er man venninner                             | barn         |        384 |     0.2 |
+| Klassen                                | MSUE13001618 | 16. Klassekassen                                         | barn         |        231 |     0.1 |
 | Klassen                                | MSUE13001621 | 17. Sabotøren del 1                                      | barn         |        490 |     0.2 |
+| Klassen                                | MSUE13001718 | 17. Nytt kjærestepar                                     | barn         |        419 |     0.1 |
 | Klassen                                | MSUE13001721 | 18. Sabotøren del 2                                      | barn         |        473 |     0.1 |
+| Klassen                                | MSUE13001818 | 18. Please, Hermann                                      | barn         |        328 |     0.1 |
 | Klassen                                | MSUE13001821 | 19. Headsettet                                           | barn         |        536 |     0.2 |
+| Klassen                                | MSUE13001918 | 19. Guttetesten                                          | barn         |        378 |     0.1 |
 | Klassen                                | MSUE13001921 | 20. Bare en venn?                                        | barn         |        408 |     0.1 |
+| Klassen                                | MSUE13002018 | 20. Kakekrigen                                           | barn         |        372 |     0.1 |
 | Klassen                                | MSUE13002021 | 21. Presset                                              | barn         |        470 |     0.2 |
+| Klassen                                | MSUE13002118 | 21. Sannheten om Amalie                                  | barn         |        356 |     0.1 |
 | Klassen                                | MSUE13002121 | 22. Bibliotekaren                                        | barn         |        329 |     0.1 |
+| Klassen                                | MSUE13002218 | 22. Løftebrudd                                           | barn         |        335 |     0.1 |
 | Klassen                                | MSUE13002221 | 23. Forelsket i min beste venninne                       | barn         |        455 |     0.2 |
+| Klassen                                | MSUE13002318 | 23. Den første mensen                                    | barn         |        250 |     0.1 |
 | Klassen                                | MSUE13002321 | 24. Lyve om venninner                                    | barn         |        319 |     0.1 |
+| Klassen                                | MSUE13002418 | 24. Mobiltyven del 1                                     | barn         |        425 |     0.1 |
 | Klassen                                | MSUE13002421 | 25. Klikker totalt!                                      | barn         |        324 |     0.2 |
+| Klassen                                | MSUE13002518 | 25. Mobiltyven del 2                                     | barn         |        388 |     0.1 |
 | Klassen                                | MSUE13002521 | 26. Men Oskar!                                           | barn         |        444 |     0.2 |
+| Klassen                                | MSUE13002618 | 26. Nørden og bitchen                                    | barn         |        505 |     0.1 |
 | Klassen                                | MSUE13002621 | 27. Joakim går rett på!                                  | barn         |        306 |     0.1 |
+| Klassen                                | MSUE13002718 | 27. Klassens dronning                                    | barn         |        399 |     0.2 |
 | Klassen                                | MSUE13002721 | 28. En kjip venn                                         | barn         |        311 |     0.1 |
+| Klassen                                | MSUE13002818 | 28. Månedsdagen                                          | barn         |        451 |     0.1 |
 | Klassen                                | MSUE13002821 | 29. Modelldrømmen del 1                                  | barn         |        478 |     0.2 |
+| Klassen                                | MSUE13002918 | 29. Fotballspilleren                                     | barn         |        336 |     0.1 |
 | Klassen                                | MSUE13002921 | 30. Modelldrømmen del 2                                  | barn         |        497 |     0.1 |
+| Klassen                                | MSUE13003018 | 30. Innsamlingsaksjonen                                  | barn         |        220 |     0.1 |
 | Klassen                                | MSUE13003021 | 31. Katinka ro ned!                                      | barn         |        394 |     0.2 |
+| Klassen                                | MSUE13003118 | 31. Har du tissa på deg                                  | barn         |        232 |     0.1 |
 | Klassen                                | MSUE13003121 | 32. Klassens mest perfekte                               | barn         |        422 |     0.2 |
+| Klassen                                | MSUE13003218 | 32. Fie trenger trøst                                    | barn         |        509 |     0.1 |
 | Klassen                                | MSUE13003221 | 33. Diabetes                                             | barn         |        378 |     0.1 |
+| Klassen                                | MSUE13003318 | 33. Lilys frykt                                          | barn         |        421 |     0.1 |
 | Klassen                                | MSUE13003321 | 34. Ola svikter Ava                                      | barn         |        558 |     0.2 |
+| Klassen                                | MSUE13003418 | 34. Joffes crush                                         | barn         |        436 |     0.1 |
+| Klassen                                | MSUE13003518 | 35. Stjernedrømmen                                       | barn         |        241 |     0.1 |
+| Klassen                                | MSUE13003618 | 36. De tre kjekkeste                                     | barn         |        500 |     0.1 |
+| Klassen                                | MSUE13003718 | 37. Har hun anoreksi                                     | barn         |        387 |     0.1 |
+| Klassen                                | MSUE13003818 | 38. Superkvisa                                           | barn         |        283 |     0.1 |
+| Klassen                                | MSUE13003918 | 39. Flau over mamma                                      | barn         |        291 |     0.1 |
+| Klassen                                | MSUE13004018 | 40. Ingrid skulker                                       | barn         |        348 |     0.1 |
+| Klassen                                | MSUE13004118 | 41. Only girl in the world                               | barn         |        262 |     0.1 |
+| Klassen                                | MSUE13004218 | 42. Ryktet                                               | barn         |        448 |     0.2 |
+| Klassen                                | MSUE13004318 | 43. Guttevenner                                          | barn         |        217 |     0.1 |
+| Klassen                                | MSUE13004418 | 44. Tyveriet del 1                                       | barn         |        319 |     0.1 |
+| Klassen                                | MSUE13004518 | 45. Tyveriet del 2                                       | barn         |        434 |     0.1 |
 | Klassen                                | MSUE13004521 | 4. God Id Rakel!                                         | barn         |        305 |     0.1 |
+| Klassen                                | MSUE13004618 | 46. Pinlige bilder                                       | barn         |        382 |     0.2 |
+| Klassen                                | MSUE13004718 | 47. Ro deg ned, Noah                                     | barn         |        299 |     0.1 |
+| Klassen                                | MSUE13004818 | 48. Smugbildet                                           | barn         |        264 |     0.1 |
+| Klassen                                | MSUE13004918 | 49. Sammen eller ikke del 1                              | barn         |        412 |     0.1 |
+| Klassen                                | MSUE13005018 | 50. Sammen eller ikke del 2                              | barn         |        417 |     0.1 |
+| Klassen                                | MSUE13005118 | 51. Sportsnørder                                         | barn         |        245 |     0.1 |
+| Klassen                                | MSUE13005218 | 52. Klassefesten                                         | barn         |        204 |     0.1 |
+| Klassen                                | MSUE16000119 | 1. Nødt eller sannhet del 1                              | barn         |        429 |     0.2 |
+| Klassen                                | MSUE16000219 | 2. Nødt eller sannhet del 2                              | barn         |        322 |     0.1 |
+| Klassen                                | MSUE16000319 | 3. Gamle venner                                          | barn         |        404 |     0.1 |
+| Klassen                                | MSUE16000419 | 4. Rødvin                                                | barn         |        430 |     0.1 |
+| Klassen                                | MSUE16000519 | 5. Stjerne på Youtube                                    | barn         |        406 |     0.2 |
+| Klassen                                | MSUE16000619 | 6. Hestejenter                                           | barn         |        328 |     0.1 |
+| Klassen                                | MSUE16000719 | 7. Vinne for enhver pris                                 | barn         |        366 |     0.2 |
+| Klassen                                | MSUE16000819 | 8. Romeo og julie                                        | barn         |        350 |     0.1 |
+| Klassen                                | MSUE16000919 | 9. Lilys dagbok                                          | barn         |        477 |     0.1 |
+| Klassen                                | MSUE16001019 | 10. En ekte venn                                         | barn         |        367 |     0.1 |
+| Klassen                                | MSUE16001119 | 11. Skilsmissen                                          | barn         |        512 |     0.2 |
+| Klassen                                | MSUE16001219 | 12. Sex og samliv                                        | barn         |        290 |     0.2 |
+| Klassen                                | MSUE16001319 | 13. Noahs arbeidsuke                                     | barn         |        501 |     0.2 |
+| Klassen                                | MSUE16001419 | 14. Joffe og Madelen del 1                               | barn         |        503 |     0.1 |
+| Klassen                                | MSUE16001519 | 15. Joffe og Madelen del 2                               | barn         |        470 |     0.1 |
+| Klassen                                | MSUE16001619 | 16. Jenter på fotballaget                                | barn         |        393 |     0.1 |
+| Klassen                                | MSUE16001719 | 17. Guttegarderoben                                      | barn         |        365 |     0.1 |
+| Klassen                                | MSUE16001819 | 18. Adas kjæreste                                        | barn         |        310 |     0.1 |
+| Klassen                                | MSUE16001919 | 19. Venneløse Lily                                       | barn         |        513 |     0.2 |
+| Klassen                                | MSUE16002019 | 20. Kysse med regulering                                 | barn         |        360 |     0.1 |
+| Klassen                                | MSUE16002119 | 21. Rømme hjemmefra                                      | barn         |        367 |     0.1 |
+| Klassen                                | MSUE16002219 | 22. Hva skjer nå?                                        | barn         |        571 |     0.2 |
+| Klassen                                | MSUE16002319 | 23. Ingrid er forelsket                                  | barn         |        441 |     0.1 |
+| Klassen                                | MSUE16002419 | 24. Jakten på likes                                      | barn         |        379 |     0.2 |
+| Klassen                                | MSUE16002519 | 25. Fotballtrøbbel                                       | barn         |        319 |     0.1 |
+| Klassen                                | MSUE16002619 | 26. Bestevenner?                                         | barn         |        327 |     0.1 |
+| Klassen                                | MSUE16002719 | 27. Rivalene                                             | barn         |        325 |     0.1 |
+| Klassen                                | MSUE16002819 | 28. Amalies nye bestis                                   | barn         |        606 |     0.2 |
+| Klassen                                | MSUE16002919 | 29. Herman flytter                                       | barn         |        421 |     0.1 |
+| Klassen                                | MSUE16003019 | 30. Smykketyven                                          | barn         |        369 |     0.1 |
+| Klassen                                | MSUE16003119 | 31. Venneløse Edvard                                     | barn         |        342 |     0.1 |
+| Klassen                                | MSUE16003219 | 32. Prompen                                              | barn         |        222 |     0.1 |
+| Klassen                                | MSUE16003319 | 33. Juksemaker                                           | barn         |        357 |     0.2 |
+| Klassen                                | MSUE16003419 | 34. Fisken i veska                                       | barn         |        337 |     0.1 |
+| Klassen                                | MSUE16003519 | 35. Er vi på samme lag del 1                             | barn         |        311 |     0.2 |
+| Klassen                                | MSUE16003619 | 36. Pinlige interesser                                   | barn         |        328 |     0.2 |
+| Klassen                                | MSUE16003719 | 37. Skulkekongen                                         | barn         |        366 |     0.2 |
+| Klassen                                | MSUE16003819 | 38. Nakenbilder del 1                                    | barn         |        430 |     0.2 |
+| Klassen                                | MSUE16003919 | 39. Nakenbilder del 2                                    | barn         |        472 |     0.1 |
+| Klassen                                | MSUE16004019 | 40. Er vi på samme lag del 2                             | barn         |        421 |     0.2 |
+| Klassen                                | MSUE16004119 | 41. Aldri mer usynlig                                    | barn         |        330 |     0.1 |
+| Klassen                                | MSUE16004219 | 42. Hjertet på jentedoen                                 | barn         |        479 |     0.2 |
+| Klassen                                | MSUE16004319 | 43. La meg være del 1                                    | barn         |        430 |     0.1 |
+| Klassen                                | MSUE16004419 | 44. La meg være del 2                                    | barn         |        406 |     0.1 |
+| Klassen                                | MSUE16004519 | 45. Hvem stinker                                         | barn         |        398 |     0.2 |
+| Klassen                                | MSUE16004619 | 46. Som en skrekkfilm                                    | barn         |        406 |     0.1 |
+| Klassen                                | MSUE16004719 | 47. Dramafri sone                                        | barn         |        574 |     0.2 |
+| Klassen                                | MSUE16004819 | 48. Kampen om makta                                      | barn         |        374 |     0.2 |
+| Klassen                                | MSUE16004919 | 49. Den nye gamle flammen                                | barn         |        507 |     0.2 |
+| Klassen                                | MSUE16005019 | 50. Gutter er noe dritt                                  | barn         |        404 |     0.1 |
+| Klassen                                | MSUE16005119 | 51. Kjærlighet i luften                                  | barn         |        418 |     0.1 |
+| Klassen                                | MSUE16005219 | 52. Avslutning                                           | barn         |        379 |     0.2 |
+| Klassen                                | MSUE16008120 | 26. Hvem har rett (Temadagene, spesial)                  | barn         |        346 |     0.2 |
+| Klassen                                | MSUE16008220 | 27. Optimisten (Temadagene, spesial)                     | barn         |        472 |     0.2 |
 | Klassen                                | MSUE17006121 | 29. Hemmelig nissevenn                                   | barn         |        332 |     0.2 |
 | Klassen                                | MSUE17006221 | 36. Bromance (Temadagene,spesial)                        | barn         |        528 |     0.2 |
 | Klassen                                | MSUE17006321 | 37. Si ifra! (Temadagene, spesial)                       | barn         |        468 |     0.2 |
@@ -632,6 +898,43 @@
 | Klassen                                | MSUE18002119 | 22. Bestevennen del 2                                    | barn         |        424 |     0.1 |
 | Klassen                                | MSUE18002219 | 23. Bestevennen del 3                                    | barn         |        494 |     0.2 |
 | Klassen                                | MSUE18002319 | 24. Klassens sterkeste                                   | barn         |        360 |     0.2 |
+| Klassen                                | MSUE18002419 | 25. Arvesmykket (Temadagene, spesial)                    | barn         |        380 |     0.2 |
+| Klassen                                | MSUE18002519 | 28. Ida er en dårlig taper                               | barn         |        364 |     0.1 |
+| Klassen                                | MSUE18002619 | 29. Den eneste single                                    | barn         |        388 |     0.2 |
+| Klassen                                | MSUE18002719 | 30. Hemmeligheten, del 1                                 | barn         |        320 |     0.1 |
+| Klassen                                | MSUE18002819 | 31. Hemmeligheten, del 2                                 | barn         |        390 |     0.1 |
+| Klassen                                | MSUE18002919 | 32. Loverboy                                             | barn         |        431 |     0.2 |
+| Klassen                                | MSUE18003019 | 33. Det første kysset                                    | barn         |        408 |     0.1 |
+| Klassen                                | MSUE18003119 | 34. Crush på en kjendis                                  | barn         |        272 |     0.2 |
+| Klassen                                | MSUE18003219 | 35. Farlig sladder                                       | barn         |        318 |     0.1 |
+| Klassen                                | MSUE18003319 | 36. Venner eller views?                                  | barn         |        328 |     0.1 |
+| Klassen                                | MSUE18003419 | 37. Overraskelsen                                        | barn         |        443 |     0.2 |
+| Klassen                                | MSUE18003519 | 38. Damekoden                                            | barn         |        460 |     0.2 |
+| Klassen                                | MSUE18003619 | 39. Ydmyket, del 1                                       | barn         |        352 |     0.1 |
+| Klassen                                | MSUE18003719 | 40. Ydmyket, del 2                                       | barn         |        511 |     0.2 |
+| Klassen                                | MSUE18003819 | 41. Dødslisten, del 1                                    | barn         |        477 |     0.2 |
+| Klassen                                | MSUE18003919 | 42. Dødslisten, del 2                                    | barn         |        388 |     0.2 |
+| Klassen                                | MSUE18004019 | 43. Desperat etter venner                                | barn         |        287 |     0.2 |
+| Klassen                                | MSUE18004119 | 44. Forbudt kjærlighet                                   | barn         |        524 |     0.2 |
+| Klassen                                | MSUE18004219 | 45. Alarmen går                                          | barn         |        272 |     0.1 |
+| Klassen                                | MSUE18004319 | 46. Tre på date, del 1                                   | barn         |        369 |     0.1 |
+| Klassen                                | MSUE18004419 | 47. Tre på date, del 2                                   | barn         |        367 |     0.1 |
+| Klassen                                | MSUE18004519 | 48. Hvem er stalkeren? del 1                             | barn         |        369 |     0.2 |
+| Klassen                                | MSUE18004619 | 49. For nære                                             | barn         |        310 |     0.1 |
+| Klassen                                | MSUE18004719 | 50. Tampongkrøll                                         | barn         |        325 |     0.1 |
+| Klassen                                | MSUE18004819 | 51. Hvem er stalkeren? del 2                             | barn         |        420 |     0.2 |
+| Klassen                                | MSUE18004919 | 52. To kjærester                                         | barn         |        425 |     0.1 |
+| Klassen                                | MSUE18005019 | 53. Klemt i midten                                       | barn         |        416 |     0.1 |
+| Klassen                                | MSUE18005119 | 54. Sammen                                               | barn         |        446 |     0.1 |
+| Klassen                                | MSUE18005219 | 55. Mammagutt                                            | barn         |        390 |     0.1 |
+| Klassen                                | MSUE18005319 | 56. Instatyveriet                                        | barn         |        323 |     0.2 |
+| Klassen                                | MSUE18005419 | 57. Hemmelig crush, del 1                                | barn         |        407 |     0.1 |
+| Klassen                                | MSUE18005519 | 58. Hemmelig crush, del 2                                | barn         |        412 |     0.2 |
+| Klassen                                | MSUE18005619 | 59. Helt perfekt                                         | barn         |        524 |     0.2 |
+| Klassen                                | MSUE18005719 | 60. Fest i fare                                          | barn         |        474 |     0.2 |
+| Klassen                                | MSUE18005819 | 61. Dronningens flukt                                    | barn         |        434 |     0.2 |
+| Klassen                                | MSUE18005919 | 62. Drømmejobben                                         | barn         |        389 |     0.2 |
+| Klassen                                | MSUE18006019 | 63. Krise siste skoledag                                 | barn         |        482 |     0.2 |
 | Kråkeklubben                           | DNPR63700114 | 1. Finn dyret                                            | barn         |        504 |     0.3 |
 | Kråkeklubben                           | DNPR63700115 | 1. Promp                                                 | barn         |        196 |     0.2 |
 | Kråkeklubben                           | DNPR63700214 | 2. Lam                                                   | barn         |        629 |     0.3 |
@@ -782,14 +1085,193 @@
 | Livet                                  | MSUI49006820 | 28. Husarrest                                            | barn         |        349 |     0.2 |
 | Livet                                  | MSUI49006920 | 29. Tredje hjulet                                        | barn         |        404 |     0.1 |
 | Livet                                  | MSUI49007020 | 30. Alt har en slutt                                     | barn         |        637 |     0.2 |
+| Megafon                                | MSUB07000110 | 21. januar 2010                                          | barn         |        850 |     0.4 |
+| Megafon                                | MSUB07000113 | Megafon: Yoga og skating                                 | barn         |        543 |     0.5 |
+| Megafon                                | MSUB07000210 | 28. januar 2010                                          | barn         |        897 |     0.4 |
+| Megafon                                | MSUB07000211 | 13. januar 2011                                          | barn         |        767 |     0.4 |
+| Megafon                                | MSUB07000212 | Megafon: Operasjon og Trommer                            | barn         |        748 |     0.4 |
+| Megafon                                | MSUB07000213 | Megafon: Motorcross og stamming                          | barn         |        714 |     0.4 |
+| Megafon                                | MSUB07000310 | 11. februar 2010                                         | barn         |        581 |     0.4 |
+| Megafon                                | MSUB07000311 | 20. januar 2011                                          | barn         |        905 |     0.4 |
+| Megafon                                | MSUB07000410 | 18. februar 2010                                         | barn         |        809 |     0.4 |
+| Megafon                                | MSUB07000412 | Megafon: Stemmeskifte og Sara                            | barn         |        857 |     0.4 |
+| Megafon                                | MSUB07000413 | Megafon: Autist og Detektiv                              | barn         |        968 |     0.4 |
+| Megafon                                | MSUB07000510 | 25. februar 2010                                         | barn         |        806 |     0.4 |
+| Megafon                                | MSUB07000512 | Megafon: Skilsmisse og Breakdance                        | barn         |        753 |     0.4 |
+| Megafon                                | MSUB07000513 | Megafon: Programlederen                                  | barn         |        727 |     0.4 |
+| Megafon                                | MSUB07000610 | 11. mars 2010                                            | barn         |        868 |     0.4 |
+| Megafon                                | MSUB07000612 | Megafon: Flyktning og hest                               | barn         |        916 |     0.4 |
+| Megafon                                | MSUB07000613 | Megafon: Veien til Nøtteknekkeren                        | barn         |        763 |     0.4 |
+| Megafon                                | MSUB07000710 | 18. mars 2010                                            | barn         |        950 |     0.4 |
+| Megafon                                | MSUB07000712 | Megafon: Dyr og Fotografen                               | barn         |        858 |     0.4 |
+| Megafon                                | MSUB07000810 | 25. mars 2010                                            | barn         |       1034 |     0.4 |
+| Megafon                                | MSUB07000910 | 8. april 2010                                            | barn         |        742 |     0.4 |
+| Megafon                                | MSUB07000912 | Megafon: Nesten blind og Når er du flau?                 | barn         |        948 |     0.4 |
 | Megafon                                | MSUB07000913 | Megafon: Domino og født døv                              | barn         |        750 |     0.4 |
+| Megafon                                | MSUB07001010 | 22. april 2010                                           | barn         |        810 |     0.4 |
 | Megafon                                | MSUB07001013 | Megafon: Dauinger og Trylling                            | barn         |        624 |     0.5 |
+| Megafon                                | MSUB07001110 | 29. april 2010                                           | barn         |        911 |     0.4 |
 | Megafon                                | MSUB07001113 | Megafon: Rideknappen og Jakttårn                         | barn         |        724 |     0.5 |
+| Megafon                                | MSUB07001210 | 6. mai 2010                                              | barn         |        721 |     0.4 |
 | Megafon                                | MSUB07001213 | Megafon: Potetkanon og Azza                              | barn         |        744 |     0.4 |
+| Megafon                                | MSUB07001310 | 13. mai 2010                                             | barn         |        689 |     0.4 |
+| Megafon                                | MSUB07001312 | Megafon: Skoleball og Ørnejakten                         | barn         |        909 |     0.4 |
 | Megafon                                | MSUB07001313 | Megafon: Fekting og anderledes                           | barn         |        659 |     0.4 |
+| Megafon                                | MSUB07001410 | 20. mai 2010                                             | barn         |        666 |     0.4 |
+| Megafon                                | MSUB07001412 | Megafon: Adopsjon og Cheerleader-NM                      | barn         |       1009 |     0.4 |
 | Megafon                                | MSUB07001413 | Megafon: Til topps og Oliver                             | barn         |        725 |     0.4 |
+| Megafon                                | MSUB07001510 | 21. oktober 2010                                         | barn         |        870 |     0.4 |
+| Megafon                                | MSUB07001512 | Megafon: Modeller                                        | barn         |        717 |     0.4 |
 | Megafon                                | MSUB07001513 | Megafon: 3Dprinter og sjarken                            | barn         |        830 |     0.4 |
+| Megafon                                | MSUB07001610 | 28. oktober 2010                                         | barn         |        968 |     0.4 |
+| Megafon                                | MSUB07001612 | Megafon: Sirkus og skihopp                               | barn         |        765 |     0.4 |
 | Megafon                                | MSUB07001613 | Megafon: Adopsjon                                        | barn         |        960 |     0.4 |
+| Megafon                                | MSUB07001710 | 4. november 2010                                         | barn         |        441 |     0.4 |
+| Megafon                                | MSUB07001712 | Megafon: The Gathering                                   | barn         |        464 |     0.4 |
+| Megafon                                | MSUB07001810 | 11. november 2010                                        | barn         |        826 |     0.4 |
+| Megafon                                | MSUB07001812 | Megafon: Belibers                                        | barn         |        271 |     0.5 |
+| Megafon                                | MSUB07001910 | 18. november 2010                                        | barn         |        694 |     0.4 |
+| Megafon                                | MSUB07001911 | 13. oktober 2011                                         | barn         |        578 |     0.3 |
+| Megafon                                | MSUB07001912 | Megafon: Speider-NM og Basar                             | barn         |        529 |     0.4 |
+| Megafon                                | MSUB07002010 | 25. november 2010                                        | barn         |        842 |     0.4 |
+| Megafon                                | MSUB07002011 | 20. oktober 2011                                         | barn         |        534 |     0.5 |
+| Megafon                                | MSUB07002012 | Megafon: Dysleksi                                        | barn         |        837 |     0.4 |
+| Megafon                                | MSUB07002112 | Megafon: Ånd og Dykking                                  | barn         |        698 |     0.4 |
+| Megafon                                | MSUB07002211 | 3. november 2011                                         | barn         |        585 |     0.5 |
+| Megafon                                | MSUB07002212 | Megafon: Same og Fiolin                                  | barn         |       1048 |     0.4 |
+| Megafon                                | MSUB07002311 | 10. november 2011                                        | barn         |        753 |     0.4 |
+| Megafon                                | MSUB07002312 | Megafon: Funksjonshemmet og Fobi                         | barn         |        748 |     0.4 |
+| Megafon                                | MSUB07002411 | 17. november 2011                                        | barn         |        800 |     0.4 |
+| Megafon                                | MSUB07002511 | 24. november 2011                                        | barn         |        741 |     0.4 |
+| Megafon                                | OBUB07000408 | 10. januar 2008                                          | barn         |        733 |     0.4 |
+| Megafon                                | OBUB07000508 | 17. januar 2008                                          | barn         |        794 |     0.4 |
+| Megafon                                | OBUB07000608 | 24. januar 2008                                          | barn         |        857 |     0.4 |
+| Megafon                                | OBUB07000708 | 31. januar 2008                                          | barn         |        884 |     0.4 |
+| Megafon                                | OBUB07000808 | 7. februar 2008                                          | barn         |        742 |     0.4 |
+| Megafon                                | OBUB07000908 | 14. februar 2008                                         | barn         |        740 |     0.4 |
+| Megafon                                | OBUB07001008 | 21. februar 2008                                         | barn         |        713 |     0.4 |
+| Megafon                                | OBUB07001108 | 28. februar 2008                                         | barn         |        743 |     0.4 |
+| Megafon                                | OBUB07001308 | 13. mars 2008                                            | barn         |        708 |     0.4 |
+| Megafon                                | OBUB07001408 | 20. mars 2008                                            | barn         |        667 |     0.4 |
+| Megafon                                | OBUB07001508 | 3. april 2008                                            | barn         |        768 |     0.4 |
+| Megafon                                | OBUB07001608 | 10. april 2008                                           | barn         |        847 |     0.4 |
+| Megafon                                | OBUB07001708 | 17. april 2008                                           | barn         |        857 |     0.4 |
+| Megafon                                | OBUB07001808 | 24. april 2008                                           | barn         |        639 |     0.4 |
+| Megafon                                | OBUB07001908 | 1. mai 2008                                              | barn         |        759 |     0.4 |
+| Megafon                                | OBUB07002008 | 8. mai 2008                                              | barn         |        907 |     0.4 |
+| Megafon                                | OBUB07002108 | 15. mai 2008                                             | barn         |        800 |     0.4 |
+| Megafon                                | OBUB07002208 | 21. august 2008                                          | barn         |        730 |     0.4 |
+| Megafon                                | OBUB07002308 | 28. august 2008                                          | barn         |        814 |     0.4 |
+| Megafon                                | OBUB07002408 | 11. september 2008                                       | barn         |        790 |     0.4 |
+| Megafon                                | OBUB07002508 | 25. september 2008                                       | barn         |        844 |     0.4 |
+| Megafon                                | OBUB07002608 | 2. oktober 2008                                          | barn         |        875 |     0.4 |
+| Megafon                                | OBUB07002708 | 9. oktober 2008                                          | barn         |        823 |     0.4 |
+| Megafon                                | OBUB07002808 | 16. oktober 2008                                         | barn         |        745 |     0.4 |
+| Megafon                                | OBUB07002908 | 23. oktober 2008                                         | barn         |        629 |     0.5 |
+| Megafon                                | OBUB07003008 | 30. oktober 2008                                         | barn         |        852 |     0.4 |
+| Megafon                                | OBUB07003108 | 6. november 2008                                         | barn         |        974 |     0.4 |
+| Megafon                                | OBUB07003208 | 13. november 2008                                        | barn         |        773 |     0.4 |
+| Megafon                                | OBUB07003308 | 20. november 2008                                        | barn         |        774 |     0.4 |
+| Megafon                                | OBUB07003408 | 27. november 2008                                        | barn         |        867 |     0.4 |
+| Megafon                                | OBUB07003508 | 4. desember 2008                                         | barn         |        757 |     0.4 |
+| Megafon                                | OBUB07003608 | 11. desember 2008                                        | barn         |        829 |     0.4 |
+| Megafon                                | OBUB70000109 | 15. januar 2009                                          | barn         |        787 |     0.4 |
+| Megafon                                | OBUB70000209 | 22. januar 2009                                          | barn         |        930 |     0.4 |
+| Megafon                                | OBUB70000309 | 29. januar 2009                                          | barn         |        680 |     0.4 |
+| Megafon                                | OBUB70000409 | 5. februar 2009                                          | barn         |        761 |     0.4 |
+| Megafon                                | OBUB70000509 | 12. februar 2009                                         | barn         |        823 |     0.4 |
+| Megafon                                | OBUB70000609 | 19. februar 2009                                         | barn         |        665 |     0.5 |
+| Megafon                                | OBUB70000709 | 26. februar 2009                                         | barn         |        872 |     0.4 |
+| Megafon                                | OBUB70000809 | 5. mars 2009                                             | barn         |        704 |     0.4 |
+| Megafon                                | OBUB70000909 | 12. mars 2009                                            | barn         |        893 |     0.4 |
+| Megafon                                | OBUB70001009 | 19. mars 2009                                            | barn         |        926 |     0.4 |
+| Megafon                                | OBUB70001109 | 26. mars 2009                                            | barn         |        744 |     0.4 |
+| Megafon                                | OBUB70001209 | 2. april 2009                                            | barn         |        835 |     0.4 |
+| Megafon                                | OBUB70001309 | 16. april 2009                                           | barn         |        920 |     0.4 |
+| Megafon                                | OBUB70001409 | 23. april 2009                                           | barn         |        744 |     0.4 |
+| Megafon                                | OBUB70001509 | 30. april 2009                                           | barn         |        739 |     0.4 |
+| Megafon                                | OBUB70001609 | 7. mai 2009                                              | barn         |        793 |     0.4 |
+| Megafon                                | OBUB70001709 | 14. mai 2009                                             | barn         |        776 |     0.4 |
+| Megafon                                | OBUB70001809 | 10. september 2009                                       | barn         |        737 |     0.4 |
+| Megafon                                | OBUB70001909 | 17. september 2009                                       | barn         |        951 |     0.4 |
+| Megafon                                | OBUB70002009 | 24. september 2009                                       | barn         |        946 |     0.4 |
+| Megafon                                | OBUB70002109 | 8. oktober 2009                                          | barn         |        712 |     0.4 |
+| Megafon                                | OBUB70002209 | 15. oktober 2009                                         | barn         |        970 |     0.4 |
+| Megafon                                | OBUB70002309 | 29. oktober 2009                                         | barn         |        697 |     0.4 |
+| Megafon                                | OBUB70002409 | 5. november 2009                                         | barn         |        672 |     0.5 |
+| Megafon                                | OBUB70002509 | 19. november 2009                                        | barn         |        778 |     0.4 |
+| Megafon                                | OBUB70002609 | 3. desember 2009                                         | barn         |        754 |     0.4 |
+| Megafon                                | OBUB70002709 | 17. desember 2009                                        | barn         |        892 |     0.4 |
+| Megafon                                | OBUB70002809 | 7. januar 2010                                           | barn         |        890 |     0.4 |
+| Megafon                                | OBUB70002909 | 14. januar 2010                                          | barn         |        744 |     0.4 |
+| Midt i smørøyet                        | FBUB03001395 | 1. april 1995                                            | barn         |       1727 |     0.8 |
+| Midt i smørøyet                        | FBUB03001495 | 8. april 1995                                            | barn         |       2167 |     0.8 |
+| Midt i smørøyet                        | FBUB03001595 | 15. april 1995                                           | barn         |       1057 |     0.9 |
+| Midt i smørøyet                        | FBUB07000496 | 27. januar 1996                                          | barn         |       1526 |     0.8 |
+| Midt i smørøyet                        | FBUB07000596 | 3. februar 1996                                          | barn         |       1894 |     0.8 |
+| Midt i smørøyet                        | FBUB07000598 | 31. januar 1998                                          | barn         |       1700 |     0.8 |
+| Midt i smørøyet                        | FBUB07000696 | 10. februar 1996                                         | barn         |       2218 |     0.7 |
+| Midt i smørøyet                        | FBUB07000698 | 7. februar 1998                                          | barn         |       1600 |     0.8 |
+| Midt i smørøyet                        | FBUB07000796 | 17. februar 1996                                         | barn         |       1022 |     0.8 |
+| Midt i smørøyet                        | FBUB07000798 | 14. februar 1998                                         | barn         |       1684 |     0.8 |
+| Midt i smørøyet                        | FBUB07000896 | 24. februar 1996                                         | barn         |       1781 |     0.8 |
+| Midt i smørøyet                        | FBUB07000898 | 21. februar 1998                                         | barn         |       1987 |     0.7 |
+| Midt i smørøyet                        | FBUB07000996 | 2. mars 1996                                             | barn         |       2141 |     0.7 |
+| Midt i smørøyet                        | FBUB07000998 | 28. februar 1998                                         | barn         |       1730 |     0.8 |
+| Midt i smørøyet                        | FBUB07001096 | 9. mars 1996                                             | barn         |       1653 |     0.8 |
+| Midt i smørøyet                        | FBUB07001098 | 7. mars 1998                                             | barn         |       1963 |     0.8 |
+| Midt i smørøyet                        | FBUB07001196 | 16. mars 1996                                            | barn         |       1967 |     0.8 |
+| Midt i smørøyet                        | FBUB07001198 | 14. mars 1998                                            | barn         |       1790 |     0.8 |
+| Midt i smørøyet                        | FBUB07001296 | 23. mars 1996                                            | barn         |       1793 |     0.8 |
+| Midt i smørøyet                        | FBUB07001298 | Midt i smørøyet, Showbiz                                 | barn         |       1830 |     0.8 |
+| Midt i smørøyet                        | FBUB07001396 | 30. mars 1996                                            | barn         |       1680 |     0.8 |
+| Midt i smørøyet                        | FBUB07001398 | 28. mars 1998                                            | barn         |       2035 |     0.7 |
+| Midt i smørøyet                        | FBUB07001496 | 6. april 1996                                            | barn         |       2138 |     0.8 |
+| Midt i smørøyet                        | FBUB07001596 | 13. april 1996                                           | barn         |       1836 |     0.8 |
+| Midt i smørøyet                        | FBUB07001598 | 11. april 1998                                           | barn         |       1638 |     0.8 |
+| Midt i smørøyet                        | FBUB07001696 | 20. april 1996                                           | barn         |       1431 |     0.8 |
+| Midt i smørøyet                        | FBUB07001796 | 27. april 1996                                           | barn         |       1754 |     0.8 |
+| Midt i smørøyet                        | FBUB07003795 | 16. september 1995                                       | barn         |       1927 |     0.8 |
+| Midt i smørøyet                        | FBUB07003895 | 23. september 1995                                       | barn         |       1999 |     0.8 |
+| Midt i smørøyet                        | FBUB07003896 | Midt i smørøyet: Sladder, vås og bare kødd               | barn         |       2351 |     0.7 |
+| Midt i smørøyet                        | FBUB07003995 | 30. september 1995                                       | barn         |       1967 |     0.8 |
+| Midt i smørøyet                        | FBUB07003996 | Midt i smørøyet: Mot                                     | barn         |       2030 |     0.8 |
+| Midt i smørøyet                        | FBUB07003997 | 27. september 1997                                       | barn         |       1868 |     0.8 |
+| Midt i smørøyet                        | FBUB07004095 | 7. oktober 1995                                          | barn         |       1879 |     0.8 |
+| Midt i smørøyet                        | FBUB07004096 | Midt i smørøyet: Makt og rettigheter                     | barn         |       1956 |     0.8 |
+| Midt i smørøyet                        | FBUB07004097 | 4. oktober 1997                                          | barn         |       1652 |     0.8 |
+| Midt i smørøyet                        | FBUB07004195 | 14. oktober 1995                                         | barn         |       1718 |     0.8 |
+| Midt i smørøyet                        | FBUB07004196 | Midt i smørøyet: Romantikk                               | barn         |       2095 |     0.7 |
+| Midt i smørøyet                        | FBUB07004197 | 11. oktober 1997                                         | barn         |       1746 |     0.8 |
+| Midt i smørøyet                        | FBUB07004295 | 21. oktober 1995                                         | barn         |       1789 |     0.8 |
+| Midt i smørøyet                        | FBUB07004296 | Midt i smørøyet: Arbeid mot mobbing                      | barn         |       2207 |     0.8 |
+| Midt i smørøyet                        | FBUB07004297 | 18. oktober 1997                                         | barn         |       1766 |     0.8 |
+| Midt i smørøyet                        | FBUB07004395 | 28. oktober 1995                                         | barn         |       2101 |     0.8 |
+| Midt i smørøyet                        | FBUB07004396 | Midt i smørøyet: Hester og våpen                         | barn         |       2623 |     0.7 |
+| Midt i smørøyet                        | FBUB07004397 | 25. oktober 1997                                         | barn         |       1399 |     0.8 |
+| Midt i smørøyet                        | FBUB07004495 | 4. november 1995                                         | barn         |       1921 |     0.8 |
+| Midt i smørøyet                        | FBUB07004496 | 2. november 1996                                         | barn         |       2032 |     0.7 |
+| Midt i smørøyet                        | FBUB07004497 | 1. november 1997                                         | barn         |       1656 |     0.8 |
+| Midt i smørøyet                        | FBUB07004595 | 11. november 1995                                        | barn         |       2375 |     0.8 |
+| Midt i smørøyet                        | FBUB07004596 | 9. november 1996                                         | barn         |       2175 |     0.7 |
+| Midt i smørøyet                        | FBUB07004597 | 8. november 1997                                         | barn         |       1323 |     0.8 |
+| Midt i smørøyet                        | FBUB07004695 | 18. november 1995                                        | barn         |       2156 |     0.8 |
+| Midt i smørøyet                        | FBUB07004696 | 16. november 1996                                        | barn         |       1794 |     0.7 |
+| Midt i smørøyet                        | FBUB07004697 | 15. november 1997                                        | barn         |       1740 |     0.8 |
+| Midt i smørøyet                        | FBUB07004795 | 25. november 1995                                        | barn         |       2476 |     0.7 |
+| Midt i smørøyet                        | FBUB07004796 | 23. november 1996                                        | barn         |       1617 |     0.7 |
+| Midt i smørøyet                        | FBUB07004797 | 22. november 1997                                        | barn         |       1601 |     0.8 |
+| Midt i smørøyet                        | FBUB07004895 | 2. desember 1995                                         | barn         |       2084 |     0.8 |
+| Midt i smørøyet                        | FBUB07004896 | 30. november 1996                                        | barn         |       1689 |     0.8 |
+| Midt i smørøyet                        | FBUB07004897 | 29. november 1997                                        | barn         |       1992 |     0.8 |
+| Midt i smørøyet                        | FBUB07004995 | 9. desember 1995                                         | barn         |       2215 |     0.8 |
+| Midt i smørøyet                        | FBUB07004996 | 7. desember 1996                                         | barn         |       1910 |     0.7 |
+| Midt i smørøyet                        | FBUB07004997 | 6. desember 1997                                         | barn         |       1581 |     0.8 |
+| Midt i smørøyet                        | FBUB07005095 | 16. desember 1995                                        | barn         |       2027 |     0.8 |
+| Midt i smørøyet                        | FBUB07005096 | 14. desember 1996                                        | barn         |       1866 |     0.7 |
+| Midt i smørøyet                        | FBUB07005097 | 13. desember 1997                                        | barn         |       1601 |     0.8 |
+| Midt i smørøyet                        | FBUB07005196 | 21. desember 1996                                        | barn         |       1812 |     0.7 |
+| Midt i smørøyet                        | FBUB07005197 | 20. desember 1997                                        | barn         |       1604 |     0.8 |
 | Newton                                 | DMPP21000121 | Stian må passe Anton!                                    | barn         |        495 |     0.3 |
 | Newton                                 | DMPP21000221 | Krasjtester bil fra 15 meter!                            | barn         |        250 |     0.2 |
 | Newton                                 | DMPP21000321 | Lyst til å gjøre som Dennis?                             | barn         |        178 |     0.2 |
