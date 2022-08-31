@@ -2,22 +2,25 @@
 | title                         |   segments |   hours |
 |:------------------------------|-----------:|--------:|
 | Alle sammen sammen            |       8030 |     9.8 |
+| Barnas supershow              |         55 |     0.1 |
 | Borgen skole                  |       3020 |     4.2 |
 | Fin fredag                    |       1558 |     2   |
-| Fjortis                       |        441 |     0.5 |
+| Fjortis                       |        699 |     0.8 |
 | Jul i svingen - Helene Bøksle |         17 |     0   |
-| Klassen                       |       3779 |     4.8 |
+| Klassen                       |       4047 |     5.1 |
 | Kråkeklubben                  |       7740 |     9.2 |
 | Leirskolen                    |        964 |     1.4 |
 | Linus i Svingen               |       1256 |     1.2 |
+| Livet                         |       9166 |    11.7 |
 | Megafon                       |       1342 |     1.9 |
-| Planetpatruljen               |        403 |     0.6 |
+| Newton                        |        197 |     0.2 |
+| Planetpatruljen               |        569 |     0.8 |
 | SKAM                          |      10599 |    13.3 |
 | Stjernestøv                   |       3721 |     4.6 |
 | U                             |        180 |     0.2 |
 
 
-**A total of 53.6 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 66.4 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                         | program_id   | subtitle                                           | category     |   segments |   hours |
 |:------------------------------|:-------------|:---------------------------------------------------|:-------------|-----------:|--------:|
@@ -48,6 +51,8 @@
 | Alle sammen sammen            | MSUB22000913 | 9. episode                                         | barn         |        308 |     0.4 |
 | Alle sammen sammen            | MSUB22000914 | 9. episode                                         | barn         |        333 |     0.4 |
 | Alle sammen sammen            | MSUB22000915 | 9. episode                                         | barn         |        227 |     0.3 |
+| Barnas supershow              | MSUS01104210 | 3. Barnas supershow - musikkvideo "Tissetrengt"    | barn         |         31 |     0   |
+| Barnas supershow              | OBUS05500207 | 4. Barnas superjul- Musikkvideo- "Gavejaktnatt"    | barn         |         24 |     0   |
 | Borgen skole                  | FBUA03002089 | 1. Borgen skole - klasse 7B og 4A                  | barn         |        237 |     0.3 |
 | Borgen skole                  | FBUA03002189 | 2. Borgen skole - klasse 7B og 4A                  | barn         |        215 |     0.3 |
 | Borgen skole                  | FBUA03002289 | 3. Borgen skole - klasse 7B og 4A                  | barn         |        218 |     0.3 |
@@ -76,6 +81,8 @@
 | Fjortis                       | FBUB04000100 | 1. Pikenes Mons                                    | drama-serier |        157 |     0.2 |
 | Fjortis                       | FBUB04000200 | 2. Blind date                                      | drama-serier |        138 |     0.1 |
 | Fjortis                       | FBUB04000300 | 3. Siste dans                                      | drama-serier |        146 |     0.2 |
+| Fjortis                       | FBUB04000500 | 5. Copenhagen                                      | drama-serier |        109 |     0.1 |
+| Fjortis                       | FBUB04000600 | 6. Tango jalousie                                  | drama-serier |        149 |     0.2 |
 | Jul i svingen - Helene Bøksle | MKTV13100320 |                                                    | kultur       |         17 |     0   |
 | Klassen                       | MSUE13000121 | 1. Levis liste del 1                               | barn         |        137 |     0.2 |
 | Klassen                       | MSUE13000221 | 2. Levis liste del 2                               | barn         |        143 |     0.2 |
@@ -108,6 +115,8 @@
 | Klassen                       | MSUE13002921 | 30. Modelldrømmen del 2                            | barn         |         96 |     0.1 |
 | Klassen                       | MSUE13003021 | 31. Katinka ro ned!                                | barn         |        106 |     0.1 |
 | Klassen                       | MSUE13003121 | 32. Klassens mest perfekte                         | barn         |        107 |     0.1 |
+| Klassen                       | MSUE13003221 | 33. Diabetes                                       | barn         |        107 |     0.1 |
+| Klassen                       | MSUE13003321 | 34. Ola svikter Ava                                | barn         |        161 |     0.2 |
 | Klassen                       | MSUE13004521 | 4. God Id Rakel!                                   | barn         |         98 |     0.1 |
 | Kråkeklubben                  | DNPR63700114 | 1. Finn dyret                                      | barn         |        273 |     0.3 |
 | Kråkeklubben                  | DNPR63700115 | 1. Promp                                           | barn         |        174 |     0.2 |
@@ -157,6 +166,78 @@
 | Linus i Svingen               | OBUS01000403 | 4. episode                                         | barn         |        212 |     0.2 |
 | Linus i Svingen               | OBUS01000503 | 5. episode                                         | barn         |        236 |     0.2 |
 | Linus i Svingen               | OBUS01000603 | 6. episode                                         | barn         |        199 |     0.2 |
+| Livet                         | MSUI40005120 | 1. Å være meg                                      | barn         |        146 |     0.2 |
+| Livet                         | MSUI40005220 | 2. Boner                                           | barn         |        132 |     0.2 |
+| Livet                         | MSUI40005320 | 3. Ond tvilling                                    | barn         |        160 |     0.2 |
+| Livet                         | MSUI40005420 | 4. Invitasjon i garderoben                         | barn         |        135 |     0.2 |
+| Livet                         | MSUI40005520 | 5. Problemer på toalettet                          | barn         |        119 |     0.1 |
+| Livet                         | MSUI40005620 | 6. Hjemmealenefest                                 | barn         |        178 |     0.2 |
+| Livet                         | MSUI40005720 | 7. Skulke-date                                     | barn         |        129 |     0.2 |
+| Livet                         | MSUI40005820 | 8. Større muskler nå                               | barn         |        118 |     0.1 |
+| Livet                         | MSUI40005920 | 9. Sexprat                                         | barn         |        138 |     0.2 |
+| Livet                         | MSUI40006020 | 10. Girlcrush                                      | barn         |        115 |     0.1 |
+| Livet                         | MSUI40006120 | 11. Hårløs og håpløs                               | barn         |        112 |     0.1 |
+| Livet                         | MSUI40006220 | 12. Jenta fra Italia                               | barn         |        152 |     0.2 |
+| Livet                         | MSUI40006320 | 13. Dirty meldinger                                | barn         |        110 |     0.1 |
+| Livet                         | MSUI40006420 | 14. Tre på date                                    | barn         |        137 |     0.2 |
+| Livet                         | MSUI40006520 | 15. Bakerst i bussen                               | barn         |         97 |     0.1 |
+| Livet                         | MSUI40006620 | 16. Boner på leirskole                             | barn         |        128 |     0.2 |
+| Livet                         | MSUI40006720 | 17. Nødt eller sannhet                             | barn         |        159 |     0.2 |
+| Livet                         | MSUI40006820 | 18. Vill natt                                      | barn         |        149 |     0.2 |
+| Livet                         | MSUI40006920 | 19. Et kyss er et kyss                             | barn         |        154 |     0.2 |
+| Livet                         | MSUI40007020 | 20. Kjæresteekspert                                | barn         |        118 |     0.1 |
+| Livet                         | MSUI40007120 | 21. Ny BH                                          | barn         |        120 |     0.1 |
+| Livet                         | MSUI40007220 | 22. Kjenn deg selv                                 | barn         |        120 |     0.1 |
+| Livet                         | MSUI40007320 | 23. Flørting på geografiprøven                     | barn         |         98 |     0.1 |
+| Livet                         | MSUI40007420 | 24. Ekskjæreste                                    | barn         |        152 |     0.2 |
+| Livet                         | MSUI40007520 | 25. Første kyss på rommet                          | barn         |        166 |     0.2 |
+| Livet                         | MSUI40007620 | 26. Reggis-fri                                     | barn         |        118 |     0.2 |
+| Livet                         | MSUI40007720 | 27. Grøsserdate                                    | barn         |        141 |     0.2 |
+| Livet                         | MSUI40007820 | 28. Vorspiel                                       | barn         |        136 |     0.2 |
+| Livet                         | MSUI40007920 | 29. Årets fest - del 1                             | barn         |        128 |     0.2 |
+| Livet                         | MSUI40008020 | 30. Årets fest - del 2                             | barn         |        132 |     0.2 |
+| Livet                         | MSUI40008120 | 31. Guttetur på ski                                | barn         |        209 |     0.3 |
+| Livet                         | MSUI40008220 | 32. Date på svensk                                 | barn         |        171 |     0.2 |
+| Livet                         | MSUI40008320 | 33. Hemmeligheten                                  | barn         |        130 |     0.2 |
+| Livet                         | MSUI40008420 | 34. Ikke rør søstra mi!                            | barn         |        151 |     0.2 |
+| Livet                         | MSUI40008520 | 35. Kjærester i smug                               | barn         |        136 |     0.2 |
+| Livet                         | MSUI40008620 | 36. Flørting overalt                               | barn         |        165 |     0.2 |
+| Livet                         | MSUI40008720 | 37. Ingen voksne                                   | barn         |        174 |     0.2 |
+| Livet                         | MSUI40008820 | 38. Første dag på jobb                             | barn         |        136 |     0.2 |
+| Livet                         | MSUI40008920 | 39. Blodig morgen                                  | barn         |        122 |     0.1 |
+| Livet                         | MSUI40009020 | 40. Ta på meg                                      | barn         |        179 |     0.2 |
+| Livet                         | MSUI40009120 | 41. Slå meg                                        | barn         |        144 |     0.2 |
+| Livet                         | MSUI40009220 | 42. Kjærlighetsfest                                | barn         |        105 |     0.1 |
+| Livet                         | MSUI41000120 | 1. Sløv søndag                                     | barn         |        156 |     0.2 |
+| Livet                         | MSUI41000220 | 2. En skremmende prat                              | barn         |         78 |     0.1 |
+| Livet                         | MSUI41000320 | 3. Innesperret                                     | barn         |         95 |     0.1 |
+| Livet                         | MSUI41000420 | 4. Nye tider, nye venner                           | barn         |         91 |     0.1 |
+| Livet                         | MSUI41000520 | 5. Den perfekte svigersønn                         | barn         |         95 |     0.1 |
+| Livet                         | MSUI41000620 | 6. Tjuvstart                                       | barn         |        115 |     0.1 |
+| Livet                         | MSUI41000720 | 7. Pakten i parken                                 | barn         |        111 |     0.1 |
+| Livet                         | MSUI41000820 | 8. Kondomkampen                                    | barn         |         97 |     0.1 |
+| Livet                         | MSUI41000920 | 9. Det forbudte kysset                             | barn         |        141 |     0.2 |
+| Livet                         | MSUI41001020 | 10. Total forvirring                               | barn         |        105 |     0.1 |
+| Livet                         | MSUI41001120 | 11. Pølse i brød                                   | barn         |         96 |     0.1 |
+| Livet                         | MSUI41001220 | 12. Den (u)perfekte festen                         | barn         |         98 |     0.1 |
+| Livet                         | MSUI41001320 | 13. Kjærlighetssorg i dyrehagen                    | barn         |         86 |     0.1 |
+| Livet                         | MSUI41001420 | 14. Flere fisk i havet                             | barn         |         96 |     0.1 |
+| Livet                         | MSUI41001520 | 15. Piercet sammen                                 | barn         |        106 |     0.1 |
+| Livet                         | MSUI41001620 | 16. Tvungen unnskyldning                           | barn         |        118 |     0.2 |
+| Livet                         | MSUI41001720 | 17. Bare en liten ting                             | barn         |        119 |     0.2 |
+| Livet                         | MSUI41001820 | 18. Bar mage med gutta                             | barn         |        103 |     0.1 |
+| Livet                         | MSUI41001920 | 19. Homie-seksuell                                 | barn         |        134 |     0.2 |
+| Livet                         | MSUI41002020 | 20. Naken sannhet                                  | barn         |         96 |     0.1 |
+| Livet                         | MSUI41002120 | 21. Et flytende fengsel                            | barn         |         88 |     0.1 |
+| Livet                         | MSUI41002220 | 22. Tur i skogen                                   | barn         |        156 |     0.2 |
+| Livet                         | MSUI41002320 | 23. Det baller på seg                              | barn         |        118 |     0.2 |
+| Livet                         | MSUI41002420 | 24. Den stønnende ulven                            | barn         |        116 |     0.1 |
+| Livet                         | MSUI41002520 | 25. Mellom kjærester                               | barn         |        147 |     0.2 |
+| Livet                         | MSUI41002620 | 26. Blått hår                                      | barn         |        111 |     0.1 |
+| Livet                         | MSUI41002720 | 27. Upassende barnevakt                            | barn         |        116 |     0.1 |
+| Livet                         | MSUI41002820 | 28. Ollies verden                                  | barn         |        124 |     0.2 |
+| Livet                         | MSUI41002920 | 29. Den andre første gangen                        | barn         |        123 |     0.1 |
+| Livet                         | MSUI41003020 | 30. Å være oss                                     | barn         |        112 |     0.1 |
 | Megafon                       | MSUB07000913 | Megafon: Domino og født døv                        | barn         |        244 |     0.3 |
 | Megafon                       | MSUB07001013 | Megafon: Dauinger og Trylling                      | barn         |         13 |     0   |
 | Megafon                       | MSUB07001113 | Megafon: Rideknappen og Jakttårn                   | barn         |          1 |     0   |
@@ -165,10 +246,13 @@
 | Megafon                       | MSUB07001413 | Megafon: Til topps og Oliver                       | barn         |        239 |     0.4 |
 | Megafon                       | MSUB07001513 | Megafon: 3Dprinter og sjarken                      | barn         |        261 |     0.4 |
 | Megafon                       | MSUB07001613 | Megafon: Adopsjon                                  | barn         |        181 |     0.3 |
+| Newton                        | DMPP21502322 | Prosjekt kylling!                                  | barn         |        197 |     0.2 |
 | Planetpatruljen               | DNRR63000122 | 2. Spar strøm                                      | barn         |        156 |     0.2 |
 | Planetpatruljen               | DNRR63000222 | 4. Ikke sløs vann                                  | barn         |        151 |     0.2 |
+| Planetpatruljen               | DNRR63000322 | 6. Bruk beina                                      | barn         |        132 |     0.2 |
 | Planetpatruljen               | DNRR63000922 | 3. Planettips: spar støm                           | barn         |         43 |     0.1 |
 | Planetpatruljen               | DNRR63001022 | 5. Planettips: bruk mindre vann                    | barn         |         31 |     0   |
+| Planetpatruljen               | DNRR63001122 | 7. Planettips: dyresafari                          | barn         |         34 |     0   |
 | Planetpatruljen               | DNRR63001522 | 1. Planetpatruljen musikkvideo                     | barn         |         22 |     0   |
 | SKAM                          | MSUB19120116 | 1. episode                                         | drama-serier |         12 |     0   |
 | SKAM                          | MSUB19120216 | 2. episode                                         | drama-serier |        168 |     0.2 |
