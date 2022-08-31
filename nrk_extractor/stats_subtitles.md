@@ -26,6 +26,7 @@
 | Linus i Svingen                       |       1256 |     1.2 |
 | Livet                                 |       9166 |    11.7 |
 | Megafon                               |      13597 |    20.5 |
+| Midt i smørøyet                       |       2154 |     3.3 |
 | Newton                                |       6128 |     8.3 |
 | Planetpatruljen                       |       9302 |    11.2 |
 | SKAM                                  |      10599 |    13.3 |
@@ -33,7 +34,7 @@
 | U                                     |        180 |     0.2 |
 
 
-**A total of 156.0 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 159.3 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                                 | program_id   | subtitle                                                 | category     |   segments |   hours |
 |:--------------------------------------|:-------------|:---------------------------------------------------------|:-------------|-----------:|--------:|
@@ -641,6 +642,15 @@
 | Megafon                               | OBUB70002709 | 17. desember 2009                                        | barn         |        298 |     0.5 |
 | Megafon                               | OBUB70002809 | 7. januar 2010                                           | barn         |        246 |     0.4 |
 | Megafon                               | OBUB70002909 | 14. januar 2010                                          | barn         |        262 |     0.4 |
+| Midt i smørøyet                       | FBUA03001190 | 27. januar 1990                                          | barn         |        123 |     0.2 |
+| Midt i smørøyet                       | FBUA03001290 | 10. februar 1990                                         | barn         |        338 |     0.5 |
+| Midt i smørøyet                       | FBUA03001390 | 24. februar 1990                                         | barn         |        284 |     0.4 |
+| Midt i smørøyet                       | FBUA03001490 | 10. mars 1990                                            | barn         |        270 |     0.4 |
+| Midt i smørøyet                       | FBUA03001590 | 24. mars 1990                                            | barn         |        351 |     0.6 |
+| Midt i smørøyet                       | FBUA03003290 | 3. november 1990                                         | barn         |        100 |     0.2 |
+| Midt i smørøyet                       | FBUA03003390 | 10. november 1990                                        | barn         |         33 |     0   |
+| Midt i smørøyet                       | FBUA03003490 | 17. november 1990                                        | barn         |        354 |     0.5 |
+| Midt i smørøyet                       | FBUA03003590 | 24. november 1990                                        | barn         |        301 |     0.4 |
 | Newton                                | DMPP21000121 | Stian må passe Anton!                                    | barn         |        232 |     0.3 |
 | Newton                                | DMPP21000221 | Krasjtester bil fra 15 meter!                            | barn         |        132 |     0.1 |
 | Newton                                | DMPP21000321 | Lyst til å gjøre som Dennis?                             | barn         |        103 |     0.1 |
