@@ -34,7 +34,6 @@ def main(args):
         programs_detailed = programs_detailed.drop(columns=['sum'])
         programs_detailed = programs_detailed.rename(columns={"count": "segments"})
        
-        breakpoint()
         if s == segments_list:
             save_file = "stats.md"
             title="# NRK Programs Processed\n"
