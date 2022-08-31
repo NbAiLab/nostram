@@ -32,7 +32,7 @@
 | Linus i Svingen                        |       5763 |     2.4 |
 | Livet                                  |      38863 |    14.6 |
 | Megafon                                |      93013 |    51.2 |
-| Midt i smørøyet                        |     126062 |    53   |
+| Midt i smørøyet                        |     380399 |   171.7 |
 | Newton                                 |      13190 |     9.7 |
 | Planetpatruljen                        |      19402 |    12.1 |
 | SKAM                                   |      52402 |    13.6 |
@@ -42,7 +42,7 @@
 | Vaffelhjarte                           |       4907 |     1.8 |
 
 
-**A total of 470.5 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 589.2 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                                  | program_id   | subtitle                                                 | category     |   segments |   hours |
 |:---------------------------------------|:-------------|:---------------------------------------------------------|:-------------|-----------:|--------:|
@@ -1204,9 +1204,156 @@
 | Megafon                                | OBUB70002709 | 17. desember 2009                                        | barn         |        892 |     0.4 |
 | Megafon                                | OBUB70002809 | 7. januar 2010                                           | barn         |        890 |     0.4 |
 | Megafon                                | OBUB70002909 | 14. januar 2010                                          | barn         |        744 |     0.4 |
+| Midt i smørøyet                        | FALB03000593 | 6. februar 1993                                          | barn         |       1829 |     0.8 |
+| Midt i smørøyet                        | FALB03000594 | 5. februar 1994                                          | barn         |       1585 |     0.8 |
+| Midt i smørøyet                        | FALB03000693 | 13. februar 1993                                         | barn         |       2482 |     0.8 |
+| Midt i smørøyet                        | FALB03000793 | 20. februar 1993                                         | barn         |       2005 |     0.7 |
+| Midt i smørøyet                        | FALB03000794 | 19. februar 1994                                         | barn         |       1720 |     0.8 |
+| Midt i smørøyet                        | FALB03000892 | 22. februar 1992                                         | barn         |       2063 |     0.8 |
+| Midt i smørøyet                        | FALB03000893 | 27. februar 1993                                         | barn         |       1979 |     0.8 |
+| Midt i smørøyet                        | FALB03000894 | 26. februar 1994                                         | barn         |       1640 |     0.9 |
+| Midt i smørøyet                        | FALB03000992 | 29. februar 1992                                         | barn         |       2017 |     0.7 |
+| Midt i smørøyet                        | FALB03000993 | 6. mars 1993                                             | barn         |       1933 |     0.8 |
+| Midt i smørøyet                        | FALB03000994 | 5. mars 1994                                             | barn         |       1992 |     0.8 |
+| Midt i smørøyet                        | FALB03001092 | 7. mars 1992                                             | barn         |       2156 |     0.8 |
+| Midt i smørøyet                        | FALB03001093 | 13. mars 1993                                            | barn         |       2035 |     0.8 |
+| Midt i smørøyet                        | FALB03001094 | 12. mars 1994                                            | barn         |       1909 |     0.8 |
+| Midt i smørøyet                        | FALB03001192 | 14. mars 1992                                            | barn         |       1878 |     0.8 |
+| Midt i smørøyet                        | FALB03001193 | 20. mars 1993                                            | barn         |       1410 |     0.8 |
+| Midt i smørøyet                        | FALB03001194 | 19. mars 1994                                            | barn         |       1958 |     0.8 |
+| Midt i smørøyet                        | FALB03001292 | 21. mars 1992                                            | barn         |       2207 |     0.8 |
+| Midt i smørøyet                        | FALB03001293 | 27. mars 1993                                            | barn         |       1904 |     0.8 |
+| Midt i smørøyet                        | FALB03001294 | 26. mars 1994                                            | barn         |       1575 |     0.8 |
+| Midt i smørøyet                        | FALB03001392 | 27. mars 1992                                            | barn         |       2168 |     0.7 |
+| Midt i smørøyet                        | FALB03001393 | 3. april 1993                                            | barn         |       1485 |     0.8 |
+| Midt i smørøyet                        | FALB03001394 | 2. april 1994                                            | barn         |       1863 |     0.8 |
+| Midt i smørøyet                        | FALB03001492 | 4. april 1992                                            | barn         |       2170 |     0.7 |
+| Midt i smørøyet                        | FALB03001493 | 10. april 1993                                           | barn         |       1847 |     0.8 |
+| Midt i smørøyet                        | FALB03001592 | 11. april 1992                                           | barn         |       1747 |     0.8 |
+| Midt i smørøyet                        | FALB03001593 | 17. april 1993                                           | barn         |       2022 |     0.8 |
+| Midt i smørøyet                        | FALB03001692 | Midt i Smørøyet - Kavalkade                              | barn         |       1158 |     0.8 |
+| Midt i smørøyet                        | FALB03003891 | 21. september 1991                                       | barn         |       1460 |     0.8 |
+| Midt i smørøyet                        | FALB03003893 | 25. september 1993                                       | barn         |       2083 |     0.8 |
+| Midt i smørøyet                        | FALB03003991 | 28. september 1991                                       | barn         |       1830 |     0.8 |
+| Midt i smørøyet                        | FALB03003992 | 26. september 1992                                       | barn         |       1486 |     0.8 |
+| Midt i smørøyet                        | FALB03003993 | 2. oktober 1993                                          | barn         |       1777 |     0.8 |
+| Midt i smørøyet                        | FALB03004091 | 5. oktober 1991                                          | barn         |       1535 |     0.8 |
+| Midt i smørøyet                        | FALB03004092 | 3. oktober 1992                                          | barn         |       1683 |     0.8 |
+| Midt i smørøyet                        | FALB03004093 | 9. oktober 1993                                          | barn         |       1830 |     0.8 |
+| Midt i smørøyet                        | FALB03004191 | 12. oktober 1991                                         | barn         |       1787 |     0.8 |
+| Midt i smørøyet                        | FALB03004192 | 10. oktober 1992                                         | barn         |       1873 |     0.8 |
+| Midt i smørøyet                        | FALB03004193 | 16. oktober 1993                                         | barn         |       1896 |     0.8 |
+| Midt i smørøyet                        | FALB03004291 | 19. oktober 1991                                         | barn         |       1632 |     0.8 |
+| Midt i smørøyet                        | FALB03004292 | 17. oktober 1992                                         | barn         |       2126 |     0.8 |
+| Midt i smørøyet                        | FALB03004293 | 23. oktober 1993                                         | barn         |       1803 |     0.8 |
+| Midt i smørøyet                        | FALB03004391 | 26. oktober 1991                                         | barn         |       1355 |     0.8 |
+| Midt i smørøyet                        | FALB03004392 | 24. oktober 1992                                         | barn         |       1691 |     0.8 |
+| Midt i smørøyet                        | FALB03004393 | 30. oktober 1993                                         | barn         |       1858 |     0.8 |
+| Midt i smørøyet                        | FALB03004491 | 2. november 1991                                         | barn         |       1467 |     0.8 |
+| Midt i smørøyet                        | FALB03004492 | 31. oktober 1992                                         | barn         |       1653 |     0.8 |
+| Midt i smørøyet                        | FALB03004493 | 6. november 1993                                         | barn         |       2152 |     0.8 |
+| Midt i smørøyet                        | FALB03004591 | 9. november 1991                                         | barn         |       1537 |     0.8 |
+| Midt i smørøyet                        | FALB03004592 | 7. november 1992                                         | barn         |       1668 |     0.8 |
+| Midt i smørøyet                        | FALB03004593 | 13. november 1993                                        | barn         |       1937 |     0.7 |
+| Midt i smørøyet                        | FALB03004692 | 14. november 1992                                        | barn         |       1773 |     0.8 |
+| Midt i smørøyet                        | FALB03004693 | 20. november 1993                                        | barn         |       1908 |     0.8 |
+| Midt i smørøyet                        | FALB03004791 | 23. november 1991                                        | barn         |       2087 |     0.8 |
+| Midt i smørøyet                        | FALB03004792 | 21. november 1992                                        | barn         |       1483 |     0.8 |
+| Midt i smørøyet                        | FALB03004793 | 27. november 1993                                        | barn         |       2165 |     0.8 |
+| Midt i smørøyet                        | FALB03004891 | 30. november 1991                                        | barn         |       1674 |     0.9 |
+| Midt i smørøyet                        | FALB03004892 | 28. november 1992                                        | barn         |       1654 |     0.8 |
+| Midt i smørøyet                        | FALB03004893 | 4. desember 1993                                         | barn         |       1864 |     0.8 |
+| Midt i smørøyet                        | FALB03004991 | 7. desember 1991                                         | barn         |       1496 |     0.8 |
+| Midt i smørøyet                        | FALB03004992 | 5. desember 1992                                         | barn         |       1398 |     0.9 |
+| Midt i smørøyet                        | FALB03004993 | 11. desember 1993                                        | barn         |       1905 |     0.8 |
+| Midt i smørøyet                        | FALB03005091 | 14. desember 1991                                        | barn         |       1501 |     0.8 |
+| Midt i smørøyet                        | FALB03005092 | 12. desember 1992                                        | barn         |       1785 |     0.8 |
+| Midt i smørøyet                        | FALB03005093 | 18. desember 1993                                        | barn         |       1630 |     0.8 |
+| Midt i smørøyet                        | FALB03005192 | 19. desember 1992                                        | barn         |       2024 |     0.8 |
+| Midt i smørøyet                        | FALB03005292 | 26. desember 1992                                        | barn         |        845 |     0.4 |
+| Midt i smørøyet                        | FALB04004691 | 16. november 1991                                        | barn         |       1540 |     0.8 |
+| Midt i smørøyet                        | FBUA03000189 | 28. januar 1989                                          | barn         |       1392 |     0.9 |
+| Midt i smørøyet                        | FBUA03000191 | 9. februar 1991                                          | barn         |       1197 |     0.8 |
+| Midt i smørøyet                        | FBUA03000289 | 4. februar 1989                                          | barn         |       1821 |     0.8 |
+| Midt i smørøyet                        | FBUA03000291 | 16. februar 1991                                         | barn         |       1293 |     0.8 |
+| Midt i smørøyet                        | FBUA03000391 | 23. februar 1991                                         | barn         |       1748 |     0.8 |
+| Midt i smørøyet                        | FBUA03000489 | 18. februar 1989                                         | barn         |       1546 |     0.8 |
+| Midt i smørøyet                        | FBUA03000491 | 2. mars 1991                                             | barn         |       1317 |     0.8 |
+| Midt i smørøyet                        | FBUA03000589 | 25. februar 1989                                         | barn         |       1943 |     0.8 |
+| Midt i smørøyet                        | FBUA03000591 | 9. mars 1991                                             | barn         |       1421 |     0.8 |
+| Midt i smørøyet                        | FBUA03000689 | 4. mars 1989                                             | barn         |       1880 |     0.9 |
+| Midt i smørøyet                        | FBUA03000691 | 16. mars 1991                                            | barn         |       1584 |     0.8 |
+| Midt i smørøyet                        | FBUA03000789 | 11. mars 1989                                            | barn         |       1768 |     0.8 |
+| Midt i smørøyet                        | FBUA03000791 | 23. mars 1991                                            | barn         |       1320 |     0.8 |
+| Midt i smørøyet                        | FBUA03000889 | 18. mars 1989                                            | barn         |       2322 |     0.8 |
+| Midt i smørøyet                        | FBUA03000891 | 13. april 1991                                           | barn         |       1287 |     0.9 |
+| Midt i smørøyet                        | FBUA03000989 | 25. mars 1989                                            | barn         |       1204 |     0.9 |
+| Midt i smørøyet                        | FBUA03000991 | 20. april 1991                                           | barn         |       1115 |     0.8 |
+| Midt i smørøyet                        | FBUA03001091 | 27. april 1991                                           | barn         |       1709 |     0.8 |
+| Midt i smørøyet                        | FBUA03001190 | 27. januar 1990                                          | barn         |       1530 |     0.8 |
+| Midt i smørøyet                        | FBUA03001290 | 10. februar 1990                                         | barn         |       1755 |     0.8 |
+| Midt i smørøyet                        | FBUA03001388 | 1. oktober 1988                                          | barn         |       1584 |     0.8 |
+| Midt i smørøyet                        | FBUA03001390 | 24. februar 1990                                         | barn         |       1336 |     0.8 |
+| Midt i smørøyet                        | FBUA03001488 | 8. oktober 1988                                          | barn         |       1647 |     0.8 |
+| Midt i smørøyet                        | FBUA03001490 | 10. mars 1990                                            | barn         |       1311 |     0.8 |
+| Midt i smørøyet                        | FBUA03001588 | 15. oktober 1988                                         | barn         |       1520 |     0.8 |
+| Midt i smørøyet                        | FBUA03001590 | 24. mars 1990                                            | barn         |       1177 |     0.9 |
+| Midt i smørøyet                        | FBUA03001688 | 22. oktober 1988                                         | barn         |       1691 |     0.8 |
+| Midt i smørøyet                        | FBUA03001788 | 29. oktober 1988                                         | barn         |       1642 |     0.8 |
+| Midt i smørøyet                        | FBUA03001888 | 5. november 1988                                         | barn         |       1842 |     0.8 |
+| Midt i smørøyet                        | FBUA03001988 | 12. november 1988                                        | barn         |       1585 |     0.8 |
+| Midt i smørøyet                        | FBUA03002088 | 19. november 1988                                        | barn         |       1879 |     0.8 |
+| Midt i smørøyet                        | FBUA03002188 | 26. november 1988                                        | barn         |       1289 |     0.8 |
+| Midt i smørøyet                        | FBUA03002288 | 3. desember 1988                                         | barn         |       1890 |     0.8 |
+| Midt i smørøyet                        | FBUA03002388 | 10. desember 1988                                        | barn         |       1666 |     0.8 |
+| Midt i smørøyet                        | FBUA03002488 | 17. desember 1988                                        | barn         |       1625 |     0.9 |
+| Midt i smørøyet                        | FBUA03002588 | 31. desember 1988                                        | barn         |       1609 |     0.9 |
+| Midt i smørøyet                        | FBUA03003190 | 27. oktober 1990                                         | barn         |       1505 |     0.8 |
+| Midt i smørøyet                        | FBUA03003290 | 3. november 1990                                         | barn         |       1739 |     0.8 |
+| Midt i smørøyet                        | FBUA03003390 | 10. november 1990                                        | barn         |       1722 |     0.8 |
+| Midt i smørøyet                        | FBUA03003490 | 17. november 1990                                        | barn         |       1505 |     0.9 |
+| Midt i smørøyet                        | FBUA03003590 | 24. november 1990                                        | barn         |       1915 |     0.8 |
+| Midt i smørøyet                        | FBUA03003690 | 1. desember 1990                                         | barn         |       1852 |     0.8 |
+| Midt i smørøyet                        | FBUA03003790 | 8. desember 1990                                         | barn         |       1483 |     0.8 |
+| Midt i smørøyet                        | FBUA03003890 | 15. desember 1990                                        | barn         |       1691 |     0.8 |
+| Midt i smørøyet                        | FBUA03003990 | 22. desember 1990                                        | barn         |       1580 |     0.8 |
+| Midt i smørøyet                        | FBUA03004189 | 7. oktober 1989                                          | barn         |       1334 |     0.9 |
+| Midt i smørøyet                        | FBUA03004289 | 14. oktober 1989                                         | barn         |       1787 |     0.8 |
+| Midt i smørøyet                        | FBUA03004389 | 21. oktober 1989                                         | barn         |       2041 |     0.8 |
+| Midt i smørøyet                        | FBUA03004489 | 28. oktober 1989                                         | barn         |       1698 |     0.9 |
+| Midt i smørøyet                        | FBUA03004589 | 4. november 1989                                         | barn         |       1913 |     0.9 |
+| Midt i smørøyet                        | FBUA03004689 | 11. november 1989                                        | barn         |       1950 |     0.9 |
+| Midt i smørøyet                        | FBUA03004789 | 18. november 1989                                        | barn         |       2199 |     0.9 |
+| Midt i smørøyet                        | FBUA03004889 | 25. november 1989                                        | barn         |       2076 |     0.8 |
+| Midt i smørøyet                        | FBUA03004989 | 2. desember 1989                                         | barn         |       2032 |     0.9 |
+| Midt i smørøyet                        | FBUA03005089 | 9. desember 1989                                         | barn         |       1916 |     0.9 |
+| Midt i smørøyet                        | FBUA03005189 | 16. desember 1989                                        | barn         |       1976 |     0.9 |
+| Midt i smørøyet                        | FBUA03005289 | 23. desember 1989                                        | barn         |       1541 |     0.9 |
+| Midt i smørøyet                        | FBUA03005389 | 30. desember 1989                                        | barn         |       1821 |     0.9 |
+| Midt i smørøyet                        | FBUB03000595 | 4. februar 1995                                          | barn         |       2069 |     0.8 |
+| Midt i smørøyet                        | FBUB03000695 | 11. februar 1995                                         | barn         |       1882 |     0.8 |
+| Midt i smørøyet                        | FBUB03000795 | 17. februar 1995                                         | barn         |       2205 |     0.8 |
+| Midt i smørøyet                        | FBUB03000895 | 25. februar 1995                                         | barn         |       2215 |     0.8 |
+| Midt i smørøyet                        | FBUB03000995 | 4. mars 1995                                             | barn         |       1968 |     0.8 |
+| Midt i smørøyet                        | FBUB03001095 | 11. mars 1995                                            | barn         |       1925 |     0.8 |
+| Midt i smørøyet                        | FBUB03001195 | 18. mars 1995                                            | barn         |       2132 |     0.8 |
+| Midt i smørøyet                        | FBUB03001295 | 25. mars 1995                                            | barn         |       1810 |     0.8 |
 | Midt i smørøyet                        | FBUB03001395 | 1. april 1995                                            | barn         |       1727 |     0.8 |
 | Midt i smørøyet                        | FBUB03001495 | 8. april 1995                                            | barn         |       2167 |     0.8 |
 | Midt i smørøyet                        | FBUB03001595 | 15. april 1995                                           | barn         |       1057 |     0.9 |
+| Midt i smørøyet                        | FBUB03003894 | 24. september 1994                                       | barn         |       1855 |     0.8 |
+| Midt i smørøyet                        | FBUB03003994 | 1. oktober 1994                                          | barn         |       1829 |     0.8 |
+| Midt i smørøyet                        | FBUB03004094 | 8. oktober 1994                                          | barn         |       1510 |     0.8 |
+| Midt i smørøyet                        | FBUB03004194 | 15. oktober 1994                                         | barn         |       1686 |     0.8 |
+| Midt i smørøyet                        | FBUB03004294 | 22. oktober 1994                                         | barn         |       1539 |     0.8 |
+| Midt i smørøyet                        | FBUB03004394 | 29. oktober 1994                                         | barn         |       1498 |     0.8 |
+| Midt i smørøyet                        | FBUB03004494 | 5. november 1994                                         | barn         |       1358 |     0.8 |
+| Midt i smørøyet                        | FBUB03004594 | 12. november 1994                                        | barn         |       1817 |     0.8 |
+| Midt i smørøyet                        | FBUB03004694 | 19. november 1994                                        | barn         |       1577 |     0.8 |
+| Midt i smørøyet                        | FBUB03004794 | 26. november 1994                                        | barn         |       1353 |     0.8 |
+| Midt i smørøyet                        | FBUB03004894 | 3. desember 1994                                         | barn         |       1869 |     0.8 |
+| Midt i smørøyet                        | FBUB03004994 | 10. desember 1994                                        | barn         |        996 |     0.7 |
+| Midt i smørøyet                        | FBUB03005094 | 17. desember 1994                                        | barn         |       1935 |     0.7 |
 | Midt i smørøyet                        | FBUB07000496 | 27. januar 1996                                          | barn         |       1526 |     0.8 |
 | Midt i smørøyet                        | FBUB07000596 | 3. februar 1996                                          | barn         |       1894 |     0.8 |
 | Midt i smørøyet                        | FBUB07000598 | 31. januar 1998                                          | barn         |       1700 |     0.8 |
