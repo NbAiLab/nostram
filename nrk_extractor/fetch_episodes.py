@@ -79,10 +79,10 @@ class episodefetcher:
 
 
         resp = self.geturl(programinforeq)
-        print(resp.json())
-        exit(-1)
+        #print(resp.json())
+        #exit(-1)
         
-        pere - jeg er her
+        #pere - jeg er her
 
         #print(resp)
         #print(resp.json())
