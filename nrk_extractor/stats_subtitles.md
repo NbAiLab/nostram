@@ -4,16 +4,16 @@
 | Alle sammen sammen                    |       8030 |     9.8 |
 | Barnas supershow                      |       1998 |     2.7 |
 | Borgen skole                          |       3020 |     4.2 |
-| Distriktsnyheter Innlandet            |        797 |     1.2 |
-| Distriktsnyheter Midtnytt             |       1057 |     1.6 |
-| Distriktsnyheter Møre og Romsdal      |        844 |     1.2 |
+| Distriktsnyheter Innlandet            |        919 |     1.4 |
+| Distriktsnyheter Midtnytt             |       1195 |     1.9 |
+| Distriktsnyheter Møre og Romsdal      |        985 |     1.5 |
 | Distriktsnyheter Nordland             |       2060 |     3.1 |
-| Distriktsnyheter Nordnytt             |        357 |     0.6 |
-| Distriktsnyheter Oslo og Viken        |       1160 |     1.7 |
-| Distriktsnyheter Rogaland             |       2065 |     3.1 |
-| Distriktsnyheter Sørlandet            |        457 |     0.6 |
-| Distriktsnyheter Vestfold og Telemark |        842 |     1.2 |
-| Distriktsnyheter Vestlandsrevyen      |        311 |     0.5 |
+| Distriktsnyheter Nordnytt             |        484 |     0.8 |
+| Distriktsnyheter Oslo og Viken        |       1284 |     1.9 |
+| Distriktsnyheter Rogaland             |       2222 |     3.3 |
+| Distriktsnyheter Sørlandet            |        619 |     0.8 |
+| Distriktsnyheter Vestfold og Telemark |        978 |     1.5 |
+| Distriktsnyheter Vestlandsrevyen      |        472 |     0.7 |
 | Distriktsnyheter Østafjells           |        102 |     0.2 |
 | Distriktsnyheter Østfold              |        174 |     0.3 |
 | Distriktsnyheter Østlandssendingen    |        355 |     0.6 |
@@ -28,13 +28,15 @@
 | Megafon                               |      13597 |    20.5 |
 | Midt i smørøyet                       |       2154 |     3.3 |
 | Newton                                |       6128 |     8.3 |
+| Norge Rundt                           |      90574 |   128.7 |
 | Planetpatruljen                       |       9302 |    11.2 |
 | SKAM                                  |      10599 |    13.3 |
 | Stjernestøv                           |       3721 |     4.6 |
+| Supernytt                             |       3423 |     5   |
 | U                                     |        180 |     0.2 |
 
 
-**A total of 159.3 hours in the dataset**<details><summary>View detailed summary</summary>
+**A total of 294.9 hours in the dataset**<details><summary>View detailed summary</summary>
 ## Detailed View
 | title                                 | program_id   | subtitle                                                 | category     |   segments |   hours |
 |:--------------------------------------|:-------------|:---------------------------------------------------------|:-------------|-----------:|--------:|
@@ -107,6 +109,7 @@
 | Distriktsnyheter Innlandet            | DKIN98082622 | Fredag                                                   | nyheter      |         97 |     0.1 |
 | Distriktsnyheter Innlandet            | DKIN98082922 | Mandag kl. 19.45                                         | nyheter      |        135 |     0.2 |
 | Distriktsnyheter Innlandet            | DKIN98083022 | I går kl. 19.45                                          | nyheter      |        143 |     0.2 |
+| Distriktsnyheter Innlandet            | DKIN98083122 | I går kl. 19.45                                          | nyheter      |        122 |     0.2 |
 | Distriktsnyheter Midtnytt             | DKTL98081922 | 19. august                                               | nyheter      |        102 |     0.1 |
 | Distriktsnyheter Midtnytt             | DKTL98082222 | 22. august kl. 19.45                                     | nyheter      |        146 |     0.2 |
 | Distriktsnyheter Midtnytt             | DKTL98082322 | 23. august kl. 19.45                                     | nyheter      |        139 |     0.2 |
@@ -115,12 +118,14 @@
 | Distriktsnyheter Midtnytt             | DKTL98082622 | Fredag                                                   | nyheter      |         89 |     0.1 |
 | Distriktsnyheter Midtnytt             | DKTL98082922 | Mandag kl. 19.45                                         | nyheter      |        141 |     0.2 |
 | Distriktsnyheter Midtnytt             | DKTL98083022 | I går kl. 19.45                                          | nyheter      |        158 |     0.2 |
+| Distriktsnyheter Midtnytt             | DKTL98083122 | I går kl. 19.45                                          | nyheter      |        138 |     0.2 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98082322 | 23. august kl. 19.45                                     | nyheter      |        155 |     0.2 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98082422 | 24. august kl. 19.45                                     | nyheter      |        131 |     0.2 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98082522 | 25. august kl. 19.45                                     | nyheter      |        153 |     0.2 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98082622 | Fredag                                                   | nyheter      |         96 |     0.1 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98082922 | Mandag kl. 19.45                                         | nyheter      |        160 |     0.2 |
 | Distriktsnyheter Møre og Romsdal      | DKMR98083022 | I går kl. 19.45                                          | nyheter      |        149 |     0.2 |
+| Distriktsnyheter Møre og Romsdal      | DKMR98083122 | I går kl. 19.45                                          | nyheter      |        141 |     0.2 |
 | Distriktsnyheter Nordland             | DKNO98080922 | 9. august                                                | nyheter      |        130 |     0.2 |
 | Distriktsnyheter Nordland             | DKNO98081022 | 10. august                                               | nyheter      |        146 |     0.2 |
 | Distriktsnyheter Nordland             | DKNO98081122 | 11. august                                               | nyheter      |        159 |     0.2 |
@@ -140,6 +145,7 @@
 | Distriktsnyheter Nordnytt             | DKTR98082422 | 24. august kl. 19.45                                     | nyheter      |        131 |     0.2 |
 | Distriktsnyheter Nordnytt             | DKTR98082622 | Fredag                                                   | nyheter      |         98 |     0.1 |
 | Distriktsnyheter Nordnytt             | DKTR98082922 | Mandag kl. 19.45                                         | nyheter      |        128 |     0.2 |
+| Distriktsnyheter Nordnytt             | DKTR98083122 | I går kl. 19.45                                          | nyheter      |        127 |     0.2 |
 | Distriktsnyheter Oslo og Viken        | DKOV98081722 | 17. august                                               | nyheter      |        144 |     0.2 |
 | Distriktsnyheter Oslo og Viken        | DKOV98081922 | 19. august                                               | nyheter      |         82 |     0.1 |
 | Distriktsnyheter Oslo og Viken        | DKOV98082222 | 22. august kl. 19.45                                     | nyheter      |        153 |     0.2 |
@@ -149,6 +155,7 @@
 | Distriktsnyheter Oslo og Viken        | DKOV98082622 | Fredag                                                   | nyheter      |         89 |     0.1 |
 | Distriktsnyheter Oslo og Viken        | DKOV98082922 | Mandag kl. 19.45                                         | nyheter      |        128 |     0.2 |
 | Distriktsnyheter Oslo og Viken        | DKOV98083022 | I går kl. 19.45                                          | nyheter      |        143 |     0.2 |
+| Distriktsnyheter Oslo og Viken        | DKOV98083122 | I går kl. 19.45                                          | nyheter      |        124 |     0.2 |
 | Distriktsnyheter Rogaland             | DKRO98081022 | 10. august                                               | nyheter      |        138 |     0.2 |
 | Distriktsnyheter Rogaland             | DKRO98081122 | 11. august                                               | nyheter      |        160 |     0.3 |
 | Distriktsnyheter Rogaland             | DKRO98081222 | 12. august                                               | nyheter      |        101 |     0.1 |
@@ -164,17 +171,21 @@
 | Distriktsnyheter Rogaland             | DKRO98082622 | Fredag                                                   | nyheter      |        106 |     0.1 |
 | Distriktsnyheter Rogaland             | DKRO98082922 | Mandag kl. 19.45                                         | nyheter      |        139 |     0.2 |
 | Distriktsnyheter Rogaland             | DKRO98083022 | I går kl. 19.45                                          | nyheter      |        146 |     0.2 |
+| Distriktsnyheter Rogaland             | DKRO98083122 | I går kl. 19.45                                          | nyheter      |        157 |     0.2 |
 | Distriktsnyheter Sørlandet            | DKSL98082522 | 25. august kl. 19.45                                     | nyheter      |        161 |     0.2 |
 | Distriktsnyheter Sørlandet            | DKSL98082922 | Mandag kl. 19.45                                         | nyheter      |        152 |     0.2 |
 | Distriktsnyheter Sørlandet            | DKSL98083022 | I går kl. 19.45                                          | nyheter      |        144 |     0.2 |
+| Distriktsnyheter Sørlandet            | DKSL98083122 | I går kl. 19.45                                          | nyheter      |        162 |     0.2 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98082322 | 23. august kl. 19.45                                     | nyheter      |        158 |     0.2 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98082422 | 24. august kl. 19.45                                     | nyheter      |        136 |     0.2 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98082522 | 25. august kl. 19.45                                     | nyheter      |        133 |     0.2 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98082622 | Fredag                                                   | nyheter      |        103 |     0.1 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98082922 | Mandag kl. 19.45                                         | nyheter      |        161 |     0.2 |
 | Distriktsnyheter Vestfold og Telemark | DKVT98083022 | I går kl. 19.45                                          | nyheter      |        151 |     0.2 |
+| Distriktsnyheter Vestfold og Telemark | DKVT98083122 | I går kl. 19.45                                          | nyheter      |        136 |     0.2 |
 | Distriktsnyheter Vestlandsrevyen      | DKHO98082922 | Mandag kl. 19.45                                         | nyheter      |        148 |     0.2 |
 | Distriktsnyheter Vestlandsrevyen      | DKHO98083022 | I går kl. 19.45                                          | nyheter      |        163 |     0.2 |
+| Distriktsnyheter Vestlandsrevyen      | DKHO98083122 | I går kl. 19.45                                          | nyheter      |        161 |     0.2 |
 | Distriktsnyheter Østafjells           | DKTE99122019 | 20. desember 2019                                        | nyheter      |        102 |     0.2 |
 | Distriktsnyheter Østfold              | DKOS99121919 | 19. desember 2019 kl. 18.50                              | nyheter      |         82 |     0.1 |
 | Distriktsnyheter Østfold              | DKOS99122019 | 20. desember 2019                                        | nyheter      |         92 |     0.1 |
@@ -701,6 +712,489 @@
 | Newton                                | DMPP21502022 | Lag slush på 5 min!                                      | barn         |         49 |     0.1 |
 | Newton                                | DMPP21502222 | Ane blir hypnotisert!                                    | barn         |        160 |     0.2 |
 | Newton                                | DMPP21502322 | Prosjekt kylling!                                        | barn         |        197 |     0.2 |
+| Norge Rundt                           | DVNR03005011 | Norge Rundt-jubileum                                     | livsstil     |        256 |     0.4 |
+| Norge Rundt                           | DVNR03005111 | Norge Rundt-jubileum                                     | livsstil     |          6 |     0   |
+| Norge Rundt                           | DVNR04000112 | 6. januar 2012                                           | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04000113 | 4. januar 2013                                           | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04000114 | 3. januar 2014                                           | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04000115 | 2. januar 2015                                           | livsstil     |        207 |     0.3 |
+| Norge Rundt                           | DVNR04000116 | 8. januar 2016                                           | livsstil     |        206 |     0.3 |
+| Norge Rundt                           | DVNR04000117 | 6. januar 2017                                           | livsstil     |          8 |     0   |
+| Norge Rundt                           | DVNR04000118 | 5. januar 2018                                           | livsstil     |        239 |     0.3 |
+| Norge Rundt                           | DVNR04000119 | Kva gler vi oss til?                                     | livsstil     |        237 |     0.4 |
+| Norge Rundt                           | DVNR04000120 | Jeg kan ikke lage mat!                                   | livsstil     |        257 |     0.4 |
+| Norge Rundt                           | DVNR04000121 | Kakekunst                                                | livsstil     |        263 |     0.4 |
+| Norge Rundt                           | DVNR04000122 | Lager kunst med motorsag                                 | livsstil     |        299 |     0.4 |
+| Norge Rundt                           | DVNR04000212 | 13. januar 2012                                          | livsstil     |        191 |     0.3 |
+| Norge Rundt                           | DVNR04000213 | 11. januar 2013                                          | livsstil     |        203 |     0.3 |
+| Norge Rundt                           | DVNR04000214 | 10. januar 2014                                          | livsstil     |        227 |     0.3 |
+| Norge Rundt                           | DVNR04000215 | 9. januar 2015                                           | livsstil     |        221 |     0.3 |
+| Norge Rundt                           | DVNR04000216 | 15. januar 2016                                          | livsstil     |         26 |     0   |
+| Norge Rundt                           | DVNR04000217 | 13. januar 2017                                          | livsstil     |        241 |     0.3 |
+| Norge Rundt                           | DVNR04000218 | 12. januar 2018                                          | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04000219 | Livet i lufta                                            | livsstil     |        225 |     0.3 |
+| Norge Rundt                           | DVNR04000220 | Turntreneren min                                         | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04000221 | På høgda i stolpen                                       | livsstil     |        248 |     0.3 |
+| Norge Rundt                           | DVNR04000222 | Pizzanerding                                             | livsstil     |        282 |     0.4 |
+| Norge Rundt                           | DVNR04000312 | 20. januar 2012                                          | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04000313 | 18. januar 2013                                          | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04000314 | 17. januar 2014                                          | livsstil     |        221 |     0.3 |
+| Norge Rundt                           | DVNR04000315 | 16. januar 2015                                          | livsstil     |        203 |     0.3 |
+| Norge Rundt                           | DVNR04000316 | 22. januar 2016                                          | livsstil     |        225 |     0.3 |
+| Norge Rundt                           | DVNR04000317 | 20. januar 2017                                          | livsstil     |        234 |     0.3 |
+| Norge Rundt                           | DVNR04000318 | 19. januar 2018                                          | livsstil     |        245 |     0.3 |
+| Norge Rundt                           | DVNR04000319 | Bilmekking                                               | livsstil     |        230 |     0.3 |
+| Norge Rundt                           | DVNR04000320 | Kveldspadling                                            | livsstil     |        237 |     0.3 |
+| Norge Rundt                           | DVNR04000321 | Syskule med Morten                                       | livsstil     |        260 |     0.4 |
+| Norge Rundt                           | DVNR04000412 | 27. januar 2012                                          | livsstil     |          4 |     0   |
+| Norge Rundt                           | DVNR04000413 | 25. januar 2013                                          | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04000414 | 24. januar 2014                                          | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04000415 | 23. januar 2015                                          | livsstil     |        208 |     0.3 |
+| Norge Rundt                           | DVNR04000416 | 29. januar 2016                                          | livsstil     |        250 |     0.3 |
+| Norge Rundt                           | DVNR04000417 | 27. januar 2017                                          | livsstil     |         12 |     0   |
+| Norge Rundt                           | DVNR04000418 | 26. januar 2018                                          | livsstil     |        199 |     0.3 |
+| Norge Rundt                           | DVNR04000419 | Sjelden tatovering                                       | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04000420 | Den norske skolen i London                               | livsstil     |         16 |     0   |
+| Norge Rundt                           | DVNR04000421 | Stein på stein                                           | livsstil     |         26 |     0   |
+| Norge Rundt                           | DVNR04000422 | En dag i hundesleden                                     | livsstil     |        260 |     0.3 |
+| Norge Rundt                           | DVNR04000512 | 3. februar 2012                                          | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04000513 | 1. februar 2013                                          | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04000514 | 31. januar 2014                                          | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04000515 | 30. januar 2015                                          | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04000516 | 5. februar 2016                                          | livsstil     |        221 |     0.3 |
+| Norge Rundt                           | DVNR04000517 | 3. februar 2017                                          | livsstil     |        298 |     0.4 |
+| Norge Rundt                           | DVNR04000518 | 2. februar 2018                                          | livsstil     |        242 |     0.3 |
+| Norge Rundt                           | DVNR04000519 | Isbading                                                 | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04000520 | Garnfiske                                                | livsstil     |        252 |     0.4 |
+| Norge Rundt                           | DVNR04000521 | Service på borerigg                                      | livsstil     |          7 |     0   |
+| Norge Rundt                           | DVNR04000522 | Kunstløp for voksne                                      | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04000612 | 10. februar 2012                                         | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04000613 | 8. februar 2013                                          | livsstil     |         11 |     0   |
+| Norge Rundt                           | DVNR04000614 | 7. februar 2014                                          | livsstil     |        235 |     0.3 |
+| Norge Rundt                           | DVNR04000616 | 12. februar 2016                                         | livsstil     |        214 |     0.3 |
+| Norge Rundt                           | DVNR04000617 | 10. februar 2017                                         | livsstil     |        282 |     0.4 |
+| Norge Rundt                           | DVNR04000618 | 9. februar 2018                                          | livsstil     |        256 |     0.4 |
+| Norge Rundt                           | DVNR04000619 | Ullklassifisør                                           | livsstil     |        247 |     0.4 |
+| Norge Rundt                           | DVNR04000620 | Råning med mopedbil                                      | livsstil     |        242 |     0.3 |
+| Norge Rundt                           | DVNR04000621 | Dyrefristaden på Askøy                                   | livsstil     |        253 |     0.4 |
+| Norge Rundt                           | DVNR04000622 | Ekte cowboyer                                            | livsstil     |        255 |     0.3 |
+| Norge Rundt                           | DVNR04000712 | 17. februar 2012                                         | livsstil     |        201 |     0.3 |
+| Norge Rundt                           | DVNR04000713 | 15. februar 2013                                         | livsstil     |        228 |     0.3 |
+| Norge Rundt                           | DVNR04000714 | 14. februar 2014                                         | livsstil     |         19 |     0   |
+| Norge Rundt                           | DVNR04000715 | 13. februar 2015                                         | livsstil     |        200 |     0.3 |
+| Norge Rundt                           | DVNR04000716 | 19. februar 2016                                         | livsstil     |          7 |     0   |
+| Norge Rundt                           | DVNR04000717 | 17. februar 2017                                         | livsstil     |        209 |     0.3 |
+| Norge Rundt                           | DVNR04000718 | 16. februar 2018                                         | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04000719 | Fra kloakk til drivstoff                                 | livsstil     |        242 |     0.3 |
+| Norge Rundt                           | DVNR04000721 | Villmarkskjensla i nærområdet                            | livsstil     |        245 |     0.4 |
+| Norge Rundt                           | DVNR04000722 | Klatring i Bergen                                        | livsstil     |        259 |     0.4 |
+| Norge Rundt                           | DVNR04000812 | 24. februar 2012                                         | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04000813 | 22. februar 2013                                         | livsstil     |        213 |     0.3 |
+| Norge Rundt                           | DVNR04000814 | 21. februar 2014                                         | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04000815 | 20. februar 2015                                         | livsstil     |        278 |     0.4 |
+| Norge Rundt                           | DVNR04000816 | 26. februar 2016                                         | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04000818 | 23. februar 2018                                         | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04000819 | Justervesenet                                            | livsstil     |        234 |     0.3 |
+| Norge Rundt                           | DVNR04000820 | Munnharpe som levebrød                                   | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04000821 | Vår i kjøkkenvindauget                                   | livsstil     |        265 |     0.4 |
+| Norge Rundt                           | DVNR04000822 | Drømmer om å bli stuntskuespiller                        | livsstil     |          7 |     0   |
+| Norge Rundt                           | DVNR04000912 | 2. mars 2012                                             | livsstil     |        207 |     0.3 |
+| Norge Rundt                           | DVNR04000913 | 1. mars 2013                                             | livsstil     |        297 |     0.5 |
+| Norge Rundt                           | DVNR04000914 | 28. februar 2014                                         | livsstil     |        212 |     0.3 |
+| Norge Rundt                           | DVNR04000915 | 27. februar 2015                                         | livsstil     |        228 |     0.3 |
+| Norge Rundt                           | DVNR04000916 | 4. mars 2016                                             | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04000917 | 3. mars 2017                                             | livsstil     |         31 |     0.1 |
+| Norge Rundt                           | DVNR04000918 | 2. mars 2018                                             | livsstil     |        199 |     0.3 |
+| Norge Rundt                           | DVNR04000919 | Maskør                                                   | livsstil     |        245 |     0.3 |
+| Norge Rundt                           | DVNR04000920 | Dataspel som sport                                       | livsstil     |        263 |     0.4 |
+| Norge Rundt                           | DVNR04000921 | Valp trenes til å bli politihund                         | livsstil     |         43 |     0   |
+| Norge Rundt                           | DVNR04000922 | Hovslagar                                                | livsstil     |        282 |     0.4 |
+| Norge Rundt                           | DVNR04001012 | 9. mars 2012                                             | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04001013 | 8. mars 2013                                             | livsstil     |         28 |     0   |
+| Norge Rundt                           | DVNR04001014 | 7. mars 2014                                             | livsstil     |        251 |     0.3 |
+| Norge Rundt                           | DVNR04001015 | 6. mars 2015                                             | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04001016 | 11. mars 2016                                            | livsstil     |        192 |     0.3 |
+| Norge Rundt                           | DVNR04001017 | 10. mars 2017                                            | livsstil     |        210 |     0.3 |
+| Norge Rundt                           | DVNR04001018 | 9. mars 2018                                             | livsstil     |         14 |     0   |
+| Norge Rundt                           | DVNR04001019 | Arbeidsuke i Norge Rundt                                 | livsstil     |         17 |     0   |
+| Norge Rundt                           | DVNR04001020 | Finnmarksløpet                                           | livsstil     |        230 |     0.3 |
+| Norge Rundt                           | DVNR04001021 | Amerikansk fotball - en idrett for alle                  | livsstil     |        245 |     0.3 |
+| Norge Rundt                           | DVNR04001022 | Dei frivillige i hoppbakken                              | livsstil     |        287 |     0.4 |
+| Norge Rundt                           | DVNR04001112 | 16. mars 2012                                            | livsstil     |        238 |     0.4 |
+| Norge Rundt                           | DVNR04001113 | 15. mars 2013                                            | livsstil     |        213 |     0.3 |
+| Norge Rundt                           | DVNR04001114 | 14. mars 2014                                            | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04001115 | 13. mars 2015                                            | livsstil     |        187 |     0.3 |
+| Norge Rundt                           | DVNR04001116 | 18. mars 2016                                            | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04001117 | 17. mars 2017                                            | livsstil     |          4 |     0   |
+| Norge Rundt                           | DVNR04001118 | 16. mars 2018                                            | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04001119 | Folk om tid                                              | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04001120 | DJ-kurs                                                  | livsstil     |         17 |     0   |
+| Norge Rundt                           | DVNR04001121 | Konduktør på Bergensbanen                                | livsstil     |        251 |     0.3 |
+| Norge Rundt                           | DVNR04001122 | Om bord MS Tranen                                        | livsstil     |        292 |     0.4 |
+| Norge Rundt                           | DVNR04001212 | 23. mars 2012                                            | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04001213 | 22. mars 2013                                            | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04001214 | 21. mars 2014                                            | livsstil     |         11 |     0   |
+| Norge Rundt                           | DVNR04001215 | 20. mars 2015                                            | livsstil     |         12 |     0   |
+| Norge Rundt                           | DVNR04001216 | 25. mars 2016                                            | livsstil     |        235 |     0.4 |
+| Norge Rundt                           | DVNR04001217 | 24. mars 2017                                            | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04001218 | 23. mars 2018                                            | livsstil     |          4 |     0   |
+| Norge Rundt                           | DVNR04001219 | Firbeinte helter på Svalbard                             | livsstil     |        207 |     0.3 |
+| Norge Rundt                           | DVNR04001220 | På skype frå Sundal                                      | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04001221 | Omsorg og god mat                                        | livsstil     |        296 |     0.4 |
+| Norge Rundt                           | DVNR04001222 | Ein dag på sirkuslinja                                   | livsstil     |         38 |     0.1 |
+| Norge Rundt                           | DVNR04001312 | 30. mars 2012                                            | livsstil     |        196 |     0.3 |
+| Norge Rundt                           | DVNR04001313 | 29. mars 2013                                            | livsstil     |        224 |     0.3 |
+| Norge Rundt                           | DVNR04001314 | 28. mars 2014                                            | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04001315 | 27. mars 2015                                            | livsstil     |        310 |     0.5 |
+| Norge Rundt                           | DVNR04001316 | 1. april 2016                                            | livsstil     |        210 |     0.3 |
+| Norge Rundt                           | DVNR04001317 | 31. mars 2017                                            | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04001318 | 30. mars 2018                                            | livsstil     |         31 |     0   |
+| Norge Rundt                           | DVNR04001319 | FugleAdvokatene                                          | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04001320 | Skolemuseet i Bergen                                     | livsstil     |        242 |     0.3 |
+| Norge Rundt                           | DVNR04001321 | Livredderen                                              | livsstil     |        400 |     0.5 |
+| Norge Rundt                           | DVNR04001322 | TikTok-læraren                                           | livsstil     |        285 |     0.4 |
+| Norge Rundt                           | DVNR04001412 | 6. april 2012                                            | livsstil     |        192 |     0.3 |
+| Norge Rundt                           | DVNR04001413 | 5. april 2013                                            | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04001414 | 4. april 2014                                            | livsstil     |        218 |     0.3 |
+| Norge Rundt                           | DVNR04001415 | 3. april 2015                                            | livsstil     |        250 |     0.4 |
+| Norge Rundt                           | DVNR04001416 | 8. april 2016                                            | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04001417 | 7. april 2017                                            | livsstil     |        243 |     0.3 |
+| Norge Rundt                           | DVNR04001418 | 6. april 2018                                            | livsstil     |        214 |     0.3 |
+| Norge Rundt                           | DVNR04001419 | Butlerdrømmen                                            | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04001420 | Folk om korona                                           | livsstil     |        234 |     0.3 |
+| Norge Rundt                           | DVNR04001421 | Dubbing av barne-tv                                      | livsstil     |        270 |     0.4 |
+| Norge Rundt                           | DVNR04001422 | Bustadstylistane                                         | livsstil     |        268 |     0.4 |
+| Norge Rundt                           | DVNR04001512 | 13. april 2012                                           | livsstil     |        193 |     0.3 |
+| Norge Rundt                           | DVNR04001513 | 12. april 2013                                           | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04001514 | 11. april 2014                                           | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04001515 | 10. april 2015                                           | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04001516 | 15. april 2016                                           | livsstil     |        206 |     0.3 |
+| Norge Rundt                           | DVNR04001517 | 14. april 2017                                           | livsstil     |        234 |     0.3 |
+| Norge Rundt                           | DVNR04001518 | 13. april 2018                                           | livsstil     |        199 |     0.3 |
+| Norge Rundt                           | DVNR04001519 | Tett på egget                                            | livsstil     |        239 |     0.4 |
+| Norge Rundt                           | DVNR04001520 | Påsketips                                                | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04001521 | Vårens vakreste eventyr                                  | livsstil     |        163 |     0.2 |
+| Norge Rundt                           | DVNR04001612 | 20. april 2012                                           | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04001613 | 19. april 2013                                           | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04001614 | 18. april 2014                                           | livsstil     |         38 |     0.1 |
+| Norge Rundt                           | DVNR04001615 | 17. april 2015                                           | livsstil     |        294 |     0.4 |
+| Norge Rundt                           | DVNR04001616 | 22. april 2016                                           | livsstil     |         13 |     0   |
+| Norge Rundt                           | DVNR04001617 | 21. april 2017                                           | livsstil     |        242 |     0.4 |
+| Norge Rundt                           | DVNR04001618 | 20. april 2018                                           | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04001619 | Vi lager surdeigsbrød                                    | livsstil     |        225 |     0.3 |
+| Norge Rundt                           | DVNR04001620 | Planting av vårblomster                                  | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04001621 | Motorsykkelmedisin                                       | livsstil     |        275 |     0.4 |
+| Norge Rundt                           | DVNR04001622 | Frå bønne til kaffikopp                                  | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04001712 | 27. april 2012                                           | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04001713 | 26. april 2013                                           | livsstil     |        230 |     0.3 |
+| Norge Rundt                           | DVNR04001714 | 25. april 2014                                           | livsstil     |          9 |     0   |
+| Norge Rundt                           | DVNR04001715 | 24. april 2015                                           | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04001716 | 6. mai 2016                                              | livsstil     |        240 |     0.4 |
+| Norge Rundt                           | DVNR04001717 | 28. april 2017                                           | livsstil     |         16 |     0   |
+| Norge Rundt                           | DVNR04001718 | 27. april 2018                                           | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04001719 | Hjelperne                                                | livsstil     |        281 |     0.4 |
+| Norge Rundt                           | DVNR04001720 | Jakta på vasslekasje                                     | livsstil     |        225 |     0.3 |
+| Norge Rundt                           | DVNR04001721 | På forskningstokt                                        | livsstil     |        280 |     0.4 |
+| Norge Rundt                           | DVNR04001722 | Ein dag med vikingar                                     | livsstil     |        259 |     0.4 |
+| Norge Rundt                           | DVNR04001812 | 4. mai 2012                                              | livsstil     |        208 |     0.3 |
+| Norge Rundt                           | DVNR04001813 | 3. mai 2013                                              | livsstil     |        202 |     0.3 |
+| Norge Rundt                           | DVNR04001814 | 2. mai 2014                                              | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04001815 | 1. mai 2015                                              | livsstil     |        252 |     0.3 |
+| Norge Rundt                           | DVNR04001817 | 5. mai 2017                                              | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04001818 | 4. mai 2018                                              | livsstil     |        227 |     0.3 |
+| Norge Rundt                           | DVNR04001819 | Fiskekonkurranse med Team Gråstein                       | livsstil     |        292 |     0.4 |
+| Norge Rundt                           | DVNR04001820 | Urban bonde                                              | livsstil     |        324 |     0.5 |
+| Norge Rundt                           | DVNR04001821 | Arbeidsglede på Asvo                                     | livsstil     |        294 |     0.4 |
+| Norge Rundt                           | DVNR04001822 | Dyreskulen                                               | livsstil     |        288 |     0.4 |
+| Norge Rundt                           | DVNR04001912 | 11. mai 2012                                             | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04001913 | 10. mai 2013                                             | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04001914 | 9. mai 2014                                              | livsstil     |        206 |     0.3 |
+| Norge Rundt                           | DVNR04001915 | 8. mai 2015                                              | livsstil     |        512 |     0.8 |
+| Norge Rundt                           | DVNR04001916 | 13. mai 2016                                             | livsstil     |         22 |     0   |
+| Norge Rundt                           | DVNR04001917 | 12. mai 2017                                             | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04001918 | 11. mai 2018                                             | livsstil     |        283 |     0.3 |
+| Norge Rundt                           | DVNR04001919 | Ny førerhund                                             | livsstil     |        252 |     0.4 |
+| Norge Rundt                           | DVNR04001920 | Da freden kom til fangeleiren                            | livsstil     |        228 |     0.3 |
+| Norge Rundt                           | DVNR04001921 | Surdeigsbakeren                                          | livsstil     |        304 |     0.4 |
+| Norge Rundt                           | DVNR04001922 | Klar for heile norskekysten                              | livsstil     |        290 |     0.4 |
+| Norge Rundt                           | DVNR04002012 | 18. mai 2012                                             | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04002013 | 17. mai 2013                                             | livsstil     |         40 |     0.1 |
+| Norge Rundt                           | DVNR04002014 | 16. mai 2014                                             | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04002015 | 15. mai 2015                                             | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04002016 | 20. mai 2016                                             | livsstil     |        209 |     0.3 |
+| Norge Rundt                           | DVNR04002017 | 19. mai 2017                                             | livsstil     |        266 |     0.4 |
+| Norge Rundt                           | DVNR04002019 | Plaster på skrubbsåret                                   | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04002020 | Stolpejakt                                               | livsstil     |         23 |     0   |
+| Norge Rundt                           | DVNR04002021 | Youtuberen                                               | livsstil     |        279 |     0.4 |
+| Norge Rundt                           | DVNR04002022 | Bli med inn i bikuben                                    | livsstil     |        304 |     0.4 |
+| Norge Rundt                           | DVNR04002112 | 25. mai 2012                                             | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04002113 | 24. mai 2013                                             | livsstil     |         27 |     0   |
+| Norge Rundt                           | DVNR04002114 | 23. mai 2014                                             | livsstil     |         15 |     0   |
+| Norge Rundt                           | DVNR04002115 | 22. mai 2015                                             | livsstil     |        221 |     0.3 |
+| Norge Rundt                           | DVNR04002116 | 27. mai 2016                                             | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04002117 | 26. mai 2017                                             | livsstil     |        260 |     0.4 |
+| Norge Rundt                           | DVNR04002118 | 25. mai 2018                                             | livsstil     |         11 |     0   |
+| Norge Rundt                           | DVNR04002119 | På besøk hos naboen                                      | livsstil     |        261 |     0.4 |
+| Norge Rundt                           | DVNR04002120 | Måkesafari                                               | livsstil     |        244 |     0.4 |
+| Norge Rundt                           | DVNR04002121 | Hundefotografen                                          | livsstil     |        305 |     0.4 |
+| Norge Rundt                           | DVNR04002122 | Grønne mattak                                            | livsstil     |        308 |     0.4 |
+| Norge Rundt                           | DVNR04002213 | 31. mai 2013                                             | livsstil     |         31 |     0   |
+| Norge Rundt                           | DVNR04002214 | 30. mai 2014                                             | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04002215 | 29. mai 2015                                             | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04002216 | 3. juni 2016                                             | livsstil     |        244 |     0.4 |
+| Norge Rundt                           | DVNR04002217 | 2. juni 2017                                             | livsstil     |        274 |     0.4 |
+| Norge Rundt                           | DVNR04002218 | 1. juni 2018                                             | livsstil     |         48 |     0.1 |
+| Norge Rundt                           | DVNR04002219 | Vindusvask i høyden                                      | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04002220 | Tett på epleblomsten                                     | livsstil     |         14 |     0   |
+| Norge Rundt                           | DVNR04002221 | Verdens vakreste postrute                                | livsstil     |        271 |     0.4 |
+| Norge Rundt                           | DVNR04002222 | Klar for Vømmølfest                                      | livsstil     |        287 |     0.4 |
+| Norge Rundt                           | DVNR04002312 | 8. juni 2012                                             | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04002313 | 7. juni 2013                                             | livsstil     |         20 |     0   |
+| Norge Rundt                           | DVNR04002314 | 6. juni 2014                                             | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04002315 | 5. juni 2015                                             | livsstil     |        209 |     0.3 |
+| Norge Rundt                           | DVNR04002316 | 10. juni 2016                                            | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04002317 | 9. juni 2017                                             | livsstil     |         27 |     0   |
+| Norge Rundt                           | DVNR04002318 | 8. juni 2018                                             | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04002319 | Et hesteliv                                              | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04002320 | Mobilt sykkelkjøkken                                     | livsstil     |        228 |     0.3 |
+| Norge Rundt                           | DVNR04002322 | Den store dagen                                          | livsstil     |        284 |     0.4 |
+| Norge Rundt                           | DVNR04002412 | 15. juni 2012                                            | livsstil     |        247 |     0.4 |
+| Norge Rundt                           | DVNR04002413 | 14. juni 2013                                            | livsstil     |         31 |     0   |
+| Norge Rundt                           | DVNR04002414 | 15. juni 2014                                            | livsstil     |        267 |     0.4 |
+| Norge Rundt                           | DVNR04002415 | 12. juni 2015                                            | livsstil     |        243 |     0.4 |
+| Norge Rundt                           | DVNR04002416 | 17. juni 2016                                            | livsstil     |        234 |     0.3 |
+| Norge Rundt                           | DVNR04002417 | 16. juni 2017                                            | livsstil     |          8 |     0   |
+| Norge Rundt                           | DVNR04002418 | 15. juni 2018                                            | livsstil     |        241 |     0.4 |
+| Norge Rundt                           | DVNR04002419 | Idrettsmerkedag                                          | livsstil     |          7 |     0   |
+| Norge Rundt                           | DVNR04002420 | Høgdepunkt frå Norge Rundt                               | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04002421 | Høgdepunkt frå Norge Rundt                               | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04002512 | 22. juni 2012                                            | livsstil     |        341 |     0.5 |
+| Norge Rundt                           | DVNR04002513 | 21. juni 2013                                            | livsstil     |         18 |     0   |
+| Norge Rundt                           | DVNR04002514 | 27. juni 2014                                            | livsstil     |        192 |     0.3 |
+| Norge Rundt                           | DVNR04002515 | 19. juni 2015                                            | livsstil     |         12 |     0   |
+| Norge Rundt                           | DVNR04002516 | 1. juli 2016                                             | livsstil     |        243 |     0.3 |
+| Norge Rundt                           | DVNR04002517 | 23. juni 2017                                            | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04002519 | Høydepunkter                                             | livsstil     |        265 |     0.4 |
+| Norge Rundt                           | DVNR04002520 | Reisespesial                                             | livsstil     |        237 |     0.3 |
+| Norge Rundt                           | DVNR04002522 | Høgdepunkt frå Norge Rundt                               | livsstil     |        458 |     0.6 |
+| Norge Rundt                           | DVNR04002618 | 29. juni 2018                                            | livsstil     |        192 |     0.3 |
+| Norge Rundt                           | DVNR04003214 | 8. august 2014                                           | livsstil     |        269 |     0.4 |
+| Norge Rundt                           | DVNR04003215 | 7. august 2015                                           | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04003216 | 12. august 2016                                          | livsstil     |        233 |     0.3 |
+| Norge Rundt                           | DVNR04003312 | 17. august 2012                                          | livsstil     |        213 |     0.3 |
+| Norge Rundt                           | DVNR04003313 | 16. august 2013                                          | livsstil     |         15 |     0   |
+| Norge Rundt                           | DVNR04003314 | 15. august 2014                                          | livsstil     |        189 |     0.3 |
+| Norge Rundt                           | DVNR04003315 | 14. august 2015                                          | livsstil     |         31 |     0   |
+| Norge Rundt                           | DVNR04003316 | 19. august 2016                                          | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04003317 | 18. august 2017                                          | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04003320 | Draumejobb på Stølen                                     | livsstil     |        205 |     0.3 |
+| Norge Rundt                           | DVNR04003321 | 20. august 2021                                          | livsstil     |        272 |     0.4 |
+| Norge Rundt                           | DVNR04003412 | 24. august 2012                                          | livsstil     |         28 |     0   |
+| Norge Rundt                           | DVNR04003413 | 23. august 2013                                          | livsstil     |        125 |     0.2 |
+| Norge Rundt                           | DVNR04003414 | 22. august 2014                                          | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04003415 | 21. august 2015                                          | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04003416 | 26. august 2016                                          | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04003417 | 25. august 2017                                          | livsstil     |         10 |     0   |
+| Norge Rundt                           | DVNR04003418 | 24. august 2018                                          | livsstil     |        225 |     0.3 |
+| Norge Rundt                           | DVNR04003419 | Studentene kommer!                                       | livsstil     |        261 |     0.4 |
+| Norge Rundt                           | DVNR04003420 | Når kroppen er livet                                     | livsstil     |        236 |     0.4 |
+| Norge Rundt                           | DVNR04003421 | Frisbeegolf                                              | livsstil     |        297 |     0.4 |
+| Norge Rundt                           | DVNR04003422 | Frå stokk til kubbe                                      | livsstil     |        246 |     0.3 |
+| Norge Rundt                           | DVNR04003512 | 31. august 2012                                          | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04003513 | 30. august 2013                                          | livsstil     |         34 |     0   |
+| Norge Rundt                           | DVNR04003514 | 29. august 2014                                          | livsstil     |        214 |     0.3 |
+| Norge Rundt                           | DVNR04003515 | 28. august 2015                                          | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04003516 | 2. september 2016                                        | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04003517 | 1. september 2017                                        | livsstil     |         50 |     0.1 |
+| Norge Rundt                           | DVNR04003518 | 31. august 2018                                          | livsstil     |        237 |     0.3 |
+| Norge Rundt                           | DVNR04003519 | Alt kan repareres                                        | livsstil     |        237 |     0.4 |
+| Norge Rundt                           | DVNR04003520 | Skrot eller kunst?                                       | livsstil     |        249 |     0.4 |
+| Norge Rundt                           | DVNR04003521 | Is på småbruket                                          | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04003612 | 7. september 2012                                        | livsstil     |        224 |     0.3 |
+| Norge Rundt                           | DVNR04003613 | 6. september 2013                                        | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04003614 | 5. september 2014                                        | livsstil     |         12 |     0   |
+| Norge Rundt                           | DVNR04003615 | 4. september 2015                                        | livsstil     |         37 |     0   |
+| Norge Rundt                           | DVNR04003616 | 9. september 2016                                        | livsstil     |        249 |     0.3 |
+| Norge Rundt                           | DVNR04003617 | 8. september 2017                                        | livsstil     |         32 |     0   |
+| Norge Rundt                           | DVNR04003618 | 7. september 2018                                        | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04003619 | Stjernelaget                                             | livsstil     |        182 |     0.3 |
+| Norge Rundt                           | DVNR04003620 | Ned Skjervsfossen i tau                                  | livsstil     |        198 |     0.3 |
+| Norge Rundt                           | DVNR04003712 | 14. september 2012                                       | livsstil     |        214 |     0.3 |
+| Norge Rundt                           | DVNR04003713 | 13. september 2013                                       | livsstil     |          4 |     0   |
+| Norge Rundt                           | DVNR04003714 | 12. september 2014                                       | livsstil     |        204 |     0.3 |
+| Norge Rundt                           | DVNR04003715 | 11. september 2015                                       | livsstil     |          6 |     0   |
+| Norge Rundt                           | DVNR04003716 | 16. september 2016                                       | livsstil     |        241 |     0.3 |
+| Norge Rundt                           | DVNR04003717 | 15. september 2017                                       | livsstil     |         14 |     0   |
+| Norge Rundt                           | DVNR04003718 | 14. september 2018                                       | livsstil     |        302 |     0.4 |
+| Norge Rundt                           | DVNR04003719 | Fra havet til hermetikkboksen                            | livsstil     |        213 |     0.3 |
+| Norge Rundt                           | DVNR04003720 | Vikingenes glemte fjellpass                              | livsstil     |        236 |     0.4 |
+| Norge Rundt                           | DVNR04003721 | Bresmelting på Svalbard                                  | livsstil     |         84 |     0.1 |
+| Norge Rundt                           | DVNR04003812 | 21. september 2012                                       | livsstil     |        218 |     0.3 |
+| Norge Rundt                           | DVNR04003813 | 20. september 2013                                       | livsstil     |        232 |     0.3 |
+| Norge Rundt                           | DVNR04003814 | 19. september 2014                                       | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04003815 | 18. september 2015                                       | livsstil     |        252 |     0.4 |
+| Norge Rundt                           | DVNR04003816 | 23. september 2016                                       | livsstil     |        239 |     0.4 |
+| Norge Rundt                           | DVNR04003817 | 22. september 2017                                       | livsstil     |         21 |     0   |
+| Norge Rundt                           | DVNR04003818 | 21. september 2018                                       | livsstil     |         16 |     0   |
+| Norge Rundt                           | DVNR04003819 | Store gutter med små tog                                 | livsstil     |          8 |     0   |
+| Norge Rundt                           | DVNR04003820 | Ein blind kvardag                                        | livsstil     |        231 |     0.3 |
+| Norge Rundt                           | DVNR04003821 | Hest er best                                             | livsstil     |        272 |     0.4 |
+| Norge Rundt                           | DVNR04003912 | 28. september 2012                                       | livsstil     |        200 |     0.3 |
+| Norge Rundt                           | DVNR04003913 | 27. september 2013                                       | livsstil     |        197 |     0.3 |
+| Norge Rundt                           | DVNR04003914 | 26. september 2014                                       | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04003915 | 25. september 2015                                       | livsstil     |        214 |     0.3 |
+| Norge Rundt                           | DVNR04003916 | 30. september 2016                                       | livsstil     |         25 |     0   |
+| Norge Rundt                           | DVNR04003917 | 29. september 2017                                       | livsstil     |        207 |     0.3 |
+| Norge Rundt                           | DVNR04003918 | 28. september 2018                                       | livsstil     |        270 |     0.4 |
+| Norge Rundt                           | DVNR04003919 | Opp Stoltzekleiven                                       | livsstil     |        281 |     0.4 |
+| Norge Rundt                           | DVNR04003920 | Norge på tvers                                           | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04003921 | Kostar hamna rein                                        | livsstil     |        298 |     0.4 |
+| Norge Rundt                           | DVNR04004012 | 5. oktober 2012                                          | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04004013 | 4. oktober 2013                                          | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04004014 | 3. oktober 2014                                          | livsstil     |        258 |     0.4 |
+| Norge Rundt                           | DVNR04004015 | 2. oktober 2015                                          | livsstil     |        236 |     0.3 |
+| Norge Rundt                           | DVNR04004016 | 7. oktober 2016                                          | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04004017 | 6. oktober 2017                                          | livsstil     |         22 |     0   |
+| Norge Rundt                           | DVNR04004018 | 5. oktober 2018                                          | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04004020 | Gatekunst                                                | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04004021 | Elgjakt                                                  | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04004112 | 12. oktober 2012                                         | livsstil     |        237 |     0.3 |
+| Norge Rundt                           | DVNR04004113 | 11. oktober 2013                                         | livsstil     |        235 |     0.3 |
+| Norge Rundt                           | DVNR04004114 | 10. oktober 2014                                         | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04004115 | 9. oktober 2015                                          | livsstil     |        207 |     0.3 |
+| Norge Rundt                           | DVNR04004116 | 14. oktober 2016                                         | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04004117 | 13. oktober 2017                                         | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04004118 | 12. oktober 2018                                         | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04004119 | Natt i hengekøye                                         | livsstil     |        216 |     0.3 |
+| Norge Rundt                           | DVNR04004120 | Hulebuarane på Sørøya                                    | livsstil     |        255 |     0.4 |
+| Norge Rundt                           | DVNR04004121 | Popstjernedraumen                                        | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04004212 | 19. oktober 2012                                         | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04004213 | 18. oktober 2013                                         | livsstil     |        222 |     0.3 |
+| Norge Rundt                           | DVNR04004214 | 17. oktober 2014                                         | livsstil     |         22 |     0   |
+| Norge Rundt                           | DVNR04004215 | 16. oktober 2015                                         | livsstil     |        210 |     0.3 |
+| Norge Rundt                           | DVNR04004216 | 21. oktober 2016                                         | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04004217 | 20. oktober 2017                                         | livsstil     |         16 |     0   |
+| Norge Rundt                           | DVNR04004218 | 19. oktober 2018                                         | livsstil     |        290 |     0.4 |
+| Norge Rundt                           | DVNR04004220 | Personleg trenar i rullestol                             | livsstil     |        254 |     0.3 |
+| Norge Rundt                           | DVNR04004312 | 26. oktober 2012                                         | livsstil     |        259 |     0.4 |
+| Norge Rundt                           | DVNR04004313 | 25. oktober 2013                                         | livsstil     |        230 |     0.3 |
+| Norge Rundt                           | DVNR04004314 | 24. oktober 2014                                         | livsstil     |         15 |     0   |
+| Norge Rundt                           | DVNR04004315 | 23. oktober 2015                                         | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04004316 | 28. oktober 2016                                         | livsstil     |        224 |     0.3 |
+| Norge Rundt                           | DVNR04004317 | 27. oktober 2017                                         | livsstil     |         19 |     0   |
+| Norge Rundt                           | DVNR04004318 | 26. oktober 2018                                         | livsstil     |        265 |     0.4 |
+| Norge Rundt                           | DVNR04004319 | Tøffe jenter på is                                       | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04004320 | Audition til musikal                                     | livsstil     |        250 |     0.3 |
+| Norge Rundt                           | DVNR04004321 | Topaz trenar tredemølle                                  | livsstil     |        269 |     0.4 |
+| Norge Rundt                           | DVNR04004411 | 4. november 2011                                         | livsstil     |        200 |     0.3 |
+| Norge Rundt                           | DVNR04004412 | 2. november 2012                                         | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04004413 | 1. november 2013                                         | livsstil     |        245 |     0.4 |
+| Norge Rundt                           | DVNR04004414 | 31. oktober 2014                                         | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04004415 | 30. oktober 2015                                         | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04004416 | 4. november 2016                                         | livsstil     |         11 |     0   |
+| Norge Rundt                           | DVNR04004417 | 3. november 2017                                         | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04004418 | 2. november 2018                                         | livsstil     |        289 |     0.4 |
+| Norge Rundt                           | DVNR04004419 | Førjulseventyret                                         | livsstil     |        243 |     0.4 |
+| Norge Rundt                           | DVNR04004420 | Spøkelsesjakt                                            | livsstil     |        249 |     0.3 |
+| Norge Rundt                           | DVNR04004421 | Livet om bord                                            | livsstil     |        291 |     0.4 |
+| Norge Rundt                           | DVNR04004511 | 11. november 2011                                        | livsstil     |        224 |     0.3 |
+| Norge Rundt                           | DVNR04004512 | 9. november 2012                                         | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04004513 | 8. november 2013                                         | livsstil     |        239 |     0.3 |
+| Norge Rundt                           | DVNR04004514 | 7. november 2014                                         | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04004515 | 6. november 2015                                         | livsstil     |         11 |     0   |
+| Norge Rundt                           | DVNR04004516 | 11. november 2016                                        | livsstil     |        240 |     0.3 |
+| Norge Rundt                           | DVNR04004517 | 10. november 2017                                        | livsstil     |         32 |     0   |
+| Norge Rundt                           | DVNR04004518 | 9. november 2018                                         | livsstil     |         23 |     0   |
+| Norge Rundt                           | DVNR04004519 | Ut og feie                                               | livsstil     |        254 |     0.4 |
+| Norge Rundt                           | DVNR04004520 | Kartleser i rallybil                                     | livsstil     |        258 |     0.3 |
+| Norge Rundt                           | DVNR04004521 | Sminkar seg skadd                                        | livsstil     |        312 |     0.4 |
+| Norge Rundt                           | DVNR04004611 | 18. november 2011                                        | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04004612 | 16. november 2012                                        | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04004613 | 15. november 2013                                        | livsstil     |        248 |     0.3 |
+| Norge Rundt                           | DVNR04004614 | 14. november 2014                                        | livsstil     |        212 |     0.3 |
+| Norge Rundt                           | DVNR04004615 | 13. november 2015                                        | livsstil     |        266 |     0.4 |
+| Norge Rundt                           | DVNR04004616 | 18. november 2016                                        | livsstil     |        231 |     0.3 |
+| Norge Rundt                           | DVNR04004617 | 17. november 2017                                        | livsstil     |        278 |     0.4 |
+| Norge Rundt                           | DVNR04004618 | 16. november 2018                                        | livsstil     |        279 |     0.4 |
+| Norge Rundt                           | DVNR04004619 | Sangdebut i hovedstaden                                  | livsstil     |          6 |     0   |
+| Norge Rundt                           | DVNR04004620 | Gatemusikant                                             | livsstil     |         35 |     0   |
+| Norge Rundt                           | DVNR04004621 | Sikrar sjøvegen                                          | livsstil     |        258 |     0.4 |
+| Norge Rundt                           | DVNR04004711 | 25. november 2011                                        | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04004712 | 23. november 2012                                        | livsstil     |        260 |     0.4 |
+| Norge Rundt                           | DVNR04004713 | 22. november 2013                                        | livsstil     |        223 |     0.3 |
+| Norge Rundt                           | DVNR04004714 | 21. november 2014                                        | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04004715 | 20. november 2015                                        | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04004716 | 25. november 2016                                        | livsstil     |        239 |     0.4 |
+| Norge Rundt                           | DVNR04004717 | 24. november 2017                                        | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04004718 | 23. november 2018                                        | livsstil     |        303 |     0.4 |
+| Norge Rundt                           | DVNR04004719 | Hjemmelaget julekalender                                 | livsstil     |        328 |     0.4 |
+| Norge Rundt                           | DVNR04004720 | Akvariet i Bergen                                        | livsstil     |         30 |     0   |
+| Norge Rundt                           | DVNR04004721 | Komiker-drømmen                                          | livsstil     |        258 |     0.4 |
+| Norge Rundt                           | DVNR04004811 | 2. desember 2011                                         | livsstil     |        224 |     0.3 |
+| Norge Rundt                           | DVNR04004812 | 30. november 2012                                        | livsstil     |        245 |     0.4 |
+| Norge Rundt                           | DVNR04004813 | 29. november 2013                                        | livsstil     |        221 |     0.3 |
+| Norge Rundt                           | DVNR04004814 | 28. november 2014                                        | livsstil     |        212 |     0.3 |
+| Norge Rundt                           | DVNR04004815 | 27. november 2015                                        | livsstil     |         33 |     0.1 |
+| Norge Rundt                           | DVNR04004816 | 2. desember 2016                                         | livsstil     |        249 |     0.4 |
+| Norge Rundt                           | DVNR04004817 | 1. desember 2017                                         | livsstil     |        231 |     0.3 |
+| Norge Rundt                           | DVNR04004818 | 30. november 2018                                        | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04004819 | Uten fast bopel                                          | livsstil     |        312 |     0.4 |
+| Norge Rundt                           | DVNR04004820 | Adventskrans frå skogen                                  | livsstil     |        283 |     0.4 |
+| Norge Rundt                           | DVNR04004821 | Bak kulissene på Stortinget                              | livsstil     |         23 |     0   |
+| Norge Rundt                           | DVNR04004911 | 9. desember 2011                                         | livsstil     |        235 |     0.3 |
+| Norge Rundt                           | DVNR04004912 | 7. desember 2012                                         | livsstil     |         15 |     0   |
+| Norge Rundt                           | DVNR04004913 | 6. desember 2013                                         | livsstil     |        220 |     0.3 |
+| Norge Rundt                           | DVNR04004914 | 5. desember 2014                                         | livsstil     |        219 |     0.3 |
+| Norge Rundt                           | DVNR04004915 | 4. desember 2015                                         | livsstil     |        243 |     0.4 |
+| Norge Rundt                           | DVNR04004916 | Norge Rundt 40 år                                        | livsstil     |         12 |     0   |
+| Norge Rundt                           | DVNR04004917 | 8. desember 2017                                         | livsstil     |         31 |     0   |
+| Norge Rundt                           | DVNR04004918 | 7. desember 2018                                         | livsstil     |        251 |     0.4 |
+| Norge Rundt                           | DVNR04004919 | Båtdrømmen                                               | livsstil     |        258 |     0.4 |
+| Norge Rundt                           | DVNR04004920 | Motehistorie                                             | livsstil     |        282 |     0.4 |
+| Norge Rundt                           | DVNR04004921 | Bekjemper uønska gjester                                 | livsstil     |        276 |     0.4 |
+| Norge Rundt                           | DVNR04005011 | 16. desember 2011                                        | livsstil     |        193 |     0.3 |
+| Norge Rundt                           | DVNR04005012 | 14. desember 2012                                        | livsstil     |        226 |     0.3 |
+| Norge Rundt                           | DVNR04005013 | 13. desember 2013                                        | livsstil     |        229 |     0.3 |
+| Norge Rundt                           | DVNR04005014 | 12. desember 2014                                        | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04005015 | 11. desember 2015                                        | livsstil     |         24 |     0   |
+| Norge Rundt                           | DVNR04005016 | 16. desember 2016                                        | livsstil     |        212 |     0.3 |
+| Norge Rundt                           | DVNR04005017 | 15. desember 2017                                        | livsstil     |        246 |     0.4 |
+| Norge Rundt                           | DVNR04005018 | 14. desember 2018                                        | livsstil     |        256 |     0.4 |
+| Norge Rundt                           | DVNR04005019 | Reko-ring                                                | livsstil     |        259 |     0.4 |
+| Norge Rundt                           | DVNR04005020 | Juletrehogst                                             | livsstil     |        253 |     0.4 |
+| Norge Rundt                           | DVNR04005021 | Kommer julegaven fram?                                   | livsstil     |        285 |     0.4 |
+| Norge Rundt                           | DVNR04005112 | 21. desember 2012                                        | livsstil     |        227 |     0.3 |
+| Norge Rundt                           | DVNR04005113 | 20. desember 2013                                        | livsstil     |        189 |     0.3 |
+| Norge Rundt                           | DVNR04005114 | 19. desember 2014                                        | livsstil     |        199 |     0.3 |
+| Norge Rundt                           | DVNR04005115 | 18. desember 2015                                        | livsstil     |          1 |     0   |
+| Norge Rundt                           | DVNR04005116 | 23. desember 2016                                        | livsstil     |        217 |     0.3 |
+| Norge Rundt                           | DVNR04005117 | 22. desember 2017                                        | livsstil     |        318 |     0.4 |
+| Norge Rundt                           | DVNR04005118 | 21. desember 2018                                        | livsstil     |        215 |     0.3 |
+| Norge Rundt                           | DVNR04005119 | Kanefart på Røros                                        | livsstil     |          3 |     0   |
+| Norge Rundt                           | DVNR04005120 | Keramikkdreiing på Alvøen                                | livsstil     |        284 |     0.4 |
+| Norge Rundt                           | DVNR04005121 | Julespesial                                              | livsstil     |        464 |     0.7 |
+| Norge Rundt                           | DVNR04005212 | 24. desember 2012                                        | livsstil     |         22 |     0   |
+| Norge Rundt                           | DVNR04005213 | 24. desember 2013                                        | livsstil     |        244 |     0.4 |
+| Norge Rundt                           | DVNR04005214 | 24. desember 2014                                        | livsstil     |        341 |     0.5 |
+| Norge Rundt                           | DVNR04005215 | 24. desember 2015                                        | livsstil     |         30 |     0   |
+| Norge Rundt                           | DVNR04005216 | Norge Rundt julespesial                                  | livsstil     |        416 |     0.6 |
+| Norge Rundt                           | DVNR04005217 | 29. desember 2017                                        | livsstil     |        251 |     0.4 |
+| Norge Rundt                           | DVNR04005218 | 28. desember 2018                                        | livsstil     |        250 |     0.4 |
+| Norge Rundt                           | DVNR04005219 | Høydepunkter fra 2019                                    | livsstil     |        277 |     0.4 |
+| Norge Rundt                           | DVNR04005220 | Julespesial                                              | livsstil     |        450 |     0.6 |
+| Norge Rundt                           | DVNR04005221 | Høydepunkter fra Norge Rundt                             | livsstil     |        451 |     0.6 |
+| Norge Rundt                           | DVNR04005312 | 28. desember 2012                                        | livsstil     |        211 |     0.3 |
+| Norge Rundt                           | DVNR04005313 | 27. desember 2013                                        | livsstil     |          2 |     0   |
+| Norge Rundt                           | DVNR04005314 | 26. desember 2014                                        | livsstil     |         28 |     0   |
+| Norge Rundt                           | DVNR04005315 | Norge Rundt julespesial                                  | livsstil     |          5 |     0   |
+| Norge Rundt                           | DVNR04005316 | 30. desember 2016                                        | livsstil     |        341 |     0.5 |
+| Norge Rundt                           | DVNR04005317 | Julespesial                                              | livsstil     |        373 |     0.6 |
+| Norge Rundt                           | DVNR04005318 | Julespesial                                              | livsstil     |        472 |     0.6 |
+| Norge Rundt                           | DVNR04005319 | Norge Rundt julespesial                                  | livsstil     |        381 |     0.6 |
+| Norge Rundt                           | DVNR04005320 | SUP i vintersol                                          | livsstil     |        238 |     0.3 |
+| Norge Rundt                           | DVNR04005415 | 31. desember 2015                                        | livsstil     |        267 |     0.4 |
+| Norge Rundt                           | DVNR04005420 | Høydepunkter fra Norge Rundt                             | livsstil     |        627 |     0.8 |
+| Norge Rundt                           | DVNR04005421 | Sjølvmelding frå Norge Rundt                             | livsstil     |        248 |     0.4 |
 | Planetpatruljen                       | DNPR63000116 | 1. Bilkjøring                                            | barn         |        132 |     0.2 |
 | Planetpatruljen                       | DNPR63000216 | 2. Klesbyttedag                                          | barn         |        157 |     0.2 |
 | Planetpatruljen                       | DNPR63000316 | 3. Søppelbrenning                                        | barn         |        144 |     0.2 |
@@ -843,4 +1337,51 @@
 | Stjernestøv                           | MSUS24002220 | 22. episode                                              | barn         |        185 |     0.2 |
 | Stjernestøv                           | MSUS24002320 | 23. episode                                              | barn         |        170 |     0.2 |
 | Stjernestøv                           | MSUS24002420 | 24. episode                                              | barn         |        134 |     0.2 |
+| Supernytt                             | MSUM02050222 | 2. mai                                                   | barn         |         97 |     0.1 |
+| Supernytt                             | MSUM02050322 | 3. mai                                                   | barn         |         90 |     0.1 |
+| Supernytt                             | MSUM02050422 | 4. mai                                                   | barn         |         77 |     0.1 |
+| Supernytt                             | MSUM02050522 | 5. mai                                                   | barn         |         93 |     0.1 |
+| Supernytt                             | MSUM02050622 | 6. mai                                                   | barn         |        103 |     0.1 |
+| Supernytt                             | MSUM02050922 | 9. mai                                                   | barn         |         97 |     0.1 |
+| Supernytt                             | MSUM02051022 | 10. mai                                                  | barn         |         86 |     0.1 |
+| Supernytt                             | MSUM02051122 | 11. mai                                                  | barn         |         79 |     0.1 |
+| Supernytt                             | MSUM02051222 | 12. mai                                                  | barn         |         91 |     0.1 |
+| Supernytt                             | MSUM02051322 | 13. mai                                                  | barn         |         91 |     0.1 |
+| Supernytt                             | MSUM02051622 | 16. mai                                                  | barn         |          4 |     0   |
+| Supernytt                             | MSUM02051822 | 18. mai                                                  | barn         |         95 |     0.1 |
+| Supernytt                             | MSUM02051922 | 19. mai                                                  | barn         |         99 |     0.2 |
+| Supernytt                             | MSUM02052022 | 20. mai                                                  | barn         |          1 |     0   |
+| Supernytt                             | MSUM02052322 | 23. mai                                                  | barn         |         76 |     0.1 |
+| Supernytt                             | MSUM02052422 | 24. mai                                                  | barn         |         94 |     0.1 |
+| Supernytt                             | MSUM02052522 | 25. mai                                                  | barn         |         90 |     0.1 |
+| Supernytt                             | MSUM02053022 | 30. mai                                                  | barn         |          9 |     0   |
+| Supernytt                             | MSUM02053122 | 31. mai                                                  | barn         |         30 |     0   |
+| Supernytt                             | MSUM02060122 | 1. juni                                                  | barn         |         26 |     0   |
+| Supernytt                             | MSUM02060222 | 2. juni                                                  | barn         |         36 |     0.1 |
+| Supernytt                             | MSUM02060322 | 3. juni                                                  | barn         |         40 |     0.1 |
+| Supernytt                             | MSUM02060722 | 7. juni                                                  | barn         |         98 |     0.1 |
+| Supernytt                             | MSUM02060822 | 8. juni                                                  | barn         |         87 |     0.1 |
+| Supernytt                             | MSUM02060922 | 9. juni                                                  | barn         |         72 |     0.1 |
+| Supernytt                             | MSUM02061022 | 10. juni kl. 09.45                                       | barn         |         76 |     0.1 |
+| Supernytt                             | MSUM02061322 | 13. juni                                                 | barn         |          1 |     0   |
+| Supernytt                             | MSUM02061422 | 14. juni                                                 | barn         |         92 |     0.1 |
+| Supernytt                             | MSUM02061522 | 15. juni                                                 | barn         |        108 |     0.1 |
+| Supernytt                             | MSUM02061622 | 16. juni                                                 | barn         |        111 |     0.2 |
+| Supernytt                             | MSUM02061722 | 17. juni                                                 | barn         |        122 |     0.2 |
+| Supernytt                             | MSUM02062022 | 20. juni                                                 | barn         |        114 |     0.2 |
+| Supernytt                             | MSUM02062122 | 21. juni                                                 | barn         |         93 |     0.1 |
+| Supernytt                             | MSUM02081422 | 15. august                                               | barn         |          8 |     0   |
+| Supernytt                             | MSUM02081522 | 25. juni                                                 | barn         |         87 |     0.1 |
+| Supernytt                             | MSUM02081622 | 16. august                                               | barn         |        102 |     0.1 |
+| Supernytt                             | MSUM02081722 | 17. august                                               | barn         |          3 |     0   |
+| Supernytt                             | MSUM02081822 | 18. august                                               | barn         |          2 |     0   |
+| Supernytt                             | MSUM02081922 | 19. august                                               | barn         |         92 |     0.2 |
+| Supernytt                             | MSUM02082222 | 22. august                                               | barn         |         95 |     0.1 |
+| Supernytt                             | MSUM02082322 | 23. august                                               | barn         |         96 |     0.2 |
+| Supernytt                             | MSUM02082422 | 24. august                                               | barn         |         79 |     0.1 |
+| Supernytt                             | MSUM02082522 | 25. august                                               | barn         |        105 |     0.1 |
+| Supernytt                             | MSUM02082622 | Fredag                                                   | barn         |         98 |     0.1 |
+| Supernytt                             | MSUM02082922 | Mandag                                                   | barn         |         86 |     0.1 |
+| Supernytt                             | MSUM02083022 | I går                                                    | barn         |          6 |     0   |
+| Supernytt                             | MSUM02083122 | I dag                                                    | barn         |         86 |     0.1 |
 | U                                     | RKUU07003701 | 31. mai 2001                                             | dokumentar   |        180 |     0.2 |</details>

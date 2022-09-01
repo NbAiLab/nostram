@@ -75,7 +75,7 @@ class episodefetcher:
         #print(title)
         programinforeq = "https://psapi.nrk.no/tv/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
         # Needs to be like this for radio
-        programinforeq = "https://psapi.nrk.no/radio/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
+        #programinforeq = "https://psapi.nrk.no/radio/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
 
 
         resp = self.geturl(programinforeq)
