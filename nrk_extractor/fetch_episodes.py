@@ -83,12 +83,20 @@ class episodefetcher:
             medium = "undefined"
 
         return medium
+    
+    def getserieimage(self,serie):
+        programinforeq = "https://psapi.nrk.no/series/" + serie
+        resp = self.geturl(programinforeq)
+        resultingjson = resp.json()
+        serieimage = resultingjson["image"]["webImages"][0]["imageUrl"]
+        
+        return serieimage
 
     def getprograms(self,medium,title,seasonsnr):
         programinforeq = "https://psapi.nrk.no/"+str(medium)+"/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
         resp = self.geturl(programinforeq)
         resultingjson =[]
-        print(medium + " "+ title + " " + seasonsnr)
+        #print(medium + " "+ title + " " + seasonsnr)
         # print(resp.json())
         if resp.status_code != 200:
             return []
