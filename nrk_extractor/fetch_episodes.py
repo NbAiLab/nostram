@@ -27,6 +27,9 @@ class episodefetcher:
         #cntreq = 0
         searchstr = url
         resp = requests.get(searchstr)
+        if (resp.status_code !=200):
+            print("something went wrong with url: "+ searchstr + " returned status code" + str(resp.status_code))
+
         return resp
 
 
@@ -84,8 +87,11 @@ class episodefetcher:
     def getprograms(self,medium,title,seasonsnr):
         programinforeq = "https://psapi.nrk.no/"+str(medium)+"/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
         resp = self.geturl(programinforeq)
-
         resultingjson =[]
+        print(medium + " "+ title + " " + seasonsnr)
+        # print(resp.json())
+        if resp.status_code != 200:
+            return []
 
         if "episodes" in resp.json()["_embedded"]:
             resultingjson = resp.json()["_embedded"]["episodes"]
@@ -110,20 +116,20 @@ class episodefetcher:
     def episodebuilder(self,inputids):
         self.episodelist=[]
         inputlist=inputids.split(",")
-        for i in inputlist:
-            if self.isseries(i)== False:
-                self.episodelist.append(i)
+        for programidentifier in inputlist:
+            if self.isseries(programidentifier)== False:
+                self.episodelist.append(programidentifier)
             else:
-                currentserie = self.getseries(i)
+                currentserie = self.getseries(programidentifier)
                 theseasons = self.getmetadataforseries(currentserie)
 
                 #Figure out if this is radio or tv
                 medium = self.getmedium(currentserie)
 
-                for i in theseasons:
-                    result = self.getprograms(medium,currentserie, i)
-                    for r in result:
-                        self.episodelist.append(r)
+                for season in theseasons:
+                    programlist = self.getprograms(medium,currentserie, season)
+                    for program in programlist:
+                        self.episodelist.append(program)
                         #print("serie" + currentserie + " sesong: " + str(i) + " id: " + str(r))
 
     def episodegenerator(self):
