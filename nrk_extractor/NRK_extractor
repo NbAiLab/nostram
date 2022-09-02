@@ -66,17 +66,16 @@ class NRKExtractor():
             raise Exception("Failed to load metadata from '%s'" % murl)
         #print(r.json()["vtt"])
         res["info"] = json.loads(r.text)
-        #print(res["info"]["nonPlayable"])
-        if res["info"]["nonPlayable"] == None:
-            res["info"]["medium"] = "tv"
-        else:
-            res["info"]["medium"] = "radio"
+        
+        #Set medium
+        ef=episodefetcher()
+        res["info"]["medium"] = ef.getmedium(ef.getseries(id))
 
-        print(res["info"])
+        #Set serie image
+        res["info"]["serieimageurl"] = ef.getserieimage(ef.getseries(id))
+
         if not bool(res["info"]["playable"]):
             res["info"] = "Unknown"
-
-        
 
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
             return None
@@ -119,8 +118,6 @@ class NRKExtractor():
         return res
 
 
-    def getmedium(self):
-        return "radio"
     def extract_audio(self, info, target):
 
         if os.path.exists(target) and os.stat(target).st_size > 0:
@@ -339,6 +336,9 @@ class NRKExtractor():
                     "end_time": int(item["end"]*100),
                     "duration": int((item["end"] - item["start"])*100),
                     "program_id": info["id"],
+                    "medium": info["info"]["medium"],
+                    "serieimageurl" : info["info"]["serieimageurl"],
+                    "programimageurl" : info["info"]["preplay"]["poster"]["images"][0]["url"],
                     "source": "NRK TV",
                     "category": info["manifest"]["statistics"]["luna"]["data"]["category"],
                     "title": info["info"]["preplay"]["titles"]["title"],
@@ -415,7 +415,7 @@ if __name__ == "__main__":
     if options.infoonly:
         info = extractor.resolve_urls(options.src)
 
-        print(json.dumps(info, indent=" "))
+        #print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
     print("* Starting to process "+options.src)
