@@ -92,13 +92,19 @@ class episodefetcher:
         
         else:
             resultingjson = resp.json()["_embedded"]["instalments"]
-
-
+        
         resultlist=[]
-        for ind,i in enumerate(resultingjson):
-            id=resultingjson[ind]["_links"]["self"]["href"].split("/")[-1]
-            #print(resultingjson[ind]["_links"]["self"]["href"])
-            resultlist.append(id)
+
+        if not isinstance(resultingjson, list):
+            for ind,i in enumerate(resultingjson["_embedded"]["episodes"]):
+                id=resultingjson["_embedded"]["episodes"][ind]["_links"]["self"]["href"].split("/")[-1]
+                resultlist.append(id) 
+        else:
+            for ind,i in enumerate(resultingjson):
+                id=resultingjson[ind]["_links"]["self"]["href"].split("/")[-1]
+                resultlist.append(id)
+        
+
         return resultlist
 
     def episodebuilder(self,inputids):
