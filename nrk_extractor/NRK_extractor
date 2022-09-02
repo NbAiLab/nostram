@@ -171,9 +171,22 @@ class NRKExtractor():
 
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
+        
+        if not os.path.exists(target_dir+"/mp4"):
+            os.makedirs(target_dir+"/mp4")
+        
+        if not os.path.exists(target_dir+"/vtt"):
+            os.makedirs(target_dir+"/vtt")
+        
+        if not os.path.exists(target_dir+"/subtitles"):
+            os.makedirs(target_dir+"/subtitles")
+            
+        if not os.path.exists(target_dir+"/segments"):
+            os.makedirs(target_dir+"/segments")
 
-        target_audio = os.path.join(target_dir, "%s.mp4" % id)
-        target_vtt = os.path.join(target_dir, "%s.vtt" % id)
+
+        target_audio = os.path.join(target_dir+"/mp4", "%s.mp4" % id)
+        target_vtt = os.path.join(target_dir+"/vtt", "%s.vtt" % id)
 
         self.extract_audio(info, target_audio)
         self.extract_vtt(info, target_vtt)
@@ -185,20 +198,20 @@ class NRKExtractor():
         info["subtitles"] = target_vtt
         info["elapsed"] = elapsed
 
-        print("Audio file", info["audio"])
-        print("Subtitle file", info["subtitles"])
+        #print("Audio file", info["audio"])
+        #print("Subtitle file", info["subtitles"])
 
-        subtitles_destination = os.path.splitext(info["audio"])[0] + ".jsonl"
+        subtitles_destination = os.path.splitext(info["audio"])[0].replace("/mp4","/segments") + ".json"
         
-        if os.path.exists(subtitles_destination):
-            return info
+        #if os.path.exists(subtitles_destination):
+        #    return info
 
         subtitles = self.load_subtitles(info["subtitles"])
         subtitles = self.resync(info["audio"], subtitles,  options)
-        print(subtitles)
+        #print(subtitles)
         self.find_good_areas(subtitles)
         
-        print("***SAVING")
+        print("*** SAVING")
         self.save_jsonlines(subtitles, subtitles_destination, info)
 
         return info
@@ -360,7 +373,7 @@ class NRKExtractor():
                 f.write(json.dumps(entry) + "\n")
 
         # Save subtitles
-        with open(destination.replace(".jsonl","_subtitles.jsonl"), "w") as f:
+        with open(destination.replace("segments","/subtitles").replace(".json","_subtitles.json"), "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = build_entry(item,info)
