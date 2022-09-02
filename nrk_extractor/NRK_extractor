@@ -66,9 +66,16 @@ class NRKExtractor():
             raise Exception("Failed to load metadata from '%s'" % murl)
         #print(r.json()["vtt"])
         res["info"] = json.loads(r.text)
-        
+        #print(res["info"]["nonPlayable"])
+        if res["info"]["nonPlayable"] == None:
+            res["info"]["medium"] = "tv"
+        else:
+            res["info"]["medium"] = "radio"
+
+        print(res["info"])
         if not bool(res["info"]["playable"]):
-            res["info"]["playable"] = "Unknown"
+            res["info"] = "Unknown"
+
         
 
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
@@ -111,6 +118,9 @@ class NRKExtractor():
 
         return res
 
+
+    def getmedium(self):
+        return "radio"
     def extract_audio(self, info, target):
 
         if os.path.exists(target) and os.stat(target).st_size > 0:
