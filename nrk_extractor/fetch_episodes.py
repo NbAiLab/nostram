@@ -46,7 +46,6 @@ class episodefetcher:
             return True
 
     def getseries(self,anepisodeidofsomething):
-
         programinforeq="https://psapi.nrk.no/playback/metadata/program/"+anepisodeidofsomething
         resp=self.geturl(programinforeq)
         resultingjson=resp.json()
@@ -58,40 +57,42 @@ class episodefetcher:
             return resultingjson["_links"]["series"]["href"].split("/")[-1]
 
     def getmetadataforseries(self,serie):
-        #print(serie)
         programinforeq = "https://psapi.nrk.no/series/" + serie
         resp = self.geturl(programinforeq)
         resultingjson = resp.json()
-        #print(resultingjson)
-        #print(resultingjson["seasons"][0]["name"])
+        
         resultlist=[]
         for ind,i in enumerate(resultingjson["seasons"]):
             resultlist.append(resultingjson["seasons"][ind]["name"])
         return resultlist
 
-
-
-    def getprograms(self,title,seasonsnr):
-        #print(title)
-        programinforeq = "https://psapi.nrk.no/tv/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
-        # Needs to be like this for radio
-        #programinforeq = "https://psapi.nrk.no/radio/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
-
-
+    def getmedium(self,serie):
+        programinforeq = "https://psapi.nrk.no/series/" + serie
         resp = self.geturl(programinforeq)
-        #print(resp.json())
-        #exit(-1)
+        resultingjson = resp.json()
         
-        #pere - jeg er her
+        href = resultingjson["_links"]["share"]["href"]
+        if "radio.nrk.no" in href:
+            medium = "radio"
+        elif "tv.nrk.no" in href:
+            medium = "tv"
+        else:
+            medium = "undefined"
 
-        #print(resp)
-        #print(resp.json())
+        return medium
+
+    def getprograms(self,medium,title,seasonsnr):
+        programinforeq = "https://psapi.nrk.no/"+str(medium)+"/catalog/series/"+ str(title) + "/seasons/" + str(seasonsnr)
+        resp = self.geturl(programinforeq)
+
         resultingjson =[]
 
         if "episodes" in resp.json()["_embedded"]:
             resultingjson = resp.json()["_embedded"]["episodes"]
+        
         else:
             resultingjson = resp.json()["_embedded"]["instalments"]
+
 
         resultlist=[]
         for ind,i in enumerate(resultingjson):
@@ -108,13 +109,17 @@ class episodefetcher:
                 self.episodelist.append(i)
             else:
                 currentserie = self.getseries(i)
-                print(currentserie)
                 theseasons = self.getmetadataforseries(currentserie)
+
+                #Figure out if this is radio or tv
+                medium = self.getmedium(currentserie)
+
                 for i in theseasons:
-                    result = self.getprograms(currentserie, i)
+                    result = self.getprograms(medium,currentserie, i)
                     for r in result:
                         self.episodelist.append(r)
                         #print("serie" + currentserie + " sesong: " + str(i) + " id: " + str(r))
+
     def episodegenerator(self):
         for episode in self.episodelist:
             yield episode
@@ -144,7 +149,6 @@ if __name__ == '__main__':
         print(i)
 
 
-     #MSUB22000113,FBUA06000075,MSUS01004710,FBUA03003087,MSUB20002611,FBUB04000100,FBUA03001389,OBUB12000108,FSTL01000188,MKTV13100320,MSUE13000118,OBUB07000104,OBUS01000103,OBUB07000408,FBUA03002588,MSUS24000120,MSUB02000110,FBUA01007383,MSUS05001110,FALB60000192,FBUA03000179,DMND10005013,FBUA03001388,MSUB19120116,FALU07000191,MSUI40005120,DMYT24002818,DNPR63700110,DNPR63000116
 
 
 
