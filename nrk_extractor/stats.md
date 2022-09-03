@@ -9,8 +9,8 @@
 ## barn
 |                                                                                       | title              |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | *Borgen skole*       |          3 | 2,309      |          1.3 |     0.9 |
-| <img src="cachedimages/Cunw69xZv4gApIx5s-RjzAlNvQ4x2gs_u5X9tx75IJrQ.jpg" height="48"> | Alle sammen sammen |          3 | 2,292      |          1.6 |     1   |
+| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | *Borgen skole (R)*       |          3 | 2,309      |          1.3 |     0.9 |
+| <img src="cachedimages/Cunw69xZv4gApIx5s-RjzAlNvQ4x2gs_u5X9tx75IJrQ.jpg" height="48"> | Alle sammen sammen (TV) |          3 | 2,292      |          1.6 |     1   |
 | <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow   |          3 | 1,202      |          2.9 |     1   |
 
 <details><summary>View detailed summary</summary>
