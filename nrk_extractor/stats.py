@@ -88,9 +88,6 @@ def save_images(imagelist,save_dir="cachedimages"):
             print("Saving image "+ image_path)
             urllib.request.urlretrieve(url, image_path)
 
-
-
-
 def parse_args():
     # Parse commandline
     parser = ArgumentParser()
