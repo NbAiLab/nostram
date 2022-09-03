@@ -1,5 +1,6 @@
 # NRK Programs Processed
-# barn|                                                                                       | title              |   programs | segments   |   average(s) |   hours |
+## barn
+|                                                                                       | title              |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | Borgen skole       |          3 | 2,309      |          1.3 |     0.9 |
 | <img src="cachedimages/Cunw69xZv4gApIx5s-RjzAlNvQ4x2gs_u5X9tx75IJrQ.jpg" height="48"> | Alle sammen sammen |          3 | 2,292      |          1.6 |     1   |
@@ -18,7 +19,9 @@
 | Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B | barn       |        696 |     0.3 |
 | Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B | barn       |        888 |     0.3 |
 | Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |</details>
-# drama-serier|                                                                                       | title   |   programs | segments   |   average(s) |   hours |
+
+## drama-serier
+|                                                                                       | title   |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:--------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/RnVdXnh0TfNSVOh6yq5TfwtmJ6Rx3ocJZFpjY_O-KoRA.jpg" height="48"> | Ante    |          3 | 3,951      |          0.9 |     0.9 |
 
@@ -29,3 +32,4 @@
 | Ante    | FBUA06000075 | 1. episode | drama-serier |       1268 |     0.3 |
 | Ante    | FBUA06000175 | 2. episode | drama-serier |       1308 |     0.3 |
 | Ante    | FBUA06000275 | 3. episode | drama-serier |       1375 |     0.3 |</details>
+
