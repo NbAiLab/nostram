@@ -1,10 +1,10 @@
 # NRK Programs Processed
-| title              |   segments |   hours |
-|:-------------------|-----------:|--------:|
-| ![](cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg) Alle sammen sammen |       2292 |     1   |
-| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg" width="48"> Ante               |       3951 |     0.9 |
-| Barnas supershow   |       1202 |     1   |
-| Borgen skole       |       2309 |     0.9 |
+| | title              |   segments |   hours |
+|:|:-------------------|-----------:|--------:|
+| Alle sammen sammen |       2292 |     1   |
+| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg" width="30">| Ante               |       3951 |     0.9 |
+| | Barnas supershow   |       1202 |     1   |
+| | Borgen skole       |       2309 |     0.9 |
 
 
 **A total of 3.8 hours in the dataset**<details><summary>View detailed summary</summary>
