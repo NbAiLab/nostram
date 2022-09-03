@@ -7,7 +7,6 @@
 | <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow   |          3 | 1,202      |          2.9 |     1   |
 
 <details><summary>View detailed summary</summary>
-
 | title              | program_id   | subtitle                    | category   |   segments |   hours |
 |:-------------------|:-------------|:----------------------------|:-----------|-----------:|--------:|
 | Alle sammen sammen | MSUB22000113 | 1. episode                  | barn       |        753 |     0.3 |
@@ -18,8 +17,7 @@
 | Barnas supershow   | MSUS01004910 | 3. episode                  | barn       |        441 |     0.3 |
 | Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B | barn       |        696 |     0.3 |
 | Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B | barn       |        888 |     0.3 |
-| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |
-</details>
+| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |</details>
 
 ## drama-serier
 |                                                                                       | title   |   programs | segments   |   average(s) |   hours |
@@ -27,7 +25,6 @@
 | <img src="cachedimages/RnVdXnh0TfNSVOh6yq5TfwtmJ6Rx3ocJZFpjY_O-KoRA.jpg" height="48"> | Ante    |          3 | 3,951      |          0.9 |     0.9 |
 
 <details><summary>View detailed summary</summary>
-## Detailed View
 | title   | program_id   | subtitle   | category     |   segments |   hours |
 |:--------|:-------------|:-----------|:-------------|-----------:|--------:|
 | Ante    | FBUA06000075 | 1. episode | drama-serier |       1268 |     0.3 |
