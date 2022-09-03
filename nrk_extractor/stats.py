@@ -76,7 +76,7 @@ def main(args):
                 #f.write(f"\n**A total of {round(df['duration'].sum()/100/3600,1)} hours in the dataset**")
                 f.write("<details><summary>View detailed summary</summary>\n\n")
                 f.write(programs_detailed[cat].to_markdown(index=False))
-                f.write("/n</details>\n\n")
+                f.write("\n</details>\n\n")
             print(save_file+" written to disk")
 
 def save_images(imagelist,save_dir="cachedimages"):
