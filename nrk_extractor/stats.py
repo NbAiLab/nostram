@@ -6,15 +6,17 @@ import jsonlines
 from argparse import ArgumentParser
 import pandas as pd
 import glob
+import urllib.request
 
 
 
 def main(args):
-    json_pattern = os.path.join(args.directory,'*.jsonl')
-    file_list = glob.glob(json_pattern)
-    segments_list = [x for x in file_list if not '_subtitles' in x]
-    subtitles_list = [x for x in file_list if '_subtitles' in x]
-   
+    segments_pattern = os.path.join(args.directory,'segments/','*.json')
+    segments_list = glob.glob(segments_pattern)
+    
+    subtitles_pattern = os.path.join(args.directory,'subtitles/','*.json')
+    subtitles_list = glob.glob(subtitles_pattern)
+    
 
     for s in [segments_list,subtitles_list]:
         dfs = []
@@ -23,7 +25,17 @@ def main(args):
             dfs.append(data) # append the data frame to the list
     
         df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
-    
+        
+        save_images(df['serieimageurl'].unique())
+        save_images(df['programimageurl'].unique())
+       
+        # Create extra dataframes for each category
+        categories = {}
+        for cat in df.category.unique():
+            categories[cat] = df[df['category'] == cat]
+
+        breakpoint()
+
         programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
         programs['hours'] = (programs['sum']/100/3600).round(1)
         programs = programs.drop(columns=['sum'])
@@ -51,7 +63,18 @@ def main(args):
             f.write(programs_detailed.to_markdown(index=False))
             f.write("</details>\n")
         print(save_file+" written to disk")
-    
+
+def save_images(imagelist,save_dir="cachedimages"):
+    for url in imagelist:
+        image_name = url.split("/")[-1]+".jpg"
+        image_path = os.path.join(save_dir,image_name)
+        
+        if not os.path.exists(image_path):
+            print("Saving image "+ image_path)
+            urllib.request.urlretrieve(url, image_path)
+
+
+
 
 def parse_args():
     # Parse commandline
