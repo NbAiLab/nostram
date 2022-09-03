@@ -1,5 +1,9 @@
 # NRK Programs Processed
+<<<<<<< HEAD
 ## barn
+=======
+# barn
+>>>>>>> 7cf730f84b6890957b23cdb5b05105143d21f473
 |                                                                                       | title              |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | Borgen skole       |          3 | 2,309      |          1.3 |     0.9 |
@@ -19,8 +23,12 @@
 | Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B | barn       |        696 |     0.3 |
 | Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B | barn       |        888 |     0.3 |
 | Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |</details>
+<<<<<<< HEAD
 
 ## drama-serier
+=======
+# drama-serier
+>>>>>>> 7cf730f84b6890957b23cdb5b05105143d21f473
 |                                                                                       | title   |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:--------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/RnVdXnh0TfNSVOh6yq5TfwtmJ6Rx3ocJZFpjY_O-KoRA.jpg" height="48"> | Ante    |          3 | 3,951      |          0.9 |     0.9 |
