@@ -2,16 +2,24 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| barn | 2.9 | 0.0                  |        **2.9** |
+| *barn* | 2.9 | 0.0                  |        **2.9** |
 | drama-serier | 0.9 | 0.0                  |        **0.9** |
 | **total** | **3.8** | **0.0**                  |        **3.8** |
 
 ## barn
+<<<<<<< HEAD
 |                                                                                       | title                   |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | Borgen skole (TV)       |          3 | 2,309      |          1.3 |     0.9 |
 | <img src="cachedimages/Cunw69xZv4gApIx5s-RjzAlNvQ4x2gs_u5X9tx75IJrQ.jpg" height="48"> | Alle sammen sammen (TV) |          3 | 2,292      |          1.6 |     1   |
 | <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow (TV)   |          3 | 1,202      |          2.9 |     1   |
+=======
+|                                                                                       | title              |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:-------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwTf5TtkecDyLvYyLyhKeLpw.jpg" height="48"> | Borgen skole       |          3 | 2,309      |          1.3 |     0.9 |
+| <img src="cachedimages/Cunw69xZv4gApIx5s-RjzAlNvQ4x2gs_u5X9tx75IJrQ.jpg" height="48"> | Alle sammen sammen (TV) |          3 | 2,292      |          1.6 |     1   |
+| <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow   |          3 | 1,202      |          2.9 |     1   |
+>>>>>>> 313c4b8f1d4477b249e7a5220ca61aa2611f52cb
 
 <details><summary>View detailed summary</summary>
 
