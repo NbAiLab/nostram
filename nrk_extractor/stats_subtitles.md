@@ -13,5 +13,6 @@
 | Alle sammen sammen | MSUB22000213 | 2. episode |        309 |          4.4 |     0.4 |
 | Alle sammen sammen | MSUB22000313 | 3. episode |        283 |          4.4 |     0.3 |
 | Barnas supershow   | MSUS01004710 | 1. episode |        154 |          3.9 |     0.2 |
-| Barnas supershow   | MSUS01004810 | 2. episode |        237 |          4.9 |     0.3 |/n</details>
+| Barnas supershow   | MSUS01004810 | 2. episode |        237 |          4.9 |     0.3 |
+</details>
 
