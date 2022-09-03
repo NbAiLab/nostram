@@ -45,10 +45,11 @@ def main(args):
         with open(save_file, 'w') as f:
             f.write(title)
             f.write("## SUMMARY - hours\n")
-            f.write("| title              | tv   | radio                    |   **total** |\n")   
+            f.write("| category              | tv   | radio                    |   **total** |\n")   
             f.write("|:-------------------|-------------:|----------------------------:|---------------------------:|\n")
-            f.write("| children | 10.2 | 3.4                  |        **13.4** |\n")     
-            f.write("| drama-series | 10.2 | 3.4                  |        **13.4** |\n")
+            for cat in categories:
+                f.write("| "+cat+" | 10.2 | 3.4                  |        **13.4** |\n")     
+            
             f.write("| **total** | **10.2** | **3.4**                  |        **13.4** |\n\n")  
 
 
