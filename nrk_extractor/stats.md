@@ -7,7 +7,7 @@
 | <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow   |          3 | 1,202      |          2.9 |     1   |
 
 <details><summary>View detailed summary</summary>
-## Detailed View
+
 | title              | program_id   | subtitle                    | category   |   segments |   hours |
 |:-------------------|:-------------|:----------------------------|:-----------|-----------:|--------:|
 | Alle sammen sammen | MSUB22000113 | 1. episode                  | barn       |        753 |     0.3 |
