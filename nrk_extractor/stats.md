@@ -7,7 +7,7 @@
 | <img src="cachedimages/MBhV845j-22KU4JLQhX06AutGeiOj25l-J4DTt1kJQVw.jpg" height="48"> | Barnas supershow   |          3 | 1,202      |          2.9 |     1   |
 
 <details><summary>View detailed summary</summary>
-  
+
 | title              | program_id   | subtitle                    | category   |   segments |   hours |
 |:-------------------|:-------------|:----------------------------|:-----------|-----------:|--------:|
 | Alle sammen sammen | MSUB22000113 | 1. episode                  | barn       |        753 |     0.3 |
@@ -27,9 +27,11 @@
 | <img src="cachedimages/RnVdXnh0TfNSVOh6yq5TfwtmJ6Rx3ocJZFpjY_O-KoRA.jpg" height="48"> | Ante    |          3 | 3,951      |          0.9 |     0.9 |
 
 <details><summary>View detailed summary</summary>
+
 | title   | program_id   | subtitle   | category     |   segments |   hours |
 |:--------|:-------------|:-----------|:-------------|-----------:|--------:|
 | Ante    | FBUA06000075 | 1. episode | drama-serier |       1268 |     0.3 |
 | Ante    | FBUA06000175 | 2. episode | drama-serier |       1308 |     0.3 |
-| Ante    | FBUA06000275 | 3. episode | drama-serier |       1375 |     0.3 |</details>
+| Ante    | FBUA06000275 | 3. episode | drama-serier |       1375 |     0.3 |
+</details>
 
