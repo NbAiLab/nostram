@@ -25,6 +25,7 @@ def main(args):
             dfs.append(data) # append the data frame to the list
     
         df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
+        df.loc[df['medium'] == 'tv', 'title'] = df['title'] + " (TV)"
         
         save_images(df['serieimageurl'].unique())
         save_images(df['programimageurl'].unique())
@@ -32,6 +33,7 @@ def main(args):
         # Create extra dataframes for each category
         categories = {}
         for cat in df.category.unique():
+            
             categories[cat] = df[df['category'] == cat]
 
         
@@ -77,16 +79,22 @@ def main(args):
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
                 programs[cat] = programs[cat][['serieimageurl', 'title', 'programs', 'segments', 'average(s)','hours']]
                 programs[cat] = programs[cat].rename(columns={"serieimageurl": " "})
-                
+
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
-                programs_detailed[cat] = categories[cat].groupby(["title","program_id","subtitle"])['duration'].agg(['sum','count']).reset_index()
+                #Detailed
+                programs_detailed[cat] = categories[cat].groupby(["programimageurl","title","program_id","subtitle"])['duration'].agg(['sum','count']).reset_index()
                 programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/100).round(1)
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
+                programs_detailed[cat]['programimageurl'] = '<img src="cachedimages/'+programs_detailed[cat]['programimageurl'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="24">'
+                programs_detailed[cat] = programs_detailed[cat].rename(columns={"programimageurl": " "})
                 
+                #Format
+                programs_detailed[cat]['segments'] = programs_detailed[cat]['segments'].map('{:,d}'.format)
+
                 f.write("## "+cat+"\n") 
                 f.write(programs[cat].to_markdown(index=False))
                 f.write("\n\n")
