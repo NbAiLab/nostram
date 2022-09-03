@@ -11,7 +11,7 @@
 ## Detailed View
 | title              | program_id   | subtitle                    | category     |   segments |   hours |
 |:-------------------|:-------------|:----------------------------|:-------------|-----------:|--------:|
-| Alle sammen sammen | MSUB22000113 | 1. episode                  | barn         |        753 |     0.3 |
+| ![](cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg)Alle sammen sammen | MSUB22000113 | 1. episode                  | barn         |        753 |     0.3 |
 | Alle sammen sammen | MSUB22000213 | 2. episode                  | barn         |        763 |     0.3 |
 | Alle sammen sammen | MSUB22000313 | 3. episode                  | barn         |        776 |     0.4 |
 | Ante               | FBUA06000075 | 1. episode                  | drama-serier |       1268 |     0.3 |
