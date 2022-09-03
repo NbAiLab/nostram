@@ -48,9 +48,17 @@ def main(args):
             f.write("| category              | tv   | radio                    |   **total** |\n")   
             f.write("|:-------------------|-------------:|----------------------------:|---------------------------:|\n")
             for cat in categories:
-                f.write("| "+cat+" | "+str(round(categories[cat].query("medium == 'tv'")['duration'].sum()/100/3600,1))+" | "+str(round(categories[cat].query("medium == 'radio'")['duration'].sum()/100/3600,1))+"                  |        **"+str(round(categories[cat]['duration'].sum()/100/3600,1))+"** |\n")     
+                tv = "{:,.1f}".format(categories[cat].query("medium == 'tv'")['duration'].sum()/100/3600,1)
+                radio = "{:,.1f}".format(categories[cat].query("medium == 'radio'")['duration'].sum()/100/3600,1)
+                total = "{:,.1f}".format(categories[cat]['duration'].sum()/100/3600,1)
+
+                f.write("| "+cat+" | "+tv+" | "+radio+"                  |        **"+total+"** |\n")     
             
-            f.write("| **total** | **"+str(round(df.query("medium == 'tv'")['duration'].sum()/100/3600,1))+"** | **"+str(round(df.query("medium == 'radio'")['duration'].sum()/100/3600,1))+"**                  |        **"+str(round(df['duration'].sum()/100/3600,1))+"** |\n\n")  
+            tv = "{:,.1f}".format(df.query("medium == 'tv'")['duration'].sum()/100/3600,1)
+            radio = "{:,.1f}".format(df.query("medium == 'radio'")['duration'].sum()/100/3600,1)
+            total = "{:,.1f}".format(df['duration'].sum()/100/3600,1)
+
+            f.write("| **total** | **"+tv+"** | **"+radio+"**                  |        **"+total+"** |\n\n")  
 
 
             for cat in categories:
