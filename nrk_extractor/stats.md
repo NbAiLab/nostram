@@ -8,17 +8,17 @@
 
 <details><summary>View detailed summary</summary>
 
-| title              | program_id   | subtitle                    |   segments |   hours |   average(s) |
-|:-------------------|:-------------|:----------------------------|-----------:|--------:|-------------:|
-| Alle sammen sammen | MSUB22000113 | 1. episode                  |        753 |     0.3 |          1.6 |
-| Alle sammen sammen | MSUB22000213 | 2. episode                  |        763 |     0.3 |          1.6 |
-| Alle sammen sammen | MSUB22000313 | 3. episode                  |        776 |     0.4 |          1.6 |
-| Barnas supershow   | MSUS01004710 | 1. episode                  |        372 |     0.3 |          3.2 |
-| Barnas supershow   | MSUS01004810 | 2. episode                  |        389 |     0.3 |          2.9 |
-| Barnas supershow   | MSUS01004910 | 3. episode                  |        441 |     0.3 |          2.6 |
-| Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B |        696 |     0.3 |          1.5 |
-| Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B |        888 |     0.3 |          1.1 |
-| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B |        725 |     0.3 |          1.4 |/n</details>
+| title              | program_id   | subtitle                    |   segments |   average(s) |   hours |
+|:-------------------|:-------------|:----------------------------|-----------:|-------------:|--------:|
+| Alle sammen sammen | MSUB22000113 | 1. episode                  |        753 |          1.6 |     0.3 |
+| Alle sammen sammen | MSUB22000213 | 2. episode                  |        763 |          1.6 |     0.3 |
+| Alle sammen sammen | MSUB22000313 | 3. episode                  |        776 |          1.6 |     0.4 |
+| Barnas supershow   | MSUS01004710 | 1. episode                  |        372 |          3.2 |     0.3 |
+| Barnas supershow   | MSUS01004810 | 2. episode                  |        389 |          2.9 |     0.3 |
+| Barnas supershow   | MSUS01004910 | 3. episode                  |        441 |          2.6 |     0.3 |
+| Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B |        696 |          1.5 |     0.3 |
+| Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B |        888 |          1.1 |     0.3 |
+| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B |        725 |          1.4 |     0.3 |/n</details>
 
 ## drama-serier
 |                                                                                       | title   |   programs | segments   |   average(s) |   hours |
@@ -27,9 +27,9 @@
 
 <details><summary>View detailed summary</summary>
 
-| title   | program_id   | subtitle   |   segments |   hours |   average(s) |
-|:--------|:-------------|:-----------|-----------:|--------:|-------------:|
-| Ante    | FBUA06000075 | 1. episode |       1268 |     0.3 |          0.9 |
-| Ante    | FBUA06000175 | 2. episode |       1308 |     0.3 |          0.9 |
-| Ante    | FBUA06000275 | 3. episode |       1375 |     0.3 |          0.8 |/n</details>
+| title   | program_id   | subtitle   |   segments |   average(s) |   hours |
+|:--------|:-------------|:-----------|-----------:|-------------:|--------:|
+| Ante    | FBUA06000075 | 1. episode |       1268 |          0.9 |     0.3 |
+| Ante    | FBUA06000175 | 2. episode |       1308 |          0.9 |     0.3 |
+| Ante    | FBUA06000275 | 3. episode |       1375 |          0.8 |     0.3 |/n</details>
 
