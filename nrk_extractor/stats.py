@@ -48,9 +48,9 @@ def main(args):
             f.write("| category              | tv   | radio                    |   **total** |\n")   
             f.write("|:-------------------|-------------:|----------------------------:|---------------------------:|\n")
             for cat in categories:
-                f.write("| "+cat+" | 10.2 | 3.4                  |        **13.4** |\n")     
+                f.write("| "+cat+" | "+str(round(categories[cat].query("medium == 'tv'")['duration'].sum()/100/3600,1))+" | "+str(round(categories[cat].query("medium == 'radio'")['duration'].sum()/100/3600,1))+"                  |        **"+str(round(categories[cat]['duration'].sum()/100/3600,1))+"** |\n")     
             
-            f.write("| **total** | **10.2** | **3.4**                  |        **13.4** |\n\n")  
+            f.write("| **total** | **"+str(round(df.query("medium == 'tv'")['duration'].sum()/100/3600,1))+"** | **"+str(round(df.query("medium == 'radio'")['duration'].sum()/100/3600,1))+"**                  |        **"+str(round(df['duration'].sum()/100/3600,1))+"** |\n\n")  
 
 
             for cat in categories:

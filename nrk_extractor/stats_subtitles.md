@@ -1,10 +1,9 @@
 # NRK Subtitles Extracted
 ## SUMMARY - hours
-| title              | tv   | radio                    |   **total** |
+| category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| children | 10.2 | 3.4                  |        **13.4** |
-| drama-series | 10.2 | 3.4                  |        **13.4** |
-| **total** | **10.2** | **3.4**                  |        **13.4** |
+| barn | 1.6 | 0.0                  |        **1.6** |
+| **total** | **1.6** | **0.0**                  |        **1.6** |
 
 ## barn
 |                                                                                       | title              |   programs |   segments |   average(s) |   hours |
