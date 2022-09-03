@@ -34,18 +34,7 @@ def main(args):
         for cat in df.category.unique():
             categories[cat] = df[df['category'] == cat]
 
-        breakpoint()
-
-        programs = df.groupby(["title"])['duration'].agg(['sum','count']).reset_index()
-        programs['hours'] = (programs['sum']/100/3600).round(1)
-        programs = programs.drop(columns=['sum'])
-        programs = programs.rename(columns={"count": "segments"})
-
-        programs_detailed = df.groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
-        programs_detailed['hours'] = (programs_detailed['sum']/100/3600).round(1)
-        programs_detailed = programs_detailed.drop(columns=['sum'])
-        programs_detailed = programs_detailed.rename(columns={"count": "segments"})
-       
+        
         if s == segments_list:
             save_file = "stats.md"
             title="# NRK Programs Processed\n"
@@ -55,14 +44,40 @@ def main(args):
 
         with open(save_file, 'w') as f:
             f.write(title)
-            f.write(programs.to_markdown(index=False))
-            f.write("\n\n")
-            f.write(f"\n**A total of {round(df['duration'].sum()/100/3600,1)} hours in the dataset**")
-            f.write("<details><summary>View detailed summary</summary>\n")
-            f.write("## Detailed View\n")
-            f.write(programs_detailed.to_markdown(index=False))
-            f.write("</details>\n")
-        print(save_file+" written to disk")
+            for cat in categories:
+                programs = {}
+                programs_detailed = {}
+
+                programs[cat] = categories[cat].groupby(["serieimageurl","title"])['duration'].agg(['sum','count']).reset_index()
+                temp = categories[cat].groupby(["title"])['program_id'].agg(['nunique']).reset_index()
+                programs[cat] = pd.merge(programs[cat],temp)
+                programs[cat]['hours'] = (programs[cat]['sum']/100/3600).round(1)
+                programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/100).round(1)
+                programs[cat]['serieimageurl'] = '<img src="cachedimages/'+programs[cat]['serieimageurl'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="48">'
+
+                programs[cat] = programs[cat].drop(columns=['sum'])
+                programs[cat] = programs[cat].rename(columns={"count": "segments"})
+                programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
+                programs[cat] = programs[cat][['serieimageurl', 'title', 'programs', 'segments', 'average(s)','hours']]
+                programs[cat] = programs[cat].rename(columns={"serieimageurl": " "})
+                
+                #Format
+                programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
+                
+                programs_detailed[cat] = categories[cat].groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
+                programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
+                programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
+                programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
+                
+                f.write("# "+cat) 
+                f.write(programs[cat].to_markdown(index=False))
+                f.write("\n\n")
+                #f.write(f"\n**A total of {round(df['duration'].sum()/100/3600,1)} hours in the dataset**")
+                f.write("<details><summary>View detailed summary</summary>\n")
+                f.write("## Detailed View\n")
+                f.write(programs_detailed[cat].to_markdown(index=False))
+                f.write("</details>\n")
+            print(save_file+" written to disk")
 
 def save_images(imagelist,save_dir="cachedimages"):
     for url in imagelist:
