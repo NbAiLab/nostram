@@ -66,7 +66,7 @@ def main(args):
                 
                 programs_detailed[cat] = categories[cat].groupby(["title","program_id","subtitle"])['duration'].agg(['sum','count']).reset_index()
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
-                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs[cat]['count'])/100).round(1)
+                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/100).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
                 
@@ -76,7 +76,7 @@ def main(args):
                 #f.write(f"\n**A total of {round(df['duration'].sum()/100/3600,1)} hours in the dataset**")
                 f.write("<details><summary>View detailed summary</summary>\n\n")
                 f.write(programs_detailed[cat].to_markdown(index=False))
-                f.write("\n</details>\n\n")
+                f.write("/n</details>\n\n")
             print(save_file+" written to disk")
 
 def save_images(imagelist,save_dir="cachedimages"):

@@ -7,12 +7,11 @@
 
 <details><summary>View detailed summary</summary>
 
-| title              | program_id   | subtitle   | category   |   segments |   hours |
-|:-------------------|:-------------|:-----------|:-----------|-----------:|--------:|
-| Alle sammen sammen | MSUB22000113 | 1. episode | barn       |        321 |     0.4 |
-| Alle sammen sammen | MSUB22000213 | 2. episode | barn       |        309 |     0.4 |
-| Alle sammen sammen | MSUB22000313 | 3. episode | barn       |        283 |     0.3 |
-| Barnas supershow   | MSUS01004710 | 1. episode | barn       |        154 |     0.2 |
-| Barnas supershow   | MSUS01004810 | 2. episode | barn       |        237 |     0.3 |
-</details>
+| title              | program_id   | subtitle   |   segments |   hours |   average(s) |
+|:-------------------|:-------------|:-----------|-----------:|--------:|-------------:|
+| Alle sammen sammen | MSUB22000113 | 1. episode |        321 |     0.4 |          4.1 |
+| Alle sammen sammen | MSUB22000213 | 2. episode |        309 |     0.4 |          4.4 |
+| Alle sammen sammen | MSUB22000313 | 3. episode |        283 |     0.3 |          4.4 |
+| Barnas supershow   | MSUS01004710 | 1. episode |        154 |     0.2 |          3.9 |
+| Barnas supershow   | MSUS01004810 | 2. episode |        237 |     0.3 |          4.9 |/n</details>
 
