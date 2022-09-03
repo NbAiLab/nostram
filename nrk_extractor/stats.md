@@ -2,7 +2,7 @@
 | title              |   segments |   hours |
 |:-------------------|-----------:|--------:|
 | ![](cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg) Alle sammen sammen |       2292 |     1   |
-| Ante               |       3951 |     0.9 |
+| <img src="cachedimages/65lwG2RYIez97JLmKiBMJwArVNmHchBFnvYyLyhKeLpw.jpg" width="48"> Ante               |       3951 |     0.9 |
 | Barnas supershow   |       1202 |     1   |
 | Borgen skole       |       2309 |     0.9 |
 
