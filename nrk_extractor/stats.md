@@ -19,7 +19,8 @@
 | Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B | barn       |        696 |     0.3 |
 | Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B | barn       |        888 |     0.3 |
 | Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |</details>
-# drama-serier|                                                                                       | title   |   programs | segments   |   average(s) |   hours |
+# drama-serier
+|                                                                                       | title   |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:--------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/RnVdXnh0TfNSVOh6yq5TfwtmJ6Rx3ocJZFpjY_O-KoRA.jpg" height="48"> | Ante    |          3 | 3,951      |          0.9 |     0.9 |
 
