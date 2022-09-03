@@ -17,7 +17,8 @@
 | Barnas supershow   | MSUS01004910 | 3. episode                  | barn       |        441 |     0.3 |
 | Borgen skole       | FBUA03003087 | 1. Borgen skole - klasse 6B | barn       |        696 |     0.3 |
 | Borgen skole       | FBUA03003187 | 2. Borgen skole - klasse 6B | barn       |        888 |     0.3 |
-| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |</details>
+| Borgen skole       | FBUA03003287 | 3. Borgen skole - klasse 6B | barn       |        725 |     0.3 |
+</details>
 
 ## drama-serier
 |                                                                                       | title   |   programs | segments   |   average(s) |   hours |
