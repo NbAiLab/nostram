@@ -64,8 +64,9 @@ def main(args):
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
-                programs_detailed[cat] = categories[cat].groupby(["title","program_id","subtitle","category"])['duration'].agg(['sum','count']).reset_index()
+                programs_detailed[cat] = categories[cat].groupby(["title","program_id","subtitle"])['duration'].agg(['sum','count']).reset_index()
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
+                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs[cat]['count'])/100).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
                 
