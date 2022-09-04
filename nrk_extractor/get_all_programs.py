@@ -6,7 +6,7 @@ import subprocess
 import time
 import sys
 import argparse
-
+import isodate
 def main(args):
 
     # Fetch the info blob
@@ -31,13 +31,18 @@ def main(args):
         
         catcount = 0
         for series in res["series-tv"]["sections"]:
-            print(series['included']['title']+' = '+str(series["included"]["count"]))
+            #print(series['included']['title']+' = '+str(series["included"]["count"]))
             count = count+int(series["included"]["count"])
             catcount = catcount+ +int(series["included"]["count"])
+            
+            #For each of these loop through programs to find out how long they are
+            for programs in series["included"]["plugs"]:
+                print(programs["targetType"])
+                #isodate.parse_duration("PT4M13S").total_seconds()
+        
+        #print('##SUM## ' + categories['id']+' = '+str(catcount)+ "\n")
 
-        print('##SUM## ' + categories['id']+' = '+str(catcount)+ "\n")
-
-    print("\n\n##Total## "+" = "+str(count))
+    #print("\n\n##Total## "+" = "+str(count))
 
 
 
