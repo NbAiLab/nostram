@@ -2,24 +2,25 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| nyheter | 99.6 | 4,157.4                  |        **4,257.0** |
+| nyheter | 99.6 | 4,305.1                  |        **4,404.7** |
 | barn | 398.5 | 0.0                  |        **398.5** |
 | livsstil | 136.3 | 0.0                  |        **136.3** |
 | drama-serier | 20.2 | 0.0                  |        **20.2** |
 | kultur | 1.0 | 0.0                  |        **1.0** |
-| **total** | **655.6** | **4,157.4**                  |        **4,813.0** |
+| **total** | **655.6** | **4,305.1**                  |        **4,960.7** |
 
 ## nyheter
 |                                                                                       | title                                      |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/-OqOvs33upLy_-_h2DKdHw4A9nOuEF1SpVLXD-X9LRNQ.jpg" height="48"> | Distriktsprogram - Møre og Romsdal (radio) |        384 | 90,873     |         15.6 |   394.3 |
+| <img src="cachedimages/3CrF4KyR7TsnNei5RsUbRgcYsyOwQvVrr32JVCGFZOjg.jpg" height="48"> | Distriktsprogram - Vestfold                |        205 | 36,119     |         13.3 |   133.1 |
 | <img src="cachedimages/3yJCmi7O6o_LRMyHXG4PKAyJDqY7tz1_KZAdoMhM3Jyg.jpg" height="48"> | Distriktsnyheter Østafjells (TV)           |          6 | 793        |          3.1 |     0.7 |
 | <img src="cachedimages/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig.jpg" height="48"> | Distriktsnyheter Oslo og Viken (TV)        |         21 | 3,529      |          3.3 |     3.2 |
 | <img src="cachedimages/7OCQCjdvyodYBXFCqKQ_OQh4a_qRVOVHM_yqNiASd-tw.jpg" height="48"> | Distriktsprogram - Troms og Finnmark       |        582 | 8,170      |          8   |    18.2 |
 | <img src="cachedimages/7OCQCjdvyodYBXFCqKQ_OQh4a_qRVOVHN23pzH-1CpUQ.jpg" height="48"> | Distriktsprogram - Finnmark                |        499 | 116,396    |         12.1 |   392.3 |
 | <img src="cachedimages/Gdmx4kPdEAUGw1aXXhAsYw_eQdqwOb6Oz5_VVGtYBSHA.jpg" height="48"> | Distriktsprogram - Trøndelag               |        388 | 99,801     |         14.2 |   393.8 |
 | <img src="cachedimages/Owt1MB9tFgo6abUQiW_hlgUafN0-5yTpzyaDTaQ3StBg.jpg" height="48"> | Distriktsnyheter Midtnytt (TV)             |         19 | 3,360      |          3   |     2.8 |
-| <img src="cachedimages/QKF27WvEKkuwQvTtNBc2mA0IuAY9rJzQY4oaFqvQ0FBA.jpg" height="48"> | Distriktsprogram - Hordaland               |        376 | 92,286     |         14.8 |   379.2 |
+| <img src="cachedimages/QKF27WvEKkuwQvTtNBc2mA0IuAY9rJzQY4oaFqvQ0FBA.jpg" height="48"> | Distriktsprogram - Hordaland               |        389 | 95,823     |         14.8 |   393.9 |
 | <img src="cachedimages/RWx0wjITpvu0-3IZJwk3mgo9rCB1QNYRvmLCPt7sypEQ.jpg" height="48"> | Distriktsnyheter Innlandet (TV)            |         17 | 2,467      |          3.6 |     2.4 |
 | <img src="cachedimages/SFHU2_2tLiWf1IikofMDEAyNSX8n29dHLYwu9x6jcacA.jpg" height="48"> | Distriktsnyheter Vestlandsrevyen (TV)      |          9 | 1,438      |          3.3 |     1.3 |
 | <img src="cachedimages/WF0SSi2EOv2EO0CF8bQLmQGNu3ZOP9JVjGudILYGQBmA.jpg" height="48"> | Distriktsnyheter Møre og Romsdal (TV)      |         17 | 2,395      |          3.7 |     2.4 |
