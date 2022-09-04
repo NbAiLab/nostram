@@ -2,18 +2,18 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| nyheter | 99.6 | 4,334.4                  |        **4,434.0** |
+| nyheter | 99.6 | 4,457.7                  |        **4,557.3** |
 | barn | 398.5 | 0.0                  |        **398.5** |
 | livsstil | 136.3 | 0.0                  |        **136.3** |
 | drama-serier | 20.2 | 0.0                  |        **20.2** |
 | kultur | 1.0 | 0.0                  |        **1.0** |
-| **total** | **655.6** | **4,334.4**                  |        **4,990.1** |
+| **total** | **655.6** | **4,457.7**                  |        **5,113.3** |
 
 ## nyheter
 |                                                                                       | title                                      |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/-OqOvs33upLy_-_h2DKdHw4A9nOuEF1SpVLXD-X9LRNQ.jpg" height="48"> | Distriktsprogram - Møre og Romsdal (radio) |        384 | 90,873     |         15.6 |   394.3 |
-| <img src="cachedimages/3CrF4KyR7TsnNei5RsUbRgcYsyOwQvVrr32JVCGFZOjg.jpg" height="48"> | Distriktsprogram - Vestfold                |        254 | 43,966     |         13.3 |   162.4 |
+| <img src="cachedimages/3CrF4KyR7TsnNei5RsUbRgcYsyOwQvVrr32JVCGFZOjg.jpg" height="48"> | Distriktsprogram - Vestfold                |        478 | 76,475     |         13.4 |   285.7 |
 | <img src="cachedimages/3yJCmi7O6o_LRMyHXG4PKAyJDqY7tz1_KZAdoMhM3Jyg.jpg" height="48"> | Distriktsnyheter Østafjells (TV)           |          6 | 793        |          3.1 |     0.7 |
 | <img src="cachedimages/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig.jpg" height="48"> | Distriktsnyheter Oslo og Viken (TV)        |         21 | 3,529      |          3.3 |     3.2 |
 | <img src="cachedimages/7OCQCjdvyodYBXFCqKQ_OQh4a_qRVOVHM_yqNiASd-tw.jpg" height="48"> | Distriktsprogram - Troms og Finnmark       |        582 | 8,170      |          8   |    18.2 |
