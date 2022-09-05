@@ -25,7 +25,8 @@ def main(args):
             dfs.append(data) # append the data frame to the list
     
         df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
-        #df.loc[df['medium'] == 'tv', 'title'] = str(df['title']) + " (TV)"
+        df['title'] = df['title'].astype(str)
+        #df.loc[df['medium'] == 'tv', 'title'] = df['title'] + " (TV)"
 
         save_images(df['serieimageurl'].unique())
         save_images(df['programimageurl'].unique())
