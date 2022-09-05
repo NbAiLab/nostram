@@ -22,6 +22,7 @@ def main(args):
     count = 0
     for categories in res["categories-tv"]["pageListItems"]:
         murl = "https://psapi.nrk.no/"+categories["_links"]["self"]["href"]
+        print(murl)
         r = requests.get(murl)
         if r.status_code != 200:
             raise Exception("Failed to load metadata from '%s'" % murl)
@@ -31,15 +32,27 @@ def main(args):
         
         catcount = 0
         for series in res["series-tv"]["sections"]:
-            #print(series['included']['title']+' = '+str(series["included"]["count"]))
+            print(series['included']['title']+' = '+str(series["included"]["count"]))
             count = count+int(series["included"]["count"])
             catcount = catcount+ +int(series["included"]["count"])
             
-            #For each of these loop through programs to find out how long they are
+            #For each of these check how long they are in total
             for programs in series["included"]["plugs"]:
-                print(programs["targetType"])
-                #isodate.parse_duration("PT4M13S").total_seconds()
-        
+                seconds = 0
+
+                if programs['targetType'] == "series":
+                    e=99
+
+                elif programs['targetType'] == "episode":
+                    e = 1
+                    seconds = isodate.parse_duration(programs['episode']['duration']).total_seconds()
+                
+                elif programs['targetType'] == "standaloneProgram":
+                    e = 1
+                    seconds = isodate.parse_duration(programs['episode']['duration']).total_seconds()
+               
+                print(programs["displayContractContent"]["contentTitle"]+" - " + str(e) + " - " +str(round(seconds/3600,1)))
+
         #print('##SUM## ' + categories['id']+' = '+str(catcount)+ "\n")
 
     #print("\n\n##Total## "+" = "+str(count))

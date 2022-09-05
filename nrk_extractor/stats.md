@@ -2,12 +2,12 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| nyheter | 99.6 | 5,541.6                  |        **5,641.2** |
+| nyheter | 99.6 | 5,745.4                  |        **5,845.1** |
 | barn | 398.5 | 0.0                  |        **398.5** |
 | livsstil | 136.3 | 0.0                  |        **136.3** |
 | drama-serier | 20.2 | 0.0                  |        **20.2** |
 | kultur | 1.0 | 0.0                  |        **1.0** |
-| **total** | **655.6** | **5,541.6**                  |        **6,197.3** |
+| **total** | **655.6** | **5,745.4**                  |        **6,401.1** |
 
 ## nyheter
 |                                                                                       | title                                      |   programs | segments   |   average(s) |   hours |
@@ -35,7 +35,7 @@
 | <img src="cachedimages/mxk6wvJhB3psty_lOvEgpwr-7yHfs7q8zzmhikLnKdCA.jpg" height="48"> | Distriktsprogram - Østfold                 |        382 | 94,406     |         15   |   393.9 |
 | <img src="cachedimages/ndOhzQTyLRB-UnOHn24IEgjy2iG5mGWBO44JeLHVNOhg.jpg" height="48"> | Distriktsnyheter Østlandssendingen (TV)    |         18 | 1,659      |          4.2 |     1.9 |
 | <img src="cachedimages/qGdbbseW4d2_t0gw6d1FewFlKArRiv35y60RspWBRxaA.jpg" height="48"> | Distriktsprogram - Østlandssendingen       |        383 | 92,657     |         15.3 |   394.2 |
-| <img src="cachedimages/rfTtGpJAgC7_Lh1MLKJRHAGKlR0zFB1b-wo78hInTorw.jpg" height="48"> | Distriktsprogram - Sogn og Fjordane        |        183 | 48,415     |         14.1 |   189.4 |
+| <img src="cachedimages/rfTtGpJAgC7_Lh1MLKJRHAGKlR0zFB1b-wo78hInTorw.jpg" height="48"> | Distriktsprogram - Sogn og Fjordane        |        404 | 102,192    |         13.9 |   393.2 |
 | <img src="cachedimages/tCtNe32Xt-fXXekeRjqHZA4XQLBWuSavfNmn66CRcsOg.jpg" height="48"> | Distriktsprogram - Sørlandet               |        370 | 86,661     |         15.7 |   379.1 |
 | <img src="cachedimages/wQ4Ltlts1tdMmOCKlbV35wCct2HiPR8ZDkiq-5udzOpw.jpg" height="48"> | Distriktsnyheter Nordland (TV)             |          4 | 419        |          4.5 |     0.5 |
 | <img src="cachedimages/xEbKR8-Oni5B6bT2LZCBDA5WOZiAaDAt9M9mrElDWaFw.jpg" height="48"> | Heia Norge (TV)                            |        161 | 156,810    |          1.7 |    72.6 |
