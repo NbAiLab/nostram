@@ -2,28 +2,29 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| barn | 641.9 | 0.0                  |        **641.9** |
-| natur | 84.5 | 0.0                  |        **84.5** |
-| drama-serier | 464.6 | 0.0                  |        **464.6** |
-| kultur | 75.0 | 0.0                  |        **75.0** |
+| barn | 665.0 | 0.0                  |        **665.0** |
+| natur | 93.7 | 0.0                  |        **93.7** |
+| drama-serier | 486.2 | 0.0                  |        **486.2** |
+| kultur | 75.2 | 0.0                  |        **75.2** |
 | humor | 92.5 | 0.0                  |        **92.5** |
-| nrk-arkivet | 46.5 | 0.0                  |        **46.5** |
-| livsstil | 194.3 | 0.0                  |        **194.3** |
-| dokumentar | 281.4 | 0.0                  |        **281.4** |
+| nrk-arkivet | 57.0 | 0.0                  |        **57.0** |
+| livsstil | 195.8 | 0.0                  |        **195.8** |
+| dokumentar | 297.0 | 0.0                  |        **297.0** |
+| underholdning | 30.8 | 0.0                  |        **30.8** |
 | sport | 25.5 | 0.0                  |        **25.5** |
-| underholdning | 21.4 | 0.0                  |        **21.4** |
 | familie | 3.4 | 0.0                  |        **3.4** |
 | vitenskap | 3.8 | 0.0                  |        **3.8** |
-| **total** | **1,934.9** | **0.0**                  |        **1,934.9** |
+| **total** | **2,025.8** | **0.0**                  |        **2,025.8** |
 
 ## barn
 |                                                                                       | title                                            |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-------------------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/-JB_fzQxzo9rRwPWHDDlkg7aJ8Rfiqjc8yBuqebe34ZQ.jpg" height="48"> | Brillebjørn-show                                 |         10 | 1,239      |          4.9 |     1.7 |
-| <img src="cachedimages/-grFRvy4tIDaHZEsylnhggHxTg318mFeGyKFl9QcyXhg.jpg" height="48"> | Flaskepost fra Stillehavet                       |         21 | 789        |          4.5 |     1   |
+| <img src="cachedimages/-grFRvy4tIDaHZEsylnhggHxTg318mFeGyKFl9QcyXhg.jpg" height="48"> | Flaskepost fra Stillehavet                       |         26 | 910        |          4.4 |     1.1 |
 | <img src="cachedimages/-pTiuj5k8AOyNNV0mfeL_QkxBZKD5kn99B0rwk9A2ulg.jpg" height="48"> | Bablo                                            |         68 | 6,186      |          4.4 |     7.6 |
 | <img src="cachedimages/0Uz9PzOxTAgM8UXrokgc1Q5F_R4ywY1xW73epCyF0BPA.jpg" height="48"> | Tikk takk                                        |          1 | 3          |          2.9 |     0   |
 | <img src="cachedimages/0uIsTKm7wbX6P4qVslUihAUWCVYT0dbvdzVUuAPaNVTg.jpg" height="48"> | Kan selv                                         |         12 | 45         |          3.4 |     0   |
+| <img src="cachedimages/0wK804Tv-VQD-lChQfdrcQbr1GMYsoJq0aAZAmrqLOVw.jpg" height="48"> | Nilam og banden                                  |          8 | 934        |          4.4 |     1.1 |
 | <img src="cachedimages/13b3lEBpnfWjdCwmcYjghgYdG4mMWt7T3exHSwlDqM6g.jpg" height="48"> | Vår ruler                                        |         31 | 3,775      |          4.5 |     4.7 |
 | <img src="cachedimages/1JH4MShiJbM0nL7eBiwWxQzohScy8ouHvID4EwfB-A7Q.jpg" height="48"> | Tema - Rasisme                                   |          5 | 67         |          4.8 |     0.1 |
 | <img src="cachedimages/1k5y2W_jeC7zOwyQWRQoTQJyHbrBa9k3neFYAHn7XNbQ.jpg" height="48"> | Velkommen til jorda                              |         26 | 1,441      |          4.7 |     1.9 |
@@ -60,7 +61,7 @@
 | <img src="cachedimages/Ee1Xna7_fTyJMv-RQorleABVfdwtRs4bOy0J3CwtpLxA.jpg" height="48"> | Babblarna                                        |         23 | 583        |          5.1 |     0.8 |
 | <img src="cachedimages/EyZBjOyWljWe1UTMs8_FdAF-8bkdGXc_ONNM-Nofnxyg.jpg" height="48"> | Ikke gjør dette mot klimaet!                     |         10 | 2,155      |          4.9 |     2.9 |
 | <img src="cachedimages/FqD3rsnk7zBqZ4KyNuOFBQodwohD1PpCEwM3R8yrdZJg.jpg" height="48"> | Gusse - den bitte lille ridderen                 |         52 | 7,158      |          4.3 |     8.5 |
-| <img src="cachedimages/HqtDTupaq3mOEPpMr2W3wQO_z50OHaY0-bYuK5FUs-ww.jpg" height="48"> | Full kontroll                                    |         15 | 5,389      |          4   |     5.9 |
+| <img src="cachedimages/HqtDTupaq3mOEPpMr2W3wQO_z50OHaY0-bYuK5FUs-ww.jpg" height="48"> | Full kontroll                                    |         23 | 8,172      |          4   |     9   |
 | <img src="cachedimages/HzY09EEvfc1U3M4eUIWhqAVDUz6Lh5oJaRTn1xR77jeQ.jpg" height="48"> | Emil i Lønneberget                               |          2 | 501        |          3.7 |     0.5 |
 | <img src="cachedimages/I9jf413-ONHCKTbZ6LdPcwG8MHvvnj_eCc2g-XoTbHfw.jpg" height="48"> | Sauen Shaun                                      |         41 | 329        |          3.6 |     0.3 |
 | <img src="cachedimages/IaLsQL-V1_cf9K5GhpBQbQJpd0c2hfHFATrhO9qsV46g.jpg" height="48"> | Nattens arvinger                                 |         26 | 6,548      |          4.4 |     7.9 |
@@ -82,7 +83,7 @@
 | <img src="cachedimages/RxxKGLA_cmWz3HwWv5tz0AQanMlURi7dzRR5a-WpiC2Q.jpg" height="48"> | Eg går på                                        |         26 | 2,673      |          3.8 |     2.8 |
 | <img src="cachedimages/SBHgQKKbGfr-qIiE7U8YfQa39hiRDPb2Ii_mepByjkXg.jpg" height="48"> | Binnabánnásj - julevsámegiellaj / lulesamisk     |         31 | 1,173      |          3.8 |     1.2 |
 | <img src="cachedimages/SKiIb2G69B9XQRzsruB4QAnfejpWHXhj4yGjSiEmp5WA.jpg" height="48"> | Nødt eller Sannhet                               |         13 | 2,564      |          4.4 |     3.2 |
-| <img src="cachedimages/SRjt9_bHFEHJBL8q-CEZ6gI-pz0TWkCdAHZmHiFuu9Xw.jpg" height="48"> | Klassen Sverige                                  |         42 | 5,263      |          4.5 |     6.6 |
+| <img src="cachedimages/SRjt9_bHFEHJBL8q-CEZ6gI-pz0TWkCdAHZmHiFuu9Xw.jpg" height="48"> | Klassen Sverige                                  |        104 | 12,487     |          4.6 |    15.9 |
 | <img src="cachedimages/TPrB0UfSc-ASQ_rFD9BXiwrTtGR-IdTRJRz_y12rnW5g.jpg" height="48"> | Brødrene Dal og spektralsteinene                 |         13 | 1,139      |          5   |     1.6 |
 | <img src="cachedimages/UCuwcTYD-UvxnPW1A8mn8AyWwdABfWRfLvD0BSePVIgA.jpg" height="48"> | 100% Ulv - Legenden om månesteinen               |         26 | 7,548      |          4.2 |     8.9 |
 | <img src="cachedimages/XGiBnDsKOcO0otuY-N9ktACNbJH3ZwZ_i2w7UiGl_WJg.jpg" height="48"> | Skal vi leke?                                    |          8 | 1,221      |          3.1 |     1.1 |
@@ -90,6 +91,7 @@
 | <img src="cachedimages/YPPPEP9NWj-b7RTjbVRruQr3tLhBW4zmPi76Zi1Jfgow.jpg" height="48"> | Strong Stories                                   |         39 | 1,124      |          4.3 |     1.3 |
 | <img src="cachedimages/YyWEMVKGhnxr6fb9TBj8Tg1U0uYQM_DL94tY0tKujkLw.jpg" height="48"> | Hvis jeg var deg                                 |         10 | 2,372      |          5.3 |     3.5 |
 | <img src="cachedimages/Z0kIC_3WqTSCE4J05pRXtA9D0LG37_V2ELjLCroA0iug.jpg" height="48"> | Raske penger                                     |         13 | 3,262      |          5   |     4.5 |
+| <img src="cachedimages/ZQ3ne3FsiTQJC7TIEHNWwAup18hNEdmSYE31evxCgrzA.jpg" height="48"> | Paddington på eventyr                            |         53 | 7,405      |          4.5 |     9.3 |
 | <img src="cachedimages/ZlajeEwNocmxs2mtg_ZPzQL_86dn-Vy8ouQd3XsUtclQ.jpg" height="48"> | Store maskiner                                   |         20 | 347        |          5   |     0.5 |
 | <img src="cachedimages/ZoEVhB0pB7HQqhaFwW5oMgdATjZwoCOzoOh8TbZgIMxA.jpg" height="48"> | Spookys                                          |         10 | 2,654      |          4.3 |     3.2 |
 | <img src="cachedimages/ZpzEPetGm3JT453FMUPExwxyfUfkIVj20EhVXOCnvpGA.jpg" height="48"> | Boađe stoahkat                                   |          8 | 1,223      |          3.1 |     1.1 |
@@ -160,7 +162,7 @@
 | <img src="cachedimages/NhKJZu66_L357gpsn8fg6wZwnFndIHGElCn0YOdp_kwg.jpg" height="48"> | Gordon og bjørnungane                    |          2 | 839        |          5.2 |     1.2 |
 | <img src="cachedimages/VoKdomGcuJgxsGgt2Dy97gfEKfp6da2W0dT7G-2E28Tg.jpg" height="48"> | Fuglefjellet Hornøya                     |          1 | 409        |          5.5 |     0.6 |
 | <img src="cachedimages/WexwLrjhmrRkq3KbI4OzRQYBN0v74yAWS3a1c8YGWGSw.jpg" height="48"> | Fremtidens drømmehager                   |          4 | 1,981      |          4.6 |     2.5 |
-| <img src="cachedimages/_08IuzDkSs_wjVHN87TBcAdG8URVTpBYqmXYg74ZkHRA.jpg" height="48"> | Med Monsen på villspor                   |          2 | 1,460      |          4.8 |     2   |
+| <img src="cachedimages/_08IuzDkSs_wjVHN87TBcAdG8URVTpBYqmXYg74ZkHRA.jpg" height="48"> | Med Monsen på villspor                   |         12 | 8,320      |          4.8 |    11.2 |
 | <img src="cachedimages/_zIvxM1dkxCJ7Q95iJ_6RApFGOjslIpKcpDmuoMKsxoQ.jpg" height="48"> | Jens i villmarka                         |         17 | 3,476      |          4.8 |     4.7 |
 | <img src="cachedimages/cQ5kxHpNNFSS6TmObEzfpgw8GjJCALy9AErXKc420fjQ.jpg" height="48"> | Helt alene                               |          8 | 1,893      |          5.2 |     2.7 |
 | <img src="cachedimages/cTsTQecE6pyZC7-gcXMsrwuTWDlvstiVWdOrl8Mc7rFA.jpg" height="48"> | Safari Norge                             |          9 | 3,421      |          5.1 |     4.9 |
@@ -181,6 +183,7 @@
 | <img src="cachedimages/19LHt3SyDmQjXTq-__DEmwucM6rnSJD-wbS5DRW4TbcA.jpg" height="48"> | Atlantic Crossing                |          8 | 4,300      |          4.3 |     5.2 |
 | <img src="cachedimages/1NE89I3LY6CwZua8mOO8IgoSCM5q6vDURg60cJubQEng.jpg" height="48"> | Erobreren                        |          6 | 980        |          4.7 |     1.3 |
 | <img src="cachedimages/1k9qjEPKLT-iUWLuCdvEYQiq1zoDvJfNuiYSskceJCBg.jpg" height="48"> | Exit                             |         16 | 5,840      |          4.4 |     7.1 |
+| <img src="cachedimages/3QqbyUYCH6D2i1sPyegawgWK6-qvL1wzJRj2_GUrxxgw.jpg" height="48"> | Familien Durrells greske eventyr |          3 | 1,661      |          4.3 |     2   |
 | <img src="cachedimages/3n-rTf5IGts42xUHjG_grA-EtykXhp3g101LfrgiDn1Q.jpg" height="48"> | Deadline Torp                    |          2 | 296        |          5.2 |     0.4 |
 | <img src="cachedimages/3oCzLpXKwbo8Lhl_XktRUAE6tQe_aodo2kjXDs6fTOKw.jpg" height="48"> | Nattseilere                      |          6 | 883        |          5.6 |     1.4 |
 | <img src="cachedimages/4RKYXDg8fsM4hZgARLC9sQjeFWySF8EGc5dpmT-vyVDQ.jpg" height="48"> | Svarte penger - hvite løgner     |          6 | 1,700      |          5.2 |     2.5 |
@@ -205,6 +208,7 @@
 | <img src="cachedimages/JwtG-T2KY5LXUXVn2QWcGAPwbOLW2t8Jnd_iujobYHlA.jpg" height="48"> | Mitt liv som meg                 |         10 | 3,484      |          4.7 |     4.5 |
 | <img src="cachedimages/KNfC35H0Q5Xm7D1ip00ULwdxN_JUs82ssWjpR2TQMR9A.jpg" height="48"> | Venner fra før                   |         15 | 3,276      |          5.2 |     4.7 |
 | <img src="cachedimages/KWX3x4RusxgQ_TGtfOv_gAjbEo84c6fdh-GGEU69NpOg.jpg" height="48"> | Yes No Maybe                     |         16 | 2,902      |          4.7 |     3.8 |
+| <img src="cachedimages/LRTU-yPVfNmZ_zD5d9Li0AMJ4F9Xvu8bWncHLhkpwlHQ.jpg" height="48"> | Itch                             |          6 | 1,318      |          5.1 |     1.9 |
 | <img src="cachedimages/LxGZdR64IdppPFHxvPbZsg_VfrR8N_OIBWF_-gfeO3vQ.jpg" height="48"> | Ulven kommer                     |          8 | 3,437      |          4.2 |     4   |
 | <img src="cachedimages/LxtPwk3HgcNxOrqgNwF2OABODPuiACArVDuvorld4t0g.jpg" height="48"> | Nobel  - fred for enhver pris    |          7 | 3,592      |          4.1 |     4.1 |
 | <img src="cachedimages/NHd4ODiMWyFgpZ0foJ7YewsEN1EZxQ3AqSDZDYKTapsg.jpg" height="48"> | Stolthet og forfall              |          8 | 2,373      |          4.7 |     3.1 |
@@ -220,10 +224,11 @@
 | <img src="cachedimages/StZE0Sm60JWyEvCNJPExnAmv3e3d0wVMuIvp6-Ykav0g.jpg" height="48"> | Heime                            |          8 | 3,405      |          4.5 |     4.3 |
 | <img src="cachedimages/VC0210sbr6dWZMxcE4jy3w40dVVksWpI8N91LtwHCbRw.jpg" height="48"> | Den hvite dronningen             |         10 | 5,188      |          4.7 |     6.7 |
 | <img src="cachedimages/VIzz8tPuwBew99EUWTgTfwEL8VEvsGZ_McQ-p_z2ORcw.jpg" height="48"> | En natt                          |         10 | 2,717      |          4.6 |     3.5 |
-| <img src="cachedimages/VKlUHgztAqtw24qvKF7NawqnBkwbCkDxH0XUMZYn74-Q.jpg" height="48"> | Det forsvunne Ravkammeret        |          1 | 346        |          4.6 |     0.4 |
+| <img src="cachedimages/VKlUHgztAqtw24qvKF7NawqnBkwbCkDxH0XUMZYn74-Q.jpg" height="48"> | Det forsvunne Ravkammeret        |          8 | 2,267      |          4.4 |     2.8 |
 | <img src="cachedimages/VMjleWZDmXzPAtLvSV6YIw7kCtYrLukfOhcMzM2eIiaA.jpg" height="48"> | Offshore                         |          5 | 1,020      |          4.4 |     1.2 |
 | <img src="cachedimages/VgYgXqQiGr0LtYfEl1erEQs0yO54IUme8NJnq91SqTeQ.jpg" height="48"> | Skitten snø                      |          8 | 1,280      |          4.4 |     1.6 |
 | <img src="cachedimages/VoHE1-V0xMor70b7kl0xSgTZsre1gxKo4zPirdTH-yzA.jpg" height="48"> | Mood                             |          6 | 2,532      |          4.4 |     3.1 |
+| <img src="cachedimages/WyyfaScz4vkzo42Eghbwmw2eyO12ApmC1I4saK-SgIAg.jpg" height="48"> | Orkestret                        |         10 | 3,021      |          4.4 |     3.7 |
 | <img src="cachedimages/Y_W27VHUiwbKjNxNm95mjARfBitGV2Og3tx_pafanX-w.jpg" height="48"> | Berlinerpoplene                  |          7 | 474        |          5.4 |     0.7 |
 | <img src="cachedimages/YqBYnf-WuV5nNz-gC7iKBgB9cleYqzA4GGOwqc7L0XUw.jpg" height="48"> | Eg kjem                          |          8 | 1,343      |          3.9 |     1.5 |
 | <img src="cachedimages/ZLevEwfdSQa9K76HYJMCQAejufZhHrX5MrWXEacRHPpA.jpg" height="48"> | White Wall                       |          8 | 3,124      |          4.2 |     3.7 |
@@ -240,6 +245,7 @@
 | <img src="cachedimages/gYTR7LlOqehh6LlmWuZMGwmbuVbBYNzsBT18g9YjFzyw.jpg" height="48"> | En mot en                        |          8 | 1,310      |          4.2 |     1.5 |
 | <img src="cachedimages/hMeVgp3BfmF5-GSUghIWqQoTaIZXXYTi1P2Z-6rwTw3A.jpg" height="48"> | Shetland                         |          6 | 3,343      |          5   |     4.6 |
 | <img src="cachedimages/ixPHPxJEsSb7GoPAMR4QRgxw-A5MaIiLiRGQH_PjM7EA.jpg" height="48"> | Eagles                           |         10 | 2,437      |          4.2 |     2.9 |
+| <img src="cachedimages/ktXiwN-Z38T_sWwXW8qmcQTy3qfLRwgjxFH-FkCj3Pug.jpg" height="48"> | Monster                          |          7 | 2,581      |          4.3 |     3.1 |
 | <img src="cachedimages/l21nnY79cjuAQXYIQUzfMg5zCltiilFdzC6Jg06ww-7Q.jpg" height="48"> | Weissensee                       |         24 | 12,873     |          4.5 |    16   |
 | <img src="cachedimages/lWWRenuj9tm_xB6XZt3k5g8C-yHpVMQZDEaONCWSCP0w.jpg" height="48"> | Magnus                           |          6 | 1,127      |          4.2 |     1.3 |
 | <img src="cachedimages/mRSPyuR9vvaYphPqO08YFwV8qLPjKTbuhlfd9K2NsYUg.jpg" height="48"> | Den hvite prinsessen             |          8 | 3,723      |          4.6 |     4.7 |
@@ -247,7 +253,7 @@
 | <img src="cachedimages/nbsdUK2Fm5BBqbLH9ZPfjwVP5yiOQ9svGZVKKb1Kqzdg.jpg" height="48"> | Et sted å høre til               |         67 | 32,686     |          4.7 |    42.9 |
 | <img src="cachedimages/okfc9TDCJ7OTicZcUIzREwYun82cltyDF-kjl2WtycZA.jpg" height="48"> | Valkyrien                        |          8 | 3,683      |          4.6 |     4.7 |
 | <img src="cachedimages/pOVUIeOYIX2txJC2PyfaKQw7vJAqHgSfdSVw8QaBgWVw.jpg" height="48"> | Sjukt                            |          8 | 2,106      |          4   |     2.4 |
-| <img src="cachedimages/pntEhCVlYlvXOHW0e9eUBQxBC15UavWo5HZhNlZXhxAg.jpg" height="48"> | Le Bureau                        |         11 | 4,809      |          4.3 |     5.8 |
+| <img src="cachedimages/pntEhCVlYlvXOHW0e9eUBQxBC15UavWo5HZhNlZXhxAg.jpg" height="48"> | Le Bureau                        |         25 | 11,598     |          4.5 |    14.4 |
 | <img src="cachedimages/qqVKs9KvEe0sRJidc4EF3QCvvAkayGF21Zz1mwOFyRcA.jpg" height="48"> | Lovleg                           |         20 | 4,511      |          3.9 |     4.9 |
 | <img src="cachedimages/r9Txszq-WqF8P-73abVZNAhBYnxjdKNA3-UhgszRMBlw.jpg" height="48"> | Fredløs                          |          8 | 1,689      |          3.6 |     1.7 |
 | <img src="cachedimages/snaBmCsfSGBEjLkTbzM4NgZ7fVqXmJ9nCQ7MxI0bpqUw.jpg" height="48"> | SKAM                             |         43 | 10,599     |          4.5 |    13.3 |
@@ -282,7 +288,7 @@
 | <img src="cachedimages/KuQPtpaH09CTEuUolJCQ7Q3sYeEqito9VlAJu5Rukc6A.jpg" height="48"> | Oppfinneren                                   |         20 | 7,365      |          5.1 |    10.4 |
 | <img src="cachedimages/Mec1H3YN9ev9HcH4nzovHA5Vqn_Se3q73DrtvOpU727Q.jpg" height="48"> | Vår historie - vår sang                       |          4 | 2,133      |          5.2 |     3.1 |
 | <img src="cachedimages/MsytoLtVEIXFBgQ-Zmf_gwhO4GpmjiwMP9hVTdCqbyhw.jpg" height="48"> | Hurra for jentemusikken                       |          2 | 383        |          4.9 |     0.5 |
-| <img src="cachedimages/NmA44nLoU4vak_n-gsSFowUXeJ-qjEOPaEzT2CR6kSvQ.jpg" height="48"> | Fra de kongelige samlinger                    |          4 | 203        |          5   |     0.3 |
+| <img src="cachedimages/NmA44nLoU4vak_n-gsSFowUXeJ-qjEOPaEzT2CR6kSvQ.jpg" height="48"> | Fra de kongelige samlinger                    |         10 | 348        |          5   |     0.5 |
 | <img src="cachedimages/PAZCyatbK4TAP53lEH60aANoaAGAVHIm8gP3MMP648rg.jpg" height="48"> | Aukrust - Gud velsigne vår Herre              |          3 | 1,590      |          4.9 |     2.2 |
 | <img src="cachedimages/UVE6SepNSALy7I4js8AoMgjYZQbT9KIUIJVUZcmCbMSQ.jpg" height="48"> | Kunstsamlarane                                |          6 | 1,243      |          4.8 |     1.6 |
 | <img src="cachedimages/W1nEoPc3yn9YcGc50hpUZAvalsFclUZc-OIeSAbrFJCw.jpg" height="48"> | Takin Ova - Historien om norsk hiphop         |          4 | 1,248      |          4.7 |     1.6 |
@@ -327,7 +333,7 @@
 ## nrk-arkivet
 |                                                                                       | title                                  |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:---------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/7vvzn6xYbKsARdJ8YYspyAdk6VgLWSwJe9R-8Hp0KWIA.jpg" height="48"> | Der ingen skulle tru at nokon kunne bu |         59 | 19,575     |          5.4 |    29.3 |
+| <img src="cachedimages/7vvzn6xYbKsARdJ8YYspyAdk6VgLWSwJe9R-8Hp0KWIA.jpg" height="48"> | Der ingen skulle tru at nokon kunne bu |         89 | 26,128     |          5.5 |    39.8 |
 | <img src="cachedimages/NN7g-8BNGMy78bsxftlNZw007T8MSpb97RdkLI22DRQg.jpg" height="48"> | Uti vår hage                           |         11 | 2,167      |          5   |     3   |
 | <img src="cachedimages/_1UrnCgu2CWNOJ5HOR0Q4gTdm1KAfJPZsMauaugm9SdA.jpg" height="48"> | Med hjartet på rette staden            |         21 | 10,727     |          4.8 |    14.2 |
 
@@ -341,6 +347,7 @@
 | <img src="cachedimages/6Rya3QA2TrUvJTjytGE6ewz5WK0l7aV9oKMEDUBUQ0Fw.jpg" height="48"> | Team Ingebrigtsen                 |         25 | 15,321     |          4.4 |    18.7 |
 | <img src="cachedimages/7o8cWR1-9TCXgk5GAI7PWQNXUxFg3Ob1uHAxkD-fF8aQ.jpg" height="48"> | 100 falske forelskelser           |          4 | 1,184      |          4.7 |     1.6 |
 | <img src="cachedimages/9jYujECDZYuDXOnA5IUTrgvOpUrdst-DUanmejhVd-zQ.jpg" height="48"> | Montys hageverden                 |         25 | 14,793     |          5.2 |    21.5 |
+| <img src="cachedimages/BL-nlrttT6-MUrAz7Fid-gwtQ5xfJgBi3NDed1GCvhKg.jpg" height="48"> | Drømmeslottet                     |          2 | 1,087      |          4.8 |     1.5 |
 | <img src="cachedimages/Cl6zG5vwhbnHP2boUyINpQDetuLrQ6M6dt1hqmCob2fA.jpg" height="48"> | Ja vi elsker. Norsk dok.serie     |          5 | 1,234      |          4.5 |     1.6 |
 | <img src="cachedimages/EHZvRGE64G8Erc-e7rdVdwlrc8s4gsX-64Axmlvajiqw.jpg" height="48"> | Australia rundt med Griff         |          6 | 2,982      |          5.2 |     4.3 |
 | <img src="cachedimages/FbMsvGceoo2FCNPo0-ZyNgaj05hmcmUo3W6OEm87DBfg.jpg" height="48"> | Gift                              |          7 | 1,774      |          5   |     2.4 |
@@ -379,118 +386,137 @@
 | <img src="cachedimages/yfx8FX89y6qgssrZRGy02wXSYy1PHvPSMehwINwGC5tQ.jpg" height="48"> | Olav på Kvipt                     |          5 | 819        |          4.5 |     1   |
 
 ## dokumentar
-|                                                                                       | title                                     |   programs | segments   |   average(s) |   hours |
-|:--------------------------------------------------------------------------------------|:------------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/-DqcdCo2Qv7Zh0tcXy20_AbhkeLRu0Bev93FHx0z4f1w.jpg" height="48"> | Mullaen og Meling                         |          3 | 526        |          5.5 |     0.8 |
-| <img src="cachedimages/-L4gANUgxbFOZkC85pfdggWekaXz4W4QuKrt1vc0Rlbg.jpg" height="48"> | Lovens lengste arm                        |          6 | 1,184      |          4.9 |     1.6 |
-| <img src="cachedimages/-awjpb0CqGNDFs1VKZ5bbAc3gWc-nJ-_EY85IMKARd5Q.jpg" height="48"> | Rus                                       |          6 | 2,615      |          4.8 |     3.5 |
-| <img src="cachedimages/-quEhZtdcjv-MwwXYu257wI4YBnLYy7Tpb1btDUhk7gg.jpg" height="48"> | Mitt liv                                  |         24 | 8,378      |          5.5 |    12.7 |
-| <img src="cachedimages/0AFhi8DP5T0bCICvVoP_GAhCWG0LJkjcans7v7LdvWsg.jpg" height="48"> | Pompeiis siste dager                      |          3 | 1,478      |          5   |     2.1 |
-| <img src="cachedimages/0Fm0hyEjtvQ-OgrjFkj8AAWZU9zN1glKwP3mXohYHapw.jpg" height="48"> | Gamerne                                   |         12 | 1,703      |          4.3 |     2   |
-| <img src="cachedimages/1W8W40XWQUqEd5_qHBNaeQ6zOII50x2WRW8r8dJbiONQ.jpg" height="48"> | Da vi styrte landet                       |          6 | 1,466      |          4.4 |     1.8 |
-| <img src="cachedimages/1qNpJb_7GYlZAZWPTKMdewG7hgVqnggCxmF--pB6eECw.jpg" height="48"> | Brennpunkt: Alt for Kina                  |          2 | 93         |          5.5 |     0.1 |
-| <img src="cachedimages/203W5IZxb2lO-fx0FrXQ-AUeFej5Ssk4RF-4uEWAoZgw.jpg" height="48"> | Presidentvalet: Trump mot Biden           |          2 | 1,285      |          4.9 |     1.7 |
-| <img src="cachedimages/34fGnXAmPwTFsEWnjMq56ApmgXDK8gmVrH3q0ciUqtYw.jpg" height="48"> | Det umulige landet                        |          5 | 2,327      |          5   |     3.3 |
-| <img src="cachedimages/3H7TKS-FLbLHJ5-1al9dNA_R8XaaUNSvQx_6MRW6xAzQ.jpg" height="48"> | Barna som ble holdt fanget                |          4 | 2,001      |          4.9 |     2.7 |
-| <img src="cachedimages/3fjDlKc82VPbykoktYyJGAEEanp1tmgyfGdkMwTAcViA.jpg" height="48"> | Brennpunkt: Guds utvalde                  |          3 | 493        |          5.1 |     0.7 |
-| <img src="cachedimages/4FweXwq0X7NxGFqeMjZDMQpsBj7K3E9qxYXexXjEbwow.jpg" height="48"> | Snikskytterne                             |          6 | 3,088      |          4.6 |     4   |
-| <img src="cachedimages/5HCXKGuntL5F79IqBNVgqAY72wPGTBLi0zaVAmw5e4YA.jpg" height="48"> | Dubais danske damer                       |          4 | 1,266      |          4.8 |     1.7 |
-| <img src="cachedimages/5IYJxfVXXIenLZWUuSpbmgQ-v3YfThv3lTveN28hMkzQ.jpg" height="48"> | Ett år i Lofoten                          |          2 | 42         |          4.4 |     0.1 |
-| <img src="cachedimages/7PpKAuWh-t11-9a55SmNDASRltFgHPvy7CxblcPKInAw.jpg" height="48"> | Operasjon menneskehandel                  |          3 | 1,168      |          5.2 |     1.7 |
-| <img src="cachedimages/7sClkPa-_zhe_BYobPJ89AIYAy62ujDnGVR2AHXBpakA.jpg" height="48"> | Chippendales - sex, dop og mord           |          4 | 1,854      |          5.2 |     2.7 |
-| <img src="cachedimages/9Dh711FeTfVDobjNMvGyBgwC6m5oocfv4XqQGUfYmgwg.jpg" height="48"> | Tage Erlander - Makten og sannheten       |          2 | 1,304      |          4.8 |     1.8 |
-| <img src="cachedimages/9NUgDaWVOIjbNqVvhyPiuwq6612Z1pY66ZJAA9dUdotQ.jpg" height="48"> | Uro                                       |          5 | 2,271      |          4.9 |     3.1 |
-| <img src="cachedimages/9NlvGm1v9j9XmZisQBfTCAxStDfmeqxq_LPqka-YxUJQ.jpg" height="48"> | Ukraina - på randen av storkrig           |          2 | 950        |          5.5 |     1.4 |
-| <img src="cachedimages/AU2QNnZiklPDP3aT_iQbpwCczS9a-DFsj7jov9M5Paaw.jpg" height="48"> | Jævla homo                                |          5 | 400        |          4.9 |     0.5 |
-| <img src="cachedimages/AuSBBda3xUOkJrSFcvr19wFh62LL_rsKTRhv8qntFOUQ.jpg" height="48"> | Heime hos Sussi og Leo                    |          8 | 2,100      |          4.8 |     2.8 |
-| <img src="cachedimages/BNiPJI96JFBcFsR-0WTKRwgK2tG3U8m7zjymlD5GfIxQ.jpg" height="48"> | Gutter mot verden                         |          4 | 1,760      |          5.3 |     2.6 |
-| <img src="cachedimages/C21MG8aCoV2ly2Fu60-s0Qx6JXAhzBu7jhySorIvkDCw.jpg" height="48"> | Krypto                                    |          3 | 1,113      |          4.8 |     1.5 |
-| <img src="cachedimages/CbUmfRZN-pey0QMyaRQfiA6y_4pRbXyF4fCXAh2Y69rA.jpg" height="48"> | Astrid S tilbake fra verden               |          5 | 241        |          5.1 |     0.3 |
-| <img src="cachedimages/ClZrY2jfnzMxCMceeglH4ABzIbWZfdNivch2kQYDWLPA.jpg" height="48"> | Ein djevel i Guds hus                     |          2 | 1,120      |          5.2 |     1.6 |
-| <img src="cachedimages/E1vAacqCgXQhdV1kph3VBQ91nz52VUVJjo1ttxnLBE3g.jpg" height="48"> | Infiltratøren                             |          6 | 1,691      |          5   |     2.3 |
-| <img src="cachedimages/EHI-IKBWCup-8MlrUgzOYwqf-EC1PYoHzlDKweOA6-5Q.jpg" height="48"> | Apokalypse - første verdenskrig           |          5 | 1,749      |          4.8 |     2.3 |
-| <img src="cachedimages/FBNMzsOs_ZjgLeXRcJZS6QK8P_laXoNE17cFVhHbw1JA.jpg" height="48"> | Ku Klux Klan                              |          2 | 1,078      |          5.5 |     1.6 |
-| <img src="cachedimages/FE68YW8Sf0DK1N8LCw2iHAiDAUq5wFFQY-riQCwRuHVA.jpg" height="48"> | Hemmelig hav                              |          3 | 1,176      |          5   |     1.6 |
-| <img src="cachedimages/HUH_pnlvzCKZw0gdg9b1kQiteLW6PW64RX_mvRBQcWSQ.jpg" height="48"> | Fiskerne                                  |          8 | 2,815      |          5.1 |     4   |
-| <img src="cachedimages/HhSdqEt0AO_YD7hrsO68XQjvKxygyLyWNO9gs1g3rMuQ.jpg" height="48"> | Cash                                      |          4 | 1,331      |          5.1 |     1.9 |
-| <img src="cachedimages/J-QmosMuOScky9y2h3pMjwf68c61S35-M5OHSssMRGfQ.jpg" height="48"> | Dørvaktene                                |          6 | 2,038      |          4.7 |     2.6 |
-| <img src="cachedimages/JA-D4sdbSzuxkQhkLKrgZAoZ2MfKJypRlhBJjgyRHTEQ.jpg" height="48"> | Kebnekaise – åtte årstider                |          4 | 1,108      |          5   |     1.6 |
-| <img src="cachedimages/JlDND5h2y3GMyZH-AaTKNguuAjlBDXAZYcqhaTMtIH5Q.jpg" height="48"> | Gåta om Danmarks fyrste konge             |          5 | 1,593      |          4.9 |     2.2 |
-| <img src="cachedimages/JtMYgxLhUU4_T0QfupYIZAT0CQPbFgzpQvtbMeDZbBHQ.jpg" height="48"> | Ut av skapet                              |          7 | 2,319      |          5.1 |     3.3 |
-| <img src="cachedimages/Jw7H8Dq44Gs_flX18Pc4YgDxFoAtslAzjmDSQfH5qnlg.jpg" height="48"> | Adjø Afghanistan                          |          2 | 1,145      |          5.4 |     1.7 |
-| <img src="cachedimages/MJaCnxJDGuq8MhgHnWEYYgWDml8atk1HBkKB72q29KaA.jpg" height="48"> | Premier League – en helt annen liga       |          4 | 2,494      |          4.9 |     3.4 |
-| <img src="cachedimages/O3iSE9wQsTllWuDOWQbbPw9HHibCwk2yZPhu3qFjTiRg.jpg" height="48"> | Gåten i Isdalen                           |          8 | 487        |          5   |     0.7 |
-| <img src="cachedimages/OQKtAcJYVgz4-sPTf1LiaA98Jj5QEoAcaxClUV3z3Dkg.jpg" height="48"> | USA i fargar                              |          6 | 2,617      |          4.9 |     3.6 |
-| <img src="cachedimages/OZ7wBHtamL2kg-2vFAN96Q-xrdaVibRtwStBUjmrqxwQ.jpg" height="48"> | Brennpunkt: Drapet i akebakken            |          4 | 527        |          5.4 |     0.8 |
-| <img src="cachedimages/Os-kzR3yCOfK8xjs8iUgGw_pzkOcCqv4E7qM-fPR_bHA.jpg" height="48"> | Nazistenes vei til makten                 |          6 | 2,762      |          5.4 |     4.2 |
-| <img src="cachedimages/Q9umiQK4rCDqdaw2zRbAHA1UwofvMSAtxRp2txQ3RfcA.jpg" height="48"> | Folkevalgt                                |          6 | 3,032      |          4.9 |     4.2 |
-| <img src="cachedimages/QCKXYeBhJ76BJdBXjyP1EQTX5Iu3ojTUWE9Mz0Eylm9w.jpg" height="48"> | Therese - jenta som forsvant              |          5 | 1,042      |          5.1 |     1.5 |
-| <img src="cachedimages/QP_avZvl2nRyyk5LktClvAK5AbJoDNNmqSL4U2XQGd1A.jpg" height="48"> | Storbritannia i fargar                    |          3 | 1,303      |          5   |     1.8 |
-| <img src="cachedimages/Qcsk6w3N_ni8iN5ZWk2YsgbExjZW9YNFo0J7CgPHeang.jpg" height="48"> | 24 timer i Jerusalem                      |         24 | 11,770     |          4.9 |    16   |
-| <img src="cachedimages/Rn-ZQZVtrvzcIEQPoOtwZQAj0HTvqSK3SQutCzZAexLQ.jpg" height="48"> | München 72 – olympisk terror              |          4 | 1,810      |          5   |     2.5 |
-| <img src="cachedimages/SBhrwVgCWqiBUFfplA4ZXwmp_inKbgN-gSfSLjlu4CUw.jpg" height="48"> | Uræd - egget som kunne berge liv          |          2 | 315        |          5.4 |     0.5 |
-| <img src="cachedimages/Slpzo8WD6mdTF5JeDvHiMgadXsi-YR32j_lvdRL0xvSQ.jpg" height="48"> | QAnon                                     |          3 | 1,489      |          5.3 |     2.2 |
-| <img src="cachedimages/T7LS4oIYbNTb5ylhAgZwmguc-h1Afvmv1pv-NCNp_dmg.jpg" height="48"> | 80-talet                                  |          8 | 3,428      |          5.2 |     5   |
-| <img src="cachedimages/TAIEzp99m4N-TjJaqUNdJAwqWH26es01ftEmVXveqVVw.jpg" height="48"> | Apokalypse - andre verdenskrig            |          6 | 525        |          5.2 |     0.8 |
-| <img src="cachedimages/U5s7uDWqsijBXFOGhIzNhghEI0-Sq0kJgzjJjeB9jfaQ.jpg" height="48"> | Følelsen av frihet                        |          2 | 1,348      |          4.4 |     1.7 |
-| <img src="cachedimages/UC33VGWSQmol-guQ1gEgPAfb0r2yaMxf8-nZDRcv8isQ.jpg" height="48"> | Ein gresk odyssé med Bettany Hughes       |          6 | 3,056      |          4.9 |     4.1 |
-| <img src="cachedimages/Vbfc15d50F1NhrhBpKrsNw4jffbWFjpVO60jacQ5QYsQ.jpg" height="48"> | Brennpunkt: Philips vei til terror        |          1 | 370        |          5   |     0.5 |
-| <img src="cachedimages/VoFKwTl0O9Yg814TIWjXjwglz-ErZFPArIEEPVmfocHQ.jpg" height="48"> | Fyrbarna                                  |          4 | 1,261      |          4.8 |     1.7 |
-| <img src="cachedimages/Wd8em0LdFJQr7Mf_LHA1IQSXU3_SpSnRDGN5-lEzkvuA.jpg" height="48"> | De utvalgte barna                         |          3 | 1,740      |          5.2 |     2.5 |
-| <img src="cachedimages/Wpk_5UuIS5zNPYWIj225gwYlXAXYDMyJw94ej5cp2CFA.jpg" height="48"> | Pesten i London                           |          3 | 1,402      |          5.6 |     2.2 |
-| <img src="cachedimages/WsrgbeR7AvuSHerKniqxegO4P-Gz_-1J8NYmBvgR6Ajw.jpg" height="48"> | Bilda som endra verda                     |          1 | 236        |          5.4 |     0.4 |
-| <img src="cachedimages/Xlq5CIHdAvAsr6I5-Z7H-QA8LLoS3uuYQmh4Kj_E7Zmg.jpg" height="48"> | Gåten Agnes                               |          4 | 1,822      |          5.1 |     2.6 |
-| <img src="cachedimages/XtHbrv6xlB88bHiMZ2EWkwJ_t0N15sT_aKvFsrAQhM7g.jpg" height="48"> | Forført av spriten                        |          5 | 1,459      |          5.5 |     2.2 |
-| <img src="cachedimages/YYoDR3vLsbI4OLczW97iBgFXRof1QEb11lG_bEteexjw.jpg" height="48"> | Afghanistans evige strid                  |          4 | 1,908      |          5.6 |     2.9 |
-| <img src="cachedimages/YbRo5ZibE_hLLBy3y-5dZg1A2Ct1F5rrFAVHk3smmflg.jpg" height="48"> | Mysteriet Hammarskjöld                    |          3 | 1,411      |          5.4 |     2.1 |
-| <img src="cachedimages/Yn9NsRPH3o00nILE7Gli5gDGpZhGQqlh5AoOPP3LFlTw.jpg" height="48"> | Ghislaine Maxwells forbrytelser           |          3 | 1,421      |          5.2 |     2.1 |
-| <img src="cachedimages/ZNPZG0P-VIjVlQnxVmiE6A1v6ckcdZSWK5t1Rwo4hTIg.jpg" height="48"> | Flukt                                     |          5 | 2,077      |          5   |     2.9 |
-| <img src="cachedimages/ZQxswDP1sQomZz7tZeI5OwfyYsWp4D152Ko1oXJlrI8w.jpg" height="48"> | Mannefall                                 |          4 | 1,770      |          4.8 |     2.4 |
-| <img src="cachedimages/Z_Q9nuxdrO96PgQyKGlK5w5WsFWDMmFbustUvlEuDcsQ.jpg" height="48"> | Tsjernobyl – nye avsløringar              |          2 | 921        |          5.1 |     1.3 |
-| <img src="cachedimages/ZwYrs6NTR4BoHxuCwHHc2AlS21MKVtTqKSLj6OKkgfQA.jpg" height="48"> | Scandinavian Star                         |          6 | 3,583      |          4.9 |     4.9 |
-| <img src="cachedimages/_2tATLKDc1e7Ru9N7CbJLgd4RPUPZK81HE5Atp9z6iyQ.jpg" height="48"> | Verden under Trump                        |          3 | 1,817      |          5.3 |     2.7 |
-| <img src="cachedimages/_hbk0HcjyVsOihOzDS9DVgAuv3wtuwydEOd1pRAdeY9A.jpg" height="48"> | Dagboken                                  |          3 | 1,008      |          5.5 |     1.6 |
-| <img src="cachedimages/aoPJbvwDYloOX-nYw-24ZgEcSst4diH52KJMq5n2dW2w.jpg" height="48"> | Tinderdrapene                             |          2 | 880        |          5.4 |     1.3 |
-| <img src="cachedimages/bC45bpEGZmH_3QrydJbSBwZL_lf9lJjPelk3hlcYdtLQ.jpg" height="48"> | Exit Afghanistan                          |          4 | 869        |          5.4 |     1.3 |
-| <img src="cachedimages/e3w9hyKkzlzkroG_ZaQU3Qm-u-SLopo8Pthv8r8xRNbA.jpg" height="48"> | 2000-talet                                |          8 | 3,375      |          5.1 |     4.7 |
-| <img src="cachedimages/eddpg7I3NZdU2s3tMoCAOwBXe1FWzJWXy5xJqT5t__3g.jpg" height="48"> | Slaveriet                                 |          6 | 2,965      |          5.4 |     4.5 |
-| <img src="cachedimages/emJhhu1HtPsJQ__8DYa0vgrhCVYBLc8d2CYm6GCIl3tw.jpg" height="48"> | Legendariske førstedamer                  |          6 | 2,749      |          5   |     3.8 |
-| <img src="cachedimages/fODLUOTk-krgjagPIvoHRAZe3LQccjCtXiK2XmAOQZlA.jpg" height="48"> | Vålnes-saken                              |          5 | 1,940      |          5.5 |     3   |
-| <img src="cachedimages/hztvIPF-tyDAaMInkEIIsw8vsKZQS2z0yO0ipdHTOMkQ.jpg" height="48"> | Gåten Orderud                             |          6 | 3,088      |          5.4 |     4.7 |
-| <img src="cachedimages/i-1NhEMPaOh2XykfEAPn_goWbMvb1TRuumHOaYSKdB5A.jpg" height="48"> | Iraks tragedie                            |          4 | 2,248      |          5.2 |     3.2 |
-| <img src="cachedimages/iXos21xtnuwZit7rCYLq1gs9SSCkOxgvE4uxbpPrP7Hg.jpg" height="48"> | Stacey Dooley overnatter                  |         16 | 9,223      |          4.8 |    12.2 |
-| <img src="cachedimages/jFTvMeQ-cOiyOcaPXaN-wAIqHZSkGmz2jJs6f50T1zlg.jpg" height="48"> | Uønsket                                   |          4 | 2,355      |          4.5 |     3   |
-| <img src="cachedimages/jJxDa6QeExwwdZ338-buKgs3OwX4-JE-9WcaYr_Y0Ppg.jpg" height="48"> | UXA - Thomas Seltzers Amerika             |          5 | 2,496      |          4.8 |     3.3 |
-| <img src="cachedimages/jM0zuFacx101teyJr-06bgDrjl3fJtEYLnWl2PbuSurA.jpg" height="48"> | We can't do it                            |          3 | 938        |          5.1 |     1.3 |
-| <img src="cachedimages/jNCMEgUhu4oA3PCq78qGMQlCc6h6KoNlClKBB8vOlWsA.jpg" height="48"> | Pandaene kjem - diplomatar i pels         |          3 | 1,275      |          5.1 |     1.8 |
-| <img src="cachedimages/jPq-WThRGuQdmhNWzvNOnAexNsK3pvcwDmuOUoDZP0Tw.jpg" height="48"> | Rødt, hvitt og skrått                     |          4 | 1,197      |          5.1 |     1.7 |
-| <img src="cachedimages/k4oe2FEno4Lv6SnGrmKKbANDiAX03dDX9Ris6hdDTqkw.jpg" height="48"> | På bortebane                              |          4 | 1,430      |          4.9 |     1.9 |
-| <img src="cachedimages/kU-tP5TQA3Jt-1Rz4-fdcA9VylRe1xkmfNmUeL_3JzEw.jpg" height="48"> | Astralis - kongene av CS:GO               |          3 | 934        |          4.4 |     1.1 |
-| <img src="cachedimages/l6gHH3At15mSWnRlZPNXNwsadSwJH2h_Yb6lNNP4U8bQ.jpg" height="48"> | I Jan Baalsruds fotspor                   |          6 | 2,583      |          4.5 |     3.2 |
-| <img src="cachedimages/lOJRXYOOPvcyHxzldlM68AT-IXXR8nJs1Lhv9kjslIBA.jpg" height="48"> | Fordi du er kvinne                        |          6 | 2,890      |          5.1 |     4.1 |
-| <img src="cachedimages/ljfBd5uhj6V2Q8b_sQh2Fg3ViyIBptbPbs5p1Txc8_1w.jpg" height="48"> | 60-talet                                  |         10 | 3,862      |          5.2 |     5.6 |
-| <img src="cachedimages/mK40HnLtfMXgsb1OJJ0B8Q5X0HwjmNAYsAghwhPinOVA.jpg" height="48"> | Osama bin Laden                           |          3 | 1,305      |          5.2 |     1.9 |
-| <img src="cachedimages/nEP8En9Cz4n_8OodMJflUwGvHGgRLF-V8uJPdy8r2z8Q.jpg" height="48"> | Gulag - Sovjets dødsleirar                |          3 | 1,356      |          5.1 |     1.9 |
-| <img src="cachedimages/nFwkX6JA25CZ4EtRgZGHnAMd5iRjpzbUkXiLeajh577g.jpg" height="48"> | Einar - hele historien                    |          4 | 1,621      |          5.4 |     2.4 |
-| <img src="cachedimages/nulVYOANMJbDmTuAVUXFsQY33JIL0U9pSORrtLBKiXHg.jpg" height="48"> | 90-talet                                  |          8 | 3,398      |          5.1 |     4.8 |
-| <img src="cachedimages/oZksr042g2FkE8QPmtXXAAe_o7JJUCybMZbCPsSjEzGg.jpg" height="48"> | Auditionfella                             |          3 | 837        |          5.2 |     1.2 |
-| <img src="cachedimages/pz_Bs1kmBBBthTWgQtcdiwE0nkFFuwVbjPYBJvlLNd4w.jpg" height="48"> | Tidsvitne                                 |         11 | 2,313      |          5   |     3.2 |
-| <img src="cachedimages/q5UyMpAaxhO_rqx3yQqksAR1aANC2LRtoPvHBTe7-gXQ.jpg" height="48"> | Tyskland og den kalde krigen              |          2 | 815        |          5.3 |     1.2 |
-| <img src="cachedimages/qflUdx7PpxgecjjDVWKbxQdEEZW2D6bjq8woscaMnrug.jpg" height="48"> | Watergate                                 |          6 | 2,863      |          5.4 |     4.3 |
-| <img src="cachedimages/qima568QFgDRCuML9R3MSgj15-uF6WD5konr0m2txc4g.jpg" height="48"> | F-ordet                                   |          5 | 1,313      |          4.8 |     1.8 |
-| <img src="cachedimages/r-BnfaE_R3QWw-6ywdvuqQBRB9XHS3tgk3OX_1X1AooQ.jpg" height="48"> | Olav                                      |          3 | 954        |          4.6 |     1.2 |
-| <img src="cachedimages/t3e2ocw4uRiJ-g1v5VU1wAhCTfsk4Kuypwjwon4AKlHw.jpg" height="48"> | Rikets sikkerhet                          |          6 | 1,482      |          5.1 |     2.1 |
-| <img src="cachedimages/tGu7QdjIExg8kK32LOeAWQTmEPpZd-_JiKF1wqePOTWA.jpg" height="48"> | Drapet på Emilie Meng                     |          3 | 1,479      |          5   |     2.1 |
-| <img src="cachedimages/tOSOkhwQkooICKLkMcDVzgUsxp4V_ZsSh4Ef5gswtA4Q.jpg" height="48"> | Operasjon Muskedunder                     |          3 | 719        |          4.7 |     0.9 |
-| <img src="cachedimages/u1OrNNeDitAvGbsYwtGPvgGrwC2SM0Bd0DmBI5kbcmAA.jpg" height="48"> | Year Zero                                 |          3 | 1,704      |          4.4 |     2.1 |
-| <img src="cachedimages/vbljLK3qllrQnLNGudlBfgI7lXGUl6TfbDTniq6f08qw.jpg" height="48"> | Det franske kolonirikets fall             |          2 | 1,409      |          5.7 |     2.2 |
-| <img src="cachedimages/voHUJLH1ia8eUW0OnTSQtA72lwu2n5dIvvj5NN2S6kSA.jpg" height="48"> | Monsen og hundene                         |         17 | 1,669      |          4.9 |     2.3 |
-| <img src="cachedimages/xd6i-_SLMlL8Mpb11IF6uAFGv7er3WQj2Wg3HTpcZpCQ.jpg" height="48"> | 70-talet                                  |          8 | 3,345      |          5.1 |     4.8 |
-| <img src="cachedimages/z2RScs82th_tQzX_rqSiSwqaVeGwELFdmR6mTXdv2WOw.jpg" height="48"> | 1979 - Big bang for vår tid               |          2 | 861        |          5.3 |     1.3 |
-| <img src="cachedimages/zMYE-ydRdOpHleiwoM5vdgFdS6Ex_LzLJVjt51R1v9iw.jpg" height="48"> | Porno 2022                                |          5 | 994        |          5.3 |     1.5 |
-| <img src="cachedimages/zOz3-qWqGmLE7X-uW63OmQR0K39LBWfk_99z9i46oW6A.jpg" height="48"> | Rex-faktor - Kongeparets reiser for Noreg |          7 | 259        |          4.8 |     0.3 |
-| <img src="cachedimages/zUYuXWCc3CoVaSIUqx3LuwxqNcmGoNQVBLeo0VPnQzFQ.jpg" height="48"> | Kongelige fotografer                      |          2 | 101        |          5   |     0.1 |
-| <img src="cachedimages/zl16YszMkHzPBWmVg7Dhfw5BAeSEcxgJfu3YteUq4Flg.jpg" height="48"> | Den verdifulle skogen                     |          2 | 415        |          5.4 |     0.6 |
+|                                                                                       | title                                       |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:--------------------------------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/-DqcdCo2Qv7Zh0tcXy20_AbhkeLRu0Bev93FHx0z4f1w.jpg" height="48"> | Mullaen og Meling                           |          3 | 526        |          5.5 |     0.8 |
+| <img src="cachedimages/-L4gANUgxbFOZkC85pfdggWekaXz4W4QuKrt1vc0Rlbg.jpg" height="48"> | Lovens lengste arm                          |          6 | 1,184      |          4.9 |     1.6 |
+| <img src="cachedimages/-awjpb0CqGNDFs1VKZ5bbAc3gWc-nJ-_EY85IMKARd5Q.jpg" height="48"> | Rus                                         |          6 | 2,615      |          4.8 |     3.5 |
+| <img src="cachedimages/-quEhZtdcjv-MwwXYu257wI4YBnLYy7Tpb1btDUhk7gg.jpg" height="48"> | Mitt liv                                    |         24 | 8,378      |          5.5 |    12.7 |
+| <img src="cachedimages/0AFhi8DP5T0bCICvVoP_GAhCWG0LJkjcans7v7LdvWsg.jpg" height="48"> | Pompeiis siste dager                        |          3 | 1,478      |          5   |     2.1 |
+| <img src="cachedimages/0Fm0hyEjtvQ-OgrjFkj8AAWZU9zN1glKwP3mXohYHapw.jpg" height="48"> | Gamerne                                     |         12 | 1,703      |          4.3 |     2   |
+| <img src="cachedimages/1W8W40XWQUqEd5_qHBNaeQ6zOII50x2WRW8r8dJbiONQ.jpg" height="48"> | Da vi styrte landet                         |          6 | 1,466      |          4.4 |     1.8 |
+| <img src="cachedimages/1qNpJb_7GYlZAZWPTKMdewG7hgVqnggCxmF--pB6eECw.jpg" height="48"> | Brennpunkt: Alt for Kina                    |          2 | 93         |          5.5 |     0.1 |
+| <img src="cachedimages/203W5IZxb2lO-fx0FrXQ-AUeFej5Ssk4RF-4uEWAoZgw.jpg" height="48"> | Presidentvalet: Trump mot Biden             |          2 | 1,285      |          4.9 |     1.7 |
+| <img src="cachedimages/34fGnXAmPwTFsEWnjMq56ApmgXDK8gmVrH3q0ciUqtYw.jpg" height="48"> | Det umulige landet                          |          5 | 2,327      |          5   |     3.3 |
+| <img src="cachedimages/3H7TKS-FLbLHJ5-1al9dNA_R8XaaUNSvQx_6MRW6xAzQ.jpg" height="48"> | Barna som ble holdt fanget                  |          4 | 2,001      |          4.9 |     2.7 |
+| <img src="cachedimages/3fjDlKc82VPbykoktYyJGAEEanp1tmgyfGdkMwTAcViA.jpg" height="48"> | Brennpunkt: Guds utvalde                    |          3 | 493        |          5.1 |     0.7 |
+| <img src="cachedimages/4FweXwq0X7NxGFqeMjZDMQpsBj7K3E9qxYXexXjEbwow.jpg" height="48"> | Snikskytterne                               |          6 | 3,088      |          4.6 |     4   |
+| <img src="cachedimages/5HCXKGuntL5F79IqBNVgqAY72wPGTBLi0zaVAmw5e4YA.jpg" height="48"> | Dubais danske damer                         |          4 | 1,266      |          4.8 |     1.7 |
+| <img src="cachedimages/5IYJxfVXXIenLZWUuSpbmgQ-v3YfThv3lTveN28hMkzQ.jpg" height="48"> | Ett år i Lofoten                            |          2 | 42         |          4.4 |     0.1 |
+| <img src="cachedimages/75wXEP5Rrew1JlhCSmjrMQDOBPc8SySEF3ZlWxyVS9VA.jpg" height="48"> | Prinsane og pressa                          |          2 | 1,081      |          5.6 |     1.7 |
+| <img src="cachedimages/7PpKAuWh-t11-9a55SmNDASRltFgHPvy7CxblcPKInAw.jpg" height="48"> | Operasjon menneskehandel                    |          3 | 1,168      |          5.2 |     1.7 |
+| <img src="cachedimages/7sClkPa-_zhe_BYobPJ89AIYAy62ujDnGVR2AHXBpakA.jpg" height="48"> | Chippendales - sex, dop og mord             |          4 | 1,854      |          5.2 |     2.7 |
+| <img src="cachedimages/8fR1yTzqZL8nLnHh5NiQwwHWxfRhMBodpxjEiWRB6BvA.jpg" height="48"> | Brennpunkt: Muldvarpen - Nord-Korea avslørt |          3 | 1,407      |          5   |     2   |
+| <img src="cachedimages/9Dh711FeTfVDobjNMvGyBgwC6m5oocfv4XqQGUfYmgwg.jpg" height="48"> | Tage Erlander - Makten og sannheten         |          2 | 1,304      |          4.8 |     1.8 |
+| <img src="cachedimages/9ErIwe9ZJ-DJko19bEqECAuM8ypyLgzeQTWNIEJGsVhg.jpg" height="48"> | Krigerhjerte                                |          5 | 1,206      |          4.8 |     1.6 |
+| <img src="cachedimages/9NUgDaWVOIjbNqVvhyPiuwq6612Z1pY66ZJAA9dUdotQ.jpg" height="48"> | Uro                                         |          5 | 2,271      |          4.9 |     3.1 |
+| <img src="cachedimages/9NlvGm1v9j9XmZisQBfTCAxStDfmeqxq_LPqka-YxUJQ.jpg" height="48"> | Ukraina - på randen av storkrig             |          2 | 950        |          5.5 |     1.4 |
+| <img src="cachedimages/AU2QNnZiklPDP3aT_iQbpwCczS9a-DFsj7jov9M5Paaw.jpg" height="48"> | Jævla homo                                  |          5 | 400        |          4.9 |     0.5 |
+| <img src="cachedimages/AuSBBda3xUOkJrSFcvr19wFh62LL_rsKTRhv8qntFOUQ.jpg" height="48"> | Heime hos Sussi og Leo                      |          8 | 2,100      |          4.8 |     2.8 |
+| <img src="cachedimages/BNiPJI96JFBcFsR-0WTKRwgK2tG3U8m7zjymlD5GfIxQ.jpg" height="48"> | Gutter mot verden                           |          4 | 1,760      |          5.3 |     2.6 |
+| <img src="cachedimages/C21MG8aCoV2ly2Fu60-s0Qx6JXAhzBu7jhySorIvkDCw.jpg" height="48"> | Krypto                                      |          3 | 1,113      |          4.8 |     1.5 |
+| <img src="cachedimages/CbUmfRZN-pey0QMyaRQfiA6y_4pRbXyF4fCXAh2Y69rA.jpg" height="48"> | Astrid S tilbake fra verden                 |          5 | 241        |          5.1 |     0.3 |
+| <img src="cachedimages/ClZrY2jfnzMxCMceeglH4ABzIbWZfdNivch2kQYDWLPA.jpg" height="48"> | Ein djevel i Guds hus                       |          2 | 1,120      |          5.2 |     1.6 |
+| <img src="cachedimages/E1vAacqCgXQhdV1kph3VBQ91nz52VUVJjo1ttxnLBE3g.jpg" height="48"> | Infiltratøren                               |          6 | 1,691      |          5   |     2.3 |
+| <img src="cachedimages/EHI-IKBWCup-8MlrUgzOYwqf-EC1PYoHzlDKweOA6-5Q.jpg" height="48"> | Apokalypse - første verdenskrig             |          5 | 1,749      |          4.8 |     2.3 |
+| <img src="cachedimages/FBNMzsOs_ZjgLeXRcJZS6QK8P_laXoNE17cFVhHbw1JA.jpg" height="48"> | Ku Klux Klan                                |          2 | 1,078      |          5.5 |     1.6 |
+| <img src="cachedimages/FE68YW8Sf0DK1N8LCw2iHAiDAUq5wFFQY-riQCwRuHVA.jpg" height="48"> | Hemmelig hav                                |          3 | 1,176      |          5   |     1.6 |
+| <img src="cachedimages/HOiLri_gonOKsn5xpJMifwjMighls30J9H2OnDuJi3zQ.jpg" height="48"> | Hodet i klemme                              |          8 | 3,671      |          5   |     5.1 |
+| <img src="cachedimages/HUH_pnlvzCKZw0gdg9b1kQiteLW6PW64RX_mvRBQcWSQ.jpg" height="48"> | Fiskerne                                    |          8 | 2,815      |          5.1 |     4   |
+| <img src="cachedimages/HhSdqEt0AO_YD7hrsO68XQjvKxygyLyWNO9gs1g3rMuQ.jpg" height="48"> | Cash                                        |          4 | 1,331      |          5.1 |     1.9 |
+| <img src="cachedimages/J-QmosMuOScky9y2h3pMjwf68c61S35-M5OHSssMRGfQ.jpg" height="48"> | Dørvaktene                                  |          6 | 2,038      |          4.7 |     2.6 |
+| <img src="cachedimages/JA-D4sdbSzuxkQhkLKrgZAoZ2MfKJypRlhBJjgyRHTEQ.jpg" height="48"> | Kebnekaise – åtte årstider                  |          4 | 1,108      |          5   |     1.6 |
+| <img src="cachedimages/JlDND5h2y3GMyZH-AaTKNguuAjlBDXAZYcqhaTMtIH5Q.jpg" height="48"> | Gåta om Danmarks fyrste konge               |          5 | 1,593      |          4.9 |     2.2 |
+| <img src="cachedimages/JtMYgxLhUU4_T0QfupYIZAT0CQPbFgzpQvtbMeDZbBHQ.jpg" height="48"> | Ut av skapet                                |          7 | 2,319      |          5.1 |     3.3 |
+| <img src="cachedimages/Jw7H8Dq44Gs_flX18Pc4YgDxFoAtslAzjmDSQfH5qnlg.jpg" height="48"> | Adjø Afghanistan                            |          2 | 1,145      |          5.4 |     1.7 |
+| <img src="cachedimages/MJaCnxJDGuq8MhgHnWEYYgWDml8atk1HBkKB72q29KaA.jpg" height="48"> | Premier League – en helt annen liga         |          4 | 2,494      |          4.9 |     3.4 |
+| <img src="cachedimages/NiMdYL2vg5v-3_SjPHl9gAk9VYRzQeAgZ_D5OJzTtbcg.jpg" height="48"> | Dynastiet Windsor                           |          3 | 1,299      |          5.2 |     1.9 |
+| <img src="cachedimages/O3iSE9wQsTllWuDOWQbbPw9HHibCwk2yZPhu3qFjTiRg.jpg" height="48"> | Gåten i Isdalen                             |          8 | 487        |          5   |     0.7 |
+| <img src="cachedimages/OQKtAcJYVgz4-sPTf1LiaA98Jj5QEoAcaxClUV3z3Dkg.jpg" height="48"> | USA i fargar                                |          6 | 2,617      |          4.9 |     3.6 |
+| <img src="cachedimages/OZ7wBHtamL2kg-2vFAN96Q-xrdaVibRtwStBUjmrqxwQ.jpg" height="48"> | Brennpunkt: Drapet i akebakken              |          4 | 527        |          5.4 |     0.8 |
+| <img src="cachedimages/Os-kzR3yCOfK8xjs8iUgGw_pzkOcCqv4E7qM-fPR_bHA.jpg" height="48"> | Nazistenes vei til makten                   |          6 | 2,762      |          5.4 |     4.2 |
+| <img src="cachedimages/Q9umiQK4rCDqdaw2zRbAHA1UwofvMSAtxRp2txQ3RfcA.jpg" height="48"> | Folkevalgt                                  |          6 | 3,032      |          4.9 |     4.2 |
+| <img src="cachedimages/QCKXYeBhJ76BJdBXjyP1EQTX5Iu3ojTUWE9Mz0Eylm9w.jpg" height="48"> | Therese - jenta som forsvant                |          5 | 1,042      |          5.1 |     1.5 |
+| <img src="cachedimages/QP_avZvl2nRyyk5LktClvAK5AbJoDNNmqSL4U2XQGd1A.jpg" height="48"> | Storbritannia i fargar                      |          3 | 1,303      |          5   |     1.8 |
+| <img src="cachedimages/Qcsk6w3N_ni8iN5ZWk2YsgbExjZW9YNFo0J7CgPHeang.jpg" height="48"> | 24 timer i Jerusalem                        |         24 | 11,770     |          4.9 |    16   |
+| <img src="cachedimages/R_YiBZCrRe0O4d3PFg2fQQThnBIGKXCfm9u7KouxX25w.jpg" height="48"> | Konge og dronning i 25 år                   |          7 | 475        |          5   |     0.7 |
+| <img src="cachedimages/Rn-ZQZVtrvzcIEQPoOtwZQAj0HTvqSK3SQutCzZAexLQ.jpg" height="48"> | München 72 – olympisk terror                |          4 | 1,810      |          5   |     2.5 |
+| <img src="cachedimages/SBhrwVgCWqiBUFfplA4ZXwmp_inKbgN-gSfSLjlu4CUw.jpg" height="48"> | Uræd - egget som kunne berge liv            |          2 | 315        |          5.4 |     0.5 |
+| <img src="cachedimages/Slpzo8WD6mdTF5JeDvHiMgadXsi-YR32j_lvdRL0xvSQ.jpg" height="48"> | QAnon                                       |          3 | 1,489      |          5.3 |     2.2 |
+| <img src="cachedimages/T7LS4oIYbNTb5ylhAgZwmguc-h1Afvmv1pv-NCNp_dmg.jpg" height="48"> | 80-talet                                    |          8 | 3,428      |          5.2 |     5   |
+| <img src="cachedimages/TAIEzp99m4N-TjJaqUNdJAwqWH26es01ftEmVXveqVVw.jpg" height="48"> | Apokalypse - andre verdenskrig              |          6 | 525        |          5.2 |     0.8 |
+| <img src="cachedimages/U5s7uDWqsijBXFOGhIzNhghEI0-Sq0kJgzjJjeB9jfaQ.jpg" height="48"> | Følelsen av frihet                          |          2 | 1,348      |          4.4 |     1.7 |
+| <img src="cachedimages/UC33VGWSQmol-guQ1gEgPAfb0r2yaMxf8-nZDRcv8isQ.jpg" height="48"> | Ein gresk odyssé med Bettany Hughes         |          6 | 3,056      |          4.9 |     4.1 |
+| <img src="cachedimages/Vbfc15d50F1NhrhBpKrsNw4jffbWFjpVO60jacQ5QYsQ.jpg" height="48"> | Brennpunkt: Philips vei til terror          |          3 | 1,105      |          5   |     1.5 |
+| <img src="cachedimages/VoFKwTl0O9Yg814TIWjXjwglz-ErZFPArIEEPVmfocHQ.jpg" height="48"> | Fyrbarna                                    |          4 | 1,261      |          4.8 |     1.7 |
+| <img src="cachedimages/Wd8em0LdFJQr7Mf_LHA1IQSXU3_SpSnRDGN5-lEzkvuA.jpg" height="48"> | De utvalgte barna                           |          3 | 1,740      |          5.2 |     2.5 |
+| <img src="cachedimages/Wpk_5UuIS5zNPYWIj225gwYlXAXYDMyJw94ej5cp2CFA.jpg" height="48"> | Pesten i London                             |          3 | 1,402      |          5.6 |     2.2 |
+| <img src="cachedimages/WsrgbeR7AvuSHerKniqxegO4P-Gz_-1J8NYmBvgR6Ajw.jpg" height="48"> | Bilda som endra verda                       |          1 | 236        |          5.4 |     0.4 |
+| <img src="cachedimages/Xlq5CIHdAvAsr6I5-Z7H-QA8LLoS3uuYQmh4Kj_E7Zmg.jpg" height="48"> | Gåten Agnes                                 |          4 | 1,822      |          5.1 |     2.6 |
+| <img src="cachedimages/XtHbrv6xlB88bHiMZ2EWkwJ_t0N15sT_aKvFsrAQhM7g.jpg" height="48"> | Forført av spriten                          |          5 | 1,459      |          5.5 |     2.2 |
+| <img src="cachedimages/YYoDR3vLsbI4OLczW97iBgFXRof1QEb11lG_bEteexjw.jpg" height="48"> | Afghanistans evige strid                    |          4 | 1,908      |          5.6 |     2.9 |
+| <img src="cachedimages/YbRo5ZibE_hLLBy3y-5dZg1A2Ct1F5rrFAVHk3smmflg.jpg" height="48"> | Mysteriet Hammarskjöld                      |          3 | 1,411      |          5.4 |     2.1 |
+| <img src="cachedimages/Yn9NsRPH3o00nILE7Gli5gDGpZhGQqlh5AoOPP3LFlTw.jpg" height="48"> | Ghislaine Maxwells forbrytelser             |          3 | 1,421      |          5.2 |     2.1 |
+| <img src="cachedimages/ZNPZG0P-VIjVlQnxVmiE6A1v6ckcdZSWK5t1Rwo4hTIg.jpg" height="48"> | Flukt                                       |          5 | 2,077      |          5   |     2.9 |
+| <img src="cachedimages/ZQxswDP1sQomZz7tZeI5OwfyYsWp4D152Ko1oXJlrI8w.jpg" height="48"> | Mannefall                                   |          4 | 1,770      |          4.8 |     2.4 |
+| <img src="cachedimages/Z_Q9nuxdrO96PgQyKGlK5w5WsFWDMmFbustUvlEuDcsQ.jpg" height="48"> | Tsjernobyl – nye avsløringar                |          2 | 921        |          5.1 |     1.3 |
+| <img src="cachedimages/ZwYrs6NTR4BoHxuCwHHc2AlS21MKVtTqKSLj6OKkgfQA.jpg" height="48"> | Scandinavian Star                           |          6 | 3,583      |          4.9 |     4.9 |
+| <img src="cachedimages/_2tATLKDc1e7Ru9N7CbJLgd4RPUPZK81HE5Atp9z6iyQ.jpg" height="48"> | Verden under Trump                          |          3 | 1,817      |          5.3 |     2.7 |
+| <img src="cachedimages/_hbk0HcjyVsOihOzDS9DVgAuv3wtuwydEOd1pRAdeY9A.jpg" height="48"> | Dagboken                                    |          3 | 1,008      |          5.5 |     1.6 |
+| <img src="cachedimages/aoPJbvwDYloOX-nYw-24ZgEcSst4diH52KJMq5n2dW2w.jpg" height="48"> | Tinderdrapene                               |          2 | 880        |          5.4 |     1.3 |
+| <img src="cachedimages/bC45bpEGZmH_3QrydJbSBwZL_lf9lJjPelk3hlcYdtLQ.jpg" height="48"> | Exit Afghanistan                            |          4 | 869        |          5.4 |     1.3 |
+| <img src="cachedimages/e3w9hyKkzlzkroG_ZaQU3Qm-u-SLopo8Pthv8r8xRNbA.jpg" height="48"> | 2000-talet                                  |          8 | 3,375      |          5.1 |     4.7 |
+| <img src="cachedimages/eddpg7I3NZdU2s3tMoCAOwBXe1FWzJWXy5xJqT5t__3g.jpg" height="48"> | Slaveriet                                   |          6 | 2,965      |          5.4 |     4.5 |
+| <img src="cachedimages/emJhhu1HtPsJQ__8DYa0vgrhCVYBLc8d2CYm6GCIl3tw.jpg" height="48"> | Legendariske førstedamer                    |          6 | 2,749      |          5   |     3.8 |
+| <img src="cachedimages/fODLUOTk-krgjagPIvoHRAZe3LQccjCtXiK2XmAOQZlA.jpg" height="48"> | Vålnes-saken                                |          5 | 1,940      |          5.5 |     3   |
+| <img src="cachedimages/hztvIPF-tyDAaMInkEIIsw8vsKZQS2z0yO0ipdHTOMkQ.jpg" height="48"> | Gåten Orderud                               |          6 | 3,088      |          5.4 |     4.7 |
+| <img src="cachedimages/i-1NhEMPaOh2XykfEAPn_goWbMvb1TRuumHOaYSKdB5A.jpg" height="48"> | Iraks tragedie                              |          4 | 2,248      |          5.2 |     3.2 |
+| <img src="cachedimages/iXos21xtnuwZit7rCYLq1gs9SSCkOxgvE4uxbpPrP7Hg.jpg" height="48"> | Stacey Dooley overnatter                    |         16 | 9,223      |          4.8 |    12.2 |
+| <img src="cachedimages/jFTvMeQ-cOiyOcaPXaN-wAIqHZSkGmz2jJs6f50T1zlg.jpg" height="48"> | Uønsket                                     |          4 | 2,355      |          4.5 |     3   |
+| <img src="cachedimages/jJxDa6QeExwwdZ338-buKgs3OwX4-JE-9WcaYr_Y0Ppg.jpg" height="48"> | UXA - Thomas Seltzers Amerika               |          5 | 2,496      |          4.8 |     3.3 |
+| <img src="cachedimages/jM0zuFacx101teyJr-06bgDrjl3fJtEYLnWl2PbuSurA.jpg" height="48"> | We can't do it                              |          3 | 938        |          5.1 |     1.3 |
+| <img src="cachedimages/jNCMEgUhu4oA3PCq78qGMQlCc6h6KoNlClKBB8vOlWsA.jpg" height="48"> | Pandaene kjem - diplomatar i pels           |          3 | 1,275      |          5.1 |     1.8 |
+| <img src="cachedimages/jPq-WThRGuQdmhNWzvNOnAexNsK3pvcwDmuOUoDZP0Tw.jpg" height="48"> | Rødt, hvitt og skrått                       |          4 | 1,197      |          5.1 |     1.7 |
+| <img src="cachedimages/k4oe2FEno4Lv6SnGrmKKbANDiAX03dDX9Ris6hdDTqkw.jpg" height="48"> | På bortebane                                |          4 | 1,430      |          4.9 |     1.9 |
+| <img src="cachedimages/kU-tP5TQA3Jt-1Rz4-fdcA9VylRe1xkmfNmUeL_3JzEw.jpg" height="48"> | Astralis - kongene av CS:GO                 |          3 | 934        |          4.4 |     1.1 |
+| <img src="cachedimages/l6gHH3At15mSWnRlZPNXNwsadSwJH2h_Yb6lNNP4U8bQ.jpg" height="48"> | I Jan Baalsruds fotspor                     |          6 | 2,583      |          4.5 |     3.2 |
+| <img src="cachedimages/lOJRXYOOPvcyHxzldlM68AT-IXXR8nJs1Lhv9kjslIBA.jpg" height="48"> | Fordi du er kvinne                          |          6 | 2,890      |          5.1 |     4.1 |
+| <img src="cachedimages/ljfBd5uhj6V2Q8b_sQh2Fg3ViyIBptbPbs5p1Txc8_1w.jpg" height="48"> | 60-talet                                    |         10 | 3,862      |          5.2 |     5.6 |
+| <img src="cachedimages/mK40HnLtfMXgsb1OJJ0B8Q5X0HwjmNAYsAghwhPinOVA.jpg" height="48"> | Osama bin Laden                             |          3 | 1,305      |          5.2 |     1.9 |
+| <img src="cachedimages/nEP8En9Cz4n_8OodMJflUwGvHGgRLF-V8uJPdy8r2z8Q.jpg" height="48"> | Gulag - Sovjets dødsleirar                  |          3 | 1,356      |          5.1 |     1.9 |
+| <img src="cachedimages/nFwkX6JA25CZ4EtRgZGHnAMd5iRjpzbUkXiLeajh577g.jpg" height="48"> | Einar - hele historien                      |          4 | 1,621      |          5.4 |     2.4 |
+| <img src="cachedimages/nulVYOANMJbDmTuAVUXFsQY33JIL0U9pSORrtLBKiXHg.jpg" height="48"> | 90-talet                                    |          8 | 3,398      |          5.1 |     4.8 |
+| <img src="cachedimages/oZksr042g2FkE8QPmtXXAAe_o7JJUCybMZbCPsSjEzGg.jpg" height="48"> | Auditionfella                               |          3 | 837        |          5.2 |     1.2 |
+| <img src="cachedimages/pz_Bs1kmBBBthTWgQtcdiwE0nkFFuwVbjPYBJvlLNd4w.jpg" height="48"> | Tidsvitne                                   |         11 | 2,313      |          5   |     3.2 |
+| <img src="cachedimages/q5UyMpAaxhO_rqx3yQqksAR1aANC2LRtoPvHBTe7-gXQ.jpg" height="48"> | Tyskland og den kalde krigen                |          2 | 815        |          5.3 |     1.2 |
+| <img src="cachedimages/qflUdx7PpxgecjjDVWKbxQdEEZW2D6bjq8woscaMnrug.jpg" height="48"> | Watergate                                   |          6 | 2,863      |          5.4 |     4.3 |
+| <img src="cachedimages/qima568QFgDRCuML9R3MSgj15-uF6WD5konr0m2txc4g.jpg" height="48"> | F-ordet                                     |          5 | 1,313      |          4.8 |     1.8 |
+| <img src="cachedimages/r-BnfaE_R3QWw-6ywdvuqQBRB9XHS3tgk3OX_1X1AooQ.jpg" height="48"> | Olav                                        |          3 | 954        |          4.6 |     1.2 |
+| <img src="cachedimages/roS76GqI-uwGiWuZzvwHFQ2x6x0NpZsE1L-aoPVrpzGw.jpg" height="48"> | Dronning Margrethe - 50 år for Danmark      |          2 | 1,315      |          4.7 |     1.7 |
+| <img src="cachedimages/t3e2ocw4uRiJ-g1v5VU1wAhCTfsk4Kuypwjwon4AKlHw.jpg" height="48"> | Rikets sikkerhet                            |          6 | 1,482      |          5.1 |     2.1 |
+| <img src="cachedimages/tGu7QdjIExg8kK32LOeAWQTmEPpZd-_JiKF1wqePOTWA.jpg" height="48"> | Drapet på Emilie Meng                       |          3 | 1,479      |          5   |     2.1 |
+| <img src="cachedimages/tOSOkhwQkooICKLkMcDVzgUsxp4V_ZsSh4Ef5gswtA4Q.jpg" height="48"> | Operasjon Muskedunder                       |          3 | 719        |          4.7 |     0.9 |
+| <img src="cachedimages/u1OrNNeDitAvGbsYwtGPvgGrwC2SM0Bd0DmBI5kbcmAA.jpg" height="48"> | Year Zero                                   |          3 | 1,704      |          4.4 |     2.1 |
+| <img src="cachedimages/vbljLK3qllrQnLNGudlBfgI7lXGUl6TfbDTniq6f08qw.jpg" height="48"> | Det franske kolonirikets fall               |          2 | 1,409      |          5.7 |     2.2 |
+| <img src="cachedimages/voHUJLH1ia8eUW0OnTSQtA72lwu2n5dIvvj5NN2S6kSA.jpg" height="48"> | Monsen og hundene                           |         17 | 1,669      |          4.9 |     2.3 |
+| <img src="cachedimages/xd6i-_SLMlL8Mpb11IF6uAFGv7er3WQj2Wg3HTpcZpCQ.jpg" height="48"> | 70-talet                                    |          8 | 3,345      |          5.1 |     4.8 |
+| <img src="cachedimages/z2RScs82th_tQzX_rqSiSwqaVeGwELFdmR6mTXdv2WOw.jpg" height="48"> | 1979 - Big bang for vår tid                 |          2 | 861        |          5.3 |     1.3 |
+| <img src="cachedimages/zMYE-ydRdOpHleiwoM5vdgFdS6Ex_LzLJVjt51R1v9iw.jpg" height="48"> | Porno 2022                                  |          5 | 994        |          5.3 |     1.5 |
+| <img src="cachedimages/zOz3-qWqGmLE7X-uW63OmQR0K39LBWfk_99z9i46oW6A.jpg" height="48"> | Rex-faktor - Kongeparets reiser for Noreg   |          7 | 259        |          4.8 |     0.3 |
+| <img src="cachedimages/zUYuXWCc3CoVaSIUqx3LuwxqNcmGoNQVBLeo0VPnQzFQ.jpg" height="48"> | Kongelige fotografer                        |          2 | 101        |          5   |     0.1 |
+| <img src="cachedimages/zl16YszMkHzPBWmVg7Dhfw5BAeSEcxgJfu3YteUq4Flg.jpg" height="48"> | Den verdifulle skogen                       |          2 | 415        |          5.4 |     0.6 |
+
+## underholdning
+|                                                                                       | title                |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:---------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/A4_MVtKfJwp2cwMuOzHR0gUnc2LVAOktk5YKmhawiixA.jpg" height="48"> | Line dater Norge     |          6 | 2,076      |          4.9 |     2.8 |
+| <img src="cachedimages/Bg55XL2XaCXL0Q_4kAk0TwfDLYgiZCeOfDQFjv0xUXRw.jpg" height="48"> | Oppdrag Sognefjorden |          6 | 1,196      |          5.4 |     1.8 |
+| <img src="cachedimages/JZptBi9NisfpMBL9dUCoKwMoUVuQoGPahWVuM_zhWK5w.jpg" height="48"> | Oppdrag Nord-Norge   |          8 | 2,028      |          5.5 |     3.1 |
+| <img src="cachedimages/THwtcWns3PYNFSRyCCLcXANbemEiGKQ_H1nZQUqNnsCQ.jpg" height="48"> | Leo & U-landslaget   |          8 | 2,962      |          4.8 |     4   |
+| <img src="cachedimages/i9LiZrW8knXqSTFeBJSBKw0h8FpmqAuqqqytN51VDZdQ.jpg" height="48"> | Typen til            |         14 | 4,081      |          4.8 |     5.4 |
+| <img src="cachedimages/k9jvr0T0-FI4rbBTv0pLwgvdnl9G-WySYM-94Co2_bFw.jpg" height="48"> | Gordon, Gino og Fred |          8 | 5,980      |          4.7 |     7.7 |
+| <img src="cachedimages/pCmOOtqF0up7IJxhVOkWEQb0lSNeAdNAaE1kG-xFxtHg.jpg" height="48"> | Kjærlighetens kode   |          8 | 2,769      |          4.6 |     3.6 |
+| <img src="cachedimages/pdi7SYLlxj_23OxZKG2vRQf6zHdpaL4KyVo3pqlepuOQ.jpg" height="48"> | Det store spranget   |          9 | 1,848      |          4.7 |     2.4 |
 
 ## sport
 |                                                                                       | title                   |   programs | segments   |   average(s) |   hours |
@@ -504,16 +530,6 @@
 | <img src="cachedimages/sEVpD5EK4q6P82dToiLIsgIHobSmfcmuWKMKhS-VGjZQ.jpg" height="48"> | Parastjernene           |          8 | 345        |          5.6 |     0.5 |
 | <img src="cachedimages/sobKwIiWFdNjdn-OsoMZ4gCEKaUOnRBJAugJxEl61vtg.jpg" height="48"> | Muhammad Ali            |          4 | 4,447      |          5.4 |     6.7 |
 | <img src="cachedimages/tIP4xoim-SMKQ7yaifl6mA6qHxxvoUeVrZkve4XfajGA.jpg" height="48"> | Karsten og Leif         |          5 | 1,873      |          4.6 |     2.4 |
-
-## underholdning
-|                                                                                       | title                |   programs | segments   |   average(s) |   hours |
-|:--------------------------------------------------------------------------------------|:---------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/A4_MVtKfJwp2cwMuOzHR0gUnc2LVAOktk5YKmhawiixA.jpg" height="48"> | Line dater Norge     |          6 | 2,076      |          4.9 |     2.8 |
-| <img src="cachedimages/Bg55XL2XaCXL0Q_4kAk0TwfDLYgiZCeOfDQFjv0xUXRw.jpg" height="48"> | Oppdrag Sognefjorden |          6 | 1,196      |          5.4 |     1.8 |
-| <img src="cachedimages/JZptBi9NisfpMBL9dUCoKwMoUVuQoGPahWVuM_zhWK5w.jpg" height="48"> | Oppdrag Nord-Norge   |          8 | 2,028      |          5.5 |     3.1 |
-| <img src="cachedimages/k9jvr0T0-FI4rbBTv0pLwgvdnl9G-WySYM-94Co2_bFw.jpg" height="48"> | Gordon, Gino og Fred |          8 | 5,980      |          4.7 |     7.7 |
-| <img src="cachedimages/pCmOOtqF0up7IJxhVOkWEQb0lSNeAdNAaE1kG-xFxtHg.jpg" height="48"> | Kjærlighetens kode   |          8 | 2,769      |          4.6 |     3.6 |
-| <img src="cachedimages/pdi7SYLlxj_23OxZKG2vRQf6zHdpaL4KyVo3pqlepuOQ.jpg" height="48"> | Det store spranget   |          9 | 1,848      |          4.7 |     2.4 |
 
 ## familie
 |                                                                                       | title                    |   programs | segments   |   average(s) |   hours |
