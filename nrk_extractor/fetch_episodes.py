@@ -25,10 +25,9 @@ class episodefetcher:
     def geturl(self,url):
         #maxreq = 4
         #cntreq = 0
-        searchstr = url
-        resp = requests.get(searchstr)
+        resp = requests.get(url)
         if (resp.status_code !=200):
-            print("something went wrong with url: "+ searchstr + " returned status code" + str(resp.status_code))
+            print("something went wrong with url: "+ url + " returned status code " + str(resp.status_code))
 
         return resp
 
@@ -83,7 +82,24 @@ class episodefetcher:
             medium = "undefined"
 
         return medium
-    
+   
+    def getmediumprogram(self,progid):
+        #Function is needed only if we do not have the series. Hack to get the medium
+        purl = "https://psapi.nrk.no/playback/metadata/program/" + progid
+        resp = self.geturl(purl)
+        resultingjson = resp.json()
+
+        href = resultingjson["_links"]["progress"]["href"]
+        if "/tv/" in href:
+            medium = "tv"
+        elif "/radio/" in href:
+            medium = "radio"
+        else:
+            medium = "undefined"
+
+        return medium
+
+
     def getserieimage(self,serie):
         programinforeq = "https://psapi.nrk.no/series/" + serie
         resp = self.geturl(programinforeq)
