@@ -69,10 +69,17 @@ class NRKExtractor():
         
         #Set medium
         ef=episodefetcher()
-        res["info"]["medium"] = ef.getmedium(ef.getseries(id))
+        #Try first for series, but if this does not exist, try for program
+        try:
+            res["info"]["medium"] = ef.getmedium(ef.getseries(id))
+        except:
+            res["info"]["medium"] = ef.getmediumprogram(id)
 
         #Set serie image
-        res["info"]["serieimageurl"] = ef.getserieimage(ef.getseries(id))
+        try:
+            res["info"]["serieimageurl"] = ef.getserieimage(ef.getseries(id))
+        except:
+            res["info"]["serieimageurl"] = "placeholder"
 
         if not bool(res["info"]["playable"]):
             res["info"] = "Unknown"
