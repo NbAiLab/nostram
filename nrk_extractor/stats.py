@@ -109,7 +109,7 @@ def save_images(imagelist,save_dir="cachedimages"):
         image_name = url.split("/")[-1]+".jpg"
         image_path = os.path.join(save_dir,image_name)
         
-        if not os.path.exists(image_path):
+        if not os.path.exists(image_path) and url  != "placeholder":
             print("Saving image "+ image_path)
             urllib.request.urlretrieve(url, image_path)
 
