@@ -12,13 +12,13 @@
 | humor | 203.0 | 0.0                  |        **203.0** |
 | nrk-arkivet | 78.8 | 0.0                  |        **78.8** |
 | nyheter | 50.4 | 0.0                  |        **50.4** |
-| vitenskap | 56.5 | 0.0                  |        **56.5** |
+| vitenskap | 60.8 | 0.0                  |        **60.8** |
 | sport | 54.4 | 0.0                  |        **54.4** |
 | unknown | 3.8 | 0.0                  |        **3.8** |
 | samisk | 14.9 | 0.0                  |        **14.9** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,579.0** | **0.0**                  |        **4,579.0** |
+| **total** | **4,583.3** | **0.0**                  |        **4,583.3** |
 
 ## dokumentar
 |                                                                                       | title                                                   |   programs | segments   |   average(s) |   hours |
@@ -1620,7 +1620,7 @@
 | <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 376        |          5.1 |     0.5 |
 | <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 731        |          5.2 |     1.1 |
 | <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 355        |          4.9 |     0.5 |
-| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |          2 | 953        |          5.6 |     1.5 |
+| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |         10 | 3,777      |          5.5 |     5.8 |
 | <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          7 | 2,058      |          4.4 |     2.5 |
 | <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 535        |          5.2 |     0.8 |
 | <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 829        |          4.8 |     1.1 |
