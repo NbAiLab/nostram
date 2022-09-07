@@ -7,6 +7,7 @@
 | dokumentar | 1,076.0 | 0.0                  |        **1,076.0** |
 | sport | 153.8 | 0.0                  |        **153.8** |
 | kultur | 881.9 | 0.0                  |        **881.9** |
+| vitenskap | 388.9 | 0.0                  |        **388.9** |
 | natur | 413.5 | 0.0                  |        **413.5** |
 | livsstil | 644.8 | 0.0                  |        **644.8** |
 | humor | 264.0 | 0.0                  |        **264.0** |
@@ -14,11 +15,10 @@
 | nyheter | 192.8 | 0.0                  |        **192.8** |
 | samisk | 32.4 | 0.0                  |        **32.4** |
 | familie | 21.3 | 0.0                  |        **21.3** |
-| vitenskap | 158.8 | 0.0                  |        **158.8** |
 | underholdning | 380.2 | 0.0                  |        **380.2** |
 | film | 7.0 | 0.0                  |        **7.0** |
 | unknown | 4.3 | 0.0                  |        **4.3** |
-| **total** | **7,124.5** | **0.0**                  |        **7,124.5** |
+| **total** | **7,354.6** | **0.0**                  |        **7,354.6** |
 
 ## barn
 |                                                                                       | title                                                |   programs | segments   |   average(s) |   hours |
@@ -1392,6 +1392,43 @@
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Været i nordiske malerier                                 |          1 | 1,526      |          1.5 |     0.6 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | William og Kate - eit kongeleg bryllaup                   |          1 | 1,013      |          2.6 |     0.7 |
 
+## vitenskap
+|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 4,142      |          1.7 |     2   |
+| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,852      |          3.6 |     1.8 |
+| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 4,931      |          1.6 |     2.2 |
+| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 7,318      |          2.4 |     4.8 |
+| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 1,719      |          3.9 |     1.8 |
+| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |        276 | 386,153    |          2.3 |   244.1 |
+| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          8 | 6,927      |          1.7 |     3.3 |
+| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 6,436      |          2   |     3.5 |
+| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 3,696      |          1.3 |     1.4 |
+| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 2,512      |          3.3 |     2.3 |
+| <img src="cachedimages/_MB99w6x8NSGJKl2vK32nA_DQAsotkVmAThFSsnft7Hg.jpg" height="48"> | Tankens hjelpere                                |          4 | 3,972      |          1.5 |     1.7 |
+| <img src="cachedimages/bdmYk0FIUUcpjxNBIs8ARQeqxUMtlDHQRGcTuijtV9iA.jpg" height="48"> | Øyeblikket                                      |         34 | 619        |          3.3 |     0.6 |
+| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          4 | 2,862      |          2.2 |     1.7 |
+| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 3,702      |          3.1 |     3.2 |
+| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |        166 | 126,970    |          2.2 |    77.4 |
+| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 15,709     |          1.9 |     8.1 |
+| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,836      |          3.6 |     2.8 |
+| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         37 | 21,974     |          2.7 |    16.7 |
+| <img src="cachedimages/sWT8UStrYqccKkLIA6D3mwInUTryG11N9cpF7WzIs4Fg.jpg" height="48"> | ID                                              |          3 | 916        |          1.7 |     0.4 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 665        |          2.4 |     0.5 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 1,253      |          2.5 |     0.9 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 301        |          3.6 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Homøopati - vitenskap eller overtro?            |          1 | 1,044      |          2.2 |     0.6 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 1,155      |          2.6 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Kviser, et unødvendig onde?                     |          1 | 541        |          4   |     0.6 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Mennesket i fart gjennom tid og rom             |          1 | 603        |          1.8 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 733        |          1.7 |     0.4 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 1,462      |          1.8 |     0.7 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 2,256      |          1.2 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 1,598      |          1.7 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Teknologi - vår lykke eller ulykke              |          1 | 800        |          1.7 |     0.4 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1,317      |          2.5 |     0.9 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 3,397      |          1.4 |     1.3 |
+
 ## natur
 |                                                                                       | title                                    |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-----------------------------------------|-----------:|:-----------|-------------:|--------:|
@@ -1877,43 +1914,6 @@
 |:--------------------------------------------------------------------------------------|:-------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/s1eNks47MpN0C_RoLDxV-gi81ouVypRe3h6_7F4uHQtw.jpg" height="48"> | Teenage Boss             |         18 | 26,699     |          1.9 |    14.2 |
 | <img src="cachedimages/x2u3Mo926uYPF8Do2CFd7wIRzsDtLDatdZPg72-13yQA.jpg" height="48"> | Pelle Parafins Bøljeband |         29 | 16,684     |          1.5 |     7.2 |
-
-## vitenskap
-|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
-|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 4,142      |          1.7 |     2   |
-| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,852      |          3.6 |     1.8 |
-| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 4,931      |          1.6 |     2.2 |
-| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 7,318      |          2.4 |     4.8 |
-| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 1,719      |          3.9 |     1.8 |
-| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |         10 | 21,237     |          2.4 |    14   |
-| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          8 | 6,927      |          1.7 |     3.3 |
-| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 6,436      |          2   |     3.5 |
-| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 3,696      |          1.3 |     1.4 |
-| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 2,512      |          3.3 |     2.3 |
-| <img src="cachedimages/_MB99w6x8NSGJKl2vK32nA_DQAsotkVmAThFSsnft7Hg.jpg" height="48"> | Tankens hjelpere                                |          4 | 3,972      |          1.5 |     1.7 |
-| <img src="cachedimages/bdmYk0FIUUcpjxNBIs8ARQeqxUMtlDHQRGcTuijtV9iA.jpg" height="48"> | Øyeblikket                                      |         34 | 619        |          3.3 |     0.6 |
-| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          4 | 2,862      |          2.2 |     1.7 |
-| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 3,702      |          3.1 |     3.2 |
-| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |        166 | 126,970    |          2.2 |    77.4 |
-| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 15,709     |          1.9 |     8.1 |
-| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,836      |          3.6 |     2.8 |
-| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         37 | 21,974     |          2.7 |    16.7 |
-| <img src="cachedimages/sWT8UStrYqccKkLIA6D3mwInUTryG11N9cpF7WzIs4Fg.jpg" height="48"> | ID                                              |          3 | 916        |          1.7 |     0.4 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 665        |          2.4 |     0.5 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 1,253      |          2.5 |     0.9 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 301        |          3.6 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Homøopati - vitenskap eller overtro?            |          1 | 1,044      |          2.2 |     0.6 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 1,155      |          2.6 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Kviser, et unødvendig onde?                     |          1 | 541        |          4   |     0.6 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Mennesket i fart gjennom tid og rom             |          1 | 603        |          1.8 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 733        |          1.7 |     0.4 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 1,462      |          1.8 |     0.7 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 2,256      |          1.2 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 1,598      |          1.7 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Teknologi - vår lykke eller ulykke              |          1 | 800        |          1.7 |     0.4 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1,317      |          2.5 |     0.9 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 3,397      |          1.4 |     1.3 |
 
 ## underholdning
 |                                                                                       | title                                              |   programs | segments   |   average(s) |   hours |

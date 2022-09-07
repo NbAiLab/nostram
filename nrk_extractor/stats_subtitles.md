@@ -2,6 +2,7 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
+| vitenskap | 220.4 | 0.0                  |        **220.4** |
 | dokumentar | 727.9 | 0.0                  |        **727.9** |
 | barn | 1,214.0 | 0.0                  |        **1,214.0** |
 | underholdning | 200.7 | 0.0                  |        **200.7** |
@@ -12,13 +13,42 @@
 | humor | 203.0 | 0.0                  |        **203.0** |
 | nrk-arkivet | 78.8 | 0.0                  |        **78.8** |
 | nyheter | 50.4 | 0.0                  |        **50.4** |
-| vitenskap | 60.8 | 0.0                  |        **60.8** |
 | sport | 54.4 | 0.0                  |        **54.4** |
 | unknown | 3.8 | 0.0                  |        **3.8** |
 | samisk | 14.9 | 0.0                  |        **14.9** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,583.3** | **0.0**                  |        **4,583.3** |
+| **total** | **4,742.9** | **0.0**                  |        **4,742.9** |
+
+## vitenskap
+|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 1,540      |          4.8 |     2.1 |
+| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,562      |          4.7 |     2   |
+| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 376        |          5.1 |     0.5 |
+| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 731        |          5.2 |     1.1 |
+| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 355        |          4.9 |     0.5 |
+| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |        249 | 112,680    |          5.3 |   165.3 |
+| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          7 | 2,058      |          4.4 |     2.5 |
+| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 535        |          5.2 |     0.8 |
+| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 829        |          4.8 |     1.1 |
+| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 461        |          4.5 |     0.6 |
+| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          2 | 20         |          5.4 |     0   |
+| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 1,712      |          4.6 |     2.2 |
+| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |         97 | 10,249     |          4.8 |    13.7 |
+| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 3,770      |          4.9 |     5.2 |
+| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,100      |          4.8 |     2.8 |
+| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         36 | 11,733     |          4.5 |    14.7 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 328        |          4.7 |     0.4 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 508        |          5.7 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 190        |          4.8 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 534        |          5.6 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 229        |          4.8 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 488        |          5.3 |     0.7 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 495        |          4.3 |     0.6 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 237        |          5.1 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1          |          4.4 |     0   |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 726        |          5.4 |     1.1 |
 
 ## dokumentar
 |                                                                                       | title                                                   |   programs | segments   |   average(s) |   hours |
@@ -1611,36 +1641,6 @@
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Kongelig bryllup i Storbritannia     |          1 | 326        |          6.8 |     0.6 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Tilbake til Oscarsborg               |          1 | 173        |          5.1 |     0.2 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Vatn på børs                         |          1 | 462        |          5.1 |     0.7 |
-
-## vitenskap
-|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
-|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 1,540      |          4.8 |     2.1 |
-| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,562      |          4.7 |     2   |
-| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 376        |          5.1 |     0.5 |
-| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 731        |          5.2 |     1.1 |
-| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 355        |          4.9 |     0.5 |
-| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |         10 | 3,777      |          5.5 |     5.8 |
-| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          7 | 2,058      |          4.4 |     2.5 |
-| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 535        |          5.2 |     0.8 |
-| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 829        |          4.8 |     1.1 |
-| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 461        |          4.5 |     0.6 |
-| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          2 | 20         |          5.4 |     0   |
-| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 1,712      |          4.6 |     2.2 |
-| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |         97 | 10,249     |          4.8 |    13.7 |
-| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 3,770      |          4.9 |     5.2 |
-| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,100      |          4.8 |     2.8 |
-| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         36 | 11,733     |          4.5 |    14.7 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 328        |          4.7 |     0.4 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 508        |          5.7 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 190        |          4.8 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 534        |          5.6 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 229        |          4.8 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 488        |          5.3 |     0.7 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 495        |          4.3 |     0.6 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 237        |          5.1 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1          |          4.4 |     0   |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 726        |          5.4 |     1.1 |
 
 ## sport
 |                                                                                       | title                           |   programs | segments   |   average(s) |   hours |
