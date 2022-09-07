@@ -3,22 +3,22 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | dokumentar | 727.9 | 0.0                  |        **727.9** |
-| barn | 1,203.9 | 0.0                  |        **1,203.9** |
-| underholdning | 197.7 | 0.0                  |        **197.7** |
+| barn | 1,214.0 | 0.0                  |        **1,214.0** |
+| underholdning | 200.7 | 0.0                  |        **200.7** |
 | livsstil | 490.8 | 0.0                  |        **490.8** |
 | natur | 248.0 | 0.0                  |        **248.0** |
 | drama-serier | 825.1 | 0.0                  |        **825.1** |
-| kultur | 382.2 | 0.0                  |        **382.2** |
+| kultur | 385.7 | 0.0                  |        **385.7** |
 | humor | 203.0 | 0.0                  |        **203.0** |
 | nrk-arkivet | 78.8 | 0.0                  |        **78.8** |
 | nyheter | 50.4 | 0.0                  |        **50.4** |
-| sport | 53.5 | 0.0                  |        **53.5** |
+| vitenskap | 56.5 | 0.0                  |        **56.5** |
+| sport | 54.4 | 0.0                  |        **54.4** |
 | unknown | 3.8 | 0.0                  |        **3.8** |
 | samisk | 14.9 | 0.0                  |        **14.9** |
-| vitenskap | 44.7 | 0.0                  |        **44.7** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,549.7** | **0.0**                  |        **4,549.7** |
+| **total** | **4,579.0** | **0.0**                  |        **4,579.0** |
 
 ## dokumentar
 |                                                                                       | title                                                   |   programs | segments   |   average(s) |   hours |
@@ -446,11 +446,11 @@
 |                                                                                       | title                                                |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:-----------------------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="cachedimages/-JB_fzQxzo9rRwPWHDDlkg7aJ8Rfiqjc8yBuqebe34ZQ.jpg" height="48"> | Brillebjørn-show                                     |         10 | 1,239      |          4.9 |     1.7 |
-| <img src="cachedimages/-LbTZyoymy5nlS6vfOetAA1iGOfHdy704YdF54vjWhFQ.jpg" height="48"> | BaseBoys                                             |          1 | 38         |          3.8 |     0   |
+| <img src="cachedimages/-LbTZyoymy5nlS6vfOetAA1iGOfHdy704YdF54vjWhFQ.jpg" height="48"> | BaseBoys                                             |         38 | 5,553      |          4.4 |     6.8 |
 | <img src="cachedimages/-bkipTnrhPqFzG62J5iCmgDNUpswlrzwEhoNxskbhouw.jpg" height="48"> | Lik meg X                                            |         14 | 1,261      |          4.4 |     1.6 |
 | <img src="cachedimages/-grFRvy4tIDaHZEsylnhggHxTg318mFeGyKFl9QcyXhg.jpg" height="48"> | Flaskepost fra Stillehavet                           |         26 | 910        |          4.4 |     1.1 |
 | <img src="cachedimages/-pTiuj5k8AOyNNV0mfeL_QkxBZKD5kn99B0rwk9A2ulg.jpg" height="48"> | Bablo                                                |         68 | 6,186      |          4.4 |     7.6 |
-| <img src="cachedimages/-qCB376AHjqiyz1VClIt9w55XYOHGcQfx-tERlka71IQ.jpg" height="48"> | Rot X                                                |          1 | 35         |          4.2 |     0   |
+| <img src="cachedimages/-qCB376AHjqiyz1VClIt9w55XYOHGcQfx-tERlka71IQ.jpg" height="48"> | Rot X                                                |          8 | 210        |          4.4 |     0.3 |
 | <img src="cachedimages/-t8okcnEGKM447hoL06_QAt8qlT4J9FurBQBCjCEo9OA.jpg" height="48"> | Wallace og Gromit                                    |         14 | 432        |          4.1 |     0.5 |
 | <img src="cachedimages/0Uz9PzOxTAgM8UXrokgc1Q5F_R4ywY1xW73epCyF0BPA.jpg" height="48"> | Tikk takk                                            |          1 | 3          |          2.9 |     0   |
 | <img src="cachedimages/0WRU_kV5LPd7AzCFayFhZAtpYnDFBN6MZYC0MefHD7hw.jpg" height="48"> | ORPS                                                 |          8 | 1,613      |          4.6 |     2   |
@@ -576,7 +576,7 @@
 | <img src="cachedimages/SKiIb2G69B9XQRzsruB4QAnfejpWHXhj4yGjSiEmp5WA.jpg" height="48"> | Nødt eller Sannhet                                   |         13 | 2,564      |          4.4 |     3.2 |
 | <img src="cachedimages/SRjt9_bHFEHJBL8q-CEZ6gI-pz0TWkCdAHZmHiFuu9Xw.jpg" height="48"> | Klassen Sverige                                      |        104 | 12,487     |          4.6 |    15.9 |
 | <img src="cachedimages/SU10_3vz1HvtZCykj5jOHAOxAsI6XThXz1fvtqvAfVhA.jpg" height="48"> | Sykampen                                             |          5 | 726        |          4.8 |     1   |
-| <img src="cachedimages/TIP9QUOThq3QFamCBCY47QsU0CN9rPgkGTz6cCJ1-6UA.jpg" height="48"> | Fantasity                                            |          2 | 57         |          4   |     0.1 |
+| <img src="cachedimages/TIP9QUOThq3QFamCBCY47QsU0CN9rPgkGTz6cCJ1-6UA.jpg" height="48"> | Fantasity                                            |         13 | 1,474      |          5   |     2   |
 | <img src="cachedimages/TPrB0UfSc-ASQ_rFD9BXiwrTtGR-IdTRJRz_y12rnW5g.jpg" height="48"> | Brødrene Dal og spektralsteinene                     |         13 | 1,139      |          5   |     1.6 |
 | <img src="cachedimages/Thn8xVfBPGdvuMKy9NyTjQ0M6ZX-yw9wK8JXmb_HrQug.jpg" height="48"> | FlippKlipp                                           |         34 | 6,882      |          4   |     7.7 |
 | <img src="cachedimages/TmzWmDmnzuHtz_LGqh6lSgA-5u8JQREHsbp06mbIH29w.jpg" height="48"> | Jentene på Malory                                    |         26 | 7,525      |          4.5 |     9.4 |
@@ -617,13 +617,14 @@
 | <img src="cachedimages/cB6AzoML9OuyxTf0iD4PDwV0x6lwqnLQzb7Xbo7P_EMA.jpg" height="48"> | Lesekorpset                                          |         25 | 2,474      |          4.4 |     3   |
 | <img src="cachedimages/cGpFpYxKNcm6QnNlXFfilQOfGuwTpBeoqhjEmngMBkyg.jpg" height="48"> | Musikkquiz                                           |         18 | 428        |          4.1 |     0.5 |
 | <img src="cachedimages/cHeHnlqGUV81-rDq5X-EdA_3SrnQfqaWe8i20nHjO35Q.jpg" height="48"> | Tema - Overgrep                                      |          5 | 142        |          4.2 |     0.2 |
-| <img src="cachedimages/cLwS0VcSw2WHzxncibfsfAYpZh2HxSGZuypuvM5wdWqQ.jpg" height="48"> | Barne-TV                                             |          3 | 36         |          7.3 |     0.1 |
+| <img src="cachedimages/cLwS0VcSw2WHzxncibfsfAYpZh2HxSGZuypuvM5wdWqQ.jpg" height="48"> | Barne-TV                                             |         62 | 707        |          4.5 |     0.9 |
 | <img src="cachedimages/cOeiy_lgN2_5-wsVdqLS5Qmkr3ZPHR_wXwX9vyoHY0xw.jpg" height="48"> | Fjellgården i Trollheimen                            |         12 | 1,208      |          4.4 |     1.5 |
 | <img src="cachedimages/cfeyUGYhxw6vi0rsi0YZhgGJ8kywKJHcp-xAoN2oIp2g.jpg" height="48"> | 9liv                                                 |         39 | 1,536      |          4.8 |     2.1 |
 | <img src="cachedimages/cqCFuyllEigBfq5M1Sw46ASxDZIpaDGPbksJsXa9CQvg.jpg" height="48"> | Sånn er jeg, og sånn er det                          |          5 | 907        |          4.1 |     1   |
 | <img src="cachedimages/dSUBwAGsYsdZZebps4LSggVC6y5uKTfMFfdUkS8YGsxw.jpg" height="48"> | Min venn Marlon                                      |         13 | 1,511      |          4.4 |     1.9 |
 | <img src="cachedimages/eUJ7Za9TdqrGNv74kN9YRgeIym4v7EygtxkBlVCbsbqQ.jpg" height="48"> | Helt hekta                                           |         25 | 7,554      |          4.1 |     8.6 |
 | <img src="cachedimages/eXniIV6XKrasMyDJtVdz-wW6bzvyjQ58YuoGZdqtGiMg.jpg" height="48"> | Svampebob                                            |         11 | 2,866      |          4.2 |     3.3 |
+| <img src="cachedimages/e_yvIAywYDRU6bPPBHFQag7UyFJ0G35pFVZHSppSTVkg.jpg" height="48"> | Supernytt og jakten på sannheten                     |          5 | 239        |          5   |     0.3 |
 | <img src="cachedimages/eavTCYo7SqSlam8RP9RB2grsaQa7wIamq2uT0cO9sn-A.jpg" height="48"> | Fantus og maskinene                                  |         20 | 658        |          4.2 |     0.8 |
 | <img src="cachedimages/f47oExafh0wGfPiQc32MQwhWuPFuvV1m8GULRRpcNmzg.jpg" height="48"> | Sangfoni X                                           |         35 | 482        |          4.7 |     0.6 |
 | <img src="cachedimages/fR548qPzQ3KI4KhLngI4ugaiZiC6V20d0hV3JKaF8vGw.jpg" height="48"> | Min funky familie                                    |          4 | 1,243      |          4.8 |     1.7 |
@@ -659,7 +660,7 @@
 | <img src="cachedimages/mFisK3VxuNrLXbkVJidO1gb7dmEKmFGL0T3XxJ_i-c3Q.jpg" height="48"> | Buhtabággi                                           |          4 | 573        |          4.5 |     0.7 |
 | <img src="cachedimages/mh-M7o4JiaUB_MonBzTBhgDxU61xHLc4R8OVkSxhyFmw.jpg" height="48"> | Ponniskolen                                          |         31 | 8,849      |          5   |    12.3 |
 | <img src="cachedimages/nJXVR65Qntxo8Pj2kx6ddwcqAicuaBzb2pOa6xGNdmwQ.jpg" height="48"> | Supernytt med tegntolk                               |          1 | 76         |          5.7 |     0.1 |
-| <img src="cachedimages/nKAi36-wFzKdi2x-iTsfogPlJCBrmSSTXVq_j0aP7rWw.jpg" height="48"> | Kaptein Sabeltann                                    |          1 | 26         |          4.1 |     0   |
+| <img src="cachedimages/nKAi36-wFzKdi2x-iTsfogPlJCBrmSSTXVq_j0aP7rWw.jpg" height="48"> | Kaptein Sabeltann                                    |          2 | 45         |          4.6 |     0.1 |
 | <img src="cachedimages/nPs9Ez0W5KKh9xOcoqXlBwbKrwIJA23fomjUo65S-yeQ.jpg" height="48"> | Flukta frå Dyreskogen                                |          2 | 409        |          4.1 |     0.5 |
 | <img src="cachedimages/nyXtXYXDXC3vbeQxosEN1wC6wQBiAAO3Mgo8uDBkxUKw.jpg" height="48"> | Linus i Svingen                                      |          6 | 1,256      |          3.4 |     1.2 |
 | <img src="cachedimages/o3SXdPQmZg2mXxy8f94_qQEfkQIXYco-G4i5v0MGjSqg.jpg" height="48"> | Pip og Poppy                                         |         10 | 1,001      |          4.3 |     1.2 |
@@ -747,7 +748,7 @@
 | <img src="cachedimages/18GMjE3n-NRc6hakKAJVdA0em_mmuwJgEMDSCT9hWTXQ.jpg" height="48"> | Sjette gir                                         |          8 | 4,203      |          4.8 |     5.6 |
 | <img src="cachedimages/3dbcxPqjwjwi5za_7Fl73AY7fbHW7_RWopQpUHvRRwIA.jpg" height="48"> | Mitt liv med hund                                  |          7 | 914        |          5.1 |     1.3 |
 | <img src="cachedimages/47v7HDfpjZQlzDzasT7PAAOGzaocdjELjjGojdtkr-NA.jpg" height="48"> | Hva har du i bagasjen?                             |         17 | 1,824      |          4.5 |     2.3 |
-| <img src="cachedimages/7pIUiFsU6H2E-_ToAujqfAQCysqubGPRCMGliVk6vV0g.jpg" height="48"> | Kroppsspråk                                        |          1 | 300        |          5.2 |     0.4 |
+| <img src="cachedimages/7pIUiFsU6H2E-_ToAujqfAQCysqubGPRCMGliVk6vV0g.jpg" height="48"> | Kroppsspråk                                        |          6 | 1,961      |          5.2 |     2.8 |
 | <img src="cachedimages/8fTTz2owcL0ZiVaYkOjrZQEMW69Gx3qcT5BcuCNahYbg.jpg" height="48"> | Når kjemien stemmer                                |         12 | 3,833      |          4.8 |     5.1 |
 | <img src="cachedimages/A4_MVtKfJwp2cwMuOzHR0gUnc2LVAOktk5YKmhawiixA.jpg" height="48"> | Line dater Norge                                   |          6 | 2,076      |          4.9 |     2.8 |
 | <img src="cachedimages/AH-yqy7DEGzWJfUtHZEKTQ0Ty5Md_VSA8azmCY9jH-dg.jpg" height="48"> | Pridefest                                          |          2 | 1,475      |          6.5 |     2.6 |
@@ -777,7 +778,7 @@
 | <img src="cachedimages/YevnF3xRb2xEGR2IVxIIcw7t9hECuUPw6FmELoI-HphQ.jpg" height="48"> | Mensen                                             |         11 | 2,150      |          5.2 |     3.1 |
 | <img src="cachedimages/_RzcgBbVP1ayXIp0atg3mQ0DvL2Z7W-haUXVYc7Jpl8A.jpg" height="48"> | Fotballkrigen                                      |          6 | 1,002      |          4.5 |     1.3 |
 | <img src="cachedimages/_sVC-eT0BIzi29gUTmQrAwrStdpuE1FAF5Y_gjOQ8tWw.jpg" height="48"> | Bokekspedisjonen                                   |         13 | 3,720      |          5.4 |     5.6 |
-| <img src="cachedimages/_vp8lH7mELr2zr1NZJ8HxgjhmtNyP-LJTVVUMLKCW2eA.jpg" height="48"> | Folkeopplysningen                                  |         28 | 4,856      |          4.8 |     6.4 |
+| <img src="cachedimages/_vp8lH7mELr2zr1NZJ8HxgjhmtNyP-LJTVVUMLKCW2eA.jpg" height="48"> | Folkeopplysningen                                  |         29 | 5,265      |          4.8 |     7.1 |
 | <img src="cachedimages/_yfdB3zfasU0rLtreMyhhA6ZyNjcHh3rJsP0Psq9yAbQ.jpg" height="48"> | Revy-portretter                                    |          6 | 1,565      |          5.3 |     2.3 |
 | <img src="cachedimages/dIeap87bDxZrP7eZMF44kA_YhMDRkuojrAdYMM44CVCA.jpg" height="48"> | Norges smarteste                                   |          1 | 553        |          5   |     0.8 |
 | <img src="cachedimages/f6528kTj9_FivIHZU8TSUQhaznRd8EOHn85w6-WrqqEw.jpg" height="48"> | Melkeveien - samisk versjon                        |          6 | 1,199      |          4.9 |     1.6 |
@@ -1333,6 +1334,7 @@
 | <img src="cachedimages/W1nEoPc3yn9YcGc50hpUZAvalsFclUZc-OIeSAbrFJCw.jpg" height="48"> | Takin Ova - Historien om norsk hiphop                    |          4 | 1,248      |          4.7 |     1.6 |
 | <img src="cachedimages/WN5QdJ1MTJKlhUm2zB06xQr_V_qsmEryWN_y0cdQDE6A.jpg" height="48"> | Messias                                                  |          4 | 1,178      |          4.8 |     1.6 |
 | <img src="cachedimages/X6Gksr29cPMpibhSyZjKzQW864Yv46ths4XQpHAsmSQw.jpg" height="48"> | Zoeys spilleliste                                        |         11 | 5,823      |          4.5 |     7.2 |
+| <img src="cachedimages/XAVkdMu0ONFAC3aSo-A_uQYLOyxmqCGwS60esHQJ0FGw.jpg" height="48"> | Kulturoperatørene                                        |         30 | 2,251      |          5.6 |     3.5 |
 | <img src="cachedimages/XyxfBzlyVfwAjRjdADVQ_gQn4CpJbQ3U_NzqHyBnr20g.jpg" height="48"> | Skamløs                                                  |          3 | 933        |          5.3 |     1.4 |
 | <img src="cachedimages/XzV3bmQGgtE0y72-6lKDUwmFjTcPxDg4S-Jic2GwWv9g.jpg" height="48"> | Gastronomi                                               |          6 | 472        |          5   |     0.7 |
 | <img src="cachedimages/Y1mKuFOf8QrBnAaowW1rLwFnENIDEwYPmwdoLyaZfprQ.jpg" height="48"> | Arkitektens hjem                                         |         37 | 9,824      |          5.1 |    14.1 |
@@ -1610,6 +1612,36 @@
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Tilbake til Oscarsborg               |          1 | 173        |          5.1 |     0.2 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Vatn på børs                         |          1 | 462        |          5.1 |     0.7 |
 
+## vitenskap
+|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
+|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 1,540      |          4.8 |     2.1 |
+| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,562      |          4.7 |     2   |
+| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 376        |          5.1 |     0.5 |
+| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 731        |          5.2 |     1.1 |
+| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 355        |          4.9 |     0.5 |
+| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |          2 | 953        |          5.6 |     1.5 |
+| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          7 | 2,058      |          4.4 |     2.5 |
+| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 535        |          5.2 |     0.8 |
+| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 829        |          4.8 |     1.1 |
+| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 461        |          4.5 |     0.6 |
+| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          2 | 20         |          5.4 |     0   |
+| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 1,712      |          4.6 |     2.2 |
+| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |         97 | 10,249     |          4.8 |    13.7 |
+| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 3,770      |          4.9 |     5.2 |
+| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,100      |          4.8 |     2.8 |
+| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         36 | 11,733     |          4.5 |    14.7 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 328        |          4.7 |     0.4 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 508        |          5.7 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 190        |          4.8 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 534        |          5.6 |     0.8 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 229        |          4.8 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 488        |          5.3 |     0.7 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 495        |          4.3 |     0.6 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 237        |          5.1 |     0.3 |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1          |          4.4 |     0   |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 726        |          5.4 |     1.1 |
+
 ## sport
 |                                                                                       | title                           |   programs | segments   |   average(s) |   hours |
 |:--------------------------------------------------------------------------------------|:--------------------------------|-----------:|:-----------|-------------:|--------:|
@@ -1625,6 +1657,7 @@
 | <img src="cachedimages/Hw92gNrmmcjUaVbxAs45ugLqYzPi2qDRWCni6Ivw8zjA.jpg" height="48"> | Enter e-sport                   |          4 | 409        |          4.4 |     0.5 |
 | <img src="cachedimages/KGGC_82lw9hTb2-rBK0H6QBKqb2Myzbxly87XI6ABX6A.jpg" height="48"> | Skiskyting                      |          1 | 827        |          4.3 |     1   |
 | <img src="cachedimages/LpB8JARXBZ126Z-NsQIVmQDicE3iIgxo-a2V1ZHH_CUw.jpg" height="48"> | Special Olympics                |          2 | 1,015      |          4.9 |     1.4 |
+| <img src="cachedimages/OT-Z4Y64V0GT8kqJZg-c0wtBOWmxeykmI7DdHXpiODOA.jpg" height="48"> | Sportsrevyen                    |          4 | 582        |          5.1 |     0.8 |
 | <img src="cachedimages/c-__N39RCKEJOfvSdVwYjQheXRWQLVH20JkHcxN9HzUg.jpg" height="48"> | Smæsj                           |          6 | 945        |          5   |     1.3 |
 | <img src="cachedimages/dKpADZARXsDgi7vDIqagYQ9QIHwSZOLZvimjTjohvrtQ.jpg" height="48"> | Sportsdokumentar                |         10 | 2,241      |          5.1 |     3.2 |
 | <img src="cachedimages/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ.jpg" height="48"> | Min idrett                      |         20 | 904        |          5.3 |     1.3 |
@@ -1667,36 +1700,6 @@
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Tre rein og en leilighet          |          1 | 174        |          4.6 |     0.2 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Viddas voktere                    |          1 | 90         |          5.4 |     0.1 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Åndelig mote                      |          1 | 174        |          5.6 |     0.3 |
-
-## vitenskap
-|                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
-|:--------------------------------------------------------------------------------------|:------------------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="cachedimages/1GSwrC2sninPJrAn7xi--gmumSh_94j09ECzWClHbWBQ.jpg" height="48"> | I hjernen til en morder                         |          3 | 1,540      |          4.8 |     2.1 |
-| <img src="cachedimages/1YqiAEjmJi0mCZ9AZxhvCgZecQ3H4QJ-hQ4JNTX5PyKw.jpg" height="48"> | Gintberg, Eskelund og den djupe tallerken       |          4 | 1,562      |          4.7 |     2   |
-| <img src="cachedimages/1l6jlsyXeTzmaaJaoKkyywS1MGLuYrteBCMixhRYOiRw.jpg" height="48"> | Norske røter                                    |          3 | 376        |          5.1 |     0.5 |
-| <img src="cachedimages/2PI4GT8XO2EGIB8RZdcwJAbsGrc8rAfERQQGDgtqDpjA.jpg" height="48"> | Arkeologene                                     |          8 | 731        |          5.2 |     1.1 |
-| <img src="cachedimages/4QibeS2dV0vDuTXQN7QIjQJxFvYkhmeqwQpawotpN2Bw.jpg" height="48"> | Teknologien som forandrer oss                   |          4 | 355        |          4.9 |     0.5 |
-| <img src="cachedimages/D2u6-EyVUZpVCq0PdSNHRgsHwFWbuIdVVVG-qRkExqBA.jpg" height="48"> | Kunnskapskanalen                                |          2 | 953        |          5.6 |     1.5 |
-| <img src="cachedimages/DOBcbTh3tG3GezlAbHK2jQWVTQ9StDMyuhnYLEqhKj5A.jpg" height="48"> | Med livet som innsats                           |          7 | 2,058      |          4.4 |     2.5 |
-| <img src="cachedimages/FkFi7GEhqWwSDbH0Swl-Lwv_7RbguWMB1tcHSis13Gvw.jpg" height="48"> | Kampen om livet                                 |          8 | 535        |          5.2 |     0.8 |
-| <img src="cachedimages/PrKFap6iWo3VU0H7hvC6-wBLqhURVlF97zFJ2H0cecnQ.jpg" height="48"> | Verdas største polarekspedisjon                 |          2 | 829        |          4.8 |     1.1 |
-| <img src="cachedimages/_CprarUVlvdNpABnYHK6CQtt4gmjLwCRTHpf-X4ZTiJg.jpg" height="48"> | Evig ung                                        |          5 | 461        |          4.5 |     0.6 |
-| <img src="cachedimages/g5rrZQn_x2ICmeNu4mrfkgHGEVS9q-QV8CcRZdRsqMSA.jpg" height="48"> | En kilde klar og ren                            |          2 | 20         |          5.4 |     0   |
-| <img src="cachedimages/hrLqmhfo7vWLzslODBbAmA0nldeq4QVjqv7bZKwrdnBw.jpg" height="48"> | Kjærlighetens laboratorium                      |          7 | 1,712      |          4.6 |     2.2 |
-| <img src="cachedimages/lkCYlcV9C8NcqAW5vOmsJw4-YFgwxIiPFp4em-rEqa9A.jpg" height="48"> | Schrödingers katt                               |          6 | 1,277      |          5.4 |     1.9 |
-| <img src="cachedimages/lq_yI4kBBDWjq72BR4_KLQW3qxwx3Fww6BVIilke3Ulw.jpg" height="48"> | Viten og vilje                                  |         15 | 3,770      |          4.9 |     5.2 |
-| <img src="cachedimages/ohFxd5-uzUehxs2O5PSqnwgbWvpXM-xMDYCy4UCSRT5g.jpg" height="48"> | Det aller verste - fra Ikke gjør dette hjemme   |          6 | 2,100      |          4.8 |     2.8 |
-| <img src="cachedimages/p-eMJ2M8vmEVSGgeQ8nxEQvaH1vDz95xLeY2P4fZcs-Q.jpg" height="48"> | Ikke gjør dette hjemme                          |         36 | 11,733     |          4.5 |    14.7 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | 72 timer uten søvn                              |          1 | 328        |          4.7 |     0.4 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | En overvåket verden                             |          1 | 508        |          5.7 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Fremtidsteknologi på 20 minutter                |          1 | 190        |          4.8 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Hvem kjører?                                    |          1 | 534        |          5.6 |     0.8 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Observatoriet                                   |          1 | 229        |          4.8 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Psykedelika mot depresjon?                      |          1 | 488        |          5.3 |     0.7 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Sjølberga                                       |          1 | 495        |          4.3 |     0.6 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Spis deg smart                                  |          1 | 237        |          5.1 |     0.3 |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | Vendepunktet - miljøkampen som ble en urfolksak |          1 | 1          |          4.4 |     0   |
-| <img src="cachedimages/placeholder.jpg" height="48">                                  | iHUMAN                                          |          1 | 726        |          5.4 |     1.1 |
 
 ## familie
 |                                                                                       | title                    |   programs | segments   |   average(s) |   hours |
