@@ -4,7 +4,7 @@
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | vitenskap | 220.4 | 0.0                  |        **220.4** |
 | dokumentar | 727.9 | 0.0                  |        **727.9** |
-| barn | 1,214.0 | 0.0                  |        **1,214.0** |
+| barn | 1,214.1 | 0.0                  |        **1,214.1** |
 | underholdning | 200.7 | 0.0                  |        **200.7** |
 | livsstil | 490.8 | 0.0                  |        **490.8** |
 | natur | 248.0 | 0.0                  |        **248.0** |
@@ -18,7 +18,7 @@
 | samisk | 14.9 | 0.0                  |        **14.9** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,742.9** | **0.0**                  |        **4,742.9** |
+| **total** | **4,743.0** | **0.0**                  |        **4,743.0** |
 
 ## vitenskap
 |                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
@@ -733,7 +733,7 @@
 | <img src="cachedimages/xiJQeV_idH53izdM4jmu1wmL38vvOUqUQiXYZxiOgFVA.jpg" height="48"> | Ghost Rockers                                        |         65 | 8,169      |          4.7 |    10.7 |
 | <img src="cachedimages/xwtdU9elX3IK5DEx0We6oQc-90UEg3eTRI5CFXvZ9RJQ.jpg" height="48"> | Fride på skipet                                      |         10 | 642        |          5.3 |     0.9 |
 | <img src="cachedimages/xz37b28McsygDFxop4IxGQVwVSgImL7IHn6UX2tGEwNA.jpg" height="48"> | Krimteam 5                                           |         36 | 11,238     |          4.7 |    14.7 |
-| <img src="cachedimages/y2H5ybA2Bm6022ZnEHEQdQZYe_OOY1kaX-l7t3yJyCMQ.jpg" height="48"> | Supernytt                                            |         78 | 6,956      |          5.3 |    10.2 |
+| <img src="cachedimages/y2H5ybA2Bm6022ZnEHEQdQZYe_OOY1kaX-l7t3yJyCMQ.jpg" height="48"> | Supernytt                                            |         80 | 7,049      |          5.3 |    10.4 |
 | <img src="cachedimages/yXOnmZzFZIR1eDhbfVEVqg7MgrBo4Wd1o0OCa4caUO2Q.jpg" height="48"> | Livet - sanger                                       |         13 | 361        |          4.3 |     0.4 |
 | <img src="cachedimages/yuTYGnjM787XygSxux7KdgpB0Q7SJPqqBV9fhrx2zPsg.jpg" height="48"> | Moka                                                 |         27 | 1,528      |          4.9 |     2.1 |
 | <img src="cachedimages/z-QLxss-Mnw7TW9XAmrz1A5y0BvAzrpZhu4s51LiP08Q.jpg" height="48"> | Zack & Quack                                         |         37 | 4,943      |          4.1 |     5.7 |
