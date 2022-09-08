@@ -2,7 +2,7 @@
 ## SUMMARY - hours
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
-| barn | 1,768.8 | 0.0                  |        **1,768.8** |
+| barn | 1,769.1 | 0.0                  |        **1,769.1** |
 | drama-serier | 971.9 | 0.0                  |        **971.9** |
 | dokumentar | 1,076.0 | 0.0                  |        **1,076.0** |
 | sport | 153.8 | 0.0                  |        **153.8** |
@@ -18,7 +18,7 @@
 | underholdning | 380.2 | 0.0                  |        **380.2** |
 | film | 7.0 | 0.0                  |        **7.0** |
 | unknown | 4.3 | 0.0                  |        **4.3** |
-| **total** | **7,354.6** | **0.0**                  |        **7,354.6** |
+| **total** | **7,354.9** | **0.0**                  |        **7,354.9** |
 
 ## barn
 |                                                                                       | title                                                |   programs | segments   |   average(s) |   hours |
@@ -324,7 +324,7 @@
 | <img src="cachedimages/xiJQeV_idH53izdM4jmu1wmL38vvOUqUQiXYZxiOgFVA.jpg" height="48"> | Ghost Rockers                                        |         65 | 30,965     |          1.3 |    11.5 |
 | <img src="cachedimages/xwtdU9elX3IK5DEx0We6oQc-90UEg3eTRI5CFXvZ9RJQ.jpg" height="48"> | Fride på skipet                                      |         10 | 3,152      |          1.9 |     1.7 |
 | <img src="cachedimages/xz37b28McsygDFxop4IxGQVwVSgImL7IHn6UX2tGEwNA.jpg" height="48"> | Krimteam 5                                           |         36 | 42,103     |          1.2 |    14   |
-| <img src="cachedimages/y2H5ybA2Bm6022ZnEHEQdQZYe_OOY1kaX-l7t3yJyCMQ.jpg" height="48"> | Supernytt                                            |         81 | 16,538     |          2.9 |    13.3 |
+| <img src="cachedimages/y2H5ybA2Bm6022ZnEHEQdQZYe_OOY1kaX-l7t3yJyCMQ.jpg" height="48"> | Supernytt                                            |         83 | 16,831     |          2.9 |    13.6 |
 | <img src="cachedimages/yTdIPaJl0sMlPu3AUaG6hgmj5Iryx_-rMDMrbUgQUQrg.jpg" height="48"> | Idiotiatlon                                          |          8 | 6,464      |          2   |     3.6 |
 | <img src="cachedimages/yXOnmZzFZIR1eDhbfVEVqg7MgrBo4Wd1o0OCa4caUO2Q.jpg" height="48"> | Livet - sanger                                       |         14 | 290        |          6.9 |     0.6 |
 | <img src="cachedimages/yuTYGnjM787XygSxux7KdgpB0Q7SJPqqBV9fhrx2zPsg.jpg" height="48"> | Moka                                                 |         27 | 4,853      |          2.3 |     3.1 |
