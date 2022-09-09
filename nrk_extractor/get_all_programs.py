@@ -8,6 +8,7 @@ import sys
 import argparse
 import isodate
 import csv
+import dateutil.parser
 
 def main(args):
     error = 0
@@ -42,6 +43,8 @@ def main(args):
                 target_type ="targetType"
 
             for categories in res["categories-"+medium][page_items]:
+                print(f'\n\n* Parsing {categories["_links"]["self"]["href"]}')
+
                 murl = "https://psapi.nrk.no/"+categories["_links"]["self"]["href"]
                 r = requests.get(murl)
                 if r.status_code != 200:
@@ -61,69 +64,119 @@ def main(args):
                         all_episodes_ids = []
                         first_prod_year = 2022
                         last_prod_year = 0
-                        
 
+                        #print(programs[target_type])
                         if programs[target_type] == "series":
                             try:
                                 theserie = get_serie_json(programs['series']['_links']['self']['href'], medium)
+                                program_title = programs['displayContractContent']['contentTitle']
                             except:
-                                print("Seems like just an empty serie image. Skipping")
-                                continue
+                                theserie = get_serie_json(programs['_links']['series'],medium)
+                                program_title = programs['series']['titles']['title']
 
-                            for seasons in theserie['_embedded']['seasons']:
-                                #Loop through the episodes
-                                #The errors here seem to be stuff that are not episodes. Just ignore
-                                single = False
+                            
+                            try:
+                                for seasons in theserie['_embedded']['seasons']:
+                                    #Loop through the episodes
+                                    #The errors here seem to be stuff that are not episodes. Just ignore
+                                    single = False
 
-                                try:
-                                    for episodes in seasons['_embedded']['episodes']:
-                                        num_episodes += 1
-                                        all_episodes_ids.append(episodes['prfId'])
-                                        if episodes['productionYear'] <= first_prod_year:
-                                            first_prod_year = episodes['productionYear']
-                                        if episodes['productionYear'] >= last_prod_year:
-                                            last_prod_year = episodes['productionYear']
-                                        if first_episode_id == 0:
-                                            first_episode_id = episodes['prfId']
-                                    
-                                        seconds += isodate.parse_duration(episodes['duration']).total_seconds()
-                                except:
-                                    #breakpoint()
-                                    #print("Missing data. Skipping. Just ignore this if it is not too many.")
-                                    error = 1
-                                    continue
+                                    try:
+                                        for episodes in seasons['_embedded']['episodes']:
+                                            num_episodes += 1
+                                            all_episodes_ids.append(episodes['prfId'])
+                                            if episodes['productionYear'] <= first_prod_year:
+                                                first_prod_year = episodes['productionYear']
+                                            if episodes['productionYear'] >= last_prod_year:
+                                                last_prod_year = episodes['productionYear']
+                                            if first_episode_id == 0:
+                                                first_episode_id = episodes['prfId']
+                                        
+                                            seconds += isodate.parse_duration(episodes['duration']).total_seconds()
+                                    except:
+                                        #breakpoint()
+                                        #print("Missing data. Skipping. Just ignore this if it is not too many.")
+                                        error = 1
+                                        continue
+                            except:
+                                #Runs only if there are no seasons
+                                season = theserie['_embedded']['episodes']
+                                for episodes in season['_embedded']['episodes']:
+                                            num_episodes += 1
+                                            all_episodes_ids.append(episodes['_links']['self']['href'].split('/')[-1])
+                                            if episodes['productionYear'] <= first_prod_year:
+                                                first_prod_year = episodes['productionYear']
+                                            if episodes['productionYear'] >= last_prod_year:
+                                                last_prod_year = episodes['productionYear']
+                                            if first_episode_id == 0:
+                                                first_episode_id = episodes['_links']['self']['href'].split('/')[-1]
+
+                                            seconds += isodate.parse_duration(episodes['duration']).total_seconds()
+
 
                         elif (programs[target_type] == "standaloneProgram") or (programs[target_type] == "episode"):
+                            
                             #Get meta information for this program
                             try:
                                 theprogram = get_program_json(programs[programs[target_type]]['_links']['self']['href'])
                             except:
-                                print("Seems like just an empty program image. Skipping")
-                                continue
+                                try:
+                                    theprogram = get_program_json(programs['_links'][programs[target_type]])
+                                except:
+                                    theprogram = get_program_json(programs['_links']['program'])
 
                             first_prod_year = last_prod_year = theprogram['productionYear']
                             seconds += isodate.parse_duration(theprogram['duration']).total_seconds()
                             first_episode_id = theprogram['id']
                             all_episodes_ids.append(theprogram['id'])
+                            
+                            try:
+                                program_title = programs['displayContractContent']['contentTitle']
+                            except:
+                                try:
+                                    program_title = programs[programs[target_type]]['titles']['title']
+                                except:
+                                    program_title = programs['program']['titles']['title']
+
                             num_episodes = 1
                             single = True
                        
                         elif programs[target_type] == "podcastEpisode":
-                            breakpoint()
-                            print("PodcastEpisode - skipping")
-                            continue
+                            theprogram = get_program_json(programs['_links']['podcastEpisode'])
+                            seconds += isodate.parse_duration(theprogram['duration']).total_seconds()
+                            first_prod_year = last_prod_year = dateutil.parser.isoparse(theprogram['publishedAt']).year
+                            first_episode_id = theprogram['_links']['self']['href'].split('/')[-1]
+                            all_episodes_ids.append(first_episode_id)
+                            program_title = programs['podcastEpisode']['titles']['title']
+                            num_episodes = 1
+                            single = True
                         
                         elif programs[target_type] == "podcast":
-                            print("Podcast - skipping")
-                            continue
+                            thepodcast = get_podcast_json(programs['_links']['podcast'])
+
+                            for episode in thepodcast['_embedded']['episodes']['items']:
+                                year = dateutil.parser.isoparse(episode['publishedAt']).year
+                                if year <= first_prod_year:
+                                            first_prod_year = year
+                                if year >= last_prod_year:
+                                            last_prod_year = year
+                                seconds += isodate.parse_duration(episode['duration']).total_seconds()
+                                if first_episode_id == 0:
+                                    first_episode_id = episode['_links']['podcastEpisode']['href'].split('/')[-1]
+                                all_episodes_ids.append(first_episode_id)
+                                num_episodes = len(thepodcast['_embedded']['episodes']['items'])
+
+                            program_title = programs['podcast']['titles']['title']
+                            num_episodes = programs['podcast']['numberOfEpisodes']
+                            single = False
 
                         elif programs[target_type] == "channel":
-                            print("Channel - skipping")
+                            print("Channel - skipping!")
                             continue
 
                         else:
-                            print("never seen this type before")
-                            breakpoint()
+                            print("Unknown - skipping!")
+                            continue
 
                         if error == 0:
                             #Clean up variables
@@ -131,7 +184,7 @@ def main(args):
                                 cat_title = "Undefined"
                             else:
                                 cat_title = series['included']['title']
-                            program_title = programs['displayContractContent']['contentTitle']
+                            
 
                             #print(f"{cat_title} -  {program_title} - {first_prod_year} - {last_prod_year} - {nr_episodes} - {first_episode_id} - array({len(all_episodes_ids)}) - {round(seconds)}")
 
@@ -159,6 +212,16 @@ def get_serie_json(seriename,medium):
         raise Exception("Failed to load metadata from '%s'" % surl)
 
     return(json.loads(r.text))
+
+def get_podcast_json(podcast):
+    surl = "https://psapi.nrk.no/"+podcast
+
+    r = requests.get(surl)
+    if r.status_code != 200:
+        raise Exception("Failed to load metadata from '%s'" % surl)
+
+    return(json.loads(r.text))
+
 
 def get_program_json(programpath):
     surl = "https://psapi.nrk.no"+programpath
