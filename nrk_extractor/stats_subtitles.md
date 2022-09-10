@@ -6,10 +6,10 @@
 | dokumentar | 727.9 | 0.0                  |        **727.9** |
 | barn | 1,214.1 | 0.0                  |        **1,214.1** |
 | underholdning | 200.7 | 0.0                  |        **200.7** |
-| livsstil | 490.8 | 0.0                  |        **490.8** |
+| livsstil | 494.7 | 0.0                  |        **494.7** |
 | natur | 248.0 | 0.0                  |        **248.0** |
 | drama-serier | 825.1 | 0.0                  |        **825.1** |
-| kultur | 385.7 | 0.0                  |        **385.7** |
+| kultur | 414.0 | 0.0                  |        **414.0** |
 | humor | 203.0 | 0.0                  |        **203.0** |
 | nrk-arkivet | 78.8 | 0.0                  |        **78.8** |
 | nyheter | 50.4 | 0.0                  |        **50.4** |
@@ -18,7 +18,7 @@
 | samisk | 14.9 | 0.0                  |        **14.9** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,743.0** | **0.0**                  |        **4,743.0** |
+| **total** | **4,775.2** | **0.0**                  |        **4,775.2** |
 
 ## vitenskap
 |                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
@@ -865,6 +865,7 @@
 | <img src="cachedimages/7o8cWR1-9TCXgk5GAI7PWQNXUxFg3Ob1uHAxkD-fF8aQ.jpg" height="48"> | 100 falske forelskelser                              |          4 | 1,184      |          4.7 |     1.6 |
 | <img src="cachedimages/8RwBd9nFLjifxB1RFd4PIwFUPX9Y8yhb5_BkslxJYEdQ.jpg" height="48"> | Ganefryd                                             |          2 | 76         |          4.5 |     0.1 |
 | <img src="cachedimages/8uWOMCkNAO2u_K0xdVP78gEx1lrtZ85gaUBJUioUM23g.jpg" height="48"> | Ikke spør om det                                     |         20 | 4,833      |          4.9 |     6.6 |
+| <img src="cachedimages/9QOo4XZuEuG92f1NrlX5TQ8wxL1ULCc3evTVrp-nlp1A.jpg" height="48"> | Fjernsynskjøkkenet                                   |          7 | 1,418      |          5.1 |     2   |
 | <img src="cachedimages/9jYujECDZYuDXOnA5IUTrgvOpUrdst-DUanmejhVd-zQ.jpg" height="48"> | Montys hageverden                                    |         25 | 14,793     |          5.2 |    21.5 |
 | <img src="cachedimages/9sdCr0hQjD1gT7ByrHG2UA2E_6LbOfu4d5IsuXSVPYjg.jpg" height="48"> | Under huden                                          |          4 | 477        |          5.2 |     0.7 |
 | <img src="cachedimages/AaoiOaD1TjjPq8KIUY_TKAWJZE-tDa_yBDGR5-jCfggQ.jpg" height="48"> | Skårungen                                            |         10 | 5,436      |          5   |     7.5 |
@@ -911,7 +912,7 @@
 | <img src="cachedimages/Zumo_onlhQ4BjtKIhssEHwBGz93Rj1GLJXOjYZhXK7Pg.jpg" height="48"> | Naturligvis                                          |          5 | 1,674      |          5.5 |     2.5 |
 | <img src="cachedimages/_LC8qfKgUIk4brlzFSuekQualtjbLVhA0VBhuCUmZLkA.jpg" height="48"> | Stjernetegn-dating                                   |          8 | 2,889      |          4.9 |     3.9 |
 | <img src="cachedimages/aNKZ0JHsBagmwv2NizsRcw2ibn2jbfMR4WIrsmiOPsOQ.jpg" height="48"> | Værbitt                                              |          1 | 365        |          5.9 |     0.6 |
-| <img src="cachedimages/aPuFiGa0B3f2AntYwsx6pQShdEZu0INDKrHDebNnJYxQ.jpg" height="48"> | Ein dag i livet vårt                                 |          1 | 330        |          4.9 |     0.4 |
+| <img src="cachedimages/aPuFiGa0B3f2AntYwsx6pQShdEZu0INDKrHDebNnJYxQ.jpg" height="48"> | Ein dag i livet vårt                                 |          5 | 1,706      |          4.8 |     2.3 |
 | <img src="cachedimages/aUVEIzdv4Sy0nW5IKzQzwAU1vScGleTIo1u8g6j1mOWQ.jpg" height="48"> | Arveoppgjøret                                        |          5 | 2,943      |          5.1 |     4.2 |
 | <img src="cachedimages/dXtRrMy0Oj6mquR4HQv6egVaqbQAXiHmsywWVQOCQShg.jpg" height="48"> | I gode og onde dager                                 |          4 | 1,187      |          5   |     1.6 |
 | <img src="cachedimages/eTCD6Xl9cU8hR8vXl7rTOQXLDECLwe1q0lyUfWwPb2Qw.jpg" height="48"> | Generasjoner                                         |          8 | 1,691      |          5   |     2.4 |
@@ -1338,7 +1339,7 @@
 | <img src="cachedimages/CQ9stQry9fpf2Nw2lVPlUgzZLvGHlknnvFp3mTBz7zHA.jpg" height="48"> | Bjørnson - europeeren                                    |          3 | 111        |          5.4 |     0.2 |
 | <img src="cachedimages/CoDPshPok4Pa77gDvkBP3Q5vTccJNQtjmqYZ4OGphuDg.jpg" height="48"> | KORK - hele landets orkester                             |         38 | 9,236      |          5   |    12.8 |
 | <img src="cachedimages/DCE1lJWtrwXfwk54JbVpvwps5OCsckaWFXVL5AimkgTw.jpg" height="48"> | Brenner - historier fra vårt land                        |         28 | 5,594      |          5.3 |     8.3 |
-| <img src="cachedimages/E0-CCNY2kbOqK1fFeeSrLAxOF8bykn_s2Xk6Cs6r63zw.jpg" height="48"> | Poppeas kroning                                          |          1 | 527        |          9.1 |     1.3 |
+| <img src="cachedimages/E0-CCNY2kbOqK1fFeeSrLAxOF8bykn_s2Xk6Cs6r63zw.jpg" height="48"> | Poppeas kroning                                          |          2 | 964        |          9   |     2.4 |
 | <img src="cachedimages/E1HhdtGRuLslLmvkXU2ACAg_t6K_bUE5LtomR4N3wzVg.jpg" height="48"> | Hemingway                                                |          6 | 3,181      |          5.2 |     4.6 |
 | <img src="cachedimages/EVUfLl9APf_JmFuhyi5L8gnepO1dDXS9XD83rdnF9z6g.jpg" height="48"> | HAIK                                                     |         21 | 7,739      |          4.4 |     9.5 |
 | <img src="cachedimages/EahPuZCRRkvWl0J7FiEh1wOwDpNdtYCTRZ7nzPIICarw.jpg" height="48"> | Tilbake til 70-tallet                                    |         10 | 387        |          4.5 |     0.5 |
@@ -1389,7 +1390,7 @@
 | <img src="cachedimages/o5-3Q0vedUewLD_f-PSr8gF95-fBBcO0TGNza038TcVQ.jpg" height="48"> | Hitlåtens historie                                       |          8 | 1,780      |          4.8 |     2.4 |
 | <img src="cachedimages/ozGMVdJAwgtvR92RuOX9PAYjCr27pI_-jdEfER6VLIow.jpg" height="48"> | Festivalspesial                                          |          5 | 226        |          5   |     0.3 |
 | <img src="cachedimages/pdrSNxDSujVysFtltQeM9gdZqvUg34NhJVnr_PG2SBRA.jpg" height="48"> | Litteraturfest på Lillehammer                            |          2 | 1,233      |          5.4 |     1.9 |
-| <img src="cachedimages/sRvkpHE2wZli-PRYmD_vTQ7fF_yEEQz3dM-b_UWcZIwg.jpg" height="48"> | NRK Musikk - låt for låt                                 |         74 | 19,336     |          4.8 |    26   |
+| <img src="cachedimages/sRvkpHE2wZli-PRYmD_vTQ7fF_yEEQz3dM-b_UWcZIwg.jpg" height="48"> | NRK Musikk - låt for låt                                 |         75 | 19,416     |          4.8 |    26.1 |
 | <img src="cachedimages/spOZMAy14vu3ufB3RxcoGgGjEyQi-19N6RPZmWdlhFzA.jpg" height="48"> | Krøll                                                    |          5 | 328        |          4.6 |     0.4 |
 | <img src="cachedimages/v_RiNxWU_0X5-70iT2kyggSJvccIoEqJgI5cwBJSJ1LA.jpg" height="48"> | Dialektriket                                             |          6 | 1,802      |          4.8 |     2.4 |
 | <img src="cachedimages/wn932_MCB8Lfq9DtGm4sEAZYPXFhlz-8DUTs1CmoT9Jg.jpg" height="48"> | Brenner & bøkene                                         |         30 | 5,889      |          5.5 |     9   |
@@ -1397,7 +1398,7 @@
 | <img src="cachedimages/xhMohox-YWNgeD1ESWJJYQnF-B7QrxHSdpwZadJ9qy4w.jpg" height="48"> | Fjernsynsteatret                                         |         10 | 4,390      |          5.4 |     6.6 |
 | <img src="cachedimages/xk4_VrVsUWlwQFo3tKgO0gYIMOF99-tVNM9VIC0KCR5g.jpg" height="48"> | URBI - Bare gjør det!                                    |          5 | 570        |          4.8 |     0.8 |
 | <img src="cachedimages/ybCbubIrO7WOgxHURI-zjwOx2JpxvRkCxb6ciCo2EfTA.jpg" height="48"> | Mitt liv som en Rolling Stone                            |          4 | 2,404      |          4.7 |     3.2 |
-| <img src="cachedimages/zX6yqrxGKX1wIq-DpV2tHATXyxZFDJFublN5oD8cv8vg.jpg" height="48"> | Bokprogrammet                                            |          2 | 451        |          6.1 |     0.8 |
+| <img src="cachedimages/zX6yqrxGKX1wIq-DpV2tHATXyxZFDJFublN5oD8cv8vg.jpg" height="48"> | Bokprogrammet                                            |        108 | 18,402     |          5.4 |    27.8 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | "Fra en annen virkelighet"                               |          1 | 58         |          6   |     0.1 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Aalto                                                    |          1 | 397        |          5.3 |     0.6 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Abba Forever                                             |          1 | 353        |          5.3 |     0.5 |
@@ -1471,6 +1472,7 @@
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Kubrick om Kubrick                                       |          1 | 561        |          5.1 |     0.8 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Kunsten å plystre                                        |          1 | 460        |          4.7 |     0.6 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Leif Ove og Harmonien                                    |          1 | 39         |          4.2 |     0   |
+| <img src="cachedimages/placeholder.jpg" height="48">                                  | Lise Davidsen - stemmen som erobrer verden               |          1 | 48         |          4.4 |     0.1 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Little Mix: LM5 The Tour Film                            |          1 | 200        |          3.8 |     0.2 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Liv                                                      |          1 | 40         |          4.6 |     0.1 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | Lyden av Nord                                            |          1 | 24         |          4.1 |     0   |

@@ -6,10 +6,10 @@
 | drama-serier | 971.9 | 0.0                  |        **971.9** |
 | dokumentar | 1,076.0 | 0.0                  |        **1,076.0** |
 | sport | 153.8 | 0.0                  |        **153.8** |
-| kultur | 881.9 | 0.0                  |        **881.9** |
+| kultur | 1,048.1 | 0.0                  |        **1,048.1** |
 | vitenskap | 388.9 | 0.0                  |        **388.9** |
 | natur | 413.5 | 0.0                  |        **413.5** |
-| livsstil | 644.8 | 0.0                  |        **644.8** |
+| livsstil | 745.0 | 0.0                  |        **745.0** |
 | humor | 264.0 | 0.0                  |        **264.0** |
 | nrk-arkivet | 152.9 | 0.0                  |        **152.9** |
 | nyheter | 192.8 | 0.0                  |        **192.8** |
@@ -18,7 +18,7 @@
 | underholdning | 380.2 | 0.0                  |        **380.2** |
 | film | 7.0 | 0.0                  |        **7.0** |
 | unknown | 4.3 | 0.0                  |        **4.3** |
-| **total** | **7,354.9** | **0.0**                  |        **7,354.9** |
+| **total** | **7,621.4** | **0.0**                  |        **7,621.4** |
 
 ## barn
 |                                                                                       | title                                                |   programs | segments   |   average(s) |   hours |
@@ -1114,7 +1114,7 @@
 | <img src="cachedimages/CoDPshPok4Pa77gDvkBP3Q5vTccJNQtjmqYZ4OGphuDg.jpg" height="48"> | KORK - hele landets orkester                              |         76 | 97,300     |          1.7 |    46.1 |
 | <img src="cachedimages/DCE1lJWtrwXfwk54JbVpvwps5OCsckaWFXVL5AimkgTw.jpg" height="48"> | Brenner - historier fra vårt land                         |         28 | 23,396     |          2.3 |    15.1 |
 | <img src="cachedimages/DbkiX0JcjBRGOaPZMMaDoAYMXWnwp-b41Gzk5M6ej9pA.jpg" height="48"> | Oslo Filharmoniske Orkester                               |         31 | 35,763     |          1.2 |    12.3 |
-| <img src="cachedimages/E0-CCNY2kbOqK1fFeeSrLAxOF8bykn_s2Xk6Cs6r63zw.jpg" height="48"> | Poppeas kroning                                           |          1 | 1,922      |          2.6 |     1.4 |
+| <img src="cachedimages/E0-CCNY2kbOqK1fFeeSrLAxOF8bykn_s2Xk6Cs6r63zw.jpg" height="48"> | Poppeas kroning                                           |          2 | 4,013      |          2.3 |     2.6 |
 | <img src="cachedimages/E1HhdtGRuLslLmvkXU2ACAg_t6K_bUE5LtomR4N3wzVg.jpg" height="48"> | Hemingway                                                 |          6 | 7,886      |          2.1 |     4.6 |
 | <img src="cachedimages/EVUfLl9APf_JmFuhyi5L8gnepO1dDXS9XD83rdnF9z6g.jpg" height="48"> | HAIK                                                      |         22 | 18,978     |          2.3 |    12.3 |
 | <img src="cachedimages/EahPuZCRRkvWl0J7FiEh1wOwDpNdtYCTRZ7nzPIICarw.jpg" height="48"> | Tilbake til 70-tallet                                     |         10 | 5,138      |          3.2 |     4.6 |
@@ -1134,7 +1134,7 @@
 | <img src="cachedimages/Ptd4vRLHNuBU3x0FbP20-wWlSsjyo8QsnqfhXW4PvdGQ.jpg" height="48"> | Lisenskontrolløren                                        |         28 | 16,442     |          2.8 |    12.8 |
 | <img src="cachedimages/PzTebigWoszXTKI07LjRKgpZCatQRg_zjXyjFXA7u23A.jpg" height="48"> | Nøkkelen til suksess                                      |          4 | 3,468      |          2.1 |     2   |
 | <img src="cachedimages/Q1zPnPRAuwsKfLR7s3xvbwkhlTuJE74sUFTkAYVTWlmw.jpg" height="48"> | De neste                                                  |          6 | 5,939      |          3.5 |     5.8 |
-| <img src="cachedimages/Rs-rpPVwqD6VClyebgPNuAbqXxr0n8qKEBKUepyS-_Mw.jpg" height="48"> | Epoke                                                     |          1 | 364        |          1.3 |     0.1 |
+| <img src="cachedimages/Rs-rpPVwqD6VClyebgPNuAbqXxr0n8qKEBKUepyS-_Mw.jpg" height="48"> | Epoke                                                     |         16 | 11,828     |          1.5 |     5   |
 | <img src="cachedimages/U5SuodU12tZNb1KLc-2KIww2pnMZDLxVe22VmJ4ArERw.jpg" height="48"> | Arven                                                     |          4 | 1,396      |          1.2 |     0.5 |
 | <img src="cachedimages/UVE6SepNSALy7I4js8AoMgjYZQbT9KIUIJVUZcmCbMSQ.jpg" height="48"> | Kunstsamlarane                                            |          6 | 4,868      |          1.9 |     2.6 |
 | <img src="cachedimages/VMlEWdufhj79TgjneQ8_2gm8Pt-nSlD9BSZu31NKjQuw.jpg" height="48"> | Grenseland                                                |          8 | 28,295     |          0.9 |     6.7 |
@@ -1149,7 +1149,7 @@
 | <img src="cachedimages/Y1mKuFOf8QrBnAaowW1rLwFnENIDEwYPmwdoLyaZfprQ.jpg" height="48"> | Arkitektens hjem                                          |         37 | 26,323     |          2.2 |    16.1 |
 | <img src="cachedimages/YNe6qMJFz1e44TjdwJqhUQCo1mraW-f7-1JuxyU5iSpQ.jpg" height="48"> | Festkonsert for Marie Foss                                |          1 | 1,202      |          1   |     0.3 |
 | <img src="cachedimages/Yd-Yk3_vuEK3CxV0yMeMLg6NoMz2_yWMM-U-ilL64M-g.jpg" height="48"> | Musikk for fjernsyn                                       |          2 | 731        |          1.5 |     0.3 |
-| <img src="cachedimages/ZKlSuuAH02sPsjgfiePIiwf6Sl88OQafvNN3hix8Mxhw.jpg" height="48"> | Pan                                                       |          1 | 1,591      |          1.2 |     0.5 |
+| <img src="cachedimages/ZKlSuuAH02sPsjgfiePIiwf6Sl88OQafvNN3hix8Mxhw.jpg" height="48"> | Pan                                                       |        159 | 181,593    |          1.7 |    85.4 |
 | <img src="cachedimages/ZlCkk9fKZOHT1Av10Om9UwH7RpBIng7t97XAFD3NSjJQ.jpg" height="48"> | Korps-, brass- og janitsjarmusikk                         |          1 | 1,708      |          1.4 |     0.7 |
 | <img src="cachedimages/aNQ_EolPR482mJXw3F2UBQHLr6ngb4oeHVtoO2L87Pvg.jpg" height="48"> | Inside/Offside                                            |          5 | 3,820      |          1.7 |     1.9 |
 | <img src="cachedimages/bMx9rQp7GkfGWiU5JRDkyQKnz6BjfdzXwMj5Bqfv8kqg.jpg" height="48"> | Fantastisk forvandling                                    |          6 | 5,265      |          1.7 |     2.5 |
@@ -1176,7 +1176,7 @@
 | <img src="cachedimages/o5-3Q0vedUewLD_f-PSr8gF95-fBBcO0TGNza038TcVQ.jpg" height="48"> | Hitlåtens historie                                        |          8 | 4,822      |          2.7 |     3.6 |
 | <img src="cachedimages/ozGMVdJAwgtvR92RuOX9PAYjCr27pI_-jdEfER6VLIow.jpg" height="48"> | Festivalspesial                                           |          6 | 4,281      |          2.3 |     2.7 |
 | <img src="cachedimages/pdrSNxDSujVysFtltQeM9gdZqvUg34NhJVnr_PG2SBRA.jpg" height="48"> | Litteraturfest på Lillehammer                             |          2 | 2,499      |          2.6 |     1.8 |
-| <img src="cachedimages/sRvkpHE2wZli-PRYmD_vTQ7fF_yEEQz3dM-b_UWcZIwg.jpg" height="48"> | NRK Musikk - låt for låt                                  |         83 | 60,804     |          3   |    49.9 |
+| <img src="cachedimages/sRvkpHE2wZli-PRYmD_vTQ7fF_yEEQz3dM-b_UWcZIwg.jpg" height="48"> | NRK Musikk - låt for låt                                  |         84 | 61,681     |          2.9 |    50.5 |
 | <img src="cachedimages/spOZMAy14vu3ufB3RxcoGgGjEyQi-19N6RPZmWdlhFzA.jpg" height="48"> | Krøll                                                     |          5 | 1,770      |          2.4 |     1.2 |
 | <img src="cachedimages/v_RiNxWU_0X5-70iT2kyggSJvccIoEqJgI5cwBJSJ1LA.jpg" height="48"> | Dialektriket                                              |          6 | 5,615      |          2.3 |     3.6 |
 | <img src="cachedimages/wPhqy9UVM6JbWBRnIwgVVgdiJyjtvvxyzCaNMgHe2gbQ.jpg" height="48"> | Trondheim Kammerkor i Alstahaug kirke                     |          1 | 692        |          2.7 |     0.5 |
@@ -1186,7 +1186,7 @@
 | <img src="cachedimages/xk4_VrVsUWlwQFo3tKgO0gYIMOF99-tVNM9VIC0KCR5g.jpg" height="48"> | URBI - Bare gjør det!                                     |          5 | 3,842      |          1.7 |     1.8 |
 | <img src="cachedimages/ybCbubIrO7WOgxHURI-zjwOx2JpxvRkCxb6ciCo2EfTA.jpg" height="48"> | Mitt liv som en Rolling Stone                             |          4 | 6,465      |          2   |     3.6 |
 | <img src="cachedimages/yuCZEikIAmrJI6VteYNw6gsiBYJarJiOJ-YkkKn9XIvQ.jpg" height="48"> | Mennesker i hverdagen                                     |          1 | 1,170      |          1.2 |     0.4 |
-| <img src="cachedimages/zX6yqrxGKX1wIq-DpV2tHATXyxZFDJFublN5oD8cv8vg.jpg" height="48"> | Bokprogrammet                                             |          3 | 2,290      |          2   |     1.3 |
+| <img src="cachedimages/zX6yqrxGKX1wIq-DpV2tHATXyxZFDJFublN5oD8cv8vg.jpg" height="48"> | Bokprogrammet                                             |        171 | 114,311    |          2.4 |    76   |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | "Fra en annen virkelighet"                                |          1 | 1,023      |          2.3 |     0.7 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | "Garn"                                                    |          1 | 1,595      |          0.6 |     0.3 |
 | <img src="cachedimages/placeholder.jpg" height="48">                                  | "Medmenneske" - Et Olav Duun program                      |          1 | 2,090      |          1.4 |     0.8 |
@@ -1581,7 +1581,7 @@
 | <img src="cachedimages/8m6xFepACcTzS6jo04r2vgOGNFfwxx_tdAmUezyOOtag.jpg" height="48"> | Vet du hvem?                                         |         16 | 12,651     |          1.2 |     4.3 |
 | <img src="cachedimages/8nD5yw-POmbt7gtDp4OCyQ2w7z7Xdktc6OGmKhmNik0w.jpg" height="48"> | Hagebruk                                             |         11 | 3,021      |          1.8 |     1.5 |
 | <img src="cachedimages/8uWOMCkNAO2u_K0xdVP78gEx1lrtZ85gaUBJUioUM23g.jpg" height="48"> | Ikke spør om det                                     |         20 | 9,008      |          2.5 |     6.4 |
-| <img src="cachedimages/9QOo4XZuEuG92f1NrlX5TQ8wxL1ULCc3evTVrp-nlp1A.jpg" height="48"> | Fjernsynskjøkkenet                                   |          1 | 1,586      |          1   |     0.5 |
+| <img src="cachedimages/9QOo4XZuEuG92f1NrlX5TQ8wxL1ULCc3evTVrp-nlp1A.jpg" height="48"> | Fjernsynskjøkkenet                                   |        245 | 222,542    |          1.6 |    98.9 |
 | <img src="cachedimages/9jYujECDZYuDXOnA5IUTrgvOpUrdst-DUanmejhVd-zQ.jpg" height="48"> | Montys hageverden                                    |         25 | 42,549     |          1.9 |    21.9 |
 | <img src="cachedimages/9sdCr0hQjD1gT7ByrHG2UA2E_6LbOfu4d5IsuXSVPYjg.jpg" height="48"> | Under huden                                          |          4 | 1,514      |          2.1 |     0.9 |
 | <img src="cachedimages/AaoiOaD1TjjPq8KIUY_TKAWJZE-tDa_yBDGR5-jCfggQ.jpg" height="48"> | Skårungen                                            |         10 | 20,029     |          1.6 |     8.7 |
@@ -1630,7 +1630,7 @@
 | <img src="cachedimages/Zumo_onlhQ4BjtKIhssEHwBGz93Rj1GLJXOjYZhXK7Pg.jpg" height="48"> | Naturligvis                                          |          5 | 5,921      |          1.7 |     2.8 |
 | <img src="cachedimages/_LC8qfKgUIk4brlzFSuekQualtjbLVhA0VBhuCUmZLkA.jpg" height="48"> | Stjernetegn-dating                                   |          8 | 5,854      |          2.3 |     3.7 |
 | <img src="cachedimages/aNKZ0JHsBagmwv2NizsRcw2ibn2jbfMR4WIrsmiOPsOQ.jpg" height="48"> | Værbitt                                              |          1 | 749        |          3   |     0.6 |
-| <img src="cachedimages/aPuFiGa0B3f2AntYwsx6pQShdEZu0INDKrHDebNnJYxQ.jpg" height="48"> | Ein dag i livet vårt                                 |          1 | 795        |          2   |     0.4 |
+| <img src="cachedimages/aPuFiGa0B3f2AntYwsx6pQShdEZu0INDKrHDebNnJYxQ.jpg" height="48"> | Ein dag i livet vårt                                 |          5 | 2,951      |          2.7 |     2.2 |
 | <img src="cachedimages/aUVEIzdv4Sy0nW5IKzQzwAU1vScGleTIo1u8g6j1mOWQ.jpg" height="48"> | Arveoppgjøret                                        |          5 | 7,030      |          1.8 |     3.6 |
 | <img src="cachedimages/coP3WFRX73vCxtf8grFU2wH6IH1kjATf51T2oLAmWQ9g.jpg" height="48"> | Hjem, kjære hjem                                     |          3 | 2,796      |          1.9 |     1.5 |
 | <img src="cachedimages/dXtRrMy0Oj6mquR4HQv6egVaqbQAXiHmsywWVQOCQShg.jpg" height="48"> | I gode og onde dager                                 |          4 | 2,933      |          2.1 |     1.7 |
