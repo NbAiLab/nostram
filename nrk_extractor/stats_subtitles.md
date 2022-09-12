@@ -10,7 +10,7 @@
 | natur | 248.0 | 0.0                  |        **248.0** |
 | drama-serier | 825.1 | 0.0                  |        **825.1** |
 | kultur | 414.0 | 0.0                  |        **414.0** |
-| humor | 203.0 | 0.0                  |        **203.0** |
+| humor | 216.6 | 0.0                  |        **216.6** |
 | nrk-arkivet | 78.8 | 0.0                  |        **78.8** |
 | nyheter | 50.4 | 0.0                  |        **50.4** |
 | sport | 54.4 | 0.0                  |        **54.4** |
@@ -18,7 +18,7 @@
 | samisk | 14.9 | 0.0                  |        **14.9** |
 | familie | 19.5 | 0.0                  |        **19.5** |
 | film | 5.6 | 0.0                  |        **5.6** |
-| **total** | **4,775.2** | **0.0**                  |        **4,775.2** |
+| **total** | **4,788.8** | **0.0**                  |        **4,788.8** |
 
 ## vitenskap
 |                                                                                       | title                                           |   programs | segments   |   average(s) |   hours |
@@ -1554,7 +1554,7 @@
 | <img src="cachedimages/9pFqT_H1ebkVoIzEjWuCXwEnXRHHCeMs6Aq6eSPBZIUg.jpg" height="48"> | Helsebrusjan                        |          1 | 112        |          4.9 |     0.2 |
 | <img src="cachedimages/BN2oiT0KBbWkd_J7kzMnywrOGVg6GRpUQd0BgdPM6UWQ.jpg" height="48"> | Norske grønnsaker – sommersnutter   |         12 | 1,286      |          4.4 |     1.6 |
 | <img src="cachedimages/CPyQLoJSo0GJ74VSznQqVw2nG8bh8lw5f4QQ_hAZIVdg.jpg" height="48"> | Søstrene ser på TV                  |         30 | 1,633      |          4.7 |     2.1 |
-| <img src="cachedimages/DJzJ1zCZ_6xYIv7ATTtn3w-XgHRCCVfZ1yw5JZfMV9HQ.jpg" height="48"> | Satiriks oppsummerer                |          1 | 71         |          4.4 |     0.1 |
+| <img src="cachedimages/DJzJ1zCZ_6xYIv7ATTtn3w-XgHRCCVfZ1yw5JZfMV9HQ.jpg" height="48"> | Satiriks oppsummerer                |          5 | 848        |          4.2 |     1   |
 | <img src="cachedimages/DbKN7aNZSk0heaJptQr5WA_IJZ3SgdTfeZo8XyRoF4OA.jpg" height="48"> | Norsk-ish                           |          8 | 2,269      |          4.4 |     2.7 |
 | <img src="cachedimages/H5gbO3Rkk5hMUvjYWmZaMQ9FU_gEyVqfutrfT-8gowWg.jpg" height="48"> | Småfysen                            |          3 | 173        |          4.3 |     0.2 |
 | <img src="cachedimages/HRxhBks0W98VpL6GTimxSwh7xi2v6TxOGFQjYzgp9yHQ.jpg" height="48"> | Visning                             |          9 | 1,139      |          4.7 |     1.5 |
@@ -1587,13 +1587,13 @@
 | <img src="cachedimages/bOr4n7u5CtGDWdYZCC9esQPEUsmKTTrFgTmnhjDY2odg.jpg" height="48"> | Helt Ramme sporter                  |          4 | 606        |          3.8 |     0.6 |
 | <img src="cachedimages/bUsZ7-MXPPZjYSc6WDQYyAvsFoGaS8Mhdub28Zt2b5Qw.jpg" height="48"> | 5080 Nyhetskanalen                  |          3 | 726        |          4.5 |     0.9 |
 | <img src="cachedimages/bgXyzXcObT0TQIuTVbMUNAC1NHkZrleQ6x95nFczvlSQ.jpg" height="48"> | Snakkistan                          |          5 | 486        |          4.5 |     0.6 |
-| <img src="cachedimages/cC-7Pof4VOTO8HJC3pYImQap_CQjvFVF646ntwIypjmw.jpg" height="48"> | NRK 4ETG                            |         15 | 2,888      |          4.6 |     3.7 |
+| <img src="cachedimages/cC-7Pof4VOTO8HJC3pYImQap_CQjvFVF646ntwIypjmw.jpg" height="48"> | NRK 4ETG                            |         63 | 12,919     |          4.5 |    16.3 |
 | <img src="cachedimages/cc3uXbf-4lqnYH1-jsJxsQB3LfznPrjf1wPqun3d9rYA.jpg" height="48"> | Birthe og Jeanette søker skeive     |          3 | 144        |          4.1 |     0.2 |
 | <img src="cachedimages/hxHcXjOOWUMH6CoBxq-C8gvwcBBJMDAzvypIMVjrxPvQ.jpg" height="48"> | Feeden                              |          4 | 480        |          4.6 |     0.6 |
 | <img src="cachedimages/iBMdcV1tfSXel9mdaLj7Qwp-2AMdUuQxXkZeXjbsvWVg.jpg" height="48"> | Underholdningsavdelingen            |          4 | 1,936      |          4.8 |     2.6 |
 | <img src="cachedimages/izWfTc5L03iXwRBQkCqAQwl-UI1GnK9KqEW6K1oTic7w.jpg" height="48"> | Gutta på skauen                     |          4 | 990        |          4.1 |     1.1 |
 | <img src="cachedimages/jMJtVDxrNvd7gBLuAGDmOQy4aiPkyCcEWECSGq15b3yA.jpg" height="48"> | I heisen med                        |         14 | 4,946      |          4.9 |     6.7 |
-| <img src="cachedimages/kwY4RU8K-CpszRxRSvDQUQ0LOeEH7iv_Ej6gv6o9zeEA.jpg" height="48"> | Humorlab: Ledelsen                  |          1 | 74         |          4.4 |     0.1 |
+| <img src="cachedimages/kwY4RU8K-CpszRxRSvDQUQ0LOeEH7iv_Ej6gv6o9zeEA.jpg" height="48"> | Humorlab: Ledelsen                  |          3 | 176        |          4.4 |     0.2 |
 | <img src="cachedimages/l9EU4d6HeiAgvHus_kKUhw3QqW4FA167W5K6UtLN6GSw.jpg" height="48"> | Karl Johan                          |         13 | 2,645      |          4.9 |     3.6 |
 | <img src="cachedimages/lpJzCaa-kHnOJcx-dierpwNhiY8AjKlFW_zDunSmt95A.jpg" height="48"> | Nesten litt voksen                  |          8 | 243        |          4.4 |     0.3 |
 | <img src="cachedimages/n1xvepJTD-vXfOpJdkZUAQfqhZ4o6RQMmvFQb-1VNJOQ.jpg" height="48"> | Jordbrukerne                        |          8 | 4,287      |          4.4 |     5.3 |
