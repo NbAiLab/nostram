@@ -60,25 +60,43 @@ def main(args):
                                 if not season_json: 
                                     print("\n\n***ERROR Season Json\n")
                                     continue
-                                
+                               
+                                if not 'episodes' in season_json['_embedded']:
+                                    print("\n\n***ERROR Season Json Episodes\n")
+                                    continue
+
                                 for episode in season_json['_embedded']['episodes']:
                                     episode_seconds = write_episode(episode,writer,season_json['image'][0]['url'])
                                     seconds += episode_seconds
                                     if episode_seconds:
                                         valid_manifest += 1
                                     else:
-                                        invalid_manifest += 1
+                                        invalid_manifest +=1
                         else:
                             print("This happens for radio, but I have not found it in TV. It is therefore untested. If it crashes here, uncomment, and restart")
                             exit(-1)
-                            for episode in serie_json['_embedded']['episodes']:
-                                episode_seconds = write_episode(episode, writer, serie_json['series']['image'][0]['url'])
-                                seconds += episode_seconds
-                                
-                                if episode_seconds:
-                                    valid_manifest += 1
-                                else:
-                                    invalid_manifest += 1
+                            #for episode in serie_json['_embedded']['episodes']:
+                            #    episode_seconds = write_episode(episode, writer, serie_json['series']['image'][0]['url'])
+                            #    seconds += episode_seconds
+                            #    if episode_seconds:
+                            #        valid_manifest += 1
+                            #    else:
+                            #        invalid_manifest +=1
+
+                    
+                    elif 'episode' == itemtype or 'standaloneProgram' == itemtype:
+                        #There seem to be very few like this, and the structure is very different. Therefore we simply drop them
+                        print(f"\n{itemtype} that is dropped.\n")
+                        continue
+                        #episode = get_json(base_url+item['episode']['_links']['self']['href'])
+                        #episode_seconds = write_episode(episode, writer)
+                        #seconds += episode_seconds
+                        #if episode_seconds:
+                        #    valid_manifest += 1
+                        #else:
+                        #    invalid_manifest +=1
+
+
                     else:
                         print("This should not happen!")
                         breakpoint()
@@ -92,6 +110,7 @@ def main(args):
 def write_episode(episode,writer,serie_image_url="None"):
         base_url = "https://psapi.nrk.no"   
         episode_id = episode['prfId']
+
         medium = episode['_links']['self']['href'].split("/")[1] 
         program_image_url = episode['image'][0]['url']
 
