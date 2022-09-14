@@ -128,7 +128,7 @@ def write_episode(episode,writer,serie_image_url="None"):
 
             availability_information = manifest_json['availability']['information']
             is_geoblocked = manifest_json['availability']['isGeoBlocked']
-        
+            external_embedding_allowed = manifest_json['availability']['externalEmbeddingAllowed']
             duration = round(isodate.parse_duration(manifest_json['playable']['duration']).total_seconds())
             audio_file = manifest_json['playable']['assets'][0]['url']
             audio_format = manifest_json['playable']['assets'][0]['format']
@@ -142,6 +142,7 @@ def write_episode(episode,writer,serie_image_url="None"):
             audio_file = "unknown"
             audio_format = "unknown"
             audio_mime_type = "unknown"
+            external_embedding_allowed = "unknown"
             manifest_exist = False
             print('M', end='', flush=True)
 
@@ -154,7 +155,7 @@ def write_episode(episode,writer,serie_image_url="None"):
 
         row = {'episode_id':episode_id, 
                 'medium': medium, 
-                'programi_image_url': program_image_url, 
+                'program_image_url': program_image_url, 
                 'serie_image_url':serie_image_url,
                 'title':title,
                 'subtitle': subtitle,
@@ -162,6 +163,7 @@ def write_episode(episode,writer,serie_image_url="None"):
                 'duration': duration,
                 'availability_information':availability_information,
                 'is_geoblocked':is_geoblocked,
+                'external_embedding_allowed':external_embedding_allowed,
                 'on_demand_from':on_demand_from,
                 'on_demand_to':on_demand_to,
                 'audio_file':audio_file,
