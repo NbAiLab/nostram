@@ -2,15 +2,12 @@
 # PYTHON_ARGCOMPLETE_OK
 
 """
-
 NORCE Research Institute 2022, Njaal Borch <njbo@norceresearch.no>
 Licensed under Apache 2.0
 
 Modified by Freddy Wetjen and Per Egil Kummervold
 National Library of Norway
-
 """
-
 
 import requests
 import json
@@ -26,122 +23,19 @@ from sub_parser import SubParser
 from fetch_episodes import episodefetcher
 import jsonlines
 
-"""
-META: https://psapi.nrk.no/programs/PRHO04004903
-
-Playlist:https://nrk-od-51.akamaized.net/world/23451/3/hls/prho04004903/playlist.m3u8?bw_low=262&bw_high=2399&bw_start=886&no_iframes&no_audio_only&no_subtitles
-
-
-
-
-
-
-https://psapi.nrk.no/playback/metadata/program/PRHO04004903?eea-portability=true
-
-"""
-
 
 class EpisodeExtractor():
-    def resolve_urls(self, url_or_id):
-        """
-        Resolve NRK urls based on a url or an ID
-        """
-        print("url:" + str(url_or_id))
-        if url_or_id.startswith("http"):
-            r = re.match("https://.*/(.*)/avspiller", url_or_id)
-            if r:
-                id = r.groups()[0]
-            else:
-                raise Exception("Unknown URL, expect 'avspiller' URL")
-        else:
-            id = url_or_id
-
-        res = {
-            "id": id
-        }
-
-        # Fetch the info blob
-        murl = "https://psapi.nrk.no/playback/metadata/program/%s?eea-portability=true" % id
-        r = requests.get(murl)
-        if r.status_code != 200:
-            raise Exception("Failed to load metadata from '%s'" % murl)
-        #print(r.json()["vtt"])
-        res["info"] = json.loads(r.text)
-        
-        #Set medium
-        ef=episodefetcher()
-        #Try first for series, but if this does not exist, try for program
-        try:
-            res["info"]["medium"] = ef.getmedium(ef.getseries(id))
-        except:
-            res["info"]["medium"] = ef.getmediumprogram(id)
-
-        #Set serie image
-        try:
-            res["info"]["serieimageurl"] = ef.getserieimage(ef.getseries(id))
-        except:
-            res["info"]["serieimageurl"] = "placeholder"
-
-        if not bool(res["info"]["playable"]):
-            res["info"] = "Unknown"
-
-        if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
-            return None
-            #raise Exception("Bad info block from '%s'" % murl)
-
-        murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
-        r = requests.get(murl)
-        if r.status_code != 200:
-            raise Exception("Failed to load manifest from '%s'" % murl)
-
-        res["manifest"] = json.loads(r.text)
-
-        # Now we find the core playlist URL
-        purl = res["manifest"]["playable"]["assets"][0]["url"]
-        r = requests.get(purl)
-        if r.status_code != 200:
-            raise Exception("Failed to get playlist from '%s'" % purl)
-
-        spec = None  # We take the first valid line
-        for line in r.text.split("\n"):
-            if line.startswith("#"):
-                continue
-            spec = line
-            break
-
-        if not spec:
-            raise Exception("Failed to find valid specification in core m3u8")
-
-        # We now have the correct url for downloading
-        res["m3u8"] = os.path.split(purl)[0] + "/" + spec
-
-        # We need the subtitles too
-        if not res["manifest"]["playable"]["subtitles"]:
-            # raise Exception("Missing subtitles")
-            print("Missing subtitles for", id)
-            res["vtt"] = None
-        else:
-            res["vtt"] = res["manifest"]["playable"]["subtitles"][0]["webVtt"]
-
-        return res
-
 
     def extract_audio(self, info, target):
 
         if os.path.exists(target) and os.stat(target).st_size > 0:
-            print("  Audio already present at '%s'" % target)
+            print("Audio already present at '%s'" % target)
             return
-        
-        #if "m3u8" not in info:
-        #    print("No playlist in info", info)
-        #    raise Exception("Missing HLS playlist for '%s'" % target)
-
-        #url = info["m3u8"].replace("no_audio_only", "audio_only")
         
         url = info["audio_file"]
         cmd = ["ffmpeg", "-y", "-i", url, "-vn", "-c:a", "copy", target]
 
-        print("  Extracting audio to %s" % target)
+        print("Extracting audio to %s" % target)
         p = subprocess.run(cmd,
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.STDOUT)
@@ -156,125 +50,22 @@ class EpisodeExtractor():
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
         
-        if not os.path.exists(target_dir+"/mp4"):
-            os.makedirs(target_dir+"/mp4")
-        
-        if not os.path.exists(target_dir+"/mp3"):
-            os.makedirs(target_dir+"/mp3")
+        if not os.path.exists(target_dir+"/audio"):
+            os.makedirs(target_dir+"/audio")
         
         if not os.path.exists(target_dir+"/segments"):
             os.makedirs(target_dir+"/segments")
 
-        target_audio = os.path.join(target_dir+"/mp4", "%s.mp4" % id)
+        target_audio = os.path.join(target_dir+"/audio", "%s.mp4" % id)
         
         self.extract_audio(info, target_audio)
         
         destination = os.path.join(target_dir, 'segments', id+'.json')
        
-
-        #subtitles = self.load_subtitles(info["subtitles"])
         subtitles = self.resync(target_audio,  options)
-        #print(subtitles)
-        #self.find_good_areas(subtitles)
-
-        print("*** SAVING")
         self.save_jsonlines(subtitles, destination, info)
 
         return info
-
-    @staticmethod
-    def time_to_string(seconds):
-        """
-        Convert a number of minutes to days, hours, minutes, seconds
-        """
-
-        days = hours = minutes = secs = 0
-        ret = ""
-
-        if seconds == 0:
-            return "0 seconds"
-
-        secs = seconds % 60
-        if secs:
-            ret = "%d sec" % secs
-
-        if seconds <= 60:
-            return ret
-
-        tmp = (seconds - secs) / 60
-        minutes = tmp % 60
-
-        if minutes > 0:
-            ret = "%d min " % minutes + ret
-
-        if tmp <= 60:
-            return ret.strip()
-
-        tmp = tmp / 60
-        hours = tmp % 24
-        if hours > 0:
-            ret = "%d hours " % hours + ret
-
-        if tmp <= 24:
-            return ret.strip()
-
-        days = tmp / 24
-
-        return ("%d days " % days + ret).strip()
-
-    def find_good_areas(self, subtitles):
-
-        bad = 0
-        playtime = 0
-        for sub in subtitles.items:
-            # If sub is two lines and BOTH start with "-" it's two different
-            # people and hence the timing is shit
-            lines = sub["text"].split("<br>")
-            if len(lines) > 1:
-                if lines[0].strip().startswith("—") and \
-                   lines[1].strip().startswith("—"):
-                    # print("BAD SUB", sub)
-                    bad += 1
-                    continue
-
-            playtime += sub["end"] - sub["start"]
-
-        print("  -- %d subtitles, %d are bad" % (len(subtitles.items), bad))
-        print("  Playtime: %s" % NRKExtractor.time_to_string(playtime))
-
-    def load_subtitles(self, subtitlefile, max_gap_s=0.4):
-        subs = SubParser()
-        subs.load_srt(subtitlefile)
-
-        # We merge those with continuation mark '—'
-        updated = []
-        for item in subs.items:
-            lines = item["text"].split("<br>")
-            # If item has *3* lines, the first one is (likely) a person's name - remove it for now
-            if len(lines) == 3:
-                item["text"] = "<br>".join(lines[1:])
-
-            # If both lines start with "—" it's two people - ignore
-            if len(lines) == 2 and lines[0].startswith("—") and lines[1].startswith("—"):
-                print("Two people, skipping")
-                continue
-
-            if len(updated) == 0:
-                updated.append(item)
-                continue
-
-            if updated[-1]["text"][-1] == "—" and item["text"][0] == "—":
-                # Merge
-                updated[-1]["text"] = updated[-1]["text"][:-1] + item["text"][2:]
-                updated[-1]["end"] = item["end"]
-            elif 0 and item["start"] - updated[-1]["end"] < max_gap_s:  # Need to sync them first
-                updated[-1]["text"] = updated[-1]["text"] + "<br>" + item["text"]
-                updated[-1]["end"] = item["end"]
-            else:
-                updated.append(item)
-
-        subs.items = updated
-        return subs
 
     def resync(self, audiofile, options, max_gap_s=0.5):
         detector = VoiceDetector(audiofile)
@@ -351,7 +142,7 @@ if __name__ == "__main__":
 
     extractor = EpisodeExtractor()
 
-    print("\n\n* Preparing to process "+options.src)
+    print("\n\n* Starting processing "+options.src)
 
     with jsonlines.open(options.src) as reader:
         for obj in reader:
