@@ -88,7 +88,7 @@ class EpisodeExtractor():
                     "id": info["episode_id"]+"_"+str(int(item["start"]*100))+"_"+str(int(item["end"]*100)),
                     "start_time": int(item["start"]*100),
                     "end_time": int(item["end"]*100),
-                    "duration": int((item["end"] - item["start"])*100),
+                    "duration_ms": int((item["end"] - item["start"])*100),
                     'episode_id':info['episode_id'], 
                     'medium': info['medium'], 
                     'program_image_url': info['program_image_url'], 
