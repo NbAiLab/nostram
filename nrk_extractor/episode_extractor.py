@@ -27,7 +27,6 @@ import jsonlines
 class EpisodeExtractor():
 
     def extract_audio(self, info, target):
-
         if os.path.exists(target) and os.stat(target).st_size > 0:
             print("Audio already present at '%s'" % target)
             return
@@ -55,8 +54,16 @@ class EpisodeExtractor():
         
         if not os.path.exists(target_dir+"/segments"):
             os.makedirs(target_dir+"/segments")
+        
+        if info['audio_format'] == "HLS":
+            audio_file_name = f"{id}.mp4"
+        elif info['audio_format'] == "MP3":
+            audio_file_name = f"{id}.mp3"
+        else:
+            print("Error: Unknown Audio Format")
+            exit(-1)
 
-        target_audio = os.path.join(target_dir+"/audio", "%s.mp4" % id)
+        target_audio = os.path.join(target_dir+"/audio", audio_file_name)
         
         self.extract_audio(info, target_audio)
         
