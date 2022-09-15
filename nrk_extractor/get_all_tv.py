@@ -62,9 +62,12 @@ def main(args):
                                     continue
                                
                                 if not 'episodes' in season_json['_embedded']:
-                                    print("\n\n***ERROR Season Json Episodes\n")
-                                    continue
-
+                                    try:
+                                        season_json['_embedded']['episodes'] = season_json['_embedded']['instalments']
+                                    except:
+                                        print("\n\n***ERROR Season Json Episodes\n")
+                                        continue
+                                
                                 for episode in season_json['_embedded']['episodes']:
                                     episode_seconds = write_episode(episode,writer,season_json['image'][0]['url'])
                                     seconds += episode_seconds
@@ -72,9 +75,11 @@ def main(args):
                                         valid_manifest += 1
                                     else:
                                         invalid_manifest +=1
+                                
                         else:
                             print("This happens for radio, but I have not found it in TV. It is therefore untested. If it crashes here, uncomment, and restart")
-                            exit(-1)
+                            breakpoint()
+                            
                             #for episode in serie_json['_embedded']['episodes']:
                             #    episode_seconds = write_episode(episode, writer, serie_json['series']['image'][0]['url'])
                             #    seconds += episode_seconds
@@ -95,13 +100,15 @@ def main(args):
                         #    valid_manifest += 1
                         #else:
                         #    invalid_manifest +=1
-
+                    
+                    elif 'channel' == itemtype:
+                        print("\n\n***ERROR Channel\n")
+                        continue
 
                     else:
                         print("This should not happen!")
-                        breakpoint()
                         print(item['_links'])
-                        exit(-1)
+                        breakpoint()
 
         print(f"\nTotal time: {round(seconds/3600)} hours.") 
         print(f"\nThere were a total of {valid_manifest} episodes with valid manifest files, and {invalid_manifest} episodes with an invalid one.")
