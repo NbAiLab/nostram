@@ -5,3 +5,5 @@ Pillow
 joblib
 jsonlines
 tqdm
+torchaudio
+onnxruntime

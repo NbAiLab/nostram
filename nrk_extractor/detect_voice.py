@@ -5,9 +5,13 @@
 NORCE Research Institute 2022, Njaal Borch <njbo@norceresearch.no>
 Licensed under GPL v3
 
+Modified by Javier de la Rosa
+National Library of Norway
+
 """
 
 
+from asyncio import threads
 import contextlib
 import sys
 import wave
@@ -17,6 +21,8 @@ import operator
 from argparse import ArgumentParser
 import tempfile
 import os
+import torch
+torch.set_num_threads(1)
 
 
 class Frame(object):
@@ -29,25 +35,49 @@ class Frame(object):
 
 class VoiceDetector:
 
-    def __init__(self, sourcefile, output_dir=None):
+    def __init__(self, output_dir=None, method=None):
 
         self.is_tmp = False
         self.output_dir = output_dir
 
+        if output_dir and not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        self.method = method or ""
+        if self.method.lower() == "silero":
+            self.model, self._utils = torch.hub.load(repo_or_dir='snakers4/silero-vad',
+                                        model='silero_vad',
+                                        force_reload=False,
+                                        onnx=True)
+
+
+    def select_sourcefile(self, sourcefile):
         if not sourcefile.endswith(".wav"):
             self.is_tmp = True
             self.sourcefile = self.convert(sourcefile)
         else:
             self.sourcefile = sourcefile
 
-        if output_dir and not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-
     def __del__(self):
         if self.is_tmp:
             os.remove(self.sourcefile)
 
-    def analyze(self, aggressive=2, max_segment_length=8, max_pause=0, frame_length=10):
+    def analyze(self, aggressive=2, max_segment_length=8, max_pause=0, frame_length=10, threshold=0.75):
+        if self.method.lower() == "silero":
+            segments = self.silero_segments(
+                max_pause=max_pause,
+                threshold=threshold,
+            )
+        else:
+            segments = self.webcrt_segments(
+                aggressive=aggressive,
+                max_segment_length=max_segment_length,
+                max_pause=max_pause,
+                frame_length=frame_length,
+            )
+        return segments
+
+    def webcrt_segments(self, aggressive=2, max_segment_length=8, max_pause=0, frame_length=10):
         audio, sample_rate = self.read_wave(self.sourcefile)
         vad = webrtcvad.Vad(int(aggressive))
         frames = self.frame_generator(frame_length, audio, sample_rate)
@@ -56,8 +86,22 @@ class VoiceDetector:
                                       output_dir=self.output_dir,
                                       max_segment_length=max_segment_length,
                                       max_pause=max_pause)
-
         return segments
+
+    def silero_segments(self, max_pause=0, threshold=0.75):
+        (get_speech_timestamps, _, read_audio, *_) = self._utils
+        _, sampling_rate = self.read_wave(self.sourcefile)
+        wav = read_audio(self.sourcefile, sampling_rate=sampling_rate)
+        speech_timestamps = get_speech_timestamps(
+            wav,
+            self.model,
+            sampling_rate=sampling_rate,
+            min_silence_duration_ms=max_pause * 1000,
+            return_seconds=True,
+            threshold=threshold,
+        )
+        # return [{"start": d["start"] / 1e4, "end": d["end"] / 1e4} for d in speech_timestamps]
+        return speech_timestamps
 
     def read_wave(self, path):
         """Reads a .wav file.
@@ -172,7 +216,7 @@ class VoiceDetector:
                 segment_data = []
             elif triggered and is_speech:
                 padding = 0
-        
+
         for s in segments:
             if "data" in s:
                 del s["data"]
@@ -183,7 +227,8 @@ class VoiceDetector:
         import subprocess
         fd, tmpfile = tempfile.mkstemp(suffix=".wav")
         print("Extracting audio to", tmpfile)
-        cmd = ["ffmpeg", "-i", mp3file, "-vn", "-ac", "1", "-y", tmpfile]
+        # cmd = ["ffmpeg", "-i", mp3file, "-vn", "-ac", "1", "-y", tmpfile]
+        cmd = ["ffmpeg", "-i", mp3file, "-vn", "-sn", "-dn", "-acodec", "pcm_s16le", "-ac", "1", "-ar", "16000", "-y", tmpfile]
         print(" ".join(cmd))
         s = subprocess.Popen(cmd, stderr=subprocess.PIPE)
         s.wait()
@@ -194,7 +239,7 @@ class VoiceDetector:
 
     def realign_subs(self, segments, subs, options):
 
-        updated = kept = 0    
+        updated = kept = 0
         subs = sorted(subs, key=operator.itemgetter("start"))
 
         for sub in subs:

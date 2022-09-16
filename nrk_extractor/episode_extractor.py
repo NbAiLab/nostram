@@ -19,6 +19,9 @@ from tqdm import tqdm
 
 class EpisodeExtractor():
 
+    def __init__(self, method=None) -> None:
+        self.detector = VoiceDetector(method=method)
+
     def extract_audio(self, url, target, start=None, end=None):
         if os.path.exists(target) and os.stat(target).st_size > 0:
             if start is None or end is None:
@@ -39,7 +42,7 @@ class EpisodeExtractor():
             raise Exception("Extraction failed '%s', code %s" % (cmd, p))
 
     def extract_segment(self, entry, audio, audio_segments_dir):
-        audio_segment_filename = f"{entry['episode_id']}_{entry['start_time']}_{entry['end_time']}_{entry['duration_ms']}.wav"
+        audio_segment_filename = f"{entry['episode_id']}_{entry['start_time_ms']:010d}_{entry['end_time_ms']:010d}_{entry['duration_ms']}.wav"
         audio_segment_dir = audio_segments_dir + f"/{entry['episode_id']}"
 
         if not os.path.exists(audio_segment_dir):
@@ -51,8 +54,8 @@ class EpisodeExtractor():
         self.extract_audio(
             audio,
             audio_segment_destinaton,
-            start=entry['start_time'],
-            end=entry['end_time']
+            start=entry['start_time_ms'],
+            end=entry['end_time_ms']
         )
 
     def dump_at(self, info, target_dir):
@@ -92,11 +95,14 @@ class EpisodeExtractor():
         return info
 
     def resync(self, audiofile, options, max_gap_s=0.5):
-        detector = VoiceDetector(audiofile)
-        segments = detector.analyze(aggressive=options.aggressive,
-                                    max_pause=float(options.max_pause),
-                                    max_segment_length=float(options.max_segment_length))
-
+        self.detector.select_sourcefile(audiofile)
+        segments = self.detector.analyze(
+            aggressive=options.aggressive,
+            max_pause=float(options.max_pause),
+            max_segment_length=float(options.max_segment_length),
+            threshold=float(options.silero_threshold)
+        )
+        print(f"Detected {len(segments)} audio segments.")
         return segments
 
     def save_jsonlines(self, segments, destination, info, audio, audio_segments_dir):
@@ -108,10 +114,10 @@ class EpisodeExtractor():
             )
             for item in segments_iter:
                 entry = {
-                    "id": info["episode_id"] + "_" + str(int(item["start"] * 100)) + "_" + str(int(item["end"] * 100)),
-                    "start_time": int(item["start"]*100),
-                    "end_time": int(item["end"]*100),
-                    "duration_ms": int((item["end"] - item["start"])*100),
+                    "id": info["episode_id"] + "_" + str(int(item["start"] * 1000)) + "_" + str(int(item["end"] * 1000)),
+                    "start_time_ms": int(item["start"] * 1000),
+                    "end_time_ms": int(item["end"] * 1000),
+                    "duration_ms": int((item["end"] - item["start"]) * 1000),
                     'episode_id': info['episode_id'],
                     'medium': info['medium'],
                     'program_image_url': info['program_image_url'],
@@ -151,6 +157,8 @@ if __name__ == "__main__":
     parser.add_argument("--max_segment_length", dest="max_segment_length", help="Max segment length", default=30)
     parser.add_argument("--max_adjust", dest="max_adjust", help="Maximum adjustment (s)", default=1.0)
     parser.add_argument("--min_time", dest="min_time", help="Minimium time for a sub (s)", default=1.2)
+    parser.add_argument("--vad_method", dest="vad_method", help="VAD method. Either 'silero' for SileroVAD or 'webrtc' for WebRTCVad (s)", default="webrtc")
+    parser.add_argument("--silero_threshold", dest="silero_threshold", help="SileroVAD threshold to consider a segment speeech", default=0.75)
 
     try:
         import argcomplete
@@ -164,8 +172,9 @@ if __name__ == "__main__":
     options.max_cps = float(options.max_cps)
     options.max_adjust = float(options.max_adjust)
     options.min_time = float(options.min_time)
+    options.silero_threshold = float(options.silero_threshold)
 
-    extractor = EpisodeExtractor()
+    extractor = EpisodeExtractor(method=options.vad_method)
 
     print("\n\n* Starting processing " + options.src)
 
