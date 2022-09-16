@@ -112,7 +112,7 @@ def main(args):
 
         print(f"\nTotal time: {round(seconds/3600)} hours.") 
         print(f"\nThere were a total of {valid_manifest} episodes with valid manifest files, and {invalid_manifest} episodes with an invalid one.")
-        print(f"\nFinished writing json output file to {(podcast_file)}")
+        print(f"\nFinished writing json output file to {(tv_file)}")
 
 def write_episode(episode,writer,serie_image_url="None"):
         base_url = "https://psapi.nrk.no"   
