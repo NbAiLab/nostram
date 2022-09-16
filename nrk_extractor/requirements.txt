@@ -1,5 +1,7 @@
+argcomplete
 requests
 webrtcvad
 Pillow
 joblib
 jsonlines
+tqdm
