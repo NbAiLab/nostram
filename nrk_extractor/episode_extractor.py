@@ -58,7 +58,7 @@ class EpisodeExtractor():
             end=entry['end_time_ms']
         )
 
-    def dump_at(self, info, target_dir):
+    def dump_at(self, info, target_dir, extract_audio_segments=False):
         id = info['episode_id']
 
         if not os.path.exists(target_dir):
@@ -73,7 +73,7 @@ class EpisodeExtractor():
             os.makedirs(segments_dir)
 
         audio_segments_dir = target_dir + "/audio_segments"
-        if not os.path.exists(audio_segments_dir):
+        if extract_audio_segments and not os.path.exists(audio_segments_dir):
             os.makedirs(audio_segments_dir)
 
         if info['audio_format'] == "HLS":
@@ -89,8 +89,8 @@ class EpisodeExtractor():
 
         self.extract_audio(info["audio_file"], target_audio)
 
-        subtitles = self.resync(target_audio,  options)
-        self.save_jsonlines(subtitles, target_segment, info, target_audio, audio_segments_dir)
+        subtitles, target_audio_wav = self.resync(target_audio,  options)
+        self.save_jsonlines(subtitles, target_segment, info, target_audio_wav, audio_segments_dir, extract_audio_segments)
 
         return info
 
@@ -103,15 +103,18 @@ class EpisodeExtractor():
             threshold=float(options.silero_threshold)
         )
         print(f"Detected {len(segments)} audio segments.")
-        return segments
+        return segments, self.detector.sourcefile
 
-    def save_jsonlines(self, segments, destination, info, audio, audio_segments_dir):
+    def save_jsonlines(self, segments, destination, info, audio, audio_segments_dir, extract_audio_segments=False):
         # Save segments
         with open(destination, "w") as destination_file:
             # Write a single line pr entry that's good
-            segments_iter = tqdm(
-                segments, desc="Saving audio segments", total=len(segments)
-            )
+            if extract_audio_segments:
+                segments_iter = tqdm(
+                    segments, desc="Saving audio segments", total=len(segments)
+                )
+            else:
+                segments_iter = segments
             for item in segments_iter:
                 entry = {
                     "id": info["episode_id"] + "_" + str(int(item["start"] * 1000)) + "_" + str(int(item["end"] * 1000)),
@@ -135,7 +138,8 @@ class EpisodeExtractor():
                     'audio_mime_type': info['audio_mime_type']
                 }
                 destination_file.write(json.dumps(entry) + "\n")
-                self.extract_segment(entry, audio, audio_segments_dir)
+                if extract_audio_segments:
+                    self.extract_segment(entry, audio, audio_segments_dir)
 
 
 if __name__ == "__main__":
@@ -159,6 +163,8 @@ if __name__ == "__main__":
     parser.add_argument("--min_time", dest="min_time", help="Minimium time for a sub (s)", default=1.2)
     parser.add_argument("--vad_method", dest="vad_method", help="VAD method. Either 'silero' for SileroVAD or 'webrtc' for WebRTCVad (s)", default="webrtc")
     parser.add_argument("--silero_threshold", dest="silero_threshold", help="SileroVAD threshold to consider a segment speeech", default=0.75)
+    parser.add_argument("-e", "--extract_audio_segments", dest="extract_audio_segments", help="Extract audio segments",
+                        action="store_true", default=False)
 
     try:
         import argcomplete
@@ -180,6 +186,6 @@ if __name__ == "__main__":
 
     with jsonlines.open(options.src) as reader:
         for obj in reader:
-            info = extractor.dump_at(obj, options.dst)
+            info = extractor.dump_at(obj, options.dst, options.extract_audio_segments)
 
 
