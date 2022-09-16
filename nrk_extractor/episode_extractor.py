@@ -69,8 +69,8 @@ class EpisodeExtractor():
         
         destination = os.path.join(target_dir, 'segments', id+'.json')
        
-        subtitles = self.resync(target_audio,  options)
-        self.save_jsonlines(subtitles, destination, info)
+        segments = self.resync(target_audio,  options)
+        self.save_jsonlines(segments, destination, info)
 
         return info
 
