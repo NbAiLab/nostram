@@ -232,7 +232,10 @@ class VoiceDetector:
         print(" ".join(cmd))
         s = subprocess.Popen(cmd, stderr=subprocess.PIPE)
         s.wait()
-        print(s.poll())
+        if s.poll():
+            print("Error with ffmpeg :(")
+        else:
+            print("Success")
 
         print("Analyzing")
         return tmpfile
