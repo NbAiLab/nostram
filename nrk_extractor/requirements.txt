@@ -1,0 +1,5 @@
+requests
+webrtcvad
+Pillow
+joblib
+jsonlines
