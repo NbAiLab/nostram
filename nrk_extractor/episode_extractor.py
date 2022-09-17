@@ -164,7 +164,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_segment_length", dest="max_segment_length", help="Max segment length", default=30)
     parser.add_argument("--max_adjust", dest="max_adjust", help="Maximum adjustment (s)", default=1.0)
     parser.add_argument("--min_time", dest="min_time", help="Minimium time for a sub (s)", default=1.2)
-    parser.add_argument("--vad_method", dest="vad_method", help="VAD method. Either 'silero' for SileroVAD or 'webrtc' for WebRTCVad (s)", default="webrtc")
+    parser.add_argument("--vad_method", dest="vad_method", help="VAD method. Either 'silero' for SileroVAD or 'webrtc' for WebRTCVad (s)", default="silero")
     parser.add_argument("--silero_threshold", dest="silero_threshold", help="SileroVAD threshold to consider a segment speeech", default=0.75)
     parser.add_argument("-e", "--extract_audio_segments", dest="extract_audio_segments", help="Extract audio segments",
                         action="store_true", default=False)
