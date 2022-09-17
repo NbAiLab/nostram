@@ -11,7 +11,7 @@ National Library of Norway
 """
 
 
-from asyncio import threads
+#from asyncio import threads
 import contextlib
 import sys
 import wave
