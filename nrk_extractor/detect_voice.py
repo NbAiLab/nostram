@@ -344,16 +344,7 @@ if __name__ == '__main__':
         if options.output_dir and not os.path.exists(options.output_dir):
             os.makedirs(options.output_dir)
 
-        #This seems to often fail. Lets do a few attempts before giving up
-        for i in range(0,100):
-            while True:
-                try:
-                    audio, sample_rate = read_wave(options.src)
-                except:
-                    print(f"Reading audio file failed. Waiting for {i} seconds.")
-                    time.sleep(i)
-                    continue
-                break
+        audio, sample_rate = read_wave(options.src)
 
         vad = webrtcvad.Vad(int(options.aggressive))
         frames = frame_generator(30, audio, sample_rate)
