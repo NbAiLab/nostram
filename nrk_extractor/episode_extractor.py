@@ -88,9 +88,12 @@ class EpisodeExtractor():
         target_segment = os.path.join(target_dir, 'segments', id + '.json')
 
         self.extract_audio(info["audio_file"], target_audio)
-
-        subtitles, target_audio_wav = self.resync(target_audio,  options)
-        self.save_jsonlines(subtitles, target_segment, info, target_audio_wav, audio_segments_dir, extract_audio_segments)
+        
+        segments, target_audio_wav = self.resync(target_audio,  options)
+        self.save_jsonlines(segments, target_segment, info, target_audio_wav, audio_segments_dir, extract_audio_segments)
+        
+        #Remove tmp-file
+        os.remove(target_audio_wav)
 
         return info
 

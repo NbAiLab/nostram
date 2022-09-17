@@ -11,7 +11,7 @@ National Library of Norway
 """
 
 
-from asyncio import threads
+#from asyncio import threads
 import contextlib
 import sys
 import wave
@@ -22,6 +22,7 @@ from argparse import ArgumentParser
 import tempfile
 import os
 import torch
+import time
 torch.set_num_threads(1)
 
 
@@ -90,7 +91,9 @@ class VoiceDetector:
 
     def silero_segments(self, max_pause=0, threshold=0.75):
         (get_speech_timestamps, _, read_audio, *_) = self._utils
-        _, sampling_rate = self.read_wave(self.sourcefile)
+        _, sampling_rate = self.read_wave(
+            self.sourcefile, only_sampling_rate=True
+        )
         wav = read_audio(self.sourcefile, sampling_rate=sampling_rate)
         speech_timestamps = get_speech_timestamps(
             wav,
@@ -103,7 +106,7 @@ class VoiceDetector:
         # return [{"start": d["start"] / 1e4, "end": d["end"] / 1e4} for d in speech_timestamps]
         return speech_timestamps
 
-    def read_wave(self, path):
+    def read_wave(self, path, only_sampling_rate=False):
         """Reads a .wav file.
 
         Takes the path, and returns (PCM audio data, sample rate).
@@ -116,11 +119,14 @@ class VoiceDetector:
                 assert sample_width == 2
                 sample_rate = wf.getframerate()
                 assert sample_rate in (8000, 16000, 32000, 48000)
-                pcm_data = wf.readframes(wf.getnframes())
-                return pcm_data, sample_rate
+                if only_sampling_rate:
+                    pcm_data = None
+                else:
+                    pcm_data = wf.readframes(wf.getnframes())
+            return pcm_data, sample_rate
         except:
             print("**ERROR: Was not able to read the .wav file. Returning False")
-            return False
+            return False, 0
 
     def frame_generator(self, frame_duration_ms, audio, sample_rate):
         """Generates audio frames from PCM audio data.
@@ -338,8 +344,17 @@ if __name__ == '__main__':
         if options.output_dir and not os.path.exists(options.output_dir):
             os.makedirs(options.output_dir)
 
+        #This seems to often fail. Lets do a few attempts before giving up
+        for i in range(0,100):
+            while True:
+                try:
+                    audio, sample_rate = read_wave(options.src)
+                except:
+                    print(f"Reading audio file failed. Waiting for {i} seconds.")
+                    time.sleep(i)
+                    continue
+                break
 
-        audio, sample_rate = read_wave(options.src)
         vad = webrtcvad.Vad(int(options.aggressive))
         frames = frame_generator(30, audio, sample_rate)
         frames = list(frames)
