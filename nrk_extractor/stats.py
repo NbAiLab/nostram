@@ -14,11 +14,11 @@ def main(args):
     segments_pattern = os.path.join(args.directory,'segments/','*.json')
     segments_list = glob.glob(segments_pattern)
     
-    subtitles_pattern = os.path.join(args.directory,'subtitles/','*.json')
-    subtitles_list = glob.glob(subtitles_pattern)
+    #subtitles_pattern = os.path.join(args.directory,'subtitles/','*.json')
+    #subtitles_list = glob.glob(subtitles_pattern)
     
 
-    for s in [segments_list,subtitles_list]:
+    for s in [segments_list]:
         dfs = []
         for file in s:
             data = pd.read_json(file, lines=True) # read data frame from json file
@@ -27,23 +27,26 @@ def main(args):
         df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
         df['title'] = df['title'].astype(str)
         #df.loc[df['medium'] == 'tv', 'title'] = df['title'] + " (TV)"
+        df['duration'] = df['duration_ms']/1000 
 
-        save_images(df['serieimageurl'].unique())
-        save_images(df['programimageurl'].unique())
+        save_images(df['serie_image_url'].unique())
+        save_images(df['program_image_url'].unique())
        
         # Create extra dataframes for each category
+        # Dropping categories here
+        # Simple workaround to save rewriting the code below
         categories = {}
-        for cat in df.category.unique():
-            
-            categories[cat] = df[df['category'] == cat]
+        #for cat in df.category.unique():
+        df['category'] = "all"
+        categories['all'] = df[df['category'] == 'all']
 
-        
-        if s == segments_list:
-            save_file = "stats.md"
-            title="# NRK Programs Processed\n"
-        else:
-            save_file = "stats_subtitles.md"
-            title="# NRK Subtitles Extracted\n"
+
+        #if s == segments_list:
+        save_file = "stats.md"
+        title="# NRK Programs Processed\n"
+        #else:
+        #    save_file = "stats_subtitles.md"
+        #    title="# NRK Subtitles Extracted\n"
 
         with open(save_file, 'w') as f:
             f.write(title)
@@ -68,30 +71,30 @@ def main(args):
                 programs = {}
                 programs_detailed = {}
 
-                programs[cat] = categories[cat].groupby(["serieimageurl","title"])['duration'].agg(['sum','count']).reset_index()
-                temp = categories[cat].groupby(["title"])['program_id'].agg(['nunique']).reset_index()
+                programs[cat] = categories[cat].groupby(["serie_image_url","title"])['duration'].agg(['sum','count']).reset_index()
+                temp = categories[cat].groupby(["title"])['episode_id'].agg(['nunique']).reset_index()
                 programs[cat] = pd.merge(programs[cat],temp)
                 programs[cat]['hours'] = (programs[cat]['sum']/100/3600).round(1)
                 programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/100).round(1)
-                programs[cat]['serieimageurl'] = '<img src="cachedimages/'+programs[cat]['serieimageurl'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="48">'
+                programs[cat]['serie_image_url'] = '<img src="cachedimages/'+programs[cat]['serie_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="48">'
 
                 programs[cat] = programs[cat].drop(columns=['sum'])
                 programs[cat] = programs[cat].rename(columns={"count": "segments"})
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
-                programs[cat] = programs[cat][['serieimageurl', 'title', 'programs', 'segments', 'average(s)','hours']]
-                programs[cat] = programs[cat].rename(columns={"serieimageurl": " "})
+                programs[cat] = programs[cat][['serie_image_url', 'title', 'programs', 'segments', 'average(s)','hours']]
+                programs[cat] = programs[cat].rename(columns={"serie_image_url": " "})
 
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
                 #Detailed
-                programs_detailed[cat] = categories[cat].groupby(["programimageurl","title","program_id","subtitle"])['duration'].agg(['sum','count']).reset_index()
+                programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id"])['duration'].agg(['sum','count']).reset_index()
                 programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/100).round(1)
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
-                programs_detailed[cat]['programimageurl'] = '<img src="cachedimages/'+programs_detailed[cat]['programimageurl'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="24">'
-                programs_detailed[cat] = programs_detailed[cat].rename(columns={"programimageurl": " "})
+                programs_detailed[cat]['program_image_url'] = '<img src="cachedimages/'+programs_detailed[cat]['program_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="24">'
+                programs_detailed[cat] = programs_detailed[cat].rename(columns={"program_image_url": " "})
                 
                 #Format
                 programs_detailed[cat]['segments'] = programs_detailed[cat]['segments'].map('{:,d}'.format)
@@ -109,7 +112,7 @@ def save_images(imagelist,save_dir="cachedimages"):
         image_name = url.split("/")[-1]+".jpg"
         image_path = os.path.join(save_dir,image_name)
         
-        if not os.path.exists(image_path) and url  != "placeholder":
+        if not os.path.exists(image_path) and url  != "placeholder" and url!= "None":
             print("Saving image "+ image_path)
             urllib.request.urlretrieve(url, image_path)
 
