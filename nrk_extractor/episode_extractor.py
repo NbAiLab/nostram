@@ -39,7 +39,9 @@ class EpisodeExtractor():
                            stderr=subprocess.STDOUT)
 
         if p.returncode != 0:
-            raise Exception("Extraction failed '%s', code %s" % (cmd, p))
+            print("Extraction failed '%s', code %s" % (cmd, p))
+            return False
+            #raise Exception("Extraction failed '%s', code %s" % (cmd, p))
 
     def extract_segment(self, entry, audio, audio_segments_dir):
         audio_segment_filename = f"{entry['episode_id']}_{entry['start_time_ms']:010d}_{entry['end_time_ms']:010d}_{entry['duration_ms']}.wav"
@@ -189,6 +191,10 @@ if __name__ == "__main__":
 
     with jsonlines.open(options.src) as reader:
         for obj in reader:
-            info = extractor.dump_at(obj, options.dst, options.extract_audio_segments)
+            if os.path.isfile(options.dst + "segments/"+obj['episode_id']+".json"):
+                print("Json file aldready exists - skipping")
+                continue
+            else:
+                info = extractor.dump_at(obj, options.dst, options.extract_audio_segments)
 
 
