@@ -55,7 +55,7 @@ def main(args):
                     else:
                         for episode in serie_json['_embedded']['episodes']['_embedded']['episodes']:
                             try:
-                                seconds += write_episode(episode, writer,serie_json['series']['category'],serie_json['series']['titles']['title'], serie_json['series']['image'][0]['url'])
+                                seconds += write_episode(episode, writer,serie_json['series']['category']['name'],serie_json['series']['titles']['title'], serie_json['series']['image'][0]['url'])
                             except:
                                 seconds += write_episode(episode, writer,serie_json['seriesType'],serie_json['series']['titles']['title'], serie_json['series']['image'][0]['url'])
                 elif 'customSeason' == itemtype:
