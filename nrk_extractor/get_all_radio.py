@@ -51,11 +51,13 @@ def main(args):
                                 continue
                             
                             for episode in season_json['_embedded']['episodes']['_embedded']['episodes']:
-                                seconds += write_episode(episode,writer,season_json['image'][0]['url'])
+                                seconds += write_episode(episode,writer,serie_json['seriesType'],serie_json['series']['titles']['title'],serie_json['series']['image'][0]['url'])
                     else:
                         for episode in serie_json['_embedded']['episodes']['_embedded']['episodes']:
-                            seconds += write_episode(episode, writer, serie_json['series']['image'][0]['url'])
-
+                            try:
+                                seconds += write_episode(episode, writer,serie_json['series']['category'],serie_json['series']['titles']['title'], serie_json['series']['image'][0]['url'])
+                            except:
+                                seconds += write_episode(episode, writer,serie_json['seriesType'],serie_json['series']['titles']['title'], serie_json['series']['image'][0]['url'])
                 elif 'customSeason' == itemtype:
                     #print(f"-#{n} {itemtype} - {item['title']}")
                     serie_json = get_json(base_url+item['_links'][itemtype]['href'])
@@ -64,7 +66,7 @@ def main(args):
                         continue
                     
                     for episode in serie_json['_embedded']['episodes']['_embedded']['episodes']:
-                        seconds += write_episode(episode,writer,serie_json['image'][0]['url'])
+                        seconds += write_episode(episode,writer,serie_json['seriesType'],serie_json['titles']['title'],serie_json['image'][0]['url'])
 
                 elif 'singleProgram' == itemtype:
                     #print("singleProgram")
@@ -80,7 +82,7 @@ def main(args):
         print(f"\nTotal time: {round(seconds/3600)} hours.") 
         print(f"\nFinished writing json output file to {(podcast_file)}")
 
-def write_episode(episode,writer,serie_image_url="None"):
+def write_episode(episode,writer,category="Undefined", serie_title="Undefined",serie_image_url="None"):
         base_url = "https://psapi.nrk.no"    
         episode_id = episode['episodeId']
         medium = episode['_links']['self']['href'].split("/")[1] 
@@ -97,11 +99,10 @@ def write_episode(episode,writer,serie_image_url="None"):
         #Get the manifest-file
         try:
             manifest_json = get_json(base_url+playback_json['_links']['manifests'][0]['href'])
-
             availability_information = manifest_json['availability']['information']
             is_geoblocked = manifest_json['availability']['isGeoBlocked']
             external_embedding_allowed = manifest_json['availability']['externalEmbeddingAllowed']
-            duration = round(isodate.parse_duration(manifest_json['playable']['duration']).total_seconds())
+            duration = round(isodate.parse_duration(manifest_json['playable']['duration']).total_seconds()*1000)
             audio_file = manifest_json['playable']['assets'][0]['url']
             audio_format = manifest_json['playable']['assets'][0]['format']
             audio_mime_type = manifest_json['playable']['assets'][0]['mimeType']
@@ -132,6 +133,8 @@ def write_episode(episode,writer,serie_image_url="None"):
                 'serie_image_url':serie_image_url,
                 'title':title,
                 'subtitle': subtitle,
+                'category':category,
+                'serie_title':serie_title,
                 'year':year,
                 'duration': duration,
                 'availability_information':availability_information,

@@ -69,7 +69,13 @@ def main(args):
                                         continue
                                 
                                 for episode in season_json['_embedded']['episodes']:
-                                    episode_seconds = write_episode(episode,writer,season_json['image'][0]['url'])
+                                    try:
+                                        episode_seconds =  write_episode(episode, writer,serie_json['category']['id'],serie_json['title'], serie_json['image']['webImages'][0]['imageUrl'])
+                                    except:
+                                        print("Failed because of unknown error")
+                                        episode_seconds = 0
+                                    #breakpoint()
+                                    #episode_seconds = write_episode(episode,writer,season_json['image'][0]['url'])
                                     seconds += episode_seconds
                                     if episode_seconds:
                                         valid_manifest += 1
@@ -114,7 +120,7 @@ def main(args):
         print(f"\nThere were a total of {valid_manifest} episodes with valid manifest files, and {invalid_manifest} episodes with an invalid one.")
         print(f"\nFinished writing json output file to {(tv_file)}")
 
-def write_episode(episode,writer,serie_image_url="None"):
+def write_episode(episode,writer,category="Undefined", serie_title="Undefined",serie_image_url="None"):
         base_url = "https://psapi.nrk.no"   
         episode_id = episode['prfId']
 
@@ -136,7 +142,7 @@ def write_episode(episode,writer,serie_image_url="None"):
             availability_information = manifest_json['availability']['information']
             is_geoblocked = manifest_json['availability']['isGeoBlocked']
             external_embedding_allowed = manifest_json['availability']['externalEmbeddingAllowed']
-            duration = round(isodate.parse_duration(manifest_json['playable']['duration']).total_seconds())
+            duration = round(isodate.parse_duration(manifest_json['playable']['duration']).total_seconds()*1000)
             audio_file = manifest_json['playable']['assets'][0]['url']
             audio_format = manifest_json['playable']['assets'][0]['format']
             audio_mime_type = manifest_json['playable']['assets'][0]['mimeType']
@@ -166,6 +172,8 @@ def write_episode(episode,writer,serie_image_url="None"):
                 'serie_image_url':serie_image_url,
                 'title':title,
                 'subtitle': subtitle,
+                'category':category,
+                'serie_title':serie_title,
                 'year':year,
                 'duration': duration,
                 'availability_information':availability_information,

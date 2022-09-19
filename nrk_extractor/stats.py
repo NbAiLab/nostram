@@ -40,7 +40,7 @@ def main(args):
         df['category'] = "all"
         categories['all'] = df[df['category'] == 'all']
 
-
+        breakpoint()
         #if s == segments_list:
         save_file = "stats.md"
         title="# NRK Programs Processed\n"

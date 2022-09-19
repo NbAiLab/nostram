@@ -170,7 +170,8 @@ if __name__ == "__main__":
     parser.add_argument("--silero_threshold", dest="silero_threshold", help="SileroVAD threshold to consider a segment speeech", default=0.75)
     parser.add_argument("-e", "--extract_audio_segments", dest="extract_audio_segments", help="Extract audio segments",
                         action="store_true", default=False)
-
+    parser.add_argument("-r", "--reprocess_segments", dest="reprocess_segments", help="Reprocess segments that is already processed",
+                        default=False)
     try:
         import argcomplete
         argcomplete.autocomplete(parser)
@@ -191,7 +192,7 @@ if __name__ == "__main__":
 
     with jsonlines.open(options.src) as reader:
         for obj in reader:
-            if os.path.isfile(options.dst + "segments/"+obj['episode_id']+".json"):
+            if os.path.isfile(options.dst + "segments/"+obj['episode_id']+".json") and not options.reprocess_segments:
                 print("Json file aldready exists - skipping")
                 continue
             else:
