@@ -170,8 +170,8 @@ if __name__ == "__main__":
     parser.add_argument("--silero_threshold", dest="silero_threshold", help="SileroVAD threshold to consider a segment speeech", default=0.75)
     parser.add_argument("-e", "--extract_audio_segments", dest="extract_audio_segments", help="Extract audio segments",
                         action="store_true", default=False)
-    parser.add_argument("-r", "--reprocess_segments", dest="reprocess_segments", help="Reprocess segments that is already processed",
-                        default=False)
+    parser.add_argument("-r", "--reprocess_segments", dest="reprocess_segments", help="Reprocess segments that is already processed", action="store_true", default=False)
+    
     try:
         import argcomplete
         argcomplete.autocomplete(parser)
