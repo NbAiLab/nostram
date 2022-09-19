@@ -54,15 +54,15 @@ def main(args):
             f.write("| category              | tv   | radio                    |   **total** |\n")   
             f.write("|:-------------------|-------------:|----------------------------:|---------------------------:|\n")
             for cat in categories:
-                tv = "{:,.1f}".format(categories[cat].query("medium == 'tv'")['duration'].sum()/100/3600,1)
-                radio = "{:,.1f}".format(categories[cat].query("medium == 'radio'")['duration'].sum()/100/3600,1)
-                total = "{:,.1f}".format(categories[cat]['duration'].sum()/100/3600,1)
+                tv = "{:,.1f}".format(categories[cat].query("medium == 'tv'")['duration'].sum()/1000/3600,1)
+                radio = "{:,.1f}".format(categories[cat].query("medium == 'radio'")['duration'].sum()/1000/3600,1)
+                total = "{:,.1f}".format(categories[cat]['duration'].sum()/1000/3600,1)
 
                 f.write("| "+cat+" | "+tv+" | "+radio+"                  |        **"+total+"** |\n")     
             
-            tv = "{:,.1f}".format(df.query("medium == 'tv'")['duration'].sum()/100/3600,1)
-            radio = "{:,.1f}".format(df.query("medium == 'radio'")['duration'].sum()/100/3600,1)
-            total = "{:,.1f}".format(df['duration'].sum()/100/3600,1)
+            tv = "{:,.1f}".format(df.query("medium == 'tv'")['duration'].sum()/1000/3600,1)
+            radio = "{:,.1f}".format(df.query("medium == 'radio'")['duration'].sum()/1000/3600,1)
+            total = "{:,.1f}".format(df['duration'].sum()/1000/3600,1)
 
             f.write("| **total** | **"+tv+"** | **"+radio+"**                  |        **"+total+"** |\n\n")  
 
@@ -74,8 +74,8 @@ def main(args):
                 programs[cat] = categories[cat].groupby(["serie_image_url","title"])['duration'].agg(['sum','count']).reset_index()
                 temp = categories[cat].groupby(["title"])['episode_id'].agg(['nunique']).reset_index()
                 programs[cat] = pd.merge(programs[cat],temp)
-                programs[cat]['hours'] = (programs[cat]['sum']/100/3600).round(1)
-                programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/100).round(1)
+                programs[cat]['hours'] = (programs[cat]['sum']/1000/3600).round(1)
+                programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/1000).round(1)
                 programs[cat]['serie_image_url'] = '<img src="cachedimages/'+programs[cat]['serie_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="48">'
 
                 programs[cat] = programs[cat].drop(columns=['sum'])
@@ -89,8 +89,8 @@ def main(args):
                 
                 #Detailed
                 programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
-                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/100).round(1)
-                programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
+                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/1000).round(1)
+                programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/1000/3600).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
                 programs_detailed[cat]['program_image_url'] = '<img src="cachedimages/'+programs_detailed[cat]['program_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="24">'
