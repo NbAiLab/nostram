@@ -27,26 +27,26 @@ def main(args):
         df = pd.concat(dfs, ignore_index=True) # concatenate all the data frames in the list.
         df['title'] = df['title'].astype(str)
         #df.loc[df['medium'] == 'tv', 'title'] = df['title'] + " (TV)"
-        df['duration'] = df['duration_ms']/1000 
 
         save_images(df['serie_image_url'].unique())
         save_images(df['program_image_url'].unique())
        
         # Create extra dataframes for each category
-        # Dropping categories here
-        # Simple workaround to save rewriting the code below
         categories = {}
-        #for cat in df.category.unique():
-        df['category'] = "all"
-        categories['all'] = df[df['category'] == 'all']
+        
+        df['category'] = "debug"
 
-        breakpoint()
-        #if s == segments_list:
-        save_file = "stats.md"
-        title="# NRK Programs Processed\n"
-        #else:
-        #    save_file = "stats_subtitles.md"
-        #    title="# NRK Subtitles Extracted\n"
+        for cat in df.category.unique():
+            
+            categories[cat] = df[df['category'] == cat]
+
+        
+        if s == segments_list:
+            save_file = "stats.md"
+            title="# NRK Programs Processed\n"
+        else:
+            save_file = "stats_subtitles.md"
+            title="# NRK Subtitles Extracted\n"
 
         with open(save_file, 'w') as f:
             f.write(title)
@@ -88,7 +88,7 @@ def main(args):
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
                 #Detailed
-                programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id"])['duration'].agg(['sum','count']).reset_index()
+                programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
                 programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/100).round(1)
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/100/3600).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
@@ -112,7 +112,7 @@ def save_images(imagelist,save_dir="cachedimages"):
         image_name = url.split("/")[-1]+".jpg"
         image_path = os.path.join(save_dir,image_name)
         
-        if not os.path.exists(image_path) and url  != "placeholder" and url!= "None":
+        if not os.path.exists(image_path) and url  != "None":
             print("Saving image "+ image_path)
             urllib.request.urlretrieve(url, image_path)
 
