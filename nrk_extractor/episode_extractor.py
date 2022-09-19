@@ -44,7 +44,7 @@ class EpisodeExtractor():
             #raise Exception("Extraction failed '%s', code %s" % (cmd, p))
 
     def extract_segment(self, entry, audio, audio_segments_dir):
-        audio_segment_filename = f"{entry['episode_id']}_{entry['start_time_ms']:010d}_{entry['end_time_ms']:010d}_{entry['duration_ms']}.wav"
+        audio_segment_filename = f"{entry['episode_id']}_{entry['start_time']:010d}_{entry['end_time']:010d}_{entry['duration']}.wav"
         audio_segment_dir = audio_segments_dir + f"/{entry['episode_id']}"
 
         if not os.path.exists(audio_segment_dir):
@@ -56,8 +56,8 @@ class EpisodeExtractor():
         self.extract_audio(
             audio,
             audio_segment_destinaton,
-            start=entry['start_time_ms'],
-            end=entry['end_time_ms']
+            start=entry['start_time'],
+            end=entry['end_time']
         )
 
     def dump_at(self, info, target_dir, extract_audio_segments=False):
@@ -123,15 +123,17 @@ class EpisodeExtractor():
             for item in segments_iter:
                 entry = {
                     "id": info["episode_id"] + "_" + str(int(item["start"] * 1000)) + "_" + str(int(item["end"] * 1000)),
-                    "start_time_ms": int(item["start"] * 1000),
-                    "end_time_ms": int(item["end"] * 1000),
-                    "duration_ms": int((item["end"] - item["start"]) * 1000),
+                    "start_time": int(item["start"] * 1000),
+                    "end_time": int(item["end"] * 1000),
+                    "duration": int((item["end"] - item["start"]) * 1000),
                     'episode_id': info['episode_id'],
                     'medium': info['medium'],
                     'program_image_url': info['program_image_url'],
                     'serie_image_url': info['serie_image_url'],
                     'title': info['title'],
                     'sub_title': info['subtitle'],
+                    'category':info['category'],
+                    'serie_title':info['serie_title'],
                     'year': info['year'],
                     'availability_information': info['availability_information'],
                     'is_geoblocked': info['is_geoblocked'],
@@ -162,7 +164,7 @@ if __name__ == "__main__":
     parser.add_argument("-a", "--aggressive", dest="aggressive", help="How aggressive (0-3, 3 is most aggressive), default 1", default=1)
     parser.add_argument("--min_cps", dest="min_cps", help="Minimum CPS", default=0)
     parser.add_argument("--max_cps", dest="max_cps", help="Maximum CPS", default=0)
-    parser.add_argument("--max_pause", dest="max_pause", help="Merge if closer than this (if >0s)", default=0)
+    parser.add_argument("--max_pause", dest="max_pause", help="Merge if closer than this (if >1s)", default=1)
     parser.add_argument("--max_segment_length", dest="max_segment_length", help="Max segment length", default=30)
     parser.add_argument("--max_adjust", dest="max_adjust", help="Maximum adjustment (s)", default=1.0)
     parser.add_argument("--min_time", dest="min_time", help="Minimium time for a sub (s)", default=1.2)

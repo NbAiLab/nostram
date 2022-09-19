@@ -60,8 +60,11 @@ class VoiceDetector:
             self.sourcefile = sourcefile
 
     def __del__(self):
-        if self.is_tmp:
-            os.remove(self.sourcefile)
+        try:
+            if self.is_tmp:
+                os.remove(self.sourcefile)
+        except:
+            print(f'{self.sourcefile} has already been deleted')
 
     def analyze(self, aggressive=2, max_segment_length=8, max_pause=0, frame_length=10, threshold=0.75):
         if self.method.lower() == "silero":
