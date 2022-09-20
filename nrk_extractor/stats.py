@@ -69,7 +69,7 @@ def main(args):
                 programs = {}
                 programs_detailed = {}
 
-                programs[cat] = categories[cat].groupby(["serie_image_url","title"])['duration'].agg(['sum','count']).reset_index()
+                programs[cat] = categories[cat].groupby(["serie_image_url","serie_title"])['duration'].agg(['sum','count']).reset_index()
                 temp = categories[cat].groupby(["serie_title"])['episode_id'].agg(['nunique']).reset_index()
                 programs[cat] = pd.merge(programs[cat],temp)
                 programs[cat]['hours'] = (programs[cat]['sum']/1000/3600).round(1)
@@ -84,7 +84,6 @@ def main(args):
                 programs[cat]['title'] = programs[cat]['title'].str.replace('|','-')
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
-                breakpoint() 
                 #Detailed
                 #programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
                 #programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/1000).round(1)
