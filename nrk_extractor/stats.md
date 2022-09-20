@@ -8,7 +8,7 @@
 ## debug
 |                                                                                           | title                                                                            |   programs |   segments |   average(s) |   hours |
 |:------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------|-----------:|-----------:|-------------:|--------:|
-| <img src="cachedimages/-eCynIrGMRLHS2NsT1Q1Mg6I7ekdW9Nh-fAzwmytikAA.jpg" height="48">     | Norske skipsforlis - Fiskebåten Brattegga                                        |          1 |         11 |          5.5 |     0   |
+| <img src="https://gfx.nrk.no/-eCynIrGMRLHS2NsT1Q1Mg6I7ekdW9Nh-fAzwmytikAA.jpg" height="48">     | Norske skipsforlis - Fiskebåten Brattegga                                        |          1 |         11 |          5.5 |     0   |
 | <img src="cachedimages/-eCynIrGMRLHS2NsT1Q1Mg6I7ekdW9Nh-fAzwmytikAA.jpg" height="48">     | Norske skipsforlis - Rigel                                                       |          1 |         10 |          4.9 |     0   |
 | <img src="cachedimages/-eCynIrGMRLHS2NsT1Q1Mg6I7ekdW9Nh-fAzwmytikAA.jpg" height="48">     | Norske skipsforlis - Ulf Jarl                                                    |          1 |         10 |          5.8 |     0   |
 | <img src="cachedimages/-i7GH_UhE4l70oDmw5z4xwYlNKH0_93hZ4RhOqR90CLw.jpg" height="48">     | Sergej er utenlandsk agent                                                       |          1 |          7 |          9.9 |     0   |
