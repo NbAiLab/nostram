@@ -93,7 +93,7 @@ def main(args):
                 programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/1000/3600).round(1)
                 programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
-                programs_detailed[cat]['program_image_url'] = '<img src="cachedimages/'+programs_detailed[cat]['program_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="24">'
+                programs_detailed[cat]['program_image_url'] = '<img src="'+programs_detailed[cat]['program_image_url']+'" height="24">'
                 programs_detailed[cat] = programs_detailed[cat].rename(columns={"program_image_url": " "})
                 
                 #Format
