@@ -85,6 +85,13 @@ def main(args):
                 programs[cat]['serie_title'] = programs[cat]['serie_title'].str.replace('|','-')
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
+                
+                #Frequencies
+                freq = (categories[cat]['duration']/1000).astype(int)
+                ax = freq.plot.hist(bins=200)
+                fig = ax.get_figure()
+                fig.savefig('images/histogram.png')
+
                 #Detailed
                 #programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
                 #programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/1000).round(1)
