@@ -75,7 +75,6 @@ def main(args):
                 programs[cat]['hours'] = (programs[cat]['sum']/1000/3600).round(1)
                 programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/1000).round(1)
                 programs[cat]['serie_image_url'] = '<img src="'+programs[cat]['serie_image_url']+'" height="48">'
-                breakpoint()
 
                 programs[cat] = programs[cat].drop(columns=['sum'])
                 programs[cat] = programs[cat].rename(columns={"count": "segments"})
@@ -91,6 +90,7 @@ def main(args):
                 ax = freq.plot.hist(bins=200)
                 fig = ax.get_figure()
                 fig.savefig('images/histogram.png')
+                breakpoint()
 
                 #Detailed
                 #programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
