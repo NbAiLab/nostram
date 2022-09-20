@@ -76,7 +76,7 @@ def main(args):
                 programs[cat] = pd.merge(programs[cat],temp)
                 programs[cat]['hours'] = (programs[cat]['sum']/1000/3600).round(1)
                 programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/1000).round(1)
-                programs[cat]['serie_image_url'] = '<img src="cachedimages/'+programs[cat]['serie_image_url'].str.replace('https://gfx.nrk.no/','')+'.jpg" height="48">'
+                programs[cat]['serie_image_url'] = '<img src="'+programs[cat]['serie_image_url']+'" height="24">'
 
                 programs[cat] = programs[cat].drop(columns=['sum'])
                 programs[cat] = programs[cat].rename(columns={"count": "segments"})
