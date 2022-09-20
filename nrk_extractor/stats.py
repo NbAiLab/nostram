@@ -81,7 +81,7 @@ def main(args):
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
                 programs[cat] = programs[cat][['serie_image_url', 'serie_title', 'programs', 'segments', 'average(s)','hours']]
                 programs[cat] = programs[cat].rename(columns={"serie_image_url": " "})
-                programs[cat]['title'] = programs[cat]['title'].str.replace('|','-')
+                programs[cat]['serie_title'] = programs[cat]['serie_title'].str.replace('|','-')
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 #Detailed
