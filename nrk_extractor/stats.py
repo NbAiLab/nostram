@@ -28,14 +28,12 @@ def main(args):
         df['title'] = df['title'].astype(str)
         #df.loc[df['medium'] == 'tv', 'title'] = df['title'] + " (TV)"
 
-        save_images(df['serie_image_url'].unique())
-        save_images(df['program_image_url'].unique())
+        #save_images(df['serie_image_url'].unique())
+        #save_images(df['program_image_url'].unique())
        
         # Create extra dataframes for each category
         categories = {}
         
-        df['category'] = "debug"
-
         for cat in df.category.unique():
             
             categories[cat] = df[df['category'] == cat]
@@ -107,14 +105,14 @@ def main(args):
                 #f.write("\n</details>\n\n")
             print(save_file+" written to disk")
 
-def save_images(imagelist,save_dir="cachedimages"):
-    for url in imagelist:
-        image_name = url.split("/")[-1]+".jpg"
-        image_path = os.path.join(save_dir,image_name)
-        
-        if not os.path.exists(image_path) and url  != "None":
-            print("Saving image "+ image_path)
-            urllib.request.urlretrieve(url, image_path)
+#def save_images(imagelist,save_dir="cachedimages"):
+#    for url in imagelist:
+#        image_name = url.split("/")[-1]+".jpg"
+#        image_path = os.path.join(save_dir,image_name)
+#        
+#        if not os.path.exists(image_path) and url  != "None":
+#            print("Saving image "+ image_path)
+#            urllib.request.urlretrieve(url, image_path)
 
 def parse_args():
     # Parse commandline

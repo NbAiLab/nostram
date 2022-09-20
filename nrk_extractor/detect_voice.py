@@ -221,6 +221,8 @@ class VoiceDetector:
                         target_f.setframerate(sample_rate)
                         for d in segment_data:
                             target_f.writeframes(d.bytes)
+                        target_f.close()
+
                     s["file"] = target
                     s["data"] = segment_data
 
@@ -252,6 +254,8 @@ class VoiceDetector:
             print("Success")
 
         print("Analyzing")
+        os.close(fd)
+
         return tmpfile
 
     def realign_subs(self, segments, subs, options):
