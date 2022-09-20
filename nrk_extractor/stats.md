@@ -13,7 +13,9 @@
 | **total** | **0.0** | **34.8**                  |        **34.8** |
 
 
-<img src="images/histogram.png">.\n 9648 segments. 429 longer than 60 seconds (not displayed)## standard
+
+<img src="images/histogram.png">
+ 9,648 segments. 429(4%) longer than 60 seconds (not displayed)## standard
 |                                                                                         | serie_title                      |   programs |   segments |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:---------------------------------|-----------:|-----------:|-------------:|--------:|
 | <img src="https://gfx.nrk.no/-i7GH_UhE4l70oDmw5z4xwYlNKH0_93hZ4RhOqR90CLw" height="48"> | Krig og fred                     |          1 |          7 |          9.9 |     0   |
