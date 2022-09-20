@@ -63,7 +63,16 @@ def main(args):
             total = "{:,.1f}".format(df['duration'].sum()/1000/3600,1)
 
             f.write("| **total** | **"+tv+"** | **"+radio+"**                  |        **"+total+"** |\n\n")  
+            
+            #Frequencies
+            freq = (df['duration']/1000).astype(int)
+            count = freq[freq > 60].count()
+            freq = freq.drop(freq[freq > 60].index)
 
+            ax = freq.plot.hist(bins=60)
+            fig = ax.get_figure()
+            fig.savefig('images/histogram.png')
+            f.write(f"\nIMAGE HERE. {len(df)} segments. {count} longer than 60 seconds (not displayed)")    
 
             for cat in categories:
                 programs = {}
@@ -85,16 +94,7 @@ def main(args):
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
-                #Frequencies
-                freq = (categories[cat]['duration']/1000).astype(int)
-                breakpoint()
-                count = freq[freq > 60].count()
-                freq = freq.drop(freq[freq > 60].index)
-
-                ax = freq.plot.hist(bins=60)
-                fig = ax.get_figure()
-                fig.savefig('images/histogram.png')
-                breakpoint()
+               
 
                 #Detailed
                 #programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
