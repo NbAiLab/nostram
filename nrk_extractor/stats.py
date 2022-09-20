@@ -72,7 +72,7 @@ def main(args):
             ax = freq.plot.hist(bins=60)
             fig = ax.get_figure()
             fig.savefig('images/histogram.png')
-            f.write(f'\n\n## Sequence Length\n\n<img src="images/histogram.png">\n {len(df):,} segments. {count:,}({round(count*100/len(df))}%) longer than 60 seconds (not displayed)\n\n')    
+            f.write(f'\n\n## Sequence Length\n\n<img src="images/histogram.png"><i> {len(df):,} segments. {count:,}({round(count*100/len(df))}%) longer than 60 seconds (not displayed)</i>\n\n')    
 
             for cat in categories:
                 programs = {}
