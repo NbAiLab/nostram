@@ -81,21 +81,21 @@ def main(args):
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
                 programs[cat] = programs[cat][['serie_image_url', 'title', 'programs', 'segments', 'average(s)','hours']]
                 programs[cat] = programs[cat].rename(columns={"serie_image_url": " "})
-
+                programs[cat]['title'] = programs[cat]['title'].str.replace('|','-')
                 #Format
                 programs[cat]['segments'] = programs[cat]['segments'].map('{:,d}'.format)
                 
                 #Detailed
-                programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
-                programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/1000).round(1)
-                programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/1000/3600).round(1)
-                programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
-                programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
-                programs_detailed[cat]['program_image_url'] = '<img src="'+programs_detailed[cat]['program_image_url']+'" height="24">'
-                programs_detailed[cat] = programs_detailed[cat].rename(columns={"program_image_url": " "})
+                #programs_detailed[cat] = categories[cat].groupby(["program_image_url","title","episode_id","sub_title"])['duration'].agg(['sum','count']).reset_index()
+                #programs_detailed[cat]['average(s)'] = ((programs_detailed[cat]['sum']/programs_detailed[cat]['count'])/1000).round(1)
+                #programs_detailed[cat]['hours'] = (programs_detailed[cat]['sum']/1000/3600).round(1)
+                #programs_detailed[cat] = programs_detailed[cat].drop(columns=['sum'])
+                #programs_detailed[cat] = programs_detailed[cat].rename(columns={"count": "segments"})
+                #programs_detailed[cat]['program_image_url'] = '<img src="'+programs_detailed[cat]['program_image_url']+'" height="24">'
+                #programs_detailed[cat] = programs_detailed[cat].rename(columns={"program_image_url": " "})
                 
                 #Format
-                programs_detailed[cat]['segments'] = programs_detailed[cat]['segments'].map('{:,d}'.format)
+                #programs_detailed[cat]['segments'] = programs_detailed[cat]['segments'].map('{:,d}'.format)
 
                 f.write("## "+cat+"\n") 
                 f.write(programs[cat].to_markdown(index=False))
