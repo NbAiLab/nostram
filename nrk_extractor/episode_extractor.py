@@ -42,6 +42,13 @@ class EpisodeExtractor():
             print("Extraction failed '%s', code %s" % (cmd, p))
             return False
             #raise Exception("Extraction failed '%s', code %s" % (cmd, p))
+        
+        #Make sure the process is no longer alive
+        #try:
+        #    p.kill()
+        #    print("Killed a process")
+        #except:
+        #    print("No process to kill")
 
     def extract_segment(self, entry, audio, audio_segments_dir):
         audio_segment_filename = f"{entry['episode_id']}_{entry['start_time']:010d}_{entry['end_time']:010d}_{entry['duration']}.wav"
