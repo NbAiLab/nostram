@@ -87,8 +87,9 @@ def main(args):
                 
                 #Frequencies
                 freq = (categories[cat]['duration']/1000).astype(int)
+                breakpoint()
                 count = freq[freq > 60].count()
-                freq = freq.drop(freq[freq < 60].index)
+                freq = freq.drop(freq[freq > 60].index)
 
                 ax = freq.plot.hist(bins=60)
                 fig = ax.get_figure()
