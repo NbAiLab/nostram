@@ -79,7 +79,7 @@ def main(args):
                 programs[cat] = programs[cat].drop(columns=['sum'])
                 programs[cat] = programs[cat].rename(columns={"count": "segments"})
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
-                programs[cat] = programs[cat][['serie_image_url', 'serie', 'programs', 'segments', 'average(s)','hours']]
+                programs[cat] = programs[cat][['serie_image_url', 'serie_title', 'programs', 'segments', 'average(s)','hours']]
                 programs[cat] = programs[cat].rename(columns={"serie_image_url": " "})
                 programs[cat]['title'] = programs[cat]['title'].str.replace('|','-')
                 #Format
