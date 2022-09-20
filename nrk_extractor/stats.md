@@ -36,7 +36,7 @@
 | <img src="https://gfx.nrk.no/WWHLs51ng8F-U8Rr9dTRAwR0YBjeUfHNmFdVC0peubqA" height="48"> | # 21 Er høyreekstremismen i vekst?                           |          1 |          3 |         22.4 |     0   |
 | <img src="https://gfx.nrk.no/WWHLs51ng8F-U8Rr9dTRAwR0YBjeUfHNmFdVC0peubqA" height="48"> | #10 Hva bør vi spise? Når bør vi spise?                      |          1 |          2 |         33.5 |     0   |
 | <img src="https://gfx.nrk.no/WWHLs51ng8F-U8Rr9dTRAwR0YBjeUfHNmFdVC0peubqA" height="48"> | #8 Hvorfor ytre høyre vinner debatten                        |          1 |          4 |         15.4 |     0   |
-| <img src="https://gfx.nrk.no/ZTTE2P0vSywuQVLjRaBouQ23yV3iGq3jDgU9LTTqIMqA" height="48"> | Kranglar med eks og bestevenn | Agnete Husebye               |          1 |          2 |         37.4 |     0   |
+| <img src="https://gfx.nrk.no/ZTTE2P0vSywuQVLjRaBouQ23yV3iGq3jDgU9LTTqIMqA" height="48"> | Kranglar med eks og bestevenn - Agnete Husebye               |          1 |          2 |         37.4 |     0   |
 | <img src="https://gfx.nrk.no/cwKeM4zVvVRBJFYpMB9trQFKmybPYj8dkYKjoiefbjuQ" height="48"> | Pressekonferansen, brystpumpa og superonsdag!                |          1 |          2 |         41.8 |     0   |
 | <img src="https://gfx.nrk.no/ezSF__VXQgZbYeTLJl7IrQ9956JR-Os8r1Q1vAfbbbwg" height="48"> | Pardon me                                                    |          1 |          4 |         18.5 |     0   |
 | <img src="https://gfx.nrk.no/lAYMbrfAP2E0pMKXHeiUEQ4j8CZtIfbP_OqdRNlvTySg" height="48"> | Amadeus- ros, Putin- sang, delfin- rusing                    |          1 |          5 |         15.7 |     0   |
