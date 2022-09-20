@@ -79,7 +79,7 @@ def main(args):
                     print(item['_links'])
                     exit(-1)
 
-        print(f"\nTotal time: {round(seconds/3600)} hours.") 
+        print(f"\nTotal time: {round(seconds/1000/3600)} hours.") 
         print(f"\nFinished writing json output file to {(podcast_file)}")
 
 def write_episode(episode,writer,category="Undefined", serie_title="Undefined",serie_image_url="None"):
