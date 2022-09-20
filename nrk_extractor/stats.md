@@ -16,8 +16,7 @@
 
 ## Sequence Length
 
-<img src="images/histogram.png">
- 9,648 segments. 429(4%) longer than 60 seconds (not displayed)
+<img src="images/histogram.png"><i> 9,648 segments. 429(4%) longer than 60 seconds (not displayed)</i>
 
 ## standard
 |                                                                                         | serie_title                      |   programs |   segments |   average(s) |   hours |
