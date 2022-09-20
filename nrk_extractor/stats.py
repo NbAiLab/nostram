@@ -70,7 +70,7 @@ def main(args):
                 programs_detailed = {}
 
                 programs[cat] = categories[cat].groupby(["serie_image_url","title"])['duration'].agg(['sum','count']).reset_index()
-                temp = categories[cat].groupby(["title"])['episode_id'].agg(['nunique']).reset_index()
+                temp = categories[cat].groupby(["serie_title"])['episode_id'].agg(['nunique']).reset_index()
                 programs[cat] = pd.merge(programs[cat],temp)
                 programs[cat]['hours'] = (programs[cat]['sum']/1000/3600).round(1)
                 programs[cat]['average(s)'] = ((programs[cat]['sum']/programs[cat]['count'])/1000).round(1)
@@ -79,7 +79,7 @@ def main(args):
                 programs[cat] = programs[cat].drop(columns=['sum'])
                 programs[cat] = programs[cat].rename(columns={"count": "segments"})
                 programs[cat] = programs[cat].rename(columns={"nunique": "programs"})
-                programs[cat] = programs[cat][['serie_image_url', 'title', 'programs', 'segments', 'average(s)','hours']]
+                programs[cat] = programs[cat][['serie_image_url', 'serie', 'programs', 'segments', 'average(s)','hours']]
                 programs[cat] = programs[cat].rename(columns={"serie_image_url": " "})
                 programs[cat]['title'] = programs[cat]['title'].str.replace('|','-')
                 #Format
