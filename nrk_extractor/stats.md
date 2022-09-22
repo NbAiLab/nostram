@@ -3,13 +3,13 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,831.3 | 0.0                  |        **1,831.3** |
-| nyheter | 14,980.0 | 0.0                  |        **14,980.0** |
+| nyheter | 15,155.3 | 0.0                  |        **15,155.3** |
 | drama-serier | 546.4 | 0.0                  |        **546.4** |
-| dokumentar | 769.3 | 0.0                  |        **769.3** |
+| dokumentar | 772.2 | 0.0                  |        **772.2** |
 | humor | 362.7 | 0.0                  |        **362.7** |
 | Musikk | 0.0 | 1,708.0                  |        **1,708.0** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
-| sport | 994.3 | 0.0                  |        **994.3** |
+| sport | 1,028.3 | 0.0                  |        **1,028.3** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -17,11 +17,11 @@
 | umbrella | 0.0 | 40.3                  |        **40.3** |
 | Nyheter | 0.0 | 610.9                  |        **610.9** |
 | standard | 0.0 | 57.8                  |        **57.8** |
-| natur | 267.6 | 0.0                  |        **267.6** |
-| kultur | 778.1 | 0.0                  |        **778.1** |
+| natur | 269.0 | 0.0                  |        **269.0** |
+| kultur | 821.4 | 0.0                  |        **821.4** |
 | livsstil | 920.3 | 0.0                  |        **920.3** |
-| underholdning | 1,565.4 | 0.0                  |        **1,565.4** |
-| samisk | 235.9 | 0.0                  |        **235.9** |
+| underholdning | 1,587.7 | 0.0                  |        **1,587.7** |
+| samisk | 275.5 | 0.0                  |        **275.5** |
 | Undefined | 0.0 | 346.3                  |        **346.3** |
 | nrk-arkivet | 453.6 | 0.0                  |        **453.6** |
 | Kultur | 0.0 | 374.1                  |        **374.1** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **23,833.2** | **7,522.3**                  |        **31,355.5** |
+| **total** | **24,152.0** | **7,522.3**                  |        **31,674.3** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 7,517,103 segments. 372,037(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 7,569,073 segments. 376,017(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -373,14 +373,14 @@
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       2060 | 172,725    |         26.5 |  1269.9 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
-| <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3160 | 106,407    |         25.4 |   750.3 |
+| <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3334 | 112,910    |         25.3 |   792.3 |
 | <img src="https://gfx.nrk.no/AeXfN8x_xnmjfslcfGCETw13tyrPjXH5HQYMx6bAyayQ" height="48"> | Norge i dag                           |        258 | 10,540     |         22.7 |    66.6 |
 | <img src="https://gfx.nrk.no/C38jjlpPJ8Km_GyvMvJ43gG-2Pwngy-qKdQVhmQqf-YQ" height="48"> | Debatten                              |        503 | 12,444     |        119.7 |   413.8 |
 | <img src="https://gfx.nrk.no/Dit2aK7t275VsX59w0A7rAZhLWE1gCPT5BhCFw8v89LQ" height="48"> | Kongepar i 25 år                      |          3 | 391        |         29   |     3.1 |
 | <img src="https://gfx.nrk.no/ImYyQ6XgFT7CL-KM2TBXOwe5XWZGWKNhC8JNlWH8k8vQ" height="48"> | Jorda i endring                       |          3 | 852        |          7   |     1.7 |
 | <img src="https://gfx.nrk.no/Owt1MB9tFgo6abUQiW_hlgUafN0-5yTpzyaDTaQ3StBg" height="48"> | Distriktsnyheter Midtnytt             |       5010 | 112,070    |         21.9 |   683.2 |
 | <img src="https://gfx.nrk.no/RWx0wjITpvu0-3IZJwk3mgo9rCB1QNYRvmLCPt7sypEQ" height="48"> | Distriktsnyheter Innlandet            |       5004 | 113,832    |         21.4 |   675.6 |
-| <img src="https://gfx.nrk.no/S2Nb1MlbbfZU4UkdF46IIAQiS1nGVN2xa3RqUw1MM0KQ" height="48"> | Nyhetsmorgen - TV                     |        335 | 30,638     |         67.4 |   574   |
+| <img src="https://gfx.nrk.no/S2Nb1MlbbfZU4UkdF46IIAQiS1nGVN2xa3RqUw1MM0KQ" height="48"> | Nyhetsmorgen - TV                     |        381 | 33,195     |         67.3 |   621   |
 | <img src="https://gfx.nrk.no/SFHU2_2tLiWf1IikofMDEAyNSX8n29dHLYwu9x6jcacA" height="48"> | Distriktsnyheter Vestlandsrevyen      |       4970 | 113,638    |         21.6 |   682.8 |
 | <img src="https://gfx.nrk.no/T-T05llQQgBcmwAv3hGJqwMxXGtnFjdhxKkJOevZX92w" height="48"> | Agnete jienáda/Agnete bruker stemmen  |          5 | 322        |         15.5 |     1.4 |
 | <img src="https://gfx.nrk.no/T1S_bh-WJahb0atZZYdGdw0c4QujTO4SZYFXdesavq0A" height="48"> | Dagsrevyen 21                         |       2285 | 119,294    |         24.9 |   823.9 |
@@ -390,12 +390,12 @@
 | <img src="https://gfx.nrk.no/_4UdJp3BT1GUwADsm_joNgrT0M17njfVl3vfq7b5KuEg" height="48"> | Distriktsnyheter Rogaland             |       4971 | 102,536    |         23.8 |   678   |
 | <img src="https://gfx.nrk.no/aKWR6snP4SI_T80WEZkaQgitKsxOBqiRrQ6Y3iE6CtLw" height="48"> | H.M. Kongens nyttårstale              |         41 | 2,618      |          7.5 |     5.5 |
 | <img src="https://gfx.nrk.no/cITZXcIrcw2d_aLULv0XkAFutCOPp4v9xkH-gswz8uRg" height="48"> | Distriktsnyheter Sørlandet            |       4899 | 114,274    |         20.8 |   660.1 |
-| <img src="https://gfx.nrk.no/dQmCVz6CeNKnJJpXBF5rHgBbQpndhnEU88-ypHMnG09w" height="48"> | Dagsnytt 18 - TV                      |       1923 | 51,099     |        128.8 |  1828.3 |
+| <img src="https://gfx.nrk.no/dQmCVz6CeNKnJJpXBF5rHgBbQpndhnEU88-ypHMnG09w" height="48"> | Dagsnytt 18 - TV                      |       1966 | 52,143     |        129   |  1869   |
 | <img src="https://gfx.nrk.no/gJl8Qxx6a_1UDGlJANIQHQaU4LxUkz_G06wW_RiuHEqQ" height="48"> | Sjukt mange spørsmål                  |         14 | 88         |         62.4 |     1.5 |
 | <img src="https://gfx.nrk.no/itQwfRvpFU8-4vVAtiGWDQDjbUxem7BemjLXMWj4zRvQ" height="48"> | Kongefamilien                         |         66 | 11,951     |         10.2 |    33.7 |
 | <img src="https://gfx.nrk.no/k59qjgC0MsoxK1oLs3yRwAXoLhY6Q1LGCUKGsLTa7APw" height="48"> | Distriktsnyheter Vestfold og Telemark |       1091 | 22,989     |         25.6 |   163.5 |
 | <img src="https://gfx.nrk.no/ld_68pXR4PcerFYAdOENkAG1ItKu7rLarNk00MwHGOXg" height="48"> | Politisk kvarter - TV                 |       1724 | 11,591     |        132.8 |   427.6 |
-| <img src="https://gfx.nrk.no/o5INCh_lbOkXw4LP4p2bJwLzOw1TcYyCbodCQ7n9bSvw" height="48"> | NRK Nyheter                           |       8761 | 317,272    |         29.8 |  2629.1 |
+| <img src="https://gfx.nrk.no/o5INCh_lbOkXw4LP4p2bJwLzOw1TcYyCbodCQ7n9bSvw" height="48"> | NRK Nyheter                           |       8948 | 325,383    |         29.6 |  2674.6 |
 | <img src="https://gfx.nrk.no/wQ4Ltlts1tdMmOCKlbV35wCct2HiPR8ZDkiq-5udzOpw" height="48"> | Distriktsnyheter Nordland             |       4960 | 105,862    |         22.8 |   670.2 |
 | <img src="https://gfx.nrk.no/xEbKR8-Oni5B6bT2LZCBDA5WOZiAaDAt9M9mrElDWaFw" height="48"> | Heia Norge                            |        161 | 19,204     |          7.5 |    39.9 |
 | <img src="https://gfx.nrk.no/xVhKY-rHygwrxbV8tRgeyQMCyOt3EisGKhXB3fSZBpbQ" height="48"> | Distriktsnyheter Nordnytt             |       4942 | 100,539    |         24.2 |   677.1 |
@@ -592,6 +592,7 @@
 | <img src="https://gfx.nrk.no/2pEc_z_-ZOPNnOSukM8d_ApsT4CIM9O3IZnFoAqUCGfA" height="48"> | Murmansk-konvoiene                             |          3 | 665        |          9.3 |     1.7 |
 | <img src="https://gfx.nrk.no/2xP9PcN9bwfQnc3exPn2-Q_LL7_dVb6oU9lIXH0tDACQ" height="48"> | Stacey Dooley                                  |          1 | 203        |         10.3 |     0.6 |
 | <img src="https://gfx.nrk.no/34fGnXAmPwTFsEWnjMq56ApmgXDK8gmVrH3q0ciUqtYw" height="48"> | Det umulige landet                             |          5 | 1,608      |          7   |     3.1 |
+| <img src="https://gfx.nrk.no/37fVorKfnKObVmotRc-cNwGYVagW5DpnoD-UbD2XS7wg" height="48"> | Nordiske Barnebokforfattere                    |          3 | 241        |         12.4 |     0.8 |
 | <img src="https://gfx.nrk.no/3H7TKS-FLbLHJ5-1al9dNA_R8XaaUNSvQx_6MRW6xAzQ" height="48"> | Barna som ble holdt fanget                     |          4 | 575        |         13.9 |     2.2 |
 | <img src="https://gfx.nrk.no/3fjDlKc82VPbykoktYyJGAEEanp1tmgyfGdkMwTAcViA" height="48"> | Brennpunkt: Guds utvalde                       |          3 | 699        |         10.2 |     2   |
 | <img src="https://gfx.nrk.no/3ul0vb0OHrPMxMNcHN1i-g2crQY75S97YIeEZLK4Frtw" height="48"> | Alt var bedre før                              |          9 | 906        |         13.7 |     3.4 |
@@ -644,6 +645,7 @@
 | <img src="https://gfx.nrk.no/EahPuZCRRkvWl0J7FiEh1wdXT-CL_y44hF8_7VZBydWw" height="48"> | Tilbake til 90-tallet                          |         10 | 894        |         15.3 |     3.8 |
 | <img src="https://gfx.nrk.no/Eb9O7pJ0M2WFBr4C2s90lAfaFmu7Qr1ZPKY4h54OUU6g" height="48"> | Avkledd                                        |          8 | 683        |         14.3 |     2.7 |
 | <img src="https://gfx.nrk.no/F3lAIdDIdMAD_AnKjEcK8w9aQUTwbBS51pmjrsvP9FZg" height="48"> | 1814 på 24 timar                               |         16 | 3,794      |         20.2 |    21.3 |
+| <img src="https://gfx.nrk.no/F62pcHLu2GaN-Feykyt4eAO-5CYybGx0SherwVwPLzug" height="48"> | Det moderne gjennombruddet                     |          3 | 351        |          9.2 |     0.9 |
 | <img src="https://gfx.nrk.no/FBNMzsOs_ZjgLeXRcJZS6QK8P_laXoNE17cFVhHbw1JA" height="48"> | Ku Klux Klan                                   |          2 | 475        |         10.5 |     1.4 |
 | <img src="https://gfx.nrk.no/FE68YW8Sf0DK1N8LCw2iHAiDAUq5wFFQY-riQCwRuHVA" height="48"> | Hemmelig hav                                   |          3 | 644        |          6.9 |     1.2 |
 | <img src="https://gfx.nrk.no/Ge-EKZH5LCLjVIV8mqS0hQHtHg-3kjvPVTy5L-nHcyzQ" height="48"> | Hacket                                         |          6 | 433        |         19.9 |     2.4 |
@@ -767,6 +769,7 @@
 | <img src="https://gfx.nrk.no/o-omJXGIiFj1X7QzT4fiIAWehDJgFnbzbVf9g1gmbD0A" height="48"> | Romfart                                        |          1 | 66         |         10.8 |     0.2 |
 | <img src="https://gfx.nrk.no/oXa0NA3jF8eP5EXg5qe7vQnxwWpeev9GwMkqGaocFD2w" height="48"> | Glimt av Norge                                 |        156 | 7,114      |          8.5 |    16.8 |
 | <img src="https://gfx.nrk.no/oZksr042g2FkE8QPmtXXAAe_o7JJUCybMZbCPsSjEzGg" height="48"> | Auditionfella                                  |          3 | 301        |         13   |     1.1 |
+| <img src="https://gfx.nrk.no/pYZw6sSPzLcZgylMVOh_dQshhASvQKcHandtsV6ANiPQ" height="48"> | Norske forfatterprofiler                       |          2 | 331        |         13.2 |     1.2 |
 | <img src="https://gfx.nrk.no/pa-blu9HfXodXEk1rAJ-MgP8z4na4pZDm7pRFOFZqwlA" height="48"> | Brøyt i vei                                    |         22 | 4,495      |          3.9 |     4.9 |
 | <img src="https://gfx.nrk.no/pfk0S9olJDS24hjCfN06qQGdjwaOkT4RTShxIWIdyRqg" height="48"> | Røst                                           |          8 | 1,157      |          6.9 |     2.2 |
 | <img src="https://gfx.nrk.no/pqJtbCDia9oGFslVSF263AbeicB3Su_oJaDRHhYvI4SQ" height="48"> | En himmel full av stjerner                     |          1 | 107        |          9   |     0.3 |
@@ -1212,7 +1215,7 @@
 | <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret               |          2 | 345        |          7.8 |     0.7 |
 | <img src="https://gfx.nrk.no/5DyHSn-PWhzeHNSkZktM6gTUX9ZBxwTp5HOIOB6scxOg" height="48"> | Verdens beste landslag   |          4 | 216        |         13.2 |     0.8 |
 | <img src="https://gfx.nrk.no/5wWFAMacjxoxnWdouY1qkQBExVupLwwS7qCoMTNw2fWA" height="48"> | Historien om fotball-EM  |         13 | 2,700      |         11.4 |     8.5 |
-| <img src="https://gfx.nrk.no/84esErUM0QBkyb8jKhb4PADrgx6OnyHOZF2ClJBgN_Aw" height="48"> | Friidrett                |        161 | 47,598     |         18.5 |   244.6 |
+| <img src="https://gfx.nrk.no/84esErUM0QBkyb8jKhb4PADrgx6OnyHOZF2ClJBgN_Aw" height="48"> | Friidrett                |        181 | 54,546     |         18.4 |   278.6 |
 | <img src="https://gfx.nrk.no/8oYfX1ALRVHCpoVVM1pSzgbFkTAV2VUk5qQu69XFalCw" height="48"> | Skiskytterne             |          2 | 408        |          9.4 |     1.1 |
 | <img src="https://gfx.nrk.no/94VMGyNUKhGG1s-XdJ3m1QLno609XM_BKZtppU7rfpXg" height="48"> | Vitenskapen bak medaljen |          4 | 596        |         11.6 |     1.9 |
 | <img src="https://gfx.nrk.no/9pwtygvOFaWSH9P-dgSKngEWUcCTvef2tEnAI90NZt1Q" height="48"> | Sjakk (1970-tallet)      |         10 | 535        |         17.4 |     2.6 |
@@ -2222,6 +2225,7 @@
 | <img src="https://gfx.nrk.no/deJwXfGOInrtOCvPHPJ2MwyB4IvfH0RdbDdNPAiD_4Dw" height="48"> | Norges villmarker                          |          3 | 771        |          5.2 |     1.1 |
 | <img src="https://gfx.nrk.no/eVMME4A4gL59DO9ucw0b7wAyDrbxgHIF0RH7XXWlJA4w" height="48"> | Under midnattssola                         |          3 | 616        |          5.6 |     1   |
 | <img src="https://gfx.nrk.no/ez6pGyN-UhloBH0ETNK1xgQ-_M_goHQ32JamekFbCEHw" height="48"> | Hvorfor plast?                             |          3 | 631        |         11.4 |     2   |
+| <img src="https://gfx.nrk.no/g2jJ6BFXGczqNN081kZHygDHhVFfLU_1NCshDm2rLugg" height="48"> | Til Maldivene                              |          2 | 355        |         13.9 |     1.4 |
 | <img src="https://gfx.nrk.no/gL1YgQuIKrGnnDOiCJmc8QP5vI_txc7hjcxZ_7iMd1Sg" height="48"> | Familieekspedisjonen                       |         16 | 2,989      |          7.9 |     6.5 |
 | <img src="https://gfx.nrk.no/he7pP8RUbovgNWdVOxtflAPLpchH37PI-Q-p4SZ5fG9g" height="48"> | Atlanterhavsroerne                         |          4 | 671        |          5.3 |     1   |
 | <img src="https://gfx.nrk.no/jn1TrE_e2nCUIKS1XH9W7Q5I4QfQIzGSB6Z6RTevIe9Q" height="48"> | Helt ute                                   |          3 | 601        |          6.3 |     1.1 |
@@ -2254,13 +2258,15 @@
 | <img src="https://gfx.nrk.no/-XNLIbEMC_x0s8WUTwBAYQA_ZEzf9Cfw6MqT3DLfZUgQ" height="48"> | Punx                                          |          4 | 355        |         14.9 |     1.5 |
 | <img src="https://gfx.nrk.no/01ZZuLv0Wc0xG3Y83o7z_Qo5g3KPirI5eNXGhNQ5BmKA" height="48"> | Din sang                                      |          4 | 501        |          9.7 |     1.3 |
 | <img src="https://gfx.nrk.no/06ZxLHPhkgsrJtY_69Jt8w45zGpbM32rmMq40k7vEawA" height="48"> | Ballettens historie og estetikk               |          8 | 833        |          8.3 |     1.9 |
+| <img src="https://gfx.nrk.no/0c3ITtpz7NBBD6M0NTOglgtvDaWf8LRo0unGry5vAHTQ" height="48"> | Forfatterportrett                             |          6 | 668        |         14.2 |     2.6 |
 | <img src="https://gfx.nrk.no/11fgJhawxGLmvCGOgSb87gjSR2v13KVzUZkHmovSAiaA" height="48"> | Dans til Dovre faller                         |         10 | 49         |         13.9 |     0.2 |
 | <img src="https://gfx.nrk.no/1Z8UMkwkB0r1LEAnkoCIxQm4J24mlYRyy30csQWVJl0A" height="48"> | Rawdah                                        |         10 | 625        |         15.8 |     2.7 |
 | <img src="https://gfx.nrk.no/2F_PD2E9PCJg6EAdQzVAsQsqXm51JoNTE_AHd7J2tAtw" height="48"> | Fortuna                                       |          6 | 1,840      |          4.1 |     2.1 |
 | <img src="https://gfx.nrk.no/2MEjwmulSgD-wQqNNeVTNAvk0ZtZAvYW4DhVfzj4ma5w" height="48"> | Jazzkabaret                                   |          2 | 137        |          3.4 |     0.1 |
 | <img src="https://gfx.nrk.no/2c8d-dzSgwQuQW35NPDOmgifIDVVM9uacApS_1WWJE1A" height="48"> | Kunstnerliv                                   |          6 | 1,138      |          8.8 |     2.8 |
+| <img src="https://gfx.nrk.no/3-pVg1hFi5hURPd8kuSFQQvkTnoSaX2MrudZfZQFRW6w" height="48"> | Samtaler i natten                             |          9 | 1,235      |         12.3 |     4.2 |
 | <img src="https://gfx.nrk.no/3Ql8TiVE0MAKLLBrlNc4eg-W4vSVxs8BnwsGC5H6MtJA" height="48"> | Stjernekamp                                   |         67 | 17,802     |         11.5 |    57   |
-| <img src="https://gfx.nrk.no/3rHaBQES01g0sePKE6gFkAFgEwfwZdYfbK-2TziaZcGQ" height="48"> | Leseforeningen                                |         28 | 2,054      |         33.2 |    18.9 |
+| <img src="https://gfx.nrk.no/3rHaBQES01g0sePKE6gFkAFgEwfwZdYfbK-2TziaZcGQ" height="48"> | Leseforeningen                                |         48 | 4,048      |         28.4 |    31.9 |
 | <img src="https://gfx.nrk.no/3whq3tHOAyBSMTUaGzfT8A3sksa2okQ6Y_fApyf8cgwQ" height="48"> | Åpen bok spesial                              |          3 | 210        |         66.8 |     3.9 |
 | <img src="https://gfx.nrk.no/425DhXu52lZLtmJO73Kt_w-nTlOomkiHyU-KsRjXw6Cw" height="48"> | Vi flytter Munch                              |          8 | 1,483      |         10.5 |     4.3 |
 | <img src="https://gfx.nrk.no/4VxMoqf4ZD2DyQvqq3Coqw9CJTgClTZBZOcMd5CUOVeQ" height="48"> | Jazz i Munch-museet                           |          2 | 131        |          4.1 |     0.1 |
@@ -2304,6 +2310,7 @@
 | <img src="https://gfx.nrk.no/GiPAXHzoTiAUGjiQPsEp4Q4OfQMR8UXfi00sKDKjrC2g" height="48"> | Jazz på Prelaten                              |          2 | 12         |          6   |     0   |
 | <img src="https://gfx.nrk.no/Gzy177pAMiYZYno-HdBEFQqL4c3eU6C_HUX8IN78Wu-g" height="48"> | Folk og musikk                                |         19 | 1,173      |         10.3 |     3.3 |
 | <img src="https://gfx.nrk.no/Hs4zBlSrvBBLVPTBQukrPA22X45qpe19MVi311D6lGuw" height="48"> | Slåtter og reels                              |          6 | 637        |          8.2 |     1.5 |
+| <img src="https://gfx.nrk.no/IAa1u6ySvSgvPwbMMhQXNA3e_oGyqWfn2cIZTOKxnpCA" height="48"> | På jobb med en krimforfatter                  |          4 | 374        |         14.5 |     1.5 |
 | <img src="https://gfx.nrk.no/IOPOvoLvRpY5__rZx1SkzQhQxyC2sT7wY2TikH__j5IA" height="48"> | Landskappleiken                               |         16 | 1,224      |          9.6 |     3.3 |
 | <img src="https://gfx.nrk.no/IrMnzFs92D1q_3WJlIBQ3QNICf-Dtxm-aWpQWBr0dLCA" height="48"> | Thomas og den vanskelige kunsten              |          6 | 810        |          7.8 |     1.8 |
 | <img src="https://gfx.nrk.no/Iz3ngVC-wXs9U6B8HTHOognyx6EZk_sUkvgOdPQYgWfQ" height="48"> | Historien om A&M Records                      |          2 | 473        |          6.8 |     0.9 |
@@ -2334,6 +2341,7 @@
 | <img src="https://gfx.nrk.no/SatGOiMTdGhQLFV7RpeVXA2oG8yum03_Mu8qqbcjMTEw" height="48"> | Folk i hus                                    |          6 | 267        |         13.1 |     1   |
 | <img src="https://gfx.nrk.no/SdPaBn7T7wNAmUEaxrs3pwZEMPlMg5tI5EoTP2wA79yA" height="48"> | Der folkemusikken lever                       |          2 | 146        |          9.4 |     0.4 |
 | <img src="https://gfx.nrk.no/T4oK4j4PdZirHEgCAD82Hg4Vwf7OCV0F3dO-hW_CeW6Q" height="48"> | Etterklang                                    |          3 | 360        |         16.6 |     1.7 |
+| <img src="https://gfx.nrk.no/U6lJ0ypD-jHa62X5HTNr3Qb49GmmD4TNdDMrUYu_jb0Q" height="48"> | Forfatterinne i dag                           |         15 | 2,609      |         10.3 |     7.4 |
 | <img src="https://gfx.nrk.no/UNkkdFnY4mTRBxy7pX170A_52jfATX3iQk0YQsHCjtgQ" height="48"> | Rockheim Hall of Fame                         |          6 | 1,070      |         10.9 |     3.2 |
 | <img src="https://gfx.nrk.no/UVE6SepNSALy7I4js8AoMgjYZQbT9KIUIJVUZcmCbMSQ" height="48"> | Kunstsamlarane                                |          6 | 654        |         12.1 |     2.2 |
 | <img src="https://gfx.nrk.no/UW0Wlu0OAyRvWpG8VGfn7QFD_wkQuY6zf4LY18ZPElUg" height="48"> | Country & Western i Njårdhallen               |          8 | 571        |          2.9 |     0.5 |
@@ -2354,6 +2362,7 @@
 | <img src="https://gfx.nrk.no/YPsisvKyRlMyrlfGrl27iAUILfddSKyxYb7UMZzVG_cg" height="48"> | Mediehverdag                                  |          8 | 709        |         17.1 |     3.4 |
 | <img src="https://gfx.nrk.no/aNQ_EolPR482mJXw3F2UBQHLr6ngb4oeHVtoO2L87Pvg" height="48"> | Inside/Offside                                |          5 | 550        |          7.9 |     1.2 |
 | <img src="https://gfx.nrk.no/aNgqXI024D5KK8HfGKtdlQOfng8qNrfQD_cueOF0KT-g" height="48"> | Norsk Danseteater på turné                    |          3 | 94         |          6.8 |     0.2 |
+| <img src="https://gfx.nrk.no/atMq_waBTGxrQYBd3woV4ww1s36R_onJIETigWGsBvGw" height="48"> | Jens Bjørneboe                                |          2 | 186        |         13.8 |     0.7 |
 | <img src="https://gfx.nrk.no/bMx9rQp7GkfGWiU5JRDkyQKnz6BjfdzXwMj5Bqfv8kqg" height="48"> | Fantastisk forvandling                        |          6 | 579        |         14   |     2.2 |
 | <img src="https://gfx.nrk.no/cEVJvhaZqjZioXWSOD-glgTiKyaJGGjF_GlX0LuZOWpQ" height="48"> | Tett på stjernene                             |         20 | 1,335      |          9.7 |     3.6 |
 | <img src="https://gfx.nrk.no/cRFvJUGprY7iV4pzVVrzxgFDCrH-Tw5g9menm6IKAWzg" height="48"> | Norsk køntri                                  |          2 | 155        |          3.6 |     0.2 |
@@ -2381,7 +2390,7 @@
 | <img src="https://gfx.nrk.no/lG37BYsd_N_Xzgb3WNshYgjAkqp40nvbQKTQGb17CoEg" height="48"> | Ung norsk jazz                                |          8 | 713        |          5.2 |     1   |
 | <img src="https://gfx.nrk.no/lGEi1yO9KVeEJB39drS24wo50CGI7X-9k2fgBfCRu-XQ" height="48"> | Under åpen himmel til Santiago de Compostela  |          3 | 289        |         14.3 |     1.1 |
 | <img src="https://gfx.nrk.no/lHFiwu2lfUZDtL7AXmMeCAwiMeEOicvS4vXAtkTjtlJQ" height="48"> | Norsk folkemusikk (1983)                      |          5 | 371        |         13.1 |     1.3 |
-| <img src="https://gfx.nrk.no/lRR47lo4JOdNZCZOcoe8awbeZKCRlEIKyi1YthAHcsNg" height="48"> | Zikk-Zakk                                     |         45 | 3,165      |          8.4 |     7.4 |
+| <img src="https://gfx.nrk.no/lRR47lo4JOdNZCZOcoe8awbeZKCRlEIKyi1YthAHcsNg" height="48"> | Zikk-Zakk                                     |         56 | 4,721      |          7   |     9.2 |
 | <img src="https://gfx.nrk.no/lf2_uNSb92KYGpvW8dNmjAMOV-syf1Qp8qmGC7ssnCRQ" height="48"> | Norske minikonserter                          |         13 | 1,292      |          2.8 |     1   |
 | <img src="https://gfx.nrk.no/lhPPWxQ_fd0SGZx20PupSgmA3h5-Y0_lfL9EmvwiHpxA" height="48"> | Greven av Monte Cristo                        |          4 | 1,326      |          5   |     1.8 |
 | <img src="https://gfx.nrk.no/nH_uzwr3CfVwL6XpeB0o2QdROQLuNvfaR4uCHh5o8Y_Q" height="48"> | NRK Musikk - konsert                          |          4 | 314        |          4.9 |     0.4 |
@@ -2392,6 +2401,7 @@
 | <img src="https://gfx.nrk.no/o5-3Q0vedUewLD_f-PSr8gF95-fBBcO0TGNza038TcVQ" height="48"> | Hitlåtens historie                            |          8 | 705        |         16.3 |     3.2 |
 | <img src="https://gfx.nrk.no/pIEf6lVXLXbuufYPYSuIJQziuyAeRqH_N4ClJV0-gpBw" height="48"> | Country Music Festival i Oslo                 |          4 | 434        |          3.2 |     0.4 |
 | <img src="https://gfx.nrk.no/pSvhpCCcg5tv2j77bzUgpA28r91DLIqK55Xa1owHWihQ" height="48"> | Jazzklubben - TV                              |          5 | 295        |          5   |     0.4 |
+| <img src="https://gfx.nrk.no/pU2Rz9-zdv_j7-ZLy0UdRAIkK7rpdFkqgOT11lLcLesQ" height="48"> | Smilende penner                               |         14 | 2,511      |         17.4 |    12.1 |
 | <img src="https://gfx.nrk.no/rASqUCv379mTGH-7LmlgeQ7He-xK1k6bnBIbYjir6HIg" height="48"> | Newport Jazz Festival i Njårdhallen           |          4 | 51         |          1.8 |     0   |
 | <img src="https://gfx.nrk.no/rEVxZWEaZXKSAHBW-1cnPQ8-i4TqK5TMfhUt-tIAzb7A" height="48"> | Aargang 1880                                  |         10 | 793        |         15.1 |     3.3 |
 | <img src="https://gfx.nrk.no/spOZMAy14vu3ufB3RxcoGgGjEyQi-19N6RPZmWdlhFzA" height="48"> | Krøll                                         |          5 | 170        |         22.3 |     1.1 |
@@ -2597,7 +2607,8 @@
 | <img src="https://gfx.nrk.no/E2Io-YjcKyx8JCU8TzlH0grlxmMwu_ZHfoco3wlf6FMg" height="48"> | Underholdningskavalkade                        |         23 | 5,815      |          8.8 |    14.2 |
 | <img src="https://gfx.nrk.no/EarJ_qBWm0qFdua9ir2qxwypOz2LE2Jm3TdLwnCfAzAQ" height="48"> | Underholdningsmaskinen                         |          6 | 406        |         23.7 |     2.7 |
 | <img src="https://gfx.nrk.no/FOnYDy7mfhjIwH1HLMiWDgs6mZpdE8U3AUI7WgU43CGg" height="48"> | Rett hjem!                                     |         18 | 4,261      |         13.8 |    16.3 |
-| <img src="https://gfx.nrk.no/FvMfhVyqXcD3-mo7MIHF4gfbdgffI21QxfRtA06_Ce9A" height="48"> | Da Capo                                        |         44 | 6,834      |         10.9 |    20.6 |
+| <img src="https://gfx.nrk.no/FvMfhVyqXcD3-mo7MIHF4gfbdgffI21QxfRtA06_Ce9A" height="48"> | Da Capo                                        |         92 | 11,434     |         11.4 |    36.3 |
+| <img src="https://gfx.nrk.no/HNdzWoiHsSTrlVC4u3Xu6Qg1FTsTDek5GQB-5LeFutfA" height="48"> | Ballade                                        |          2 | 488        |          4.9 |     0.7 |
 | <img src="https://gfx.nrk.no/Hcc3-JQBv9SaPqzImA0dxACVeDCbLrvQYlAlDNzBWkHg" height="48"> | Kongeparet 80 år                               |          4 | 782        |         21.7 |     4.7 |
 | <img src="https://gfx.nrk.no/IriUKFYOR681HkPsUI1Itg_uxH5V0-NfuldVzrSr2-Tg" height="48"> | Melodi Grand Prix                              |         88 | 16,853     |         10.3 |    48.3 |
 | <img src="https://gfx.nrk.no/J6E_plAEnf1cCRbEkW1r4AwSwLmCW1MRWLaWq6HLv2kw" height="48"> | Norges tøffeste                                |         22 | 4,229      |          6.4 |     7.5 |
@@ -2638,6 +2649,7 @@
 | <img src="https://gfx.nrk.no/_vp8lH7mELr2zr1NZJ8HxgjhmtNyP-LJTVVUMLKCW2eA" height="48"> | Folkeopplysningen                              |         29 | 1,918      |         28.9 |    15.4 |
 | <img src="https://gfx.nrk.no/_xCBXEfFe_NpZQaL4_4s6AsdF3sYrLobXOm0r6qVowFA" height="48"> | Kontrapunkt                                    |         80 | 13,213     |         13.6 |    50   |
 | <img src="https://gfx.nrk.no/_yfdB3zfasU0rLtreMyhhA6ZyNjcHh3rJsP0Psq9yAbQ" height="48"> | Revy-portretter                                |          8 | 807        |         16.8 |     3.8 |
+| <img src="https://gfx.nrk.no/aT-F47hoybK7NFRL53N-wQlBpZHqC6D1c-AIk8fX3MBw" height="48"> | Gjensyn på fjernsyn                            |         11 | 1,866      |         11.4 |     5.9 |
 | <img src="https://gfx.nrk.no/a_MeWYFgtuO3ggUcxn8_9wup1_QjBidVc7iWNuWPi-1Q" height="48"> | På rundreise                                   |         10 | 1,631      |          9.9 |     4.5 |
 | <img src="https://gfx.nrk.no/bD9RIOpssNsZJ6GW74nHawatmbLIX-aOVE_L2wzv0HAw" height="48"> | Komiprisen                                     |          4 | 1,057      |          7.8 |     2.3 |
 | <img src="https://gfx.nrk.no/dLM-lz46_lGGVWR9vSwWoQ3gQXrxslEnQYBXJDSv0Bew" height="48"> | Egentlig                                       |         42 | 4,270      |         11.3 |    13.4 |
@@ -2675,7 +2687,7 @@
 |                                                                                         | serie                        |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:-----------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="https://gfx.nrk.no/-esWJYYUHhp246P_5aE5HQbsP5O73s_79Q40rizLVTvA" height="48"> | Studio Sápmi                 |         60 | 4,909      |         17.5 |    23.9 |
-| <img src="https://gfx.nrk.no/6F_bF5AsANIsDkKmiGxz9wBAHs6xCt7w59F0yxPrtjCA" height="48"> | Ođđasat - TV                 |        969 | 30,858     |         19.8 |   169.7 |
+| <img src="https://gfx.nrk.no/6F_bF5AsANIsDkKmiGxz9wBAHs6xCt7w59F0yxPrtjCA" height="48"> | Ođđasat - TV                 |       1198 | 38,300     |         19.7 |   209.4 |
 | <img src="https://gfx.nrk.no/7GdFl9bPic3BCB_AMXC8yAQnL61OpjzsoYdkn2n4WjzQ" height="48"> | Stálugilvvut                 |         57 | 6,464      |          4.1 |     7.4 |
 | <img src="https://gfx.nrk.no/7l_LkPAolW3Nu9tMCRPXXAePSUAjYnGCo4ymedh3AjjA" height="48"> | Árdna - TV                   |         56 | 4,218      |         15.9 |    18.7 |
 | <img src="https://gfx.nrk.no/L876h6OnE6-wG3JPDVrZownVbIMsclonyPFeJs4fSvaQ" height="48"> | Laara & Leisa                |         20 | 1,021      |          4.5 |     1.3 |
