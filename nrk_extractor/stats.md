@@ -3,14 +3,14 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,849.0 | 0.0                  |        **1,849.0** |
-| nyheter | 17,333.2 | 0.0                  |        **17,333.2** |
+| nyheter | 17,438.5 | 0.0                  |        **17,438.5** |
 | drama-serier | 550.0 | 0.0                  |        **550.0** |
 | dokumentar | 798.1 | 0.0                  |        **798.1** |
 | humor | 362.7 | 0.0                  |        **362.7** |
 | Musikk | 0.0 | 1,708.0                  |        **1,708.0** |
 | samisk | 603.5 | 0.0                  |        **603.5** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
-| sport | 1,465.4 | 0.0                  |        **1,465.4** |
+| sport | 1,508.4 | 0.0                  |        **1,508.4** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **27,285.1** | **7,522.3**                  |        **34,807.4** |
+| **total** | **27,433.4** | **7,522.3**                  |        **34,955.8** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,021,131 segments. 417,279(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,040,854 segments. 419,484(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -375,7 +375,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       2840 | 229,178    |         27.5 |  1752.9 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       2937 | 234,869    |         27.7 |  1804.7 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
 | <img src="https://gfx.nrk.no/AeXfN8x_xnmjfslcfGCETw13tyrPjXH5HQYMx6bAyayQ" height="48"> | Norge i dag                           |        258 | 10,540     |         22.7 |    66.6 |
@@ -384,7 +384,7 @@
 | <img src="https://gfx.nrk.no/ImYyQ6XgFT7CL-KM2TBXOwe5XWZGWKNhC8JNlWH8k8vQ" height="48"> | Jorda i endring                       |          3 | 852        |          7   |     1.7 |
 | <img src="https://gfx.nrk.no/Owt1MB9tFgo6abUQiW_hlgUafN0-5yTpzyaDTaQ3StBg" height="48"> | Distriktsnyheter Midtnytt             |       5010 | 112,070    |         21.9 |   683.2 |
 | <img src="https://gfx.nrk.no/RWx0wjITpvu0-3IZJwk3mgo9rCB1QNYRvmLCPt7sypEQ" height="48"> | Distriktsnyheter Innlandet            |       5004 | 113,832    |         21.4 |   675.6 |
-| <img src="https://gfx.nrk.no/S2Nb1MlbbfZU4UkdF46IIAQiS1nGVN2xa3RqUw1MM0KQ" height="48"> | Nyhetsmorgen - TV                     |       1001 | 67,094     |         66   |  1231   |
+| <img src="https://gfx.nrk.no/S2Nb1MlbbfZU4UkdF46IIAQiS1nGVN2xa3RqUw1MM0KQ" height="48"> | Nyhetsmorgen - TV                     |       1043 | 69,958     |         66.1 |  1284.5 |
 | <img src="https://gfx.nrk.no/SFHU2_2tLiWf1IikofMDEAyNSX8n29dHLYwu9x6jcacA" height="48"> | Distriktsnyheter Vestlandsrevyen      |       4970 | 113,638    |         21.6 |   682.8 |
 | <img src="https://gfx.nrk.no/T-T05llQQgBcmwAv3hGJqwMxXGtnFjdhxKkJOevZX92w" height="48"> | Agnete jienáda/Agnete bruker stemmen  |          5 | 322        |         15.5 |     1.4 |
 | <img src="https://gfx.nrk.no/T1S_bh-WJahb0atZZYdGdw0c4QujTO4SZYFXdesavq0A" height="48"> | Dagsrevyen 21                         |       2285 | 119,294    |         24.9 |   823.9 |
@@ -1241,40 +1241,41 @@
 | <img src="https://gfx.nrk.no/vBpA7_8IcjC8UIeEj7092wY4jiTggqCvQJlnLikpqxUw" height="48"> | Kulturhuset Bok                           |         20 | 1,011      |         29.9 |     8.4 |
 
 ## sport
-|                                                                                         | serie                        |   programs | segments   |   average(s) |   hours |
-|:----------------------------------------------------------------------------------------|:-----------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                   |          2 | 345        |          7.8 |     0.7 |
-| <img src="https://gfx.nrk.no/5DyHSn-PWhzeHNSkZktM6gTUX9ZBxwTp5HOIOB6scxOg" height="48"> | Verdens beste landslag       |          4 | 216        |         13.2 |     0.8 |
-| <img src="https://gfx.nrk.no/5wWFAMacjxoxnWdouY1qkQBExVupLwwS7qCoMTNw2fWA" height="48"> | Historien om fotball-EM      |         13 | 2,700      |         11.4 |     8.5 |
-| <img src="https://gfx.nrk.no/84esErUM0QBkyb8jKhb4PADrgx6OnyHOZF2ClJBgN_Aw" height="48"> | Friidrett                    |        299 | 97,519     |         16.3 |   441.1 |
-| <img src="https://gfx.nrk.no/8oYfX1ALRVHCpoVVM1pSzgbFkTAV2VUk5qQu69XFalCw" height="48"> | Skiskytterne                 |          2 | 408        |          9.4 |     1.1 |
-| <img src="https://gfx.nrk.no/94VMGyNUKhGG1s-XdJ3m1QLno609XM_BKZtppU7rfpXg" height="48"> | Vitenskapen bak medaljen     |          4 | 596        |         11.6 |     1.9 |
-| <img src="https://gfx.nrk.no/9pwtygvOFaWSH9P-dgSKngEWUcCTvef2tEnAI90NZt1Q" height="48"> | Sjakk (1970-tallet)          |         10 | 535        |         17.4 |     2.6 |
-| <img src="https://gfx.nrk.no/AT6KIiTJNQ06Pje7S0wTuQyFJUvwpwJOiIyQ3krdB3ZA" height="48"> | 100 år med Vasaloppet        |          1 | 257        |         11.3 |     0.8 |
-| <img src="https://gfx.nrk.no/Ax2ih1QeYYWzIz2MMAfeCQJDD3h-A54A5s6yUtBhv3EA" height="48"> | Sundby mot verden            |          5 | 809        |          9.8 |     2.2 |
-| <img src="https://gfx.nrk.no/C9iqF_Q8g0Pfp41E-HpTaQPcP0K0RuCeIbwbdzOxOEKQ" height="48"> | Sjakk                        |        217 | 21,856     |        102.7 |   623.7 |
-| <img src="https://gfx.nrk.no/FTd1OtpRe01sEEHA-O9i_gTWD-o5hLA4UjX_NrS5XzzA" height="48"> | The olympic draum            |          7 | 604        |          9.9 |     1.7 |
-| <img src="https://gfx.nrk.no/FTmqjs1ia_bXliZSc0QDuwXUZ38u1u1cB55fp0RR-_2g" height="48"> | Sjakk med Simen              |          6 | 1,008      |          7.1 |     2   |
-| <img src="https://gfx.nrk.no/Hw92gNrmmcjUaVbxAs45ugLqYzPi2qDRWCni6Ivw8zjA" height="48"> | Enter e-sport                |          4 | 689        |         10.9 |     2.1 |
-| <img src="https://gfx.nrk.no/LTWaGTghc3xdnhnBGV3YMQEPBxfqyMnHaQrPRfDb7xrA" height="48"> | Innta plassene...            |         10 | 700        |          7.1 |     1.4 |
-| <img src="https://gfx.nrk.no/LpB8JARXBZ126Z-NsQIVmQDicE3iIgxo-a2V1ZHH_CUw" height="48"> | Special Olympics             |          3 | 533        |          7.8 |     1.2 |
-| <img src="https://gfx.nrk.no/Nok5Y40BbcTSL0wL5i_A4Q6vmgs6aUI2Y56uGR_0Wt4Q" height="48"> | Bryting                      |         12 | 5,358      |         12.8 |    19   |
-| <img src="https://gfx.nrk.no/c-__N39RCKEJOfvSdVwYjQheXRWQLVH20JkHcxN9HzUg" height="48"> | Smæsj                        |          8 | 1,148      |         13.1 |     4.2 |
-| <img src="https://gfx.nrk.no/f7FO6Nu3BgBMLhz8geBW-wMJmUlvZ60L6wXfXm70VUEg" height="48"> | 40 år med sommer-OL          |          1 | 284        |         19.4 |     1.5 |
-| <img src="https://gfx.nrk.no/hYpkB92d1n2FYQ7DZj76_AWfUp3ZOAMOYzR4_NDhIuIQ" height="48"> | Fotball - Toppserien         |        134 | 62,527     |          9.8 |   170.4 |
-| <img src="https://gfx.nrk.no/i1CRD82Ere3fJf_vf_P68ANkQfHOjKFHAcvBeHHcGw4A" height="48"> | Finnmarksløpet               |         76 | 4,787      |         23.9 |    31.8 |
-| <img src="https://gfx.nrk.no/iCvrHEypxEn84bWUaF_ZZQSZMa5NMLq6F4j0vurGU5vQ" height="48"> | Fotball - NM kvinner (cupen) |         74 | 36,547     |          8.4 |    85.1 |
-| <img src="https://gfx.nrk.no/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ" height="48"> | Min idrett                   |         21 | 2,699      |          7.6 |     5.7 |
-| <img src="https://gfx.nrk.no/liBhUiMzkbJL9-_xVSjQLAfyQ_ja3OR1Q7qa1wE8TLkg" height="48"> | Det perfekte fallet          |          5 | 268        |          7   |     0.5 |
-| <img src="https://gfx.nrk.no/nw7O1nDmdut-gGavxcK82QitD30g967dH1DKK9OIb8QQ" height="48"> | OL-profiler                  |         11 | 251        |          7.5 |     0.5 |
-| <img src="https://gfx.nrk.no/pzfggucy_gXu6Zz8l1T_Xg9HT5RLZQbUWmM4CTPjzwPw" height="48"> | Puckers                      |          5 | 697        |          6.1 |     1.2 |
-| <img src="https://gfx.nrk.no/rIVPWDFGdOpeaGhc_nRRigGDfjuxlyTLXttyKK4uVEJg" height="48"> | Torsteins sjakkskole         |         47 | 644        |         15   |     2.7 |
-| <img src="https://gfx.nrk.no/s-9UWkxDD3ut27Vs4NMx4gGThoAsVJAaicz5QoqoC12w" height="48"> | Sjakksnakk                   |          1 | 69         |         41   |     0.8 |
-| <img src="https://gfx.nrk.no/sEVpD5EK4q6P82dToiLIsgIHobSmfcmuWKMKhS-VGjZQ" height="48"> | Parastjernene                |          8 | 140        |         12.9 |     0.5 |
-| <img src="https://gfx.nrk.no/sobKwIiWFdNjdn-OsoMZ4gCEKaUOnRBJAugJxEl61vtg" height="48"> | Muhammad Ali                 |          4 | 1,905      |         11.3 |     6   |
-| <img src="https://gfx.nrk.no/tIP4xoim-SMKQ7yaifl6mA6qHxxvoUeVrZkve4XfajGA" height="48"> | Karsten og Leif              |          5 | 705        |          9   |     1.8 |
-| <img src="https://gfx.nrk.no/tQvt4BJs8JiTD0b2e24LZQRLqo8OGrUhzA75UxM9K50A" height="48"> | Gull fra sportsarkivet       |         23 | 5,865      |         19.5 |    31.7 |
-| <img src="https://gfx.nrk.no/yYMvh-ML0kdnSrZYn9-XhwGpxtfHdOOOG0iXSWAZwqeQ" height="48"> | Best i verden                |         22 | 2,519      |         14.8 |    10.3 |
+|                                                                                         | serie                              |   programs | segments   |   average(s) |   hours |
+|:----------------------------------------------------------------------------------------|:-----------------------------------|-----------:|:-----------|-------------:|--------:|
+| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                         |          2 | 345        |          7.8 |     0.7 |
+| <img src="https://gfx.nrk.no/5DyHSn-PWhzeHNSkZktM6gTUX9ZBxwTp5HOIOB6scxOg" height="48"> | Verdens beste landslag             |          4 | 216        |         13.2 |     0.8 |
+| <img src="https://gfx.nrk.no/5wWFAMacjxoxnWdouY1qkQBExVupLwwS7qCoMTNw2fWA" height="48"> | Historien om fotball-EM            |         13 | 2,700      |         11.4 |     8.5 |
+| <img src="https://gfx.nrk.no/84esErUM0QBkyb8jKhb4PADrgx6OnyHOZF2ClJBgN_Aw" height="48"> | Friidrett                          |        299 | 97,519     |         16.3 |   441.1 |
+| <img src="https://gfx.nrk.no/8oYfX1ALRVHCpoVVM1pSzgbFkTAV2VUk5qQu69XFalCw" height="48"> | Skiskytterne                       |          2 | 408        |          9.4 |     1.1 |
+| <img src="https://gfx.nrk.no/94VMGyNUKhGG1s-XdJ3m1QLno609XM_BKZtppU7rfpXg" height="48"> | Vitenskapen bak medaljen           |          4 | 596        |         11.6 |     1.9 |
+| <img src="https://gfx.nrk.no/9pwtygvOFaWSH9P-dgSKngEWUcCTvef2tEnAI90NZt1Q" height="48"> | Sjakk (1970-tallet)                |         10 | 535        |         17.4 |     2.6 |
+| <img src="https://gfx.nrk.no/AT6KIiTJNQ06Pje7S0wTuQyFJUvwpwJOiIyQ3krdB3ZA" height="48"> | 100 år med Vasaloppet              |          1 | 257        |         11.3 |     0.8 |
+| <img src="https://gfx.nrk.no/Ax2ih1QeYYWzIz2MMAfeCQJDD3h-A54A5s6yUtBhv3EA" height="48"> | Sundby mot verden                  |          5 | 809        |          9.8 |     2.2 |
+| <img src="https://gfx.nrk.no/C9iqF_Q8g0Pfp41E-HpTaQPcP0K0RuCeIbwbdzOxOEKQ" height="48"> | Sjakk                              |        217 | 21,856     |        102.7 |   623.7 |
+| <img src="https://gfx.nrk.no/FTd1OtpRe01sEEHA-O9i_gTWD-o5hLA4UjX_NrS5XzzA" height="48"> | The olympic draum                  |          7 | 604        |          9.9 |     1.7 |
+| <img src="https://gfx.nrk.no/FTmqjs1ia_bXliZSc0QDuwXUZ38u1u1cB55fp0RR-_2g" height="48"> | Sjakk med Simen                    |          6 | 1,008      |          7.1 |     2   |
+| <img src="https://gfx.nrk.no/Hw92gNrmmcjUaVbxAs45ugLqYzPi2qDRWCni6Ivw8zjA" height="48"> | Enter e-sport                      |          4 | 689        |         10.9 |     2.1 |
+| <img src="https://gfx.nrk.no/LTWaGTghc3xdnhnBGV3YMQEPBxfqyMnHaQrPRfDb7xrA" height="48"> | Innta plassene...                  |         10 | 700        |          7.1 |     1.4 |
+| <img src="https://gfx.nrk.no/LpB8JARXBZ126Z-NsQIVmQDicE3iIgxo-a2V1ZHH_CUw" height="48"> | Special Olympics                   |          3 | 533        |          7.8 |     1.2 |
+| <img src="https://gfx.nrk.no/Nok5Y40BbcTSL0wL5i_A4Q6vmgs6aUI2Y56uGR_0Wt4Q" height="48"> | Bryting                            |         12 | 5,358      |         12.8 |    19   |
+| <img src="https://gfx.nrk.no/c-__N39RCKEJOfvSdVwYjQheXRWQLVH20JkHcxN9HzUg" height="48"> | Smæsj                              |          8 | 1,148      |         13.1 |     4.2 |
+| <img src="https://gfx.nrk.no/f7FO6Nu3BgBMLhz8geBW-wMJmUlvZ60L6wXfXm70VUEg" height="48"> | 40 år med sommer-OL                |          1 | 284        |         19.4 |     1.5 |
+| <img src="https://gfx.nrk.no/hYpkB92d1n2FYQ7DZj76_AWfUp3ZOAMOYzR4_NDhIuIQ" height="48"> | Fotball - Toppserien               |        159 | 73,028     |         10.4 |   211.8 |
+| <img src="https://gfx.nrk.no/i1CRD82Ere3fJf_vf_P68ANkQfHOjKFHAcvBeHHcGw4A" height="48"> | Finnmarksløpet                     |         76 | 4,787      |         23.9 |    31.8 |
+| <img src="https://gfx.nrk.no/iCvrHEypxEn84bWUaF_ZZQSZMa5NMLq6F4j0vurGU5vQ" height="48"> | Fotball - NM kvinner (cupen)       |         74 | 36,547     |          8.4 |    85.1 |
+| <img src="https://gfx.nrk.no/iRqIUilbLKx2PTWBbuIVwgv6KlFcsBFOdJVSEgMMOKmg" height="48"> | Fotball - VM-kvalifisering kvinner |          1 | 667        |          9   |     1.7 |
+| <img src="https://gfx.nrk.no/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ" height="48"> | Min idrett                         |         21 | 2,699      |          7.6 |     5.7 |
+| <img src="https://gfx.nrk.no/liBhUiMzkbJL9-_xVSjQLAfyQ_ja3OR1Q7qa1wE8TLkg" height="48"> | Det perfekte fallet                |          5 | 268        |          7   |     0.5 |
+| <img src="https://gfx.nrk.no/nw7O1nDmdut-gGavxcK82QitD30g967dH1DKK9OIb8QQ" height="48"> | OL-profiler                        |         11 | 251        |          7.5 |     0.5 |
+| <img src="https://gfx.nrk.no/pzfggucy_gXu6Zz8l1T_Xg9HT5RLZQbUWmM4CTPjzwPw" height="48"> | Puckers                            |          5 | 697        |          6.1 |     1.2 |
+| <img src="https://gfx.nrk.no/rIVPWDFGdOpeaGhc_nRRigGDfjuxlyTLXttyKK4uVEJg" height="48"> | Torsteins sjakkskole               |         47 | 644        |         15   |     2.7 |
+| <img src="https://gfx.nrk.no/s-9UWkxDD3ut27Vs4NMx4gGThoAsVJAaicz5QoqoC12w" height="48"> | Sjakksnakk                         |          1 | 69         |         41   |     0.8 |
+| <img src="https://gfx.nrk.no/sEVpD5EK4q6P82dToiLIsgIHobSmfcmuWKMKhS-VGjZQ" height="48"> | Parastjernene                      |          8 | 140        |         12.9 |     0.5 |
+| <img src="https://gfx.nrk.no/sobKwIiWFdNjdn-OsoMZ4gCEKaUOnRBJAugJxEl61vtg" height="48"> | Muhammad Ali                       |          4 | 1,905      |         11.3 |     6   |
+| <img src="https://gfx.nrk.no/tIP4xoim-SMKQ7yaifl6mA6qHxxvoUeVrZkve4XfajGA" height="48"> | Karsten og Leif                    |          5 | 705        |          9   |     1.8 |
+| <img src="https://gfx.nrk.no/tQvt4BJs8JiTD0b2e24LZQRLqo8OGrUhzA75UxM9K50A" height="48"> | Gull fra sportsarkivet             |         23 | 5,865      |         19.5 |    31.7 |
+| <img src="https://gfx.nrk.no/yYMvh-ML0kdnSrZYn9-XhwGpxtfHdOOOG0iXSWAZwqeQ" height="48"> | Best i verden                      |         22 | 2,519      |         14.8 |    10.3 |
 
 ## Unknown
 |                                                                                         | serie                   |   programs | segments   |   average(s) |   hours |
