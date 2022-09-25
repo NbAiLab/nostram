@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,947.5 | 0.0                  |        **1,947.5** |
-| nyheter | 18,914.0 | 0.0                  |        **18,914.0** |
+| nyheter | 18,948.8 | 0.0                  |        **18,948.8** |
 | drama-serier | 550.0 | 0.0                  |        **550.0** |
 | dokumentar | 807.9 | 0.0                  |        **807.9** |
 | humor | 362.7 | 0.0                  |        **362.7** |
@@ -11,7 +11,7 @@
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 909.2 | 0.0                  |        **909.2** |
-| sport | 2,970.8 | 0.0                  |        **2,970.8** |
+| sport | 3,001.3 | 0.0                  |        **3,001.3** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -19,7 +19,7 @@
 | umbrella | 0.0 | 40.3                  |        **40.3** |
 | Nyheter | 0.0 | 610.9                  |        **610.9** |
 | standard | 0.0 | 57.8                  |        **57.8** |
-| natur | 373.4 | 0.0                  |        **373.4** |
+| natur | 402.0 | 0.0                  |        **402.0** |
 | livsstil | 958.6 | 0.0                  |        **958.6** |
 | vitenskap | 391.2 | 0.0                  |        **391.2** |
 | underholdning | 1,682.1 | 0.0                  |        **1,682.1** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **30,945.8** | **7,522.3**                  |        **38,468.1** |
+| **total** | **31,039.7** | **7,522.3**                  |        **38,562.0** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,790,263 segments. 461,312(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,812,102 segments. 462,252(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -384,7 +384,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4490 | 361,748    |         27.5 |  2768.2 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4561 | 366,567    |         27.5 |  2803   |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -1493,7 +1493,7 @@
 | <img src="https://gfx.nrk.no/i1CRD82Ere3fJf_vf_P68ANkQfHOjKFHAcvBeHHcGw4A" height="48"> | Finnmarksløpet                      |         76 | 4,787      |         23.9 |    31.8 |
 | <img src="https://gfx.nrk.no/iCvrHEypxEn84bWUaF_ZZQSZMa5NMLq6F4j0vurGU5vQ" height="48"> | Fotball - NM kvinner (cupen)        |         74 | 36,547     |          8.4 |    85.1 |
 | <img src="https://gfx.nrk.no/iRqIUilbLKx2PTWBbuIVwgv6KlFcsBFOdJVSEgMMOKmg" height="48"> | Fotball - VM-kvalifisering kvinner  |         29 | 12,575     |          8.4 |    29.5 |
-| <img src="https://gfx.nrk.no/j8ZHAucZINlwrUNL8qvQzwDOBiXGXCPfzRo4vxjkCqDQ" height="48"> | NM-veka                             |         76 | 15,272     |         15.8 |    66.9 |
+| <img src="https://gfx.nrk.no/j8ZHAucZINlwrUNL8qvQzwDOBiXGXCPfzRo4vxjkCqDQ" height="48"> | NM-veka                             |        109 | 22,107     |         15.9 |    97.4 |
 | <img src="https://gfx.nrk.no/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ" height="48"> | Min idrett                          |         21 | 2,699      |          7.6 |     5.7 |
 | <img src="https://gfx.nrk.no/liBhUiMzkbJL9-_xVSjQLAfyQ_ja3OR1Q7qa1wE8TLkg" height="48"> | Det perfekte fallet                 |          5 | 268        |          7   |     0.5 |
 | <img src="https://gfx.nrk.no/nPTqtw9AdvQEKHN7HLUbUgjxRdHjAO5nQFGx19Hsjl5g" height="48"> | Svømming - EM                       |         85 | 10,849     |         25   |    75.5 |
@@ -2448,7 +2448,7 @@
 | <img src="https://gfx.nrk.no/9KT6KfABLGVSkO0Ge0SeeQ_LQK-IRjttYkEkQTpi84cQ" height="48"> | Canada rundt med Griff                     |          6 | 884        |         16.4 |     4   |
 | <img src="https://gfx.nrk.no/9jEoQrPq0h7d9_5rP_KjSQfVUI9PTppuFk_06ahzIuzQ" height="48"> | Naturen vender tilbake - rewilding         |          4 | 738        |          8   |     1.6 |
 | <img src="https://gfx.nrk.no/9jIOzUXrM7HNlMXEs2DAfwS3kkZTBz7FUQtzcHzaNVjw" height="48"> | I gamle spor                               |          6 | 487        |         14.3 |     1.9 |
-| <img src="https://gfx.nrk.no/AJQsvJEeoH5rk-2H7bp_Pgx1UaQKwRsRoSx3eKi-f6Uw" height="48"> | Ut i naturen                               |        262 | 42,734     |          7.2 |    85.2 |
+| <img src="https://gfx.nrk.no/AJQsvJEeoH5rk-2H7bp_Pgx1UaQKwRsRoSx3eKi-f6Uw" height="48"> | Ut i naturen                               |        348 | 52,919     |          7.7 |   113.8 |
 | <img src="https://gfx.nrk.no/AveCal4lrzvaFNNVccavDApTf9r2hpkaZr24CDkJ8N4A" height="48"> | Eventyrjenter                              |         10 | 2,076      |          4.5 |     2.6 |
 | <img src="https://gfx.nrk.no/BCDiEvO7xV_u8wcirFc-2Qgaj_tOBNRNHZqt_ToEkdCA" height="48"> | 7-fjellsturen                              |          8 | 778        |          1.9 |     0.4 |
 | <img src="https://gfx.nrk.no/C6vl5D7BAb4Dvk88NrGf3gyrDZxRd8ESN85-pCHjtJCg" height="48"> | Kari møter                                 |          8 | 456        |         21.6 |     2.7 |
