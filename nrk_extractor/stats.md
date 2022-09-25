@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,133.4 | 0.0                  |        **19,133.4** |
+| nyheter | 19,146.9 | 0.0                  |        **19,146.9** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 812.4 | 0.0                  |        **812.4** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -11,7 +11,7 @@
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,154.3 | 0.0                  |        **3,154.3** |
+| sport | 3,163.7 | 0.0                  |        **3,163.7** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,476.3** | **7,522.3**                  |        **38,998.6** |
+| **total** | **31,499.1** | **7,522.3**                  |        **39,021.4** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,927,115 segments. 466,795(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,931,073 segments. 467,083(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4891 | 393,952    |         27.3 |  2985.5 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4919 | 395,955    |         27.3 |  2999   |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -1503,7 +1503,7 @@
 | <img src="https://gfx.nrk.no/AT6KIiTJNQ06Pje7S0wTuQyFJUvwpwJOiIyQ3krdB3ZA" height="48"> | 100 år med Vasaloppet               |          1 | 257        |         11.3 |     0.8 |
 | <img src="https://gfx.nrk.no/Ax2ih1QeYYWzIz2MMAfeCQJDD3h-A54A5s6yUtBhv3EA" height="48"> | Sundby mot verden                   |          5 | 809        |          9.8 |     2.2 |
 | <img src="https://gfx.nrk.no/C9iqF_Q8g0Pfp41E-HpTaQPcP0K0RuCeIbwbdzOxOEKQ" height="48"> | Sjakk                               |        217 | 21,856     |        102.7 |   623.7 |
-| <img src="https://gfx.nrk.no/D4WYmBIC4MwvveUyrSM7fgcBMW-v06vzcgFGUV_4_7DA" height="48"> | Hestesport                          |         86 | 28,138     |         14.1 |   110.5 |
+| <img src="https://gfx.nrk.no/D4WYmBIC4MwvveUyrSM7fgcBMW-v06vzcgFGUV_4_7DA" height="48"> | Hestesport                          |         92 | 30,093     |         14.3 |   119.8 |
 | <img src="https://gfx.nrk.no/EPxWkzJQm8xV_T_K5jADLAdW9HZiN7DMHk4PaB6oSk0A" height="48"> | Orientering                         |         84 | 16,184     |         33   |   148.5 |
 | <img src="https://gfx.nrk.no/FTd1OtpRe01sEEHA-O9i_gTWD-o5hLA4UjX_NrS5XzzA" height="48"> | The olympic draum                   |          7 | 604        |          9.9 |     1.7 |
 | <img src="https://gfx.nrk.no/FTmqjs1ia_bXliZSc0QDuwXUZ38u1u1cB55fp0RR-_2g" height="48"> | Sjakk med Simen                     |          6 | 1,008      |          7.1 |     2   |
