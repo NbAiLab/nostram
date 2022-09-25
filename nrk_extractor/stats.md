@@ -3,15 +3,15 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,051.7 | 0.0                  |        **19,051.7** |
+| nyheter | 19,066.3 | 0.0                  |        **19,066.3** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 812.4 | 0.0                  |        **812.4** |
-| humor | 370.5 | 0.0                  |        **370.5** |
+| humor | 372.3 | 0.0                  |        **372.3** |
 | Musikk | 0.0 | 1,708.0                  |        **1,708.0** |
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,093.7 | 0.0                  |        **3,093.7** |
+| sport | 3,104.9 | 0.0                  |        **3,104.9** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,332.2** | **7,522.3**                  |        **38,854.5** |
+| **total** | **31,359.7** | **7,522.3**                  |        **38,882.0** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,898,196 segments. 465,036(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,905,224 segments. 465,341(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4726 | 382,041    |         27.4 |  2903.7 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4754 | 384,367    |         27.3 |  2918.3 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -883,7 +883,7 @@
 | <img src="https://gfx.nrk.no/792eJ5I607KRAhugJUwEPwnjuPiNHnMOrqnkoOGmeryw" height="48"> | Pulk                               |          8 | 1,152      |          4.6 |     1.5 |
 | <img src="https://gfx.nrk.no/9LcD7SOqYZ3vTHF5V6GfNwe8ENUDJI1fjiTzZlsiinQg" height="48"> | Øystein og meg                     |         25 | 2,389      |         12.6 |     8.4 |
 | <img src="https://gfx.nrk.no/9pFqT_H1ebkVoIzEjWuCXwEnXRHHCeMs6Aq6eSPBZIUg" height="48"> | Helsebrusjan                       |          1 | 59         |          6.3 |     0.1 |
-| <img src="https://gfx.nrk.no/ABDK6qLFR6WE_C6HxfqdbgFcyIzu_w4NmhS9HeISGnXw" height="48"> | Montreux                           |         18 | 1,618      |          5.9 |     2.6 |
+| <img src="https://gfx.nrk.no/ABDK6qLFR6WE_C6HxfqdbgFcyIzu_w4NmhS9HeISGnXw" height="48"> | Montreux                           |         33 | 2,979      |          5.3 |     4.4 |
 | <img src="https://gfx.nrk.no/A_j0czGan_RFFk5DcrOLkQWSIJV7tEkuPsv3chPyMAEw" height="48"> | I spøkelyset                       |          6 | 311        |         10   |     0.9 |
 | <img src="https://gfx.nrk.no/BN2oiT0KBbWkd_J7kzMnywrOGVg6GRpUQd0BgdPM6UWQ" height="48"> | Norske grønnsaker – sommersnutter  |         12 | 405        |         10.9 |     1.2 |
 | <img src="https://gfx.nrk.no/COhNZZN7BIp3bsBIrM7JQg38G1g3Pu9Grm_KwmBUYLwg" height="48"> | Rare greier fra Radioresepsjonen   |          9 | 367        |         10.9 |     1.1 |
@@ -1503,7 +1503,7 @@
 | <img src="https://gfx.nrk.no/AT6KIiTJNQ06Pje7S0wTuQyFJUvwpwJOiIyQ3krdB3ZA" height="48"> | 100 år med Vasaloppet               |          1 | 257        |         11.3 |     0.8 |
 | <img src="https://gfx.nrk.no/Ax2ih1QeYYWzIz2MMAfeCQJDD3h-A54A5s6yUtBhv3EA" height="48"> | Sundby mot verden                   |          5 | 809        |          9.8 |     2.2 |
 | <img src="https://gfx.nrk.no/C9iqF_Q8g0Pfp41E-HpTaQPcP0K0RuCeIbwbdzOxOEKQ" height="48"> | Sjakk                               |        217 | 21,856     |        102.7 |   623.7 |
-| <img src="https://gfx.nrk.no/D4WYmBIC4MwvveUyrSM7fgcBMW-v06vzcgFGUV_4_7DA" height="48"> | Hestesport                          |         40 | 12,491     |         14.4 |    49.9 |
+| <img src="https://gfx.nrk.no/D4WYmBIC4MwvveUyrSM7fgcBMW-v06vzcgFGUV_4_7DA" height="48"> | Hestesport                          |         52 | 15,832     |         13.9 |    61.1 |
 | <img src="https://gfx.nrk.no/EPxWkzJQm8xV_T_K5jADLAdW9HZiN7DMHk4PaB6oSk0A" height="48"> | Orientering                         |         84 | 16,184     |         33   |   148.5 |
 | <img src="https://gfx.nrk.no/FTd1OtpRe01sEEHA-O9i_gTWD-o5hLA4UjX_NrS5XzzA" height="48"> | The olympic draum                   |          7 | 604        |          9.9 |     1.7 |
 | <img src="https://gfx.nrk.no/FTmqjs1ia_bXliZSc0QDuwXUZ38u1u1cB55fp0RR-_2g" height="48"> | Sjakk med Simen                     |          6 | 1,008      |          7.1 |     2   |
