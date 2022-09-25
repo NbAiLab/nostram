@@ -3,15 +3,15 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,947.5 | 0.0                  |        **1,947.5** |
-| nyheter | 18,977.9 | 0.0                  |        **18,977.9** |
+| nyheter | 18,989.8 | 0.0                  |        **18,989.8** |
 | drama-serier | 550.0 | 0.0                  |        **550.0** |
-| dokumentar | 807.9 | 0.0                  |        **807.9** |
+| dokumentar | 811.0 | 0.0                  |        **811.0** |
 | humor | 362.7 | 0.0                  |        **362.7** |
 | Musikk | 0.0 | 1,708.0                  |        **1,708.0** |
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 913.7 | 0.0                  |        **913.7** |
-| sport | 3,029.2 | 0.0                  |        **3,029.2** |
+| sport | 3,042.2 | 0.0                  |        **3,042.2** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -19,7 +19,7 @@
 | umbrella | 0.0 | 40.3                  |        **40.3** |
 | Nyheter | 0.0 | 610.9                  |        **610.9** |
 | standard | 0.0 | 57.8                  |        **57.8** |
-| natur | 426.4 | 0.0                  |        **426.4** |
+| natur | 433.1 | 0.0                  |        **433.1** |
 | livsstil | 958.6 | 0.0                  |        **958.6** |
 | vitenskap | 391.2 | 0.0                  |        **391.2** |
 | underholdning | 1,682.1 | 0.0                  |        **1,682.1** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,126.7** | **7,522.3**                  |        **38,649.0** |
+| **total** | **31,161.2** | **7,522.3**                  |        **38,683.5** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,835,422 segments. 463,075(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,844,733 segments. 463,389(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -384,7 +384,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4606 | 370,878    |         27.5 |  2832.1 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4624 | 372,686    |         27.5 |  2844   |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -729,6 +729,7 @@
 | <img src="https://gfx.nrk.no/Wpk_5UuIS5zNPYWIj225gwYlXAXYDMyJw94ej5cp2CFA" height="48"> | Pesten i London                                |          3 | 490        |         13.4 |     1.8 |
 | <img src="https://gfx.nrk.no/WsrgbeR7AvuSHerKniqxegO4P-Gz_-1J8NYmBvgR6Ajw" height="48"> | Bilda som endra verda                          |          1 | 57         |         21   |     0.3 |
 | <img src="https://gfx.nrk.no/XIhajRA3HV5ItDQEBjZjTwzJQQQy2qx7F4GjtLKBrcWA" height="48"> | Djevelens advokat                              |          3 | 721        |          7   |     1.4 |
+| <img src="https://gfx.nrk.no/Xf0d3qqQFxwCg3po0Yo6RA_reUu4fadInyUQB-xuUsug" height="48"> | Mellom bakkar og berg 1995                     |          5 | 468        |          9.6 |     1.3 |
 | <img src="https://gfx.nrk.no/Xlq5CIHdAvAsr6I5-Z7H-QA8LLoS3uuYQmh4Kj_E7Zmg" height="48"> | Gåten Agnes                                    |          4 | 907        |          7.4 |     1.9 |
 | <img src="https://gfx.nrk.no/XtHbrv6xlB88bHiMZ2EWkwJ_t0N15sT_aKvFsrAQhM7g" height="48"> | Forført av spriten                             |          5 | 1,152      |          4.9 |     1.6 |
 | <img src="https://gfx.nrk.no/YHjP_G7qP12Lank0oRPmagBxDCpS_30AiE2eMkz8P0Hg" height="48"> | De farlige                                     |          3 | 561        |          8.1 |     1.3 |
@@ -825,6 +826,7 @@
 | <img src="https://gfx.nrk.no/voHUJLH1ia8eUW0OnTSQtA72lwu2n5dIvvj5NN2S6kSA" height="48"> | Monsen og hundene                              |         17 | 3,156      |          6.8 |     6   |
 | <img src="https://gfx.nrk.no/wO9-sjY5uEBxfEpZHrRgTQOS5wP8rMTBo2buraqcF8QQ" height="48"> | Aktuelt om havet                               |          3 | 128        |         30.9 |     1.1 |
 | <img src="https://gfx.nrk.no/wSzZDMEWldjTdOKi-PQn1QTlay36IKOC6V6Pb2Pd30Dg" height="48"> | nan                                            |         20 | 4,161      |          6   |     6.9 |
+| <img src="https://gfx.nrk.no/wTuTUdCunAgZcp0hRiNPngZ9sry7tl2oBfS50DnLyFWw" height="48"> | Lysglimt i mørke                               |          6 | 537        |         11.9 |     1.8 |
 | <img src="https://gfx.nrk.no/wZrG5AOOZzPfRsO6NNv8vwkBDZ0b0wmM4mlNwBshKtPA" height="48"> | Og så var det deg da                           |          6 | 514        |         16.8 |     2.4 |
 | <img src="https://gfx.nrk.no/x4TV5mVt8-wla0mqxezUzw-6vBZXMueIr1PVhGjCeiJQ" height="48"> | Line fikser maten                              |          5 | 602        |         12.5 |     2.1 |
 | <img src="https://gfx.nrk.no/x9LtofoSDuMpDcT6XidpmAAYvwX5ghzRDiTcc_73xMXg" height="48"> | Frontkjempere                                  |          4 | 904        |          9.1 |     2.3 |
@@ -1494,7 +1496,7 @@
 | <img src="https://gfx.nrk.no/i1CRD82Ere3fJf_vf_P68ANkQfHOjKFHAcvBeHHcGw4A" height="48"> | Finnmarksløpet                      |         76 | 4,787      |         23.9 |    31.8 |
 | <img src="https://gfx.nrk.no/iCvrHEypxEn84bWUaF_ZZQSZMa5NMLq6F4j0vurGU5vQ" height="48"> | Fotball - NM kvinner (cupen)        |         74 | 36,547     |          8.4 |    85.1 |
 | <img src="https://gfx.nrk.no/iRqIUilbLKx2PTWBbuIVwgv6KlFcsBFOdJVSEgMMOKmg" height="48"> | Fotball - VM-kvalifisering kvinner  |         29 | 12,575     |          8.4 |    29.5 |
-| <img src="https://gfx.nrk.no/j8ZHAucZINlwrUNL8qvQzwDOBiXGXCPfzRo4vxjkCqDQ" height="48"> | NM-veka                             |        143 | 28,439     |         15.9 |   125.3 |
+| <img src="https://gfx.nrk.no/j8ZHAucZINlwrUNL8qvQzwDOBiXGXCPfzRo4vxjkCqDQ" height="48"> | NM-veka                             |        161 | 30,979     |         16.1 |   138.3 |
 | <img src="https://gfx.nrk.no/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ" height="48"> | Min idrett                          |         21 | 2,699      |          7.6 |     5.7 |
 | <img src="https://gfx.nrk.no/liBhUiMzkbJL9-_xVSjQLAfyQ_ja3OR1Q7qa1wE8TLkg" height="48"> | Det perfekte fallet                 |          5 | 268        |          7   |     0.5 |
 | <img src="https://gfx.nrk.no/nPTqtw9AdvQEKHN7HLUbUgjxRdHjAO5nQFGx19Hsjl5g" height="48"> | Svømming - EM                       |         85 | 10,849     |         25   |    75.5 |
@@ -2437,8 +2439,10 @@
 | <img src="https://gfx.nrk.no/0g6-nCc1LxSKM9DqqpnbuwZcXjyCGsSZ2A0C22PoAx0A" height="48"> | Vill viten                                 |          4 | 799        |          7.5 |     1.7 |
 | <img src="https://gfx.nrk.no/1HFjNsTcZQ5nz1f5U_YP3wivEe4Y_x72VOsLNRishAEA" height="48"> | Fra vest til øst i Finnmark                |          7 | 509        |         14.8 |     2.1 |
 | <img src="https://gfx.nrk.no/1ll0TuwtDPZcQO8_W_QxmwXxRSL1vsy3Eih6bV7LHDlw" height="48"> | Rock til fjells                            |          4 | 566        |          7   |     1.1 |
+| <img src="https://gfx.nrk.no/2Qmc9PH7z7Y_ZW54z0zxqgV6oyMULw9KK67ksu9qBaaA" height="48"> | Bjørnøya                                   |          6 | 1,254      |          4.5 |     1.6 |
 | <img src="https://gfx.nrk.no/2yYIm0sBP4gh8Cd1l6BY-AHQfxuESCEFsh4WNzNn3wMg" height="48"> | Jonahs dyreverden                          |         20 | 1,588      |          4.2 |     1.8 |
 | <img src="https://gfx.nrk.no/3pr7nHTy9fMIO6VWj5eosgFSJhdrBWyJSYrXd2O1Am5w" height="48"> | Canada på tvers                            |          6 | 951        |          3   |     0.8 |
+| <img src="https://gfx.nrk.no/4kYc4WbNKwJYto9SjWA5QASCzmo_OMWWigB8eSco9V1Q" height="48"> | Svalbard 1964                              |          2 | 432        |          8.9 |     1.1 |
 | <img src="https://gfx.nrk.no/6aRqBh8Ik2msyfadNZK57A3k94c2hqPte7PMMxTvU-qQ" height="48"> | Hvorfor biter fisken                       |          5 | 751        |         10.8 |     2.3 |
 | <img src="https://gfx.nrk.no/6eAqUxuLQTAUiQGNoJerMgWOxnf8P3C5ipc-AFXFbbaw" height="48"> | Den glemte polarhelt                       |          4 | 941        |          8.7 |     2.3 |
 | <img src="https://gfx.nrk.no/6roymD4H5DuVkKrUDjPSBgEumiQhYitN3Hfw1lF0An9A" height="48"> | Live redder verden. Litt.                  |          5 | 569        |         11.3 |     1.8 |
@@ -2461,7 +2465,7 @@
 | <img src="https://gfx.nrk.no/CyIilEMXEr_nnM-kdSAnew9RPN9H0wiM_jDqVj6aTm7g" height="48"> | Exit Nordpolen                             |          3 | 601        |          6.5 |     1.1 |
 | <img src="https://gfx.nrk.no/DWb007ZL_I6ALA-y54Z40gGYMdxPjsA0wLrrrozpqRJg" height="48"> | Vegard Ulvang  - Gåten Nordvestpassasjen   |          3 | 530        |          4.6 |     0.7 |
 | <img src="https://gfx.nrk.no/D_Ta-9n0-wgRSdekptAVLge7jNerk2WQWKoHEpmFqxig" height="48"> | Monsen, Monsen og Mattis                   |         13 | 2,265      |          4.6 |     2.9 |
-| <img src="https://gfx.nrk.no/DeiQmgs0XGXrQsPjk--PGQZXvriHVROgkOITP2qLlF_Q" height="48"> | Saltstraumen minutt for minutt             |          5 | 974        |         10.8 |     2.9 |
+| <img src="https://gfx.nrk.no/DeiQmgs0XGXrQsPjk--PGQZXvriHVROgkOITP2qLlF_Q" height="48"> | Saltstraumen minutt for minutt             |          6 | 1,207      |         10   |     3.4 |
 | <img src="https://gfx.nrk.no/E8P-l0x7h_yStzx4k4cmEQO_Lrc5LUmfqSG3Ra85DNmQ" height="48"> | Ein ekte gullgravar                        |          2 | 738        |          3.4 |     0.7 |
 | <img src="https://gfx.nrk.no/EUiHH4nxiO2fJttYpf7qagFqz7PmDFIuAD-ZK3Yn1nwg" height="48"> | Den store elgvandringen                    |          4 | 275        |         34.5 |     2.6 |
 | <img src="https://gfx.nrk.no/EVNkNk3vntPvSlI36hmBXwaINnbolm63dJrZ2UGATKbQ" height="48"> | Eden – den ville planeten                  |         13 | 3,647      |          3.2 |     3.2 |
@@ -2475,6 +2479,8 @@
 | <img src="https://gfx.nrk.no/Lgbd623hrzQq3VkZj26TJwQGvyrmvKlSPd2JpQ201gjw" height="48"> | Norge fra lufta                            |          1 | 1          |          0.3 |     0   |
 | <img src="https://gfx.nrk.no/Loik9rGTXa6DUDgluJE5rQAODJ4pPcnkJNOO0fLgjC6g" height="48"> | Villmarkas voktere                         |          8 | 1,841      |          5.3 |     2.7 |
 | <img src="https://gfx.nrk.no/Ltf7XrtCqBipXxSgIEWm_A41ONSZxuk0ZRsAvvYyf1Qg" height="48"> | Lofotsprell                                |          4 | 560        |          5.5 |     0.9 |
+| <img src="https://gfx.nrk.no/MyM7nPFqAInsAzn2zR9j8Q6U7aOohGW46tMz-UYyGApQ" height="48"> | Gjetar i Jotunheimen                       |          8 | 1,311      |          4.8 |     1.8 |
+| <img src="https://gfx.nrk.no/MzzYshaintQDuZoO1knyOwYAdp3fs9C5qw45s2fBEsAQ" height="48"> | I all slags vær                            |          5 | 728        |          8.9 |     1.8 |
 | <img src="https://gfx.nrk.no/NDlEGFZSgU2qAC-3KwIekgVbNogIUVOM_obfZxl0wX-A" height="48"> | Fjellfolk                                  |         10 | 2,248      |          5.7 |     3.5 |
 | <img src="https://gfx.nrk.no/NhKJZu66_L357gpsn8fg6wZwnFndIHGElCn0YOdp_kwg" height="48"> | Gordon og bjørnungane                      |          2 | 587        |          4.8 |     0.8 |
 | <img src="https://gfx.nrk.no/Pcpiuq9iP_mm76fK3h-r1AJGchk4S4ohx3slvF8HbWvA" height="48"> | Fuglefjellet Hornøya - minutt for minutt   |         20 | 5,185      |         18.4 |    26.4 |
