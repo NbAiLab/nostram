@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,418.7 | 0.0                  |        **19,418.7** |
+| nyheter | 19,432.6 | 0.0                  |        **19,432.6** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 813.9 | 0.0                  |        **813.9** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,830.3** | **7,522.3**                  |        **39,352.6** |
+| **total** | **31,844.2** | **7,522.3**                  |        **39,366.5** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,999,466 segments. 471,352(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 9,001,638 segments. 471,542(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5467 | 437,759    |         26.9 |  3270.7 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5494 | 439,931    |         26.9 |  3284.6 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
