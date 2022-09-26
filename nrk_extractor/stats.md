@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,171.8 | 0.0                  |        **19,171.8** |
+| nyheter | 19,184.3 | 0.0                  |        **19,184.3** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 812.4 | 0.0                  |        **812.4** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -11,7 +11,7 @@
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,182.1 | 0.0                  |        **3,182.1** |
+| sport | 3,189.8 | 0.0                  |        **3,189.8** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,542.5** | **7,522.3**                  |        **39,064.8** |
+| **total** | **31,562.7** | **7,522.3**                  |        **39,085.0** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,939,977 segments. 467,635(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,944,169 segments. 467,925(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4969 | 399,695    |         27.2 |  3023.9 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       4994 | 401,618    |         27.2 |  3036.3 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -1507,13 +1507,14 @@
 | <img src="https://gfx.nrk.no/EPxWkzJQm8xV_T_K5jADLAdW9HZiN7DMHk4PaB6oSk0A" height="48"> | Orientering                         |         84 | 16,184     |         33   |   148.5 |
 | <img src="https://gfx.nrk.no/FTd1OtpRe01sEEHA-O9i_gTWD-o5hLA4UjX_NrS5XzzA" height="48"> | The olympic draum                   |          7 | 604        |          9.9 |     1.7 |
 | <img src="https://gfx.nrk.no/FTmqjs1ia_bXliZSc0QDuwXUZ38u1u1cB55fp0RR-_2g" height="48"> | Sjakk med Simen                     |          6 | 1,008      |          7.1 |     2   |
+| <img src="https://gfx.nrk.no/Ft0e5I9oRuXdbYVgUXsWTAS85ScnBh8y9dWObzd3bshQ" height="48"> | Fotball - EM jenter 19              |          3 | 1,878      |          3.7 |     1.9 |
 | <img src="https://gfx.nrk.no/Hw92gNrmmcjUaVbxAs45ugLqYzPi2qDRWCni6Ivw8zjA" height="48"> | Enter e-sport                       |          4 | 689        |         10.9 |     2.1 |
 | <img src="https://gfx.nrk.no/KNYTs_Pnhfxl7OLt964mGAmYyoqGfzwVrqVJARKKQm8Q" height="48"> | Fotball - EM kvinner                |         48 | 18,923     |          7.7 |    40.7 |
 | <img src="https://gfx.nrk.no/LTWaGTghc3xdnhnBGV3YMQEPBxfqyMnHaQrPRfDb7xrA" height="48"> | Innta plassene...                   |         10 | 700        |          7.1 |     1.4 |
 | <img src="https://gfx.nrk.no/LpB8JARXBZ126Z-NsQIVmQDicE3iIgxo-a2V1ZHH_CUw" height="48"> | Special Olympics                    |          3 | 533        |          7.8 |     1.2 |
 | <img src="https://gfx.nrk.no/Nok5Y40BbcTSL0wL5i_A4Q6vmgs6aUI2Y56uGR_0Wt4Q" height="48"> | Bryting                             |         12 | 5,358      |         12.8 |    19   |
 | <img src="https://gfx.nrk.no/OT-Z4Y64V0GT8kqJZg-c0wtBOWmxeykmI7DdHXpiODOA" height="48"> | Sportsrevyen                        |        404 | 27,729     |         20   |   154.4 |
-| <img src="https://gfx.nrk.no/Ww_RKcRXJAw9HubDL980vQA4XOHWPLMAlEXhgu-2K7Yg" height="48"> | Trav                                |          3 | 81         |         74.2 |     1.7 |
+| <img src="https://gfx.nrk.no/Ww_RKcRXJAw9HubDL980vQA4XOHWPLMAlEXhgu-2K7Yg" height="48"> | Trav                                |         11 | 472        |         56.9 |     7.5 |
 | <img src="https://gfx.nrk.no/ZwuRHlVqvcJ6ZCiOLitvhQybb0KP1EhRKe3wlr8U2a4g" height="48"> | EM-uka                              |        120 | 49,320     |         14.1 |   192.7 |
 | <img src="https://gfx.nrk.no/bfvq46cL7IBU6ZQWw3G-Lw8U5kElnoIeKtdRgbP-IfMQ" height="48"> | E-sport (LL35)                      |         15 | 5,298      |         31.1 |    45.8 |
 | <img src="https://gfx.nrk.no/c-__N39RCKEJOfvSdVwYjQheXRWQLVH20JkHcxN9HzUg" height="48"> | Smæsj                               |          8 | 1,148      |         13.1 |     4.2 |
