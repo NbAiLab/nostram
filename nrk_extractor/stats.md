@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,197.6 | 0.0                  |        **19,197.6** |
+| nyheter | 19,211.2 | 0.0                  |        **19,211.2** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 812.4 | 0.0                  |        **812.4** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -11,7 +11,7 @@
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,196.2 | 0.0                  |        **3,196.2** |
+| sport | 3,203.6 | 0.0                  |        **3,203.6** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,582.4** | **7,522.3**                  |        **39,104.7** |
+| **total** | **31,603.3** | **7,522.3**                  |        **39,125.6** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,951,670 segments. 468,124(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,958,439 segments. 468,359(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5020 | 403,711    |         27.2 |  3049.7 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5047 | 405,695    |         27.2 |  3063.3 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -1523,7 +1523,7 @@
 | <img src="https://gfx.nrk.no/hYpkB92d1n2FYQ7DZj76_AWfUp3ZOAMOYzR4_NDhIuIQ" height="48"> | Fotball - Toppserien                |        159 | 73,028     |         10.4 |   211.8 |
 | <img src="https://gfx.nrk.no/i1CRD82Ere3fJf_vf_P68ANkQfHOjKFHAcvBeHHcGw4A" height="48"> | Finnmarksløpet                      |         76 | 4,787      |         23.9 |    31.8 |
 | <img src="https://gfx.nrk.no/iCvrHEypxEn84bWUaF_ZZQSZMa5NMLq6F4j0vurGU5vQ" height="48"> | Fotball - NM kvinner (cupen)        |         74 | 36,547     |          8.4 |    85.1 |
-| <img src="https://gfx.nrk.no/iOX43pmp6HVO2svKnmQ4wgZehfBg6docdZAXAFqS32Zw" height="48"> | Fotball - EM jenter 17              |          1 | 805        |          3.8 |     0.9 |
+| <img src="https://gfx.nrk.no/iOX43pmp6HVO2svKnmQ4wgZehfBg6docdZAXAFqS32Zw" height="48"> | Fotball - EM jenter 17              |          4 | 2,569      |          5.2 |     3.7 |
 | <img src="https://gfx.nrk.no/iRqIUilbLKx2PTWBbuIVwgv6KlFcsBFOdJVSEgMMOKmg" height="48"> | Fotball - VM-kvalifisering kvinner  |         29 | 12,575     |          8.4 |    29.5 |
 | <img src="https://gfx.nrk.no/j8ZHAucZINlwrUNL8qvQzwDOBiXGXCPfzRo4vxjkCqDQ" height="48"> | NM-veka                             |        164 | 31,296     |         16.1 |   139.9 |
 | <img src="https://gfx.nrk.no/lYT6lNRI5pjeHLiEIM9hPwXWlM6Bzp09YvlCF2HSgoRQ" height="48"> | Min idrett                          |         21 | 2,699      |          7.6 |     5.7 |
@@ -1540,6 +1540,7 @@
 | <img src="https://gfx.nrk.no/tQvt4BJs8JiTD0b2e24LZQRLqo8OGrUhzA75UxM9K50A" height="48"> | Gull fra sportsarkivet              |         23 | 5,865      |         19.5 |    31.7 |
 | <img src="https://gfx.nrk.no/yYMvh-ML0kdnSrZYn9-XhwGpxtfHdOOOG0iXSWAZwqeQ" height="48"> | Best i verden                       |         22 | 2,519      |         14.8 |    10.3 |
 | <img src="https://gfx.nrk.no/zECC3y0kzHobQaZp1-SElgCsiNRXiA3xGCgHK9nnZUgw" height="48"> | Landsskytterstevnet                 |         63 | 18,585     |         15.5 |    79.8 |
+| <img src="https://gfx.nrk.no/zN9zrKd6fEtBvTL5pwuBXg4r-AK6w_pfpNm-QRm1uFCQ" height="48"> | Tippekampen 50 år                   |         18 | 3,021      |          5.3 |     4.5 |
 
 ## Unknown
 |                                                                                         | serie                   |   programs | segments   |   average(s) |   hours |
