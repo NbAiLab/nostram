@@ -3,15 +3,15 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,211.2 | 0.0                  |        **19,211.2** |
+| nyheter | 19,224.3 | 0.0                  |        **19,224.3** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
-| dokumentar | 812.4 | 0.0                  |        **812.4** |
+| dokumentar | 813.9 | 0.0                  |        **813.9** |
 | humor | 372.3 | 0.0                  |        **372.3** |
 | Musikk | 0.0 | 1,708.0                  |        **1,708.0** |
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,203.6 | 0.0                  |        **3,203.6** |
+| sport | 3,212.4 | 0.0                  |        **3,212.4** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,603.3** | **7,522.3**                  |        **39,125.6** |
+| **total** | **31,626.7** | **7,522.3**                  |        **39,149.0** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,958,439 segments. 468,359(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,965,896 segments. 468,586(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5047 | 405,695    |         27.2 |  3063.3 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5073 | 407,640    |         27.2 |  3076.3 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -618,6 +618,7 @@
 | <img src="https://gfx.nrk.no/0gW27xhttusHB380FuCc3AwOH0H2UoMAkmpbKxuQAahQ" height="48"> | Zdravstvujte - begynnerkurs i russisk - TV     |         18 | 2,008      |          4.7 |     2.6 |
 | <img src="https://gfx.nrk.no/0hMbz5K91zahl1kpjDWNmAZz3EA8Wy1TJerIROAOYMtg" height="48"> | Norsk historie                                 |         13 | 1,451      |         11.1 |     4.5 |
 | <img src="https://gfx.nrk.no/1W8W40XWQUqEd5_qHBNaeQ6zOII50x2WRW8r8dJbiONQ" height="48"> | Da vi styrte landet                            |          6 | 838        |         13.6 |     3.2 |
+| <img src="https://gfx.nrk.no/1dfvPnkcBtLTJPrJXR3HZAFu3NHlnlXcF6KwXz2HhQIw" height="48"> | Karanba!                                       |          8 | 1,228      |          4.3 |     1.5 |
 | <img src="https://gfx.nrk.no/1oMgEc50UcSAgs6zjeY9Lw0IyJPbRoECaQKZN5fz3w6Q" height="48"> | Skyggespill                                    |          5 | 1,372      |          6.8 |     2.6 |
 | <img src="https://gfx.nrk.no/1qNpJb_7GYlZAZWPTKMdewG7hgVqnggCxmF--pB6eECw" height="48"> | Brennpunkt: Alt for Kina                       |          2 | 467        |          9   |     1.2 |
 | <img src="https://gfx.nrk.no/203W5IZxb2lO-fx0FrXQ-AUeFej5Ssk4RF-4uEWAoZgw" height="48"> | Presidentvalet: Trump mot Biden                |          2 | 516        |         10.5 |     1.5 |
@@ -1490,7 +1491,7 @@
 |:----------------------------------------------------------------------------------------|:------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="https://gfx.nrk.no/-Jtq8zHWGRw3s7WVvV0vWQ5DBpn5JsouucWRkw6_Wmgw" height="48"> | Toppidrettsveka                     |         44 | 5,553      |         28.8 |    44.4 |
 | <img src="https://gfx.nrk.no/-l1LbYETQOYiMu5exsbJzAfdIJElUBoRX0TM_LtIZVng" height="48"> | Blink                               |         70 | 11,941     |         27.1 |    89.9 |
-| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                          |          2 | 345        |          7.8 |     0.7 |
+| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                          |          8 | 1,998      |         11.3 |     6.3 |
 | <img src="https://gfx.nrk.no/4aXWLklWcqxVkQWtfqO6dgvDS0QQuYhqfC0dlfVLZDlA" height="48"> | Friidrett - VM                      |        154 | 72,899     |         11.7 |   237.9 |
 | <img src="https://gfx.nrk.no/5DyHSn-PWhzeHNSkZktM6gTUX9ZBxwTp5HOIOB6scxOg" height="48"> | Verdens beste landslag              |          4 | 216        |         13.2 |     0.8 |
 | <img src="https://gfx.nrk.no/5fk0bev9Ucv8vv59AnPzzw-7DfgJnjI8qCT-CVqoYSrw" height="48"> | Fotball - NM menn (cupen)           |        220 | 97,026     |          8.3 |   224.7 |
@@ -1540,7 +1541,7 @@
 | <img src="https://gfx.nrk.no/tQvt4BJs8JiTD0b2e24LZQRLqo8OGrUhzA75UxM9K50A" height="48"> | Gull fra sportsarkivet              |         23 | 5,865      |         19.5 |    31.7 |
 | <img src="https://gfx.nrk.no/yYMvh-ML0kdnSrZYn9-XhwGpxtfHdOOOG0iXSWAZwqeQ" height="48"> | Best i verden                       |         22 | 2,519      |         14.8 |    10.3 |
 | <img src="https://gfx.nrk.no/zECC3y0kzHobQaZp1-SElgCsiNRXiA3xGCgHK9nnZUgw" height="48"> | Landsskytterstevnet                 |         63 | 18,585     |         15.5 |    79.8 |
-| <img src="https://gfx.nrk.no/zN9zrKd6fEtBvTL5pwuBXg4r-AK6w_pfpNm-QRm1uFCQ" height="48"> | Tippekampen 50 år                   |         18 | 3,021      |          5.3 |     4.5 |
+| <img src="https://gfx.nrk.no/zN9zrKd6fEtBvTL5pwuBXg4r-AK6w_pfpNm-QRm1uFCQ" height="48"> | Tippekampen 50 år                   |         25 | 5,652      |          4.9 |     7.8 |
 
 ## Unknown
 |                                                                                         | serie                   |   programs | segments   |   average(s) |   hours |
