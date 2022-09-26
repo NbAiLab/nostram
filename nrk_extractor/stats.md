@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 19,224.3 | 0.0                  |        **19,224.3** |
+| nyheter | 19,237.2 | 0.0                  |        **19,237.2** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 813.9 | 0.0                  |        **813.9** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -11,7 +11,7 @@
 | samisk | 608.1 | 0.0                  |        **608.1** |
 | Litteratur | 0.0 | 47.4                  |        **47.4** |
 | kultur | 924.6 | 0.0                  |        **924.6** |
-| sport | 3,212.4 | 0.0                  |        **3,212.4** |
+| sport | 3,221.6 | 0.0                  |        **3,221.6** |
 | Unknown | 0.0 | 30.8                  |        **30.8** |
 | Barn | 0.0 | 23.3                  |        **23.3** |
 | sequential | 0.0 | 813.7                  |        **813.7** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **31,626.7** | **7,522.3**                  |        **39,149.0** |
+| **total** | **31,648.8** | **7,522.3**                  |        **39,171.1** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 8,965,896 segments. 468,586(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 8,971,283 segments. 468,795(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -386,7 +386,7 @@
 ## nyheter
 |                                                                                         | serie                                 |   programs | segments   |   average(s) |   hours |
 |:----------------------------------------------------------------------------------------|:--------------------------------------|-----------:|:-----------|-------------:|--------:|
-| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5073 | 407,640    |         27.2 |  3076.3 |
+| <img src="https://gfx.nrk.no/1tQDwbH7N6bMzdZGsec6MQpBnpep2CDCb7cJeRTM0U0A" height="48"> | Dagsrevyen                            |       5100 | 409,576    |         27.2 |  3089.3 |
 | <img src="https://gfx.nrk.no/6ImwIAOjeLKEO30KGkDihwAtW9ZdaXCWp7mtyVX-DEig" height="48"> | Distriktsnyheter Oslo og Viken        |       1099 | 26,377     |         21.4 |   156.7 |
 | <img src="https://gfx.nrk.no/8gC4hV1btpJoXBsxhizoTwRMyhJA76K_sO3S0JYJWVKg" height="48"> | Trafikkposten                         |         93 | 5,387      |         15.9 |    23.8 |
 | <img src="https://gfx.nrk.no/9-eicaxbplgGnysGHz5jyABZADiuCsd-XawfwU5GIYAQ" height="48"> | Kveldsnytt                            |       3947 | 134,684    |         25   |   934.3 |
@@ -1491,7 +1491,7 @@
 |:----------------------------------------------------------------------------------------|:------------------------------------|-----------:|:-----------|-------------:|--------:|
 | <img src="https://gfx.nrk.no/-Jtq8zHWGRw3s7WVvV0vWQ5DBpn5JsouucWRkw6_Wmgw" height="48"> | Toppidrettsveka                     |         44 | 5,553      |         28.8 |    44.4 |
 | <img src="https://gfx.nrk.no/-l1LbYETQOYiMu5exsbJzAfdIJElUBoRX0TM_LtIZVng" height="48"> | Blink                               |         70 | 11,941     |         27.1 |    89.9 |
-| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                          |          8 | 1,998      |         11.3 |     6.3 |
+| <img src="https://gfx.nrk.no/0PnvoQmUlc4YzNO4UOOA4g5lCPEgL_-5nlxWp3YIBijg" height="48"> | Sportsåret                          |         21 | 5,449      |         10.2 |    15.5 |
 | <img src="https://gfx.nrk.no/4aXWLklWcqxVkQWtfqO6dgvDS0QQuYhqfC0dlfVLZDlA" height="48"> | Friidrett - VM                      |        154 | 72,899     |         11.7 |   237.9 |
 | <img src="https://gfx.nrk.no/5DyHSn-PWhzeHNSkZktM6gTUX9ZBxwTp5HOIOB6scxOg" height="48"> | Verdens beste landslag              |          4 | 216        |         13.2 |     0.8 |
 | <img src="https://gfx.nrk.no/5fk0bev9Ucv8vv59AnPzzw-7DfgJnjI8qCT-CVqoYSrw" height="48"> | Fotball - NM menn (cupen)           |        220 | 97,026     |          8.3 |   224.7 |
