@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 21,417.1 | 0.0                  |        **21,417.1** |
+| nyheter | 21,439.6 | 0.0                  |        **21,439.6** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 813.9 | 0.0                  |        **813.9** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **33,828.7** | **7,522.3**                  |        **41,351.0** |
+| **total** | **33,851.2** | **7,522.3**                  |        **41,373.5** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 9,303,663 segments. 498,849(5%) longer than 60 seconds (not displayed)</sub>
+* <sub> 9,306,498 segments. 499,286(5%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -399,7 +399,7 @@
 | <img src="https://gfx.nrk.no/S2Nb1MlbbfZU4UkdF46IIAQiS1nGVN2xa3RqUw1MM0KQ" height="48"> | Nyhetsmorgen - TV                     |       1137 | 76,414     |         65.8 |  1396.3 |
 | <img src="https://gfx.nrk.no/SFHU2_2tLiWf1IikofMDEAyNSX8n29dHLYwu9x6jcacA" height="48"> | Distriktsnyheter Vestlandsrevyen      |       4970 | 113,638    |         21.6 |   682.8 |
 | <img src="https://gfx.nrk.no/T-T05llQQgBcmwAv3hGJqwMxXGtnFjdhxKkJOevZX92w" height="48"> | Agnete jienáda/Agnete bruker stemmen  |          5 | 322        |         15.5 |     1.4 |
-| <img src="https://gfx.nrk.no/T1S_bh-WJahb0atZZYdGdw0c4QujTO4SZYFXdesavq0A" height="48"> | Dagsrevyen 21                         |       2560 | 128,313    |         25.1 |   893.1 |
+| <img src="https://gfx.nrk.no/T1S_bh-WJahb0atZZYdGdw0c4QujTO4SZYFXdesavq0A" height="48"> | Dagsrevyen 21                         |       2657 | 131,148    |         25.1 |   915.5 |
 | <img src="https://gfx.nrk.no/WF0SSi2EOv2EO0CF8bQLmQGNu3ZOP9JVjGudILYGQBmA" height="48"> | Distriktsnyheter Møre og Romsdal      |       4944 | 105,711    |         22.3 |   655.2 |
 | <img src="https://gfx.nrk.no/ZIt2RJF76bCqzI71AeR6BwBqKATQqgdztdvCc3KheeCA" height="48"> | Nyhetsåret - TV                       |         29 | 6,303      |         12.8 |    22.5 |
 | <img src="https://gfx.nrk.no/ZbQ9ap2pXjkbfxSYifiYcQ8qNy6y1CXFFcrGPsPYY01g" height="48"> | Kongeparets reise                     |          7 | 259        |          9.6 |     0.7 |
