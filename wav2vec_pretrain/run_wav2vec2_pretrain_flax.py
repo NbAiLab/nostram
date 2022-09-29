@@ -293,6 +293,9 @@ def main():
     # Downloading and loading a dataset from the hub.
     datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name, cache_dir=model_args.cache_dir)
     
+    datasets = datasets.rename_column("audio","speech")
+
+
     if "validation" not in datasets.keys():
         # make sure only "validation" and "train" keys remain"
         datasets = DatasetDict()
@@ -323,8 +326,6 @@ def main():
             split=f"{data_args.train_split_name}",
             cache_dir=model_args.cache_dir,
         )
-        datasets["train"] = datasets["train"][0:1000]
-        datasets["validation"] = datasets["validation"][0:1000]
 
     # only normalized-inputs-training is supported
     feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(
@@ -335,6 +336,7 @@ def main():
         # check that all files have the correct sampling rate
         batch["speech"], _ = librosa.load(batch[data_args.speech_file_column], sr=feature_extractor.sampling_rate)
         return batch
+
 
     # load audio files into numpy arrays
     vectorized_datasets = datasets.map(
@@ -348,6 +350,8 @@ def main():
 
     def normalize(batch):
         return feature_extractor(batch["speech"], sampling_rate=feature_extractor.sampling_rate)
+
+
 
     # normalize and transform to `BatchFeatures`
     vectorized_datasets = vectorized_datasets.map(
