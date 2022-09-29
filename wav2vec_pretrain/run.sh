@@ -9,9 +9,9 @@ python ./run_wav2vec2_pretrain_flax.py \
     --weight_decay="0.01" \
     --warmup_steps="2000" \
     --model_name_or_path=${MODEL_DIR} \
-    --dataset_name="librispeech_asr" \
-    --dataset_config_name="clean" \
-    --train_split_name="train.100" \
+    --dataset_name="common_voice" \
+    --dataset_config_name="as" \
+    --speech_file_column="path" \
     --preprocessing_num_workers="4" \
     --max_duration_in_seconds="10.0" \
     --adam_beta1="0.9" \
