@@ -3,7 +3,7 @@
 | category              | tv   | radio                    |   **total** |
 |:-------------------|-------------:|----------------------------:|---------------------------:|
 | barn | 1,950.3 | 0.0                  |        **1,950.3** |
-| nyheter | 23,250.8 | 0.0                  |        **23,250.8** |
+| nyheter | 23,758.9 | 0.0                  |        **23,758.9** |
 | drama-serier | 572.0 | 0.0                  |        **572.0** |
 | dokumentar | 813.9 | 0.0                  |        **813.9** |
 | humor | 372.3 | 0.0                  |        **372.3** |
@@ -35,14 +35,14 @@
 | Radioteater | 0.0 | 31.4                  |        **31.4** |
 | Vitenskap | 0.0 | 29.3                  |        **29.3** |
 | kvensk | 1.6 | 0.0                  |        **1.6** |
-| **total** | **35,662.4** | **7,522.3**                  |        **43,184.7** |
+| **total** | **36,170.5** | **7,522.3**                  |        **43,692.8** |
 
 
 
 ## Sequence Length
 
 <img src="images/histogram.png">
-* <sub> 9,439,453 segments. 529,811(6%) longer than 60 seconds (not displayed)</sub>
+* <sub> 9,493,450 segments. 537,768(6%) longer than 60 seconds (not displayed)</sub>
 
 ## barn
 |                                                                                         | serie                                            |   programs | segments   |   average(s) |   hours |
@@ -413,7 +413,7 @@
 | <img src="https://gfx.nrk.no/itQwfRvpFU8-4vVAtiGWDQDjbUxem7BemjLXMWj4zRvQ" height="48"> | Kongefamilien                         |         66 | 11,951     |         10.2 |    33.7 |
 | <img src="https://gfx.nrk.no/k59qjgC0MsoxK1oLs3yRwAXoLhY6Q1LGCUKGsLTa7APw" height="48"> | Distriktsnyheter Vestfold og Telemark |       1091 | 22,989     |         25.6 |   163.5 |
 | <img src="https://gfx.nrk.no/ld_68pXR4PcerFYAdOENkAG1ItKu7rLarNk00MwHGOXg" height="48"> | Politisk kvarter - TV                 |       1724 | 11,591     |        132.8 |   427.6 |
-| <img src="https://gfx.nrk.no/o5INCh_lbOkXw4LP4p2bJwLzOw1TcYyCbodCQ7n9bSvw" height="48"> | NRK Nyheter                           |      13602 | 492,028    |         31.5 |  4298.6 |
+| <img src="https://gfx.nrk.no/o5INCh_lbOkXw4LP4p2bJwLzOw1TcYyCbodCQ7n9bSvw" height="48"> | NRK Nyheter                           |      14977 | 546,025    |         31.7 |  4806.7 |
 | <img src="https://gfx.nrk.no/wQ4Ltlts1tdMmOCKlbV35wCct2HiPR8ZDkiq-5udzOpw" height="48"> | Distriktsnyheter Nordland             |       4960 | 105,862    |         22.8 |   670.2 |
 | <img src="https://gfx.nrk.no/xEbKR8-Oni5B6bT2LZCBDA5WOZiAaDAt9M9mrElDWaFw" height="48"> | Heia Norge                            |        161 | 19,204     |          7.5 |    39.9 |
 | <img src="https://gfx.nrk.no/xVhKY-rHygwrxbV8tRgeyQMCyOt3EisGKhXB3fSZBpbQ" height="48"> | Distriktsnyheter Nordnytt             |       4942 | 100,539    |         24.2 |   677.1 |
