@@ -16,6 +16,7 @@ If the script can cause unnessasary load on other systems, it is recommended to 
 
 ```python
 import time
+
 time.sleep(0.1) 
 ````
 
