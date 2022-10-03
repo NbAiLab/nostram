@@ -18,7 +18,7 @@ def main(args):
     data = pd.read_json(target_file, lines=True) # read data frame from json file
     
     ## Lets just work with part of the data
-    data = data.sample(n=10)
+    data = data.sample(n=100)
     result = pd.DataFrame()
 
     for index, row in data.iterrows():
