@@ -1,5 +1,5 @@
 # User Agent Policy
-All data collection in the project should be done as openly as absolutely possible. All requests should respect robots.txt-policies, and also identify the agent according to recommended standards. Below is the standard http-header that should be included in all requests:
+All data collection in the project should be done as openly as absolutely possible. All requests should respect robots.txt-policies, and also identify the agent according to recommended standards. Below is the standard http-header that is recommented for all requests:
 
 ```python
 import requests
