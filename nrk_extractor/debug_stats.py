@@ -16,6 +16,9 @@ def main(args):
     target_file = os.path.join(args.directory,'process_list/','tv.json')
     
     data = pd.read_json(target_file, lines=True) # read data frame from json file
+    
+    ## Lets just work with part of the data
+    data = data.sample(n=100)
 
     breakpoint()
 
