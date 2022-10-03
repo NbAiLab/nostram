@@ -63,7 +63,7 @@ def main(args):
     
 
     with open('debug_stats.md', 'w') as f:
-        f.write(result.to_markdown(index=False))
+        f.write(result.to_markdown(index=True))
     
     print(result[0:10])
     print("The complete file is written to debug_stats.md")
