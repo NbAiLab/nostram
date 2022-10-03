@@ -18,27 +18,55 @@ def main(args):
     data = pd.read_json(target_file, lines=True) # read data frame from json file
     
     ## Lets just work with part of the data
-    data = data.sample(n=100)
+    data = data.sample(n=10)
+    result = pd.DataFrame()
 
     for index, row in data.iterrows():
-        print(f"\n{row['episode_id']} - {row['serie_title']} - {row['title']}")
-        print(f"https://tv.nrk.no/se?v={row['episode_id']}")
+        #print(f"\n{row['episode_id']} - {row['serie_title']} - {row['title']}")
+        #print(f"https://tv.nrk.no/se?v={row['episode_id']}")
         audio = os.path.join(args.directory,'audio/',row['episode_id']+".mp4")
         vtt_ttv = os.path.join(args.directory,'vtt_ttv/',row['episode_id']+ ".vtt")
         vtt_nor = os.path.join(args.directory,'vtt_nor/',row['episode_id']+ ".vtt")
         manifest = os.path.join(args.directory,'manifest/',row['episode_id']+ "_manifest.json") 
-        breakpoint()
-
-        manifest_json = json.loads(manifest)
         
-        for n,f in zip(["audio","manifest","vtt_ttv","vtt_nor"],[audio,manifest,vtt_ttv,vtt_nor]):
+        i = 0
+        status = {}
+        for name,f in zip(["audio","vtt_ttv","vtt_nor"],[audio,vtt_ttv,vtt_nor, manifest]):
+            i += 1
+            
             if os.path.isfile(f):
-                print(f"{n} is OK")
+                #print(f"{name} is OK")
+                status[name] = "OK"
+
             else:
-                print(f"No {n}")
+                #print(f"No {name}")
+                status[name] = "-"
         
+        #Check Manifest file and count references
+        
+        try:
+            f = open(manifest, encoding = 'utf-8')
+            manifest_json = json.load(f)
+            vtt_ref = manifest_json['playable'].get('subtitles','')
 
+            #print(f"Manifest subtitles: {vtt_ref}")
+            status['manifest'] = str(len(vtt_ref))
+        except:
+            #print(f"No manifest")
+            status['manifest'] = "-"
+        finally:
+            f.close()
 
+        # Add the row to the dataset
+        this_result = pd.DataFrame({'SerieTitle': [row['serie_title']],'Title' : [row['title']],'Play' : [f"[{row['episode_id']}](https://tv.nrk.no/se?v={row['episode_id']})"],'Audio': [status['audio']],'VTT-TTV' : [status['vtt_ttv']],'VTT-NOR' : [status['vtt_nor']],'Manifest': [status['manifest']]})
+        result = pd.concat([result, this_result], ignore_index = True, axis = 0)
+    
+
+    with open('debug_stats.md', 'w') as f:
+        f.write(status.to_markdown(index=False))
+    
+    print(result[0:10])
+    print("The complete file is written to debug_stats.md")
 
 def parse_args():
     # Parse commandline
