@@ -58,7 +58,7 @@ def main(args):
             f.close()
 
         # Add the row to the dataset
-        this_result = pd.DataFrame({'SerieTitle': [row['serie_title']],'Title' : [row['title']],'Play' : [f"[{row['episode_id']}](https://tv.nrk.no/se?v={row['episode_id']})"],'Audio': [status['audio']],'VTT-TTV' : [status['vtt_ttv']],'VTT-NOR' : [status['vtt_nor']],'Manifest': [status['manifest']]})
+        this_result = pd.DataFrame({'SerieTitle': [row['serie_title']],'Title' : [row['title']],'Play' : [f"[{row['episode_id']}](https://tv.nrk.no/se?v={row['episode_id']})"],'VTT-TTV' : [status['vtt_ttv']],'VTT-NOR' : [status['vtt_nor']],'Manifest': [status['manifest']]})
         result = pd.concat([result, this_result], ignore_index = True, axis = 0)
     
 
