@@ -1,0 +1,207 @@
+    1  ls
+    2  git clone --branch=main https://github.com/google-research/t5x && python3 -m pip install -e 't5x/.[tpu]' -f   https://storage.googleapis.com/jax-releases/libtpu_releases.html && sudo pip uninstall jax jaxlib libtpu-nightly libtpu libtpu-tpuv4 -y && pip install -U pip && pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html && sudo apt-get update && sudo apt install git-lfs && git config --global user.email "per@capia.no" && git config --global user.name "Per Egil Kummervold" && git config --global credential.helper store &&
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && git clone https://huggingface.co/pere/eu-jav-categorisation models/eu-jav-categorisation && git clone https://huggingface.co/pere/pk-nb-t5x models/pk-nb-t5x && git clone https://huggingface.co/pere/eu-jav-pretrain models/eu-jav-pretrain && git clone https://huggingface.co/pere/t5-nynorsk-oversetter models/t5-nynorsk-oversetter && git clone https://huggingface.co/pere/t5x-scandeval-finetuning models/t5x-scandeval-finetuning && git clone https://huggingface.co/pere/t5-parliament-categorisation models/t5-parliament-categorisation && pip install datasets &&
+echo "export PATH='~/.local/bin:$PATH'" >> ~/.bashrc && source ~/.bashrc &&
+printf "1\nnancy-194708\nY\nus-central2-b\n" | gcloud init &&
+python -c "from huggingface_hub.hf_api import HfFolder; HfFolder.save_token('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')" &&
+git lfs install && cd models/pk-nb-t5x &&
+    3  git clone --branch=main https://github.com/google-research/t5x && python3 -m pip install -e 't5x/.[tpu]' -f   https://storage.googleapis.com/jax-releases/libtpu_releases.html && sudo pip uninstall jax jaxlib libtpu-nightly libtpu libtpu-tpuv4 -y && pip install -U pip && pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html && sudo apt-get update && sudo apt install git-lfs && git config --global user.email "per@capia.no" && git config --global user.name "Per Egil Kummervold" && git config --global credential.helper store && sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && git clone https://huggingface.co/pere/eu-jav-categorisation models/eu-jav-categorisation && git clone https://huggingface.co/pere/pk-nb-t5x models/pk-nb-t5x && git clone https://huggingface.co/pere/eu-jav-pretrain models/eu-jav-pretrain && git clone https://huggingface.co/pere/t5-nynorsk-oversetter models/t5-nynorsk-oversetter && git clone https://huggingface.co/pere/t5x-scandeval-finetuning models/t5x-scandeval-finetuning && git clone https://huggingface.co/pere/t5-parliament-categorisation models/t5-parliament-categorisation && pip install datasets && echo "export PATH='~/.local/bin:$PATH'" >> ~/.bashrc && source ~/.bashrc && printf "1\nnancy-194708\nY\nus-central2-b\n" | gcloud init && python -c "from huggingface_hub.hf_api import HfFolder; HfFolder.save_token('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')" && git lfs install && cd models/pk-nb-t5x
+    4  ls
+    5  cd ..
+    6  ls
+    7  git clone https://huggingface.co/flax-community/wav2vec2-spanish
+    8  ls
+    9  cd wav2vec2-spanish/
+   10  ls
+   11  vim run_wav2vec2_pretrain_flax.py 
+   12  vim train.sh 
+   13  df
+   14  df -h
+   15  ls
+   16  vim train.sh 
+   17  vim run_wav2vec2_pretrain_flax.py 
+   18  sh train.sh 
+   19  pip install -r requirements.txt 
+   20  sh train.sh 
+   21  pip install torchaudio
+   22  sh train.sh 
+   23  pip install soundfile
+   24  apt-get install soundfile
+   25  sudo apt-get install libsndfile1
+   26  sh train.sh 
+   27  pip install torchaudio
+   28  jax
+   29  python
+   30  pip install torch=="1.8.1" --force
+   31  sh train.sh 
+   32  pip install numpy==1.22.0 --force
+   33  sh train.sh 
+   34  pip install torchaudio -U
+   35  sh train.sh 
+   36  pip install torch=="1.8.1" --force
+   37  cat requirements.txt 
+   38  pip install torch  torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+   39  sh train.sh 
+   40  pip install numpy==1.22.0 --force
+   41  sh train.sh 
+   42  pythonv -m venv venv
+   43  python -m venv venv
+   44  sudo apt install python3.8-venv
+   45  python -m venv venv
+   46  source venv/bin/activate
+   47  pip install torch  torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+   48  python
+   49  cat requirements.txt 
+   50  ffmpeg
+   51  sudo apt install ffmpeg
+   52  pip install numpy
+   53  python
+   54  pip install -r requirements.txt 
+   55  python
+   56  pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
+   57  sh train.sh 
+   58  nano train.sh 
+   59  nano run_wav2vec2_pretrain_flax.py 
+   60  sh train.sh 
+   61  vim run_wav2vec2_pretrain_flax.py 
+   62  sh train.sh 
+   63  vim run_wav2vec2_pretrain_flax.py 
+   64  sh train.sh 
+   65  python
+   66  vim run_wav2vec2_pretrain_flax.py 
+   67  sh train.sh 
+   68  vim run_wav2vec2_pretrain_flax.py 
+   69  sh train.sh 
+   70  vim run_wav2vec2_pretrain_flax.py 
+   71  sh train.sh 
+   72  vim run_wav2vec2_pretrain_flax.py 
+   73  sh train.sh 
+   74  cd ..
+   75  git clone https://github.com/NbAiLab/nostram.git
+   76  cd nostram/
+   77  ls
+   78  mkdir wav2vec_pretrain
+   79  cd wav2vec_pretrain/
+   80  wget https://raw.githubusercontent.com/huggingface/transformers/main/examples/research_projects/jax-projects/wav2vec2/run_wav2vec2_pretrain_flax.py
+   81  ls
+   82  sh run.sh
+   83  vim run.sh
+   84  sh run.sh 
+   85  ls
+   86  vim run.sh 
+   87  sh run.sh 
+   88  cd ..
+   89  ls
+   90  rm -rf wav2vec2-spanish/
+   91  df
+   92  df -h
+   93  cd nostram/wav2vec_pretrain/
+   94  sh run.sh 
+   95  pip freeze | grep torch
+   96  pip list
+   97  pip
+   98  deactivate 
+   99  sh run.sh 
+  100  pip freeze | grep torch
+  101  pip install torch==1.12.1 https://storage.googleapis.com/tpu-pytorch/wheels/colab/torch_xla-1.12-cp37-cp37m-linux_x86_64.whl
+  102  pip install wheel
+  103  pip install torch==1.12.1 https://storage.googleapis.com/tpu-pytorch/wheels/colab/torch_xla-1.12-cp37-cp37m-linux_x86_64.whl
+  104  pip install torch==1.12.1 https://storage.googleapis.com/tpu-pytorch/wheels/colab/torch_xla-1.12-cp37-cp37m-linux_x86_64.whl --user
+  105  ls
+  106  cd ..
+  107  ls
+  108  python -m venv venv
+  109  source venv/bin/activate
+  110  pip install torch==1.12.1 https://storage.googleapis.com/tpu-pytorch/wheels/colab/torch_xla-1.12-cp37-cp37m-linux_x86_64.whl --user
+  111  pip install torch==1.12.1 https://storage.googleapis.com/tpu-pytorch/wheels/colab/torch_xla-1.12-cp37-cp37m-linux_x86_64.whl 
+  112  pip install torch  torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+  113  pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
+  114  sh run.sh 
+  115  cd wav2vec_pretrain/
+  116  sh run.sh 
+  117  pip install transformers datasets
+  118  sh run.sh 
+  119  pip install flax
+  120  sh run.sh 
+  121  pip install librosa soundfile
+  122  sh run.sh 
+  123  df -h
+  124  vim run_wav2vec2_pretrain_flax.py 
+  125  sh run.sh 
+  126  ls
+  127  cd ..
+  128  ls
+  129  df -h
+  130  cd ..
+  131  ls -la .
+  132  du -h .
+  133  du -hS .
+  134  ls
+  135  rm -rf .cache/
+  136  rm -rf .huggingface/
+  137  cd models/nostram/wav2vec_pretrain/
+  138  sh run.sh 
+  139  cat run.sh 
+  140  vim run.sh 
+  141  grep train_split_name *.*
+  142  vim run.sh 
+  143  cp run.sh run_backup.sh
+  144  vim run.sh 
+  145  git lfs track "*tfevents*"
+  146  python
+  147  ls
+  148  git add .
+  149  git commit -m "first submit"
+  150  git push
+  151  cd ..
+  152  git pull
+  153  git push
+  154  vim run.sh 
+  155  cd wav2vec_pretrain/
+  156  vim run.sh 
+  157  sh run.sh 
+  158  vim run.sh 
+  159  sh run.sh 
+  160  vim run.sh 
+  161  sh run.sh 
+  162  ls
+  163  cp wav2vec_pretrain/*.* .
+  164  rm -rf wav2vec_pretrain/
+  165  sh run.sh 
+  166  vim run_wav2vec2_pretrain_flax.py 
+  167  sh run.sh 
+  168  vim run_wav2vec2_pretrain_flax.py 
+  169  sh run.sh 
+  170  vim run_wav2vec2_pretrain_flax.py 
+  171  sh run.sh 
+  172  vim run_wav2vec2_pretrain_flax.py 
+  173  sh run.sh 
+  174  vim run_wav2vec2_pretrain_flax.py 
+  175  ls
+  176  cat run_backup.sh 
+  177  grep speech_file *.*
+  178  vim run_wav2vec2_pretrain_flax.py 
+  179  cat run_backup.sh 
+  180  sh run.sh 
+  181  vim run_wav2vec2_pretrain_flax.py 
+  182  sh run.sh 
+  183  vim run.sh 
+  184  sh run.sh 
+  185  vim run_wav2vec2_pretrain_flax.py 
+  186  sh run.sh 
+  187  vim run_wav2vec2_pretrain_flax.py 
+  188  vim run.sh 
+  189  vim run_wav2vec2_pretrain_flax.py 
+  190  sh run.sh 
+  191  vim run_wav2vec2_pretrain_flax.py 
+  192  sh run.sh 
+  193  git add .
+  194  git commit -m "small updates"
+  195  git push
+  196  git add .
+  197  git commit -m "final from workshop"
+  198  git push
+  199  git pull
+  200  git push
+  201  history
+  202  history > history.txt
