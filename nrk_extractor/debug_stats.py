@@ -20,7 +20,24 @@ def main(args):
     ## Lets just work with part of the data
     data = data.sample(n=100)
 
-    breakpoint()
+    for index, row in data.iterrows():
+        print(f"\n{row['episode_id']} - {row['serie_title']} - {row['title']}")
+        print(f"https://tv.nrk.no/se?v={row['episode_id']}")
+        audio = os.path.join(args.directory,'audio/',row['episode_id']+".mp4")
+        vtt_ttv = os.path.join(args.directory,'vtt_ttv/',row['episode_id']+ ".vtt")
+        vtt_nor = os.path.join(args.directory,'vtt_nor/',row['episode_id']+ ".vtt")
+        manifest = os.path.join(args.directory,'manifest/',row['episode_id']+ "_manifest.json") 
+        breakpoint()
+
+        manifest_json = json.loads(manifest)
+        
+        for n,f in zip(["audio","manifest","vtt_ttv","vtt_nor"],[audio,manifest,vtt_ttv,vtt_nor]):
+            if os.path.isfile(f):
+                print(f"{n} is OK")
+            else:
+                print(f"No {n}")
+        
+
 
 
 def parse_args():
