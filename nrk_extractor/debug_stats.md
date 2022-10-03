@@ -1,0 +1,12 @@
+| SerieTitle                 | Title                                             | Play                                                | Audio   | VTT-TTV   | VTT-NOR   | Manifest   |
+|:---------------------------|:--------------------------------------------------|:----------------------------------------------------|:--------|:----------|:----------|:-----------|
+| Distriktsnyheter Innlandet | 21. mai 2012 kl. 20:55 – Distriktsnyheter Østnytt | [DKOP98052112](https://tv.nrk.no/se?v=DKOP98052112) | OK      | -         | -         | 0          |
+| Kveldsnytt                 | 20. desember 2013                                 | [NNFA23122013](https://tv.nrk.no/se?v=NNFA23122013) | OK      | -         | -         | -          |
+| Ut i naturen               | Veiviseren i villmarka                            | [PRNA20001107](https://tv.nrk.no/se?v=PRNA20001107) | OK      | -         | -         | -          |
+| NRK Nyheter                | 9. sep. 2015 kl. 12:00                            | [NNFA12090915](https://tv.nrk.no/se?v=NNFA12090915) | OK      | -         | -         | -          |
+| Distriktsnyheter Midtnytt  | 13. sep. 2018 kl. 23:00                           | [DKTL97091318](https://tv.nrk.no/se?v=DKTL97091318) | OK      | -         | -         | 0          |
+| Supernytt                  | 11. september 2013                                | [MSUB02013013](https://tv.nrk.no/se?v=MSUB02013013) | OK      | OK        | -         | 1          |
+| Dagsrevyen                 | 14. februar 2017                                  | [NNFA19021417](https://tv.nrk.no/se?v=NNFA19021417) | OK      | -         | -         | -          |
+| NRK Nyheter                | 24. jan. kl. 12:00                                | [NNFA12012422](https://tv.nrk.no/se?v=NNFA12012422) | OK      | -         | -         | -          |
+| Familien Larkin            | 4. Nede på stasjonen                              | [KOIF12004921](https://tv.nrk.no/se?v=KOIF12004921) | OK      | -         | OK        | 1          |
+| Distriktsnyheter Sørlandet | 23. juni 2016 kl. 20:55                           | [DKSL98062316](https://tv.nrk.no/se?v=DKSL98062316) | OK      | -         | -         | 0          |
