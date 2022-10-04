@@ -1,12 +1,12 @@
 # User Agent Policy
-All data collection in the project should be done as openly as absolutely possible. All requests should respect robots.txt-policies, and also identify the agent according to recommended standards. Below is the standard http-header for all requests. Feel free to use your own email address if you want to be contacted directly:
+All data collection in the project should be done as openly as absolutely possible. All requests should respect robots.txt-policies, and also identify the agent according to recommended standards. Below is the standard http-header for all requests:
 
 ```python
 import requests
 
 headers = {
     'User-Agent': 'National Library of Norway - AiLab - NoSTraM Project - User Agent v 1.0',
-    'From': 'per.kummervold@nb.no' 
+    'From': 'ai-lab@nb.no' 
     }
 
 response = requests.get(url, headers=headers)
