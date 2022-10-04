@@ -5,7 +5,7 @@ All data collection in the project should be done as openly as absolutely possib
 import requests
 
 headers = {
-    'User-Agent': 'National Library of Norway - AiLab - NoSTraM Project - User Agent v 1.0',
+    'User-Agent': 'National Library of Norway - AiLab - NoSTraM Project - User Agent v1.0',
     'From': 'ai-lab@nb.no' 
     }
 
