@@ -4,18 +4,18 @@ All data collection in the project should be done as openly as absolutely possib
 ```python
 import requests
 
-headers = {
+HEADERS = {
     'User-Agent': 'National Library of Norway - AiLab - NoSTraM Project - User Agent v1.0',
     'From': 'ai-lab@nb.no' 
-    }
+}
 
 # Then use one of the methods below:
-response = requests.get(url, headers=headers)
+response = requests.get(url, headers=HEADERS)
 
 # Or
 with requests.Session() as session:
     session.headers.update(HEADERS)
-    session.get(...)
+    session.get(url)
 
 
 ```
