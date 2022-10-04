@@ -9,7 +9,15 @@ headers = {
     'From': 'ai-lab@nb.no' 
     }
 
+# Then use one of the methods below:
 response = requests.get(url, headers=headers)
+
+# Or
+with requests.Session() as session:
+    session.headers.update(HEADERS)
+    session.get(...)
+
+
 ```
 
 If the script can cause unnessasary load on other systems, it is recommended to add a small delay between each request:
