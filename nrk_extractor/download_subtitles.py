@@ -7,20 +7,31 @@ import os
 
 from tqdm import tqdm
 
+HEADERS = {
+    'User-Agent': 'National Library of Norway - AiLab - NoSTraM Procect - User Agent v 1.0',
+    'From': 'ai-lab@nb.no'
+}
+
 
 def main(tv_json, vtt_folder, manifest_folder):
     with requests.Session() as session:
+        session.headers.update(HEADERS)
         with open(tv_json) as tv:
 
             # Helper function for threading
             def handle(episode_id):
                 manifest_path = os.path.join(manifest_folder, f"{episode_id}_manifest.json")
 
-                if os.path.isfile(manifest_path):  # No need to redo the request, just load the file
+                exists = os.path.isfile(manifest_path)
+                if exists:  # No need to redo the request, just load the file
                     with open(manifest_path, "r") as f:
-                        manifest = json.load(f)
+                        try:
+                            manifest = json.load(f)
+                        except json.JSONDecodeError:
+                            manifest = {}
                 else:
-                    manifest = session.get(f"https://psapi.nrk.no/playback/manifest/program/{episode_id}").json()
+                    resp = session.get(f"https://psapi.nrk.no/playback/manifest/program/{episode_id}")
+                    manifest = resp.json()
                     if isinstance(manifest, dict) and manifest_folder is not None:
                         with open(manifest_path, "w") as out:
                             json.dump(manifest, out)
@@ -28,7 +39,12 @@ def main(tv_json, vtt_folder, manifest_folder):
                 # Sometimes subtitles may be missing, producing different errors depending on the format
                 try:
                     subtitles = manifest["playable"]["subtitles"]
-                except (AttributeError, KeyError, TypeError):
+                except (AttributeError, KeyError, TypeError) as error:
+                    if exists:  # Existed before
+                        os.remove(manifest_path)
+                        handle(episode_id)
+                    else:
+                        it.set_postfix_str(f"{episode_id=}, {error=}")
                     return
 
                 for subtitle_info in subtitles:
@@ -52,10 +68,10 @@ def main(tv_json, vtt_folder, manifest_folder):
                     it.set_postfix_str(f"{episode_id=}, {subtitle_code=}")
 
             episode_ids = sorted(set(json.loads(line)["episode_id"] for line in tv))
-            with ThreadPoolExecutor(6) as ex:  # Makes everything way faster
-                it = tqdm("Episodes processed", total=len(episode_ids))
-                for _ in zip(it, ex.map(handle, episode_ids)):
-                    pass
+            # Makes everything way faster
+            it = tqdm(episode_ids, "Episodes processed")
+            for ep_id in it:
+                handle(ep_id)
 
 
 if __name__ == '__main__':
