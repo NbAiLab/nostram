@@ -8,11 +8,14 @@ import pandas as pd
 import glob
 import urllib.request
 
+
 ###################################################
 # Debug script made for detecting missing subtitles
 ###################################################
 
+
 def main(args):
+    
     target_file = os.path.join(args.directory,'process_list/','tv.json')
     
     data = pd.read_json(target_file, lines=True) # read data frame from json file
