@@ -8,7 +8,7 @@ import os
 from tqdm import tqdm
 
 HEADERS = {
-    'User-Agent': 'National Library of Norway - AiLab - NoSTraM Procect - User Agent v 1.0',
+    'User-Agent': 'National Library of Norway - AiLab - NoSTraM Project - User Agent v 1.0',
     'From': 'ai-lab@nb.no'
 }
 
