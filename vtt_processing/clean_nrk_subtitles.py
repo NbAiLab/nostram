@@ -9,7 +9,7 @@ import pandas as pd
 from tqdm import tqdm
 
 VTT_SPLIT_PATTERN = re.compile(
-    r"\n(\d+)\n(-?\d+):(-?\d\d):(-?\d\d)\.(-?\d{3}) ?--> ?(-?\d+):(-?\d\d):(-?\d\d)\.(-?\d{3})")
+    r"\n(\d+)\n(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3}) ?--> ?(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3})")
 
 
 @dataclass
