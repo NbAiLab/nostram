@@ -20,6 +20,7 @@ def main(args):
 
         #with open(output_filename, 'w', encoding='utf-8') as file:
         #    data.to_json(output_filename,force_ascii=False,orient="records",lines=True)
+        output_filename = f.replace(args.directory,args.output_directory)
 
 def parse_args():
     # Parse commandline
