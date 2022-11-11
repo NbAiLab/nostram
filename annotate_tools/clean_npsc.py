@@ -5,7 +5,6 @@ from argparse import ArgumentParser
 import glob
 import os
 import re 
-from transformers import pipeline, T5ForConditionalGeneration, AutoTokenizer
 
 def main(args):
 
@@ -15,12 +14,14 @@ def main(args):
         data = pd.DataFrame()
         data = pd.read_json(f, lines=True,orient='records')
         
+        breakpoint()
+
+        output_filename = f.replace(args.directory,args.output_directory)
         
         print(f"Starting to write: {output_filename}")
 
         #with open(output_filename, 'w', encoding='utf-8') as file:
         #    data.to_json(output_filename,force_ascii=False,orient="records",lines=True)
-        output_filename = f.replace(args.directory,args.output_directory)
 
 def parse_args():
     # Parse commandline
