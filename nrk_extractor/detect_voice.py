@@ -35,7 +35,6 @@ class Frame(object):
 
 
 class VoiceDetector:
-
     def __init__(self, output_dir=None, method=None):
 
         self.is_tmp = False

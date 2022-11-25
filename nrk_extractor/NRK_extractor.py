@@ -319,7 +319,10 @@ class NRKExtractor():
 
     def resync(self, audiofile, subtitles, options, max_gap_s=0.5):
 
-        detector = VoiceDetector(audiofile)
+        detector = VoiceDetector('silero')
+        
+        detector.select_sourcefile(audiofile)
+        
         segments = detector.analyze(aggressive=options.aggressive,
                                     max_pause=float(options.max_pause),
                                     max_segment_length=float(options.max_segment_length))
@@ -454,7 +457,7 @@ if __name__ == "__main__":
         next_id = None
 
     else:
-        #If not all 
+        #If not all
         info = extractor.dump_at(options.src, options.dst)
 
         try:
