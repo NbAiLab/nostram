@@ -86,7 +86,7 @@ class VoiceDetector:
         frames = self.frame_generator(frame_length, audio, sample_rate)
         frames = list(frames)
         segments = self.vad_collector(sample_rate, frame_length, 3, vad, frames,
-                                      output_dir=self.output_dir,
+                                      output_dir=None,
                                       max_segment_length=max_segment_length,
                                       max_pause=max_pause)
         return segments
@@ -157,7 +157,8 @@ class VoiceDetector:
                       output_dir=None, max_segment_length=None, max_pause=0):
         """
         If output dir is given, speech audio segments are saved there
-        """
+        """        
+        
         triggered = False
         segments = []
         voiced_frames = []
@@ -213,6 +214,7 @@ class VoiceDetector:
 
                 # Save the audio segment if requested
                 if output_dir:
+                    print("hhhh")
                     # target = os.path.join(output_dir, "segment_%08d.wav" % idx)
                     with wave.open(target, "w") as target_f:
                         target_f.setnchannels(1)
