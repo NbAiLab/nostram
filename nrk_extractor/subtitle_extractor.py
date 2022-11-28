@@ -24,6 +24,8 @@ from argparse import ArgumentParser
 from detect_voice import VoiceDetector
 from sub_parser import SubParser
 from fetch_episodes import episodefetcher
+import glob
+from tqdm import tqdm
 
 """
 META: https://psapi.nrk.no/programs/PRHO04004903
@@ -451,7 +453,10 @@ class NRKExtractor():
 if __name__ == "__main__":
 
     parser = ArgumentParser()
-    parser.add_argument("-s", "--source", dest="src", help="Source url or NRK program ID", required=True)
+    
+    parser.add_argument("-f", "--flist", dest="flist", help="Processes all files in vtt folder. Set to True to process", default=False)
+    
+    parser.add_argument("-s", "--source", dest="src", help="Source url or NRK program ID")
 
     parser.add_argument("-d", "--destination", dest="dst",
                         help="Destination folder (new subfolder will be made)",
@@ -502,33 +507,39 @@ if __name__ == "__main__":
         #print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
-    if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
-        print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
+    if options.flist=="True" or options.flist=="1":
+        dir_path = f'{options.dst}/{options.vtt_folder}/*.vtt'
+        res = glob.glob(dir_path)
+        for f in tqdm(res):
+            options.src = os.path.basename(f).replace(".vtt","")
         
-    else:
-        print("\n\n* Preparing to process "+options.src)
+            if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
+                print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
+                
+            else:
+                print("\n\n* Preparing to process "+options.src)
 
-        if options.all_episodes and int(options.num_episodes)>1:
-            print("Please do not use the -r and the -t option together.")
-            raise SystemExit(0)
+                if options.all_episodes and int(options.num_episodes)>1:
+                    print("Please do not use the -r and the -t option together.")
+                    raise SystemExit(0)
 
-        if options.all_episodes:
-            ef=episodefetcher()
-            ef.episodebuilder(options.src)
-            
-            for i in ef.episodegenerator():
-                info = extractor.dump_at(i, options.dst)
-            
-            next_id = None
+                if options.all_episodes:
+                    ef=episodefetcher()
+                    ef.episodebuilder(options.src)
+                    
+                    for i in ef.episodegenerator():
+                        info = extractor.dump_at(i, options.dst)
+                    
+                    next_id = None
 
-        else:
-            #If not all
-            info = extractor.dump_at(options.src, options.dst)
+                else:
+                    #If not all
+                    info = extractor.dump_at(options.src, options.dst)
 
-            try:
-                next_id = info["info"]["_embedded"]["next"]["id"]
-                for i in range(1, int(options.num_episodes)):
-                    info = extractor.dump_at(next_id, options.dst)
-                    next_id = info["info"]["_embedded"]["next"]["id"]
-            except Exception:
-                next_id = None        
+                    try:
+                        next_id = info["info"]["_embedded"]["next"]["id"]
+                        for i in range(1, int(options.num_episodes)):
+                            info = extractor.dump_at(next_id, options.dst)
+                            next_id = info["info"]["_embedded"]["next"]["id"]
+                    except Exception:
+                        next_id = None        
