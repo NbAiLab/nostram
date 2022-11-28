@@ -59,13 +59,24 @@ class NRKExtractor():
             "id": id
         }
 
-        # Fetch the info blob
-        murl = "https://psapi.nrk.no/playback/metadata/program/%s?eea-portability=true" % id
-        r = requests.get(murl)
-        if r.status_code != 200:
-            raise Exception("Failed to load metadata from '%s'" % murl)
-        #print(r.json()["vtt"])
-        res["info"] = json.loads(r.text)
+        if info not extists:
+            # Fetch the info blob
+            murl = "https://psapi.nrk.no/playback/metadata/program/%s?eea-portability=true" % id
+            r = requests.get(murl)
+            
+            if r.status_code != 200:
+                raise Exception("Failed to load metadata from '%s'" % murl)
+            #print(r.json()["vtt"])
+            res["info"] = json.loads(r.text)
+
+            save info/ID_info.json
+        else:
+            load info
+            manifest/ID_info.json
+                        
+        
+        
+        breakpoint()
         
         #Set medium
         ef=episodefetcher()
@@ -182,8 +193,8 @@ class NRKExtractor():
         if not os.path.exists(target_dir+"/mp4"):
             os.makedirs(target_dir+"/mp4")
         
-        if not os.path.exists(target_dir+"/vtt"):
-            os.makedirs(target_dir+"/vtt")
+        if not os.path.exists(target_dir+"/"+self.vtt_folder):
+            os.makedirs(target_dir+"/"+self.vtt_folder)
         
         if not os.path.exists(target_dir+"/subtitles"):
             os.makedirs(target_dir+"/subtitles")
@@ -191,9 +202,14 @@ class NRKExtractor():
         if not os.path.exists(target_dir+"/segments"):
             os.makedirs(target_dir+"/segments")
 
+        if not os.path.exists(target_dir+"/manifest"):
+            os.makedirs(target_dir+"/manifest")
 
+        if not os.path.exists(target_dir+"/info"):
+            os.makedirs(target_dir+"/info")
+            
         target_audio = os.path.join(target_dir+"/mp4", "%s.mp4" % id)
-        target_vtt = os.path.join(target_dir+"/vtt", "%s.vtt" % id)
+        target_vtt = os.path.join(target_dir+"/"+self.vtt_folder, "%s.vtt" % id)
 
         self.extract_audio(info, target_audio)
         self.extract_vtt(info, target_vtt)
@@ -204,6 +220,7 @@ class NRKExtractor():
         info["audio"] = target_audio
         info["subtitles"] = target_vtt
         info["elapsed"] = elapsed
+        info["vtt_folder"] = self.vtt_folder
 
         #print("Audio file", info["audio"])
         #print("Subtitle file", info["subtitles"])
@@ -371,7 +388,8 @@ class NRKExtractor():
                     "on_demand_to":info["info"]["availability"]["onDemand"]["to"],
                     "external_embedding_allowed":info["info"]["availability"]['externalEmbeddingAllowed'],
                     "subtitle": info["info"]["preplay"]["titles"]["subtitle"],
-                    "audio": {"path": info["audio"]}
+                    "audio": {"path": info["audio"]},
+                    "vtt_folder": info["vtt_folder"]
                 }
             return entry
 
@@ -390,6 +408,8 @@ class NRKExtractor():
                 sub = {"subtitle_text": item["text"].replace("<br>", "\n")}
                 entry = {**entry,**sub}
                 f.write(json.dumps(entry) + "\n")
+        
+    vtt_folder = "vtt"
 
 
 if __name__ == "__main__":
@@ -399,7 +419,11 @@ if __name__ == "__main__":
 
     parser.add_argument("-d", "--destination", dest="dst",
                         help="Destination folder (new subfolder will be made)",
+
                         default="/data/nrk/")
+    parser.add_argument("-v", "--vtt_folder", dest="vtt_folder",
+                        help="Folder to look for vtt files. Written to metadata",
+                        default="vtt")
 
     parser.add_argument("-i", "--info", dest="infoonly", help="Only show info",
                         action="store_true", default=False)
@@ -434,36 +458,41 @@ if __name__ == "__main__":
     options.min_time = float(options.min_time)
 
     extractor = NRKExtractor()
-
+    extractor.vtt_folder = options.vtt_folder
+    
     if options.infoonly:
         info = extractor.resolve_urls(options.src)
 
         #print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
-    print("\n\n* Preparing to process "+options.src)
-
-    if options.all_episodes and int(options.num_episodes)>1:
-        print("Please do not use the -r and the -t option together.")
-        raise SystemExit(0)
-
-    if options.all_episodes:
-        ef=episodefetcher()
-        ef.episodebuilder(options.src)
+    if os.path.isfile(options.dst+"/subtitles/"+options.src+"_subtitles.json"):
+        print(f'{(options.dst+"/subtitles/"+options.src+"_subtitles.json")} have already been processed.')
         
-        for i in ef.episodegenerator():
-            info = extractor.dump_at(i, options.dst)
-        
-        next_id = None
-
     else:
-        #If not all
-        info = extractor.dump_at(options.src, options.dst)
+        print("\n\n* Preparing to process "+options.src)
 
-        try:
-            next_id = info["info"]["_embedded"]["next"]["id"]
-            for i in range(1, int(options.num_episodes)):
-                info = extractor.dump_at(next_id, options.dst)
+        if options.all_episodes and int(options.num_episodes)>1:
+            print("Please do not use the -r and the -t option together.")
+            raise SystemExit(0)
+
+        if options.all_episodes:
+            ef=episodefetcher()
+            ef.episodebuilder(options.src)
+            
+            for i in ef.episodegenerator():
+                info = extractor.dump_at(i, options.dst)
+            
+            next_id = None
+
+        else:
+            #If not all
+            info = extractor.dump_at(options.src, options.dst)
+
+            try:
                 next_id = info["info"]["_embedded"]["next"]["id"]
-        except Exception:
-            next_id = None        
+                for i in range(1, int(options.num_episodes)):
+                    info = extractor.dump_at(next_id, options.dst)
+                    next_id = info["info"]["_embedded"]["next"]["id"]
+            except Exception:
+                next_id = None        
