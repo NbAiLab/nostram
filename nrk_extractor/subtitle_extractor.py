@@ -61,7 +61,7 @@ class NRKExtractor():
 
         # Read info file
         if os.path.isfile(options.dst+"/info/"+id+"_info.json"):
-            print(f'Found info-file locally.')
+            print(f'  Found info-file locally.')
             with open(options.dst+"/info/"+id+"_info.json", 'r') as openfile:
                 res["info"] = json.load(openfile)
             
@@ -109,7 +109,7 @@ class NRKExtractor():
                 res["manifest"] = json.load(openfile)
             
         else:
-            print(f'Fetching manifest-file from NRK.')
+            print(f'  Fetching manifest-file from NRK.')
             
             # Fetch the manifest blob
             murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
@@ -120,29 +120,42 @@ class NRKExtractor():
             res["manifest"] = json.loads(r.text)
                     
             # Save
-            with open(options.dst+"/info/"+id+"_info.json", "w") as outfile:
-                json.dump(res["info"], outfile)
-
+            with open(options.dst+"/manifest/"+id+"_manifest.json", "w") as outfile:
+                json.dump(res["manifest"], outfile)
 
 
         # Now we find the core playlist URL
-        purl = res["manifest"]["playable"]["assets"][0]["url"]
-        r = requests.get(purl)
-        if r.status_code != 200:
-            raise Exception("Failed to get playlist from '%s'" % purl)
+        if os.path.isfile(options.dst+"/playlist/"+id+"_playlist.json"):
+            print(f'  Found playlist-file locally.')
+            with open(options.dst+"/playlist/"+id+"_playlist.json", 'r') as openfile:
+                res["m3u8"] = json.load(openfile)["m3u8"]
+            
+        else:
+            print(f'  Fetching playlist-file from NRK.')
+            
+            # Fetch the playlist blob
+            purl = res["manifest"]["playable"]["assets"][0]["url"]
+            r = requests.get(purl)
+            if r.status_code != 200:
+                raise Exception("  Failed to get playlist from '%s'" % purl)
 
-        spec = None  # We take the first valid line
-        for line in r.text.split("\n"):
-            if line.startswith("#"):
-                continue
-            spec = line
-            break
+            spec = None  # We take the first valid line
+            for line in r.text.split("\n"):
+                if line.startswith("#"):
+                    continue
+                spec = line
+                break
 
-        if not spec:
-            raise Exception("Failed to find valid specification in core m3u8")
+            if not spec:
+                raise Exception("Failed to find valid specification in core m3u8")
 
-        # We now have the correct url for downloading
-        res["m3u8"] = os.path.split(purl)[0] + "/" + spec
+            # We now have the correct url for downloading
+            res["m3u8"] = os.path.split(purl)[0] + "/" + spec
+            
+            # Save
+            with open(options.dst+"/playlist/"+id+"_playlist.json", "w") as outfile:
+                json.dump({"m3u8": res["m3u8"]}, outfile)
+
 
         # We need the subtitles too
         if not res["manifest"]["playable"]["subtitles"]:
@@ -217,7 +230,9 @@ class NRKExtractor():
 
         if not os.path.exists(target_dir+"/info"):
             os.makedirs(target_dir+"/info")
-        
+
+        if not os.path.exists(target_dir+"/playlist"):
+            os.makedirs(target_dir+"/playlist")    
         
         start_time = time.time()
         print("Processing", id)
@@ -488,7 +503,7 @@ if __name__ == "__main__":
         raise SystemExit(0)
 
     if os.path.isfile(options.dst+"/subtitles/"+options.src+"_subtitles.json"):
-        print(f'{(options.dst+"/subtitles/"+options.src+"_subtitles.json")} have already been processed.')
+        print(f'{(options.dst+"/subtitles/"+options.src+"_subtitles.json")} has already been processed.')
         
     else:
         print("\n\n* Preparing to process "+options.src)
