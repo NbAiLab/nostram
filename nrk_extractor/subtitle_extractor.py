@@ -59,7 +59,14 @@ class NRKExtractor():
             "id": id
         }
 
-        if info not extists:
+        # Read info file
+        if os.path.isfile(options.dst+"/info/"+id+"_info.json"):
+            print(f'Found info-file locally.')
+            with open(options.dst+"/info/"+id+"_info.json", 'r') as openfile:
+                res["info"] = json.load(openfile)
+            
+        else:
+            print(f'  Fetching info-file from NRK.')
             # Fetch the info blob
             murl = "https://psapi.nrk.no/playback/metadata/program/%s?eea-portability=true" % id
             r = requests.get(murl)
@@ -68,15 +75,11 @@ class NRKExtractor():
                 raise Exception("Failed to load metadata from '%s'" % murl)
             #print(r.json()["vtt"])
             res["info"] = json.loads(r.text)
-
-            save info/ID_info.json
-        else:
-            load info
-            manifest/ID_info.json
-                        
-        
-        
-        breakpoint()
+                    
+            # Save
+            with open(options.dst+"/info/"+id+"_info.json", "w") as outfile:
+                json.dump(res["info"], outfile)
+            
         
         #Set medium
         ef=episodefetcher()
@@ -99,12 +102,28 @@ class NRKExtractor():
             return None
             #raise Exception("Bad info block from '%s'" % murl)
 
-        murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
-        r = requests.get(murl)
-        if r.status_code != 200:
-            raise Exception("Failed to load manifest from '%s'" % murl)
+        # Read manifest file
+        if os.path.isfile(options.dst+"/manifest/"+id+"_manifest.json"):
+            print(f'  Found manifest-file locally.')
+            with open(options.dst+"/manifest/"+id+"_manifest.json", 'r') as openfile:
+                res["manifest"] = json.load(openfile)
+            
+        else:
+            print(f'Fetching manifest-file from NRK.')
+            
+            # Fetch the manifest blob
+            murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
+            r = requests.get(murl)
+            if r.status_code != 200:
+                raise Exception("Failed to load manifest from '%s'" % murl)
 
-        res["manifest"] = json.loads(r.text)
+            res["manifest"] = json.loads(r.text)
+                    
+            # Save
+            with open(options.dst+"/info/"+id+"_info.json", "w") as outfile:
+                json.dump(res["info"], outfile)
+
+
 
         # Now we find the core playlist URL
         purl = res["manifest"]["playable"]["assets"][0]["url"]
@@ -178,15 +197,6 @@ class NRKExtractor():
             f.write(r.text)
 
     def dump_at(self, id, target_dir):
-
-        start_time = time.time()
-        print("Processing", id)
-        info = self.resolve_urls(id)
-        
-        #Debug
-        if not info:
-            return None
-
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
         
@@ -207,6 +217,17 @@ class NRKExtractor():
 
         if not os.path.exists(target_dir+"/info"):
             os.makedirs(target_dir+"/info")
+        
+        
+        start_time = time.time()
+        print("Processing", id)
+        info = self.resolve_urls(id)
+        
+        #Debug
+        if not info:
+            return None
+
+
             
         target_audio = os.path.join(target_dir+"/mp4", "%s.mp4" % id)
         target_vtt = os.path.join(target_dir+"/"+self.vtt_folder, "%s.vtt" % id)
