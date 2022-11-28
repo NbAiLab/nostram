@@ -3,7 +3,6 @@ Parse subtitle file (srt, vtt) and convert to JSON
 
 NORCE Research Institute 2022, Njaal Borch <njbo@norceresearch.no>
 Licensed under GPL v3
-
 """
 
 import re
