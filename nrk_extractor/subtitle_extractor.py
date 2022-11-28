@@ -219,8 +219,8 @@ class NRKExtractor():
         if not os.path.exists(target_dir+"/"+self.vtt_folder):
             os.makedirs(target_dir+"/"+self.vtt_folder)
         
-        if not os.path.exists(target_dir+"/subtitles"):
-            os.makedirs(target_dir+"/subtitles")
+        if not os.path.exists(target_dir+"/subtitles_"+self.vtt_folder):
+            os.makedirs(target_dir+"/subtitles_"+self.vtt_folder)
             
         if not os.path.exists(target_dir+"/segments"):
             os.makedirs(target_dir+"/segments")
@@ -435,9 +435,9 @@ class NRKExtractor():
             for idx, item in enumerate(subtitles.segments):
                 entry = build_entry(item,info)
                 f.write(json.dumps(entry) + "\n")
-
+        
         # Save subtitles
-        with open(destination.replace("segments","/subtitles").replace(".json","_subtitles.json"), "w") as f:
+        with open(destination.replace("segments","/subtitles_"+self.vtt_folder).replace(".json","_subtitles.json"), "w") as f:
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = build_entry(item,info)
@@ -502,8 +502,8 @@ if __name__ == "__main__":
         #print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
-    if os.path.isfile(options.dst+"/subtitles/"+options.src+"_subtitles.json"):
-        print(f'{(options.dst+"/subtitles/"+options.src+"_subtitles.json")} has already been processed.')
+    if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
+        print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
         
     else:
         print("\n\n* Preparing to process "+options.src)
