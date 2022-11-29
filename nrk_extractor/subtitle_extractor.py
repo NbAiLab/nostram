@@ -26,6 +26,7 @@ from sub_parser import SubParser
 from fetch_episodes import episodefetcher
 import glob
 from tqdm import tqdm
+import random
 
 """
 META: https://psapi.nrk.no/programs/PRHO04004903
@@ -138,6 +139,7 @@ class NRKExtractor():
             # Fetch the playlist blob
             purl = res["manifest"]["playable"]["assets"][0]["url"]
             r = requests.get(purl)
+            
             if r.status_code != 200:
                 raise Exception("  Failed to get playlist from '%s'" % purl)
 
@@ -215,8 +217,8 @@ class NRKExtractor():
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
         
-        if not os.path.exists(target_dir+"/mp4"):
-            os.makedirs(target_dir+"/mp4")
+        if not os.path.exists(target_dir+"/audio"):
+            os.makedirs(target_dir+"/audio")
         
         if not os.path.exists(target_dir+"/"+self.vtt_folder):
             os.makedirs(target_dir+"/"+self.vtt_folder)
@@ -246,7 +248,7 @@ class NRKExtractor():
 
 
             
-        target_audio = os.path.join(target_dir+"/mp4", "%s.mp4" % id)
+        target_audio = os.path.join(target_dir+"/audio", "%s.mp4" % id)
         target_vtt = os.path.join(target_dir+"/"+self.vtt_folder, "%s.vtt" % id)
 
         self.extract_audio(info, target_audio)
@@ -263,7 +265,7 @@ class NRKExtractor():
         #print("Audio file", info["audio"])
         #print("Subtitle file", info["subtitles"])
 
-        subtitles_destination = os.path.splitext(info["audio"])[0].replace("/mp4","/segments") + ".json"
+        subtitles_destination = os.path.splitext(info["audio"])[0].replace("/audio","/segments") + ".json"
         
         #if os.path.exists(subtitles_destination):
         #    return info
@@ -507,39 +509,55 @@ if __name__ == "__main__":
         #print(json.dumps(info, indent=" "))
         raise SystemExit(0)
 
+    def process_subtitle(options):
+        if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
+                print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
+                
+        else:
+            print("\n\n* Preparing to process "+options.src)
+
+            if options.all_episodes and int(options.num_episodes)>1:
+                print("Please do not use the -r and the -t option together.")
+                raise SystemExit(0)
+
+            if options.all_episodes:
+                ef=episodefetcher()
+                ef.episodebuilder(options.src)
+                
+                for i in ef.episodegenerator():
+                    info = extractor.dump_at(i, options.dst)
+                
+                next_id = None
+
+            else:
+                #If not all
+                try:
+                    info = extractor.dump_at(options.src, options.dst)
+                except:
+                    print("**************************************")
+                    print(f"**** Failed to process {options.src} **")
+                    print("**************************************")
+                    
+                
+                try:
+                    next_id = info["info"]["_embedded"]["next"]["id"]
+                    for i in range(1, int(options.num_episodes)):
+                        info = extractor.dump_at(next_id, options.dst)
+                        next_id = info["info"]["_embedded"]["next"]["id"]
+                except Exception:
+                    next_id = None        
+
+
+
     if options.flist=="True" or options.flist=="1":
         dir_path = f'{options.dst}/{options.vtt_folder}/*.vtt'
         res = glob.glob(dir_path)
+        random.shuffle(res)
+        
         for f in tqdm(res):
             options.src = os.path.basename(f).replace(".vtt","")
+            process_subtitle(options)
+    else:
+        process_subtitle(options)
         
-            if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
-                print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
-                
-            else:
-                print("\n\n* Preparing to process "+options.src)
-
-                if options.all_episodes and int(options.num_episodes)>1:
-                    print("Please do not use the -r and the -t option together.")
-                    raise SystemExit(0)
-
-                if options.all_episodes:
-                    ef=episodefetcher()
-                    ef.episodebuilder(options.src)
-                    
-                    for i in ef.episodegenerator():
-                        info = extractor.dump_at(i, options.dst)
-                    
-                    next_id = None
-
-                else:
-                    #If not all
-                    info = extractor.dump_at(options.src, options.dst)
-
-                    try:
-                        next_id = info["info"]["_embedded"]["next"]["id"]
-                        for i in range(1, int(options.num_episodes)):
-                            info = extractor.dump_at(next_id, options.dst)
-                            next_id = info["info"]["_embedded"]["next"]["id"]
-                    except Exception:
-                        next_id = None        
+ 
