@@ -247,7 +247,6 @@ class NRKExtractor():
             return None
 
 
-            
         target_audio = os.path.join(target_dir+"/audio", "%s.mp4" % id)
         target_vtt = os.path.join(target_dir+"/"+self.vtt_folder, "%s.vtt" % id)
 
@@ -269,12 +268,11 @@ class NRKExtractor():
         
         #if os.path.exists(subtitles_destination):
         #    return info
-
         subtitles = self.load_subtitles(info["subtitles"])
         subtitles = self.resync(info["audio"], subtitles,  options)
         #print(subtitles)
         self.find_good_areas(subtitles)
-        
+
         print("*** SAVING")
         self.save_jsonlines(subtitles, subtitles_destination, info)
 
@@ -537,8 +535,6 @@ if __name__ == "__main__":
                     print("**************************************")
                     print(f"**** Failed to process {options.src} **")
                     print("**************************************")
-                    
-                
                 try:
                     next_id = info["info"]["_embedded"]["next"]["id"]
                     for i in range(1, int(options.num_episodes)):
