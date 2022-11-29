@@ -345,7 +345,7 @@ if __name__ == '__main__':
     options.max_cps = float(options.max_cps)
     options.max_adjust = float(options.max_adjust)
     options.min_time = float(options.min_time)
-
+    print("hhh")
 
     if 0:
 
@@ -364,6 +364,7 @@ if __name__ == '__main__':
         frames = list(frames)
         segments = vad_collector(sample_rate, 30, 3, vad, frames, output_dir=options.output_dir, max_pause=float(options.max_pause))
 
+    print("hh")
     detector = VoiceDetector(options.src, output_dir=options.output_dir)
     segments = detector.analyze(aggressive=options.aggressive,
                                 max_pause=float(options.max_pause),
