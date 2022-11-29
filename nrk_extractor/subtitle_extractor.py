@@ -358,22 +358,23 @@ class NRKExtractor():
             if len(updated) == 0:
                 updated.append(item)
                 continue
-
-            if updated[-1]["text"][-1] == "—" and item["text"][0] == "—":
-                # Merge
-                updated[-1]["text"] = updated[-1]["text"][:-1] + item["text"][2:]
-                updated[-1]["end"] = item["end"]
-            elif 0 and item["start"] - updated[-1]["end"] < max_gap_s:  # Need to sync them first
-                updated[-1]["text"] = updated[-1]["text"] + "<br>" + item["text"]
-                updated[-1]["end"] = item["end"]
-            else:
-                updated.append(item)
-
+            try:
+                if updated[-1]["text"][-1] == "—" and item["text"][0] == "—":
+                    # Merge
+                    updated[-1]["text"] = updated[-1]["text"][:-1] + item["text"][2:]
+                    updated[-1]["end"] = item["end"]
+                elif 0 and item["start"] - updated[-1]["end"] < max_gap_s:  # Need to sync them first
+                    updated[-1]["text"] = updated[-1]["text"] + "<br>" + item["text"]
+                    updated[-1]["end"] = item["end"]
+                else:
+                    updated.append(item)
+            except:
+                print("Index out of range")
+            
         subs.items = updated
         return subs
 
     def resync(self, audiofile, subtitles, options, max_gap_s=0.5):
-
         detector = VoiceDetector('silero')
         
         detector.select_sourcefile(audiofile)
@@ -409,10 +410,10 @@ class NRKExtractor():
     def save_jsonlines(self, subtitles, destination, info):
         def build_entry(item, info):
             entry = {
-                    "id": info["id"]+"_"+str(int(item["start"]*100))+"_"+str(int(item["end"]*100)),
-                    "start_time": int(item["start"]*100),
-                    "end_time": int(item["end"]*100),
-                    "duration": int((item["end"] - item["start"])*100),
+                    "id": info["id"]+"_"+str(int(item["start"]*1000))+"_"+str(int(item["end"]*1000)),
+                    "start_time": int(item["start"]*1000),
+                    "end_time": int(item["end"]*1000),
+                    "duration": int((item["end"] - item["start"])*1000),
                     "program_id": info["id"],
                     "medium": info["info"]["medium"],
                     "serieimageurl" : info["info"]["serieimageurl"],
@@ -443,7 +444,10 @@ class NRKExtractor():
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = build_entry(item,info)
-                sub = {"subtitle_text": item["text"].replace("<br>", "\n")}
+                
+                item["text"] = item["text"].replace("<br>"," ").replace("\t"," ").replace("\n"," ").replace("\r"," ")
+                item["text"] = " ".join(item["text"].split())
+                sub = {"subtitle_text": item["text"]}
                 entry = {**entry,**sub}
                 f.write(json.dumps(entry) + "\n")
         
@@ -478,6 +482,7 @@ if __name__ == "__main__":
                         action="store_true", default=False)
                     
     parser.add_argument("-a", "--aggressive", dest="aggressive", help="How aggressive (0-3, 3 is most aggressive), default 1", default=1)
+    parser.add_argument("-e", "--error_halt", dest="error_halt", help="Halt on errors. Stops executing and gives real error messages.", default=False)
     parser.add_argument("--min_cps", dest="min_cps", help="Minimum CPS", default=0)
     parser.add_argument("--max_cps", dest="max_cps", help="Maximum CPS", default=0)
     parser.add_argument("--max_pause", dest="max_pause", help="Merge if closer than this (if >0s)", default=0)
@@ -528,13 +533,17 @@ if __name__ == "__main__":
                 next_id = None
 
             else:
+                if options.error_halt == False or options.error_halt == 0: 
                 #If not all
-                try:
+                    try:
+                        info = extractor.dump_at(options.src, options.dst)
+                    except:
+                        print("**************************************")
+                        print(f"**** Failed to process {options.src} **")
+                        print("**************************************")
+                else:
                     info = extractor.dump_at(options.src, options.dst)
-                except:
-                    print("**************************************")
-                    print(f"**** Failed to process {options.src} **")
-                    print("**************************************")
+                
                 try:
                     next_id = info["info"]["_embedded"]["next"]["id"]
                     for i in range(1, int(options.num_episodes)):
