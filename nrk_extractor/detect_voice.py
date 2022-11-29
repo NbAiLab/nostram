@@ -312,9 +312,10 @@ class VoiceDetector:
                     subs[idx-1]["end"] = sub["start"] - 0.001
 
         # Sanity
-        for sub in subs:
+        for idx,sub in enumerate(subs):
             if sub["end"] < sub["start"]:
-                raise SystemExit("Super-wrong, end is before start", sub)
+                subs.remove(sub)
+                print ("*** Super-wrong sub, end is before start. Removing line.", sub)
 
         print("Updated", updated, "kept", kept)
 
