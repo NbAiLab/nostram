@@ -145,8 +145,7 @@ def main(args):
         data['text'] = data['text'].parallel_apply(normalise_unicode)
         logger.info(f'***  Normalised unicode. Removed double spaces. Trimmed string. ({exec_time()})')
         print(f'***  Normalised unicode. Removed double spaces. Trimmed string.({exec_time()})')
-    else:
-        print(f"The field \"normalise_unicode\" is required in config.json")
+
 
     # Add hash
     #
@@ -190,20 +189,18 @@ def main(args):
         data = data[cond]
         logger.info(f'***  Completed filtering min length article. Valid posts = {len(data)}. ({exec_time()})')
         print(f'***  Completed filtering min length article. Valid posts = {len(data)}. ({exec_time()})')
-    else:
-        print(f"The field \"minimum_length_subtitle\" is required in config.json")
+
  
     #Remove paragraphs with curly brackets
     if config['drop_subtitles_with_curly_brackets']:
         cond = data['text'].str.contains('\\{')
-        logger.debug(f'\n\n*** The following text was deleted because it contained left curly brackets:\n {data[~cond]["text"]}')
+        logger.debug(f'\n\n*** The following text was deleted because it contained left curly brackets:\n {data[cond]["text"]}')
         data = data[~cond]
         cond = data['text'].str.contains('\\}')
-        logger.debug(f'\n\n*** The following text was deleted because it contained right curly brackets:\n {data[~cond]["text"]}')
+        logger.debug(f'\n\n*** The following text was deleted because it contained right curly brackets:\n {data[cond]["text"]}')
         data = data[~cond]
         print(f'***  Completed filtering out subtitles with curly brackets. Valid subtitles = {len(data)}. ({exec_time()})')
-    else:
-        print(f"The field \"drop_subtitles_with_curly_brackets\" is required in config.json")
+
         
     #Filter out paragraphs with encoding errors
     if config['drop_subtitles_with_encoding_errors']:
@@ -211,9 +208,7 @@ def main(args):
         data = data[~cond]
         logger.info(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
         print(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
-    else:
-        print(f"The field \"drop_subtitles_with_encoding_errors\" is required in config.json")
-    
+
     #Remove duplicates
     # if len(data)>0:
     #     data.sort_values(by=['doc_length','paragraph_id'], inplace=True, ascending=[False,True])
