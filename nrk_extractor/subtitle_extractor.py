@@ -415,6 +415,7 @@ class NRKExtractor():
     
     def save_jsonlines(self, subtitles, destination, info):
         def build_entry(item, info):
+
             entry = {
                     "id": info["id"]+"_"+str(int(item["start"]*1000))+"_"+str(int(item["end"]*1000)),
                     "start_time": int(item["start"]*1000),
@@ -433,7 +434,7 @@ class NRKExtractor():
                     "on_demand_to":info["info"]["availability"]["onDemand"]["to"],
                     "external_embedding_allowed":info["info"]["availability"]['externalEmbeddingAllowed'],
                     "subtitle": info["info"]["preplay"]["titles"]["subtitle"],
-                    "audio": {"path": info["audio"]},
+                    "audio": os.path.basename(info["audio"]),
                     "vtt_folder": info["vtt_folder"]
                 }
             return entry
@@ -450,12 +451,12 @@ class NRKExtractor():
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = build_entry(item,info)
-                
                 item["text"] = item["text"].replace("<br>"," ").replace("\t"," ").replace("\n"," ").replace("\r"," ")
                 item["text"] = " ".join(item["text"].split())
-                sub = {"subtitle_text": item["text"]}
+                sub = {"text": item["text"]}
                 entry = {**entry,**sub}
-                f.write(json.dumps(entry) + "\n")
+                if item["text"] != "":
+                    f.write(json.dumps(entry) + "\n")
         
     vtt_folder = "vtt"
 
