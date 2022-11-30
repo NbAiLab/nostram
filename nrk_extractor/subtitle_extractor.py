@@ -64,7 +64,6 @@ class NRKExtractor():
 
         # Read info file
         if os.path.isfile(options.dst+"/info/"+id+"_info.json"):
-            print(f'  Found info-file locally.')
             with open(options.dst+"/info/"+id+"_info.json", 'r') as openfile:
                 res["info"] = json.load(openfile)
             
@@ -83,7 +82,6 @@ class NRKExtractor():
             with open(options.dst+"/info/"+id+"_info.json", "w") as outfile:
                 json.dump(res["info"], outfile)
             
-        
         #Set medium
         ef=episodefetcher()
         #Try first for series, but if this does not exist, try for program
@@ -92,19 +90,24 @@ class NRKExtractor():
         except:
             res["info"]["medium"] = ef.getmediumprogram(id)
 
+        
         #Set serie image
         try:
             res["info"]["serieimageurl"] = ef.getserieimage(ef.getseries(id))
         except:
             res["info"]["serieimageurl"] = "placeholder"
 
+        # Handle non-playable files
         if not bool(res["info"]["playable"]):
-            res["info"] = "Unknown"
-
+            res["info"] = res["info"]["nonPlayable"]["endUserMessage"]
+            with open(options.dst+"/unavailable/"+id+".json", "w") as creating_empty_json_file: 
+                pass 
+        
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
+            print(res["info"])
             return None
             #raise Exception("Bad info block from '%s'" % murl)
-
+        
         # Read manifest file
         if os.path.isfile(options.dst+"/manifest/"+id+"_manifest.json"):
             print(f'  Found manifest-file locally.')
@@ -237,6 +240,9 @@ class NRKExtractor():
 
         if not os.path.exists(target_dir+"/playlist"):
             os.makedirs(target_dir+"/playlist")    
+        
+        if not os.path.exists(target_dir+"/unavailable"):
+            os.makedirs(target_dir+"/unavailable") 
         
         start_time = time.time()
         print("Processing", id)
@@ -515,7 +521,8 @@ if __name__ == "__main__":
     def process_subtitle(options):
         if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
                 print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
-                
+        elif os.path.isfile(options.dst+"/unavailable/"+options.src+".json"):
+                print(f'{(options.dst+"/unavailable/"+options.src+".json")} is not playable.')       
         else:
             print("\n\n* Preparing to process "+options.src)
 
