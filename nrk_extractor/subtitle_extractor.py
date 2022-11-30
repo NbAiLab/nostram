@@ -519,6 +519,8 @@ if __name__ == "__main__":
         raise SystemExit(0)
 
     def process_subtitle(options):
+        result = True
+        
         if os.path.isfile(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json"):
                 print(f'{(options.dst+"/subtitles_"+options.vtt_folder+"/"+options.src+"_subtitles.json")} has already been processed.')
         elif os.path.isfile(options.dst+"/unavailable/"+options.src+".json"):
@@ -530,6 +532,9 @@ if __name__ == "__main__":
                 print("Please do not use the -r and the -t option together.")
                 raise SystemExit(0)
 
+            
+
+            
             if options.all_episodes:
                 ef=episodefetcher()
                 ef.episodebuilder(options.src)
@@ -548,6 +553,7 @@ if __name__ == "__main__":
                         print("**************************************")
                         print(f"**** Failed to process {options.src} **")
                         print("**************************************")
+                        result = False
                 else:
                     info = extractor.dump_at(options.src, options.dst)
                 
@@ -557,7 +563,8 @@ if __name__ == "__main__":
                         info = extractor.dump_at(next_id, options.dst)
                         next_id = info["info"]["_embedded"]["next"]["id"]
                 except Exception:
-                    next_id = None        
+                    next_id = None    
+        return result    
 
 
 
@@ -566,10 +573,23 @@ if __name__ == "__main__":
         res = glob.glob(dir_path)
         random.shuffle(res)
         
+        success = 0
+        failure = 0
         for f in tqdm(res):
             options.src = os.path.basename(f).replace(".vtt","")
-            process_subtitle(options)
+            result = process_subtitle(options)
+            if result:
+                success += 1
+            else:
+                failure +=1
+        print(f"\n\nFinished. \nSuccess: {success}\nFailure: {failure}\nTotal: {failure + success}")
+        
+        unavailable_dir = f'{options.dst}/unavailable'
+        num_unavailable = (len([entry for entry in os.listdir(unavailable_dir) if os.path.isfile(os.path.join(unavailable_dir, entry))]))
+        print(f"\nIn addition {num_unavailable} files are marked as \"unavailable\".")
+        
     else:
         process_subtitle(options)
+    
         
  
