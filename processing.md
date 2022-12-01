@@ -3,6 +3,7 @@ This contains direct paths to internal systems. Do not expect to run this withou
 
 ```bash
 
+# Generate NRK Subtitles
 python subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/ -v vtt_transcribe_translate
 python subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/ -v vtt_translate
 
@@ -13,5 +14,16 @@ for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles
 # Generate the NST dataset
 python create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/test/mp3/
 python create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/train/mp3/
+
+# Generate the NPSC Bokmål dataset
+python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+
+# Generate the NPSC Nynorsk dataset
+python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+
 
 ```
