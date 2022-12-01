@@ -132,9 +132,9 @@ def add_task_field(data: pd.DataFrame):
     # Duplicates by time, duplicates by text only (unless vtt_folder is also duplicate)
     mask = ~(dup_start | dup_end) & ~(dup_text & ~dup_text_type)
 
-    data.loc[mask & data.vtt_folder == "vtt_transcribe_translate", "language_state"] = "transcribe"
-    # data.loc[~mask & data.vtt_folder == "vtt_transcribe_translate", "language_state"] = "UNK"
-    data.loc[data.vtt_folder == "vtt_translate", "language_state"] = "translate"
+    data.loc[mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "transcribe"
+    # data.loc[~mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "UNK"
+    data.loc[data.vtt_folder == "vtt_translate", "task"] = "translate"
 
 
 def remove_inaudible(data: pd.DataFrame):
@@ -196,8 +196,7 @@ def main(args):
     data = load_json(args.input_file)
 
     logger.info(f'***  Data loaded. {len(data)} subtitles. ({exec_time()})')
-    print(f'*** Data loaded with {len(data)} subtitles. '
-          f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
+    print(f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
 
     # Set number of characters in an subtitle
     # Add this to the frame since we will use it later for sorting
@@ -218,7 +217,6 @@ def main(args):
     if config['normalise_unicode']:
         data['text'] = data['text'].parallel_apply(normalise_unicode)
         logger.info(f'***  Normalised unicode. Removed double spaces. Trimmed string. ({exec_time()})')
-        print(f'***  Normalised unicode. Removed double spaces. Trimmed string.({exec_time()})')
 
     # Add hash
     #
@@ -256,11 +254,10 @@ def main(args):
     # Minimum length of subtitle
     if config['min_length_subtitle']:
         cond = data['doc_length'] >= config['min_length_subtitle']
-        logger.debug(f'\n\n*** The following text was deleted because the article minimum lenght was too small:'
+        logger.debug(f'\n\n*** The following text was deleted because the article minimum length was too small:'
                      f'\n {data[~cond]["text"]}')
         data = data[cond]
         logger.info(f'***  Completed filtering min length article. Valid posts = {len(data)}. ({exec_time()})')
-        print(f'***  Completed filtering min length article. Valid posts = {len(data)}. ({exec_time()})')
 
     # Remove paragraphs with curly brackets
     if config['drop_subtitles_with_curly_brackets']:
@@ -272,41 +269,36 @@ def main(args):
         logger.debug(f'\n\n*** The following text was deleted because it contained right curly brackets:'
                      f'\n {data[cond]["text"]}')
         data = data[~cond]
-        print(f'***  Completed filtering out subtitles with curly brackets. '
-              f'Valid subtitles = {len(data)}. ({exec_time()})')
+        logger.info(f'***  Completed filtering out subtitles with curly brackets. '
+                    f'Valid subtitles = {len(data)}. ({exec_time()})')
 
     # Filter out paragraphs with encoding errors
     if config['drop_subtitles_with_encoding_errors']:
         cond = data['text'].str.contains('�')
         data = data[~cond]
         logger.info(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
-        print(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
 
     add_task_field(data)
     if config['task']:
         cond = data['task'] == config['task']
-        data = data[cond]
         logger.debug(f'\n\n*** The following text was deleted because it was not the correct task:'
-                     f'\n {data[~cond][["text", "language_state"]]}')
+                     f'\n {data[~cond][["text", "task"]]}')
+        data = data[cond]
         logger.info(f'***  Filtered out tasks. The length is now {len(data)}. ({exec_time()})')
-        print(f'***  Filtered out tasks. The length is now {len(data)}. ({exec_time()})')
 
     if config['drop_inaudible']:
-        modified, removed = remove_inaudible(data)
+        modified = remove_inaudible(data)
         logger.debug(f'\n\n*** The following text was modified because it contained text:'
                      f'\n {modified}')
         logger.info(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
-        print(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
 
     if config['drop_invalid_durations']:
         cond = is_invalid_duration(data)
-        data = data[~cond]
         logger.debug(f'\n\n*** The following text was modified because the speaking rate is too fast or too slow:'
                      f'\n {data[cond]}')
+        data = data[~cond]
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
-        print(f'***  Filtered out too fast and too slow speaking rates. '
-              f'The length is now {len(data)}. ({exec_time()})')
 
     # Remove duplicates
     # if len(data)>0:
@@ -354,6 +346,11 @@ if __name__ == "__main__":
 
     # Invoke logger globally
     logger = logging.getLogger()
+
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.INFO)
+    logger.addHandler(handler)
+
     if args.log_level == "INFO":
         logger.setLevel(logging.INFO)
     elif args.log_level == "DEBUG":
