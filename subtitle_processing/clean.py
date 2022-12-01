@@ -188,8 +188,19 @@ def main(args):
     if not os.path.exists(args.output_folder + "/log"):
         os.makedirs(args.output_folder + "/log")
 
-    logging.basicConfig(filename=os.path.join(args.output_folder, "log/", log_name), format='%(asctime)s %(message)s',
-                        filemode='w')
+    handler = logging.FileHandler(
+        filename=os.path.join(args.output_folder, "log/", log_name),
+        mode='w'
+    )
+    formatter = logging.Formatter('%(asctime)s %(message)s')
+    handler.setFormatter(formatter)
+    handler.setLevel({"DEBUG": logging.DEBUG, "INFO": logging.INFO}[args.log_level])
+    logger.addHandler(handler)
+
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.INFO)
+    logger.addHandler(handler)
+
     config = read_config(args.output_folder + "/config.json")
 
     print(f'*** Starting to process: {args.input_file}')
@@ -288,7 +299,7 @@ def main(args):
 
     if config['drop_inaudible']:
         modified = remove_inaudible(data)
-        logger.debug(f'\n\n*** The following text was modified because it contained text:'
+        logger.debug(f'\n\n*** The following text was modified because it contained inaudible text:'
                      f'\n {modified}')
         logger.info(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
 
@@ -299,6 +310,8 @@ def main(args):
         data = data[~cond]
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
+
+    # TODO filter out `CPossible`
 
     # Remove duplicates
     # if len(data)>0:
@@ -346,10 +359,6 @@ if __name__ == "__main__":
 
     # Invoke logger globally
     logger = logging.getLogger()
-
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.INFO)
-    logger.addHandler(handler)
 
     if args.log_level == "INFO":
         logger.setLevel(logging.INFO)
