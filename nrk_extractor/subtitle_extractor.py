@@ -277,7 +277,7 @@ class NRKExtractor():
         subtitles = self.load_subtitles(info["subtitles"])
         subtitles = self.resync(info["audio"], subtitles,  options)
         #print(subtitles)
-        self.find_good_areas(subtitles)
+        # self.find_good_areas(subtitles)
 
         print("*** SAVING")
         self.save_jsonlines(subtitles, subtitles_destination, info)
@@ -324,25 +324,25 @@ class NRKExtractor():
 
         return ("%d days " % days + ret).strip()
 
-    def find_good_areas(self, subtitles):
+    # def find_good_areas(self, subtitles):
 
-        bad = 0
-        playtime = 0
-        for sub in subtitles.items:
-            # If sub is two lines and BOTH start with "-" it's two different
-            # people and hence the timing is shit
-            lines = sub["text"].split("<br>")
-            if len(lines) > 1:
-                if lines[0].strip().startswith("—") and \
-                   lines[1].strip().startswith("—"):
-                    # print("BAD SUB", sub)
-                    bad += 1
-                    continue
+    #     bad = 0
+    #     playtime = 0
+    #     for sub in subtitles.items:
+    #         # If sub is two lines and BOTH start with "-" it's two different
+    #         # people and hence the timing is shit
+    #         lines = sub["text"].split("<br>")
+    #         if len(lines) > 1:
+    #             if lines[0].strip().startswith("—") and \
+    #                lines[1].strip().startswith("—"):
+    #                 # print("BAD SUB", sub)
+    #                 bad += 1
+    #                 continue
 
-            playtime += sub["end"] - sub["start"]
+    #         playtime += sub["end"] - sub["start"]
 
-        print("  -- %d subtitles, %d are bad" % (len(subtitles.items), bad))
-        print("  Playtime: %s" % NRKExtractor.time_to_string(playtime))
+    #     print("  -- %d subtitles, %d are bad" % (len(subtitles.items), bad))
+    #     print("  Playtime: %s" % NRKExtractor.time_to_string(playtime))
 
     def load_subtitles(self, subtitlefile, max_gap_s=0.4):
         subs = SubParser()
@@ -353,13 +353,13 @@ class NRKExtractor():
         for item in subs.items:
             lines = item["text"].split("<br>")
             # If item has *3* lines, the first one is (likely) a person's name - remove it for now
-            if len(lines) == 3:
-                item["text"] = "<br>".join(lines[1:])
+            #if len(lines) == 3:
+            #    item["text"] = "<br>".join(lines[1:])
 
             # If both lines start with "—" it's two people - ignore
-            if len(lines) == 2 and lines[0].startswith("—") and lines[1].startswith("—"):
-                print("Two people, skipping")
-                continue
+            # if len(lines) == 2 and lines[0].startswith("—") and lines[1].startswith("—"):
+            #    print("Two people, skipping")
+            #    continue
 
             if len(updated) == 0:
                 updated.append(item)
@@ -415,7 +415,6 @@ class NRKExtractor():
     
     def save_jsonlines(self, subtitles, destination, info):
         def build_entry(item, info):
-
             entry = {
                     "id": info["id"]+"_"+str(int(item["start"]*1000))+"_"+str(int(item["end"]*1000)),
                     "start_time": int(item["start"]*1000),
@@ -451,7 +450,7 @@ class NRKExtractor():
             # Write a single line pr entry that's good
             for idx, item in enumerate(subtitles.items):
                 entry = build_entry(item,info)
-                item["text"] = item["text"].replace("<br>"," ").replace("\t"," ").replace("\n"," ").replace("\r"," ")
+                #item["text"] = item["text"].replace("<br>"," ").replace("\t"," ").replace("\n"," ").replace("\r"," ")
                 item["text"] = " ".join(item["text"].split())
                 sub = {"text": item["text"]}
                 entry = {**entry,**sub}
