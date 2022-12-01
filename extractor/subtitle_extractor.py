@@ -365,11 +365,11 @@ class NRKExtractor():
                 updated.append(item)
                 continue
             try:
-                if updated[-1]["text"][-1] == "—" and item["text"][0] == "—":
-                    # Merge
-                    updated[-1]["text"] = updated[-1]["text"][:-1] + item["text"][2:]
-                    updated[-1]["end"] = item["end"]
-                elif 0 and item["start"] - updated[-1]["end"] < max_gap_s:  # Need to sync them first
+                #if updated[-1]["text"][-1] == "—" and item["text"][0] == "—":
+                #    # Merge
+                #    updated[-1]["text"] = updated[-1]["text"][:-1] + item["text"][2:]
+                #    updated[-1]["end"] = item["end"]
+                if 0 and item["start"] - updated[-1]["end"] < max_gap_s:  # Need to sync them first
                     updated[-1]["text"] = updated[-1]["text"] + "<br>" + item["text"]
                     updated[-1]["end"] = item["end"]
                 else:
