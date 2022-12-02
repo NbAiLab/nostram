@@ -1,5 +1,5 @@
 ######################################################################
-### Creates the NST dataset file
+### Creates the NPSC Nynorsk dataset file
 #####################################################################
 
 import os
@@ -42,15 +42,15 @@ def main(args):
     data["audio"] = data["meeting_date"].astype(str)+"-"+data["sentence_id"].astype(str)+".mp3"
     data["text"] = data["sentence_nno"]
     data["lang_text"] = "nno"
-    data["lang_voice"] = "nor"
+    data["lang_voice"] = "no"
     
     #Drop some stuff we dont need any more
     data = data.drop(['data_split', 'sentence_id','sentence_order','speaker_id','speaker_name','sentence_text','sentence_language_code','normsentence_text','transsentence_text','translated','transcriber_id','reviewer_id','total_duration','path','sentence_nob','sentence_nno'], axis=1)
     
     #Save it as jsonl
-    output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
+    output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file).replace(".json","_nno.json"))
     save_json(data, output_filename)
-    print(f'*** Finished processing file. Result has {len(data)} posts. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}.')
+    print(f'*** Finished processing file. \nResult has {len(data)} posts. \nTotal length is {round(data["duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
 
 
 def parse_args():
