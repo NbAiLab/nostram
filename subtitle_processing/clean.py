@@ -249,21 +249,28 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
     return modified, deleted
 
 
-def remove_italics(df: pd.DataFrame):
+def remove_italics(data: pd.DataFrame):
     """
     Italics are used liberally to denote things like emphasis, narrators, voices from phones etc.
     Generally they are spoken, and should thus be included.
     One special case is parallel translations from tertiary language to Norwegian and Sami,
      with one language italicized and the other not, on separate lines.
     """
-    cond = df.text.str.fullmatch(r"((^|<br>)[^<>]+)+(<br><i>[^<>]+<\/i>)+")
-    dropped = df.text[cond]
-    df.drop(df[cond].index, inplace=True)
-    old_text = df.text
-    df.text = df.text.str.replace("</?i>", " ", regex=True).str.strip()
-    cond = old_text != df.text
-    modified = pd.DataFrame({"old_text": old_text[cond], "new_text": df.text[cond]})
+    cond = data.text.str.fullmatch(r"((^|<br>)[^<>]+)+(<br><i>[^<>]+<\/i>)+")
+    dropped = data.text[cond]
+    data.drop(data[cond].index, inplace=True)
+    old_text = data.text
+    data.text = data.text.str.replace("</?i>", " ", regex=True).str.strip()
+    cond = old_text != data.text
+    modified = pd.DataFrame({"old_text": old_text[cond], "new_text": data.text[cond]})
     return dropped, modified
+
+
+def find_simultaneous(data: pd.DataFrame):
+    simultaneous = data[data.text.str.lower().contains("opptak fra simultanteksting")]
+    program_ids = simultaneous.program_id.unique()
+
+    return program_ids
 
 
 def main(args):
@@ -294,7 +301,7 @@ def main(args):
     config = read_config(args.output_folder + "/config.json")
 
     print(f'*** Starting to process: {args.input_file}')
-    data = load_json(args.input_file)
+    data: pd.DataFrame = load_json(args.input_file)
 
     logger.info(f'***  Data loaded. {len(data)} subtitles. ({exec_time()})')
     print(f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
@@ -378,6 +385,17 @@ def main(args):
         cond = data['text'].str.contains('�')
         data = data[~cond]
         logger.info(f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
+
+    simultaneous = find_simultaneous(data)
+    if config["simultaneous_subtitles"] == "detect":
+        data["is_simultaneous"] = data.program_id.isin(simultaneous)
+        logger.info(f'***  {data.is_simultaneous.sum()} rows were marked as simultaneous texting. ({exec_time()})')
+    elif config["simultaneous_subtitles"] == "delete":
+        cond = data.program_id.isin(simultaneous)
+        logger.debug(f'\n\n*** The following program ids were deleted because they had simultaneous texting:'
+                     f'\n {simultaneous}')
+        data = data[~cond]
+        logger.info(f'***  Filtered out simultaneous texting. The length is now {len(data)}. ({exec_time()})')
 
     add_task_field(data)
     if config['task']:
