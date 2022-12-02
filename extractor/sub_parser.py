@@ -38,14 +38,16 @@ class SubParser:
                     s = {
                         "start": SubParser.time2sec(start) + 0.01,
                         "end": SubParser.time2sec(end),
-                        "text": line[1::].strip()}
+                        "text": line.strip()
+                        #"text": line[1::].strip()
+                        }
                     if default_who:
                         s["who"] = default_who
                     self.items.append(s)
                     # text = ""
                     continue
-                elif line.startswith("-"):
-                    line = line[1:]
+                #elif line.startswith("-"):
+                #    line = line[1:]
 
                 if line.strip() == "":
                     # print("End of comment", text)
@@ -76,8 +78,8 @@ class SubParser:
                 if text and text[-1] != "-":
                     text += "<br>"
                     text += line
-                else:
-                    text = text[:-1] + line  # word has been divided
+                #else:
+                #    text = text[:-1] + line  # word has been divided
 
         return self.items
 
