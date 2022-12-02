@@ -249,6 +249,23 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
     return modified, deleted
 
 
+def remove_italics(df: pd.DataFrame):
+    """
+    Italics are used liberally to denote things like emphasis, narrators, voices from phones etc.
+    Generally they are spoken, and should thus be included.
+    One special case is parallel translations from tertiary language to Norwegian and Sami,
+     with one language italicized and the other not, on separate lines.
+    """
+    cond = df.text.str.fullmatch(r"((^|<br>)[^<>]+)+(<br><i>[^<>]+<\/i>)+")
+    dropped = df.text[cond]
+    df.drop(df[cond].index, inplace=True)
+    old_text = df.text
+    df.text = df.text.str.replace("</?i>", " ", regex=True).str.strip()
+    cond = old_text != df.text
+    modified = pd.DataFrame({"old_text": old_text[cond], "new_text": df.text[cond]})
+    return dropped, modified
+
+
 def main(args):
     pd.set_option("display.max_rows", None)
     ocr_doc = 1
@@ -369,6 +386,14 @@ def main(args):
                      f'\n {data[~cond][["text", "task"]]}')
         data = data[cond]
         logger.info(f'***  Filtered out tasks. The length is now {len(data)}. ({exec_time()})')
+
+    if config['drop_italics']:
+        dropped, modified = remove_italics(data)
+        logger.debug(f'\n\n*** The following text was deleted because it is suspected to be bilingual:'
+                     f'\n {dropped}')
+        logger.debug(f'\n\n*** The following text was modified because it contained italics text:'
+                     f'\n {modified}')
+        logger.info(f'***  Filtered out italics. The length is now {len(data)}. ({exec_time()})')
 
     if config['drop_inaudible']:
         modified = remove_inaudible(data)

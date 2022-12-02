@@ -8,6 +8,7 @@ Licensed under GPL v3
 import re
 import os.path
 
+
 class SubParser:
     """Parse VTT/SRT files."""
 
@@ -31,60 +32,45 @@ class SubParser:
             start = end = None
             text = ""
 
-            for line in f.readlines():
-                line = line.decode("utf-8").strip()
-                if text and line.startswith("-"):
-                    # print("Continuation", line)
-                    s = {
-                        "start": SubParser.time2sec(start) + 0.01,
-                        "end": SubParser.time2sec(end),
-                        "text": line.strip()
-                        #"text": line[1::].strip()
-                        }
-                    if default_who:
-                        s["who"] = default_who
-                    self.items.append(s)
-                    # text = ""
-                    continue
-                #elif line.startswith("-"):
-                #    line = line[1:]
-
-                if line.strip() == "":
-                    # print("End of comment", text)
-                    # End of comment
-                    if text and start and end:
-                        s = {
-                            "start": SubParser.time2sec(start),
-                            "end": SubParser.time2sec(end),
-                            "text": text
-                        }
-                        if default_who:
-                            s["who"] = default_who
-
-                        self.items.append(s)
-                    start = end = None
-                    text = ""
-                    continue
-                if re.match("^\d+$", line):
-                    # Just the index, we don't care
+            lines = [line.decode("utf-8").strip() for line in f.readlines()]
+            for line in lines:
+                if re.match(r"^\d+$", line) and not (start or end or text):
+                    # Just the index, ignore
                     continue
 
-                m = re.match("(\d+:\d+:\d+,\d+) --> (\d+:\d+:\d+,\d+)", line.replace(".", ","))
+                m = re.match(r"(\d+:\d+:\d+,\d+) --> (\d+:\d+:\d+,\d+)", line.replace(".", ","))
                 if m:
                     start, end = m.groups()
+                    text = ""
                     continue
 
-                # print("TEXT", text, "LINE", line)
-                if text and text[-1] != "-":
-                    text += "<br>"
-                    text += line
-                #else:
-                #    text = text[:-1] + line  # word has been divided
+                if start and end and line:
+                    if text:
+                        text += "<br>" + line
+                    else:
+                        text = line
+
+                if start and end and (line or line == lines[-1]):
+                    # print("End of comment", text)
+                    # End of comment
+                    s = {
+                        "start": SubParser.time2sec(start),  # Used to be a +0.01 sometimes, not sure why
+                        "end": SubParser.time2sec(end),
+                        "text": text
+                    }
+                    if default_who:
+                        s["who"] = default_who
+
+                    self.items.append(s)
+                    text = ""
+                    start = end = None
 
         return self.items
 
+
 if __name__ == "__main__":
     import sys
+
     parser = SubParser()
     parser.load_srt(sys.argv[1])
     print(parser.items)
