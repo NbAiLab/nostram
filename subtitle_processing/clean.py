@@ -267,7 +267,6 @@ def remove_italics(data: pd.DataFrame):
 
 
 def find_simultaneous(data: pd.DataFrame):
-    breakpoint()
     simultaneous = data[data.text.str.lower().str.contains("opptak av simultanteksting")]
     program_ids = simultaneous.program_id.unique()
 
