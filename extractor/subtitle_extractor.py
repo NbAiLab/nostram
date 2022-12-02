@@ -102,12 +102,13 @@ class NRKExtractor():
             res["info"] = res["info"]["nonPlayable"]["endUserMessage"]
             with open(options.dst+"/unavailable/"+id+".json", "w") as creating_empty_json_file: 
                 pass 
-        
+
         if "playable" not in res["info"] or "resolve" not in res["info"]["playable"]:
             print(res["info"])
             return None
             #raise Exception("Bad info block from '%s'" % murl)
         
+
         # Read manifest file
         if os.path.isfile(options.dst+"/manifest/"+id+"_manifest.json"):
             print(f'  Found manifest-file locally.')
@@ -115,7 +116,10 @@ class NRKExtractor():
                 res["manifest"] = json.load(openfile)
             
         else:
-            print(f'  Fetching manifest-file from NRK.')
+            print(f'  Fetching manifest-file from NRK. This should not happen now.')
+            
+            # Added manually to prevent NRK 
+            raise Exception("This should not happen now! It tries to contact NRK here.")
             
             # Fetch the manifest blob
             murl = "https://psapi.nrk.no" + res["info"]["playable"]["resolve"]
@@ -128,7 +132,6 @@ class NRKExtractor():
             # Save
             with open(options.dst+"/manifest/"+id+"_manifest.json", "w") as outfile:
                 json.dump(res["manifest"], outfile)
-
 
         # Now we find the core playlist URL
         if os.path.isfile(options.dst+"/playlist/"+id+"_playlist.json"):
