@@ -39,7 +39,7 @@ def main(args):
     data["subtitle"] = data["meeting_date"].astype(str)
     data["audio"] = data["meeting_date"].astype(str)+"-"+data["sentence_id"].astype(str)+".mp3"
     data["text"] = data["sentence_nob"]
-    data["lang_text"] = "nbo"
+    data["lang_text"] = "nob"
     data["lang_voice"] = "nor"
     
     #Drop some stuff we dont need any more
