@@ -32,7 +32,7 @@ class SubParser:
             start = end = None
             text = ""
 
-            lines = [line.decode("utf-8").strip() for line in f.readlines()]
+            lines = [line.decode("utf-8").strip().replace("—", "-") for line in f.readlines()]
             for line in lines:
                 if re.match(r"^\d+$", line) and not (start or end or text):
                     # Just the index, ignore
@@ -40,6 +40,10 @@ class SubParser:
 
                 m = re.match(r"(\d+:\d+:\d+,\d+) --> (\d+:\d+:\d+,\d+)", line.replace(".", ","))
                 if m:
+                    # if start and not end:
+                    #     _, end = m.groups()
+                    #     text += "<p>"
+                    # else:
                     start, end = m.groups()
                     text = ""
                     continue
@@ -48,9 +52,12 @@ class SubParser:
                     if text:
                         text += "<br>" + line
                     else:
-                        text = line
+                        text += line
 
-                if start and end and (line or line == lines[-1]):
+                if start and end and (not line or line == lines[-1]):
+                    # if line.replace("</i>", "").endswith("-"):
+                    #     end = None
+                    #     continue
                     # print("End of comment", text)
                     # End of comment
                     s = {
