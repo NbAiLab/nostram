@@ -7,6 +7,8 @@ import pandas as pd
 from slugify import slugify
 from datetime import datetime
 import argparse
+from pandarallel import pandarallel
+pandarallel.initialize(use_memory_fs=True)
 
 def load_json(jsonline):
     data = pd.read_json(jsonline, lines=True)
@@ -53,15 +55,13 @@ def main(args):
     data["subtitle"] = data["pid"].astype(str)
     data["audio"] = data["pid"].astype(str)+"_"+data["file"].str.replace(".wav",".mp3", regex=False)
     data["duration"] = args.mp3_folder+data["audio"]
-    data["duration"] = data["duration"].apply(calculate_duration)
+    data["duration"] = data["duration"].parallel_apply(calculate_duration)
     data["text"] = data["text"]
-    data["lang_text"] = "nbo"
+    data["lang_text"] = "nob"
     data["lang_voice"] = "nor"
     data["region_of_birth"] = data["Region_of_Birth"]
-    data["speaker_id"] = data["Speaker_ID"].astype(int)
     data["nst_type"] = data["type"]
     
-    breakpoint()
     
     #Drop some stuff we dont need any more
     data = data.drop(['pid', 'Age','Region_of_Birth','Region_of_Youth','Remarks','Sex','Speaker_ID','Directory','Imported_sheet_file','Number_of_recordings','RecDate','RecTime','Record_duration','Record_session','Sheet_number','ANSI_Codepage','Board','ByteFormat','Channels','CharacterSet','Coding','DOS_Codepage','Delimiter','Frequency','Memo','Script','Version','DST','NOI','QUA','SND','SPC','UTT','file','t0','t1','t2'], axis=1)
