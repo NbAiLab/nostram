@@ -464,9 +464,9 @@ def main(args):
     output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
     logger.info(
-        f'*** Finished processing file. Result has {len(data)} subtitles. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
+        f'*** Finished processing file. Result has {len(data)} posts. Total length is {round(data["duration"].sum()/1000/60/60,1)} hours. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
     print(
-        f'*** Finished processing file. Result has {len(data)} posts. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
+        f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
 
 
 def parse_args():
