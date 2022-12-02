@@ -4,6 +4,8 @@
 
 import os, sys
 import json
+
+import numpy as np
 import pandas as pd
 import re
 from slugify import slugify
@@ -176,6 +178,77 @@ def is_invalid_duration(data: pd.DataFrame):
     return cond
 
 
+def remove_splits(data: pd.DataFrame, drop_overlapping=False):
+    """
+    This method goes through and concatenates any lines that belong together,
+     e.g. sentences over two lines, sentences over several consecutive lines in different timestamps
+     (continuation is denoted by ending a line and starting the next line with -).
+    If two lines have dashes that denotes multiple speakers speaking simultaneously or in rapid succession,
+     these can optionally be filtered out using `drop_overlapping`
+    (note: generation of dataframe replaces newlines with a pipe for parsing)
+    """
+    data = data.sort_values(["program_id", "start_time", "end_time"])
+    data.text = data.text.str.replace("—", "-")  # Inconsistent usage, just stick to the normal dash
+    old_text = data.text
+
+    expects_continuation = False
+    overlapping = False
+    start_index = None
+    string = ""
+    delete_mask = np.zeros(len(data), dtype=bool)
+
+    for i, text in enumerate(data["text"]):
+        text = text.strip()
+        is_continuation = text.startswith("-")
+        if is_continuation:
+            is_continuation = expects_continuation
+            overlapping = overlapping or bool(re.fullmatch(r"-.+(<br>-.+)+", text))
+            if drop_overlapping and overlapping:
+                if expects_continuation:  # Invalidate the whole sequence
+                    delete_mask[start_index:i + 1] = True
+                elif text.endswith("-"):  # Propagate invalidation forward
+                    start_index = i
+                    expects_continuation = True
+                    delete_mask[i] = True
+                else:
+                    delete_mask[i] = True
+                continue
+        overlapping = False  # Stop propagation
+
+        expects_continuation = text.endswith("-")
+
+        if is_continuation:
+            string += "<br>" + text
+            if not expects_continuation:
+                data.iloc[start_index, 5] = string
+                data.iloc[start_index, 4] = data.iloc[i, 4]
+                delete_mask[start_index + 1: i + 1] = True
+                string = None
+        elif expects_continuation:
+            start_index = i
+            string = text
+        else:
+            start_index = None
+            string = None
+
+    data.drop(data[delete_mask].index, inplace=True)
+
+    # Continued word, e.g. `Det er viktig å treffe folk som har mer for-<br>nuftige interesser enn de gamle kompisene.`
+    data.text = data.text.str.replace(r"-<br>(?!-)", "", regex=True)
+
+    # This has very inconsistent usage (either two people talking or word continuation)
+    data.drop(data[data.text.str.contains("-<br>-")].index)
+
+    data.text = data.text.str.replace(r"^-|\-?<br>-?", " ", regex=True)
+    data.text = data.text.str.strip().replace("  +", " ", regex=True)
+    data.drop(data[data.text.isna() | (data.text.str.len() == 0)].index, inplace=True)
+
+    modified = pd.DataFrame({"old_text": old_text[data.index], "new_text": data.text})
+    deleted = old_text.drop(data.index)
+
+    return modified, deleted
+
+
 def main(args):
     pd.set_option("display.max_rows", None)
     ocr_doc = 1
@@ -309,6 +382,15 @@ def main(args):
                      f'\n {data[cond]}')
         data = data[~cond]
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
+                    f'The length is now {len(data)}. ({exec_time()})')
+
+    if config['remove_splits']:
+        modified, deleted = remove_splits(data, drop_overlapping=config['drop_overlapping'])
+        logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
+                     f'\n {modified}')
+        logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
+                     f'\n {deleted}')
+        logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
 
     # TODO filter out `CPossible`
