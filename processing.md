@@ -16,18 +16,18 @@ for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles
 
 
 # Generate the NST dataset
-python create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/test/mp3/
-python create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/train/mp3/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/test/mp3/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/nst/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/train/mp3/
 
 # Generate the NPSC Bokmål dataset
-python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
-python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
-python create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nob.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
 
 # Generate the NPSC Nynorsk dataset
-python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
-python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
-python create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc/
 
 
 ```
