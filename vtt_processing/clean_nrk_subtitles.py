@@ -9,7 +9,7 @@ import pandas as pd
 from tqdm import tqdm
 
 VTT_SPLIT_PATTERN = re.compile(
-    r"\n(\d+)\n(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3}) ?--> ?(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3})")
+        r"\n(\d+)\n(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3}) ?--> ?(-?\d+):(-?\d\d):(-?\d\d)[.,](-?\d{3})")
 
 
 @dataclass
@@ -193,7 +193,7 @@ def remove_splits(df: pd.DataFrame, drop_overlapping=False):
     df.text = df.text.str.replace(r"-\|(?!-)", "", regex=True)
 
     # This has very inconsistent usage
-    df.drop(df[df.text.str.contains("-|-")].index)
+    df.drop(df[df.text.str.contains(r"-\|-")].index)
 
     df.text = df.text.str.replace(r"^-|\-?\|-?", " ", regex=True)
     df.text = df.text.str.strip().replace("  +", " ", regex=True)
@@ -254,6 +254,35 @@ def filter_foreign_languages(df: pd.DataFrame, minimum_consecutive=4,
     df.drop(df[consecutive >= minimum_consecutive].index, inplace=True)
 
 
+def ms_to_stamp(ms):
+    hour = ms // (60 * 60 * 1000)
+    ms = ms % (60 * 60 * 1000)
+    min = ms // (60 * 1000)
+    ms = ms % (60 * 1000)
+    sec = ms // 1000
+    ms = ms % 1000
+    return "{:02d}:{:02d}:{:02d}.{:03d}".format(hour, min, sec, ms)
+
+
+def to_vtts(df, output_folder):
+    os.makedirs(output_folder, exist_ok=True)
+    it = tqdm(df.groupby("program"), desc=os.path.basename(output_folder))
+    for program, sub_df in it:
+        out_path = os.path.join(output_folder, f"{program}.vtt")
+        if os.path.isfile(out_path):
+            continue
+        with open(out_path, "w") as out_file:
+            n = 1
+            out_file.write("WEBVTT\n")
+            for _, row in sub_df.iterrows():
+                timestamp = f"{ms_to_stamp(row.ms_start)} --> {ms_to_stamp(row.ms_end)}"
+                text = row.text.replace("|", "\n")
+
+                out_file.write(f"\n{n}\n{timestamp}\n{text}\n")
+                n += 1
+        it.set_postfix_str(program)
+
+
 def main():
     # TODO make arguments
 
@@ -261,15 +290,20 @@ def main():
     # make_dataframe("out/vtts/")
 
     print("Loading file...")
-    df = pd.read_csv("lines.tsv", sep="\t", quoting=3)
+    df = pd.read_csv("../lines.tsv", sep="\t", quoting=3)
     df.text = df.text.fillna("").str.strip()
 
     df_clean = df.copy()
-    print("Removing invalid durations...")
-    remove_invalid_durations(df_clean)
+    # print("Removing invalid durations...")
+    # remove_invalid_durations(df_clean)
 
     print("Separating ttv/nor...")
     ttv, nor = separate_nor_ttv(df_clean)
+
+    to_vtts(ttv, "../out/vtts_transcribe")
+    to_vtts(nor, "../out/vtts_translate")
+
+    exit(0)
 
     for name, df_clean in ("nor", nor.copy()), ("ttv", ttv.copy()):
         print("Removing italics...")
