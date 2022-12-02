@@ -14,8 +14,9 @@ tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t transl
 
 ## JSON 2
 #Collate the subtitles into a singe directory
-for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles_vtt_transcribe_translate/*.json; do (cat "${f}"; echo) >> /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk_transcribe_translate.json; done
-for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles_vtt_translate/*.json; do (cat "${f}"; echo) >> /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk_translate.json; done
+rm /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json
+for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles_vtt_transcribe_translate/*.json; do (cat "${f}"; echo) >> /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json; done
+for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles_vtt_translate/*.json; do (cat "${f}"; echo) >> /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json; done
 
 # Generate the NST dataset
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_nst.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/nst_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/test/mp3/
