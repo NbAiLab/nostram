@@ -56,3 +56,32 @@ def detect_lang(
     else:
         return predictions[0] if return_proba else predictions[0][0]
 
+
+
+from pydub import AudioSegment
+import os
+
+def extract_mp3_chunk(filename: str, start: int, end: int, output_dir: str) -> bool:
+    """
+    Extract a chunk from the given MP3 file and save it to the output directory.
+    Return True if the chunk was successfully saved, or False if the save failed
+    or the input MP3 file does not exist.
+    """
+    # Check if the input MP3 file exists
+    if not os.path.exists(filename):
+        return False
+
+    # Load the MP3 file using pydub
+    audio = AudioSegment.from_mp3(filename)
+
+    # Extract the chunk from the MP3 file
+    chunk = audio[start:end]
+
+    # Save the chunk to the output directory
+    output_filename = f'{os.path.basename(filename)}_{start}_{end}.mp3'
+    chunk.export(output_dir + output_filename, format='mp3')
+
+    # Return True if the chunk was saved successfully
+    return True
+
+
