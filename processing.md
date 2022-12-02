@@ -9,7 +9,6 @@ This contains direct paths to internal systems. Do not expect to run this withou
 
 # Faster way to the commands above
 tmux new-session -d -s transcribe_translate; for i in {1..50}; do tmux new-window -t transcribe_translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/ -v vtt_transcribe_translate"; done
-
 tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/ -v vtt_translate"; done
 
 for f in /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/subtitles_vtt_transcribe_translate/*.json; do (cat "${f}"; echo) >> ../../../json_2/nrk/transcribe_translate.json; done
