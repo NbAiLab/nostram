@@ -32,5 +32,8 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 
+## CLEAN 3
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/test/
+
 
 ```
