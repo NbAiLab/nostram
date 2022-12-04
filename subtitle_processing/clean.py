@@ -189,61 +189,36 @@ def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
     """
     data = data.copy().sort_values(["program_id", "start_time", "end_time"][int("program_id" not in data.columns):])
     data.text = data.text.str.replace("—", "-")  # Inconsistent usage, just stick to the normal dash
-    old_text = data.text
-
-    expects_continuation = False
-    overlapping = False
-    start_index = None
-    string = ""
-    delete_mask = np.zeros(len(data), dtype=bool)
+    # old_text = data.text
 
     # is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
-    # expects_continuation = data.text.str.endswith("-")
+    expects_continuation = data.text.str.strip().str.endswith("-")
 
-    for i, text in enumerate(data["text"]):
-        text = text.strip()
-        is_continuation = text.startswith("-")
-        if is_continuation:
-            is_continuation = expects_continuation
-            overlapping = overlapping or bool(re.fullmatch(r"-.+(<br>-.+)+", text))
-            if drop_overlapping and overlapping:
-                if expects_continuation:  # Invalidate the whole sequence
-                    delete_mask[start_index:i + 1] = True
-                elif text.endswith("-"):  # Propagate invalidation forward
-                    start_index = i
-                    expects_continuation = True
-                    delete_mask[i] = True
-                else:
-                    delete_mask[i] = True
-                continue
-        overlapping = False  # Stop propagation
+    def cat(df):
+        first = df.iloc[0].copy()
+        last = df.iloc[-1]
+        first.text = df.text.str.strip().str.cat(sep="<p>")
+        first.end_time = last.end_time
 
-        expects_continuation = text.endswith("-")
+        return first
 
-        if is_continuation:
-            string += "<br>" + text
-            if not expects_continuation:
-                data.iloc[start_index, data.columns.get_loc('text')] = string
-                end_loc = data.columns.get_loc('end_time')
-                data.iloc[start_index, end_loc] = data.iloc[i, end_loc]
-                delete_mask[start_index + 1: i + 1] = True
-                string = None
-        elif expects_continuation:
-            start_index = i
-            string = text
-        else:
-            start_index = None
-            string = None
+    groups = (~expects_continuation.shift(1, fill_value=False)).cumsum()
+    data = data.groupby(groups).apply(cat)
 
-    data.drop(data[delete_mask].index, inplace=True)
+    if drop_overlapping:
+        # Find overlapping speakers, e.g. `-Vi svarte frimerker.<br>-Det var ikke alle som visste det.`
+        is_overlapping = data.text.str.match(r".*(^|<p>)-[^<>]*(?<!-)<br>-", )
+        data.drop(data[is_overlapping].index, inplace=True)
 
     # Continued word, e.g. `Det er viktig å treffe folk som har mer for-<br>nuftige interesser enn de gamle kompisene.`
     data.text = data.text.str.replace(r"-<br>(?!-)", "", regex=True)
 
-    # This has very inconsistent usage (either two people talking or word continuation)
-    data.drop(data[data.text.str.contains("-<br>-")].index)
+    # Continued sentence
+    data.text = data.text.str.replace(r"-<p>-?", " ", regex=True)
 
-    data.text = data.text.str.replace(r"^-|\-?<br>-?", " ", regex=True)
+    # Now remove any remainders
+    data.text = data.text.str.replace("<(p|br)>-?|^-", " ", regex=True)
+
     data.text = data.text.str.strip().replace("  +", " ", regex=True)
     data.drop(data[data.text.isna() | (data.text.str.len() == 0)].index, inplace=True)
 
@@ -251,6 +226,7 @@ def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
     # deleted = old_text.drop(data.index)
 
     return data
+
 
 def make_bigger_segments(data: pd.DataFrame, drop_overlapping=True):
     breakpoint()
@@ -279,16 +255,16 @@ def find_simultaneous(data: pd.DataFrame):
 
     return program_ids
 
+
 def create_histogram(data: pd.DataFrame):
     hist_string = ""
-    histogram = np.histogram(data["duration"],bins=30,range=(0,30000))[0]
+    histogram = np.histogram(data["duration"], bins=30, range=(0, 30000))[0]
     for i in histogram:
         hist_string += str(i) + ", "
 
-    hist_string = "["+hist_string[:-2].strip()+"]"
+    hist_string = "[" + hist_string[:-2].strip() + "]"
 
     return hist_string
-
 
 
 def main(args):
@@ -460,7 +436,7 @@ def main(args):
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} ')
- 
+
     if config['make_bigger_segments']:
         data = data.groupby(["program_id", "vtt_folder"]).apply(
             functools.partial(make_bigger_segments))
@@ -475,7 +451,7 @@ def main(args):
         logger.info(f'***  Created bigger sigments. '
                     f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after making bigger segments: {create_histogram(data)} ')
- 
+
     #
     # TODO filter out `CPossible`
 
