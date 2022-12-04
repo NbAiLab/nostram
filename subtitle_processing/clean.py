@@ -443,7 +443,7 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['merge_subtitles']:
-        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)} '
+        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)} ')
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(merge_subtitles, drop_overlapping=config['drop_overlapping']))
         data = data.reset_index(drop=True)
@@ -455,7 +455,7 @@ def main(args):
         #              f'\n {deleted}')
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
-        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} ')
     # 
     # TODO filter out `CPossible`
 
