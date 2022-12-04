@@ -197,8 +197,8 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
     string = ""
     delete_mask = np.zeros(len(data), dtype=bool)
 
-    is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
-    expects_continuation = data.text.str.endswith("-")
+    # is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
+    # expects_continuation = data.text.str.endswith("-")
 
     for i, text in enumerate(data["text"]):
         text = text.strip()
@@ -432,7 +432,7 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['remove_splits']:
-        data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
+        data = data.groupby(["program_id", "vtt_folder"]).apply(
             functools.partial(remove_splits, drop_overlapping=config['drop_overlapping']))
         data = data.reset_index(drop=True)
         # data = data.reset_index().drop("level_1", axis=1)
