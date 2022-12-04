@@ -178,7 +178,7 @@ def is_invalid_duration(data: pd.DataFrame):
     return cond
 
 
-def remove_splits(data: pd.DataFrame, drop_overlapping=False):
+def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
     """
     This method goes through and concatenates any lines that belong together,
      e.g. sentences over two lines, sentences over several consecutive lines in different timestamps
@@ -275,6 +275,17 @@ def find_simultaneous(data: pd.DataFrame):
     program_ids = simultaneous.program_id.unique()
 
     return program_ids
+
+def create_histogram(data: pd.DataFrame):
+    hist_string = ""
+    histogram = np.histogram(data["duration"],bins=30,range=(0,30000))[0]
+    for i in histogram:
+        hist_string += str(i) + ", "
+
+    hist_string = "["+hist_string[:-2].strip()+"]"
+
+    return hist_string
+
 
 
 def main(args):
@@ -431,19 +442,22 @@ def main(args):
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
 
-    if config['remove_splits']:
-        data = data.groupby(["program_id", "vtt_folder"]).apply(
-            functools.partial(remove_splits, drop_overlapping=config['drop_overlapping']))
+    if config['merge_subtitles']:
+        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)} ')
+        data = data.groupby(["program_id", "vtt_folder"],axis=0).parallel_apply(
+            functools.partial(merge_subtitles, drop_overlapping=config['drop_overlapping']))
+
         data = data.reset_index(drop=True)
         # data = data.reset_index().drop("level_1", axis=1)
-        # modified, deleted = remove_splits(data, drop_overlapping=config['drop_overlapping'])
+        # modified, deleted = rmerge_subtitles(data, drop_overlapping=config['drop_overlapping'])
         # logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
         #              f'\n {modified}')
         # logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
         #              f'\n {deleted}')
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
-
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} ')
+    #
     # TODO filter out `CPossible`
 
     # Remove duplicates
