@@ -444,7 +444,7 @@ def main(args):
 
     if config['merge_subtitles']:
         logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)} ')
-        data = data.groupby(["program_id", "vtt_folder"],axis=0).parallel_apply(
+        data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(merge_subtitles, drop_overlapping=config['drop_overlapping']))
 
         data = data.reset_index(drop=True)
