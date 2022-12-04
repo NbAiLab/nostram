@@ -11,6 +11,9 @@ This contains direct paths to internal systems. Do not expect to run this withou
 tmux new-session -d -s transcribe_translate; for i in {1..50}; do tmux new-window -t transcribe_translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated -v vtt_transcribe_translate"; done
 tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated -v vtt_translate"; done
 
+# Download and convert the Fleurs dataset
+python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+
 
 ## JSON 2
 #Collate the subtitles into a singe directory
