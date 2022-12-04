@@ -13,6 +13,8 @@ tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t transl
 
 # Download the Fleurs dataset
 python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
 
 
 ## JSON 2
@@ -37,6 +39,8 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py
 
 #Generate the Fleurs dataset
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/norwegian_fleurs-test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/norwegian_fleurs-validation.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/norwegian_fleurs-train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
