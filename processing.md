@@ -36,7 +36,7 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 
 #Generate the Fleurs dataset
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/norwegian_fleurs_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/norwegian_fleurs-test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/ --mp3_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
