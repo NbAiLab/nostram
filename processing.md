@@ -11,7 +11,7 @@ This contains direct paths to internal systems. Do not expect to run this withou
 tmux new-session -d -s transcribe_translate; for i in {1..50}; do tmux new-window -t transcribe_translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated -v vtt_transcribe_translate"; done
 tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated -v vtt_translate"; done
 
-# Download and convert the Fleurs dataset
+# Download the Fleurs dataset
 python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
 
 
@@ -34,6 +34,9 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nob.py
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_eval.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_npsc_nno.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
+
+#Generate the Fleurs dataset
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py --input_file /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/npsc_test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/json_2/
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
