@@ -200,6 +200,7 @@ def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
         first.text = df.text.str.strip().str.cat(sep="<p>")
         first.end_time = last.end_time
         first.duration = first.end_time - first.start_time
+        first.id = "_".join(first.id.split("_")[1:] + [str(first.end_time)])
 
         return first
 
