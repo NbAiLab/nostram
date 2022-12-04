@@ -1,7 +1,7 @@
 ######################################################################
 ### Cleans up subtitle jsonl files
 #####################################################################
-
+import functools
 import os, sys
 import json
 
@@ -187,7 +187,7 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
      these can optionally be filtered out using `drop_overlapping`
     (note: generation of dataframe replaces newlines with a pipe for parsing)
     """
-    data = data.sort_values(["program_id", "start_time", "end_time"])
+    data = data.copy().sort_values(["program_id", "start_time", "end_time"][int("program_id" not in data.columns):])
     data.text = data.text.str.replace("—", "-")  # Inconsistent usage, just stick to the normal dash
     old_text = data.text
 
@@ -196,6 +196,9 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
     start_index = None
     string = ""
     delete_mask = np.zeros(len(data), dtype=bool)
+
+    is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
+    expects_continuation = data.text.str.endswith("-")
 
     for i, text in enumerate(data["text"]):
         text = text.strip()
@@ -220,8 +223,9 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
         if is_continuation:
             string += "<br>" + text
             if not expects_continuation:
-                data.iloc[start_index, 5] = string
-                data.iloc[start_index, 4] = data.iloc[i, 4]
+                data.iloc[start_index, data.columns.get_loc('text')] = string
+                end_loc = data.columns.get_loc('end_time')
+                data.iloc[start_index, end_loc] = data.iloc[i, end_loc]
                 delete_mask[start_index + 1: i + 1] = True
                 string = None
         elif expects_continuation:
@@ -243,10 +247,10 @@ def remove_splits(data: pd.DataFrame, drop_overlapping=False):
     data.text = data.text.str.strip().replace("  +", " ", regex=True)
     data.drop(data[data.text.isna() | (data.text.str.len() == 0)].index, inplace=True)
 
-    modified = pd.DataFrame({"old_text": old_text[data.index], "new_text": data.text})
-    deleted = old_text.drop(data.index)
+    # modified = pd.DataFrame({"old_text": old_text[data.index], "new_text": data.text})
+    # deleted = old_text.drop(data.index)
 
-    return modified, deleted
+    return data
 
 
 def remove_italics(data: pd.DataFrame):
@@ -256,14 +260,14 @@ def remove_italics(data: pd.DataFrame):
     One special case is parallel translations from tertiary language to Norwegian and Sami,
      with one language italicized and the other not, on separate lines.
     """
-    cond = data.text.str.fullmatch(r"((^|<br>)[^<>]+)+(<br><i>[^<>]+<\/i>)+")
-    dropped = data.text[cond]
-    data.drop(data[cond].index, inplace=True)
+    # cond = data.text.str.fullmatch(r"((^|<br>)[^<>]+)+(<br><i>[^<>]+<\/i>)+")
+    # dropped = data.text[cond]
+    # data.drop(data[cond].index, inplace=True)
     old_text = data.text
-    data.text = data.text.str.replace("</?i>", " ", regex=True).str.strip()
+    data.text = data.text.str.replace("</?i>", "", regex=True).str.strip()
     cond = old_text != data.text
     modified = pd.DataFrame({"old_text": old_text[cond], "new_text": data.text[cond]})
-    return dropped, modified
+    return modified
 
 
 def find_simultaneous(data: pd.DataFrame):
@@ -406,9 +410,9 @@ def main(args):
         logger.info(f'***  Filtered out tasks. The length is now {len(data)}. ({exec_time()})')
 
     if config['drop_italics']:
-        dropped, modified = remove_italics(data)
-        logger.debug(f'\n\n*** The following text was deleted because it is suspected to be bilingual:'
-                     f'\n {dropped}')
+        modified = remove_italics(data)
+        # logger.debug(f'\n\n*** The following text was deleted because it is suspected to be bilingual:'
+        #              f'\n {dropped}')
         logger.debug(f'\n\n*** The following text was modified because it contained italics text:'
                      f'\n {modified}')
         logger.info(f'***  Filtered out italics. The length is now {len(data)}. ({exec_time()})')
@@ -428,11 +432,15 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['remove_splits']:
-        modified, deleted = remove_splits(data, drop_overlapping=config['drop_overlapping'])
-        logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
-                     f'\n {modified}')
-        logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
-                     f'\n {deleted}')
+        data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
+            functools.partial(remove_splits, drop_overlapping=config['drop_overlapping']))
+        data = data.reset_index(drop=True)
+        # data = data.reset_index().drop("level_1", axis=1)
+        # modified, deleted = remove_splits(data, drop_overlapping=config['drop_overlapping'])
+        # logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
+        #              f'\n {modified}')
+        # logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
+        #              f'\n {deleted}')
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
 
@@ -464,9 +472,9 @@ def main(args):
     output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
     logger.info(
-        f'*** Finished processing file. Result has {len(data)} posts. Total length is {round(data["duration"].sum()/1000/60/60,1)} hours. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
+        f'*** Finished processing file. Result has {len(data)} posts. Total length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
     print(
-        f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
+        f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
 
 
 def parse_args():
