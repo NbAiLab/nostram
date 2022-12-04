@@ -230,10 +230,6 @@ def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
     return data
 
 
-def make_bigger_segments(data: pd.DataFrame, drop_overlapping=True):
-    breakpoint()
-
-
 def remove_italics(data: pd.DataFrame):
     """
     Italics are used liberally to denote things like emphasis, narrators, voices from phones etc.
@@ -424,7 +420,7 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['merge_subtitles']:
-        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)} ')
+        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)}. \nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(merge_subtitles, drop_overlapping=config['drop_overlapping']))
 
@@ -439,20 +435,6 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} ')
 
-    if config['make_bigger_segments']:
-        data = data.groupby(["program_id", "vtt_folder"]).apply(
-            functools.partial(make_bigger_segments))
-
-        data = data.reset_index(drop=True)
-        # data = data.reset_index().drop("level_1", axis=1)
-        # modified, deleted = rmerge_subtitles(data, drop_overlapping=config['drop_overlapping'])
-        # logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
-        #              f'\n {modified}')
-        # logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
-        #              f'\n {deleted}')
-        logger.info(f'***  Created bigger sigments. '
-                    f'The length is now {len(data)}. ({exec_time()})')
-        logger.info(f'***  Histogram after making bigger segments: {create_histogram(data)} ')
 
     #
     # TODO filter out `CPossible`
