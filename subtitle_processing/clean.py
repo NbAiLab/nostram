@@ -17,6 +17,8 @@ import argparse
 import ftfy
 from pandarallel import pandarallel
 
+from subtitle_processing.utils import detect_lang
+
 pandarallel.initialize(use_memory_fs=True)
 start_time = time.time()
 
@@ -35,7 +37,7 @@ control_char_regex = re.compile(r'[\r\n\t]+')
 
 
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True)
+    data = pd.read_json(jsonline, lines=True, nrows=100_000)
 
     logger.info(f'***  Json parsed. {len(data)} lines. ({exec_time()})')
     print(f'***  Json parsed with {len(data)} lines. ({exec_time()})')
@@ -323,8 +325,8 @@ def main(args):
 
     # Set number of characters in an subtitle
     # Add this to the frame since we will use it later for sorting
-    if len(data) > 0:
-        data['doc_length'] = data["text"].parallel_apply(len).groupby(data['id']).transform(sum)
+    # if len(data) > 0:
+    #     data['doc_length'] = data["text"].parallel_apply(len).groupby(data['id']).transform(sum)
 
     # Create columns if they do not exist
     # Probably not needed for subtitles but I leave the structure just in case
@@ -376,7 +378,7 @@ def main(args):
 
     # Minimum length of subtitle
     if config['min_length_subtitle']:
-        cond = data['doc_length'] >= config['min_length_subtitle']
+        cond = data.text.str.len() >= config['min_length_subtitle']
         logger.debug(f'\n\n*** The following text was deleted because the article minimum length was too small:'
                      f'\n {data[~cond]["text"]}')
         data = data[cond]
@@ -474,6 +476,25 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
+
+    if config['detect_lang_text']:
+        if "lang_text" in data.columns:
+            mask = data["lang_text"].isna()
+            data[~mask, "lang_text_confidence"] = 1.
+        else:
+            mask = slice(None)
+
+        languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
+                                                                       index=["language", "confidence"]))
+
+        data.loc[mask, "lang_text"] = languages["language"]
+        data.loc[mask, "lang_text_confidence"] = languages["confidence"]
+
+        allowed_langs = config.get("allow_lang_text", None)
+        if allowed_langs:
+            if isinstance(allowed_langs, str):
+                allowed_langs = [allowed_langs]
+            data = data[data["lang_text"].isin(allowed_langs)]
 
     # TODO filter out `CPossible`
 
