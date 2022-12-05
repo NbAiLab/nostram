@@ -37,7 +37,7 @@ control_char_regex = re.compile(r'[\r\n\t]+')
 
 
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True, nrows=100_000)
+    data = pd.read_json(jsonline, lines=True)
 
     logger.info(f'***  Json parsed. {len(data)} lines. ({exec_time()})')
     print(f'***  Json parsed with {len(data)} lines. ({exec_time()})')
