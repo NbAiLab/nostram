@@ -123,11 +123,11 @@ def add_task_field(data: pd.DataFrame):
     dup_sub_start_end = data.duplicated(subset=["program_id", "vtt_folder", "start_time", "end_time"], keep=False)
     data.drop(data[dup_sub_start_end].index, inplace=True)
 
-    # Mark duplicates by program+time+text, mark anything except first (NOR since alphabetical) as duplicate
-    dup_start = data.duplicated(subset=["program_id", "start_time", "text"], keep="first")
-    dup_end = data.duplicated(subset=["program_id", "end_time", "text"], keep="first")
+    # Mark duplicates by program+time+text
+    dup_start = data.duplicated(subset=["program_id", "start_time", "text"], keep=False)
+    dup_end = data.duplicated(subset=["program_id", "end_time", "text"], keep=False)
 
-    # Find duplicates only by program+text (both NOR and TTV)
+    # Find duplicates only by program+text (both transcribe and transcribe_translate)
     dup_text_type = data.duplicated(subset=["program_id", "vtt_folder", "text"], keep=False)
     dup_text = data.duplicated(subset=["program_id", "text"], keep=False)
 
@@ -135,7 +135,7 @@ def add_task_field(data: pd.DataFrame):
     mask = ~(dup_start | dup_end) & ~(dup_text & ~dup_text_type)
 
     data.loc[mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "transcribe"
-    # data.loc[~mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "UNK"
+    data.loc[~mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "UNK"
     data.loc[data.vtt_folder == "vtt_translate", "task"] = "translate"
 
 
@@ -228,6 +228,29 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     # deleted = old_text.drop(data.index)
 
     return data
+
+
+def combine_to_size(data, max_total_duration_seconds=30, max_separation_seconds=5):
+    data = data.sort_values(["start_time", "end_time"])
+    groups = []
+    group = [data.iloc[0]]
+    for i in range(1, len(data) + 1):
+        row = data.iloc[i] if i < len(data) else None  # Need an extra iteration to include the last group
+        if (row is not None
+                and row.end_time - group[0].start_time < max_total_duration_seconds * 1000
+                and row.start_time - group[-1].end_time < max_separation_seconds * 1000):
+            group.append(row)
+        else:
+            first = group[0].copy()
+            first.text = re.sub(r"\s+", " ", " ".join([r.text for r in group]))
+            first.end_time = group[-1].end_time
+            first.duration = first.end_time - first.start_time
+            first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
+            groups.append(first)
+            group = [row]
+    assert group[0] is None
+    new_data = pd.concat(groups, axis=1, ignore_index=True).T
+    return new_data
 
 
 def remove_italics(data: pd.DataFrame):
@@ -390,6 +413,7 @@ def main(args):
         logger.info(f'***  Filtered out simultaneous texting. The length is now {len(data)}. ({exec_time()})')
 
     add_task_field(data)
+    logger.info(f"*** Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
         cond = data['task'] == config['task']
         logger.debug(f'\n\n*** The following text was deleted because it was not the correct task:'
@@ -420,7 +444,9 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['merge_subtitles']:
-        logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)}. \nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
+        logger.info(
+            f'***  Histogram before merging subtitles: {create_histogram(data)}. '
+            f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(merge_subtitles, drop_multiple_speakers=config['drop_multiple_speakers']))
 
@@ -433,10 +459,22 @@ def main(args):
         #              f'\n {deleted}')
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
                     f'The length is now {len(data)}. ({exec_time()})')
-        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} ')
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
+                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
 
+    if config['make_bigger_segments']:
+        data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
+            functools.partial(combine_to_size,
+                              max_total_duration_seconds=config["max_total_duration_seconds"],
+                              max_separation_seconds=config["max_total_duration_seconds"])
+        )
+        data = data.reset_index(drop=True)
 
-    #
+        logger.info(f'***  Combined texts to fill out context length. '
+                    f'The length is now {len(data)}. ({exec_time()})')
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
+                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
+
     # TODO filter out `CPossible`
 
     # Remove duplicates
