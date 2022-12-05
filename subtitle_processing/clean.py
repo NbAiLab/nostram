@@ -178,13 +178,13 @@ def is_invalid_duration(data: pd.DataFrame):
     return cond
 
 
-def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
+def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     """
     This method goes through and concatenates any lines that belong together,
      e.g. sentences over two lines, sentences over several consecutive lines in different timestamps
      (continuation is denoted by ending a line and starting the next line with -).
     If two lines have dashes that denotes multiple speakers speaking simultaneously or in rapid succession,
-     these can optionally be filtered out using `drop_overlapping`
+     these can optionally be filtered out using `drop_multiple_speakers`
     (note: generation of dataframe replaces newlines with a pipe for parsing)
     """
     data = data.copy().sort_values(["program_id", "start_time", "end_time"][int("program_id" not in data.columns):])
@@ -207,7 +207,7 @@ def merge_subtitles(data: pd.DataFrame, drop_overlapping=False):
     groups = (~expects_continuation.shift(1, fill_value=False)).cumsum()
     data = data.groupby(groups).apply(cat)
 
-    if drop_overlapping:
+    if drop_multiple_speakers:
         # Find overlapping speakers, e.g. `-Vi svarte frimerker.<br>-Det var ikke alle som visste det.`
         is_overlapping = data.text.str.match(r".*(^|<p>)-[^<>]*(?<!-)<br>-", )
         data.drop(data[is_overlapping].index, inplace=True)
@@ -422,11 +422,11 @@ def main(args):
     if config['merge_subtitles']:
         logger.info(f'***  Histogram before merging subtitles: {create_histogram(data)}. \nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 1)} hours.')
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
-            functools.partial(merge_subtitles, drop_overlapping=config['drop_overlapping']))
+            functools.partial(merge_subtitles, drop_multiple_speakers=config['drop_multiple_speakers']))
 
         data = data.reset_index(drop=True)
         # data = data.reset_index().drop("level_1", axis=1)
-        # modified, deleted = rmerge_subtitles(data, drop_overlapping=config['drop_overlapping'])
+        # modified, deleted = rmerge_subtitles(data, drop_multiple_speakers=config['drop_multiple_speakers'])
         # logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
         #              f'\n {modified}')
         # logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
