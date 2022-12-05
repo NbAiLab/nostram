@@ -1,4 +1,4 @@
-from typing import Optional, List, Set, Union
+from typing import Optional, List, Set, Union, Tuple
 
 import fasttext
 from datasets.utils.download_manager import DownloadManager
