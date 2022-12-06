@@ -321,14 +321,22 @@ def create_audio_segments_command(id, audio, start_time, duration):
 
 
 def left_align(text):
-    # Utility for debug output
-    return text.str.ljust(int(text.str.len().max()))
+    if len(text) == 0:
+        return text
+    elif isinstance(text, pd.DataFrame):
+        text = text.copy()
+        for col in text.columns:
+            if text[col].dtype == object:  # Assume string
+                text[col] = left_align(text[col])
+        return text
+    else:
+        # Utility for debug output
+        return text.str.ljust(int(text.str.len().max()))
 
 
 def main(args):
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_colwidth", None)
-    pd.set_option
     ocr_doc = 1
 
     # Invoke logging
@@ -519,7 +527,7 @@ def main(args):
         cond = before_merge.str.replace(r"\s*<br>\s*", " ", regex=True) != data.text
         modified = pd.DataFrame({"before": before_merge[cond], "after": data.text[cond]})
         logger.debug(f"\n\n*** The following text was modified during merging of subtitles:"
-                     f"\n{modified}")
+                     f"\n{left_align(modified)}")
         data = data.drop("**before_merge**", axis=1)
 
         # data = data.reset_index().drop("level_1", axis=1)
