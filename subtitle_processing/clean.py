@@ -225,7 +225,13 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     if drop_multiple_speakers:
         # Find overlapping speakers, e.g. `-Vi svarte frimerker.<br>-Det var ikke alle som visste det.`
         is_overlapping = data.text.str.match(r".*(^|<p>)-[^<>]*(?<!-)<br>-", )
-        data.drop(data[is_overlapping].index, inplace=True)
+        # is_overlapping = data[is_overlapping].text
+        # data.drop(is_overlapping.index, inplace=True)
+        data.loc[is_overlapping, "**is_overlapping**"] = data[is_overlapping].text
+
+    # To be dropped later
+    has_triple_lines = data.text.str.contains("[^<>]+<br>[^<>]+<br>[^<>]+")
+    data.loc[has_triple_lines, "**has_triple_lines**"] = data[has_triple_lines].text.copy()
 
     # Continued word, e.g. `Det er viktig å treffe folk som har mer for-<br>nuftige interesser enn de gamle kompisene.`
     data.text = data.text.str.replace(r"-<br>(?!-)", "", regex=True)
@@ -237,8 +243,7 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     data.text = data.text.str.replace("<(p|br)>-?|^-", " ", regex=True)
 
     data.text = data.text.str.strip().replace("  +", " ", regex=True)
-    data.drop(data[data.text.isna() | (
-        data.text.str.len() == 0)].index, inplace=True)
+    data.drop(data[data.text.isna() | (data.text.str.len() == 0)].index, inplace=True)
 
     # modified = pd.DataFrame({"old_text": old_text[data.index], "new_text": data.text})
     # deleted = old_text.drop(data.index)
@@ -261,9 +266,10 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
             first = group[0].copy()
             first.text = re.sub(r"\s+", " ", " ".join([r.text for r in group]))
             first.end_time = group[-1].end_time
+            if row is not None and row.start_time - group[-1].end_time > max_separation_seconds:
+                first.end_time += 1000
             first.duration = first.end_time - first.start_time
-            first.id = "_".join(first.id.split(
-                "_")[:-1] + [str(first.end_time)])
+            first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
             groups.append(first)
             group = [row]
     assert group[0] is None
@@ -308,14 +314,20 @@ def create_histogram(data: pd.DataFrame):
     return hist_string
 
 
-def create_audio_segments_command(id,audio,start_time,duration):
-    ffmpeg_command = f"ffmpeg -n -ss {start_time/1000} -t {duration/1000} -i {os.path.join(args.audio_input_folder,audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder,id+'.mp3')}"
+def create_audio_segments_command(id, audio, start_time, duration):
+    ffmpeg_command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, id + '.mp3')}"
     return ffmpeg_command
 
+
+def left_align(text):
+    # Utility for debug output
+    return text.str.ljust(int(text.str.len().max()))
 
 
 def main(args):
     pd.set_option("display.max_rows", None)
+    pd.set_option("display.max_colwidth", None)
+    pd.set_option
     ocr_doc = 1
 
     # Invoke logging
@@ -351,9 +363,8 @@ def main(args):
 
     # Set number of characters in an subtitle
     # Add this to the frame since we will use it later for sorting
-    if len(data) > 0:
-        data['doc_length'] = data["text"].parallel_apply(
-            len).groupby(data['id']).transform(sum)
+    # if len(data) > 0:
+    #     data['doc_length'] = data["text"].parallel_apply(len).groupby(data['id']).transform(sum)
 
     # Create columns if they do not exist
     # Probably not needed for subtitles but I leave the structure just in case
@@ -475,8 +486,8 @@ def main(args):
 
     if config['drop_invalid_durations']:
         cond = is_invalid_duration(data)
-        logger.debug(f'\n\n*** The following text was modified because the speaking rate is too fast or too slow:'
-                     f'\n {data[cond]}')
+        logger.debug(f'\n\n*** The following text was deleted because the speaking rate is too fast or too slow:'
+                     f'\n {data[cond][["text", "duration"]]}')
         data = data[~cond]
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
@@ -489,6 +500,20 @@ def main(args):
             functools.partial(merge_subtitles, drop_multiple_speakers=config['drop_multiple_speakers']))
 
         data = data.reset_index(drop=True)
+
+        if "**is_overlapping**" in data.columns:
+            cond = data["**is_overlapping**"]
+            logger.debug(f"\n\n*** The following lines were removed for containing overlapping speakers:"
+                         f"\n{left_align(cond[cond.notna()])}")
+            data = data[cond.isna()]
+            data = data.drop("**is_overlapping**", axis=1)
+
+        cond = data["**has_triple_lines**"]
+        logger.debug(f"\n\n*** The following text was removed because it contained more than two lines in one subtitle:"
+                     f"\n{left_align(cond[cond.notna()])}")
+        data = data[cond.isna()]
+        data = data.drop("**has_triple_lines**", axis=1)
+
         # data = data.reset_index().drop("level_1", axis=1)
         # modified, deleted = rmerge_subtitles(data, drop_multiple_speakers=config['drop_multiple_speakers'])
         # logger.debug(f'\n\n*** The following text was modified because of text continuation or speaker overlap:'
@@ -500,11 +525,18 @@ def main(args):
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
 
+    if config['remove_cpossible']:
+        cond = data.text.str.contains("CPossible")
+        logger.debug(f'\n\n*** The following text was deleted because it contained "CPossible":'
+                     f'\n {data[cond]["text"]}')
+        data = data[~cond]
+        logger.info(f'***  Filtered out "CPossible". The length is now {len(data)}. ({exec_time()})')
+
     if config['make_bigger_segments']:
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(combine_to_size,
                               target_duration_seconds=config["target_duration_seconds"],
-                              max_separation_seconds=config["target_duration_seconds"])
+                              max_separation_seconds=config["max_separation_seconds"])
         )
         data = data.reset_index(drop=True)
 
@@ -543,24 +575,22 @@ def main(args):
         if not args.audio_input_folder:
             print("You also need to provide an input folder")
             os._exit(1)
-        #data.groupby(["program_id"]).parallel_apply(create_audio_segments)
-        
-        data['ffmpeg'] = data.parallel_apply(lambda row : create_audio_segments_command(row['id'],row['audio'],
-                     row['start_time'], row['duration']), axis = 1)
-        #data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
-                                    
-        with open(args.audio_output_folder+'/process_list.sh', 'w') as f:
+        # data.groupby(["program_id"]).parallel_apply(create_audio_segments)
+
+        data['ffmpeg'] = data.parallel_apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
+                                                                                       row['start_time'],
+                                                                                       row['duration']), axis=1)
+        # data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
+
+        with open(args.audio_output_folder + '/process_list.sh', 'w') as f:
             for text in data['ffmpeg'].tolist():
                 f.write(text + '\n')
-        
-        logger.info(f'***  Wrote audio processing list to disk:\n*** {os.path.join(args.audio_output_folder, "process_list.sh")}\n '
-                    f'The length is now {len(data)}. ({exec_time()})')
+
+        logger.info(
+            f'***  Wrote audio processing list to disk:\n*** {os.path.join(args.audio_output_folder, "process_list.sh")}\n '
+            f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
-
-    
-    
-    # TODO filter out `CPossible`
 
     # Remove duplicates
     # if len(data)>0:
