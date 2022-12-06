@@ -444,6 +444,8 @@ def main(args):
     
     if 'start_time' not in data.columns:
         data = data.assign(start_time='')
+    if 'end_time' not in data.columns:
+        data = data.assign(end_time='')
     
     logger.info(
         f"*** Added task field, counts: {data.task.value_counts().to_dict()}")
@@ -595,6 +597,24 @@ def main(args):
     
     # Update the audio file path even if the audio is not generated
     data['audio'] = data['id']+".mp3"
+    
+    # Do some general cleaning
+
+    
+    # Leave just a few columns for the online dataset
+    final_table_columns = ["id","text", "start_time","end_time","duration","program_id","medium","source","category","title","subtitle","audio","lang_text","lang_text_confidence","lang_voice","lang_voice_confidence","task"]
+    data = data[data.columns.intersection(final_table_columns)]
+    breakpoint()
+    # Add final table columns if they do not exits
+    for col in final_table_columns:
+        data[col] = data.get(col,'')
+        
+    # Change the orders of the columns so that the json looks nicer
+    data = data[final_table_columns]
+    
+    # Replace NaNs with empty strings
+    data = data.replace(np.nan,'',regex=True)
+    
     
     # Save it as jsonl
     output_filename = os.path.join(
