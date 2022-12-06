@@ -38,7 +38,7 @@ control_char_regex = re.compile(r'[\r\n\t]+')
 
 
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True)
+    data = pd.read_json(jsonline, lines=True, nrows=100_000)
 
     logger.info(f'***  Json parsed. {len(data)} lines. ({exec_time()})')
     print(f'***  Json parsed with {len(data)} lines. ({exec_time()})')
@@ -233,6 +233,7 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     has_triple_lines = data.text.str.contains("[^<>]+<br>[^<>]+<br>[^<>]+")
     data.loc[has_triple_lines, "**has_triple_lines**"] = data[has_triple_lines].text.copy()
 
+    data["**before_merge**"] = data.text.copy()
     # Continued word, e.g. `Det er viktig å treffe folk som har mer for-<br>nuftige interesser enn de gamle kompisene.`
     data.text = data.text.str.replace(r"-<br>(?!-)", "", regex=True)
 
@@ -513,6 +514,13 @@ def main(args):
                      f"\n{left_align(cond[cond.notna()])}")
         data = data[cond.isna()]
         data = data.drop("**has_triple_lines**", axis=1)
+
+        before_merge = data["**before_merge**"]
+        cond = before_merge.str.replace(r"\s*<br>\s*", " ", regex=True) != data.text
+        modified = pd.DataFrame({"before": before_merge[cond], "after": data.text[cond]})
+        logger.debug(f"\n\n*** The following text was modified during merging of subtitles:"
+                     f"\n{modified}")
+        data = data.drop("**before_merge**", axis=1)
 
         # data = data.reset_index().drop("level_1", axis=1)
         # modified, deleted = rmerge_subtitles(data, drop_multiple_speakers=config['drop_multiple_speakers'])
