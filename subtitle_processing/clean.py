@@ -266,7 +266,7 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
             first = group[0].copy()
             first.text = re.sub(r"\s+", " ", " ".join([r.text for r in group]))
             first.end_time = group[-1].end_time
-            if row is not None and row.start_time - group[-1].end_time > max_separation_seconds:
+            if row is not None and row.start_time - group[-1].end_time > max_separation_seconds * 1000:
                 first.end_time += 1000
             first.duration = first.end_time - first.start_time
             first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
