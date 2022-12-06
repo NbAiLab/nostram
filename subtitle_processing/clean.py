@@ -308,36 +308,10 @@ def create_histogram(data: pd.DataFrame):
     return hist_string
 
 
-def create_audio_segments(data: pd.DataFrame):
-    """
-    Extract a chunk from the given MP3 file and save it to the output directory.
-    Return True if the chunk was successfully saved, or False if the save failed
-    or the input MP3 file does not exist.
-    """
-    
-    input_filename = args.audio_input_folder+"/"+data.iloc[0]["audio"]
-    
-    # Check if the input MP3 file exists
-    if not os.path.exists(input_filename):
-        print("*** MP3 does not exist. ERROR!!")
-    
-    if not os.path.exists(args.audio_output_folder):
-        os.makedirs(args.audio_output_folder) 
-    
-    # Load the MP3 file using pydub
-    audio = AudioSegment.from_file(input_filename)
-    for i in range(0, len(data)):
-        if data.iloc[i]["start_time"]!="" and data.iloc[i]["end_time"]!="":
-            # Extract the chunk from the MP3 file
-            chunk = audio[data.iloc[i]["start_time"]:data.iloc[i]["end_time"]]
-            
-            #Save the chunk to the output directory
-            output_filename = f'{args.audio_output_folder}/{data.iloc[i]["audio"]}'
-            chunk.export(output_filename, format='mp3')
+def create_audio_segments_command(id,audio,start_time,duration):
+    ffmpeg_command = f"ffmpeg -y -ss {start_time/1000} -t {duration/1000} -i {os.path.join(args.audio_input_folder,audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder,id+'.mp3')}"
+    return ffmpeg_command
 
-    
-    # Return True if the chunk was saved successfully
-    return True
 
 
 def main(args):
@@ -565,16 +539,27 @@ def main(args):
                 allowed_langs = [allowed_langs]
             data = data[data["lang_text"].isin(allowed_langs)]
 
-    if args.audio_output_folder and args.audio_input_folder:
-        data.groupby(["program_id"]).parallel_apply(create_audio_segments)
-
-        data["audio"] = data["id"]+".mp3"
-
-        logger.info(f'***  Wrote audio segments to disk. '
+    if args.audio_output_folder:
+        if not args.audio_input_folder:
+            print("You also need to provide an input folder")
+            os._exit(1)
+        #data.groupby(["program_id"]).parallel_apply(create_audio_segments)
+        
+        data['ffmpeg'] = data.parallel_apply(lambda row : create_audio_segments_command(row['id'],row['audio'],
+                     row['start_time'], row['duration']), axis = 1)
+        #data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
+                                    
+        with open(args.audio_output_folder+'/process_list.sh', 'w') as f:
+            for text in data['ffmpeg'].tolist():
+                f.write(text + '\n')
+        
+        logger.info(f'***  Wrote audio processing list to disk:\n*** {os.path.join(args.audio_output_folder, "process_list.sh")}\n '
                     f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
 
+    
+    
     # TODO filter out `CPossible`
 
     # Remove duplicates
