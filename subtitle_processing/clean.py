@@ -38,7 +38,7 @@ control_char_regex = re.compile(r'[\r\n\t]+')
 
 
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True, nrows=100_000)
+    data = pd.read_json(jsonline, lines=True)
 
     logger.info(f'***  Json parsed. {len(data)} lines. ({exec_time()})')
     print(f'***  Json parsed with {len(data)} lines. ({exec_time()})')
@@ -391,39 +391,6 @@ def main(args):
         logger.info(
             f'***  Normalised unicode. Removed double spaces. Trimmed string. ({exec_time()})')
 
-    # Add hash
-    #
-    # data['hash'] = data['text'].parallel_apply(lambda x: get_hash(x))
-    # logger.info(f'***  Added hash. ({exec_time()})')
-    # print(f'***  Added hash. ({exec_time()})')
-
-    # Example filter
-    # Filter for paragraph confidence
-    # if ocr_doc:
-    #     cond = data['confidence'].astype(float) >= config['min_confidence_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because paragraph confidence was too low:\n {data[~cond]["text"]}')
-    #     data = data[cond]
-    #     logger.info(f'***  Completed filtering paragraph confidence. Valid posts = {len(data)}. ({exec_time()})')
-    #     print(f'***  Completed filtering paragraph confidence. Valid posts = {len(data)}. ({exec_time()})')
-    # else:
-    #     print(f'***  Skipped paragraph confidence evaluation since this is not an ocr document. ({exec_time()})')
-
-    # #Number of alpha words in subtitle
-    # if len(data)>0:
-    #     cond = data['text'].parallel_apply(lambda x: count_alphawords(x)) >= config['min_alphawords_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because too few alpha words: \n{data[~cond]["text"]}')
-    #     data = data[cond]
-    # logger.info(f'***  Completed filtering min alpha words. Valid posts = {len(data)}. ({exec_time()})')
-    # print(f'***  Completed filtering min alpha words. Valid posts = {len(data)}. ({exec_time()})')
-
-    # Numbers of words in subtitle
-    # if len(data)>0:
-    #     cond = data['text'].parallel_apply(lambda x: count_words(x)) >= config['min_words_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because it had too few words: \n{data[~cond]["text"]}')
-    #     data = data[cond]
-    # logger.info(f'***  Completed filtering min words. Valid posts = {len(data)}. ({exec_time()})')
-    # print(f'***  Completed filtering min words. Valid posts = {len(data)}. ({exec_time()})')
-
     # Minimum length of subtitle
     if config['min_length_subtitle']:
         cond = data.text.str.len() >= config['min_length_subtitle']
@@ -596,6 +563,7 @@ def main(args):
         data['ffmpeg'] = data.parallel_apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
                                                                                        row['start_time'],
                                                                                        row['duration']), axis=1)
+        
         # data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
 
         with open(args.audio_output_folder + '/process_list.sh', 'w') as f:
@@ -607,29 +575,10 @@ def main(args):
             f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
-
-    # Remove duplicates
-    # if len(data)>0:
-    #     data.sort_values(by=['doc_length','paragraph_id'], inplace=True, ascending=[False,True])
-    #     data.drop_duplicates(subset="hash",inplace=True,keep='first')
-    # logger.info(f'***  Finished deduplicating. Final valid posts: {len(data)}. ({exec_time()})')
-    # print(f'***  Finished deduplicating. Final valid posts: {len(data)}. ({exec_time()})')
-
-    # Minimise the size of the jsonl
-    # if config['minimise_jsonl'] and len(data)>0:
-    #     valid_columns = ['id','doc_type','publish_year','doc_length','paragraph_id','hash','text']
-    #     data.drop(columns=[col for col in data if col not in valid_columns], inplace=True)
-    #     logger.info(f'***  Minimised the dataframe. ({exec_time()})')
-    #     print(f'***  Minimised the dataframe. ({exec_time()})')
-
-    # Tidy up the file and sort it
-    # data['publish_year'] = data['publish_year'].astype(int)
-    # data['paragraph_id'] = data['paragraph_id'].astype(int)
-    # if len(data)>0:
-    #     data.sort_values(['doc_length', 'paragraph_id'], ascending=[False, True], inplace=True)
-    # logger.info(f'***  Fixed data type and sorted the dataframe. ({exec_time()})')
-    # print(f'***  Fixed data type and sorted the dataframe. ({exec_time()})')
-
+    
+    # Update the audio file path even if the audio is not generated
+    data['audio'] = data['id']+".mp3"
+    
     # Save it as jsonl
     output_filename = os.path.join(
         args.output_folder, os.path.basename(args.input_file))
