@@ -68,11 +68,11 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_f
 
 
 ## Create the needed mp3 files
-python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh
-#python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh
-python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh
-python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
-python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
-python create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
 
 ```
