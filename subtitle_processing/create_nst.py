@@ -58,7 +58,9 @@ def main(args):
     data["duration"] = data["duration"].parallel_apply(calculate_duration)
     data["text"] = data["text"]
     data["lang_text"] = "nob"
+    data["lang_text_confidence"] = 1
     data["lang_voice"] = "nor"
+    data["lang_voice_confidence"] = 1
     data["region_of_birth"] = data["Region_of_Birth"]
     data["nst_type"] = data["type"]
     
