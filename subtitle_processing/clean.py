@@ -316,8 +316,11 @@ def create_histogram(data: pd.DataFrame):
 
 
 def create_audio_segments_command(id, audio, start_time, duration):
-    ffmpeg_command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, id + '.mp3')}"
-    return ffmpeg_command
+    if start_time and duration:
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, id + '.mp3')}"
+    else:
+        command =f"cp {os.path.join(args.audio_input_folder,audio)} {args.audio_output_folder}"
+    return command
 
 
 def left_align(text):
@@ -546,23 +549,27 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['detect_lang_text']:
+        do_lang_detect = True
         if "lang_text" in data.columns:
             mask = data["lang_text"].isna()
-            data[~mask, "lang_text_confidence"] = 1.
+            data.loc[~mask, "lang_text_confidence"] = 1.
+            if mask.sum() == 0:
+                do_lang_detect = False
         else:
             mask = slice(None)
 
-        languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
+        if do_lang_detect:
+            languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
                                                                        index=["language", "confidence"]))
+      
+            data.loc[mask, "lang_text"] = languages["language"]
+            data.loc[mask, "lang_text_confidence"] = languages["confidence"]
 
-        data.loc[mask, "lang_text"] = languages["language"]
-        data.loc[mask, "lang_text_confidence"] = languages["confidence"]
-
-        allowed_langs = config.get("allow_lang_text", None)
-        if allowed_langs:
-            if isinstance(allowed_langs, str):
-                allowed_langs = [allowed_langs]
-            data = data[data["lang_text"].isin(allowed_langs)]
+            allowed_langs = config.get("allow_lang_text", None)
+            if allowed_langs:
+                if isinstance(allowed_langs, str):
+                    allowed_langs = [allowed_langs]
+                data = data[data["lang_text"].isin(allowed_langs)]
 
     if args.audio_output_folder:
         if not args.audio_input_folder:
@@ -570,19 +577,18 @@ def main(args):
             os._exit(1)
         # data.groupby(["program_id"]).parallel_apply(create_audio_segments)
 
-        data['ffmpeg'] = data.parallel_apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
+        data['command'] = data.apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
                                                                                        row['start_time'],
                                                                                        row['duration']), axis=1)
         
-        # data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
-        fname = os.path.basename(args.input_file).replace(".json","")
+        filename = os.path.basename(args.input_file).replace(".json","")
         
-        with open(os.path.join(args.audio_output_folder, fname+'_process_list.sh'), 'w') as f:
-            for text in data['ffmpeg'].tolist():
+        with open(os.path.join(args.audio_output_folder, filename+'_process_list.sh'), 'w') as f:
+            for text in data['command'].tolist():
                 f.write(text + '\n')
 
         logger.info(
-            f'***  Wrote audio processing list to disk:\n*** {os.path.join(args.audio_output_folder, "process_list.sh")}\n '
+            f'Audio processing list written to {os.path.join(args.audio_output_folder, filename+"_process_list.sh")}\n '
             f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
