@@ -361,7 +361,8 @@ def main(args):
     handler.setLevel(logging.INFO)
     logger.addHandler(handler)
 
-    config = read_config(args.output_folder + "/config.json")
+    config_file_path = os.path.join(args.output_folder.replace("/train","/").replace("/test","/").replace("/validation","/"),"config.json")
+    config = read_config(config_file_path)
 
     print(f'*** Starting to process: {args.input_file}')
     data: pd.DataFrame = load_json(args.input_file)
@@ -433,7 +434,14 @@ def main(args):
         logger.info(
             f'***  Filtered out simultaneous texting. The length is now {len(data)}. ({exec_time()})')
 
-    add_task_field(data)
+    if 'vtt_folder' in data.columns:
+        add_task_field(data)
+    else:
+        data = data.assign(task='transcribe')
+    
+    if 'start_time' not in data.columns:
+        data = data.assign(start_time='')
+    
     logger.info(
         f"*** Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
@@ -468,7 +476,8 @@ def main(args):
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
 
-    if config['merge_subtitles']:
+    # Merge subtitles only if the origin is from subtitles
+    if config['merge_subtitles'] and 'vtt_folder' in data.columns:
         logger.info(
             f'***  Histogram before merging subtitles: {create_histogram(data)}. '
             f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
@@ -515,7 +524,8 @@ def main(args):
         data = data[~cond]
         logger.info(f'***  Filtered out "CPossible". The length is now {len(data)}. ({exec_time()})')
 
-    if config['make_bigger_segments']:
+    # Make bigger segments only if the origin is from subtitles
+    if config['make_bigger_segments'] and 'vtt_folder' in data.columns:
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(combine_to_size,
                               target_duration_seconds=config["target_duration_seconds"],
@@ -565,8 +575,9 @@ def main(args):
                                                                                        row['duration']), axis=1)
         
         # data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
-
-        with open(args.audio_output_folder + '/process_list.sh', 'w') as f:
+        fname = os.path.basename(args.input_file).replace(".json","")
+        
+        with open(os.path.join(args.audio_output_folder, fname+'_process_list.sh'), 'w') as f:
             for text in data['ffmpeg'].tolist():
                 f.write(text + '\n')
 
