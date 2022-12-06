@@ -309,7 +309,7 @@ def create_histogram(data: pd.DataFrame):
 
 
 def create_audio_segments_command(id,audio,start_time,duration):
-    ffmpeg_command = f"ffmpeg -y -ss {start_time/1000} -t {duration/1000} -i {os.path.join(args.audio_input_folder,audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder,id+'.mp3')}"
+    ffmpeg_command = f"ffmpeg -n -ss {start_time/1000} -t {duration/1000} -i {os.path.join(args.audio_input_folder,audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder,id+'.mp3')}"
     return ffmpeg_command
 
 
