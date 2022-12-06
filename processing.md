@@ -44,7 +44,7 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py -
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/test/
-
+# python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/test/
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
 
 ```
