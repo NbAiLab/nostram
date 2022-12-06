@@ -604,7 +604,7 @@ def main(args):
     # Leave just a few columns for the online dataset
     final_table_columns = ["id","text", "start_time","end_time","duration","program_id","medium","source","category","title","subtitle","audio","lang_text","lang_text_confidence","lang_voice","lang_voice_confidence","task"]
     data = data[data.columns.intersection(final_table_columns)]
-    breakpoint()
+
     # Add final table columns if they do not exits
     for col in final_table_columns:
         data[col] = data.get(col,'')
