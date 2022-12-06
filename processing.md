@@ -44,7 +44,29 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_fleurs.py -
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
+# The code below copies just the files needed in one specific corpus. You might need other files here.
 # python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/test/
+
+#Copies the entire NRK corpus to train
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nrk.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+#Copies NST train corpus to train
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/nst_train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/nst/NST/data/train/mp3/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+#Copies NPSC Bokmål train corpus to train
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/npsc_train_nob.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/train/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/npsc/NPSC_orto/data/train/extract/audio/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+#Copies Fleurs train corpus to train
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/norwegian_fleurs-train.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/train/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+#Copies Fleurs test corpus to test
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/norwegian_fleurs-test.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/test/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+#Copies Fleurs validation corpus to validation
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/norwegian_fleurs-validation.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/validation/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
+
+
+
+
 
 ```
