@@ -38,7 +38,7 @@ control_char_regex = re.compile(r'[\r\n\t]+')
 
 
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True, nrows=100_000)
+    data = pd.read_json(jsonline, lines=True)
 
     logger.info(f'***  Json parsed. {len(data)} lines. ({exec_time()})')
     print(f'***  Json parsed with {len(data)} lines. ({exec_time()})')
@@ -316,8 +316,21 @@ def create_histogram(data: pd.DataFrame):
 
 
 def create_audio_segments_command(id, audio, start_time, duration):
-    ffmpeg_command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, id + '.mp3')}"
-    return ffmpeg_command
+    if (start_time >=0) and duration:
+        corename = audio.split(".")[0]
+        subfolder = corename.split("_")[0][-2:]+"/"
+        
+        
+        #Create this directory if it does not exists (ffmpeg can not do this)
+        if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
+            os.makedirs(os.path.join(args.audio_output_folder, subfolder))
+        
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder+id + '.mp3')}"
+    else:
+        command =f"cp {os.path.join(args.audio_input_folder,audio)} {args.audio_output_folder}"
+        print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
+        breakpoint()
+    return command
 
 
 def left_align(text):
@@ -361,7 +374,8 @@ def main(args):
     handler.setLevel(logging.INFO)
     logger.addHandler(handler)
 
-    config = read_config(args.output_folder + "/config.json")
+    config_file_path = os.path.join(args.output_folder.replace("/train","/").replace("/test","/").replace("/validation","/"),"config.json")
+    config = read_config(config_file_path)
 
     print(f'*** Starting to process: {args.input_file}')
     data: pd.DataFrame = load_json(args.input_file)
@@ -370,59 +384,11 @@ def main(args):
     print(
         f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
 
-    # Set number of characters in an subtitle
-    # Add this to the frame since we will use it later for sorting
-    # if len(data) > 0:
-    #     data['doc_length'] = data["text"].parallel_apply(len).groupby(data['id']).transform(sum)
-
-    # Create columns if they do not exist
-    # Probably not needed for subtitles but I leave the structure just in case
-    # if 'publish_date' not in data:
-    #    data['publish_date'] = publish_date
-
-    # Fix possible NaN is mixing datasets
-    # data['document_word_confidence'] = data['document_word_confidence'].fillna(1.0)
-    # data['confidence'] = data['confidence'].fillna(1.0)
-    # data['publish_date'] = data['publish_date'].fillna(publish_date)
-
     # Fix unicode
     if config['normalise_unicode']:
         data['text'] = data['text'].parallel_apply(normalise_unicode)
         logger.info(
             f'***  Normalised unicode. Removed double spaces. Trimmed string. ({exec_time()})')
-
-    # Add hash
-    #
-    # data['hash'] = data['text'].parallel_apply(lambda x: get_hash(x))
-    # logger.info(f'***  Added hash. ({exec_time()})')
-    # print(f'***  Added hash. ({exec_time()})')
-
-    # Example filter
-    # Filter for paragraph confidence
-    # if ocr_doc:
-    #     cond = data['confidence'].astype(float) >= config['min_confidence_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because paragraph confidence was too low:\n {data[~cond]["text"]}')
-    #     data = data[cond]
-    #     logger.info(f'***  Completed filtering paragraph confidence. Valid posts = {len(data)}. ({exec_time()})')
-    #     print(f'***  Completed filtering paragraph confidence. Valid posts = {len(data)}. ({exec_time()})')
-    # else:
-    #     print(f'***  Skipped paragraph confidence evaluation since this is not an ocr document. ({exec_time()})')
-
-    # #Number of alpha words in subtitle
-    # if len(data)>0:
-    #     cond = data['text'].parallel_apply(lambda x: count_alphawords(x)) >= config['min_alphawords_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because too few alpha words: \n{data[~cond]["text"]}')
-    #     data = data[cond]
-    # logger.info(f'***  Completed filtering min alpha words. Valid posts = {len(data)}. ({exec_time()})')
-    # print(f'***  Completed filtering min alpha words. Valid posts = {len(data)}. ({exec_time()})')
-
-    # Numbers of words in subtitle
-    # if len(data)>0:
-    #     cond = data['text'].parallel_apply(lambda x: count_words(x)) >= config['min_words_paragraph']
-    #     logger.debug(f'\n\n*** The following text was deleted because it had too few words: \n{data[~cond]["text"]}')
-    #     data = data[cond]
-    # logger.info(f'***  Completed filtering min words. Valid posts = {len(data)}. ({exec_time()})')
-    # print(f'***  Completed filtering min words. Valid posts = {len(data)}. ({exec_time()})')
 
     # Minimum length of subtitle
     if config['min_length_subtitle']:
@@ -466,7 +432,16 @@ def main(args):
         logger.info(
             f'***  Filtered out simultaneous texting. The length is now {len(data)}. ({exec_time()})')
 
-    add_task_field(data)
+    if 'vtt_folder' in data.columns:
+        add_task_field(data)
+    else:
+        data = data.assign(task='transcribe')
+    
+    if 'start_time' not in data.columns:
+        data = data.assign(start_time='')
+    if 'end_time' not in data.columns:
+        data = data.assign(end_time='')
+    
     logger.info(
         f"*** Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
@@ -501,7 +476,8 @@ def main(args):
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
                     f'The length is now {len(data)}. ({exec_time()})')
 
-    if config['merge_subtitles']:
+    # Merge subtitles only if the origin is from subtitles
+    if config['merge_subtitles'] and 'vtt_folder' in data.columns:
         logger.info(
             f'***  Histogram before merging subtitles: {create_histogram(data)}. '
             f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
@@ -548,7 +524,8 @@ def main(args):
         data = data[~cond]
         logger.info(f'***  Filtered out "CPossible". The length is now {len(data)}. ({exec_time()})')
 
-    if config['make_bigger_segments']:
+    # Make bigger segments only if the origin is from subtitles
+    if config['make_bigger_segments'] and 'vtt_folder' in data.columns:
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(combine_to_size,
                               target_duration_seconds=config["target_duration_seconds"],
@@ -569,23 +546,27 @@ def main(args):
                     f'The length is now {len(data)}. ({exec_time()})')
 
     if config['detect_lang_text']:
+        do_lang_detect = True
         if "lang_text" in data.columns:
             mask = data["lang_text"].isna()
-            data[~mask, "lang_text_confidence"] = 1.
+            data.loc[~mask, "lang_text_confidence"] = 1.
+            if mask.sum() == 0:
+                do_lang_detect = False
         else:
             mask = slice(None)
 
-        languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
+        if do_lang_detect:
+            languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
                                                                        index=["language", "confidence"]))
+      
+            data.loc[mask, "lang_text"] = languages["language"]
+            data.loc[mask, "lang_text_confidence"] = languages["confidence"]
 
-        data.loc[mask, "lang_text"] = languages["language"]
-        data.loc[mask, "lang_text_confidence"] = languages["confidence"]
-
-        allowed_langs = config.get("allow_lang_text", None)
-        if allowed_langs:
-            if isinstance(allowed_langs, str):
-                allowed_langs = [allowed_langs]
-            data = data[data["lang_text"].isin(allowed_langs)]
+            allowed_langs = config.get("allow_lang_text", None)
+            if allowed_langs:
+                if isinstance(allowed_langs, str):
+                    allowed_langs = [allowed_langs]
+                data = data[data["lang_text"].isin(allowed_langs)]
 
     if args.audio_output_folder:
         if not args.audio_input_folder:
@@ -593,43 +574,43 @@ def main(args):
             os._exit(1)
         # data.groupby(["program_id"]).parallel_apply(create_audio_segments)
 
-        data['ffmpeg'] = data.parallel_apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
+        data['command'] = data.apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
                                                                                        row['start_time'],
                                                                                        row['duration']), axis=1)
-        # data['ffmpeg'] = data.apply(lambda row : create_audio_segments_command(row['id'],row['start_time'], row['duration'],args.audio_input_folder, args.audio_output_folder, axis = 1)
-
-        with open(args.audio_output_folder + '/process_list.sh', 'w') as f:
-            for text in data['ffmpeg'].tolist():
+        
+        filename = os.path.basename(args.input_file).replace(".json","")
+        
+        with open(os.path.join(args.audio_output_folder, filename+'_process_list.sh'), 'w') as f:
+            for text in data['command'].tolist():
                 f.write(text + '\n')
 
         logger.info(
-            f'***  Wrote audio processing list to disk:\n*** {os.path.join(args.audio_output_folder, "process_list.sh")}\n '
+            f'Audio processing list written to {os.path.join(args.audio_output_folder, filename+"_process_list.sh")}\n '
             f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+    
+    # Update the audio file path even if the audio is not generated
+    data['audio'] = data['id']+".mp3"
+    
+    # Do some general cleaning
 
-    # Remove duplicates
-    # if len(data)>0:
-    #     data.sort_values(by=['doc_length','paragraph_id'], inplace=True, ascending=[False,True])
-    #     data.drop_duplicates(subset="hash",inplace=True,keep='first')
-    # logger.info(f'***  Finished deduplicating. Final valid posts: {len(data)}. ({exec_time()})')
-    # print(f'***  Finished deduplicating. Final valid posts: {len(data)}. ({exec_time()})')
+    
+    # Leave just a few columns for the online dataset
+    final_table_columns = ["id","text", "start_time","end_time","duration","program_id","medium","source","category","title","subtitle","audio","lang_text","lang_text_confidence","lang_voice","lang_voice_confidence","task"]
+    data = data[data.columns.intersection(final_table_columns)]
 
-    # Minimise the size of the jsonl
-    # if config['minimise_jsonl'] and len(data)>0:
-    #     valid_columns = ['id','doc_type','publish_year','doc_length','paragraph_id','hash','text']
-    #     data.drop(columns=[col for col in data if col not in valid_columns], inplace=True)
-    #     logger.info(f'***  Minimised the dataframe. ({exec_time()})')
-    #     print(f'***  Minimised the dataframe. ({exec_time()})')
-
-    # Tidy up the file and sort it
-    # data['publish_year'] = data['publish_year'].astype(int)
-    # data['paragraph_id'] = data['paragraph_id'].astype(int)
-    # if len(data)>0:
-    #     data.sort_values(['doc_length', 'paragraph_id'], ascending=[False, True], inplace=True)
-    # logger.info(f'***  Fixed data type and sorted the dataframe. ({exec_time()})')
-    # print(f'***  Fixed data type and sorted the dataframe. ({exec_time()})')
-
+    # Add final table columns if they do not exits
+    for col in final_table_columns:
+        data[col] = data.get(col,'')
+        
+    # Change the orders of the columns so that the json looks nicer
+    data = data[final_table_columns]
+    
+    # Replace NaNs with empty strings
+    data = data.replace(np.nan,'',regex=True)
+    
+    
     # Save it as jsonl
     output_filename = os.path.join(
         args.output_folder, os.path.basename(args.input_file))
