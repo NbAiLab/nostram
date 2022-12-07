@@ -46,8 +46,7 @@ def main(args):
     
     data["id"] = "NST_"+data["pid"].astype(str)+"_"+data["file"].str.replace(".wav","", regex=False)
     data["program_id"] = "NST"+data["pid"].astype(str)
-    data["end_time"] = ""
-    data["end_time"] = ""
+    data["start_time"] = 0
     data["medium"] = "NST"
     data["source"] = "NST"
     data["category"] = "stemmeprøver"
@@ -56,9 +55,12 @@ def main(args):
     data["audio"] = data["pid"].astype(str)+"_"+data["file"].str.replace(".wav",".mp3", regex=False)
     data["duration"] = args.mp3_folder+data["audio"]
     data["duration"] = data["duration"].parallel_apply(calculate_duration)
+    data["end_time"] = data["duration"]
     data["text"] = data["text"]
     data["lang_text"] = "nob"
+    data["lang_text_confidence"] = 1
     data["lang_voice"] = "nor"
+    data["lang_voice_confidence"] = 1
     data["region_of_birth"] = data["Region_of_Birth"]
     data["nst_type"] = data["type"]
     

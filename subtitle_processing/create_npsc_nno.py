@@ -32,8 +32,8 @@ def main(args):
     data["id"] = "NPSC"+data["meeting_date"].astype(str)+"_"+data["start_time"].astype(str)+"_"+data["end_time"].astype(str)
     data["duration"] = data["end_time"]-data["start_time"]
     data["program_id"] = "NPSC"+data["meeting_date"].astype(str)
-    data["start_time"] = data["start_time"]
-    data["end_time"] = data["end_time"]
+    data["start_time"] = 0
+    data["end_time"] = data["duration"]
     data["medium"] = "Stortinget"
     data["source"] = "NPSC"
     data["category"] = "politikk"
@@ -42,7 +42,9 @@ def main(args):
     data["audio"] = data["meeting_date"].astype(str)+"-"+data["sentence_id"].astype(str)+".mp3"
     data["text"] = data["sentence_nno"]
     data["lang_text"] = "nno"
+    data["lang_text_confidence"] = 1
     data["lang_voice"] = "nor"
+    data["lang_voice_confidence"] = 1
     
     #Drop some stuff we dont need any more
     data = data.drop(['data_split', 'sentence_id','sentence_order','speaker_id','speaker_name','sentence_text','sentence_language_code','normsentence_text','transsentence_text','translated','transcriber_id','reviewer_id','total_duration','path','sentence_nob','sentence_nno'], axis=1)
