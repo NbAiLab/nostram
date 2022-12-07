@@ -3,14 +3,13 @@ You need to modify the paths below before running this script
 
 ```bash
 # Set the path to the subtitle_extractor.py script as an environment variable
-EXTRACTOR_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/extractor"
+export EXTRACTOR_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/extractor"
 
 # Set the path to the other processing scripts as an environment variable
-PROCESSING_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing"
-
+export PROCESSING_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing"
 
 # Set the path to the ncc_speech_corpus directory as an environment variable
-CORPUS_PATH="/nfsmounts/datastore/ncc_speech_corpus"
+export CORPUS_PATH="/nfsmounts/datastore/ncc_speech_corpus"
 
 
 ## SOURCE 1
