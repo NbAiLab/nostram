@@ -12,9 +12,9 @@ tmux new-session -d -s transcribe_translate; for i in {1..50}; do tmux new-windo
 tmux new-session -d -s translate; for i in {1..50}; do tmux new-window -t translate:$i "python /mnt/lv_ai_1_dante/ml/pere/nostram/extractor/subtitle_extractor.py -f True -d /nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated -v vtt_translate"; done
 
 # Download the Fleurs dataset
-python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
-python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
-python download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
+python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/download_fleurs.py --output_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs
 
 
 ## JSON 2
