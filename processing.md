@@ -9,7 +9,7 @@ export EXTRACTOR_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/extractor"
 export PROCESSING_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing"
 
 # Set the path to the ncc_speech_corpus directory as an environment variable
-export CORPUS_PATH="/nfsmounts/datastore/ncc_speech_corpus"
+export CORPUS_PATH="/mnt/lv_ai_1_dante/ncc_speech_corpus"
 
 
 ## SOURCE 1
