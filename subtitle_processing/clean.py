@@ -316,10 +316,20 @@ def create_histogram(data: pd.DataFrame):
 
 
 def create_audio_segments_command(id, audio, start_time, duration):
-    if start_time and duration:
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, id + '.mp3')}"
+    if (start_time >=0) and duration:
+        corename = audio.split(".")[0]
+        subfolder = corename.split("_")[0][-2:]+"/"
+        
+        
+        #Create this directory if it does not exists (ffmpeg can not do this)
+        if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
+            os.makedirs(os.path.join(args.audio_output_folder, subfolder))
+        
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder+id + '.mp3')}"
     else:
         command =f"cp {os.path.join(args.audio_input_folder,audio)} {args.audio_output_folder}"
+        print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
+        breakpoint()
     return command
 
 
@@ -373,21 +383,6 @@ def main(args):
     logger.info(f'***  Data loaded. {len(data)} subtitles. ({exec_time()})')
     print(
         f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
-
-    # Set number of characters in an subtitle
-    # Add this to the frame since we will use it later for sorting
-    # if len(data) > 0:
-    #     data['doc_length'] = data["text"].parallel_apply(len).groupby(data['id']).transform(sum)
-
-    # Create columns if they do not exist
-    # Probably not needed for subtitles but I leave the structure just in case
-    # if 'publish_date' not in data:
-    #    data['publish_date'] = publish_date
-
-    # Fix possible NaN is mixing datasets
-    # data['document_word_confidence'] = data['document_word_confidence'].fillna(1.0)
-    # data['confidence'] = data['confidence'].fillna(1.0)
-    # data['publish_date'] = data['publish_date'].fillna(publish_date)
 
     # Fix unicode
     if config['normalise_unicode']:
