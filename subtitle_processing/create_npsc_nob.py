@@ -30,14 +30,15 @@ def main(args):
     data["id"] = "NPSC"+data["meeting_date"].astype(str)+"_"+data["start_time"].astype(str)+"_"+data["end_time"].astype(str)
     data["duration"] = data["end_time"]-data["start_time"]
     data["program_id"] = "NPSC"+data["meeting_date"].astype(str)
-    data["start_time"] = 0
+    data["start_time"] = data["start_time"]
     data["end_time"] = data["duration"]
     data["medium"] = "Stortinget"
     data["source"] = "NPSC"
     data["category"] = "politikk"
     data["title"] = "NPSC "
     data["subtitle"] = data["meeting_date"].astype(str)
-    data["audio"] = data["meeting_date"].astype(str)+"-"+data["sentence_id"].astype(str)+".mp3"
+    data["audio"] = data["path"].str.replace("audio/","")+".mp3"
+
     data["text"] = data["sentence_nob"]
     data["lang_text"] = "nob"
     data["lang_text_confidence"] = 1

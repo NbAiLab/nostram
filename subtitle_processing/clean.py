@@ -346,6 +346,11 @@ def left_align(text):
         # Utility for debug output
         return text.str.ljust(int(text.str.len().max()))
 
+def update_mp3_name(id,audio):
+    corename = audio.split(".")[0]
+    subfolder = corename.split("_")[0][-2:]+"/"
+    final_name = subfolder+id+'.mp3'
+    return final_name
 
 def main(args):
     pd.set_option("display.max_rows", None)
@@ -591,8 +596,12 @@ def main(args):
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
     
     # Update the audio file path even if the audio is not generated
-    data['audio'] = data['id']+".mp3"
     
+
+        
+
+    data['audio'] = data.apply(lambda row: update_mp3_name(row['id'],row['audio']), axis=1)
+
     # Do some general cleaning
 
     
