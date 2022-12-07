@@ -67,12 +67,22 @@ python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_f
 python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/clean.py --input_file /nfsmounts/datastore/ncc_speech_corpus/json_2/norwegian_fleurs-validation.json --output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/validation/ --audio_input_folder /nfsmounts/datastore/ncc_speech_corpus/source_1/fleurs/audio/  --audio_output_folder /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/
 
 
+## This is probably the best way of creating the needed mp3 files
+cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+#cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+
+
 ## Create the needed mp3 files
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh
-#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
-python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
+## Currently not recommended
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh
+##python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
+#python /mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
 
 ```
