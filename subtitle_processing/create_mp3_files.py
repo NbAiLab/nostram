@@ -13,7 +13,7 @@ def main(args):
         sys.exit(1)
     
     # Use joblib.Parallel to run the commands in parallel
-    results = Parallel(n_jobs=50)(delayed(run_command)(command) for command in commands)
+    results = Parallel(n_jobs=10)(delayed(run_command)(command) for command in commands)
 
     # Print the results
     for result in results:

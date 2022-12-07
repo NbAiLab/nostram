@@ -35,8 +35,7 @@ def main(args):
     data = load_json(args.input_file)
     data["id"] = "fleurs_"+data['path'].apply(os.path.basename).str.replace(".wav","",regex=False)
     data["program_id"] = ""
-    data["end_time"] = ""
-    data["end_time"] = ""
+    data["start_time"] = 0
     data["medium"] = "Fleurs"
     data["source"] = "Fleurs"
     data["category"] = "reading"
@@ -45,6 +44,7 @@ def main(args):
     data["audio"] = "fleurs_"+data['path'].apply(os.path.basename).str.replace(".wav",".mp3",regex=False)
     data["duration"] = args.mp3_folder+"/"+data["audio"]
     data["duration"] = data["duration"].parallel_apply(calculate_duration)
+    data["end_time"] = data["duration"]
     data["text"] = data["raw_transcription"]
     data["lang_text"] = "nob"
     data["lang_text_confidence"] = 1
