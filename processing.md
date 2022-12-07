@@ -38,7 +38,7 @@ python $PROCESSING_PATH/create_nst.py --input_file $CORPUS_PATH/source_1/nst/nst
 python $PROCESSING_PATH/create_nst.py --input_file $CORPUS_PATH/source_1/nst/nst_train.json --output_folder $CORPUS_PATH/json_2/ --mp3_folder $CORPUS_PATH/source_1/nst/NST/data/train/mp3/
 
 # Generate the NPSC Bokmål dataset
-python $PROCESSING_PATH/create_npsc_nob.py --input_file $CORPUS_PATH/source_1/npsc/npsc_eval.json --output_folder $CORPUS_PATH/json_2//
+python $PROCESSING_PATH/create_npsc_nob.py --input_file $CORPUS_PATH/source_1/npsc/npsc_eval.json --output_folder $CORPUS_PATH/json_2/
 python $PROCESSING_PATH/create_npsc_nob.py --input_file $CORPUS_PATH/source_1/npsc/npsc_test.json --output_folder $CORPUS_PATH/json_2/
 python $PROCESSING_PATH/create_npsc_nob.py --input_file $CORPUS_PATH/source_1/npsc/npsc_train.json --output_folder $CORPUS_PATH/json_2/
 
