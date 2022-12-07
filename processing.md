@@ -1,3 +1,7 @@
+# Processing Scripts
+You need to modify the paths below before running this script
+
+```bash
 # Set the path to the subtitle_extractor.py script as an environment variable
 EXTRACTOR_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/extractor"
 
@@ -91,3 +95,4 @@ cat $CORPUS_PATH/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh | xargs
 #python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
 #python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
 #python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
+```
