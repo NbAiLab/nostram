@@ -389,9 +389,6 @@ def main(args):
     print(
         f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
 
-    data = data.drop_duplicates("id")
-    logger.info(f'***  Removed duplicate IDs, the length is now {len(data)}. ({exec_time()})')
-
     # Fix unicode
     if config['normalise_unicode']:
         data['text'] = data['text'].parallel_apply(normalise_unicode)
@@ -599,9 +596,6 @@ def main(args):
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
     
     # Update the audio file path even if the audio is not generated
-    
-
-        
 
     data['audio'] = data.apply(lambda row: update_mp3_name(row['id'],row['audio']), axis=1)
 
@@ -621,7 +615,9 @@ def main(args):
     
     # Replace NaNs with empty strings
     data = data.replace(np.nan,'',regex=True)
-    
+
+    data = data.drop_duplicates(["audio", "text", "task"])
+    logger.info(f'***  Removed duplicate IDs, the length is now {len(data)}. ({exec_time()})')
     
     # Save it as jsonl
     output_filename = os.path.join(
