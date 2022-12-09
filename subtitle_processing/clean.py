@@ -577,8 +577,8 @@ def main(args):
                 data = data[data["lang_text"].isin(allowed_langs)]
 
     if args.audio_input_folder:
-        def calculate_duration(program_id):
-            fpath = os.path.join(args.audio_input_folder, f"{program_id}.mp4")
+        def calculate_duration(fname):
+            fpath = os.path.join(args.audio_input_folder, fname)
             duration = int(librosa.get_duration(filename=fpath) * 1000)
             return duration
 
