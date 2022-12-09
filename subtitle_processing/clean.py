@@ -389,6 +389,9 @@ def main(args):
     print(
         f'Log written to {os.path.join(args.output_folder, "log/", log_name)}. ({exec_time()})')
 
+    data = data.drop_duplicates("id")
+    logger.info(f'***  Removed duplicate IDs, the length is now {len(data)}. ({exec_time()})')
+
     # Fix unicode
     if config['normalise_unicode']:
         data['text'] = data['text'].parallel_apply(normalise_unicode)
@@ -448,7 +451,7 @@ def main(args):
         data = data.assign(end_time='')
     
     logger.info(
-        f"*** Added task field, counts: {data.task.value_counts().to_dict()}")
+        f"***  Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
         cond = data['task'] == config['task']
         logger.debug(f'\n\n*** The following text was deleted because it was not the correct task:'
