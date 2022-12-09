@@ -6,6 +6,7 @@ import os
 import sys
 import json
 
+import librosa
 import numpy as np
 import pandas as pd
 import re
@@ -316,18 +317,17 @@ def create_histogram(data: pd.DataFrame):
 
 
 def create_audio_segments_command(id, audio, start_time, duration):
-    if (start_time >=0) and duration:
+    if (start_time >= 0) and duration:
         corename = audio.split(".")[0]
-        subfolder = corename.split("_")[0][-2:]+"/"
-        
-        
-        #Create this directory if it does not exists (ffmpeg can not do this)
+        subfolder = corename.split("_")[0][-2:] + "/"
+
+        # Create this directory if it does not exists (ffmpeg can not do this)
         if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
             os.makedirs(os.path.join(args.audio_output_folder, subfolder))
-        
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder+id + '.mp3')}"
+
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
     else:
-        command =f"cp {os.path.join(args.audio_input_folder,audio)} {args.audio_output_folder}"
+        command = f"cp {os.path.join(args.audio_input_folder, audio)} {args.audio_output_folder}"
         print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
         breakpoint()
     return command
@@ -346,11 +346,13 @@ def left_align(text):
         # Utility for debug output
         return text.str.ljust(int(text.str.len().max()))
 
-def update_mp3_name(id,audio):
+
+def update_mp3_name(id, audio):
     corename = audio.split(".")[0]
-    subfolder = corename.split("_")[0][-2:]+"/"
-    final_name = subfolder+id+'.mp3'
+    subfolder = corename.split("_")[0][-2:] + "/"
+    final_name = subfolder + id + '.mp3'
     return final_name
+
 
 def main(args):
     pd.set_option("display.max_rows", None)
@@ -379,7 +381,8 @@ def main(args):
     handler.setLevel(logging.INFO)
     logger.addHandler(handler)
 
-    config_file_path = os.path.join(args.output_folder.replace("/train","/").replace("/test","/").replace("/validation","/"),"config.json")
+    config_file_path = os.path.join(
+        args.output_folder.replace("/train", "/").replace("/test", "/").replace("/validation", "/"), "config.json")
     config = read_config(config_file_path)
 
     print(f'*** Starting to process: {args.input_file}')
@@ -441,12 +444,12 @@ def main(args):
         add_task_field(data)
     else:
         data = data.assign(task='transcribe')
-    
+
     if 'start_time' not in data.columns:
         data = data.assign(start_time='')
     if 'end_time' not in data.columns:
         data = data.assign(end_time='')
-    
+
     logger.info(
         f"***  Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
@@ -562,8 +565,8 @@ def main(args):
 
         if do_lang_detect:
             languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
-                                                                       index=["language", "confidence"]))
-      
+                                                                           index=["language", "confidence"]))
+
             data.loc[mask, "lang_text"] = languages["language"]
             data.loc[mask, "lang_text_confidence"] = languages["confidence"]
 
@@ -573,6 +576,20 @@ def main(args):
                     allowed_langs = [allowed_langs]
                 data = data[data["lang_text"].isin(allowed_langs)]
 
+    if args.audio_input_folder:
+        def calculate_duration(program_id):
+            fpath = os.path.join(args.audio_input_folder, f"{program_id}.mp4")
+            duration = int(librosa.get_duration(filename=fpath) * 1000)
+            return duration
+
+        unique_files = data["audio"].drop_duplicates()
+        durations = unique_files.parallel_apply(calculate_duration)
+        file_duration = dict(zip(unique_files, durations))
+        durations = data["audio"].map(file_duration)
+        data = data[data["end_time"] < durations]
+        logger.info(f'***  Removed subtitles that end after the audio file.'
+                    f'The length is now {len(data)}. ({exec_time()})')
+
     if args.audio_output_folder:
         if not args.audio_input_folder:
             print("You also need to provide an input folder")
@@ -580,45 +597,46 @@ def main(args):
         # data.groupby(["program_id"]).parallel_apply(create_audio_segments)
 
         data['command'] = data.apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
-                                                                                       row['start_time'],
-                                                                                       row['duration']), axis=1)
-        
-        filename = os.path.basename(args.input_file).replace(".json","")
-        
-        with open(os.path.join(args.audio_output_folder, filename+'_process_list.sh'), 'w') as f:
+                                                                               row['start_time'],
+                                                                               row['duration']), axis=1)
+
+        filename = os.path.basename(args.input_file).replace(".json", "")
+
+        with open(os.path.join(args.audio_output_folder, filename + '_process_list.sh'), 'w') as f:
             for text in data['command'].tolist():
                 f.write(text + '\n')
 
         logger.info(
-            f'Audio processing list written to {os.path.join(args.audio_output_folder, filename+"_process_list.sh")}\n '
+            f'Audio processing list written to {os.path.join(args.audio_output_folder, filename + "_process_list.sh")}\n '
             f'The length is now {len(data)}. ({exec_time()})')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
-    
+
     # Update the audio file path even if the audio is not generated
 
-    data['audio'] = data.apply(lambda row: update_mp3_name(row['id'],row['audio']), axis=1)
+    data['audio'] = data.apply(lambda row: update_mp3_name(row['id'], row['audio']), axis=1)
 
     # Do some general cleaning
 
-    
     # Leave just a few columns for the online dataset
-    final_table_columns = ["id","text", "start_time","end_time","duration","program_id","medium","source","category","title","subtitle","audio","lang_text","lang_text_confidence","lang_voice","lang_voice_confidence","task"]
+    final_table_columns = ["id", "text", "start_time", "end_time", "duration", "program_id", "medium", "source",
+                           "category", "title", "subtitle", "audio", "lang_text", "lang_text_confidence", "lang_voice",
+                           "lang_voice_confidence", "task"]
     data = data[data.columns.intersection(final_table_columns)]
 
     # Add final table columns if they do not exits
     for col in final_table_columns:
-        data[col] = data.get(col,'')
-        
+        data[col] = data.get(col, '')
+
     # Change the orders of the columns so that the json looks nicer
     data = data[final_table_columns]
-    
+
     # Replace NaNs with empty strings
-    data = data.replace(np.nan,'',regex=True)
+    data = data.replace(np.nan, '', regex=True)
 
     data = data.drop_duplicates(["audio", "text", "task"])
     logger.info(f'***  Removed duplicate IDs, the length is now {len(data)}. ({exec_time()})')
-    
+
     # Save it as jsonl
     output_filename = os.path.join(
         args.output_folder, os.path.basename(args.input_file))
