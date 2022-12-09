@@ -586,9 +586,11 @@ def main(args):
         durations = unique_files.parallel_apply(calculate_duration)
         file_duration = dict(zip(unique_files, durations))
         durations = data["audio"].map(file_duration)
-        data = data[data["end_time"] < durations]
+        data = data[data["end_time"] <= durations]
+
         logger.info(f'***  Removed subtitles that end after the audio file.'
                     f'The length is now {len(data)}. ({exec_time()})')
+
 
     if args.audio_output_folder:
         if not args.audio_input_folder:
