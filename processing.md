@@ -11,6 +11,9 @@ export PROCESSING_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing"
 # Set the path to the ncc_speech_corpus directory as an environment variable
 export CORPUS_PATH="/mnt/lv_ai_1_dante/ncc_speech_corpus"
 
+# Set corpus name
+export CORPUS_NAME="NCC_S2"
+
 
 ## SOURCE 1
 # Generate NRK Subtitles
@@ -58,40 +61,40 @@ python $PROCESSING_PATH/create_fleurs.py --input_file $CORPUS_PATH/source_1/fleu
 # python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nrk.json --output_folder $CORPUS_PATH/clean_json_3/test/
 
 #Copies the entire NRK corpus to train
-python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nrk.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/train/ --audio_input_folder $CORPUS_PATH/source_1/nrk_annotated/audio  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nrk.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/ --audio_input_folder $CORPUS_PATH/source_1/nrk_annotated/audio  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 #Copies NST train corpus to train
-python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nst_train.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/train/ --audio_input_folder $CORPUS_PATH/source_1/nst/NST/data/train/mp3/  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nst_train.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/ --audio_input_folder $CORPUS_PATH/source_1/nst/NST/data/train/mp3/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 #Copies NPSC Bokmål train corpus to train
-python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/npsc_train_nob.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/train/ --audio_input_folder $CORPUS_PATH/source_1/npsc/NPSC_orto/data/train/extract/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/npsc_train_nob.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/ --audio_input_folder $CORPUS_PATH/source_1/npsc/NPSC_orto/data/train/extract/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 #Copies Fleurs train corpus to train
 #Excluded from training
-#python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-train.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/train/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+#python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-train.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 #Copies Fleurs test corpus to test
-python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-test.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/test/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-test.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/test/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 #Copies Fleurs validation corpus to validation
-python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-validation.json --output_folder $CORPUS_PATH/clean_json_3/NCC_S/validation/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/NCC_S/audio/
+python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-validation.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/validation/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
 
 ## This is probably the best way of creating the needed mp3 files
-cat $CORPUS_PATH/clean_json_3/NCC_S/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
-cat $CORPUS_PATH/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
-cat $CORPUS_PATH/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
-#cat $CORPUS_PATH/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
-cat $CORPUS_PATH/clean_json_3/NCC_S/audio/nst_train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
-cat $CORPUS_PATH/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-test_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-validation_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+#cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/nst_train_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/npsc_train_nob_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
 
 
 ## Create the needed mp3 files
 ## Currently not recommended
-#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-test_process_list.sh
-##python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-train_process_list.sh
-#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/norwegian_fleurs-validation_process_list.sh
-#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/npsc_train_nob_process_list.sh
-#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nst_train_process_list.sh
-#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S/audio/nrk_process_list.sh
+#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-test_process_list.sh
+##python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-train_process_list.sh
+#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/norwegian_fleurs-validation_process_list.sh
+#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/npsc_train_nob_process_list.sh
+#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/nst_train_process_list.sh
+#python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/nrk_process_list.sh
 ```
