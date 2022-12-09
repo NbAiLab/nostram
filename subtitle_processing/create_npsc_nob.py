@@ -30,7 +30,7 @@ def main(args):
     data["id"] = "NPSC"+data["meeting_date"].astype(str)+"_"+data["start_time"].astype(str)+"_"+data["end_time"].astype(str)
     data["duration"] = data["end_time"]-data["start_time"]
     data["program_id"] = "NPSC"+data["meeting_date"].astype(str)
-    data["start_time"] = data["start_time"]
+    data["start_time"] = 0
     data["end_time"] = data["duration"]
     data["medium"] = "Stortinget"
     data["source"] = "NPSC"
