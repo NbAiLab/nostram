@@ -12,7 +12,8 @@ def main(input_file, output_file, model, batch_size, separator):
 
     model = pipeline("ner", model,
                      device="cuda" if torch.cuda.is_available() else "cpu",
-                     aggregation_strategy="average")
+                     aggregation_strategy="average",
+                     max_seq_len=512)
 
     entity_groups = set(label.replace("B-", "").replace("I-", "") for label in model.model.config.label2id) - {"O"}
     df[[f"named-entities_{eg}" for eg in sorted(entity_groups)]] = ""
