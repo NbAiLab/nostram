@@ -5,8 +5,11 @@ from collections import Counter
 import numpy as np
 import pandas as pd
 from pandarallel import pandarallel
+from jiwer import wer
+from sentence_transformers import SentenceTransformer, util
 
 pandarallel.initialize(use_memory_fs=False)
+model = SentenceTransformer('NbAiLab/nb-sbert-base')
 
 
 def _find_abs(a, b):
@@ -19,6 +22,10 @@ def _find_abs(a, b):
     abs_ab = sum(a[k] * b[k] for k in intersect)
     return abs_a, abs_b, abs_i, abs_ab
 
+def bert_similarity(st1,st2):
+    embeddings = model.encode([st1,st2])
+    cosine_scores = util.cos_sim(embeddings[0],embeddings[1])
+    return cosine_scores[0][0].item()
 
 def text_to_counter(text, multiset=True):
     init = Counter if multiset else set
@@ -110,15 +117,25 @@ def jaro_winkler_distance(st1, st2):
 
 
 def main():
-    df = pd.read_json("../nrk.json", lines=True, nrows=100_000)
-    transcriptions = pd.read_json("../wav2vec_transcripts.jsonl", lines=True, nrows=100_000)
-
+    df = pd.read_json("/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json", lines=True, nrows=100_000)
+    transcriptions = pd.read_json("/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json", lines=True, nrows=100_000)
+    
+    print("Starting to merge")
     df = df.merge(transcriptions, left_on="id", right_on="file", suffixes=("", "_transcription"))
+    print("Finished merging")
 
+    print("Starting mat_per")
     mat_per = df.apply(lambda row: match_percentage(row["text"], row["text_transcription"]), axis=1)
+    print("Starting cos_sim")
     cos_sim = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
+    print("Starting rel_lev")
     rel_lev = df.apply(lambda row: 1 - relative_levenshtein(row["text"], row["text_transcription"]), axis=1)
+    print("Starting jar_win")
     jar_win = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
+    print("Starting war_sco")
+    wer_sco = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
+    print("Starting ber_sim")
+    ber_sim = df.apply(lambda row: bert_similarity(row["text"], row["text_transcription"]), axis=1)
     breakpoint()
 
 
