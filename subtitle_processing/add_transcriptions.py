@@ -117,26 +117,39 @@ def jaro_winkler_distance(st1, st2):
 
 
 def main():
-    df = pd.read_json("/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json", lines=True, nrows=100_000)
-    transcriptions = pd.read_json("/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json", lines=True, nrows=100_000)
+    input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
+    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
+    output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts.json"
     
-    print("Starting to merge")
+    #df = pd.read_json(input_file, lines=True, nrows=1_000)
+    df = pd.read_json(input_file, lines=True)
+    #transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
+    transcriptions = pd.read_json(transcript_file, lines=True)
+    
+    print(f"Starting to merge. Length={len(df)}. Length of transcripts={len(transcriptions)}")
     df = df.merge(transcriptions, left_on="id", right_on="file", suffixes=("", "_transcription"))
-    print("Finished merging")
+    print(f"Finished merging. Length={len(df)}")
 
     print("Starting mat_per")
-    mat_per = df.apply(lambda row: match_percentage(row["text"], row["text_transcription"]), axis=1)
+    df['w2v_mat_per'] = df.apply(lambda row: match_percentage(row["text"], row["text_transcription"]), axis=1)
     print("Starting cos_sim")
-    cos_sim = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
+    df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
     print("Starting rel_lev")
-    rel_lev = df.apply(lambda row: 1 - relative_levenshtein(row["text"], row["text_transcription"]), axis=1)
+    df['w2v_rel_lev'] = df.apply(lambda row: 1 - relative_levenshtein(row["text"], row["text_transcription"]), axis=1)
     print("Starting jar_win")
-    jar_win = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
+    df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
     print("Starting war_sco")
-    wer_sco = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
+    df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
     print("Starting ber_sim")
-    ber_sim = df.apply(lambda row: bert_similarity(row["text"], row["text_transcription"]), axis=1)
-    breakpoint()
+    df['w2v_ber_sim'] = df.apply(lambda row: bert_similarity(row["text"], row["text_transcription"]), axis=1)
+    
+    #Remove the chunk times to save time
+    df = df.drop(columns=['chunks'])
+
+    with open(output_file, 'w', encoding='utf-8') as file:
+        df.to_json(file, orient='records', lines=True, force_ascii=False)
+    
+    print(f"Finished writing {len(df)} lines to {output_file}") 
 
 
 if __name__ == '__main__':
