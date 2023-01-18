@@ -54,6 +54,9 @@ def last_islast(source, target):
     source_word_list = re.sub(r'[^\w\s]', '', source).lower().split()
     target_word_list = re.sub(r'[^\w\s]', '', target).lower().split()
     
+    if len(target_word_list) == 0:
+        return 0
+
     if source_word_list[-1] == target_word_list[-1]:
         output = 1
     else:
