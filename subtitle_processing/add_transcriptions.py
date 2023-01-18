@@ -39,10 +39,32 @@ def match_percentage(source, target):
     common = source_set & target_set
     return len(common) / len(source_set)
 
+def last_isin(source, target):
+    source_word_list = re.sub(r'[^\w\s]', '', source).lower().split()
+    target_word_list = re.sub(r'[^\w\s]', '', target).lower().split()
+    
+    if source_word_list[-1] in target_word_list:
+        output = 1
+    else:
+        output = 0
+
+    return output
+
+def last_islast(source, target):
+    source_word_list = re.sub(r'[^\w\s]', '', source).lower().split()
+    target_word_list = re.sub(r'[^\w\s]', '', target).lower().split()
+    
+    if source_word_list[-1] == target_word_list[-1]:
+        output = 1
+    else:
+        output = 0
+
+    return output
+    
 
 def cosine_similarity(a, b):
     abs_a, abs_b, abs_i, abs_ab = _find_abs(a, b)
-    if 0 == abs_a == abs_b:
+    if 0 == abs_a or 0 == abs_b:
         return 1.
     return abs_ab / (math.sqrt(abs_a * abs_b))
 
@@ -118,11 +140,12 @@ def jaro_winkler_distance(st1, st2):
 
 def main():
     input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
-    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
+    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript_v180122.json"
     output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts.json"
     
     #df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(input_file, lines=True)
+    
     #transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
     transcriptions = pd.read_json(transcript_file, lines=True)
     
@@ -132,10 +155,14 @@ def main():
 
     print("Starting mat_per")
     df['w2v_mat_per'] = df.apply(lambda row: match_percentage(row["text"], row["text_transcription"]), axis=1)
+    print("Starting last_isin")
+    df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
+    
+    print("Starting last_islast")
+    df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
+
     print("Starting cos_sim")
     df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
-    print("Starting rel_lev")
-    df['w2v_rel_lev'] = df.apply(lambda row: 1 - relative_levenshtein(row["text"], row["text_transcription"]), axis=1)
     print("Starting jar_win")
     df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
     print("Starting war_sco")
