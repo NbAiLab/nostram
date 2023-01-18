@@ -140,8 +140,8 @@ def jaro_winkler_distance(st1, st2):
 
 def main():
     input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
-    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript_v180122.json"
-    output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts.json"
+    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
+    output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts_v180122.json"
     
     #df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(input_file, lines=True)
