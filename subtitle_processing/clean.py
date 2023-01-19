@@ -316,7 +316,7 @@ def create_histogram(data: pd.DataFrame):
     return hist_string
 
 
-def create_audio_segments_command(id, audio, start_time, duration):
+def create_audio_segments_command(id, audio, start_time, duration, right_padding=0):
     if (start_time >= 0) and duration:
         corename = audio.split(".")[0]
         subfolder = corename.split("_")[0][-2:] + "/"
@@ -325,7 +325,7 @@ def create_audio_segments_command(id, audio, start_time, duration):
         if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
             os.makedirs(os.path.join(args.audio_output_folder, subfolder))
 
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {duration / 1000} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000)+(right_padding * 1000)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
     else:
         command = f"cp {os.path.join(args.audio_input_folder, audio)} {args.audio_output_folder}"
         print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
@@ -597,10 +597,14 @@ def main(args):
             print("You also need to provide an input folder")
             os._exit(1)
         # data.groupby(["program_id"]).parallel_apply(create_audio_segments)
+        if args.right_padding:
+            right_padding = args.right_padding
+        else:
+            right_padding = 0
 
         data['command'] = data.apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
                                                                                row['start_time'],
-                                                                               row['duration']), axis=1)
+                                                                               row['duration'],right_padding), axis=1)
 
         filename = os.path.basename(args.input_file).replace(".json", "")
 
@@ -657,6 +661,8 @@ def parse_args():
                         help='Path to output folder.')
     parser.add_argument('--audio_output_folder', required=False,
                         help='Path where audio segments should be placed. If not specified, audio segments are not renerated.')
+    parser.add_argument('--right_padding', required=False,
+                        help='This adds n seconds padding to the sound file. The name of the file is not changing.')
     parser.add_argument('--audio_input_folder', required=False,
                         help='Path where audio segments should be read. If not specified, audio segments are not renerated.')
     parser.add_argument('--log_level', required=False, default="INFO",
