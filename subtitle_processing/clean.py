@@ -325,7 +325,7 @@ def create_audio_segments_command(id, audio, start_time, duration, right_padding
         if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
             os.makedirs(os.path.join(args.audio_output_folder, subfolder))
 
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000)+right_padding} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000)+int(right_padding)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
     else:
         command = f"cp {os.path.join(args.audio_input_folder, audio)} {args.audio_output_folder}"
         print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
@@ -365,6 +365,7 @@ def main(args):
 
     # Create directories if they do not exist
     if not os.path.exists(args.output_folder + "/log"):
+        print(args.output_folder)
         os.makedirs(args.output_folder + "/log")
 
     handler = logging.FileHandler(
