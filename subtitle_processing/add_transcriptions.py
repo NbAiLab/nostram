@@ -142,9 +142,12 @@ def jaro_winkler_distance(st1, st2):
 
 
 def main():
-    input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
-    transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
-    output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts_v180122.json"
+    #input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
+    input_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/train/nrk.json"
+    #transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
+    transcript_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/wav2vec_transcript_plus2_300123.json"
+    #output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts_v180122.json"
+    output_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/merged_transcript_plus2_300123.json"
     
     #df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(input_file, lines=True)
@@ -161,15 +164,15 @@ def main():
     print("Starting last_isin")
     df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
     
-    print("Starting last_islast")
-    df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
+    #print("Starting last_islast")
+    #df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
 
-    print("Starting cos_sim")
-    df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
-    print("Starting jar_win")
-    df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
-    print("Starting war_sco")
-    df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
+    #print("Starting cos_sim")
+    #df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
+    #print("Starting jar_win")
+    #df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
+    #print("Starting war_sco")
+    #df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
     print("Starting ber_sim")
     df['w2v_ber_sim'] = df.apply(lambda row: bert_similarity(row["text"], row["text_transcription"]), axis=1)
     
