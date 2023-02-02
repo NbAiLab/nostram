@@ -144,8 +144,7 @@ def add_task_field(data: pd.DataFrame):
     # Duplicates by time, duplicates by text only (unless vtt_folder is also duplicate)
     mask = ~(dup_start | dup_end) & ~(dup_text & ~dup_text_type)
 
-    data.loc[mask & (data.vtt_folder == "vtt_transcribe_translate"),
-             "task"] = "transcribe"
+    data.loc[mask & (data.vtt_folder == "vtt_transcribe_translate"), "task"] = "transcribe"
     data.loc[~mask & (data.vtt_folder ==
                       "vtt_transcribe_translate"), "task"] = "UNK"
     data.loc[data.vtt_folder == "vtt_translate", "task"] = "translate"
@@ -279,6 +278,43 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
     return new_data
 
 
+def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
+    max_length_ms = round(max_length_seconds * 1000)
+    out_data = data.copy()
+    for i in range(len(data)):
+        row = data.iloc[i]
+        current_length = row.end_time - row.start_time
+        leftover_space = current_length - max_length_ms
+
+        # Find midpoint between this subtitle and the previous/next so there's no overlap
+        if i == 0:
+            leftover_before = row.start_time
+        else:
+            leftover_before = (row.start_time - data[i - 1].end_time) / 2
+        if i == len(data) - 1:
+            leftover_after = 0  # Unless we can find time until program end?
+        else:
+            leftover_after = (data[i + 1].start_time - row.end_time) / 2
+
+        # Try to place subtitle in the middle
+        pad_before = min(leftover_before, leftover_space / 2)
+        pad_after = min(leftover_after, leftover_space / 2)
+
+        # If there's less space on either of the sides we can give more space to the opposite side
+        if pad_before < leftover_space / 2:
+            pad_after = min(leftover_after, leftover_space - pad_before)
+        if pad_after < leftover_space / 2:
+            pad_before = min(leftover_before, leftover_space - pad_after)
+
+        assert current_length + pad_before + pad_after <= max_length_ms
+        row = out_data.iloc[i]
+        row.start_time -= pad_before
+        row.end_time += pad_after
+        row.duration = row.end_time - row.start_time
+        row.id = f"{row.program_id}_{row.start_time}_{row.end_time}"
+    return out_data
+
+
 def remove_italics(data: pd.DataFrame):
     """
     Italics are used liberally to denote things like emphasis, narrators, voices from phones etc.
@@ -325,7 +361,7 @@ def create_audio_segments_command(id, audio, start_time, duration, right_padding
         if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
             os.makedirs(os.path.join(args.audio_output_folder, subfolder))
 
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000)+int(right_padding)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
+        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000) + int(right_padding)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
     else:
         command = f"cp {os.path.join(args.audio_input_folder, audio)} {args.audio_output_folder}"
         print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
@@ -547,6 +583,16 @@ def main(args):
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
 
+        if config["pad_with_silence"]:
+            data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
+                functools.partial(pad_with_silence,
+                                  max_length_seconds=config["target_duration_seconds"])
+            )
+            data = data.reset_index(drop=True)
+
+            logger.info(f'***  Histogram after padding with silence: {create_histogram(data)} '
+                        f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+
     # Filter out too long posts
     if config['max_duration_seconds']:
         cond = data['duration'] < 30000
@@ -592,7 +638,6 @@ def main(args):
         logger.info(f'***  Removed subtitles that end after the audio file.'
                     f'The length is now {len(data)}. ({exec_time()})')
 
-
     if args.audio_output_folder:
         if not args.audio_input_folder:
             print("You also need to provide an input folder")
@@ -605,7 +650,7 @@ def main(args):
 
         data['command'] = data.apply(lambda row: create_audio_segments_command(row['id'], row['audio'],
                                                                                row['start_time'],
-                                                                               row['duration'],right_padding), axis=1)
+                                                                               row['duration'], right_padding), axis=1)
 
         filename = os.path.basename(args.input_file).replace(".json", "")
 
