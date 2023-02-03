@@ -1,7 +1,8 @@
 import math
 import re
 from collections import Counter
-import os, sys
+import os
+import sys
 import numpy as np
 import pandas as pd
 from pandarallel import pandarallel
@@ -9,6 +10,7 @@ from jiwer import wer
 from sentence_transformers import SentenceTransformer, util
 import argparse
 import logging
+import json
 
 
 pandarallel.initialize(use_memory_fs=False)
@@ -21,14 +23,17 @@ def _find_abs(a, b):
     intersect = a & b
     abs_a = sum(a.values()) if isinstance(a, Counter) else len(a)
     abs_b = sum(b.values()) if isinstance(b, Counter) else len(b)
-    abs_i = sum(intersect.values()) if isinstance(intersect, Counter) else len(intersect)
+    abs_i = sum(intersect.values()) if isinstance(
+        intersect, Counter) else len(intersect)
     abs_ab = sum(a[k] * b[k] for k in intersect)
     return abs_a, abs_b, abs_i, abs_ab
 
-def bert_similarity(st1,st2):
-    embeddings = model.encode([st1,st2])
-    cosine_scores = util.cos_sim(embeddings[0],embeddings[1])
+
+def bert_similarity(st1, st2):
+    embeddings = model.encode([st1, st2])
+    cosine_scores = util.cos_sim(embeddings[0], embeddings[1])
     return cosine_scores[0][0].item()
+
 
 def text_to_counter(text, multiset=True):
     init = Counter if multiset else set
@@ -40,12 +45,15 @@ def match_percentage(source, target):
     source_set = text_to_counter(source)
     target_set = text_to_counter(target)
     common = source_set & target_set
+    if not source_set:
+        return 0.0
     return len(common) / len(source_set)
+
 
 def last_isin(source, target):
     source_word_list = re.sub(r'[^\w\s]', '', source).lower().split()
     target_word_list = re.sub(r'[^\w\s]', '', target).lower().split()
-    
+
     if source_word_list[-1] in target_word_list:
         output = 1
     else:
@@ -53,10 +61,11 @@ def last_isin(source, target):
 
     return output
 
+
 def last_islast(source, target):
     source_word_list = re.sub(r'[^\w\s]', '', source).lower().split()
     target_word_list = re.sub(r'[^\w\s]', '', target).lower().split()
-    
+
     if len(target_word_list) == 0:
         return 0
 
@@ -66,7 +75,7 @@ def last_islast(source, target):
         output = 0
 
     return output
-    
+
 
 def cosine_similarity(a, b):
     abs_a, abs_b, abs_i, abs_ab = _find_abs(a, b)
@@ -136,12 +145,14 @@ def jaro_winkler_distance(st1, st2):
             transpositions += (ch2 != ch1_match[idx1])
             idx1 += 1
 
-    jaro = (matches / len1 + matches / len2 + (matches - transpositions / 2) / matches) / 3.0
+    jaro = (matches / len1 + matches / len2 +
+            (matches - transpositions / 2) / matches) / 3.0
     commonprefix = 0
     for i in range(min(4, len2)):
         commonprefix += (st1[i] == st2[i])
 
     return 1.0 - (jaro + commonprefix * 0.1 * (1 - jaro))
+
 
 def read_config(cfile):
     try:
@@ -156,16 +167,34 @@ def read_config(cfile):
     return config
 
 
+def xis_valid_mat_per_ber_sim(data: pd.DataFrame, min_mat_per, min_ber_sim):
+    """
+    Checks is mat_per and ber_sim is high enough
+    """
+    w2v_mat_per = data.w2v_mat_per
+    w2v_ber_sim = data.w2v_ber_sim
+    cond = (w2v_ber_sim.empty | w2v_mat_per.empty) | (pd.Series(
+        w2v_ber_sim >= 0.3).astype(int) + pd.Series(w2v_mat_per >= 0.4).astype(int))
+    cond = cond.map(lambda x: True if x >= 1 else False)
+    cond = cond | (pd.isna(w2v_ber_sim) | pd.isna(w2v_mat_per))
+
+    return cond
+
+
+def is_valid_mat_per_ber_sim(data: pd.DataFrame, min_mat_per, min_ber_sim):
+    """
+    Checks if mat_per and ber_sim is high enough
+    """
+    w2v_mat_per = data["w2v_mat_per"]
+    w2v_ber_sim = data["w2v_ber_sim"]
+    cond1 = (w2v_ber_sim >= min_ber_sim) & (w2v_mat_per >= min_mat_per)
+    cond2 = (pd.isna(w2v_ber_sim) | pd.isna(w2v_mat_per))
+    cond = cond1 | cond2
+    return cond
+
 
 def main(args):
-    #input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
-    #input_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/train/nrk.json"
-    #transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
-    #transcript_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/wav2vec_transcript_plus2_300123.json"
-    #output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts_v180122.json"
-    #output_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/merged_transcript_plus2_300123.json"
-    
-    
+
     if not os.path.isfile(args.input_file):
         print(f"{args.input_file} This is not a valid input file")
         sys.exit(1)
@@ -173,54 +202,86 @@ def main(args):
     if not os.path.isfile(args.transcript_file):
         print(f"{args.transcript_file} This is not a valid transcript file")
         sys.exit(1)
-  
+
     if not os.path.isdir(args.output_folder):
         print(f"{args.output_folder} is not a valid output folder")
         sys.exit(1)
-    
-    
+
     #df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(args.input_file, lines=True)
-    
-    
+
     config_file_path = os.path.join(
         args.output_folder.replace("/train", "/").replace("/test", "/").replace("/validation", "/"), "config.json")
+
     config = read_config(config_file_path)
 
     #transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
     transcriptions = pd.read_json(args.transcript_file, lines=True)
-    breakpoint()
-    
-        
-    print(f"Starting to merge. Length={len(df)}. Length of transcripts={len(transcriptions)}")
-    df = df.merge(transcriptions, left_on="id", right_on="file", suffixes=("", "_transcription"))
+
+    print(
+        f"Starting to merge. Length={len(df)}. Length of transcripts={len(transcriptions)}")
+    df = df.merge(transcriptions, left_on="id", right_on="file",
+                  how="left", suffixes=("", "_transcription"))
+    df = df.fillna("")
     print(f"Finished merging. Length={len(df)}")
 
     print("Starting mat_per")
-    df['w2v_mat_per'] = df.apply(lambda row: match_percentage(row["text"], row["text_transcription"]), axis=1)
-    print("Starting last_isin")
-    df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
-    
+    df['w2v_mat_per'] = df.apply(lambda row: match_percentage(
+        row["text"], row["text_transcription"]) if row["text_transcription"] != "" else None, axis=1)
+
+    print("Starting ber_sim")
+    df['w2v_ber_sim'] = df.apply(lambda row: bert_similarity(
+        row["text"], row["text_transcription"]) if row["text_transcription"] != "" else None, axis=1)
+
+    # Delete the entire program if the average mat_per is below 0.5
+    grouped = df.groupby("program_id")
+    cond = grouped["w2v_mat_per"].mean(
+    )[grouped["w2v_mat_per"].mean() < 0.5].index
+    logger.debug(
+        f'\n\n*** The following text was deleted because the mat_per average for the group was not high enough:' f'\n {df[~cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
+    df = df[~df["program_id"].isin(cond)].reset_index(drop=True)
+
+    # Delete stuff if the distance between text and transcripts is too large
+    print("Evaluating mat_per and bert_sim")
+    cond = df.apply(lambda row: is_valid_mat_per_ber_sim(
+        row, config['min_mat_per'], config['min_ber_sim']), axis=1)
+
+    logger.debug(
+        f'\n\n*** The following text was deleted because the ber_sim and the mat_per was not high enough:' f'\n {df[~cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
+    df = df[cond]
+
+    # Calculate the number of words
+    df["word_count_subtitles"] = df["text"].str.split().apply(len)
+    df["word_count_transcription"] = df["text_transcription"].str.split().apply(len)
+    df["verbosity_score"] = np.where(
+        df["word_count_transcription"] != 0, df["word_count_subtitles"]/df["word_count_transcription"], 0)
+
+    # Calculate Verbosity
+    df["verbosity"] = np.choose(np.searchsorted(np.array(
+        [0.50, 0.60, 0.70, 0.80, 0.90]), df["verbosity_score"]), [1, 2, 3, 4, 5, 6])
+
+    # These are not used at the moment but keeping them in the code
+    #print("Starting last_isin")
+    #df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
     #print("Starting last_islast")
     #df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
-
     #print("Starting cos_sim")
     #df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
     #print("Starting jar_win")
     #df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
     #print("Starting war_sco")
     #df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
-    print("Starting ber_sim")
-    df['w2v_ber_sim'] = df.apply(lambda row: bert_similarity(row["text"], row["text_transcription"]), axis=1)
-    
-    #Remove the chunk times to save time
-    df = df.drop(columns=['chunks'])
+
+    # Remove the chunk times to save space
+    df = df.drop(columns=['chunks', 'file', 'model', 'text_transcription', 'w2v_mat_per', 'w2v_ber_sim', 'word_count_subtitles','word_count_transcription'])
+
+    output_file = os.path.join(
+        args.output_folder, os.path.basename(args.input_file))
 
     with open(output_file, 'w', encoding='utf-8') as file:
         df.to_json(file, orient='records', lines=True, force_ascii=False)
-    
-    print(f"Finished writing {len(df)} lines to {output_file}") 
 
+    print(f"Finished writing {len(df)} lines to {output_file}")
 
 
 def parse_args():
