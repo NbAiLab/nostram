@@ -1,12 +1,15 @@
 import math
 import re
 from collections import Counter
-
+import os, sys
 import numpy as np
 import pandas as pd
 from pandarallel import pandarallel
 from jiwer import wer
 from sentence_transformers import SentenceTransformer, util
+import argparse
+import logging
+
 
 pandarallel.initialize(use_memory_fs=False)
 model = SentenceTransformer('NbAiLab/nb-sbert-base')
@@ -140,21 +143,55 @@ def jaro_winkler_distance(st1, st2):
 
     return 1.0 - (jaro + commonprefix * 0.1 * (1 - jaro))
 
+def read_config(cfile):
+    try:
+        f = open(cfile, "r")
+        config = json.load(f)
+    except:
+        logger.info(
+            "Error. There has to be a valid config-file in the output directory")
+        print("Error. There has to be a valid config-file in the output directory")
+        exit()
 
-def main():
+    return config
+
+
+
+def main(args):
     #input_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk.json"
-    input_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/train/nrk.json"
+    #input_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/train/nrk.json"
     #transcript_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/nrk_wav2vec_transcript.json"
-    transcript_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/wav2vec_transcript_plus2_300123.json"
+    #transcript_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/wav2vec_transcript_plus2_300123.json"
     #output_file = "/mnt/lv_ai_1_dante/ncc_speech_corpus/clean_json_3/NCC_S2/train/merged_transcripts_v180122.json"
-    output_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/merged_transcript_plus2_300123.json"
+    #output_file = "/nfsmounts/datastore/ncc_speech_corpus/clean_json_3/NCC_S2_plus2/merged_transcript_plus2_300123.json"
+    
+    
+    if not os.path.isfile(args.input_file):
+        print(f"{args.input_file} This is not a valid input file")
+        sys.exit(1)
+
+    if not os.path.isfile(args.transcript_file):
+        print(f"{args.transcript_file} This is not a valid transcript file")
+        sys.exit(1)
+  
+    if not os.path.isdir(args.output_folder):
+        print(f"{args.output_folder} is not a valid output folder")
+        sys.exit(1)
+    
     
     #df = pd.read_json(input_file, lines=True, nrows=1_000)
-    df = pd.read_json(input_file, lines=True)
+    df = pd.read_json(args.input_file, lines=True)
     
+    
+    config_file_path = os.path.join(
+        args.output_folder.replace("/train", "/").replace("/test", "/").replace("/validation", "/"), "config.json")
+    config = read_config(config_file_path)
+
     #transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
-    transcriptions = pd.read_json(transcript_file, lines=True)
+    transcriptions = pd.read_json(args.transcript_file, lines=True)
+    breakpoint()
     
+        
     print(f"Starting to merge. Length={len(df)}. Length of transcripts={len(transcriptions)}")
     df = df.merge(transcriptions, left_on="id", right_on="file", suffixes=("", "_transcription"))
     print(f"Finished merging. Length={len(df)}")
@@ -185,5 +222,32 @@ def main():
     print(f"Finished writing {len(df)} lines to {output_file}") 
 
 
-if __name__ == '__main__':
-    main()
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_file', required=True,
+                        help='Path to input file.')
+    parser.add_argument('--transcript_file', required=True,
+                        help='Path to transcript file.')
+    parser.add_argument('--output_folder', required=True,
+                        help='Path to output folder.')
+    parser.add_argument('--log_level', required=False, default="INFO",
+                        help='Set logging level to DEBUG to get a report on all decisions')
+    args = parser.parse_args()
+    return args
+
+
+if __name__ == "__main__":
+    args = parse_args()
+
+    # Invoke logger globally
+    logger = logging.getLogger()
+
+    if args.log_level == "INFO":
+        logger.setLevel(logging.INFO)
+    elif args.log_level == "DEBUG":
+        logger.setLevel(logging.DEBUG)
+    else:
+        print("Log level not accepted")
+        exit()
+    main(args)
