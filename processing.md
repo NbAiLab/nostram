@@ -100,5 +100,5 @@ cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/npsc_train_nob_process_list.sh 
 ```
 
 # Create the merged transcript files - Currently just on a small test file
-python $PROCESSING_PATH/add_transcriptions.py --input_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_small.json --transcript_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_wav2vec_transcript.json --output_folder $CORPUS_PATH/transcribed_json_4/$CORPUS_NAME/train/
+python $PROCESSING_PATH/add_transcriptions.py --input_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_small.json --transcript_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_wav2vec_transcript_small.json --output_folder $CORPUS_PATH/transcribed_json_4/$CORPUS_NAME/train/
 
