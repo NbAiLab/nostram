@@ -9,7 +9,7 @@ export EXTRACTOR_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/extractor"
 export PROCESSING_PATH="/mnt/lv_ai_1_dante/ml/pere/nostram/subtitle_processing"
 
 # Set the path to the ncc_speech_corpus directory as an environment variable
-export CORPUS_PATH="/mnt/lv_ai_1_dante/ncc_speech_corpus"
+export CORPUS_PATH="/nfsmounts/datastore/ncc_speech_corpus"
 
 # Set corpus name
 export CORPUS_NAME="NCC_S2"
@@ -98,3 +98,7 @@ cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/npsc_train_nob_process_list.sh 
 #python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/nst_train_process_list.sh
 #python $PROCESSING_PATH/create_mp3_files.py --input_shell_script /nfsmounts/datastore/ncc_speech_corpus/clean_json_3/$CORPUS_NAME/audio/nrk_process_list.sh
 ```
+
+# Create the merged transcript files - Currently just on a small test file
+python $PROCESSING_PATH/add_transcriptions.py --input_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_small.json --transcript_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_wav2vec_transcript.json --output_folder $CORPUS_PATH/transcribed_json_4/$CORPUS_NAME/train/
+
