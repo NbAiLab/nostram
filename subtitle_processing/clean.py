@@ -594,7 +594,7 @@ def main(args):
     if config["pad_with_silence"]:
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
             functools.partial(pad_with_silence,
-                              max_length_seconds=config["target_duration_seconds"])
+                              max_length_seconds=config["max_duration_seconds"])
         )
         data = data.reset_index(drop=True)
 
