@@ -584,22 +584,22 @@ def main(args):
         logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
                     f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
 
-        if config["pad_with_silence"]:
-            data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
-                functools.partial(pad_with_silence,
-                                  max_length_seconds=config["target_duration_seconds"])
-            )
-            data = data.reset_index(drop=True)
-
-            logger.info(f'***  Histogram after padding with silence: {create_histogram(data)} '
-                        f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
-
     # Filter out too long posts
     if config['max_duration_seconds']:
-        cond = data['duration'] < 30000
+        cond = data['duration'] < config['max_duration_seconds'] * 1000
         data = data[cond]
         logger.info(f'***  Filtered out too long segments. '
                     f'The length is now {len(data)}. ({exec_time()})')
+
+    if config["pad_with_silence"]:
+        data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
+            functools.partial(pad_with_silence,
+                              max_length_seconds=config["target_duration_seconds"])
+        )
+        data = data.reset_index(drop=True)
+
+        logger.info(f'***  Histogram after padding with silence: {create_histogram(data)} '
+                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
 
     if config['detect_lang_text']:
         do_lang_detect = True
