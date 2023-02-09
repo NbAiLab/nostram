@@ -291,20 +291,20 @@ def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
         if i == 0:
             leftover_before = row.start_time
         else:
-            leftover_before = (row.start_time - data.iloc[i - 1].end_time) / 2
+            leftover_before = (row.start_time - data.iloc[i - 1].end_time) // 2
         if i == len(data) - 1:
             leftover_after = 0  # Unless we can find time until program end?
         else:
-            leftover_after = (data.iloc[i + 1].start_time - row.end_time) / 2
+            leftover_after = (data.iloc[i + 1].start_time - row.end_time) // 2
 
         # Try to place subtitle in the middle
-        pad_before = min(leftover_before, leftover_space / 2)
-        pad_after = min(leftover_after, leftover_space / 2)
+        pad_before = min(leftover_before, leftover_space // 2)
+        pad_after = min(leftover_after, leftover_space // 2)
 
         # If there's less space on either of the sides we can give more space to the opposite side
-        if pad_before < leftover_space / 2:
+        if pad_before < leftover_space // 2:
             pad_after = min(leftover_after, leftover_space - pad_before)
-        if pad_after < leftover_space / 2:
+        if pad_after < leftover_space // 2:
             pad_before = min(leftover_before, leftover_space - pad_after)
 
         assert current_length + pad_before + pad_after <= max_length_ms
