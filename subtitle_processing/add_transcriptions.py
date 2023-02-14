@@ -237,9 +237,10 @@ def main(args):
     grouped = df.groupby("program_id")
     cond = grouped["w2v_mat_per"].mean(
     )[grouped["w2v_mat_per"].mean() < 0.5].index
+    cond = df["program_id"].isin(cond)
     logger.debug(
-        f'\n\n*** The following text was deleted because the mat_per average for the group was not high enough:' f'\n {df[~cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
-    df = df[~df["program_id"].isin(cond)].reset_index(drop=True)
+        f'\n\n*** The following text was deleted because the mat_per average for the group was not high enough:' f'\n {df[cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
+    df = df[~cond].reset_index(drop=True)
 
     # Delete stuff if the distance between text and transcripts is too large
     print("Evaluating mat_per and bert_sim")
