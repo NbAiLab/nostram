@@ -57,6 +57,7 @@ python $PROCESSING_PATH/create_fleurs.py --input_file $CORPUS_PATH/source_1/fleu
 
 ## CLEAN 3
 ## Here the corpus collations are directories, while the individual sub-corpora are single files
+## The directory needs a config.json file to specify parameters for `clean.py`
 # The code below copies just the files needed in one specific corpus. You might need other files here.
 # python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/nrk.json --output_folder $CORPUS_PATH/clean_json_3/test/
 
