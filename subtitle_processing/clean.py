@@ -252,6 +252,14 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     return data
 
 
+def offset_timestamp_text(text, delta_seconds):
+    return re.sub(r"<\|(\d+\.\d+)\|>", lambda x: f"<|{float(x[1]) + delta_seconds:.2f}|>", text)
+
+
+def make_timestamp_text(row):
+    return f"<|0.00|>{row.text}<|{row.end_time - row.start_time}:.2f|>"
+
+
 def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
     data = data.sort_values(["start_time", "end_time"])
     groups = []
@@ -265,7 +273,12 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
             group.append(row)
         else:
             first = group[0].copy()
-            first.text = re.sub(r"\s+", " ", " ".join([r.text for r in group]))
+
+            ts_text = " ".join([offset_timestamp_text(r.timestamp_text, r.start_time - first.start_time) for r in group])
+            text = " ".join([r.text for r in group])
+            first.timestamp_text = re.sub(r"\s+", " ", ts_text)
+            first.text = re.sub(r"\s+", " ", text)
+
             first.end_time = group[-1].end_time
             if row is not None and row.start_time - group[-1].end_time > max_separation_seconds * 1000:
                 first.end_time += 1000
@@ -309,6 +322,7 @@ def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
 
         assert current_length + pad_before + pad_after <= max_length_ms
         row = out_data.iloc[i]
+        row.timestamp_text = offset_timestamp_text(row.timestamp_text, pad_before)
         row.start_time -= pad_before
         row.end_time += pad_after
         row.duration = row.end_time - row.start_time
@@ -569,6 +583,8 @@ def main(args):
                      f'\n {data[cond]["text"]}')
         data = data[~cond]
         logger.info(f'***  Filtered out "CPossible". The length is now {len(data)}. ({exec_time()})')
+
+    data["timestamp_text"] = data.text.parallel_apply(make_timestamp_text)
 
     # Make bigger segments only if the origin is from subtitles
     if config['make_bigger_segments'] and 'vtt_folder' in data.columns:
