@@ -1,3 +1,4 @@
+import jax
 import jax.numpy as jnp
 from datasets import load_dataset
 from whisper_jax import FlaxWhisperPipline
@@ -48,9 +49,15 @@ def process_dataset(dataset, output_folder):
     print(f"Total CER: {total_cer / count}")
 
 def main():
-    dataset = load_dataset("NbAiLab/NCC_speech_v5_mini", split="test", streaming=True)
+    num_of_hosts = jax.process_count()
+    current_host_idx = jax.process_index()
+
+    dataset = load_dataset("NbAiLab/NCC_speech_v5_mini", split="train", streaming=True)
+    node_dataset = split_dataset_by_node(dataset, rank=current_host_idx, world_size=num_of_hosts)
+
+
     output_folder = '/home/perk/models/output'
-    process_dataset(dataset, output_folder)
+    process_dataset(node_dataset, output_folder)
 
 if __name__ == "__main__":
     main()
