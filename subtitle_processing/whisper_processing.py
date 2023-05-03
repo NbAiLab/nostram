@@ -44,7 +44,7 @@ def process_dataset(dataset, output_filename, return_timestamps):
                 "id": mp3_id,
                 "text": text,
                 "whisper-large-v2": transcription,
-                "whisper-large-v2-chunkss": transcribed_chunks,
+                "whisper-large-v2-chunks": transcribed_chunks,
                 "wer": current_wer,
                 "cer": current_cer
             }
