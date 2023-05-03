@@ -49,7 +49,7 @@ def process_dataset(dataset, output_folder):
 
 def main():
     dataset = load_dataset("NbAiLab/NCC_speech_v5_mini", split="test", streaming=True)
-    output_folder = '../output'
+    output_folder = '/home/perk/models/output'
     process_dataset(dataset, output_folder)
 
 if __name__ == "__main__":
