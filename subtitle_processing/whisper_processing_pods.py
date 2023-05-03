@@ -1,6 +1,7 @@
 import jax
 import jax.numpy as jnp
 from datasets import load_dataset
+from datasets.distributed import split_dataset_by_node
 from whisper_jax import FlaxWhisperPipline
 from jiwer import wer, cer
 import jsonlines
