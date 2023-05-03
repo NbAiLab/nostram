@@ -253,11 +253,19 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
 
 
 def offset_timestamp_text(text, delta_seconds):
-    return re.sub(r"<\|(\d+\.\d+)\|>", lambda x: f"<|{float(x[1]) + delta_seconds:.2f}|>", text)
+    def transform(match):
+        stamp = float(match[1])
+        stamp += delta_seconds
+        stamp = 2 * round(stamp / 2, 2)
+        return f"<|{stamp:.2f}|>"
+
+    return re.sub(r"<\|(\d+\.\d+)\|>", transform, text)
 
 
 def make_timestamp_text(row):
-    return f"<|0.00|>{row.text}<|{row.end_time - row.start_time}:.2f|>"
+    end_stamp = row.end_time - row.start_time
+    end_stamp = 2 * round(end_stamp / 2, 2)
+    return f"<|0.00|>{row.text}<|{end_stamp:.2f}|>"
 
 
 def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
