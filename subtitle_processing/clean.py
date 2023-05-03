@@ -265,7 +265,7 @@ def offset_timestamp_text(text, delta_seconds):
 def make_timestamp_text(row):
     end_stamp = row.end_time - row.start_time
     end_stamp = 2 * round(end_stamp / 2, 2)
-    return f"<|0.00|>{row.text}<|{end_stamp:.2f}|>"
+    return f"<|0.00|> {row.text} <|{end_stamp:.2f}|>"
 
 
 def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
