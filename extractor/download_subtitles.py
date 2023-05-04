@@ -51,7 +51,7 @@ def main(tv_json, vtt_folder, manifest_folder):
                     # Display programs of interest if they occur
                     if subtitle_info["type"] not in ("ttv", "nor") \
                             or subtitle_info["language"] not in ("nb",) \
-                            or subtitle_info["label"] not in ("Norsk", "Norsk - på all tale"):
+                            or subtitle_info["label"] not in ("Norsk", "Norsk - på all tale", "Norsk – på all tale"):
                         print(episode_id, subtitle_info)
 
                     subtitle_code = subtitle_info["type"]
