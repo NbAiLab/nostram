@@ -13,6 +13,7 @@ def convert_to_whisper_format(timestamps, remove_em_dash=True):
     
     start_time = 0.00
     end_time = 0.00
+    pattern = re.compile(r'[a-zA-Z].*[a-zA-Z].*[a-zA-Z]')
     
     whisper_timestamps = ''
     for ts in timestamps:
@@ -26,6 +27,10 @@ def convert_to_whisper_format(timestamps, remove_em_dash=True):
         if remove_em_dash:
             text = ts['text'].replace('—', '')
 
+        # If there are less than three valid characters in a timestamp sequence, skip the sequence
+        if not bool(pattern.search(ts['text'])):
+            return False
+        
         # Generate the timestamp
         whisper_timestamps += ' <|{}|>{} <|{}|>'.format(start_time, text, end_time)
         
@@ -62,8 +67,8 @@ def main(input_filename, output_filename, cer):
                 }
                 
                 if output_line['text']:
-                    print(output_line)
-                    #outfile.write(data)
+                    #print(output_line)
+                    outfile.write(data)
     
 
 if __name__ == "__main__":
