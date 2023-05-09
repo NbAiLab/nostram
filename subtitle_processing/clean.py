@@ -342,45 +342,47 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
 
 def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
     max_length_ms = round(max_length_seconds * 1000)
-    out_data = data.copy()
-    with pd.option_context('mode.chained_assignment', None):
-        for i in range(len(data)):
-            row = data.iloc[i]
-            current_length = row.end_time - row.start_time
-            leftover_space = max_length_ms - current_length
-            assert leftover_space >= 0
+    out_data = []
+    for i in range(len(data)):
+        row = data.iloc[i].copy()
+        current_length = row.end_time - row.start_time
+        leftover_space = max_length_ms - current_length
+        assert leftover_space >= 0
 
-            # Find midpoint between this subtitle and the previous/next so there's no overlap
-            # NRK shows subtitle until it ends, so we trust leftover_before even if negative, but not leftover_after
-            if i == 0:
-                leftover_before = row.start_time
-            else:
-                leftover_before = (row.start_time - data.iloc[i - 1].end_time) // 2
-                # leftover_before = max(leftover_before, 0)
-            if i == len(data) - 1:
-                leftover_after = 0  # Unless we can find time until program end?
-            else:
-                leftover_after = (data.iloc[i + 1].start_time - row.end_time) // 2
-                leftover_after = max(leftover_after, 0)
+        # Find midpoint between this subtitle and the previous/next so there's no overlap
+        # NRK shows subtitle until it ends, so we trust leftover_before even if negative, but not leftover_after
+        if i == 0:
+            leftover_before = row.start_time
+        else:
+            leftover_before = (row.start_time - data.iloc[i - 1].end_time) // 2
+            # leftover_before = max(leftover_before, 0)
+        if i == len(data) - 1:
+            leftover_after = 0  # Unless we can find time until program end?
+        else:
+            leftover_after = (data.iloc[i + 1].start_time - row.end_time) // 2
+            leftover_after = max(leftover_after, 0)
 
-            # Try to place subtitle in the middle
-            pad_before = min(leftover_before, leftover_space // 2)
-            pad_after = min(leftover_after, leftover_space // 2)
+        # Try to place subtitle in the middle
+        pad_before = min(leftover_before, leftover_space // 2)
+        pad_after = min(leftover_after, leftover_space // 2)
 
-            # If there's less space on either of the sides we can give more space to the opposite side
-            if pad_before < leftover_space // 2:
-                pad_after = min(leftover_after, leftover_space - pad_before)
-            if pad_after < leftover_space // 2:
-                pad_before = min(leftover_before, leftover_space - pad_after)
+        # If there's less space on either of the sides we can give more space to the opposite side
+        if pad_before < leftover_space // 2:
+            pad_after = min(leftover_after, leftover_space - pad_before)
+        if pad_after < leftover_space // 2:
+            pad_before = min(leftover_before, leftover_space - pad_after)
 
-            assert current_length + pad_before + pad_after <= max_length_ms
+        assert 0 < current_length + pad_before + pad_after <= max_length_ms
 
-            out_data.iloc[i, out_data.columns.get_loc("timestamp_text")] = offset_timestamp_text(row.timestamp_text,
-                                                                                                 pad_before / 1000)
-            out_data.iloc[i, out_data.columns.get_loc("start_time")] -= pad_before
-            out_data.iloc[i, out_data.columns.get_loc("end_time")] += pad_after
-            out_data.iloc[i, out_data.columns.get_loc("duration")] = row.end_time - row.start_time
-            out_data.iloc[i, out_data.columns.get_loc("id")] = f"{row.program_id}_{row.start_time}_{row.end_time}"
+        row.timestamp_text = offset_timestamp_text(row.timestamp_text, pad_before / 1000)
+        row.start_time -= pad_before
+        row.end_time += pad_after
+        row.duration = row.end_time - row.start_time
+        row.id = f"{row.program_id}_{row.start_time}_{row.end_time}"
+        row[REMOVE_COL] |= row.end_time <= row.start_time
+        out_data.append(row)
+    out_data = pd.concat(out_data, axis=1, ignore_index=True).T
+    out_data[REMOVE_COL] = out_data[REMOVE_COL].astype(bool)
     return out_data
 
 
@@ -460,10 +462,11 @@ def update_mp3_name(id, audio):
 
 
 def show_length(data):
-    duration_seconds = data["duration"].sum() // 1000
+    valid_data = data[~data[REMOVE_COL]] if REMOVE_COL in data.columns else data
+    duration_seconds = valid_data["duration"].sum() // 1000
     hours, seconds = divmod(duration_seconds, 3600)
     minutes, seconds = divmod(seconds, 60)
-    return f"\n\tSamples: {(~data[REMOVE_COL]).sum() if REMOVE_COL in data.columns else len(data)}" \
+    return f"\n\tSamples: {len(valid_data)}" \
            f"\n\tDuration: {hours:d}h {minutes:02d}m {seconds:02d}s"
 
 
@@ -672,7 +675,7 @@ def main(args):
 
     # Filter out too long posts
     if config['max_duration_seconds']:
-        cond = data['duration'] < config['max_duration_seconds'] * 1000
+        cond = data['duration'] <= config['max_duration_seconds'] * 1000
         # data = data[cond]
         data.loc[~cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out too long segments. '
