@@ -21,6 +21,7 @@ from pydub import AudioSegment
 from pandarallel import pandarallel
 from utils import detect_lang
 
+REMOVE_COL = "**REMOVE**"
 pandarallel.initialize(use_memory_fs=False)
 start_time = time.time()
 
@@ -191,7 +192,7 @@ def is_invalid_duration(data: pd.DataFrame):
     return cond
 
 
-def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
+def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False, combine_continued_sentences=False):
     """
     This method goes through and concatenates any lines that belong together,
      e.g. sentences over two lines, sentences over several consecutive lines in different timestamps
@@ -206,21 +207,23 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     data.text = data.text.str.replace("—", "-")
     # old_text = data.text
 
-    # is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
-    expects_continuation = data.text.str.strip().str.endswith("-")
+    if combine_continued_sentences:
+        # is_overlapping = data.text.str.fullmatch(r"-.+(<br>-.+)+")
+        expects_continuation = data.text.str.strip().str.endswith("-")
 
-    def cat(df):
-        first = df.iloc[0].copy()
-        last = df.iloc[-1]
-        first.text = df.text.str.strip().str.cat(sep="<p>")
-        first.end_time = last.end_time
-        first.duration = first.end_time - first.start_time
-        first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
+        def cat(df):
+            first = df.iloc[0].copy()
+            last = df.iloc[-1]
+            first.text = df.text.str.strip().str.cat(sep="<p>")
+            first.end_time = last.end_time
+            first.duration = first.end_time - first.start_time
+            first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
+            first[REMOVE_COL] = df[REMOVE_COL].any()
 
-        return first
+            return first
 
-    groups = (~expects_continuation.shift(1, fill_value=False)).cumsum()
-    data = data.groupby(groups).apply(cat)
+        groups = (~expects_continuation.shift(1, fill_value=False)).cumsum()
+        data = data.groupby(groups).apply(cat)
 
     if drop_multiple_speakers:
         # Find overlapping speakers, e.g. `-Vi svarte frimerker.<br>-Det var ikke alle som visste det.`
@@ -238,7 +241,10 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
     data.text = data.text.str.replace(r"-<br>(?!-)", "", regex=True)
 
     # Continued sentence
-    data.text = data.text.str.replace(r"-<p>-?", " ", regex=True)
+    if combine_continued_sentences:
+        data.text = data.text.str.replace(r"-<p>-?", " ", regex=True)
+    else:
+        data.text = data.text.str.replace("(^\s*-|-\s*$)", " ", regex=True)
 
     # Now remove any remainders
     data.text = data.text.str.replace("<(p|br)>-?|^-", " ", regex=True)
@@ -253,23 +259,53 @@ def merge_subtitles(data: pd.DataFrame, drop_multiple_speakers=False):
 
 
 def offset_timestamp_text(text, delta_seconds):
+    prev_stamp = -float("inf")
+
     def transform(match):
+        nonlocal prev_stamp
         stamp = float(match[1])
         stamp += delta_seconds
         stamp = 2 * round(stamp / 2, 2)
+        if stamp < 0:
+            # If we get negative values, it means the first subtitle will not show yet due to the previous subtitle
+            # overlapping with the current one. It should still represent the start of the audio clip,
+            # and new positive values should still be respected
+            stamp = 0
+
+        # Handle some potential rounding errors
+        if -0.02 <= stamp < 0:
+            stamp = 0.0
+        elif 30 < stamp <= 30.02:
+            stamp = 30.0
+
+        # Debugging
+        if stamp < prev_stamp:
+            # Same argument as above (stamp < 0)
+            stamp = prev_stamp
+        elif not 0 <= stamp <= 30:
+            ...
+            # print(f"{stamp} outside 0-30 range")
+        prev_stamp = stamp
         return f"<|{stamp:.2f}|>"
 
     return re.sub(r"<\|(\d+\.\d+)\|>", transform, text)
 
 
 def make_timestamp_text(row):
-    end_stamp = row.end_time - row.start_time
+    end_stamp = (row.end_time - row.start_time) / 1000
+    # assert end_stamp > 0
     end_stamp = 2 * round(end_stamp / 2, 2)
-    return f"<|0.00|> {row.text} <|{end_stamp:.2f}|>"
+    return f"<|0.00|> {row.text.strip()}<|{end_stamp:.2f}|>"
 
 
 def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
     data = data.sort_values(["start_time", "end_time"])
+    data.iloc[1:, data.columns.get_loc("start_time")] = np.maximum(data["start_time"].values[1:],
+                                                                   data["end_time"].values[:-1])
+    data["duration"] = data["end_time"] - data["start_time"]
+    data = data[data["duration"] > 0]
+    data["id"] = data.apply(lambda r: f"{r.program_id}_{r.start_time}_{r.end_time}", axis=1)
+
     groups = []
     group = [data.iloc[0]]
     for i in range(1, len(data) + 1):
@@ -277,12 +313,15 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
         row = data.iloc[i] if i < len(data) else None
         if (row is not None
                 and row.end_time - group[0].start_time < target_duration_seconds * 1000
-                and row.start_time - group[-1].end_time < max_separation_seconds * 1000):
+                and row.start_time - group[-1].end_time < max_separation_seconds * 1000
+                and not row[REMOVE_COL] and not group[-1][REMOVE_COL]):
             group.append(row)
         else:
             first = group[0].copy()
 
-            ts_text = " ".join([offset_timestamp_text(r.timestamp_text, r.start_time - first.start_time) for r in group])
+            ts_text = "".join([offset_timestamp_text(r.timestamp_text, (r.start_time - first.start_time) / 1000)
+                               for r in group])
+            ts_text = offset_timestamp_text(ts_text, 0)  # Clean up any decreasing timestamps
             text = " ".join([r.text for r in group])
             first.timestamp_text = re.sub(r"\s+", " ", ts_text)
             first.text = re.sub(r"\s+", " ", text)
@@ -291,50 +330,57 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
             if row is not None and row.start_time - group[-1].end_time > max_separation_seconds * 1000:
                 first.end_time += 1000
             first.duration = first.end_time - first.start_time
-            first.id = "_".join(first.id.split("_")[:-1] + [str(first.end_time)])
+            first.id = f"{first.program_id}_{first.start_time}_{first.end_time}"
+            first[REMOVE_COL] = any(r[REMOVE_COL] for r in group)
             groups.append(first)
             group = [row]
     assert group[0] is None
     new_data = pd.concat(groups, axis=1, ignore_index=True).T
+    new_data[REMOVE_COL] = new_data[REMOVE_COL].astype(bool)
     return new_data
 
 
 def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
     max_length_ms = round(max_length_seconds * 1000)
     out_data = data.copy()
-    for i in range(len(data)):
-        row = data.iloc[i]
-        current_length = row.end_time - row.start_time
-        leftover_space = max_length_ms - current_length
-        assert leftover_space >= 0
+    with pd.option_context('mode.chained_assignment', None):
+        for i in range(len(data)):
+            row = data.iloc[i]
+            current_length = row.end_time - row.start_time
+            leftover_space = max_length_ms - current_length
+            assert leftover_space >= 0
 
-        # Find midpoint between this subtitle and the previous/next so there's no overlap
-        if i == 0:
-            leftover_before = row.start_time
-        else:
-            leftover_before = (row.start_time - data.iloc[i - 1].end_time) // 2
-        if i == len(data) - 1:
-            leftover_after = 0  # Unless we can find time until program end?
-        else:
-            leftover_after = (data.iloc[i + 1].start_time - row.end_time) // 2
+            # Find midpoint between this subtitle and the previous/next so there's no overlap
+            # NRK shows subtitle until it ends, so we trust leftover_before even if negative, but not leftover_after
+            if i == 0:
+                leftover_before = row.start_time
+            else:
+                leftover_before = (row.start_time - data.iloc[i - 1].end_time) // 2
+                # leftover_before = max(leftover_before, 0)
+            if i == len(data) - 1:
+                leftover_after = 0  # Unless we can find time until program end?
+            else:
+                leftover_after = (data.iloc[i + 1].start_time - row.end_time) // 2
+                leftover_after = max(leftover_after, 0)
 
-        # Try to place subtitle in the middle
-        pad_before = min(leftover_before, leftover_space // 2)
-        pad_after = min(leftover_after, leftover_space // 2)
+            # Try to place subtitle in the middle
+            pad_before = min(leftover_before, leftover_space // 2)
+            pad_after = min(leftover_after, leftover_space // 2)
 
-        # If there's less space on either of the sides we can give more space to the opposite side
-        if pad_before < leftover_space // 2:
-            pad_after = min(leftover_after, leftover_space - pad_before)
-        if pad_after < leftover_space // 2:
-            pad_before = min(leftover_before, leftover_space - pad_after)
+            # If there's less space on either of the sides we can give more space to the opposite side
+            if pad_before < leftover_space // 2:
+                pad_after = min(leftover_after, leftover_space - pad_before)
+            if pad_after < leftover_space // 2:
+                pad_before = min(leftover_before, leftover_space - pad_after)
 
-        assert current_length + pad_before + pad_after <= max_length_ms
-        row = out_data.iloc[i]
-        row.timestamp_text = offset_timestamp_text(row.timestamp_text, pad_before)
-        row.start_time -= pad_before
-        row.end_time += pad_after
-        row.duration = row.end_time - row.start_time
-        row.id = f"{row.program_id}_{row.start_time}_{row.end_time}"
+            assert current_length + pad_before + pad_after <= max_length_ms
+
+            out_data.iloc[i, out_data.columns.get_loc("timestamp_text")] = offset_timestamp_text(row.timestamp_text,
+                                                                                                 pad_before / 1000)
+            out_data.iloc[i, out_data.columns.get_loc("start_time")] -= pad_before
+            out_data.iloc[i, out_data.columns.get_loc("end_time")] += pad_after
+            out_data.iloc[i, out_data.columns.get_loc("duration")] = row.end_time - row.start_time
+            out_data.iloc[i, out_data.columns.get_loc("id")] = f"{row.program_id}_{row.start_time}_{row.end_time}"
     return out_data
 
 
@@ -413,6 +459,14 @@ def update_mp3_name(id, audio):
     return final_name
 
 
+def show_length(data):
+    duration_seconds = data["duration"].sum() // 1000
+    hours, seconds = divmod(duration_seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+    return f"\n\tSamples: {(~data[REMOVE_COL]).sum() if REMOVE_COL in data.columns else len(data)}" \
+           f"\n\tDuration: {hours:d}h {minutes:02d}m {seconds:02d}s"
+
+
 def main(args):
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_colwidth", None)
@@ -447,6 +501,8 @@ def main(args):
 
     print(f'*** Starting to process: {args.input_file}')
     data: pd.DataFrame = load_json(args.input_file)
+    data[REMOVE_COL] = False
+    data[REMOVE_COL] = data[REMOVE_COL].astype(bool)
 
     logger.info(f'***  Data loaded. {len(data)} subtitles. ({exec_time()})')
     print(
@@ -463,9 +519,10 @@ def main(args):
         cond = data.text.str.len() >= config['min_length_subtitle']
         logger.debug(f'\n\n*** The following text was deleted because the article minimum length was too small:'
                      f'\n {data[~cond]["text"]}')
-        data = data[cond]
+        # data = data[cond]
+        data.loc[~cond, REMOVE_COL] = True
         logger.info(
-            f'***  Completed filtering min length article. Valid posts = {len(data)}. ({exec_time()})')
+            f'***  Completed filtering min length article. ({exec_time()}) {show_length(data)}')
 
     # Remove paragraphs with curly brackets
     if config['drop_subtitles_with_curly_brackets']:
@@ -476,16 +533,17 @@ def main(args):
         cond = data['text'].str.contains('\\}')
         logger.debug(f'\n\n*** The following text was deleted because it contained right curly brackets:'
                      f'\n {data[cond]["text"]}')
-        data = data[~cond]
-        logger.info(f'***  Completed filtering out subtitles with curly brackets. '
-                    f'Valid subtitles = {len(data)}. ({exec_time()})')
+        # data = data[~cond]
+        data.loc[cond, REMOVE_COL] = True
+        logger.info(f'***  Completed filtering out subtitles with curly brackets. ({exec_time()}) {show_length(data)}')
 
     # Filter out paragraphs with encoding errors
     if config['drop_subtitles_with_encoding_errors']:
         cond = data['text'].str.contains('�')
-        data = data[~cond]
+        # data = data[~cond]
+        data.loc[cond, REMOVE_COL] = True
         logger.info(
-            f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
+            f'***  Filtered out encoding errors. ({exec_time()}) {show_length(data)}')
 
     simultaneous = find_simultaneous(data)
     if config["simultaneous_subtitles"] == "detect":
@@ -498,7 +556,7 @@ def main(args):
                      f'\n {simultaneous}')
         data = data[~cond]
         logger.info(
-            f'***  Filtered out simultaneous texting. The length is now {len(data)}. ({exec_time()})')
+            f'***  Filtered out simultaneous texting. ({exec_time()}) {show_length(data)}')
 
     if 'vtt_folder' in data.columns:
         add_task_field(data)
@@ -518,7 +576,7 @@ def main(args):
                      f'\n {data[~cond][["text", "task"]]}')
         data = data[cond]
         logger.info(
-            f'***  Filtered out tasks. The length is now {len(data)}. ({exec_time()})')
+            f'***  Filtered out tasks. ({exec_time()}) {show_length(data)}')
 
     if config['drop_italics']:
         modified = remove_italics(data)
@@ -527,30 +585,33 @@ def main(args):
         logger.debug(f'\n\n*** The following text was modified because it contained italics text:'
                      f'\n {modified}')
         logger.info(
-            f'***  Filtered out italics. The length is now {len(data)}. ({exec_time()})')
+            f'***  Filtered out italics. ({exec_time()}) {show_length(data)}')
 
     if config['drop_inaudible']:
         modified = remove_inaudible(data)
         logger.debug(f'\n\n*** The following text was modified because it contained inaudible text:'
                      f'\n {modified}')
         logger.info(
-            f'***  Filtered out encoding errors. The length is now {len(data)}. ({exec_time()})')
+            f'***  Filtered out inaudible. ({exec_time()}) {show_length(data)}')
 
     if config['drop_invalid_durations']:
         cond = is_invalid_duration(data)
         logger.debug(f'\n\n*** The following text was deleted because the speaking rate is too fast or too slow:'
                      f'\n {data[cond][["text", "duration"]]}')
-        data = data[~cond]
+        # data = data[~cond]
+        data.loc[cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out too fast and too slow speaking rates. '
-                    f'The length is now {len(data)}. ({exec_time()})')
+                    f'({exec_time()}) {show_length(data)}')
 
     # Merge subtitles only if the origin is from subtitles
     if config['merge_subtitles'] and 'vtt_folder' in data.columns:
         logger.info(
             f'***  Histogram before merging subtitles: {create_histogram(data)}. '
-            f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+            f"{show_length(data)}")
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
-            functools.partial(merge_subtitles, drop_multiple_speakers=config['drop_multiple_speakers']))
+            functools.partial(merge_subtitles,
+                              drop_multiple_speakers=config['drop_multiple_speakers'],
+                              combine_continued_sentences=config['combine_continued_sentences']))
 
         data = data.reset_index(drop=True)
 
@@ -558,13 +619,15 @@ def main(args):
             cond = data["**is_overlapping**"]
             logger.debug(f"\n\n*** The following lines were removed for containing overlapping speakers:"
                          f"\n{left_align(cond[cond.notna()])}")
-            data = data[cond.isna()]
+            # data = data[cond.isna()]
+            data.loc[cond.notna(), REMOVE_COL] = True
             data = data.drop("**is_overlapping**", axis=1)
 
         cond = data["**has_triple_lines**"]
         logger.debug(f"\n\n*** The following text was removed because it contained more than two lines in one subtitle:"
                      f"\n{left_align(cond[cond.notna()])}")
-        data = data[cond.isna()]
+        # data = data[cond.isna()]
+        data.loc[cond.notna(), REMOVE_COL] = True
         data = data.drop("**has_triple_lines**", axis=1)
 
         before_merge = data["**before_merge**"]
@@ -581,18 +644,18 @@ def main(args):
         # logger.debug(f'\n\n*** The following text was deleted because of text continuation or speaker overlap:'
         #              f'\n {deleted}')
         logger.info(f'***  Filtered out text continuation and/or speaker overlap. '
-                    f'The length is now {len(data)}. ({exec_time()})')
-        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
-                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+                    f'({exec_time()}) {show_length(data)}')
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)}')
 
     if config['remove_cpossible']:
         cond = data.text.str.contains("CPossible")
         logger.debug(f'\n\n*** The following text was deleted because it contained "CPossible":'
                      f'\n {data[cond]["text"]}')
-        data = data[~cond]
-        logger.info(f'***  Filtered out "CPossible". The length is now {len(data)}. ({exec_time()})')
+        # data = data[~cond]
+        data.loc[cond, REMOVE_COL] = True
+        logger.info(f'***  Filtered out "CPossible". ({exec_time()}) {show_length(data)}')
 
-    data["timestamp_text"] = data.text.parallel_apply(make_timestamp_text)
+    data["timestamp_text"] = data.parallel_apply(make_timestamp_text, axis=1)
 
     # Make bigger segments only if the origin is from subtitles
     if config['make_bigger_segments'] and 'vtt_folder' in data.columns:
@@ -604,16 +667,16 @@ def main(args):
         data = data.reset_index(drop=True)
 
         logger.info(f'***  Combined texts to fill out context length. '
-                    f'The length is now {len(data)}. ({exec_time()})')
-        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)} '
-                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+                    f'({exec_time()}) {show_length(data)}')
+        logger.info(f'***  Histogram after merging subtitles: {create_histogram(data)}')
 
     # Filter out too long posts
     if config['max_duration_seconds']:
         cond = data['duration'] < config['max_duration_seconds'] * 1000
-        data = data[cond]
+        # data = data[cond]
+        data.loc[~cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out too long segments. '
-                    f'The length is now {len(data)}. ({exec_time()})')
+                    f'({exec_time()}) {show_length(data)}')
 
     if config["pad_with_silence"]:
         data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(
@@ -623,7 +686,7 @@ def main(args):
         data = data.reset_index(drop=True)
 
         logger.info(f'***  Histogram after padding with silence: {create_histogram(data)} '
-                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+                    f"{show_length(data)}")
 
     if config['detect_lang_text']:
         do_lang_detect = True
@@ -661,7 +724,7 @@ def main(args):
         data = data[data["end_time"] <= durations]
 
         logger.info(f'***  Removed subtitles that end after the audio file.'
-                    f'The length is now {len(data)}. ({exec_time()})')
+                    f'({exec_time()}) {show_length(data)}')
 
     if args.audio_output_folder:
         if not args.audio_input_folder:
@@ -685,23 +748,27 @@ def main(args):
 
         logger.info(
             f'Audio processing list written to {os.path.join(args.audio_output_folder, filename + "_process_list.sh")}\n '
-            f'The length is now {len(data)}. ({exec_time()})')
+            f'({exec_time()}) {show_length(data)}')
         logger.info(f'***  Histogram after writing audio files: {create_histogram(data)} '
-                    f'\nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours.')
+                    f"{show_length(data)}")
 
     # Update the audio file path even if the audio is not generated
 
     data['audio'] = data.apply(lambda row: update_mp3_name(row['id'], row['audio']), axis=1)
 
+    data = data[~data[REMOVE_COL]]
+    data = data.drop(REMOVE_COL, axis=1)
+
     # Do some general cleaning
 
     # Leave just a few columns for the online dataset
-    final_table_columns = ["id", "text", "start_time", "end_time", "duration", "program_id", "medium", "source",
+    final_table_columns = ["id", "text", "timestamp_text", "start_time", "end_time", "duration", "program_id", "medium",
+                           "source",
                            "category", "title", "subtitle", "audio", "lang_text", "lang_text_confidence", "lang_voice",
                            "lang_voice_confidence", "task"]
     data = data[data.columns.intersection(final_table_columns)]
 
-    # Add final table columns if they do not exits
+    # Add final table columns if they do not exist
     for col in final_table_columns:
         data[col] = data.get(col, '')
 
@@ -712,16 +779,15 @@ def main(args):
     data = data.replace(np.nan, '', regex=True)
 
     data = data.drop_duplicates(["audio", "text", "task"])
-    logger.info(f'***  Removed duplicate IDs, the length is now {len(data)}. ({exec_time()})')
+    logger.info(f'***  Removed duplicate IDs. ({exec_time()}) {show_length(data)}')
 
     # Save it as jsonl
     output_filename = os.path.join(
         args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
     logger.info(
-        f'*** Finished processing file. Result has {len(data)} posts. Total length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours. Result is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
-    print(
-        f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum() / 1000 / 60 / 60, 2)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
+        f'*** Finished processing file. {show_length(data)}.'
+        f'\nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}. ({exec_time()})')
 
 
 def parse_args():
