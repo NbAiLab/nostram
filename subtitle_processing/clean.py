@@ -347,6 +347,9 @@ def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
         row = data.iloc[i].copy()
         current_length = row.end_time - row.start_time
         leftover_space = max_length_ms - current_length
+        if row[REMOVE_COL]:
+            out_data.append(row)
+            continue
         assert leftover_space >= 0
 
         # Find midpoint between this subtitle and the previous/next so there's no overlap
