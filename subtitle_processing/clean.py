@@ -295,17 +295,22 @@ def make_timestamp_text(row):
     end_stamp = (row.end_time - row.start_time) / 1000
     # assert end_stamp > 0
     end_stamp = 2 * round(end_stamp / 2, 2)
+    if "Oldsmobilen" in row.text:
+        ...
     return f"<|0.00|> {row.text.strip()}<|{end_stamp:.2f}|>"
 
 
-def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
+def adjust_overlapping_subtitles(data):
     data = data.sort_values(["start_time", "end_time"])
     data.iloc[1:, data.columns.get_loc("start_time")] = np.maximum(data["start_time"].values[1:],
                                                                    data["end_time"].values[:-1])
     data["duration"] = data["end_time"] - data["start_time"]
     data = data[data["duration"] > 0]
     data["id"] = data.apply(lambda r: f"{r.program_id}_{r.start_time}_{r.end_time}", axis=1)
+    return data
 
+
+def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
     groups = []
     group = [data.iloc[0]]
     for i in range(1, len(data) + 1):
@@ -325,6 +330,9 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
             text = " ".join([r.text for r in group])
             first.timestamp_text = re.sub(r"\s+", " ", ts_text)
             first.text = re.sub(r"\s+", " ", text)
+
+            if "Oldsmobilen" in ts_text:
+                ...
 
             first.end_time = group[-1].end_time
             if row is not None and row.start_time - group[-1].end_time > max_separation_seconds * 1000:
@@ -661,6 +669,8 @@ def main(args):
         data.loc[cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out "CPossible". ({exec_time()}) {show_length(data)}')
 
+    data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(adjust_overlapping_subtitles)
+    data = data.reset_index(drop=True)
     data["timestamp_text"] = data.parallel_apply(make_timestamp_text, axis=1)
 
     # Make bigger segments only if the origin is from subtitles
