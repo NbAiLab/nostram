@@ -383,14 +383,14 @@ def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
         if pad_after < leftover_space // 2:
             pad_before = min(leftover_before, leftover_space - pad_after)
 
-        assert 0 < current_length + pad_before + pad_after <= max_length_ms
+        valid_length = 0 < current_length + pad_before + pad_after <= max_length_ms
 
         row.timestamp_text = offset_timestamp_text(row.timestamp_text, pad_before / 1000)
         row.start_time -= pad_before
         row.end_time += pad_after
         row.duration = row.end_time - row.start_time
         row.id = f"{row.program_id}_{row.start_time}_{row.end_time}"
-        row[REMOVE_COL] |= row.end_time <= row.start_time
+        row[REMOVE_COL] |= row.end_time <= row.start_time | ~valid_length
         out_data.append(row)
     out_data = pd.concat(out_data, axis=1, ignore_index=True).T
     out_data[REMOVE_COL] = out_data[REMOVE_COL].astype(bool)
@@ -443,7 +443,7 @@ def create_audio_segments_command(id, audio, start_time, duration, right_padding
         if not os.path.exists(os.path.join(args.audio_output_folder, subfolder)):
             os.makedirs(os.path.join(args.audio_output_folder, subfolder))
 
-        command = f"ffmpeg -n -ss {start_time / 1000} -t {(duration / 1000) + int(right_padding)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
+        command = f"ffmpeg -ac 1 -n -ss {start_time / 1000} -t {(duration / 1000) + int(right_padding)} -i {os.path.join(args.audio_input_folder, audio)} -acodec libmp3lame -ar 16000 {os.path.join(args.audio_output_folder, subfolder + id + '.mp3')}"
     else:
         command = f"cp {os.path.join(args.audio_input_folder, audio)} {args.audio_output_folder}"
         print("This should not happen! Please debug this. Most likely reason is that we are running this on old files.")
@@ -474,7 +474,10 @@ def update_mp3_name(id, audio):
 
 def show_length(data):
     valid_data = data[~data[REMOVE_COL]] if REMOVE_COL in data.columns else data
-    duration_seconds = valid_data["duration"].sum() // 1000
+    if "duration" in data.columns:
+        duration_seconds = valid_data["duration"].sum() // 1000
+    else:
+        duration_seconds = valid_data["audio_duration"].sum() // 1000
     hours, seconds = divmod(duration_seconds, 3600)
     minutes, seconds = divmod(seconds, 60)
     return f"\n\tSamples: {len(valid_data)}" \
@@ -585,7 +588,10 @@ def main(args):
     logger.info(
         f"***  Added task field, counts: {data.task.value_counts().to_dict()}")
     if config['task']:
-        cond = data['task'] == config['task']
+        tasks = config["task"]
+        if isinstance(tasks, str):
+            tasks = [tasks]
+        cond = data['task'].isin(tasks)
         logger.debug(f'\n\n*** The following text was deleted because it was not the correct task:'
                      f'\n {data[~cond][["text", "task"]]}')
         data = data[cond]
@@ -715,6 +721,14 @@ def main(args):
             mask = slice(None)
 
         if do_lang_detect:
+            program_language = data[mask].groupby(["program_id", "vtt_folder"]) \
+                .parallel_apply(lambda x: detect_lang(x.text.str.cat(sep=" "), return_proba=True))
+            program_language = program_language.to_dict()
+            program_language = data[mask].parallel_apply(lambda x:
+                                                         pd.Series(program_language[(x.program_id, x.vtt_folder)],
+                                                                   index=["language", "confidence"]),
+                                                         axis=1)
+
             languages = data[mask].text.parallel_apply(lambda x: pd.Series(detect_lang(x, return_proba=True),
                                                                            index=["language", "confidence"]))
 
@@ -725,7 +739,25 @@ def main(args):
             if allowed_langs:
                 if isinstance(allowed_langs, str):
                     allowed_langs = [allowed_langs]
-                data = data[data["lang_text"].isin(allowed_langs)]
+
+                potential_norwegian = ~data[mask]["lang_text"].isin(["eng", "sme"])
+                is_short = data[mask].text.str.split().str.len() <= 5
+                is_prog_norwegian = program_language["language"].isin(["nob", "nno"])
+                inherit_prog_lang = (potential_norwegian | is_short) & is_prog_norwegian
+
+                data.loc[inherit_prog_lang, "lang_text"] = program_language[inherit_prog_lang]["language"]
+                data.loc[inherit_prog_lang, "lang_text_confidence"] = program_language[inherit_prog_lang]["confidence"]
+
+                invalid_prog_lang = ~program_language["language"].isin(allowed_langs)
+                data.loc[invalid_prog_lang, REMOVE_COL] = True
+
+                invalid_lang = ~data["lang_text"].isin(allowed_langs)
+                data.loc[invalid_lang, REMOVE_COL] = True
+
+            data["lang_text"] = data["lang_text"].map({"nob": "no", "nno": "nn", "eng": "en", "sme": "se"})
+
+            logger.info(f'***  Removed invalid languages. '
+                        f'({exec_time()}) {show_length(data)}')
 
     if args.audio_input_folder:
         def calculate_duration(fname):
@@ -778,23 +810,42 @@ def main(args):
     # Do some general cleaning
 
     # Leave just a few columns for the online dataset
-    final_table_columns = ["id", "text", "timestamp_text", "start_time", "end_time", "duration", "program_id", "medium",
-                           "source",
-                           "category", "title", "subtitle", "audio", "lang_text", "lang_text_confidence", "lang_voice",
-                           "lang_voice_confidence", "task"]
+    # final_table_columns = ["id", "text", "timestamp_text", "start_time", "end_time", "duration", "program_id", "medium",
+    #                        "source",
+    #                        "category", "title", "subtitle", "audio", "lang_text", "lang_text_confidence", "lang_voice",
+    #                        "lang_voice_confidence", "task"]
+    is_nrk = "program_id" in data.columns
+    data = data.rename({"program_id": "group_id", "duration": "audio_duration", "lang_text": "text_language"}, axis=1)
+
+    data["previous_text"] = np.nan
+    data["previous_text"] = data.text.shift()
+    new_group = data["group_id"].ne(data['group_id'].shift())
+    data.loc[new_group, "previous_text"] = np.nan
+    if is_nrk:
+        data["source"] = data.apply(lambda x: "NRK TV TRANSLATE" if x.task == "translate" else "NRK TV", axis=1)
+        new_source = data["source"].ne(data['source'].shift())
+        data.loc[new_source, "previous_text"] = np.nan
+    else:
+        raise NotImplementedError("Source unknown")
+
+    final_table_columns = ["id", "group_id", "source", "audio_language", "audio", "audio_duration", "previous_text",
+                           "text_language", "text", "translated_text_no", "translated_text_nn", "translated_text_en",
+                           "translated_text_es", "timestamp_text", "wav2vec_wer", "whisper_wer", "verbosity_level"]
     data = data[data.columns.intersection(final_table_columns)]
 
     # Add final table columns if they do not exist
     for col in final_table_columns:
-        data[col] = data.get(col, '')
+        if col not in data.columns:
+            print(f"{col} did not exist, adding it...")
+            data[col] = np.nan
 
     # Change the orders of the columns so that the json looks nicer
     data = data[final_table_columns]
 
     # Replace NaNs with empty strings
-    data = data.replace(np.nan, '', regex=True)
+    # data = data.replace(np.nan, '', regex=True)
 
-    data = data.drop_duplicates(["audio", "text", "task"])
+    data = data.drop_duplicates(["audio", "text", "group_id", "source"])
     logger.info(f'***  Removed duplicate IDs. ({exec_time()}) {show_length(data)}')
 
     # Save it as jsonl
