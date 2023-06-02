@@ -2,8 +2,8 @@ from google.cloud import translate
 
 
 def batch_translate_text(
-    input_uri: str = "gs://nostram/translate/test.tsv",
-    output_uri: str = "gs://nostram/translate/output3/",
+    input_uri: str = "gs://nostram/translate/sample_translate_programs.tsv",
+    output_uri: str = "gs://nostram/translate/sample_translate/",
     project_id: str = "vacma-250010",
     timeout: int = 180
 ) -> translate.TranslateTextResponse:
