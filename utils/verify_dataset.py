@@ -151,26 +151,32 @@ def main(args):
         for line in itertools.islice(reader.iter(), args.n):
             data.append(line)
 
-    # General JSON format validation
-    if not validate_json_format(data):
-        return
+    if args.statistics_only:
+        _, df = validate_pandas_import(data)
+        if not df.empty:
+            calculate_statistics(df, args.detailed)
+    else:
+        # General JSON format validation
+        if not validate_json_format(data):
+            return
 
-    # Scream dataset specifications validation
-    if not validate_schema(data):
-        return
+        # Scream dataset specifications validation
+        if not validate_schema(data):
+            return
 
-    # Validation for loading into pandas
-    success, df = validate_pandas_import(data)
-    if not success:
-        return
+        # Validation for loading into pandas
+        success, df = validate_pandas_import(data)
+        if not success:
+            return
 
-    # Calculate statistics
-    calculate_statistics(df, args.detailed)
+        # Calculate statistics
+        calculate_statistics(df, args.detailed)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Validate a Scream dataset.')
     parser.add_argument('filename', type=str, help='the JSONL file to validate')
     parser.add_argument('-n', type=int, help='limit the number of lines to read')
+    parser.add_argument('-s', '--statistics_only', action='store_true', help='run only the statistics without validation')
     parser.add_argument('-d', '--detailed', action='store_true', help='detailed statistics for every source')
     args = parser.parse_args()
 
