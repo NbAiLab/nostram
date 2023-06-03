@@ -45,25 +45,24 @@ def main(args):
     print(f"After checking that the sentence has punctation or question mark: {len(data)}")
     
     data["id"] = "NST_"+data["pid"].astype(str)+"_"+data["file"].str.replace(".wav","", regex=False)
-    data["program_id"] = "NST"+data["pid"].astype(str)
-    data["start_time"] = 0
+    data["group_id"] = "NST"+data["pid"].astype(str)
     data["medium"] = "NST"
     data["source"] = "NST"
-    data["category"] = "stemmeprøver"
-    data["title"] = "NST"
-    data["subtitle"] = data["pid"].astype(str)
     data["audio"] = data["pid"].astype(str)+"_"+data["file"].str.replace(".wav",".mp3", regex=False)
-    data["duration"] = args.mp3_folder+data["audio"]
-    data["duration"] = data["duration"].parallel_apply(calculate_duration)
-    data["end_time"] = data["duration"]
+    data["audio_duration"] = args.mp3_folder+data["audio"]
+    data["audio_duration"] = data["audio_duration"].parallel_apply(calculate_duration)
     data["text"] = data["text"]
-    data["lang_text"] = "nob"
-    data["lang_text_confidence"] = 1
-    data["lang_voice"] = "nor"
+    data["text_language"] = "no"
+    data["audio_language"] = "no"
     data["lang_voice_confidence"] = 1
-    data["region_of_birth"] = data["Region_of_Birth"]
-    data["nst_type"] = data["type"]
-    
+    data["previous_text"] = None
+    data["translated_text_no"] = None
+    data["translated_text_nn"] = None
+    data["translated_text_en"] = None
+    data["translated_text_es"] = None
+    data["wav2vec_wer"] = None
+    data["whisper_wer"] = None
+    data["verbosity_level"] = 6
     
     #Drop some stuff we dont need any more
     data = data.drop(['pid', 'Age','Region_of_Birth','Region_of_Youth','Remarks','Sex','Speaker_ID','Directory','Imported_sheet_file','Number_of_recordings','RecDate','RecTime','Record_duration','Record_session','Sheet_number','ANSI_Codepage','Board','ByteFormat','Channels','CharacterSet','Coding','DOS_Codepage','Delimiter','Frequency','Memo','Script','Version','DST','NOI','QUA','SND','SPC','UTT','file','t0','t1','t2'], axis=1)
@@ -73,7 +72,7 @@ def main(args):
     #Save it as jsonl
     output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
-    print(f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
+    print(f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["audio_duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
 
 
 def parse_args():
