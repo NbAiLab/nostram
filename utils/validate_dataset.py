@@ -28,7 +28,7 @@ schema = {
         "timestamped_text": {"type": ["string", "null"]},
         "wav2vec_wer": {"type": ["number", "null"]},
         "whisper_wer": {"type": ["number", "null"]},
-        "verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, null]}
+        "verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, None]}
     },
     "required": ["id", "source", "audio", "audio_duration", "text_language", "text"]
 }
