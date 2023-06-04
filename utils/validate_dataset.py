@@ -118,7 +118,7 @@ def calculate_statistics(df, detailed):
 
 
 def calculate_filled_fields(data_frame, source):
-    filled_counts = data_frame.count()
+    filled_counts = data_frame.count().apply(lambda x: f'{x:,.0f}')
     filled_counts.name = source
     return filled_counts.to_frame()
 
@@ -142,7 +142,7 @@ def convert_milliseconds(ms):
     seconds, milliseconds = divmod(ms, 1000)
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
-    return f"{hours} hours, {minutes} minutes, {seconds} seconds"
+    return f"{hours:,} hours, {minutes} minutes, {seconds} seconds"
 
 def main(args):
     with open(args.filename, 'r') as f:
