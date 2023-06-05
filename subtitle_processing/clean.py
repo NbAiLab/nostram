@@ -811,7 +811,7 @@ def main(args):
         #                                          size=len(new_data),
         #                                          p=(languages / languages.sum()).to_list())
         # new_data["lang_text_confidence"] = 0.
-        new_data["vtt_folder"] = "silence"
+        new_data["task"] = "silence"
 
         data = pd.concat([data, new_data])
 
