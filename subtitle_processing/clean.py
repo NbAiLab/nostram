@@ -426,7 +426,6 @@ def add_empty_captions(data: pd.DataFrame, max_duration=30, min_duration=1, min_
             row.start_time = start_time
             row.end_time = end_time
             row.duration = end_time - start_time
-            row[REMOVE_COL] = False
 
             new_data.append(row)
             prev_ts = end_time
