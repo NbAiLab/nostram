@@ -12,6 +12,7 @@ import argparse
 import logging
 import json
 
+from extractor.detect_voice import VoiceDetector
 
 pandarallel.initialize(use_memory_fs=False)
 model = SentenceTransformer('NbAiLab/nb-sbert-base')
@@ -193,8 +194,20 @@ def is_valid_mat_per_ber_sim(data: pd.DataFrame, min_mat_per, min_ber_sim):
     return cond
 
 
-def main(args):
+def run_vad(df, audio_folder):
+    voice_detector = VoiceDetector(method="silero")
 
+    silent_indices = []
+    for i, row in df.iterrows():
+        row = df.iloc[i]
+        voice_detector.select_sourcefile(os.path.join(audio_folder, row.id.split("_")[0][-2:], row.id))
+        voice_segments = voice_detector.analyze()
+        if len(voice_segments) <= 0:
+            silent_indices.append(i)
+    return silent_indices
+
+
+def main(args):
     if not os.path.isfile(args.input_file):
         print(f"{args.input_file} This is not a valid input file")
         sys.exit(1)
@@ -203,19 +216,41 @@ def main(args):
         print(f"{args.transcript_file} This is not a valid transcript file")
         sys.exit(1)
 
+    if args.audio_folder is not None and not os.path.isdir(args.audio_folder):
+        print(f"{args.audio_folder} is not a valid audio folder")
+        sys.exit(1)
+
     if not os.path.isdir(args.output_folder):
         print(f"{args.output_folder} is not a valid output folder")
         sys.exit(1)
 
-    #df = pd.read_json(input_file, lines=True, nrows=1_000)
+    # df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(args.input_file, lines=True)
+
+    is_silence = df.source == "NRK TV SILENCE"
+    is_translate = df.source == "NRK TV TRANSLATE"
+    is_transcribe = df.source == "NRK TV"
+    silence_df = df[is_silence]
+    translate_df = df[is_translate]
+    df = df[is_transcribe]
+
+    assert (~(is_silence | is_translate | is_transcribe)).sum() == 0
+
+    if args.audio_folder is not None and len(silence_df) > 0:
+        silent_indices = run_vad(df, args.audio_folder)
+        print(f"Silent samples in transcribe: {len(silent_indices)}/{len(df)}")
+        silent_indices = run_vad(translate_df, args.audio_folder)
+        print(f"Silent samples in translate: {len(silent_indices)}/{len(translate_df)}")
+        silent_indices = run_vad(silence_df, args.audio_folder)
+        print(f"Silent samples in silence: {len(silent_indices)}/{len(silence_df)}")
+        silence_df = silence_df.loc[silent_indices]
 
     config_file_path = os.path.join(
         args.output_folder.replace("/train", "/").replace("/test", "/").replace("/validation", "/"), "config.json")
 
     config = read_config(config_file_path)
 
-    #transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
+    # transcriptions = pd.read_json(transcript_file, lines=True, nrows=100_000)
     transcriptions = pd.read_json(args.transcript_file, lines=True)
 
     print(
@@ -235,8 +270,7 @@ def main(args):
 
     # Delete the entire program if the average mat_per is below 0.5
     grouped = df.groupby("program_id")
-    cond = grouped["w2v_mat_per"].mean(
-    )[grouped["w2v_mat_per"].mean() < 0.5].index
+    cond = grouped["w2v_mat_per"].mean()[grouped["w2v_mat_per"].mean() < 0.5].index
     cond = df["program_id"].isin(cond)
     logger.debug(
         f'\n\n*** The following text was deleted because the mat_per average for the group was not high enough:' f'\n {df[cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
@@ -255,26 +289,30 @@ def main(args):
     df["word_count_subtitles"] = df["text"].str.split().apply(len)
     df["word_count_transcription"] = df["text_transcription"].str.split().apply(len)
     df["verbosity_score"] = np.where(
-        df["word_count_transcription"] != 0, df["word_count_subtitles"]/df["word_count_transcription"], 0)
+        df["word_count_transcription"] != 0, df["word_count_subtitles"] / df["word_count_transcription"], 0)
 
     # Calculate Verbosity
     df["verbosity"] = np.choose(np.searchsorted(np.array(
         [0.50, 0.60, 0.70, 0.80, 0.90]), df["verbosity_score"]), [1, 2, 3, 4, 5, 6])
 
     # These are not used at the moment but keeping them in the code
-    #print("Starting last_isin")
-    #df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
-    #print("Starting last_islast")
-    #df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
-    #print("Starting cos_sim")
-    #df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
-    #print("Starting jar_win")
-    #df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
-    #print("Starting war_sco")
-    #df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
+    # print("Starting last_isin")
+    # df['w2v_last_isin'] = df.apply(lambda row: last_isin(row["text"], row["text_transcription"]), axis=1)
+    # print("Starting last_islast")
+    # df['w2v_last_islast'] = df.apply(lambda row: last_islast(row["text"], row["text_transcription"]), axis=1)
+    # print("Starting cos_sim")
+    # df['w2v_cos_sim'] = df.apply(lambda row: cosine_similarity(row["text"], row["text_transcription"]), axis=1)
+    # print("Starting jar_win")
+    # df['w2v_jar_win'] = df.apply(lambda row: 1 - jaro_winkler_distance(row["text"], row["text_transcription"]), axis=1)
+    # print("Starting war_sco")
+    # df['w2v_wer_sco'] = df.apply(lambda row: wer(row["text"], row["text_transcription"]), axis=1)
 
     # Remove the chunk times to save space
-    df = df.drop(columns=['chunks', 'file', 'model', 'text_transcription', 'w2v_mat_per', 'w2v_ber_sim', 'word_count_subtitles','word_count_transcription'])
+    df = df.drop(
+        columns=['chunks', 'file', 'model', 'text_transcription', 'w2v_mat_per', 'w2v_ber_sim', 'word_count_subtitles',
+                 'word_count_transcription'])
+
+    df = pd.concat([df, translate_df, silence_df])
 
     output_file = os.path.join(
         args.output_folder, os.path.basename(args.input_file))
@@ -291,6 +329,8 @@ def parse_args():
                         help='Path to input file.')
     parser.add_argument('--transcript_file', required=True,
                         help='Path to transcript file.')
+    parser.add_argument('--audio_folder',
+                        help="Path to audio folder (for VAD).")
     parser.add_argument('--output_folder', required=True,
                         help='Path to output folder.')
     parser.add_argument('--log_level', required=False, default="INFO",
