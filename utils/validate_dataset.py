@@ -106,12 +106,21 @@ def calculate_statistics(df, detailed):
     total_duration_ms = df['audio_duration'].sum()
     total_duration = convert_milliseconds(total_duration_ms)
 
-    # Update the summary_df construction to format the numbers with the thousand separator
+    # Create a new DataFrame for the summary table
     summary_df = pd.DataFrame({
         'Measure': ['Total lines', 'Total words in \'text\'', 'Total characters in \'text\'', 'Total audio duration'],
         'Total': [f"{total_lines:,}", f"{total_words:,}", f"{total_characters:,}", total_duration]
     })
 
+    # Add the source-specific counts to the summary DataFrame
+    for source in sources:
+        source_lines = len(df[df['source'] == source])
+        source_words = df[df['source'] == source]['text'].str.split().str.len().sum()
+        source_characters = df[df['source'] == source]['text'].str.len().sum()
+        source_duration_ms = df[df['source'] == source]['audio_duration'].sum()
+        source_duration = convert_milliseconds(source_duration_ms)
+
+        summary_df[source] = [f"{source_lines:,}", f"{source_words:,}", f"{source_characters:,}", source_duration]
 
     print("\nSummary:")
     print(tabulate(summary_df, headers='keys', tablefmt='psql', showindex=False))
