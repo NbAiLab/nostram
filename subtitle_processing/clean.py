@@ -17,7 +17,7 @@ import logging
 import time
 import argparse
 import ftfy
-from pydub import AudioSegment
+# from pydub import AudioSegment
 from pandarallel import pandarallel
 from utils import detect_lang
 
@@ -397,6 +397,47 @@ def pad_with_silence(data: pd.DataFrame, max_length_seconds: float):
     return out_data
 
 
+def add_empty_captions(data: pd.DataFrame, max_duration=30, min_duration=1, min_padding=2):
+    max_duration = round(1000 * max_duration)
+    min_duration = round(1000 * min_duration)
+    min_padding = round(1000 * min_padding)
+    data = data.copy().sort_values(["start_time", "end_time"])
+    new_data = []
+    for i in range(len(data) - 1):
+        prev_ts = data.iloc[i].end_time
+        next_ts = data.iloc[i + 1].start_time
+
+        prev_ts += min_padding
+        next_ts -= min_padding
+
+        while next_ts - prev_ts > min_duration:
+            row = data.iloc[i].copy()
+
+            start_time = prev_ts
+            if next_ts - prev_ts > max_duration:
+                end_time = prev_ts + min(max_duration, (next_ts - prev_ts) // 2)
+            else:
+                end_time = next_ts
+            assert min_duration <= end_time - start_time <= max_duration
+
+            row.id = f"{row.program_id}_{start_time}_{end_time}"
+            row.text = "<|nocaptions|>"
+            row.timestamp_text = "<|nocaptions|>"
+            row.start_time = start_time
+            row.end_time = end_time
+            row.duration = end_time - start_time
+            row[REMOVE_COL] = False
+
+            new_data.append(row)
+            prev_ts = end_time
+    if len(new_data) > 0:
+        new_data = pd.concat(new_data, axis=1, ignore_index=True).T
+        new_data[REMOVE_COL] = new_data[REMOVE_COL].astype(bool)
+    else:
+        new_data = data.iloc[:0].copy()
+    return new_data
+
+
 def remove_italics(data: pd.DataFrame):
     """
     Italics are used liberally to denote things like emphasis, narrators, voices from phones etc.
@@ -416,8 +457,7 @@ def remove_italics(data: pd.DataFrame):
 
 
 def find_simultaneous(data: pd.DataFrame):
-    simultaneous = data[data.text.str.lower().str.contains(
-        "opptak av simultanteksting")]
+    simultaneous = data[data.text.str.lower().str.contains("opptak av simultanteksting")]
     program_ids = simultaneous.program_id.unique()
 
     return program_ids
@@ -759,6 +799,25 @@ def main(args):
             logger.info(f'***  Removed invalid languages. '
                         f'({exec_time()}) {show_length(data)}')
 
+    if config["add_empty_captions"]:
+        new_data = data.groupby("program_id").parallel_apply(
+            functools.partial(add_empty_captions,
+                              max_duration=config["max_duration_seconds"])
+        )
+        new_data = new_data.reset_index(drop=True)
+
+        # languages = data["lang_text"].value_counts()
+        # new_data["lang_text"] = np.random.choice(languages.index.to_list(),
+        #                                          size=len(new_data),
+        #                                          p=(languages / languages.sum()).to_list())
+        # new_data["lang_text_confidence"] = 0.
+        new_data["task"] = "silence"
+
+        data = pd.concat([data, new_data])
+
+        logger.info(f'***  Added empty captions. '
+                    f'({exec_time()}) {show_length(data)}')
+
     if args.audio_input_folder:
         def calculate_duration(fname):
             fpath = os.path.join(args.audio_input_folder, fname)
@@ -822,9 +881,12 @@ def main(args):
     new_group = data["group_id"].ne(data['group_id'].shift())
     data.loc[new_group, "previous_text"] = np.nan
     if is_nrk:
-        data["source"] = data.apply(lambda x: "NRK TV TRANSLATE" if x.task == "translate" else "NRK TV", axis=1)
+        data["source"] = data.task.map({"translate": "NRK TV TRANSLATE",
+                                        "transcribe": "NRK TV",
+                                        "silence": "NRK TV SILENCE"})
         new_source = data["source"].ne(data['source'].shift())
         data.loc[new_source, "previous_text"] = np.nan
+        data["previous_text"] = data["previous_text"].replace("<|nocaptions|>", np.nan)
     else:
         raise NotImplementedError("Source unknown")
 
