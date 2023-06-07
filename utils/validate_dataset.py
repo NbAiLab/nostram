@@ -30,7 +30,8 @@ schema = {
         "whisper_wer": {"type": ["number", "null"]},
         "verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, None]}
     },
-    "required": ["id", "source", "audio", "audio_duration", "text_language", "text"]
+    "required": ["id", "source", "audio", "audio_duration", "text_language", "text"],
+    "additionalProperties": False
 }
 
 def validate_json_format(data):
