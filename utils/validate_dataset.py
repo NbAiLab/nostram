@@ -68,38 +68,67 @@ def validate_pandas_import(data):
     return True, df
 
 def calculate_statistics(df, detailed):
+    total_rows = len(df)
+
+    # Calculate filled_field_counts
     filled_field_counts = calculate_filled_fields(df, "Total")
-    total_stats = pd.concat([calculate_avg_word_counts(df, "Total"),
-                             calculate_avg_char_counts(df, "Total"),
-                             calculate_unique_value_counts(df, "Total"),
-                             calculate_avg_duration(df, "Total")], ignore_index=True)
+    filled_field_counts['Total'] = filled_field_counts['Total'].apply(
+        lambda x: f"{x} ({round((int(x) / total_rows) * 100)} %)" if int(x) > 0 else '0 %'
+    )
+
+    total_stats = pd.concat(
+        [
+            calculate_avg_word_counts(df, "Total"),
+            calculate_avg_char_counts(df, "Total"),
+            calculate_unique_value_counts(df, "Total"),
+            calculate_avg_duration(df, "Total"),
+        ],
+        ignore_index=True,
+    )
     total_stats.set_index('Measure', inplace=True)
     total_stats = total_stats[['Value']].rename(columns={'Value': 'Total'})
     stats = total_stats.copy()
 
     if detailed:
         sources = df['source'].unique()
-        
+
         for source in sources:
             source_df = df[df['source'] == source]
-            filled_field_counts = pd.concat([filled_field_counts, calculate_filled_fields(source_df, source)], axis=1)
-            
-            source_stats = pd.concat([calculate_avg_word_counts(source_df, source),
-                                      calculate_avg_char_counts(source_df, source),
-                                      calculate_unique_value_counts(source_df, source),
-                                      calculate_avg_duration(source_df, source)], ignore_index=True)
+            filled_field_counts = pd.concat(
+                [filled_field_counts, calculate_filled_fields(source_df, source)], axis=1
+            )
+
+            source_stats = pd.concat(
+                [
+                    calculate_avg_word_counts(source_df, source),
+                    calculate_avg_char_counts(source_df, source),
+                    calculate_unique_value_counts(source_df, source),
+                    calculate_avg_duration(source_df, source),
+                ],
+                ignore_index=True,
+            )
             source_stats.set_index('Measure', inplace=True)
             source_stats = source_stats[['Value']].rename(columns={'Value': source})
             stats = pd.concat([stats, source_stats], axis=1)
 
         # Move 'Total' column to the end
         stats = stats[[col for col in stats if col != 'Total'] + ['Total']]
-        filled_field_counts = filled_field_counts[[col for col in filled_field_counts if col != 'Total'] + ['Total']]
+        filled_field_counts = filled_field_counts[
+            [col for col in filled_field_counts if col != 'Total'] + ['Total']
+        ]
+
+    # Add field names to the output
+    filled_field_counts.insert(0, 'Field', filled_field_counts.index)
+    stats.insert(0, 'Field', stats.index)
+
+    # Remove 'Percentage' columns
+    filled_field_counts = filled_field_counts.loc[:, ~filled_field_counts.columns.str.contains('Percentage')]
+    stats = stats.loc[:, ~stats.columns.str.contains('Percentage')]
 
     print("\nCounts of filled out fields:")
-    print(tabulate(filled_field_counts, headers='keys', tablefmt='psql'))
+    print(tabulate(filled_field_counts, headers='keys', tablefmt='psql', showindex=False))
     print("\nStatistics:")
-    print(tabulate(stats, headers='keys', tablefmt='psql', showindex=True))
+    print(tabulate(stats, headers='keys', tablefmt='psql', showindex=False))
 
     total_lines = len(df)
     total_words = df['text'].str.split().str.len().sum()
@@ -108,10 +137,12 @@ def calculate_statistics(df, detailed):
     total_duration = convert_milliseconds(total_duration_ms)
 
     # Create a new DataFrame for the summary table
-    summary_df = pd.DataFrame({
-        'Measure': ['Total lines', 'Total words in \'text\'', 'Total characters in \'text\'', 'Total audio duration'],
-        'Total': [f"{total_lines:,}", f"{total_words:,}", f"{total_characters:,}", total_duration]
-    })
+    summary_df = pd.DataFrame(
+        {
+            'Measure': ['Total lines', 'Total words in \'text\'', 'Total characters in \'text\'', 'Total audio duration'],
+            'Total': [f"{total_lines:,}", f"{total_words:,}", f"{total_characters:,}", total_duration],
+        }
+    )
 
     if detailed:
         # Add the source-specific counts to the summary DataFrame
@@ -134,8 +165,13 @@ def calculate_statistics(df, detailed):
 
 def calculate_filled_fields(data_frame, source):
     filled_counts = data_frame.count().apply(lambda x: f'{x:,.0f}')
+    total_rows = len(data_frame)
+    filled_percentages = data_frame.count().apply(lambda x: f'{(x/total_rows)*100:.0f} %' if x > 0 else '0 %')
     filled_counts.name = source
-    return filled_counts.to_frame()
+    filled_counts_with_percentage = pd.concat([filled_counts, filled_percentages], axis=1)
+    filled_counts_with_percentage.columns = [source, 'Percentage']
+    return filled_counts_with_percentage
+
 
 def calculate_avg_word_counts(data_frame, source):
     avg_word_count = round(data_frame['text'].apply(lambda s: len(str(s).split())).mean())
