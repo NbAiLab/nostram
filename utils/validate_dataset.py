@@ -113,15 +113,20 @@ def calculate_statistics(df, detailed):
         'Total': [f"{total_lines:,}", f"{total_words:,}", f"{total_characters:,}", total_duration]
     })
 
-    # Add the source-specific counts to the summary DataFrame
-    for source in sources:
-        source_lines = len(df[df['source'] == source])
-        source_words = df[df['source'] == source]['text'].str.split().str.len().sum()
-        source_characters = df[df['source'] == source]['text'].str.len().sum()
-        source_duration_ms = df[df['source'] == source]['audio_duration'].sum()
-        source_duration = convert_milliseconds(source_duration_ms)
+    if detailed:
+        # Add the source-specific counts to the summary DataFrame
+        sources = df['source'].unique()
+        for source in sources:
+            source_lines = len(df[df['source'] == source])
+            source_words = df[df['source'] == source]['text'].str.split().str.len().sum()
+            source_characters = df[df['source'] == source]['text'].str.len().sum()
+            source_duration_ms = df[df['source'] == source]['audio_duration'].sum()
+            source_duration = convert_milliseconds(source_duration_ms)
 
-        summary_df[source] = [f"{source_lines:,}", f"{source_words:,}", f"{source_characters:,}", source_duration]
+            summary_df[source] = [f"{source_lines:,}", f"{source_words:,}", f"{source_characters:,}", source_duration]
+
+    # Move 'Total' column to the end
+    summary_df = summary_df[[col for col in summary_df if col != 'Total'] + ['Total']]
 
     print("\nSummary:")
     print(tabulate(summary_df, headers='keys', tablefmt='psql', showindex=False))
