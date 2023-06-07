@@ -199,8 +199,7 @@ def run_vad(df, audio_folder):
 
     silent_indices = []
     for i, row in df.iterrows():
-        row = df.iloc[i]
-        voice_detector.select_sourcefile(os.path.join(audio_folder, row.id.split("_")[0][-2:], row.id))
+        voice_detector.select_sourcefile(os.path.join(audio_folder, row.id.split("_")[0][-2:], row.id + ".mp3"))
         voice_segments = voice_detector.analyze()
         if len(voice_segments) <= 0:
             silent_indices.append(i)
@@ -209,11 +208,11 @@ def run_vad(df, audio_folder):
 
 def main(args):
     if not os.path.isfile(args.input_file):
-        print(f"{args.input_file} This is not a valid input file")
+        print(f"{args.input_file} is not a valid input file")
         sys.exit(1)
 
     if not os.path.isfile(args.transcript_file):
-        print(f"{args.transcript_file} This is not a valid transcript file")
+        print(f"{args.transcript_file} is not a valid transcript file")
         sys.exit(1)
 
     if args.audio_folder is not None and not os.path.isdir(args.audio_folder):
@@ -225,7 +224,7 @@ def main(args):
         sys.exit(1)
 
     # df = pd.read_json(input_file, lines=True, nrows=1_000)
-    df = pd.read_json(args.input_file, lines=True)
+    df = pd.read_json(open(args.input_file), lines=True)
 
     is_silence = df.source == "NRK TV SILENCE"
     is_translate = df.source == "NRK TV TRANSLATE"
@@ -237,10 +236,10 @@ def main(args):
     assert (~(is_silence | is_translate | is_transcribe)).sum() == 0
 
     if args.audio_folder is not None and len(silence_df) > 0:
-        silent_indices = run_vad(df, args.audio_folder)
-        print(f"Silent samples in transcribe: {len(silent_indices)}/{len(df)}")
-        silent_indices = run_vad(translate_df, args.audio_folder)
-        print(f"Silent samples in translate: {len(silent_indices)}/{len(translate_df)}")
+        # silent_indices = run_vad(df, args.audio_folder)
+        # print(f"Silent samples in transcribe: {len(silent_indices)}/{len(df)}")
+        # silent_indices = run_vad(translate_df, args.audio_folder)
+        # print(f"Silent samples in translate: {len(silent_indices)}/{len(translate_df)}")
         silent_indices = run_vad(silence_df, args.audio_folder)
         print(f"Silent samples in silence: {len(silent_indices)}/{len(silence_df)}")
         silence_df = silence_df.loc[silent_indices]

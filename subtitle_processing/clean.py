@@ -873,7 +873,8 @@ def main(args):
     #                        "category", "title", "subtitle", "audio", "lang_text", "lang_text_confidence", "lang_voice",
     #                        "lang_voice_confidence", "task"]
     is_nrk = "program_id" in data.columns
-    data = data.rename({"program_id": "group_id", "duration": "audio_duration", "lang_text": "text_language"}, axis=1)
+    data = data.rename({"program_id": "group_id", "duration": "audio_duration", "lang_text": "text_language",
+                        "timestamp_text": "timestamped_text"}, axis=1)
 
     data["previous_text"] = np.nan
     data["previous_text"] = data.text.shift()
@@ -889,9 +890,9 @@ def main(args):
     else:
         raise NotImplementedError("Source unknown")
 
-    final_table_columns = ["id", "group_id", "source", "audio_language", "audio", "audio_duration", "previous_text",
+    final_table_columns = ["id", "group_id", "source", "audio_language", "audio_duration", "previous_text",
                            "text_language", "text", "translated_text_no", "translated_text_nn", "translated_text_en",
-                           "translated_text_es", "timestamp_text", "wav2vec_wer", "whisper_wer", "verbosity_level"]
+                           "translated_text_es", "timestamped_text", "wav2vec_wer", "whisper_wer", "verbosity_level"]
     data = data[data.columns.intersection(final_table_columns)]
 
     # Add final table columns if they do not exist
