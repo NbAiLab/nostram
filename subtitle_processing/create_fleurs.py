@@ -34,26 +34,18 @@ def main(args):
     
     data = load_json(args.input_file)
     data["id"] = "fleurs_"+data['path'].apply(os.path.basename).str.replace(".wav","",regex=False)
-    data["program_id"] = ""
-    data["start_time"] = 0
-    data["medium"] = "Fleurs"
-    data["source"] = "Fleurs"
-    data["category"] = "reading"
-    data["title"] = "Fleurs"
-    data["subtitle"] = data["id"].astype(str)
+    data["group_id"] = None
+    data["source"] = "fleurs"
     data["audio"] = "fleurs_"+data['path'].apply(os.path.basename).str.replace(".wav",".mp3",regex=False)
-    data["duration"] = args.mp3_folder+"/"+data["audio"]
-    data["duration"] = data["duration"].parallel_apply(calculate_duration)
-    data["end_time"] = data["duration"]
+    data["audio_duration"] = args.mp3_folder+"/"+data["audio"]
+    data["audio_duration"] = data["audio_duration"].parallel_apply(calculate_duration)
     data["text"] = data["raw_transcription"]
-    data["lang_text"] = "nob"
-    data["lang_text_confidence"] = 1
-    data["lang_voice"] = "nor"
-    data["lang_voice_confidence"] = 1
+    data["text_language"] = "no"
+    data["audio_language"] = "no"
     
     
     #Drop some stuff we dont need any more
-    data = data.drop(['num_samples','path','transcription','raw_transcription','gender','lang_id','language','lang_group_id'], axis=1)
+    data = data.drop(['num_samples','path','audio','transcription','raw_transcription','gender','lang_id','language','lang_group_id'], axis=1)
     
     
     
@@ -61,7 +53,7 @@ def main(args):
     output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
     print(output_filename)
-    print(f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
+    print(f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["audio_duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
 
 
 def parse_args():
