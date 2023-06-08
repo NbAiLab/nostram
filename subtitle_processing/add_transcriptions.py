@@ -223,9 +223,9 @@ def main(args):
     # df = pd.read_json(input_file, lines=True, nrows=1_000)
     df = pd.read_json(open(args.input_file), lines=True)
 
-    is_silence = df.source == "NRK TV SILENCE"
-    is_translate = df.source == "NRK TV TRANSLATE"
-    is_transcribe = df.source == "NRK TV"
+    is_silence = df.source == "nrk_tv_silence"
+    is_translate = df.source == "nrk_tv_translate"
+    is_transcribe = df.source == "nrk_tv"
     silence_df = df[is_silence]
     translate_df = df[is_translate]
     df = df[is_transcribe]
