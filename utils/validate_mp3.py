@@ -1,85 +1,86 @@
-import argparse
 import os
 import json
+import argparse
 from tinytag import TinyTag
+import glob
+from pathlib import Path
 
-def validate_arguments(json_file):
+def validate_arguments(json_file, audio_path):
     """
-    Validate the input arguments: JSON file path.
+    Validates that the json file and audio directory exist
     """
-
-    # Validate JSON file
     if not os.path.isfile(json_file):
-        raise Exception(f"JSON file {json_file} does not exist.")
+        raise Exception(f"File {json_file} does not exist.")
+        
+    with open(json_file, 'r') as f:
+        try:
+            # Try to parse file to check if it's a valid json
+            for line in f:
+                json.loads(line)
+        except Exception:
+            raise Exception(f"File {json_file} is not a valid JSON file.")
+
+    if not os.path.isdir(audio_path):
+        raise Exception(f"Directory {audio_path} does not exist.")
+    
+    return audio_path
+
+def create_audio_index(audio_path):
+    """Create an index of all MP3 files in the given directory and its subdirectories."""
+    audio_index = {}
+    for root, dirs, files in os.walk(audio_path):
+        for file in files:
+            if file.endswith(".mp3"):
+                audio_index[file] = os.path.join(root, file)
+    return audio_index
 
 def main(json_file):
-    """
-    Main function to process a JSON file and corresponding MP3 files.
-    """
+    """Main function for processing the JSON file and audio files."""
+
+    json_file_path = Path(json_file).resolve()
+    dataset = json_file_path.parts[-3]  # Extract the dataset name
+    audio_path = json_file_path.parents[2] / "audio" / dataset / "audio"
 
     # Validate the input arguments
-    validate_arguments(json_file)
+    validate_arguments(json_file, str(audio_path))
 
-    # Determine the audio directory based on the JSON file path
-    abs_path = os.path.abspath(json_file)
-    dataset = os.path.basename(os.path.dirname(os.path.dirname(abs_path)))
-    audio_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(abs_path))), 'audio', dataset, 'audio')
+    audio_index = create_audio_index(str(audio_path))
 
-    # Counter for successfully checked MP3 files
-    success_counter = 0
-
-    # Open the JSON file
+    # Process the JSON file
     with open(json_file, 'r') as f:
-        # Process each line in the JSON file
-        for i, line in enumerate(f):
+        checked = 0
+        errors = 0
+        for line in f:
+            checked += 1
+            data = json.loads(line)
+            audio_file_name = f'{data["id"]}.mp3'
+            audio_file_path = audio_index.get(audio_file_name)
 
-            # Load JSON data from the line
-            entry = json.loads(line)
-
-            # Retrieve the id and audio_duration from the JSON entry
-            id = entry.get('id', None)
-            audio_duration = entry.get('audio_duration', None)
-
-            # If either the id or audio_duration is missing, skip this entry
-            if id is None or audio_duration is None:
-                print(f"Skipping entry {i} due to missing id or audio_duration.")
+            if audio_file_path is None:
+                print(f"Error: File {audio_file_name} does not exist in the audio path.")
+                errors += 1
                 continue
 
-            # Construct the path to the corresponding MP3 file
-            mp3_file = os.path.join(audio_path, f"{id}.mp3")
+            tag = TinyTag.get(audio_file_path)
+            audio_duration = tag.duration * 1000  # convert to milliseconds
 
-            # If the MP3 file does not exist, print a message and skip to the next entry
-            if not os.path.isfile(mp3_file):
-                print(f"MP3 file {mp3_file} does not exist.")
-            else:
-                # Use TinyTag to get the duration of the MP3 file
-                audio = TinyTag.get(mp3_file)
-                file_duration = audio.duration
-                
-                # Convert JSON audio_duration from milliseconds to seconds for comparison
-                json_duration = audio_duration / 1000.0
+            if audio_duration < 1000:
+                print(f"Error: File {audio_file_name} is less than 1 second long.")
+                errors += 1
+                continue
 
-                # Check if the audio file duration matches the JSON duration
-                if file_duration < 1 or abs(file_duration - json_duration) > 1:
-                    print(f"ERROR: MP3 file {mp3_file} duration mismatch. Expected: {json_duration}s, got: {file_duration}s.")
-                else:
-                    # Increase the counter for successful checks
-                    success_counter += 1
+            if abs(audio_duration - data["audio_duration"]) > 2000:
+                print(f"Error: File {audio_file_name} duration mismatch with the json file. Json claims {int(audio_duration)} while mp3 is {data['audio_duration']}")
+                errors += 1
+                continue
 
-    # Print the number of successfully checked MP3 files
-    print(f"\nTotal MP3 files successfully checked: {success_counter}")
+    print(f"\n Checked {checked} mp3-files. Found {errors} errors.")
 
-if __name__ == '__main__':
-    """
-    This block is executed when the script is run directly, not when imported as a module.
-    It sets up argument parsing and calls the main function.
-    """
 
-    # Set up argument parser
-    parser = argparse.ArgumentParser(description='A program that processes a JSON file and MP3 files.')
-    parser.add_argument('--json_file', type=str, required=True, help='The path to the JSON file.')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Check mp3 files corresponding to a json.")
+    parser.add_argument("json_file", help="Path to the json file.")
+    
     args = parser.parse_args()
-
-    # Call the main function with the parsed arguments
     main(args.json_file)
 
