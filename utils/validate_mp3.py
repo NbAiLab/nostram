@@ -1,30 +1,29 @@
 import argparse
 import os
-import glob
 import json
 from tinytag import TinyTag
 
-def validate_arguments(json_file, audio_path):
+def validate_arguments(json_file):
     """
-    Validate the input arguments: JSON file path and audio directory path.
+    Validate the input arguments: JSON file path.
     """
 
     # Validate JSON file
     if not os.path.isfile(json_file):
         raise Exception(f"JSON file {json_file} does not exist.")
 
-    # Validate audio path for MP3 files
-    mp3_files = glob.glob(os.path.join(audio_path, '*.mp3'))
-    if len(mp3_files) == 0:
-        raise Exception(f"No MP3 files found in the audio path {audio_path}.")
-
-def main(json_file, audio_path):
+def main(json_file):
     """
     Main function to process a JSON file and corresponding MP3 files.
     """
 
     # Validate the input arguments
-    validate_arguments(json_file, audio_path)
+    validate_arguments(json_file)
+
+    # Determine the audio directory based on the JSON file path
+    abs_path = os.path.abspath(json_file)
+    dataset = os.path.basename(os.path.dirname(os.path.dirname(abs_path)))
+    audio_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(abs_path))), 'audio', dataset, 'audio')
 
     # Counter for successfully checked MP3 files
     success_counter = 0
@@ -79,9 +78,8 @@ if __name__ == '__main__':
     # Set up argument parser
     parser = argparse.ArgumentParser(description='A program that processes a JSON file and MP3 files.')
     parser.add_argument('--json_file', type=str, required=True, help='The path to the JSON file.')
-    parser.add_argument('--audio_path', type=str, required=True, help='The path to the directory containing MP3 files.')
     args = parser.parse_args()
 
     # Call the main function with the parsed arguments
-    main(args.json_file, args.audio_path)
+    main(args.json_file)
 
