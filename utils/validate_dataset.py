@@ -14,9 +14,8 @@ schema = {
     "properties": {
         "id": {"type": "string"},
         "group_id": {"type": ["string", "null"]},
-        "source": {"type": "string", "enum": ["NRK TV", "NRK TV TRANSLATE", "NRK TV SILENCE", "NPSC", "NST", "FLEURS", "AUDIO BOOKS"]},
+        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "npsc", "nst", "fleurs", "audio_books"]},
         "audio_language": {"type": ["string", "null"]},
-        "audio": {"type": "string"},
         "audio_duration": {"type": "integer"},
         "previous_text": {"type": ["string", "null"]},
         "text_language": {"type": "string", "enum": ["no", "nn", "en", "es"]},
@@ -30,7 +29,7 @@ schema = {
         "whisper_wer": {"type": ["number", "null"]},
         "verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, None]}
     },
-    "required": ["id", "source", "audio", "audio_duration", "text_language", "text"],
+    "required": ["id", "source", "audio_duration", "text_language", "text"],
     "additionalProperties": False
 }
 
