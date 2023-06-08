@@ -100,7 +100,7 @@ class VoiceDetector:
             wav = read_audio(self.sourcefile, sampling_rate=sampling_rate)
         except:
             print("Error reading file")
-            return []
+            return ()
 
         speech_timestamps = get_speech_timestamps(
             wav,

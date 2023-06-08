@@ -881,9 +881,9 @@ def main(args):
     new_group = data["group_id"].ne(data['group_id'].shift())
     data.loc[new_group, "previous_text"] = np.nan
     if is_nrk:
-        data["source"] = data.task.map({"translate": "NRK TV TRANSLATE",
-                                        "transcribe": "NRK TV",
-                                        "silence": "NRK TV SILENCE"})
+        data["source"] = data.task.map({"translate": "nrk_tv_translate",
+                                        "transcribe": "nrk_tv",
+                                        "silence": "nrk_tv_silence"})
         new_source = data["source"].ne(data['source'].shift())
         data.loc[new_source, "previous_text"] = np.nan
         data["previous_text"] = data["previous_text"].replace("<|nocaptions|>", np.nan)

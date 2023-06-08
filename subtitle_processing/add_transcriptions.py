@@ -1,3 +1,4 @@
+import functools
 import math
 import re
 from collections import Counter
@@ -194,16 +195,12 @@ def is_valid_mat_per_ber_sim(data: pd.DataFrame, min_mat_per, min_ber_sim):
     return cond
 
 
-def run_vad(df, audio_folder):
-    voice_detector = VoiceDetector(method="silero")
-
-    silent_indices = []
-    for i, row in df.iterrows():
-        voice_detector.select_sourcefile(os.path.join(audio_folder, row.id.split("_")[0][-2:], row.id + ".mp3"))
-        voice_segments = voice_detector.analyze()
-        if len(voice_segments) <= 0:
-            silent_indices.append(i)
-    return silent_indices
+def run_vad(row, voice_detector, audio_folder):
+    voice_detector.select_sourcefile(os.path.join(audio_folder, row.id.split("_")[0][-2:], row.id + ".mp3"))
+    voice_segments = voice_detector.analyze()
+    if voice_detector.is_tmp:
+        os.remove(voice_detector.sourcefile)
+    return len(voice_segments) <= 0 and isinstance(voice_segments, list)
 
 
 def main(args):
@@ -233,16 +230,21 @@ def main(args):
     translate_df = df[is_translate]
     df = df[is_transcribe]
 
-    assert (~(is_silence | is_translate | is_transcribe)).sum() == 0
+    assert (is_silence | is_translate | is_transcribe).all()
 
     if args.audio_folder is not None and len(silence_df) > 0:
         # silent_indices = run_vad(df, args.audio_folder)
         # print(f"Silent samples in transcribe: {len(silent_indices)}/{len(df)}")
         # silent_indices = run_vad(translate_df, args.audio_folder)
         # print(f"Silent samples in translate: {len(silent_indices)}/{len(translate_df)}")
-        silent_indices = run_vad(silence_df, args.audio_folder)
-        print(f"Silent samples in silence: {len(silent_indices)}/{len(silence_df)}")
-        silence_df = silence_df.loc[silent_indices]
+        voice_detector = VoiceDetector(method="silero")
+        is_silent = silence_df.apply(functools.partial(run_vad,
+                                                       voice_detector=voice_detector,
+                                                       audio_folder=args.audio_folder),
+                                     axis=1)
+        print(f"Silent samples in silence: {is_silent.sum()}/{len(silence_df)}")
+        is_silent.to_frame().to_csv("is_silent.csv", header=False)
+        silence_df = silence_df[is_silent]
 
     config_file_path = os.path.join(
         args.output_folder.replace("/train", "/").replace("/test", "/").replace("/validation", "/"), "config.json")
@@ -270,7 +272,7 @@ def main(args):
     # Delete the entire program if the average mat_per is below 0.5
     grouped = df.groupby("program_id")
     cond = grouped["w2v_mat_per"].mean()[grouped["w2v_mat_per"].mean() < 0.5].index
-    cond = df["program_id"].isin(cond)
+    cond = df["id"].isin(cond)
     logger.debug(
         f'\n\n*** The following text was deleted because the mat_per average for the group was not high enough:' f'\n {df[cond][["text", "text_transcription", "w2v_mat_per", "w2v_ber_sim"]]}')
     df = df[~cond].reset_index(drop=True)
