@@ -1,7 +1,3 @@
-######################################################################
-### Creates the NST dataset file
-#####################################################################
-
 import os
 import pandas as pd
 from slugify import slugify
@@ -33,7 +29,6 @@ def main(args):
         return duration
     
     data = load_json(args.input_file)
-    # Keep only rows that are sentences
     print(f"Initial length is {len(data)}.")
     data = data[data["type"].str.contains("IS")==True]
     print(f"After checking if it is a sentence: {len(data)}")
@@ -44,17 +39,15 @@ def main(args):
     data = data[(data["text"].str.contains(".", regex=False)==True) | (data["text"].str.contains("?", regex=False)==True)]
     print(f"After checking that the sentence has punctation or question mark: {len(data)}")
     
-    data["id"] = "NST_"+data["pid"].astype(str)+"_"+data["file"].str.replace(".wav","", regex=False)
-    data["group_id"] = "NST"+data["pid"].astype(str)
-    data["medium"] = "NST"
-    data["source"] = "NST"
+    data["id"] = data["pid"].astype(str)+"_"+data["file"].str.replace(".wav","", regex=False)
+    data["group_id"] = data["pid"].astype(str)
+    data["source"] = "nst"
     data["audio"] = data["pid"].astype(str)+"_"+data["file"].str.replace(".wav",".mp3", regex=False)
     data["audio_duration"] = args.mp3_folder+data["audio"]
     data["audio_duration"] = data["audio_duration"].parallel_apply(calculate_duration)
     data["text"] = data["text"]
     data["text_language"] = "no"
     data["audio_language"] = "no"
-    data["lang_voice_confidence"] = 1
     data["previous_text"] = None
     data["translated_text_no"] = None
     data["translated_text_nn"] = None
@@ -64,12 +57,14 @@ def main(args):
     data["whisper_wer"] = None
     data["verbosity_level"] = 6
     
-    #Drop some stuff we dont need any more
-    data = data.drop(['pid', 'Age','Region_of_Birth','Region_of_Youth','Remarks','Sex','Speaker_ID','Directory','Imported_sheet_file','Number_of_recordings','RecDate','RecTime','Record_duration','Record_session','Sheet_number','ANSI_Codepage','Board','ByteFormat','Channels','CharacterSet','Coding','DOS_Codepage','Delimiter','Frequency','Memo','Script','Version','DST','NOI','QUA','SND','SPC','UTT','file','t0','t1','t2'], axis=1)
+    data = data.drop(['audio','type','pid', 'Age','Region_of_Birth','Region_of_Youth','Remarks','Sex','Speaker_ID','Directory','Imported_sheet_file','Number_of_recordings','RecDate','RecTime','Record_duration','Record_session','Sheet_number','ANSI_Codepage','Board','ByteFormat','Channels','CharacterSet','Coding','DOS_Codepage','Delimiter','Frequency','Memo','Script','Version','DST','NOI','QUA','SND','SPC','UTT','file','t0','t1','t2'], axis=1)
     
+    # Dropping duplicates based on 'id'
+    data = data.drop_duplicates(subset='id')
+
+    # Removing rows with audio_duration less than 1000
+    data = data[data["audio_duration"] >= 1000]
     
-    
-    #Save it as jsonl
     output_filename = os.path.join(args.output_folder, os.path.basename(args.input_file))
     save_json(data, output_filename)
     print(f'*** Finished processing file. Result has {len(data)} posts. \nTotal length is {round(data["audio_duration"].sum()/1000/60/60,1)} hours. \nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_file))}')
@@ -86,6 +81,4 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     main(args)
-
-
 

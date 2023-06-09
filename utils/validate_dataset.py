@@ -72,7 +72,7 @@ def calculate_statistics(df, detailed):
     # Calculate filled_field_counts
     filled_field_counts = calculate_filled_fields(df, "Total")
     filled_field_counts['Total'] = filled_field_counts['Total'].apply(
-        lambda x: f"{x} ({round((int(x) / total_rows) * 100)} %)" if int(x) > 0 else '0 %'
+        lambda x: f"{x} ({round((int(x.replace(',', '')) / total_rows) * 100)} %)" if int(x.replace(',', '')) > 0 else '0 %'
     )
 
     total_stats = pd.concat(

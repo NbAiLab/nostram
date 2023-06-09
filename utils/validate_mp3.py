@@ -55,6 +55,7 @@ def main(json_file):
             data = json.loads(line)
             audio_file_name = f'{data["id"]}.mp3'
             audio_file_path = audio_index.get(audio_file_name)
+            
 
             if audio_file_path is None:
                 print(f"Error: File {audio_file_name} does not exist in the audio path.")
