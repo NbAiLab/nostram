@@ -65,8 +65,13 @@ def main(json_file):
             tag = TinyTag.get(audio_file_path)
             audio_duration = tag.duration * 1000  # convert to milliseconds
 
-            if audio_duration < 1000:
-                print(f"Error: File {audio_file_name} is less than 1 second long.")
+            if audio_duration < 500:
+                print(f"Error: File {audio_file_name} is less than 0.5 seconds long.")
+                errors += 1
+                continue
+
+            if audio_duration 30000:
+                print(f"Error: File {audio_file_name} is more than 30 seconds long.")
                 errors += 1
                 continue
 
