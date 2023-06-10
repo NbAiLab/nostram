@@ -70,7 +70,7 @@ def main(json_file):
                 errors += 1
                 continue
 
-            if audio_duration 30000:
+            if audio_duration > 31000:
                 print(f"Error: File {audio_file_name} is more than 30 seconds long.")
                 errors += 1
                 continue
