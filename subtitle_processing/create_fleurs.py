@@ -42,7 +42,15 @@ def main(args):
     data["text"] = data["raw_transcription"]
     data["text_language"] = "no"
     data["audio_language"] = "no"
-    
+    data["previous_text"] = None
+    data["timestamped_text"] = None
+    data["translated_text_en"] = None
+    data["translated_text_es"] = None
+    data["translated_text_nn"] = None
+    data["translated_text_no"] = None
+    data["verbosity_level"] = None
+    data["wav2vec_wer"] = None
+    data["whisper_wer"] = None
     
     #Drop some stuff we dont need any more
     data = data.drop(['num_samples','path','audio','transcription','raw_transcription','gender','lang_id','language','lang_group_id'], axis=1)
