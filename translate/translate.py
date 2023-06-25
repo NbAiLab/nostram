@@ -2,9 +2,9 @@ from google.cloud import translate
 
 
 def batch_translate_text(
-    input_uri: str = "gs://nostram/translate/sample_translate_programs.tsv",
-    output_uri: str = "gs://nostram/translate/sample_translate/",
-    project_id: str = "vacma-250010",
+    input_uri: str = "gs://translate/test/sample_translate_programs.tsv",
+    output_uri: str = "gs://translate/test/output/",
+    project_id: str = "north-390910",
     timeout: int = 180
 ) -> translate.TranslateTextResponse:
     """Translates a batch of texts on GCS and stores the result in a GCS location.
