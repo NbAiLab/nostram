@@ -4,10 +4,12 @@ import jsonlines
 import string
 
 WORD_COUNT_THRESHOLD = 4
-MAX_WAV2VEC_WER = 0.55
+MAX_WAV2VEC_WER = 0.6
 MATCH_ALL_SUBNAMES = True
 DROP_TEMP_FIELD = True
 MIN_VERBOSITY_LEVEL = 4
+LAST_SEQUENCE_LENGTH = 5
+LAST_SEQUENCE_WORD_RATE = 0.1
 
 def remove_punctuation(text):
     translator = str.maketrans('', '', string.punctuation)
@@ -49,7 +51,8 @@ def check_lines(df):
         "Word Count": 0,
         "Names": 0,
         "WER Score": 0,
-        "Verbosity Level": 0
+        "Verbosity Level": 0,
+        "Last Sequence Word Rate": 0
     }
 
     for _, row in df.iterrows():
@@ -57,8 +60,9 @@ def check_lines(df):
             valid_word_count = check_word_count(row)
             valid_wer_score = check_wer(row)
             valid_verbosity_level = check_verbosity_level(row)
+            valid_last_sequence_overlap = check_last_sequence_overlap(row)
 
-            if valid_word_count and valid_wer_score and valid_verbosity_level:
+            if valid_word_count and valid_wer_score and valid_verbosity_level and valid_last_sequence_overlap:
                 filtered_rows.append(row)
             else:
                 if not valid_word_count:
@@ -67,13 +71,16 @@ def check_lines(df):
                     dropped_counts["WER Score"] += 1
                 if not valid_verbosity_level:
                     dropped_counts["Verbosity Level"] += 1
+                if not valid_last_sequence_overlap:
+                    dropped_counts["Last Sequence Word Rate"] += 1
         else:
             valid_names = check_names(row)
             valid_word_count = check_word_count(row)
             valid_wer_score = check_wer(row)
             valid_verbosity_level = check_verbosity_level(row)
+            valid_last_sequence_overlap = check_last_sequence_overlap(row)
 
-            if valid_names and valid_word_count and valid_wer_score and valid_verbosity_level:
+            if valid_names and valid_word_count and valid_wer_score and valid_verbosity_level and valid_last_sequence_overlap:
                 filtered_rows.append(row)
             else:
                 if not valid_names:
@@ -84,6 +91,8 @@ def check_lines(df):
                     dropped_counts["WER Score"] += 1
                 if not valid_verbosity_level:
                     dropped_counts["Verbosity Level"] += 1
+                if not valid_last_sequence_overlap:
+                    dropped_counts["Last Sequence Word Rate"] += 1
 
     return pd.DataFrame(filtered_rows), dropped_counts
 
@@ -141,15 +150,49 @@ def check_verbosity_level(row):
     print("--------------------------------------------------")
     return False
 
+
+
+def check_last_sequence_overlap(row):
+    text = row['text'].lower()
+    wav2vec_text = row['wav2vec_text'].lower()
+
+    if len(text.split()) < LAST_SEQUENCE_LENGTH or len(wav2vec_text.split()) < LAST_SEQUENCE_LENGTH:
+        return False
+
+    last_sequence_text = text.split()[-(LAST_SEQUENCE_LENGTH + 3):]
+    last_sequence_wav2vec_text = wav2vec_text.split()[-LAST_SEQUENCE_LENGTH:]
+
+    translator = str.maketrans('', '', string.punctuation)
+    last_sequence_text = [word.translate(translator) for word in last_sequence_text]
+    last_sequence_wav2vec_text = [word.translate(translator) for word in last_sequence_wav2vec_text]
+
+    overlap_found = any(word in last_sequence_wav2vec_text for word in last_sequence_text)
+
+    if overlap_found:
+        return True
+
+    print("Line dropped because the last sequence word overlap is below the minimum rate.")
+    print("Text:", row['text'])
+    print("Wav2Vec Text:", row['wav2vec_text'])
+    print("Last Sequence (Text):", " ".join(last_sequence_text))
+    print("Last Sequence (Wav2Vec Text):", " ".join(last_sequence_wav2vec_text))
+    print("Last Sequence Word Overlap: 0")
+    print("Total Words in Last Sequence:", len(last_sequence_text))
+    print("--------------------------------------------------")
+    return False
+
+
+
+
 def print_summary(dropped_counts):
     print("\nSummary:")
     for reason, count in dropped_counts.items():
         if count > 0:
-            print(f"{count} dropped because the {reason}")
+            print(f"{count} dropped because of {reason}")
     print("--------------------------------------------------")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Filter lines based on name matching, word count, WER score, and verbosity level.')
+    parser = argparse.ArgumentParser(description='Filter lines based on name matching, word count, WER score, verbosity level, and last sequence word rate.')
     parser.add_argument('--input_file_name', type=str, required=True, help='The input jsonlines file')
     parser.add_argument('--output_file_name', type=str, required=True, help='The output jsonlines file')
 
