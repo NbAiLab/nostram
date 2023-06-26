@@ -5,7 +5,13 @@ import os
 def process_file(input_file_name, output_file_name):
     # Read the JSON lines file
     data = pd.read_json(input_file_name, lines=True)
-    
+
+    # Ignore lines with "" in the `text` field
+    data = data[data['text'] != ""]
+
+    # Replace None in group_id with "xxx"
+    data['group_id'] = data['group_id'].fillna('xxx')
+
     # Group by group_id and aggregate the id and text fields
     aggregated = data.groupby('group_id').agg({
         'id': lambda ids: ','.join(ids),
@@ -21,10 +27,10 @@ def process_file(input_file_name, output_file_name):
         current_text = []
         current_length = 0
         for id_, text in zip(ids, texts):
-            if current_length + len(text) <= 9000:
+            if current_length + len(text) + len('<p>') <= 9000:  # Account for the length of '<p>' separator
                 current_id.append(id_)
                 current_text.append(text)
-                current_length += len(text)
+                current_length += len(text) + len('<p>')  # Account for the length of '<p>' separator
             else:
                 result.append((','.join(current_id), '<p>'.join(current_text)))
                 current_id = [id_]
@@ -41,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument("--input_file_name", required=True, help="Name of the input json lines file.")
     parser.add_argument("--output_file_name", required=True, help="Name of the output tsv file.")
     args = parser.parse_args()
-    
+
     if not os.path.isfile(args.input_file_name):
         print(f"The input file '{args.input_file_name}' does not exist.")
         exit(1)
