@@ -80,6 +80,11 @@ python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleu
 #Copies Fleurs validation corpus to validation
 python $PROCESSING_PATH/clean.py --input_file $CORPUS_PATH/json_2/norwegian_fleurs-validation.json --output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/validation/ --audio_input_folder $CORPUS_PATH/source_1/fleurs/audio/  --audio_output_folder $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/
 
+# Extra processing on the Stortinget dataset
+# Adding meta-data
+python $PROCESSING_PATH/stortinget_processing/add_meta.py --input_file_name $CORPUS_PATH/clean_json_3/validation/stortinget_validation.json --output_file_name $CORPUS_PATH/clean_json_3/validation/stortinget_validation_meta.json
+python $PROCESSING_PATH/stortinget_processing/add_meta.py --input_file_name $CORPUS_PATH/clean_json_3/test/stortinget_test.json --output_file_name $CORPUS_PATH/clean_json_3/test/stortinget_test_meta.json
+python $PROCESSING_PATH/stortinget_processing/add_meta.py --input_file_name $CORPUS_PATH/clean_json_3/train/stortinget_train.json --output_file_name $CORPUS_PATH/clean_json_3/train/stortinget_train_meta.json
 
 ## This is probably the best way of creating the needed mp3 files
 cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
