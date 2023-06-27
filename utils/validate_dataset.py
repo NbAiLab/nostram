@@ -14,7 +14,7 @@ schema = {
     "properties": {
         "id": {"type": "string"},
         "group_id": {"type": ["string", "null"]},
-        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "stortinget", "nst", "fleurs", "audio_books"]},
+        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "nrk_tv_veryshort","stortinget", "nst", "fleurs", "audio_books"]},
         "audio_language": {"type": ["string", "null"]},
         "audio_duration": {"type": "integer"},
         "previous_text": {"type": ["string", "null"]},
