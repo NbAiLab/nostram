@@ -55,6 +55,7 @@ def main(json_file):
             data = json.loads(line)
             audio_file_name = f'{data["id"]}.mp3'
             audio_file_path = audio_index.get(audio_file_name)
+            
 
             if audio_file_path is None:
                 print(f"Error: File {audio_file_name} does not exist in the audio path.")
@@ -64,8 +65,13 @@ def main(json_file):
             tag = TinyTag.get(audio_file_path)
             audio_duration = tag.duration * 1000  # convert to milliseconds
 
-            if audio_duration < 1000:
-                print(f"Error: File {audio_file_name} is less than 1 second long.")
+            if audio_duration < 500:
+                print(f"Error: File {audio_file_name} is less than 0.5 seconds long.")
+                errors += 1
+                continue
+
+            if audio_duration > 31000:
+                print(f"Error: File {audio_file_name} is more than 30 seconds long.")
                 errors += 1
                 continue
 

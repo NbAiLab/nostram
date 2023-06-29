@@ -14,7 +14,7 @@ schema = {
     "properties": {
         "id": {"type": "string"},
         "group_id": {"type": ["string", "null"]},
-        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "npsc", "nst", "fleurs", "audio_books"]},
+        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "nrk_tv_veryshort","stortinget", "nst", "fleurs", "audio_books"]},
         "audio_language": {"type": ["string", "null"]},
         "audio_duration": {"type": "integer"},
         "previous_text": {"type": ["string", "null"]},
@@ -29,7 +29,7 @@ schema = {
         "whisper_wer": {"type": ["number", "null"]},
         "verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, None]}
     },
-    "required": ["id", "source", "audio_duration", "text_language", "text"],
+    "required": ["id", "group_id", "source", "audio_language","previous_text","translated_text_no","translated_text_nn","translated_text_en","translated_text_es","timestamped_text","wav2vec_wer","whisper_wer","text_language", "text","verbosity_level"],
     "additionalProperties": False
 }
 
@@ -72,7 +72,7 @@ def calculate_statistics(df, detailed):
     # Calculate filled_field_counts
     filled_field_counts = calculate_filled_fields(df, "Total")
     filled_field_counts['Total'] = filled_field_counts['Total'].apply(
-        lambda x: f"{x} ({round((int(x) / total_rows) * 100)} %)" if int(x) > 0 else '0 %'
+        lambda x: f"{x} ({round((int(x.replace(',', '')) / total_rows) * 100)} %)" if int(x.replace(',', '')) > 0 else '0 %'
     )
 
     total_stats = pd.concat(
