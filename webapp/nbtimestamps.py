@@ -15,16 +15,16 @@ from transformers.pipelines.audio_utils import ffmpeg_read
 
 from whisper_jax import FlaxWhisperPipline
 
-
 cc.initialize_cache("./jax_cache")
-#checkpoint = "NbAiLab/scream_non_large_timestamp_test"
-#checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_small"
-#checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_1e5_long"
-#checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_3e5_v2"
-#checkpoint = "openai/whisper-small"
-#checkpoint = "NbAiLab/scream_septimusdecimus_small_ts"
-#checkpoint = "NbAiLab/scream_septimusdecimus_small_ts_prev2"
-checkpoint = "NbAiLab/scream_medium_beta"
+# checkpoint = "NbAiLab/scream_non_large_timestamp_test"
+# checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_small"
+# checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_1e5_long"
+# checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_3e5_v2"
+# checkpoint = "openai/whisper-small"
+# checkpoint = "NbAiLab/scream_septimusdecimus_small_ts"
+# checkpoint = "NbAiLab/scream_septimusdecimus_small_ts_prev2"
+# checkpoint = "NbAiLab/scream_medium_beta"
+checkpoint = "NbAiLab/nb-whisper-small-publicbeta-25k"
 
 BATCH_SIZE = 32
 CHUNK_LENGTH_S = 30
@@ -32,12 +32,17 @@ NUM_PROC = 32
 FILE_LIMIT_MB = 1000
 YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 
-title = "Scream with timestamps ⚡️"
+title = "NB Whisper BETA ⚡️"
 
-description = """This is a demo of the Norwegian Scream model with timestamps. This is a model trained by the AILab at the National Library of Norway. It is based on the HuggingFace port of OpenAI's Whsiper model. 
-"""
+description = "This is a demo of the NB Whisper BETA model. " \
+              "The model is trained by the AI-Lab at the National Library of Norway. " \
+              "It is based on the HuggingFace port of OpenAI's Whisper model. "
 
-article = f"Scream Small model by the National Library of Norway. June BETA version with timestamps. Currently running: {checkpoint}. Backend running JAX on a TPU v4-8 through the generous support of the [TRC](https://sites.research.google/trc/about/) programme. Whisper JAX [code](https://github.com/sanchit-gandhi/whisper-jax) and Gradio demo by 🤗 Hugging Face."
+article = f"NB Whisper model by the National Library of Norway. June BETA version. " \
+          f"Currently running: {checkpoint}. " \
+          f"Backend running JAX on a TPU v4-8 through the generous support of the " \
+          f"[TRC](https://sites.research.google/trc/about/) programme. " \
+          f"Whisper JAX [code](https://github.com/sanchit-gandhi/whisper-jax) and Gradio demo by 🤗 Hugging Face."
 
 language_names = sorted(TO_LANGUAGE_CODE.keys())
 
@@ -91,6 +96,7 @@ if __name__ == "__main__":
     compile_time = time.time() - start
     logger.info(f"compiled in {compile_time}s")
 
+
     def tqdm_generate(inputs: dict, task: str, return_timestamps: bool, progress: gr.Progress):
         inputs_len = inputs["array"].shape[0]
         all_chunk_start_idx = np.arange(0, inputs_len, step)
@@ -111,7 +117,8 @@ if __name__ == "__main__":
         logger.info("transcribing...")
         # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-            model_outputs.append(pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language="no", return_timestamps=True))
+            model_outputs.append(
+                pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language="no", return_timestamps=True))
         runtime = time.time() - start_time
         logger.info("done transcription")
         logger.info("post-processing...")
@@ -126,6 +133,7 @@ if __name__ == "__main__":
             text = "\n".join(str(feature) for feature in timestamps)
         logger.info("done post-processing")
         return text, runtime
+
 
     def transcribe_chunked_audio(inputs, task, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
@@ -149,6 +157,7 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, task=task, return_timestamps=return_timestamps, progress=progress)
         return text, runtime
 
+
     def _return_yt_html_embed(yt_url):
         video_id = yt_url.split("?v=")[-1]
         HTML_str = (
@@ -156,6 +165,7 @@ if __name__ == "__main__":
             " </center>"
         )
         return HTML_str
+
 
     def download_yt_audio(yt_url, filename):
         info_loader = youtube_dl.YoutubeDL()
@@ -185,6 +195,7 @@ if __name__ == "__main__":
             except youtube_dl.utils.ExtractorError as err:
                 raise gr.Error(str(err))
 
+
     def transcribe_youtube(yt_url, task, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
@@ -202,11 +213,13 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, task=task, return_timestamps=return_timestamps, progress=progress)
         return html_embed_str, text, runtime
 
+
     microphone_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
-            gr.inputs.Radio(["transcribe", "translate"], label="Transcribe to Norwegian or translate to English", default="transcribe"),
+            gr.inputs.Radio(["transcribe", "translate"], label="Transcribe to Norwegian or translate to English",
+                            default="transcribe"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -250,7 +263,9 @@ if __name__ == "__main__":
         ],
         allow_flagging="never",
         title=title,
-        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "transcribe", False],["https://www.youtube.com/watch?v=JtbZWIcj0bk", "transcribe", False]],
+        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "transcribe", False],
+                  ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "transcribe", False],
+                  ["https://www.youtube.com/watch?v=vauTloX4HkU", "transcribe", False]],
         cache_examples=False,
         description=description,
         article=article,
@@ -259,6 +274,7 @@ if __name__ == "__main__":
     demo = gr.Blocks()
 
     with demo:
+        gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)  # , title="NB Whisper Demo", article=article)
         gr.TabbedInterface([microphone_chunked, audio_chunked, youtube], ["Microphone", "Audio File", "YouTube"])
 
     demo.queue(concurrency_count=1, max_size=5)
