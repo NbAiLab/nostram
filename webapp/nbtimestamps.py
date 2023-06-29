@@ -230,8 +230,8 @@ if __name__ == "__main__":
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
-            gr.inputs.Radio(["transcribe", "translate"], label="Transcribe from language to Norwegian or translate to English from language",
-                            default="transcribe"),
+            # gr.inputs.Radio(["transcribe", "translate"], label="Transcribe from language to Norwegian or translate to English from language",
+            #                 default="transcribe"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
