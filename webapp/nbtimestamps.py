@@ -6,16 +6,16 @@ import time
 from multiprocessing import Pool
 
 import gradio as gr
-# import jax.numpy as jnp
+import jax.numpy as jnp
 import numpy as np
-# import yt_dlp as youtube_dl
-# from jax.experimental.compilation_cache import compilation_cache as cc
+import yt_dlp as youtube_dl
+from jax.experimental.compilation_cache import compilation_cache as cc
 from transformers.models.whisper.tokenization_whisper import TO_LANGUAGE_CODE
 from transformers.pipelines.audio_utils import ffmpeg_read
 
-# from whisper_jax import FlaxWhisperPipline
+from whisper_jax import FlaxWhisperPipline
 
-# cc.initialize_cache("./jax_cache")
+cc.initialize_cache("./jax_cache")
 # checkpoint = "NbAiLab/scream_non_large_timestamp_test"
 # checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_small"
 # checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_1e5_long"
@@ -81,20 +81,20 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
 
 
 if __name__ == "__main__":
-    # pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
-    # stride_length_s = CHUNK_LENGTH_S / 6
-    # chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
-    # stride_left = stride_right = round(stride_length_s * pipeline.feature_extractor.sampling_rate)
-    # step = chunk_len - stride_left - stride_right
-    # pool = Pool(NUM_PROC)
-    #
-    # # do a pre-compile step so that the first user to use the demo isn't hit with a long transcription time
-    # logger.info("compiling forward call...")
-    # start = time.time()
-    # random_inputs = {"input_features": np.ones((BATCH_SIZE, 80, 3000))}
-    # random_timestamps = pipeline.forward(random_inputs, batch_size=BATCH_SIZE, return_timestamps=True)
-    # compile_time = time.time() - start
-    # logger.info(f"compiled in {compile_time}s")
+    pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
+    stride_length_s = CHUNK_LENGTH_S / 6
+    chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
+    stride_left = stride_right = round(stride_length_s * pipeline.feature_extractor.sampling_rate)
+    step = chunk_len - stride_left - stride_right
+    pool = Pool(NUM_PROC)
+
+    # do a pre-compile step so that the first user to use the demo isn't hit with a long transcription time
+    logger.info("compiling forward call...")
+    start = time.time()
+    random_inputs = {"input_features": np.ones((BATCH_SIZE, 80, 3000))}
+    random_timestamps = pipeline.forward(random_inputs, batch_size=BATCH_SIZE, return_timestamps=True)
+    compile_time = time.time() - start
+    logger.info(f"compiled in {compile_time}s")
 
 
     def tqdm_generate(inputs: dict, task: str, language: str, return_timestamps: bool, progress: gr.Progress):
