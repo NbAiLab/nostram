@@ -97,7 +97,7 @@ if __name__ == "__main__":
     logger.info(f"compiled in {compile_time}s")
 
 
-    def tqdm_generate(inputs: dict, task: str, language: str, return_timestamps: bool, progress: gr.Progress):
+    def tqdm_generate(inputs: dict, language: str, return_timestamps: bool, progress: gr.Progress):
         inputs_len = inputs["array"].shape[0]
         all_chunk_start_idx = np.arange(0, inputs_len, step)
         num_samples = len(all_chunk_start_idx)
@@ -112,10 +112,15 @@ if __name__ == "__main__":
         dataloader = pool.map(identity, dataloader)
         logger.info("done post-processing")
 
-        if task == "transcribe":
-            language = {"bokmål": "no", "nynorsk": "nn"}[language]
+        if language == "Bokmål":
+            language = "no"
+            task = "transcribe"
+        elif language == "Nynorsk":
+            language = "nn"
+            task = "transcribe"
         else:
             language = "no"
+            task = "translate"
 
         model_outputs = []
         start_time = time.time()
@@ -140,7 +145,7 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(inputs, task, language, return_timestamps, progress=gr.Progress()):
+    def transcribe_chunked_audio(inputs, language, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
         logger.info("loading audio file...")
         if inputs is None:
@@ -159,7 +164,7 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        text, runtime = tqdm_generate(inputs, task=task, language=language,
+        text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
         return text, runtime
 
@@ -202,7 +207,7 @@ if __name__ == "__main__":
                 raise gr.Error(str(err))
 
 
-    def transcribe_youtube(yt_url, task, language, return_timestamps, progress=gr.Progress()):
+    def transcribe_youtube(yt_url, language, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
         html_embed_str = _return_yt_html_embed(yt_url)
@@ -216,7 +221,7 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading...")
-        text, runtime = tqdm_generate(inputs, task=task, language=language,
+        text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
         return html_embed_str, text, runtime
 
@@ -225,9 +230,9 @@ if __name__ == "__main__":
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
-            gr.inputs.Radio(["transcribe", "translate"], label="Transcribe to Norwegian or translate to English",
+            gr.inputs.Radio(["transcribe", "translate"], label="Transcribe from language to Norwegian or translate to English from language",
                             default="transcribe"),
-            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
+            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -244,8 +249,8 @@ if __name__ == "__main__":
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="upload", optional=True, label="Audio file", type="filepath"),
-            gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
-            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
+            # gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
+            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -262,8 +267,8 @@ if __name__ == "__main__":
         fn=transcribe_youtube,
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
-            gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
-            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
+            # gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
+            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -273,9 +278,9 @@ if __name__ == "__main__":
         ],
         allow_flagging="never",
         title=title,
-        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "transcribe", False],
-                  ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "transcribe", False],
-                  ["https://www.youtube.com/watch?v=vauTloX4HkU", "transcribe", False]],
+        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
+                  ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
+                  ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]],
         cache_examples=False,
         description=description,
         article=article,
