@@ -6,16 +6,16 @@ import time
 from multiprocessing import Pool
 
 import gradio as gr
-import jax.numpy as jnp
+# import jax.numpy as jnp
 import numpy as np
-import yt_dlp as youtube_dl
-from jax.experimental.compilation_cache import compilation_cache as cc
+# import yt_dlp as youtube_dl
+# from jax.experimental.compilation_cache import compilation_cache as cc
 from transformers.models.whisper.tokenization_whisper import TO_LANGUAGE_CODE
 from transformers.pipelines.audio_utils import ffmpeg_read
 
-from whisper_jax import FlaxWhisperPipline
+# from whisper_jax import FlaxWhisperPipline
 
-cc.initialize_cache("./jax_cache")
+# cc.initialize_cache("./jax_cache")
 # checkpoint = "NbAiLab/scream_non_large_timestamp_test"
 # checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_small"
 # checkpoint = "NbAiLab/scream_sextusdecimus_virtual_tsfix_medium_1e5_long"
@@ -81,23 +81,23 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
 
 
 if __name__ == "__main__":
-    pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
-    stride_length_s = CHUNK_LENGTH_S / 6
-    chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
-    stride_left = stride_right = round(stride_length_s * pipeline.feature_extractor.sampling_rate)
-    step = chunk_len - stride_left - stride_right
-    pool = Pool(NUM_PROC)
+    # pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
+    # stride_length_s = CHUNK_LENGTH_S / 6
+    # chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
+    # stride_left = stride_right = round(stride_length_s * pipeline.feature_extractor.sampling_rate)
+    # step = chunk_len - stride_left - stride_right
+    # pool = Pool(NUM_PROC)
+    #
+    # # do a pre-compile step so that the first user to use the demo isn't hit with a long transcription time
+    # logger.info("compiling forward call...")
+    # start = time.time()
+    # random_inputs = {"input_features": np.ones((BATCH_SIZE, 80, 3000))}
+    # random_timestamps = pipeline.forward(random_inputs, batch_size=BATCH_SIZE, return_timestamps=True)
+    # compile_time = time.time() - start
+    # logger.info(f"compiled in {compile_time}s")
 
-    # do a pre-compile step so that the first user to use the demo isn't hit with a long transcription time
-    logger.info("compiling forward call...")
-    start = time.time()
-    random_inputs = {"input_features": np.ones((BATCH_SIZE, 80, 3000))}
-    random_timestamps = pipeline.forward(random_inputs, batch_size=BATCH_SIZE, return_timestamps=True)
-    compile_time = time.time() - start
-    logger.info(f"compiled in {compile_time}s")
 
-
-    def tqdm_generate(inputs: dict, task: str, return_timestamps: bool, progress: gr.Progress):
+    def tqdm_generate(inputs: dict, task: str, language: str, return_timestamps: bool, progress: gr.Progress):
         inputs_len = inputs["array"].shape[0]
         all_chunk_start_idx = np.arange(0, inputs_len, step)
         num_samples = len(all_chunk_start_idx)
@@ -112,13 +112,18 @@ if __name__ == "__main__":
         dataloader = pool.map(identity, dataloader)
         logger.info("done post-processing")
 
+        if task == "transcribe":
+            language = {"bokmål": "no", "nynorsk": "nn"}[language]
+        else:
+            language = "no"
+
         model_outputs = []
         start_time = time.time()
         logger.info("transcribing...")
         # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
             model_outputs.append(
-                pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language="no", return_timestamps=True))
+                pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language=language, return_timestamps=True))
         runtime = time.time() - start_time
         logger.info("done transcription")
         logger.info("post-processing...")
@@ -135,7 +140,7 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(inputs, task, return_timestamps, progress=gr.Progress()):
+    def transcribe_chunked_audio(inputs, task, language, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
         logger.info("loading audio file...")
         if inputs is None:
@@ -154,7 +159,8 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        text, runtime = tqdm_generate(inputs, task=task, return_timestamps=return_timestamps, progress=progress)
+        text, runtime = tqdm_generate(inputs, task=task, language=language,
+                                      return_timestamps=return_timestamps, progress=progress)
         return text, runtime
 
 
@@ -196,7 +202,7 @@ if __name__ == "__main__":
                 raise gr.Error(str(err))
 
 
-    def transcribe_youtube(yt_url, task, return_timestamps, progress=gr.Progress()):
+    def transcribe_youtube(yt_url, task, language, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
         html_embed_str = _return_yt_html_embed(yt_url)
@@ -210,7 +216,8 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading...")
-        text, runtime = tqdm_generate(inputs, task=task, return_timestamps=return_timestamps, progress=progress)
+        text, runtime = tqdm_generate(inputs, task=task, language=language,
+                                      return_timestamps=return_timestamps, progress=progress)
         return html_embed_str, text, runtime
 
 
@@ -220,6 +227,7 @@ if __name__ == "__main__":
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
             gr.inputs.Radio(["transcribe", "translate"], label="Transcribe to Norwegian or translate to English",
                             default="transcribe"),
+            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -237,6 +245,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Audio(source="upload", optional=True, label="Audio file", type="filepath"),
             gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
+            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
@@ -254,6 +263,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
+            gr.inputs.Radio(["bokmål", "nynorsk"], label="Language", default="bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
