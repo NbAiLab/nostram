@@ -32,15 +32,12 @@ NUM_PROC = 32
 FILE_LIMIT_MB = 1000
 YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 
-title = "NB Whisper BETA ⚡️"
+title = "NB Whisper Small BETA ⚡️"
 
-description = "This is a demo of the NB Whisper BETA model. " \
-              "The model is trained by the AI-Lab at the National Library of Norway. " \
-              "It is based on the HuggingFace port of OpenAI's Whisper model. "
+description = "This is a demo of the Small NB Whisper BETA model. " \
+        "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). " 
 
-article = f"NB Whisper model by the National Library of Norway. June BETA version. " \
-          f"Currently running: {checkpoint}. " \
-          f"Backend running JAX on a TPU v4-8 through the generous support of the " \
+article = f"Backend running JAX on a TPU v3-8 through the generous support of the " \
           f"[TRC](https://sites.research.google/trc/about/) programme. " \
           f"Whisper JAX [code](https://github.com/sanchit-gandhi/whisper-jax) and Gradio demo by 🤗 Hugging Face."
 
