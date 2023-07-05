@@ -24,7 +24,7 @@ cc.initialize_cache("./jax_cache")
 # checkpoint = "NbAiLab/scream_septimusdecimus_small_ts"
 # checkpoint = "NbAiLab/scream_septimusdecimus_small_ts_prev2"
 # checkpoint = "NbAiLab/scream_medium_beta"
-checkpoint = "NbAiLab/nb-whisper-small-publicbeta-25k"
+checkpoint = "NbAiLab/nb-whisper-small-publicbeta-100k"
 
 BATCH_SIZE = 32
 CHUNK_LENGTH_S = 30
@@ -35,7 +35,7 @@ YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 title = "NB Whisper Small BETA ⚡️"
 
 description = "This is a demo of the Small NB Whisper BETA model. " \
-        "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). " 
+        "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). Please note that microphone input from IOS devices (iPad/iPhone) is not supported." 
 
 article = f"Backend running JAX on a TPU v3-8 through the generous support of the " \
           f"[TRC](https://sites.research.google/trc/about/) programme. " \
