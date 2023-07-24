@@ -20,10 +20,10 @@ import argparse
 
 # Define valid checkpoints, corresponding batch sizes, and titles
 valid_checkpoints = {
-    "NbAiLab/nb-whisper-tiny-beta": 256,
-    "NbAiLab/nb-whisper-base-beta": 256,
-    "NbAiLab/nb-whisper-small-beta": 128,
-    "NbAiLab/nb-whisper-medium-beta": 64,
+    "NbAiLab/nb-whisper-tiny-beta": 32,
+    "NbAiLab/nb-whisper-base-beta": 32,
+    "NbAiLab/nb-whisper-small-beta": 32,
+    "NbAiLab/nb-whisper-medium-beta": 32,
     "NbAiLab/nb-whisper-large-beta": 32,
 }
 
