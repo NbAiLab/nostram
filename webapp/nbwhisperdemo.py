@@ -31,7 +31,7 @@ titles = {
     "NbAiLab/nb-whisper-tiny-beta": "NB Whisper Tiny BETA ⚡️",
     "NbAiLab/nb-whisper-base-beta": "NB Whisper Base BETA ⚡️",
     "NbAiLab/nb-whisper-small-beta": "NB Whisper Small BETA ⚡️",
-    "NbAiLab/nb-whisper-medium-betak": "NB Whisper Medium BETA ⚡️",
+    "NbAiLab/nb-whisper-medium-beta": "NB Whisper Medium BETA ⚡️",
     "NbAiLab/nb-whisper-large-beta": "NB Whisper Large BETA ⚡️",
 }
 
