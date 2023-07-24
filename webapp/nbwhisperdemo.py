@@ -20,19 +20,19 @@ import argparse
 
 # Define valid checkpoints, corresponding batch sizes, and titles
 valid_checkpoints = {
-    "NbAiLab/nb-whisper-tiny-publicbeta-100k": 512,
-    "NbAiLab/nb-whisper-base-publicbeta-100k": 256,
-    "NbAiLab/nb-whisper-small-publicbeta-100k": 128,
-    "NbAiLab/nb-whisper-medium-publicbeta-100k": 64,
-    "NbAiLab/nb-whisper-large-publicbeta-100k": 32,
+    "NbAiLab/nb-whisper-tiny-beta": 256,
+    "NbAiLab/nb-whisper-base-beta": 256,
+    "NbAiLab/nb-whisper-small-beta": 128,
+    "NbAiLab/nb-whisper-medium-beta": 64,
+    "NbAiLab/nb-whisper-large-beta": 32,
 }
 
 titles = {
-    "NbAiLab/nb-whisper-tiny-publicbeta-100k": "NB Whisper Tiny BETA ⚡️",
-    "NbAiLab/nb-whisper-base-publicbeta-100k": "NB Whisper Base BETA ⚡️",
-    "NbAiLab/nb-whisper-small-publicbeta-100k": "NB Whisper Small BETA ⚡️",
-    "NbAiLab/nb-whisper-medium-publicbeta-100k": "NB Whisper Medium BETA ⚡️",
-    "NbAiLab/nb-whisper-large-publicbeta-100k": "NB Whisper Large BETA ⚡️",
+    "NbAiLab/nb-whisper-tiny-beta": "NB Whisper Tiny BETA ⚡️",
+    "NbAiLab/nb-whisper-base-beta": "NB Whisper Base BETA ⚡️",
+    "NbAiLab/nb-whisper-small-beta": "NB Whisper Small BETA ⚡️",
+    "NbAiLab/nb-whisper-medium-betak": "NB Whisper Medium BETA ⚡️",
+    "NbAiLab/nb-whisper-large-beta": "NB Whisper Large BETA ⚡️",
 }
 
 # Create the parser
