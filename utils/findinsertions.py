@@ -2,7 +2,7 @@ import pandas as pd
 import argparse
 import string
 
-def find_insertions(target, predictions, min_length=5, max_length=25):
+def find_insertions(target, predictions, min_length=5, max_length=50):
     target_words = target.lower().translate(str.maketrans('', '', string.punctuation)).split()
     best_length = 0
     best_insertion = ""
@@ -38,13 +38,14 @@ def main(input_filename, min_length, max_length):
     print("Flagged lines:", flagged_lines)
     print("Unflagged lines:", unflagged_lines)
     for k, v in statistics.items():
-        print(f"{k} words: {v}")
+        if k:
+            print(f"{k} words: {v}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_filename", required=True, help="Input TSV file")
     parser.add_argument("--min_length", type=int, default=5, help="Minimum length for insertion")
-    parser.add_argument("--max_length", type=int, default=25, help="Maximum length for insertion")
+    parser.add_argument("--max_length", type=int, default=50, help="Maximum length for insertion")
     args = parser.parse_args()
 
     main(args.input_filename, args.min_length, args.max_length)
