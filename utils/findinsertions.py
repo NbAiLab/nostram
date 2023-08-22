@@ -1,9 +1,14 @@
 import pandas as pd
 import argparse
 import string
+from tqdm import tqdm
 
 def find_insertions(target, predictions, min_length=5, max_length=50):
     target_words = target.lower().translate(str.maketrans('', '', string.punctuation)).split()
+    for prediction in predictions:
+        if prediction.lower().translate(str.maketrans('', '', string.punctuation)) == target.lower().translate(str.maketrans('', '', string.punctuation)):
+            return "", 0
+
     best_length = 0
     best_insertion = ""
     for length in range(max_length, min_length - 1, -1):
@@ -23,23 +28,26 @@ def main(input_filename, min_length, max_length):
     flagged_lines = 0
     unflagged_lines = 0
 
-    for index, row in data.iterrows():
-        target = row['target']
-        predictions = row[2:]
-        insertion, length = find_insertions(target, predictions, min_length, max_length)
-        if length > 0:
-            print(f"{row['id']} - {length} - {insertion}")
-            flagged_lines += 1
-            statistics[length] += 1
-        else:
-            unflagged_lines += 1
+    with tqdm(total=len(data), position=0, leave=True) as pbar:
+        for index, row in data.iterrows():
+            target = row['target']
+            predictions = row[2:]
+            insertion, length = find_insertions(target, predictions, min_length, max_length)
+            if length > 0:
+                tqdm.write(f"{row['id']} - {length} - {insertion}")  # Using tqdm.write instead of print
+                flagged_lines += 1
+                statistics[length] += 1
+            else:
+                unflagged_lines += 1
+            pbar.update(1)
 
     print("\nStatistics:")
     print("Flagged lines:", flagged_lines)
     print("Unflagged lines:", unflagged_lines)
     for k, v in statistics.items():
-        if k:
+        if v:
             print(f"{k} words: {v}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
