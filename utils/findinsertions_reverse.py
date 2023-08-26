@@ -2,18 +2,40 @@ import pandas as pd
 import argparse
 import string
 from tqdm import tqdm
+from collections import Counter
 
 def find_common_sequence(predictions, target, min_length=3, max_length=50):
-    predictions_words = [pred.lower().translate(str.maketrans('', '', string.punctuation)).split() for pred in predictions]
     target_words = target.lower().translate(str.maketrans('', '', string.punctuation)).split()
 
-    for length in range(max_length, min_length - 1, -1):
-        for i in range(len(predictions_words[0]) - length + 1):
-            ngram = ' '.join(predictions_words[0][i:i+length])
-            if all(word not in target_words for word in ngram.split()):
-                if all(all(word in pred for word in ngram.split()) for pred in predictions_words[1:]):
-                    return ngram, length
-    return "", 0
+    # Function to get n-grams from a list of words
+    def get_ngrams(words, n):
+        return [' '.join(words[i:i+n]) for i in range(len(words) - n + 1)]
+
+    # Find all n-grams for each prediction
+    predictions_ngrams = []
+    for prediction in predictions:
+        prediction_words = prediction.lower().translate(str.maketrans('', '', string.punctuation)).split()
+        ngrams = []
+        for n in range(min_length, max_length + 1):
+            ngrams.extend(get_ngrams(prediction_words, n))
+        predictions_ngrams.append(set(ngrams))
+
+    # Find common n-grams across all but one prediction
+    common_ngrams = set.intersection(*predictions_ngrams[:2])
+    for prediction_ngrams in predictions_ngrams[2:]:
+        common_ngrams = common_ngrams.intersection(prediction_ngrams)
+        if len(common_ngrams) == 0:
+            break
+
+    # Find the longest common n-gram not present in the target
+    best_ngram = ""
+    best_length = 0
+    for ngram in common_ngrams:
+        if all(word not in target_words for word in ngram.split()) and len(ngram.split()) > best_length:
+            best_ngram = ngram
+            best_length = len(ngram.split())
+
+    return best_ngram, best_length
 
 def main(input_filename, min_length, max_length):
     data = pd.read_csv(input_filename, sep='\t', dtype=str)
@@ -42,7 +64,6 @@ def main(input_filename, min_length, max_length):
     for k, v in statistics.items():
         if v:
             print(f"{k} words: {v}")
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
