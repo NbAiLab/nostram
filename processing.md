@@ -132,6 +132,7 @@ python simple_transcribe.py --model NbAiLab/nb-whisper-medium-fine4-npsc-norm-no
 ```
 
 Assuming the old method. First let us copy the files to the local directory `nbwhisper_transcripts/` from `gs://nb-whisper-transcript`.
+
 ```bash
 gsutil cp gs://nb-whisper-transcript
 ```
