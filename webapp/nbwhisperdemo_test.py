@@ -78,6 +78,29 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
+def format_to_srt(text, timestamps):
+    if not timestamps:
+        return None
+
+    srt_lines = []
+    counter = 1
+    for chunk in text.split("\n"):
+        start_time, rest = chunk.split(" -> ")
+        end_time, subtitle_text = rest.split("] ")
+
+        start_time = start_time.replace("[", "").replace(".", ",")
+        end_time = end_time.replace(".", ",")
+
+        srt_lines.append(str(counter))
+        srt_lines.append(f"{start_time} --> {end_time}")
+        srt_lines.append(subtitle_text)
+        srt_lines.append("")
+
+        counter += 1
+
+    return "\n".join(srt_lines)
+
+
 def identity(batch):
     return batch
 
@@ -101,40 +124,6 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
     else:
         # we have a malformed timestamp so just return it as is
         return seconds
-
-
-def to_srt(text):
-    # Split the text into lines
-    lines = text.strip().split('\n')
-
-    # Initialize an empty list to store the converted lines
-    srt_lines = []
-
-    # Counter for numbering the subtitles
-    counter = 1
-
-    for line in lines:
-        # Extract the start and end times and the subtitle text
-        start_time, rest = line.split(' -> ')
-        end_time, subtitle_text = rest.split(']  ')
-
-        # Convert the timestamps to the desired format
-        start_time = start_time.replace('[', '').replace('.', ',')
-        end_time = end_time.replace('.', ',')
-
-        # Append the converted lines to the list
-        srt_lines.append(str(counter))
-        srt_lines.append(f'{start_time} --> {end_time}')
-        srt_lines.append(subtitle_text)
-        srt_lines.append('')  # Add an empty line after each subtitle
-
-        # Increment the counter
-        counter += 1
-
-    # Join the lines into a single string
-    srt_text = '\n'.join(srt_lines)
-
-    return srt_text
 
 
 if __name__ == "__main__":
@@ -224,11 +213,11 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
 
-        # Convert the transcript to .srt format
-        srt_transcript = to_srt(text)
-
-        # Return the transcript and the .srt file
-        return text, runtime, srt_transcript
+        srt_content = format_to_srt(text, return_timestamps)
+        if return_timestamps:
+            return text, runtime, srt_content
+        else:
+            return text, runtime, None
 
 
     def _return_yt_html_embed(yt_url):
@@ -286,11 +275,11 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
 
-        # Convert the transcript to .srt format
-        srt_transcript = to_srt(text)
-
-        # Return the video embed, transcript, runtime, and the .srt file
-        return html_embed_str, text, runtime, srt_transcript
+        srt_content = format_to_srt(text, return_timestamps)
+        if return_timestamps:
+            return html_embed_str, text, runtime, srt_content
+        else:
+            return html_embed_str, text, runtime, None
 
 
     microphone_chunked = gr.Interface(
@@ -303,7 +292,7 @@ if __name__ == "__main__":
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")  # Add .srt download button
+            gr.outputs.File(label="Download .srt")
         ],
         allow_flagging="never",
         title=title,
@@ -321,7 +310,7 @@ if __name__ == "__main__":
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")  # Add .srt download button
+            gr.outputs.File(label="Download .srt")
         ],
         allow_flagging="never",
         title=title,
@@ -340,13 +329,15 @@ if __name__ == "__main__":
             gr.outputs.HTML(label="Video"),
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")  # Add .srt download button
+            gr.outputs.File(label="Download .srt")
         ],
         allow_flagging="never",
         title=title,
-        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
-                  ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
-                  ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]],
+        examples=[
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]
+        ],
         cache_examples=False,
         description=description,
         article=article,
