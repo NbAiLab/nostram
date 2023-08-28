@@ -134,5 +134,19 @@ python simple_transcribe.py --model NbAiLab/nb-whisper-medium-fine4-npsc-norm-no
 Assuming the old method. First let us copy the files to the local directory `nbwhisper_transcripts/` from `gs://nb-whisper-transcript`.
 
 ```bash
-gsutil cp gs://nb-whisper-transcript
+gsutil -m cp gs://nb-whisper-transcript/*.txt nbwhisper_transcripts/
 ```
+
+Lets combine these files:
+```bash
+mkdir nbwhisper_transcripts/combined
+python nostram/utils/merge_pseudo_labels.py nbwhisper_transcripts/ nbwhisper_transcripts/combined/combined_transcripts.txt
+```
+
+Now lets check for insertions in target or in pred and generate new files:
+```bash
+python nostram/utils/findinsertions.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_file nbwhisper_transcripts/combined/combined_transcripts2.txt || python nostram/utils/findinsertions_reversed.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts2.txt --output_file nbwhisper_transcripts/combined/combined_transcripts3.txt
+```
+
+
+
