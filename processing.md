@@ -145,7 +145,8 @@ python nostram/utils/merge_pseudo_labels.py nbwhisper_transcripts/ nbwhisper_tra
 
 Now lets check for insertions in target or in pred and generate new files:
 ```bash
-python nostram/utils/findinsertions.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_file nbwhisper_transcripts/combined/combined_transcripts2.txt || python nostram/utils/findinsertions_reversed.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts2.txt --output_file nbwhisper_transcripts/combined/combined_transcripts3.txt
+python nostram/utils/findinsertions.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_file nbwhisper_transcripts/combined/combined_transcripts2.txt &&
+python nostram/utils/findinsertions_reversed.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts2.txt --output_file nbwhisper_transcripts/combined/combined_transcripts3.txt
 ```
 
 
