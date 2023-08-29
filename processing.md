@@ -118,10 +118,8 @@ jq -c 'select(.id | IN("no19x173-07071999-1452_u0173083", "no12x767-02071999-085
 ```
 
 # Pseudo Labelling
-Below is the steps for doing pseudo labelling. 
+Below is the steps for doing pseudo labelling. Using the new method, you can run the scipts in 'nb-whisper/transcribe/'. This command will produce tsv-files and check them into git.:
 
-## Run Pseudo Labelling for each of the relevant models
-Using the new method, you can run the scipts in 'nb-whisper/transcribe/'. This command will produce tsv-files and check them into git.:
 ```bash
 bash nb-shisper/transcribe/run_transcribe_fine4.sh
 ```
