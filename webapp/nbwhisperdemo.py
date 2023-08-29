@@ -12,8 +12,10 @@ import yt_dlp as youtube_dl
 from jax.experimental.compilation_cache import compilation_cache as cc
 from transformers.models.whisper.tokenization_whisper import TO_LANGUAGE_CODE
 from transformers.pipelines.audio_utils import ffmpeg_read
+import tempfile
 
 from whisper_jax import FlaxWhisperPipline
+
 cc.initialize_cache("./jax_cache")
 
 import argparse
@@ -37,7 +39,7 @@ titles = {
 
 # Create the parser
 parser = argparse.ArgumentParser(description='Run the transcription script with a specific checkpoint.')
-parser.add_argument('--checkpoint', type=str, required=True, 
+parser.add_argument('--checkpoint', type=str, required=True,
                     help='The checkpoint to use for the model. Must be one of: ' + ', '.join(valid_checkpoints.keys()))
 
 # Parse the arguments
@@ -45,7 +47,8 @@ args = parser.parse_args()
 
 # Check if the checkpoint is valid
 if args.checkpoint not in valid_checkpoints:
-    print(f"Error: The specified checkpoint is not supported. Please choose from: {', '.join(valid_checkpoints.keys())}")
+    print(
+        f"Error: The specified checkpoint is not supported. Please choose from: {', '.join(valid_checkpoints.keys())}")
     exit(1)
 
 # If the checkpoint is valid, set it, the corresponding batch size, and title
@@ -58,9 +61,8 @@ NUM_PROC = 32
 FILE_LIMIT_MB = 1000
 YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 
-
 description = f"This is a demo of the {title}. " \
-        "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). " 
+              "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). "
 
 article = f"Backend running JAX on a TPU v4-8 through the generous support of the " \
           f"[TRC](https://sites.research.google/trc/about/) programme. " \
@@ -75,6 +77,39 @@ ch.setLevel(logging.INFO)
 formatter = logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
 ch.setFormatter(formatter)
 logger.addHandler(ch)
+
+
+def format_to_srt(text, timestamps):
+    if not timestamps:
+        return None
+
+    srt_lines = []
+    counter = 1
+    for chunk in text.split("\n"):
+        start_time, rest = chunk.split(" -> ")
+        end_time, subtitle_text = rest.split("] ")
+
+        start_time = start_time.replace("[", "").replace(".", ",")
+        end_time = end_time.replace(".", ",")
+
+        srt_lines.append(str(counter))
+        srt_lines.append(f"{start_time} --> {end_time}")
+        srt_lines.append(subtitle_text.strip())
+        srt_lines.append("")
+
+        counter += 1
+
+    return "\n".join(srt_lines)
+
+
+def save_to_temp_file(srt_content, suffix):
+    """
+    Saves the SRT content to a temporary file and returns the path to that file.
+    """
+    # Create a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, mode="w") as f:
+        f.write(srt_content)
+    return f.name
 
 
 def identity(batch):
@@ -188,7 +223,14 @@ if __name__ == "__main__":
         logger.info("done loading")
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
-        return text, runtime
+
+        if return_timestamps:
+            srt_content = format_to_srt(text, return_timestamps)
+            file_path = save_to_temp_file(srt_content, ".srt")
+        else:
+            file_path = save_to_temp_file(text, ".txt")
+
+        return text, runtime, file_path
 
 
     def _return_yt_html_embed(yt_url):
@@ -245,21 +287,27 @@ if __name__ == "__main__":
         logger.info("done loading...")
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
-        return html_embed_str, text, runtime
+
+        if return_timestamps:
+            srt_content = format_to_srt(text, return_timestamps)
+            file_path = save_to_temp_file(srt_content, ".srt")
+        else:
+            file_path = save_to_temp_file(text, ".txt")
+
+        return html_embed_str, text, runtime, file_path
 
 
     microphone_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
-            # gr.inputs.Radio(["transcribe", "translate"], label="Transcribe from language to Norwegian or translate to English from language",
-            #                 default="transcribe"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
+            gr.outputs.File(label="Download")
         ],
         allow_flagging="never",
         title=title,
@@ -271,13 +319,13 @@ if __name__ == "__main__":
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Audio(source="upload", optional=True, label="Audio file", type="filepath"),
-            # gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
+            gr.outputs.File(label="Download")
         ],
         allow_flagging="never",
         title=title,
@@ -289,7 +337,6 @@ if __name__ == "__main__":
         fn=transcribe_youtube,
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
-            # gr.inputs.Radio(["transcribe", "translate"], label="Task", default="transcribe"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=False, label="Return timestamps"),
         ],
@@ -297,12 +344,15 @@ if __name__ == "__main__":
             gr.outputs.HTML(label="Video"),
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
+            gr.outputs.File(label="Download .srt")
         ],
         allow_flagging="never",
         title=title,
-        examples=[["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
-                  ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
-                  ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]],
+        examples=[
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]
+        ],
         cache_examples=False,
         description=description,
         article=article,
@@ -311,7 +361,7 @@ if __name__ == "__main__":
     demo = gr.Blocks()
 
     with demo:
-        gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)  # , title="NB Whisper Demo", article=article)
+        gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)
         gr.TabbedInterface([microphone_chunked, audio_chunked, youtube], ["Microphone", "Audio File", "YouTube"])
 
     demo.queue(concurrency_count=1, max_size=5)
