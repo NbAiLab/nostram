@@ -12,6 +12,7 @@ import yt_dlp as youtube_dl
 from jax.experimental.compilation_cache import compilation_cache as cc
 from transformers.models.whisper.tokenization_whisper import TO_LANGUAGE_CODE
 from transformers.pipelines.audio_utils import ffmpeg_read
+import tempfile
 
 from whisper_jax import FlaxWhisperPipline
 
@@ -99,6 +100,16 @@ def format_to_srt(text, timestamps):
         counter += 1
 
     return "\n".join(srt_lines)
+
+
+def save_to_temp_file(srt_content, suffix):
+    """
+    Saves the SRT content to a temporary file and returns the path to that file.
+    """
+    # Create a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, mode="w") as f:
+        f.write(srt_content)
+    return f.name
 
 
 def identity(batch):
@@ -213,11 +224,13 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
 
-        srt_content = format_to_srt(text, return_timestamps)
         if return_timestamps:
-            return text, runtime, srt_content
+            srt_content = format_to_srt(text, return_timestamps)
+            file_path = save_to_temp_file(srt_content, ".srt")
         else:
-            return text, runtime, None
+            file_path = save_to_temp_file(text, ".txt")
+
+        return text, runtime, file_path
 
 
     def _return_yt_html_embed(yt_url):
@@ -275,11 +288,13 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, language=language,
                                       return_timestamps=return_timestamps, progress=progress)
 
-        srt_content = format_to_srt(text, return_timestamps)
         if return_timestamps:
-            return html_embed_str, text, runtime, srt_content
+            srt_content = format_to_srt(text, return_timestamps)
+            file_path = save_to_temp_file(srt_content, ".srt")
         else:
-            return html_embed_str, text, runtime, None
+            file_path = save_to_temp_file(text, ".txt")
+
+        return html_embed_str, text, runtime, file_path
 
 
     microphone_chunked = gr.Interface(
@@ -292,7 +307,7 @@ if __name__ == "__main__":
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")
+            gr.outputs.File(label="Download")
         ],
         allow_flagging="never",
         title=title,
@@ -310,7 +325,7 @@ if __name__ == "__main__":
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")
+            gr.outputs.File(label="Download")
         ],
         allow_flagging="never",
         title=title,
