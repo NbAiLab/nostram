@@ -106,10 +106,50 @@ cat $CORPUS_PATH/clean_json_3/$CORPUS_NAME/audio/npsc_train_nob_process_list.sh 
 ```
 
 # Create the merged transcript files - Currently just on a small test file
+```bash
 python $PROCESSING_PATH/add_transcriptions.py --input_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_small.json --transcript_file $CORPUS_PATH/clean_json_3/$CORPUS_NAME/train/nrk_wav2vec_transcript_small.json --output_folder $CORPUS_PATH/transcribed_json_4/$CORPUS_NAME/train/
+```
 
 # Manual changes to the files
+```bash
 jq -c 'select(.id | IN("stortinget-20100114-094334_8384400_8411300", "stortinget-20100302-100000_15268100_15293600", "stortinget-20100614-095552_2m_del_1_13521400_13547400", "stortinget-20110321-115501_2m_7288900_7310700", "stortinget-20111209-085501_6667700_6689000", "stortinget-20121025-095235_5761300_5790200", "stortinget-20121121-095439_5556900_5586500", "stortinget-20130307-095509_3652050_3680000", "stortinget-20141211-155720_12709000_12734100", "stortinget-20150217-095731_22209600_22210400", "stortinget-20150616-155450_7698500_7725000", "stortinget-20160217-095626_10071800_10100100", "stortinget-20170328-095500_15454300_15481400", "stortinget-20170613-085456_3097100_3124100", "stortinget-20181210-152505_14013700_14037800", "stortinget-20190604-155520_8092400_8119700", "stortinget-20200421-115527_15503200_15530100", "stortinget-20210427-095501_21558200_21584300", "stortinget-20210615-095521_1324000_1350500", "stortinget-20220511-095359_14382600_14410900") | not)' input.jsonl > output.jsonl
 
 jq -c 'select(.id | IN("no19x173-07071999-1452_u0173083", "no12x767-02071999-0853_u0767043", "no20x404-05081999-1242_u0404193") | not)' input.jsonl > output.jsonl
+```
+
+# Pseudo Labelling
+Below is the steps for doing pseudo labelling. 
+
+## Run Paeudo Labelling for each of the relevant models
+Using the new method, you can run the scipts in 'nb-whisper/transcribe/'. This command will produce tsv-files and check them into git.:
+```bash
+bash nb-shisper/transcribe/run_transcribe_fine4.sh
+```
+
+The old method is a lot slower. It should produce identical results, and pushes this to the GS bucket:
+```bash
+python simple_transcribe.py --model NbAiLab/nb-whisper-medium-fine4-npsc-norm-nohes
+```
+
+Assuming the old method. First let us copy the files to the local directory `nbwhisper_transcripts/` from `gs://nb-whisper-transcript`.
+
+```bash
+gsutil -m cp gs://nb-whisper-transcript/*.txt nbwhisper_transcripts/
+```
+
+Lets combine these files:
+```bash
+mkdir nbwhisper_transcripts/combined
+python nostram/utils/merge_pseudo_labels.py nbwhisper_transcripts/ nbwhisper_transcripts/combined/combined_transcripts.txt
+```
+
+Now lets check for insertions in target or in pred and generate new files:
+```bash
+python nostram/utils/findinsertions.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_file nbwhisper_transcripts/combined/combined_transcripts2.txt
+```
+```bash
+python nostram/utils/findinsertions_reversed.py  --input_filename nbwhisper_transcripts/combined/combined_transcripts2.txt --output_file nbwhisper_transcripts/combined/combined_transcripts3.txt
+```
+
+
 
