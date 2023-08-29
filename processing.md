@@ -144,7 +144,8 @@ python nostram/utils/merge_pseudo_labels.py nbwhisper_transcripts/ nbwhisper_tra
 ```
 
 Analyse this combined file, and write the result into the data file:
-```bashpython nostram/utils/analyse_predictions.py --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_filename nbwhisper_transcripts/combined/combined_transcripts_all.txt
+```bash
+python nostram/utils/analyse_predictions.py --input_filename nbwhisper_transcripts/combined/combined_transcripts.txt --output_filename nbwhisper_transcripts/combined/combined_transcripts_all.txt
 ```
 
 
