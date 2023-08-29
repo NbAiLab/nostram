@@ -94,7 +94,7 @@ def format_to_srt(text, timestamps):
 
         srt_lines.append(str(counter))
         srt_lines.append(f"{start_time} --> {end_time}")
-        srt_lines.append(subtitle_text)
+        srt_lines.append(subtitle_text.strip())
         srt_lines.append("")
 
         counter += 1
