@@ -10,6 +10,7 @@ import re
 from collections import Counter
 from pandarallel import pandarallel
 from tqdm import tqdm
+import pandas as pd
 
 # Function to find insertions that do not exist in the target.
 def find_insertions(target, predictions, min_length=1, max_length=50):
