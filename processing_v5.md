@@ -1,6 +1,5 @@
 # json_2
-#This is not used in v5
-#Copied from ncc_speech_corput and ncc_speech_corpus2
+This is not used in v5. Content is copied from ```ncc_speech_corput``` and ```ncc_speech_corpus2```.
 
 # clean_json_3
 ## Stortinget
