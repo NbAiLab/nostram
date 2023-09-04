@@ -47,11 +47,16 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 ```
 
 # inference_4
-### Stortinget
-Currently there is no processing of Stortinget, since this is moved after the inference. Just moving to the inference dataset.
+### Stortinget, Fleurs and NST
+No processing is needed here. Just copy the correct files
+
 ```bash
 cd $base_dir
 cp clean_3/stortinget/*.json inference_4/inference_dataset/
+cp clean_3/fleurs/*.json inference_4/inference_dataset/
+cp clean_3/nst/nst_train.json inference_4/inference_dataset/
+cp clean_3/nst/nst_test.json inference_4/inference_dataset/
+cp clean_3/nst/nst_validation.json inference_4/inference_dataset/
 ```
 
 
