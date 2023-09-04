@@ -27,3 +27,4 @@ cp clean_json_3/stortinget/stortinget_test.json transcribed_json_4/stortinget/te
 cp clean_json_3/stortinget/stortinget_validation.json transcribed_json_4/stortinget/validation/
 cp clean_json_3/stortinget/stortinget_eval.json transcribed_json_4/stortinget/validation/
 ```
+
