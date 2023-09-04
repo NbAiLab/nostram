@@ -1,5 +1,5 @@
-# 
-
+# ncc_speech_5
+Main dataset as of September 2023. Plese see the complete description of [Corpus Structure](corpus_structure.md)
 
 # Current Status
 ## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
@@ -20,27 +20,24 @@ base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe,nrk_tv_translate,nrk_tv_veryshort,nrk_tv_silence,stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
 ```
 
-
 # json_2
 This is not used in v5. Content is copied from ```ncc_speech_corput``` and ```ncc_speech_corpus2```.
 
-# clean_json_3
-## Stortinget
+# clean_3
+### Stortinget
 Stortinget data is copied from ```ncc_speech_corpus/json_2```
 ```bash
 cd $base_dir
-cp ../../ncc_speech_corpus/json_2/stortinget*.json stortinget/
+cp ../ncc_speech_corpus/json_2/stortinget_*.json clean_3/stortinget/
+mv clean_3/stortinget/stortinget_eval.json clean_3/stortinget/stortinget_validation.json
 ```
 
-# transcribe_json_4 - ERROR
-## Stortinget
-We have dropped the wer/ner/clean-steps for this corpus. Now simply copying from clean_json_3 to transcribe_json_4
+# inference_4
+### Stortinget
+Currently there is no processing of Stortinget, since this is moved after the inference. Just moving to the inference dataset.
 ```bash
 cd $base_dir
-cp clean_json_3/stortinget/stortinget_train.json transcribed_json_4/stortinget/train/
-cp clean_json_3/stortinget/stortinget_test.json transcribed_json_4/stortinget/test/
-cp clean_json_3/stortinget/stortinget_validation.json transcribed_json_4/stortinget/validation/
-cp clean_json_3/stortinget/stortinget_eval.json transcribed_json_4/stortinget/validation/
+cp clean_3/stortinget/*.json inference_4/inference_dataset/
 ```
 
 
