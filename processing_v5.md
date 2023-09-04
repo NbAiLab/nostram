@@ -4,12 +4,23 @@ Main dataset as of September 2023. Plese see the complete description of [Corpus
 # Current Status
 The status can be updated by running ```python nostram/utils/json_stats.py /mnt/lv_ai_1_ficino/ml/ncc_speech_v5```.
 
-### Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
+## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_train.json |    299,114 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_train.json |    720,870 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_test.json |      1,872 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_validation.json |      1,500 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_validation.json |      2,041 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | norwegian_fleurs-test.json |        357 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_test.json |      1,500 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_train.json |    299,114 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_largetest.json |     63,088 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_validation.json |      1,500 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_test.json |      1,500 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/fleurs | norwegian_fleurs-test.json |        357 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_train.json |    720,870 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_test.json |      1,872 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_validation.json |      2,041 |
