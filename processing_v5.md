@@ -1,18 +1,14 @@
 
 # Current Status
-## Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/clean_json_3/stortinget
-- **stortinget_train.json**: 720870 lines
-- **stortinget_eval.json**: 2041 lines
-- **stortinget_test.json**: 1872 lines
-
-## Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/transcribed_json_4/stortinget/validation
-- **stortinget_eval.json**: 2041 lines
-
-## Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/transcribed_json_4/stortinget/train
-- **stortinget_train.json**: 720870 lines
-
-## Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/transcribed_json_4/stortinget/test
-- **stortinget_test.json**: 1872 lines
+## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
+| Level | File | Lines |
+| ----- | ---- | ----- |
+|     clean_json_3/stortinget | stortinget_train.json | 720870 |
+|      | stortinget_eval.json | 2041 |
+|      | stortinget_test.json | 1872 |
+|         transcribed_json_4/stortinget/validation | stortinget_eval.json | 2041 |
+|         transcribed_json_4/stortinget/train | stortinget_train.json | 720870 |
+|         transcribed_json_4/stortinget/test | stortinget_test.json | 1872 |
 
 # json_2
 This is not used in v5. Content is copied from ```ncc_speech_corput``` and ```ncc_speech_corpus2```.
