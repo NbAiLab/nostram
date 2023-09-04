@@ -1,11 +1,29 @@
+# json_2
+#This is not used in v5
+#Copied from ncc_speech_corput and ncc_speech_corpus2
 
-# Clean_json_3
+# clean_json_3
 ## Stortinget
+Stortinget data is copied from ```ncc_speech_corpus/json_2```
+```bash
 cd /mnt/lv_ai_1_ficino/ml/ncc_speech_corpus_v5/clean_json_3
 mkdir stortinget
 cd stortinget
 cp ../../ncc_speech_corpus/json_2/stortinget*.json stortinget/
-#Dropping WER/NER analysis since this is for inference only
-
+```
 
 # transcribe_json_4
+## Stortinget
+We have dropped the wer/ner/clean-steps for this corpus. Now simply copying from clean_json_3 to transcribe_json_4
+```bash
+cd transcribed_json_4/
+mkdir stortinget
+mkdir stortinget/test
+mkdir stortinget/train
+mkdir stortinget/validation
+cd ..
+cp clean_json_3/stortinget/stortinget_train.json transcribed_json_4/stortinget/train/
+cp clean_json_3/stortinget/stortinget_test.json transcribed_json_4/stortinget/test/
+cp clean_json_3/stortinget/stortinget_validation.json transcribed_json_4/stortinget/validation/
+cp clean_json_3/stortinget/stortinget_eval.json transcribed_json_4/stortinget/validation/
+```
