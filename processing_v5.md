@@ -42,7 +42,6 @@ cp ../ncc_speech_corpus/json_2/norwegian_fleurs-test.json clean_3/fleurs/
 cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
 cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/
 # Get a more sane size on the NST validation and test set
-cd clean_3/nst
 sed -n '1,1500p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_test.json
 sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.json
 ```
