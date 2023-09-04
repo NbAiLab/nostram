@@ -26,12 +26,20 @@ mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe,nrk_tv_translate,nrk_tv_verysho
 Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpus``` and ```ncc_speech_corpus2```.
 
 # clean_3
-### Stortinget
-Stortinget data is copied from ```ncc_speech_corpus/json_2```
+
+### Stortinget, Fleurs and NST
+All data are copied from ```ncc_speech_corpus/json_2```
 ```bash
 cd $base_dir
+# Stortinget
 cp ../ncc_speech_corpus/json_2/stortinget_*.json clean_3/stortinget/
 mv clean_3/stortinget/stortinget_eval.json clean_3/stortinget/stortinget_validation.json
+# Fleurs
+cp ../ncc_speech_corpus/json_2/norwegian_fleurs-validation.json clean_3/fleurs/
+cp ../ncc_speech_corpus/json_2/norwegian_fleurs-test.json clean_3/fleurs/
+# NST
+cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
+cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/
 ```
 
 # inference_4
