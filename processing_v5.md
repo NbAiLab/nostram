@@ -5,12 +5,12 @@ Main dataset as of September 2023. Plese see the complete description of [Corpus
 ## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_json_3/stortinget | stortinget_train.json |    720,870 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_json_3/stortinget | stortinget_eval.json |      2,041 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_json_3/stortinget | stortinget_test.json |      1,872 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/validation | stortinget_eval.json |      2,041 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/train | stortinget_train.json |    720,870 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/test | stortinget_test.json |      1,872 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_train.json |    720,870 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_test.json |      1,872 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_validation.json |      2,041 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_train.json |    720,870 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_test.json |      1,872 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_validation.json |      2,041 |
 
 # Copy Structure
 The following command creates all the necssary folders if they do not exist.
