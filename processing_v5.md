@@ -2,7 +2,9 @@
 Main dataset as of September 2023. Plese see the complete description of [Corpus Structure](corpus_structure.md)
 
 # Current Status
-## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
+The status can be updated by running ```python nostram/utils/json_stats.py /mnt/lv_ai_1_ficino/ml/ncc_speech_v5```.
+
+### Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_train.json |    720,870 |
