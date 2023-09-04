@@ -1,14 +1,15 @@
 
 # Current Status
 ## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
-| Level | File | Lines |
-| ----- | ---- | ----- |
-|     clean_json_3/stortinget | stortinget_train.json | 720870 |
-|      | stortinget_eval.json | 2041 |
-|      | stortinget_test.json | 1872 |
-|         transcribed_json_4/stortinget/validation | stortinget_eval.json | 2041 |
-|         transcribed_json_4/stortinget/train | stortinget_train.json | 720870 |
-|         transcribed_json_4/stortinget/test | stortinget_test.json | 1872 |
+| Level | File | Lines     |
+| ----- | ---- | ---------:|
+| &nbsp;&nbsp;&nbsp;&nbsp;clean_json_3/stortinget | stortinget_train.json |    720,870 |
+| &nbsp;&nbsp;&nbsp;&nbsp; | stortinget_eval.json |      2,041 |
+| &nbsp;&nbsp;&nbsp;&nbsp; | stortinget_test.json |      1,872 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/validation | stortinget_eval.json |      2,041 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/train | stortinget_train.json |    720,870 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transcribed_json_4/stortinget/test | stortinget_test.json |      1,872 |
+
 
 # json_2
 This is not used in v5. Content is copied from ```ncc_speech_corput``` and ```ncc_speech_corpus2```.
