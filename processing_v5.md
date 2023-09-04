@@ -28,7 +28,7 @@ Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpu
 # clean_3
 
 ### Stortinget, Fleurs and NST
-All data are copied from ```ncc_speech_corpus/json_2```
+All data are directly copied from ```ncc_speech_corpus/json_2```
 ```bash
 cd $base_dir
 # Stortinget
