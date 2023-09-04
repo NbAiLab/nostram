@@ -6,7 +6,7 @@
 ## Stortinget
 Stortinget data is copied from ```ncc_speech_corpus/json_2```
 ```bash
-cd /mnt/lv_ai_1_ficino/ml/ncc_speech_corpus_v5/clean_json_3
+cd /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/clean_json_3
 mkdir stortinget
 cd stortinget
 cp ../../ncc_speech_corpus/json_2/stortinget*.json stortinget/
