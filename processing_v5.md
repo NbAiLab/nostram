@@ -62,15 +62,10 @@ This should create the following structure:
 ```plaintext
 $base_dir/
 |-- clean_3/
-|   |-- nrk_tv_transcribe/
+|   |-- nrk_tv/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
-|   |-- nrk_tv_translate/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
-|   |-- nrk_tv_silence/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
+|   |   |-- split_3c
 |   |-- silence/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
