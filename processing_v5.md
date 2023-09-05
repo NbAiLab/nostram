@@ -5,26 +5,48 @@ Main dataset as of September 2023. Plese see the complete description of [Corpus
 The status can be updated by running ```python nostram/utils/json_stats.py /mnt/lv_ai_1_ficino/ml/ncc_speech_v5```.
 
 ## Target Directory: /mnt/lv_ai_1_ficino/ml/ncc_speech_v5
+### Directory: clean_3
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_train.json |    299,114 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_train.json |    720,870 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_test.json |      1,872 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_validation.json |      1,500 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | stortinget_validation.json |      2,041 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | norwegian_fleurs-test.json |        357 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | nst_test.json |      1,500 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_train.json |    299,114 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_largetest.json |     63,088 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_validation.json |      1,500 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/nst | nst_test.json |      1,500 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/fleurs | norwegian_fleurs-test.json |        357 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_train.json |    720,870 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_test.json |      1,872 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean_3/stortinget | stortinget_validation.json |      2,041 |
+| clean_3 | <empty> | <empty>    |
+| clean_3/fleurs | norwegian_fleurs-test.json |        357 |
+| clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
+| clean_3/nrk_tv_silence | <empty> | <empty>    |
+| clean_3/nrk_tv_transcribe | <empty> | <empty>    |
+| clean_3/nrk_tv_translate | <empty> | <empty>    |
+| clean_3/nrk_tv_veryshort | <empty> | <empty>    |
+| clean_3/nst | nst_train.json |    299,114 |
+| clean_3/nst | nst_largetest.json |     63,088 |
+| clean_3/nst | nst_validation.json |      1,500 |
+| clean_3/nst | nst_test.json |      1,500 |
+| clean_3/stortinget | stortinget_train.json |    720,870 |
+| clean_3/stortinget | stortinget_test.json |      1,872 |
+| clean_3/stortinget | stortinget_validation.json |      2,041 |
+| **Total** |      | ** 1,090,505** |
 
+### Directory: inference_4
+| Directory | File | Lines     |
+| --------- | ---- | ---------:|
+| inference_4 | <empty> | <empty>    |
+| inference_4/inference_dataset | nst_train.json |    299,114 |
+| inference_4/inference_dataset | stortinget_train.json |    720,870 |
+| inference_4/inference_dataset | stortinget_test.json |      1,872 |
+| inference_4/inference_dataset | nst_validation.json |      1,500 |
+| inference_4/inference_dataset | stortinget_validation.json |      2,041 |
+| inference_4/inference_dataset | norwegian_fleurs-test.json |        357 |
+| inference_4/inference_dataset | nst_test.json |      1,500 |
+| inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
+| inference_4/inference_result | <empty> | <empty>    |
+| inference_4/processed | <empty> | <empty>    |
+| **Total** |      | ** 1,027,417** |
+
+### Directory: translation_5
+| Directory | File | Lines     |
+| --------- | ---- | ---------:|
+| translation_5 | <empty> | <empty>    |
+| translation_5/processed | <empty> | <empty>    |
+| translation_5/translation_files | <empty> | <empty>    |
+| **Total** |      | **         0** |
 # Copy Structure
 The following command creates all the necssary folders if they do not exist.
 
