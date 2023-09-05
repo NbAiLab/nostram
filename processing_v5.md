@@ -10,7 +10,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | --------- | ---- | ---------:|
 | clean_3 | <empty> | <empty>    |
 | clean_3/audio_books | <audio_book> |        981 |
-| clean_3/audio_books/<audio_book> | <audio_book>.json |        981 |
+| clean_3/audio_books/<audio_book> | <audio_book>.json |        1257064 |
 | clean_3/audio_books/<audio_book>/mp3 | <audio_book>_frommsec_tomsec.mp3 |        <relative to audio_book> |
 | clean_3/fleurs | norwegian_fleurs-test.json |        357 |
 | clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
