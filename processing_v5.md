@@ -53,7 +53,10 @@ The following command creates all the necssary folders if they do not exist.
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe,nrk_tv_translate,nrk_tv_veryshort,nrk_tv_silence,stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
+mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe/{copy_3a,clean_3b},nrk_tv_translate/{copy_3a,clean_3b},nrk_tv_veryshort/{copy_3a,clean_3b},nrk_tv_silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
+
+Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger.
+
 ```
 
 # raw_1 and json_2
@@ -78,6 +81,13 @@ cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/
 # Reduce the size of the NST validation and test set
 sed -n '1,1500p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_test.json
 sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.json
+```
+
+### NRK TV
+```bash
+# jq -c 'select(.vtt_folder=="vtt_transcribe_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_transcribe/copy_3a/nrk_tv_transcribe_all.json
+# jq -c 'select(.vtt_folder=="vtt_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_translate/copy_3a/nrk_tv_translate_all.json
+
 ```
 
 > JSON should be validated
