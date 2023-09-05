@@ -319,7 +319,8 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
         if (row is not None
                 and row.end_time - group[0].start_time < target_duration_seconds * 1000
                 and row.start_time - group[-1].end_time < max_separation_seconds * 1000
-                and not row[REMOVE_COL] and not group[-1][REMOVE_COL]):
+                and not row[REMOVE_COL] and not group[-1][REMOVE_COL]
+                and detect_lang(row.text) == detect_lang(group[-1].text)):
             group.append(row)
         else:
             first = group[0].copy()
@@ -793,7 +794,8 @@ def main(args):
                 invalid_lang = ~data["lang_text"].isin(allowed_langs)
                 data.loc[invalid_lang, REMOVE_COL] = True
 
-            data["lang_text"] = data["lang_text"].map({"nob": "no", "nno": "nn", "eng": "en", "sme": "se"})
+            three_to_two = {"nob": "no", "nno": "nn", "eng": "en", "sme": "se"}
+            data["lang_text"] = data["lang_text"].apply(lambda x: three_to_two.get(x, x))
 
             logger.info(f'***  Removed invalid languages. '
                         f'({exec_time()}) {show_length(data)}')
