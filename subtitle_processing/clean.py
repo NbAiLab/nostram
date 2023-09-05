@@ -524,6 +524,22 @@ def show_length(data):
            f"\n\tDuration: {hours:d}h {minutes:02d}m {seconds:02d}s"
 
 
+def select_random_samples(sub_df, n):
+    if n == "log":
+        n = max(1, round(np.log2(len(sub_df))))
+    return sub_df.sample(n=min(n, len(sub_df)), replace=False)
+
+
+def remove_text_program_duplicates(data: pd.DataFrame, max_duplicates):
+    data['program_id_4chars'] = data['program_id'].str[:4]
+
+    random_samples = (data.groupby(['program_id_4chars', 'vtt_folder', 'text'])
+                      .parallel_apply(select_random_samples, n=max_duplicates)
+                      .reset_index(drop=True))
+    random_samples = random_samples.drop("program_id_4chars", axis=1)
+    return random_samples
+
+
 def main(args):
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_colwidth", None)
@@ -718,6 +734,14 @@ def main(args):
     data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(adjust_overlapping_subtitles)
     data = data.reset_index(drop=True)
     data["timestamp_text"] = data.parallel_apply(make_timestamp_text, axis=1)
+
+    max_duplicates = config.get("max_duplicates_text_program", None)
+    if max_duplicates is not None:
+        data = remove_text_program_duplicates(data, max_duplicates)
+
+        logger.info(f'***  Removed duplicate text/program combinations. '
+                    f'({exec_time()}) {show_length(data)}')
+        logger.info(f'***  Histogram after removing duplicates: {create_histogram(data)}')
 
     # Make bigger segments only if the origin is from subtitles
     if config['make_bigger_segments'] and 'vtt_folder' in data.columns:
