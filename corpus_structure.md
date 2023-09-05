@@ -25,11 +25,11 @@ Since the cleaning process varies significantly across different corpora, this s
 - **Inference_results**: All output from inference on `inference_dataset`.
 - **Processed**: All files cleaned after obtaining inference results. The actions depend on individual corpus differences.
 
-> **Run complete validation tests on both JSON and MP3 files in the __inference_dataset__-folder.**
+> **Run complete validation tests on both JSON and MP3 files in both __inference_dataset__ and __processed__-folder.**
 
 ### Translations_5
 
 - **Translation files**: Files containing translations.
 - **Processed**: All files where translations have been added.
 
-> **Run complete validation tests on both JSON and MP3 files.**
+> **Run complete validation tests on both JSON and MP3 files in __processed__-folder.**
