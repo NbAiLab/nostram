@@ -53,10 +53,8 @@ The following command creates all the necssary folders if they do not exist.
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe/{copy_3a,clean_3b},nrk_tv_translate/{copy_3a,clean_3b},nrk_tv_veryshort/{copy_3a,clean_3b},nrk_tv_silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
-Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger. Kutt silence
+mkdir -p "$base_dir"/{clean_3/{nrk_tv/{copy_3a,clean_3b,split_3c,mp3},silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
 
-Make dir nrk/audio
 ```
 This should create the following structure:
 ```plaintext
@@ -66,6 +64,7 @@ $base_dir/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
 |   |   |-- split_3c
+|   |   |-- mp3
 |   |-- silence/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
