@@ -225,7 +225,8 @@ def main(args):
 
     is_silence = df.source == "nrk_tv_silence"
     is_translate = df.source == "nrk_tv_translate"
-    is_transcribe = df.source == "nrk_tv"
+    is_transcribe = (df.source == "nrk_tv") | (df.source == "nrk_tv_short") | (df.source == "nrk_tv_veryshort")
+    assert (is_silence | is_translate | is_transcribe).all(), f"{df.source.value_counts()}"
     silence_df = df[is_silence]
     translate_df = df[is_translate]
     df = df[is_transcribe]
