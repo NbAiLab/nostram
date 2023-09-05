@@ -1,5 +1,5 @@
 # ncc_speech_5
-Main dataset as of September 2023. Plese see the complete description of [Corpus Structure](corpus_structure.md)
+Main dataset as of September 2023. Please see the complete description of [Corpus Structure](corpus_structure.md)
 
 # Current Status
 The status can be updated by running ```python nostram/utils/json_stats.py /mnt/lv_ai_1_ficino/ml/ncc_speech_v5```.
