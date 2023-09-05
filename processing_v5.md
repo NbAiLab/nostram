@@ -9,9 +9,6 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | clean_3 | <empty> | <empty>    |
-| clean_3/audio_books | <audio_book> |        981 |
-| clean_3/audio_books/<audio_book> | <audio_book>.json |        1257064 |
-| clean_3/audio_books/<audio_book>/mp3 | <audio_book>_frommsec_tomsec.mp3 |        <relative to audio_book> |
 | clean_3/fleurs | norwegian_fleurs-test.json |        357 |
 | clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
 | clean_3/nrk_tv_silence | <empty> | <empty>    |
@@ -31,10 +28,6 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | inference_4 | <empty> | <empty>    |
-| inference_4/audio_books | <empty> | <empty>    |
-| inference_4/audio_books/train | audio_books_train.json | 902308     |
-| inference_4/audio_books/test  | audio_books_test.json | 150384      |
-| inference_4/audio_books/validation  | audio_books_validation.json | 150384 |
 | inference_4/inference_dataset | nst_train.json |    299,114 |
 | inference_4/inference_dataset | stortinget_train.json |    720,870 |
 | inference_4/inference_dataset | stortinget_test.json |      1,872 |
@@ -62,7 +55,8 @@ The following command creates all the necssary folders if they do not exist.
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe/{copy_3a,clean_3b},nrk_tv_translate/{copy_3a,clean_3b},nrk_tv_veryshort/{copy_3a,clean_3b},nrk_tv_silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
 
-Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger.
+Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger. Kutt silence
+
 Make dir nrk/audio
 ```
 
@@ -96,12 +90,17 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 # jq -c 'select(.vtt_folder=="vtt_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_translate/copy_3a/nrk_tv_translate_all.json
 # Create the config.json with these settings:
 echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/config.json
+echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv_veryshort/config.json
 
 
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/subtitle_processing";
-audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/";
+audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
 python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/audio/
+python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv_veryshort --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv_veryshort/audio/
 
+
+# Create the audio files
+cat $base_dir/clean_3/nrk_tv/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
 ```
 
 > JSON should be validated
