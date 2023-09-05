@@ -54,11 +54,40 @@ The following command creates all the necssary folders if they do not exist.
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe/{copy_3a,clean_3b},nrk_tv_translate/{copy_3a,clean_3b},nrk_tv_veryshort/{copy_3a,clean_3b},nrk_tv_silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
-
 Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger. Kutt silence
 
 Make dir nrk/audio
 ```
+This should create the following structure:
+```bash
+$base_dir/
+|-- clean_3/
+|   |-- nrk_tv_transcribe/
+|   |   |-- copy_3a
+|   |   |-- clean_3b
+|   |-- nrk_tv_translate/
+|   |   |-- copy_3a
+|   |   |-- clean_3b
+|   |-- nrk_tv_veryshort/
+|   |   |-- copy_3a
+|   |   |-- clean_3b
+|   |-- nrk_tv_silence/
+|   |   |-- copy_3a
+|   |   |-- clean_3b
+|   |-- stortinget
+|   |-- fleurs
+|   |-- nst
+|   |-- stortinget
+|-- inference_4/
+|   |-- inference_dataset
+|   |-- inference_result
+|   |-- processed
+|-- translation_5/
+    |-- translation_files
+    |-- processed
+
+```
+
 
 # raw_1 and json_2
 Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpus``` and ```ncc_speech_corpus2```.
