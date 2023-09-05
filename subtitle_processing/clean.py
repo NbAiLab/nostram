@@ -780,7 +780,7 @@ def main(args):
                 if isinstance(allowed_langs, str):
                     allowed_langs = [allowed_langs]
 
-                potential_norwegian = ~data[mask]["lang_text"].isin(["eng", "sme"])
+                potential_norwegian = ~data[mask]["lang_text"].isin(["eng", "sme", "nob", "nno"])
                 is_short = data[mask].text.str.split().str.len() <= 5
                 is_prog_norwegian = program_language["language"].isin(["nob", "nno"])
                 inherit_prog_lang = (potential_norwegian | is_short) & is_prog_norwegian
