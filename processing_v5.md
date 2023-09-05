@@ -84,7 +84,7 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 
 # inference_4
 ### Stortinget, Fleurs and NST
-No processing is needed here. Just copy the correct files
+No processing is needed here. Just copy the correct files into a single directory. Skip duplications.
 
 ```bash
 cd $base_dir
