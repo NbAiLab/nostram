@@ -22,7 +22,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | clean_3/stortinget | stortinget_train.json |    720,870 |
 | clean_3/stortinget | stortinget_test.json |      1,872 |
 | clean_3/stortinget | stortinget_validation.json |      2,041 |
-| **Total** |      | ** 1,090,505** |
+| **Total** |      | **1,090,505** |
 
 ### Directory: inference_4
 | Directory | File | Lines     |
@@ -38,7 +38,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
 | inference_4/inference_result | <empty> | <empty>    |
 | inference_4/processed | <empty> | <empty>    |
-| **Total** |      | ** 1,027,417** |
+| **Total** |      | **1,027,417** |
 
 ### Directory: translation_5
 | Directory | File | Lines     |
@@ -46,7 +46,8 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | translation_5 | <empty> | <empty>    |
 | translation_5/processed | <empty> | <empty>    |
 | translation_5/translation_files | <empty> | <empty>    |
-| **Total** |      | **         0** |
+| **Total** |      | **0** |
+
 # Copy Structure
 The following command creates all the necssary folders if they do not exist.
 
