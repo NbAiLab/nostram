@@ -59,7 +59,7 @@ Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger
 Make dir nrk/audio
 ```
 This should create the following structure:
-```bash
+```plaintext
 $base_dir/
 |-- clean_3/
 |   |-- nrk_tv_transcribe/
