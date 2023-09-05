@@ -150,7 +150,7 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 # Set working dirs
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/subtitle_processing";
 audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
-archive_file="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/nrk.json
+archive_file="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/nrk.json";
 
 # Create the config.json with these settings:
 echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/clean_3a/standard/config.json
