@@ -31,6 +31,10 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | inference_4 | <empty> | <empty>    |
+| inference_4/audio_books | <empty> | <empty>    |
+| inference_4/audio_books/train | audio_books_train.json | 902308     |
+| inference_4/audio_books/test  | audio_books_test.json | 150384      |
+| inference_4/audio_books/validation  | audio_books_validation.json | 150384 |
 | inference_4/inference_dataset | nst_train.json |    299,114 |
 | inference_4/inference_dataset | stortinget_train.json |    720,870 |
 | inference_4/inference_dataset | stortinget_test.json |      1,872 |
