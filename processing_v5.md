@@ -80,6 +80,8 @@ sed -n '1,1500p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_test.json
 sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.json
 ```
 
+> JSON should be validated
+
 # inference_4
 ### Stortinget, Fleurs and NST
 No processing is needed here. Just copy the correct files
@@ -92,5 +94,5 @@ cp clean_3/nst/nst_train.json inference_4/inference_dataset/
 cp clean_3/nst/nst_test.json inference_4/inference_dataset/
 cp clean_3/nst/nst_validation.json inference_4/inference_dataset/
 ```
-
+> JSON and mp3 should be validated
 
