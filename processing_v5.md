@@ -52,8 +52,9 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 The following command creates all the necssary folders if they do not exist.
 
 ```bash
-base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-mkdir -p "$base_dir"/{clean_3/{nrk_tv/{copy_3a,clean_3b,split_3c,mp3},silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
+mkdir -p "$base_dir"/{clean_3/{nrk_tv/{clean_3a/{standard,short,very_short},split_3b,mp3},silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
+
 
 ```
 This should create the following structure:
@@ -61,9 +62,11 @@ This should create the following structure:
 $base_dir/
 |-- clean_3/
 |   |-- nrk_tv/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
-|   |   |-- split_3c
+|   |   |-- clean_3a
+|   |   |   |-- standard
+|   |   |   |-- short
+|   |   |   |-- very_short
+|   |   |-- split_3b
 |   |   |-- mp3
 |   |-- silence/
 |   |   |-- copy_3a
@@ -144,17 +147,16 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 
 ### NRK TV
 ```bash
-# jq -c 'select(.vtt_folder=="vtt_transcribe_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_transcribe/copy_3a/nrk_tv_transcribe_all.json
-# jq -c 'select(.vtt_folder=="vtt_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_translate/copy_3a/nrk_tv_translate_all.json
-# Create the config.json with these settings:
-echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/config.json
-echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv_veryshort/config.json
-
-
+# Set working dirs
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/subtitle_processing";
 audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
-python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/audio/
-python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv_veryshort --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv_veryshort/audio/
+
+# Create the config.json with these settings:
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/clean_3a/standard/config.json
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/clean_3a/short/config.json
+
+python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/copy_3a/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/copy_3a/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv_veryshort/mp3/
 
 
 # Create the audio files
