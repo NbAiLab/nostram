@@ -907,7 +907,7 @@ def main(args):
     # Replace NaNs with empty strings
     # data = data.replace(np.nan, '', regex=True)
 
-    data = data.drop_duplicates(["audio", "text", "group_id", "source"])
+    data = data.drop_duplicates(["id", "text", "group_id", "source"])
     logger.info(f'***  Removed duplicate IDs. ({exec_time()}) {show_length(data)}')
 
     # Save it as jsonl
