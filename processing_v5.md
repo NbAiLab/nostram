@@ -68,18 +68,53 @@ $base_dir/
 |   |-- nrk_tv_translate/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
-|   |-- nrk_tv_veryshort/
+|   |-- nrk_tv_silence/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
-|   |-- nrk_tv_silence/
+|   |-- silence/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
 |   |-- stortinget
 |   |-- fleurs
 |   |-- nst
 |   |-- stortinget
+|   |-- audio_books
 |-- inference_4/
 |   |-- inference_dataset
+|   |   |-- mp3
+|   |   |   |-- nrk_tv
+|   |   |   |-- silence
+|   |   |   |-- stortinget
+|   |   |   |-- fleurs
+|   |   |   |-- nst
+|   |   |   |-- audio_books
+|   |   |-- nrk_tv
+|   |   |   |-- train
+|   |   |-- nrk_tv_translate
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- nrk_tv_transcribe
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- silence
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- stortinget
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- fleurs
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- nst
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- audio_books
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
 |   |-- inference_result
 |   |-- processed
 |-- translation_5/
