@@ -89,7 +89,9 @@ No processing is needed here. Just copy the correct files into a single director
 ```bash
 cd $base_dir
 cp clean_3/stortinget/*.json inference_4/inference_dataset/
-cp clean_3/fleurs/*.json inference_4/inference_dataset/
+cp clean_3/fleurs/norwegian_fleurs-test.json inference_4/inference_dataset/norwegian_fleurs_test.json
+cp clean_3/fleurs/norwegian_fleurs-validation.json inference_4/inference_dataset/norwegian_fleurs_validation.json
+cp clean_3/fleurs/norwegian_fleurs-train.json inference_4/inference_dataset/norwegian_fleurs_train.json
 cp clean_3/nst/nst_train.json inference_4/inference_dataset/
 cp clean_3/nst/nst_test.json inference_4/inference_dataset/
 cp clean_3/nst/nst_validation.json inference_4/inference_dataset/
