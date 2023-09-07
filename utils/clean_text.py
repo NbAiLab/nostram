@@ -4,7 +4,6 @@ from pandarallel import pandarallel
 import ftfy
 import re
 
-# Initialize statistics dictionary
 stats = {
     'double_spacing': 0,
     'too_long_ellipses': 0,
@@ -36,8 +35,8 @@ def double_punctuation(text):
     return re.sub(r'\.{2,}', '.', text)
 
 def remove_dashes(text):
-    text = re.sub(r'(?<=^|[\.\?\!]\s)-', ' ', text)
-    return re.sub(r'(?<=\d)-', ' ', text)
+    text = re.sub(r'(^-|[\.\?\!]\s-)(?=\s)', ' ', text)
+    return text
 
 def unicode_cleaning(text):
     return ftfy.fix_text(text)
@@ -49,8 +48,7 @@ def remove_tabs(text):
     return text.replace('\t', ' ')
 
 def stop_function(text):
-    allowed_chars = r'[a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!"]'
-    illegal_chars = re.findall(f'[^{allowed_chars}]', text)
+    illegal_chars = re.findall(r'[^a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!" ]', text)
     if illegal_chars:
         print(f"Unhandled character. Original text: {text}")
     return text
@@ -86,13 +84,8 @@ if __name__ == "__main__":
 
     pandarallel.initialize()
 
-    # Read JSON lines into DataFrame
     df = pd.read_json(args.input_file, lines=True)
-
-    # Apply clean_text function in parallel
     df['text'] = df['text'].parallel_apply(clean_text)
-
-    # Save cleaned DataFrame to JSON lines
     df.to_json(args.output_file, orient='records', lines=True)
 
     print("Cleaning completed.")
