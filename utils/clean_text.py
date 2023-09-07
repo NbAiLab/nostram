@@ -9,8 +9,6 @@ import unicodedata
 # Initialize pandarallel
 pandarallel.initialize()
 
-import ftfy  # Assuming you have imported ftfy
-
 def is_printable(char):
     category = unicodedata.category(char)
     return not category.startswith("C")
