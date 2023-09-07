@@ -29,7 +29,9 @@ def clean_text(text, verbose=False):
             "[": "",
             "]": "",
             "{": "",
-            "}": ""
+            "}": "",
+            "«": "",
+            "»": ""
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
@@ -95,7 +97,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Stop function
-    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
+    allowed_chars = '»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["stop_function"] += 1
