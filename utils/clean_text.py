@@ -100,8 +100,7 @@ def clean_text(text, verbose=False):
     if has_two_uppercase_words(text):
         stats["delete_uppercase_words"] += 1
         stats["delete_line"] = True
-        #if verbose: print(f"Line to be deleted due to uppercase words - Original: {original_text}")
-        print(f"Line to be deleted due to uppercase words - Original: {original_text}")
+        if verbose: print(f"Line to be deleted due to uppercase words - Original: {original_text}")
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
