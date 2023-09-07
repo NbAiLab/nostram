@@ -1,0 +1,1 @@
+The Norwegian Colossal Corpus speech is a collection of sound snippets and corresponding transcription suitable for training asr models. We have done extensive adaption of the datasets to make them suitable for training, and have made them available in a common format. The total size of the NCC is currently 45GB.
