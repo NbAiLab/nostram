@@ -3,6 +3,7 @@ import re
 from pandarallel import pandarallel
 import pandas as pd
 import ftfy
+import string
 
 # Initialize pandarallel
 pandarallel.initialize()
