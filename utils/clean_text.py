@@ -15,6 +15,12 @@ def is_printable(char):
     category = unicodedata.category(char)
     return not category.startswith("C")
 
+def contains_emoticon(text):
+    for char in text:
+        if unicodedata.category(char) == "So":
+            return True
+    return False
+
 def clean_text(text, verbose=False):
     stats = {
         "double_spacing": 0,
@@ -27,6 +33,7 @@ def clean_text(text, verbose=False):
         "special_char_replace": 0,
         "delete_line": False,
         "remove_non_printable": 0,
+        "emoticons": 0,
         "unhandled": 0
     }
 
@@ -76,8 +83,15 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
 
+    # Delete line if it contains any emoticon
+    if contains_emoticon(text):
+        stats["delete_lines"] = True
+        stats["emoticons"] += 1
+        print(f"Line to be deleted due to emoticon - Original: {original_text}")
+        return text, stats
+    
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ãú−-–çíÍ►™�şûłìð🙌💜💔😔❤|↑·þ💕👊☠î›🙂"):
+    if any(char in text for char in "~()[{}]ãú−-–çíÍ►™�şûłìð❤|↑·þ☠î›"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
@@ -160,6 +174,7 @@ if __name__ == "__main__":
         "special_char_replace": 0,
         "delete_line": False,
         "remove_non_printable": 0,
+        "emoticons": 0,
         "unhandled": 0
     }
     
