@@ -19,6 +19,7 @@ def clean_text(text, verbose=False):
         "remove_line_breaks": 0,
         "remove_tabs": 0,
         "special_char_replace": 0,
+        "delete_line": False,
         "stop_function": 0
     }
 
@@ -40,6 +41,12 @@ def clean_text(text, verbose=False):
         return text, stats
 
     original_text = text
+
+    # Delete line if it contains "(" or ")"
+    if "(" in text or ")" in text:
+        stats["delete_line"] = True
+        if verbose: print(f"Line to be deleted - Original: {original_text}")
+        return text, stats
     
     # Unicode cleaning
     text = ftfy.fix_text(text)
@@ -127,15 +134,26 @@ if __name__ == "__main__":
         "remove_line_breaks": 0,
         "remove_tabs": 0,
         "special_char_replace": 0,
+        "delete_line": False,
         "stop_function": 0
     }
+    
+    indices_to_delete = []
 
     for index, row in df.iterrows():
         cleaned_text, stats = clean_text(row['text'], args.verbose)
-        df.at[index, 'text'] = cleaned_text
+        if stats["delete_line"]:
+            indices_to_delete.append(index)
+            total_stats["delete_line"] += 1
+        else:
+            df.at[index, 'text'] = cleaned_text
 
         for key in stats:
-            total_stats[key] += stats[key]
+            if key != "delete_line":
+                total_stats[key] += stats[key]
+
+    # Delete rows
+    df.drop(indices_to_delete, inplace=True)
 
     df.to_json(output_file, orient='records', lines=True)
 
