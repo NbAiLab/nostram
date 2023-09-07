@@ -4,13 +4,22 @@ from pandarallel import pandarallel
 import ftfy
 import re
 
-# Global variable to store statistics
-stats = {}
+# Initialize statistics dictionary
+stats = {
+    'double_spacing': 0,
+    'too_long_ellipses': 0,
+    'illegal_ellipses': 0,
+    'double_punctuation': 0,
+    'remove_dashes': 0,
+    'unicode_cleaning': 0,
+    'remove_line_breaks': 0,
+    'remove_tabs': 0
+}
 
 def update_stats_and_print(func, original, cleaned):
     global stats
     if original != cleaned:
-        stats[func.__name__] = stats.get(func.__name__, 0) + 1
+        stats[func.__name__] += 1
         print(f"{func.__name__}:\nBefore: {original}\nAfter: {cleaned}")
 
 def double_spacing(text):
@@ -47,6 +56,9 @@ def stop_function(text):
         exit(1)
 
 def clean_text(text):
+    if text == "":
+        return text
+
     original_text = text
 
     funcs = [
@@ -63,7 +75,8 @@ def clean_text(text):
 
     for func in funcs:
         cleaned_text = func(text)
-        update_stats_and_print(func, text, cleaned_text)
+        if cleaned_text != text:
+            update_stats_and_print(func, text, cleaned_text)
         text = cleaned_text
 
     return text
