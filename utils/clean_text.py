@@ -27,6 +27,7 @@ def clean_text(text, verbose=False):
         replacements = {
             "ê": "è",
             "â": "à",
+            "ô": "ò",
             "[": "",
             "]": "",
             "{": "",
@@ -104,7 +105,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Unhandled
-    allowed_chars = '»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
+    allowed_chars = 'öáéÉ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÒæøåÆØÅ…°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
