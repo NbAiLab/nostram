@@ -74,15 +74,16 @@ def clean_text(text, verbose=False):
     # Delete line if it contains any bracket and a few other weird characters
     if any(char in text for char in "~()[{}]ãú−-–çíÍ►™�şûłìð🙌💜💔😔❤|↑·þ💕👊☠î›🙂"):
         stats["delete_line"] = True
-        #if verbose: print(f"Line to be deleted - Original: {original_text}")
-        print(f"Line to be deleted - Original: {original_text}")
+        if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
 
     # Remove non-printable characters
     new_text = ''.join(filter(lambda x: x in string.printable, text))
     if new_text != text:
         stats["remove_non_printable"] += 1
-        if verbose: print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
+        #if verbose: print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
+        print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
+
         text = new_text
     
     # Illegal ellipses
