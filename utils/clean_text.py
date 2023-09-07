@@ -93,7 +93,7 @@ if __name__ == "__main__":
     input_file = args.input_file
     output_file = args.output_file
 
-    df = pd.read_json(input_file)
+    df = pd.read_json(input_file, lines=True)
     df['text'] = df['text'].parallel_apply(clean_text)
     df.to_json(output_file, orient='records', lines=True)
 
