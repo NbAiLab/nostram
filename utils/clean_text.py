@@ -85,13 +85,13 @@ def clean_text(text, verbose=False):
 
     # Delete line if it contains any emoticon
     if contains_emoticon(text):
-        stats["delete_lines"] = True
+        stats["delete_line"] = True
         stats["emoticons"] += 1
         print(f"Line to be deleted due to emoticon - Original: {original_text}")
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ãú−-–çíÍ►™�şûłìð❤|↑·þ☠î›"):
+    if any(char in text for char in "~()[{}]ãú−-–çíÍ►™�şûłìð❤|↑·þ☠î›˛"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
@@ -140,7 +140,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Unhandled
-    allowed_chars = '²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?@_`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§'
+    allowed_chars = '²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?@_`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§Þ'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
