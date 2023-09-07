@@ -36,9 +36,8 @@ def double_punctuation(text):
     return re.sub(r'\.{2,}', '.', text)
 
 def remove_dashes(text):
-    parts = re.split(r'(\.|\?|\!)\s*', text)
-    new_parts = [re.sub(r'^[-—–]+(?=[^\d])', ' ', part) if i % 2 == 0 else part for i, part in enumerate(parts)]
-    return ''.join(new_parts)
+    text = re.sub(r'(?<=^|[\.\?\!]\s)-', ' ', text)
+    return re.sub(r'(?<=\d)-', ' ', text)
 
 def unicode_cleaning(text):
     return ftfy.fix_text(text)
@@ -50,15 +49,11 @@ def remove_tabs(text):
     return text.replace('\t', ' ')
 
 def stop_function(text):
-    if text == "":
-        return text
     allowed_chars = r'[a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!"]'
     illegal_chars = re.findall(f'[^{allowed_chars}]', text)
-    
     if illegal_chars:
-        print(f"Illegal character(s) found: {', '.join(set(illegal_chars))}")
-        print(f"Raw Text: {text}")
-        exit(1)
+        print(f"Unhandled character. Original text: {text}")
+    return text
 
 def clean_text(text):
     original_text = text
