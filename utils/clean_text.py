@@ -113,6 +113,7 @@ def clean_text(text, verbose=False):
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
+        stats["delete_line"] = True
         print(f"Unhandled character - Original: {original_text} - Char: {unhandled_char}")
     
     return text, stats
