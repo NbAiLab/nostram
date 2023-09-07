@@ -11,25 +11,34 @@ import ftfy  # Assuming you have imported ftfy
 
 def clean_text(text, verbose=False):
     stats = {
-        "stop_function": 0,
         "double_spacing": 0,
         "remove_dashes": 0,
         "illegal_ellipses": 0,
         "double_punctuation": 0,
         "unicode_cleaning": 0,
         "remove_line_breaks": 0,
-        "remove_tabs": 0
+        "remove_tabs": 0,
+        "special_char_replace": 0,
+        "stop_function": 0
     }
 
+    def special_char_replace(text):
+        replacements = {
+            "ê": "è",
+            "â": "à",
+            "[": "",
+            "]": ""
+            "{": "",
+            "}": ""
+        }
+        new_text = "".join(replacements.get(c, c) for c in text)
+        return new_text
+
+    if "nocaptions" in text:
+        return text, stats
+
     original_text = text
-
-    # Stop function
-    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
-    unhandled_char = next((c for c in text if c not in allowed_chars), None)
-    if unhandled_char:
-        stats["stop_function"] += 1
-        if verbose: print(f"Unhandled character - Original: {original_text} - Char: {unhandled_char}")
-
+    
     # Unicode cleaning
     text = ftfy.fix_text(text)
     if text != original_text:
@@ -42,7 +51,14 @@ def clean_text(text, verbose=False):
         stats["double_spacing"] += 1
         if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
         text = new_text
-
+    
+    # Special character replacements
+    new_text = special_char_replace(text)
+    if new_text != text:
+        stats["special_char_replace"] += 1
+        if verbose: print(f"Special character replacement - Original: {text} - Result: {new_text}")
+        text = new_text
+        
     # Remove Dashes
     new_text = re.sub(r"^(?:- |— )", "", text)
     if new_text != text:
@@ -78,6 +94,13 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Remove tabs - Original: {text} - Result: {new_text}")
         text = new_text
 
+    # Stop function
+    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
+    unhandled_char = next((c for c in text if c not in allowed_chars), None)
+    if unhandled_char:
+        stats["stop_function"] += 1
+        if verbose: print(f"Unhandled character - Original: {original_text} - Char: {unhandled_char}")
+    
     return text, stats
 
 
@@ -101,6 +124,7 @@ if __name__ == "__main__":
         "unicode_cleaning": 0,
         "remove_line_breaks": 0,
         "remove_tabs": 0,
+        "special_char_replace": 0,
         "stop_function": 0
     }
 
