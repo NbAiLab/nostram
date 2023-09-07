@@ -9,36 +9,66 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | clean_3 | <empty> | <empty>    |
+| clean_3/audio_books | <empty> | <empty>    |
 | clean_3/fleurs | norwegian_fleurs-test.json |        357 |
 | clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
-| clean_3/nrk_tv_silence | <empty> | <empty>    |
-| clean_3/nrk_tv_transcribe | <empty> | <empty>    |
-| clean_3/nrk_tv_translate | <empty> | <empty>    |
-| clean_3/nrk_tv_veryshort | <empty> | <empty>    |
+| clean_3/nrk_tv | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/short | nrk.json |        633 |
+| clean_3/nrk_tv/clean_3a/short | config.json |         26 |
+| clean_3/nrk_tv/clean_3a/short/log | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/standard | nrk.json |        418 |
+| clean_3/nrk_tv/clean_3a/standard | config.json |         26 |
+| clean_3/nrk_tv/clean_3a/standard/log | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/very_short | <empty> | <empty>    |
+| clean_3/nrk_tv/split_3b | nrk.json |        929 |
 | clean_3/nst | nst_train.json |    299,114 |
 | clean_3/nst | nst_largetest.json |     63,088 |
 | clean_3/nst | nst_validation.json |      1,500 |
 | clean_3/nst | nst_test.json |      1,500 |
+| clean_3/silence | <empty> | <empty>    |
+| clean_3/silence/clean_3b | <empty> | <empty>    |
+| clean_3/silence/copy_3a | <empty> | <empty>    |
 | clean_3/stortinget | stortinget_train.json |    720,870 |
 | clean_3/stortinget | stortinget_test.json |      1,872 |
 | clean_3/stortinget | stortinget_validation.json |      2,041 |
-| **Total** |      | **1,090,505** |
+| **Total** |      | ** 1,092,537** |
 
 ### Directory: inference_4
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | inference_4 | <empty> | <empty>    |
-| inference_4/inference_dataset | nst_train.json |    299,114 |
-| inference_4/inference_dataset | stortinget_train.json |    720,870 |
-| inference_4/inference_dataset | stortinget_test.json |      1,872 |
-| inference_4/inference_dataset | nst_validation.json |      1,500 |
-| inference_4/inference_dataset | stortinget_validation.json |      2,041 |
-| inference_4/inference_dataset | norwegian_fleurs-test.json |        357 |
-| inference_4/inference_dataset | nst_test.json |      1,500 |
-| inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
+| inference_4/inference_dataset | <empty> | <empty>    |
+| inference_4/inference_dataset/audio_books | <empty> | <empty>    |
+| inference_4/inference_dataset/audio_books/test | audio_books_test.json |      1,500 |
+| inference_4/inference_dataset/audio_books/train | audio_books_train.json |  1,200,076 |
+| inference_4/inference_dataset/audio_books/validation | audio_books_validation.json |      1,500 |
+| inference_4/inference_dataset/fleurs | <empty> | <empty>    |
+| inference_4/inference_dataset/fleurs/test | <empty> | <empty>    |
+| inference_4/inference_dataset/fleurs/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv/{train} | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nst | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/train | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/silence | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/test | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/train | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/test | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/train | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/validation | <empty> | <empty>    |
 | inference_4/inference_result | <empty> | <empty>    |
 | inference_4/processed | <empty> | <empty>    |
-| **Total** |      | **1,027,417** |
+| **Total** |      | ** 1,203,076** |
 
 ### Directory: translation_5
 | Directory | File | Lines     |
@@ -46,7 +76,8 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | translation_5 | <empty> | <empty>    |
 | translation_5/processed | <empty> | <empty>    |
 | translation_5/translation_files | <empty> | <empty>    |
-| **Total** |      | **0** |
+| **Total** |      | **         0** |
+
 
 # Copy Structure
 The following command creates all the necssary folders if they do not exist.
