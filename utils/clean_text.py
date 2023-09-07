@@ -16,49 +16,17 @@ stats = {
     'stop_function': 0
 }
 
-def update_stats_and_print(func, original, cleaned):
+def update_stats(func):
     global stats
-    if original != cleaned:
-        stats[func.__name__] += 1
-        print(f"{func.__name__}:\nBefore: {original}\nAfter: {cleaned}")
-
-def double_spacing(text):
-    return ' '.join(text.split())
-
-def too_long_ellipses(text):
-    return re.sub(r'\.{4,6}', '…', text)
-
-def illegal_ellipses(text):
-    return text.replace('...', '…')
-
-def double_punctuation(text):
-    return re.sub(r'\.{2,}', '.', text)
-
-def remove_dashes(text):
-    text = re.sub(r'(^-|[\.\?\!]\s-)(?=\s)', ' ', text)
-    return text
-
-def unicode_cleaning(text):
-    return ftfy.fix_text(text)
-
-def remove_line_breaks(text):
-    return text.replace('\n', ' ')
-
-def remove_tabs(text):
-    return text.replace('\t', ' ')
-
-def stop_function(text):
-    if not text.strip():
-        return text
-    illegal_chars = re.findall(r'[^a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!"’òè ]', text)
-    if illegal_chars:
-        print(f"Unhandled character. Original text: {text}")
-    return text
+    stats[func.__name__] += 1
 
 def clean_text(text):
+    if "nocaptions" in text:
+        return text
+
+    original_text = text
     if not text.strip():
         return text
-    original_text = text
 
     funcs = [
         double_spacing,
@@ -75,10 +43,12 @@ def clean_text(text):
     for func in funcs:
         cleaned_text = func(text)
         if cleaned_text != text:
-            update_stats_and_print(func, text, cleaned_text)
+            update_stats(func)
         text = cleaned_text
 
     return text
+
+# ... The rest of your cleaning functions go here ...
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Clean up a large JSON lines text file.')
