@@ -13,7 +13,8 @@ stats = {
     'unicode_cleaning': 0,
     'remove_line_breaks': 0,
     'remove_tabs': 0,
-    'stop_function': 0
+    'stop_function': 0,
+    'fraction_replace': 0
 }
 
 def update_stats(func):
@@ -37,7 +38,8 @@ def clean_text(text):
         unicode_cleaning,
         remove_line_breaks,
         remove_tabs,
-        stop_function
+        stop_function,
+        fraction_replace
     ]
 
     for func in funcs:
@@ -48,7 +50,38 @@ def clean_text(text):
 
     return text
 
-# ... The rest of your cleaning functions go here ...
+def double_spacing(text):
+    return re.sub(r'  +', ' ', text)
+
+def too_long_ellipses(text):
+    return re.sub(r'\.{3,}', '...', text)
+
+def illegal_ellipses(text):
+    return re.sub(r'(\.{1,2}[^\.])|([^\.]\.{1,2})', '. ', text)
+
+def double_punctuation(text):
+    return re.sub(r'([!?,:;"\'\.\-—])\1+', r'\1', text)
+
+def remove_dashes(text):
+    return re.sub(r'(?<=^|\.\s)-', ' ', text)
+
+def unicode_cleaning(text):
+    return ftfy.fix_text(text)
+
+def remove_line_breaks(text):
+    return re.sub(r'[\r\n]+', ' ', text)
+
+def remove_tabs(text):
+    return re.sub(r'\t+', ' ', text)
+
+def stop_function(text):
+    if re.search(r'[^a-zA-Z0-9\s,.?!:;\'"/\-—èò]', text):
+        print(f"Unhandled character. Original text: {text}")
+    return text
+
+def fraction_replace(text):
+    text = text.replace("1/2", "½").replace("1/4", "¼").replace("3/4", "¾")
+    return text
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Clean up a large JSON lines text file.')
