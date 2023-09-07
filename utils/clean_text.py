@@ -3,7 +3,15 @@ import pandas as pd
 from pandarallel import pandarallel
 import ftfy
 import re
-import json
+
+# Global variable to store statistics
+stats = {}
+
+def update_stats_and_print(func, original, cleaned):
+    global stats
+    if original != cleaned:
+        stats[func.__name__] = stats.get(func.__name__, 0) + 1
+        print(f"{func.__name__}:\nBefore: {original}\nAfter: {cleaned}")
 
 def double_spacing(text):
     return ' '.join(text.split())
@@ -18,7 +26,7 @@ def double_punctuation(text):
     return re.sub(r'\.{2,}', '.', text)
 
 def remove_dashes(text):
-    return re.sub(r'[-—–]', '', text)
+    return re.sub(r'[-—–]\s*', '', text)
 
 def unicode_cleaning(text):
     return ftfy.fix_text(text)
@@ -39,6 +47,8 @@ def stop_function(text):
         exit(1)
 
 def clean_text(text):
+    original_text = text
+
     funcs = [
         double_spacing,
         too_long_ellipses,
@@ -52,7 +62,9 @@ def clean_text(text):
     ]
 
     for func in funcs:
-        text = func(text)
+        cleaned_text = func(text)
+        update_stats_and_print(func, text, cleaned_text)
+        text = cleaned_text
 
     return text
 
@@ -74,3 +86,4 @@ if __name__ == "__main__":
     df.to_json(args.output_file, orient='records', lines=True)
 
     print("Cleaning completed.")
+    print(f"Statistics: {stats}")
