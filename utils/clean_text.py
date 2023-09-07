@@ -21,6 +21,10 @@ def contains_emoticon(text):
             return True
     return False
 
+def has_two_uppercase_words(text):
+    uppercase_words = re.findall(r'\b[A-Z]{3,}\b', text)
+    return len(uppercase_words) >= 2
+
 def clean_text(text, verbose=False):
     stats = {
         "double_spacing": 0,
@@ -34,6 +38,7 @@ def clean_text(text, verbose=False):
         "delete_line": False,
         "remove_non_printable": 0,
         "emoticons": 0,
+        "delete_uppercase_words": 0,
         "unhandled": 0
     }
 
@@ -89,6 +94,14 @@ def clean_text(text, verbose=False):
         stats["delete_line"] = True
         stats["emoticons"] += 1
         if verbose: print(f"Line to be deleted due to emoticon - Original: {original_text}")
+        return text, stats
+    
+    # Delete line if it contains at least two uppercase words of length at least 3
+    if has_two_uppercase_words(text):
+        stats["delete_uppercase_words"] += 1
+        stats["delete_line"] = True
+        #if verbose: print(f"Line to be deleted due to uppercase words - Original: {original_text}")
+        print(f"Line to be deleted due to uppercase words - Original: {original_text}")
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
@@ -175,6 +188,7 @@ if __name__ == "__main__":
         "delete_line": False,
         "remove_non_printable": 0,
         "emoticons": 0,
+        "delete_uppercase_words: 0,
         "unhandled": 0
     }
     
