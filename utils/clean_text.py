@@ -102,7 +102,7 @@ def clean_text(text, verbose=False):
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ãú−-–—‐íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ"):
+    if any(char in text for char in "~()[{}]ãú−-–—‐íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ€^Œ"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
@@ -150,7 +150,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Unhandled
-    allowed_chars = '½¼¾²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?¿@`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§ÞßÚÎšŠčžŋÇçŽùÑČųµėđÿ'
+    allowed_chars = '½¼¾²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?¿@`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§ÞßÚÎšŠčžŋÇçŽùÑČųµėđÿŧÔţË÷'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
