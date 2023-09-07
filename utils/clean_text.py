@@ -150,7 +150,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Unhandled
-    allowed_chars = '½¼¾²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?¿@`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§ÞßÚÎšŠčžŋÇçŽùÑČųµėđÿŧÔţË÷'
+    allowed_chars = '½¼¾²³ñëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?¿@`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§ÞßÚÎšŠčžŋÇçŽùÑČųµėđÿŧÔţË÷õ'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
