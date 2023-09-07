@@ -37,7 +37,8 @@ def clean_text(text, verbose=False):
             "Â": "À",
             "ô": "ò",
             "«": "",
-            "»": ""
+            "»": "",
+            "– ": ""
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
