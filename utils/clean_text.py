@@ -20,6 +20,7 @@ def clean_text(text, verbose=False):
         "remove_tabs": 0,
         "special_char_replace": 0,
         "delete_line": False,
+        "delete_non_printable": 0,
         "unhandled": 0
     }
 
@@ -77,6 +78,12 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
 
+    # Delete line if it contains non-printable characters
+    if any(c not in string.printable for c in text):
+        stats["delete_non_printable"] += 1
+        stats["delete_line"] = True
+        if verbose: print(f"Line to be deleted due to non-printable characters - Original: {original_text}")
+        return text, stats
     
     # Illegal ellipses
     new_text = re.sub(r'\.\.\.', '…', text)
@@ -146,6 +153,7 @@ if __name__ == "__main__":
         "remove_tabs": 0,
         "special_char_replace": 0,
         "delete_line": False,
+        "delete_non_printable": 0,
         "unhandled": 0
     }
     
