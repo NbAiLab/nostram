@@ -4,11 +4,16 @@ from pandarallel import pandarallel
 import pandas as pd
 import ftfy
 import string
+import unicodedata
 
 # Initialize pandarallel
 pandarallel.initialize()
 
 import ftfy  # Assuming you have imported ftfy
+
+def is_printable(char):
+    category = unicodedata.category(char)
+    return not category.startswith("C")
 
 def clean_text(text, verbose=False):
     stats = {
@@ -78,12 +83,11 @@ def clean_text(text, verbose=False):
         return text, stats
 
     # Remove non-printable characters
-    new_text = ''.join(filter(lambda x: x in string.printable, text))
+    new_text = ''.join(filter(is_printable, text))
     if new_text != text:
         stats["remove_non_printable"] += 1
         #if verbose: print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
         print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
-
         text = new_text
     
     # Illegal ellipses
