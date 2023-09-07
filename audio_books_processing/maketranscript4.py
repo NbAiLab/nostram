@@ -28,7 +28,7 @@ jsonratio="6:1:1"
 def copysoundfiles(options):
     destinationdir=options.soundoutputdir
     #print(options.masterinputdir)
-    directories = [d for d in os.listdir(options.masterinputdir+ "/") ]
+    directories = [d for d in glob.glob(options.masterinputdir+ "/9*") ]
     #print(directories)
     for d in directories:
         basedir= d.split("/")[-1]
@@ -37,16 +37,17 @@ def copysoundfiles(options):
         mkdirifnotexists(destinationdir + "/audio_books")
         mkdirifnotexists(destinationdir + "/audio_books/"+basedir)
         files=[]
-        if directoryexists(options.masterinputdir+ "/"+ d + "/mp3"):
-            files= [f for f in os.listdir(options.masterinputdir+ "/"+ d + "/mp3")]
+        if directoryexists(options.masterinputdir+ "/"+ d.split("/")[-1] + "/mp3"):
+            files= [f for f in glob.glob(options.masterinputdir+ "/"+ d.split("/")[-1] + "/mp3/*")]
 
 
         if len(files) == 0:
             print("empty book:"+ options.masterinputdir+ "/"+ d)
         else:
             for f in files:
-                print(options.masterinputdir+ "/"+ d+ "/mp3/" +str(f) + "::::"+ destinationdir+ "/audio_books/"+ basedir+ "/.")
-                shutil.copy(options.masterinputdir+ "/"+ d+ "/mp3/" +f,destinationdir+ "/audio_books/"+ basedir+ "/"+ str(f))
+                rel_f=f.split("/")[-1]
+                print(options.masterinputdir+ "/"+ d.split("/")[-1]+ "/mp3/" +str(rel_f) + "::::"+ destinationdir+ "/audio_books/"+ basedir+ "/.")
+                shutil.copy(options.masterinputdir+ "/"+ d.split("/")[-1]+ "/mp3/" +rel_f,destinationdir+ "/audio_books/"+ basedir+ "/"+ str(rel_f))
 
 
 def directoryexists(dir):
@@ -79,7 +80,8 @@ def parse_args():
                         required=True)
     parser.add_argument("-distributionratio", "--distributionratio", dest="distributionratio", help="distributionratio",
                         required=False,default=jsonratio)
-
+    parser.add_argument("-copysoundfiles", "--copysoundfiles", dest="copysoundfiles", help="copysoundfiles",type=bool,
+                        required=False)
     parser.add_argument("-maxtestlines", "--maxtestlines", dest="maxtestlines", help="maxtestlines",
                         required=False, default=-1,type=int)
     parser.add_argument("-maxvalidationlines", "--maxvalidationlines", dest="maxvalidationlines", help="maxvalidationlines",
@@ -121,8 +123,9 @@ def makefiles(options):
     cnttestlines=0
     for jsonfile in jsonfilelist:
         print(jsonfile)
-        jsongroup=jsonfile.split("/")[-1].split("_")[0]
-
+        jsongroup=jsonfile.split("/")[-1].split("_")[0].split(".")[0]
+        maks=0
+        lang = ""
         with open(jsonfile, 'r') as f:
             reader = jsonlines.Reader(f)
             cntno=0
@@ -140,16 +143,20 @@ def makefiles(options):
                 elif item["text_language"] == null:
                     cntnull += 1
             lang=""
-            max=max(cntno,cntnn,cnten,cntnull)
-            if cntno == max:
+
+            maks=max(cntno,cntnn,cnten,cntnull)
+            if cntno == maks:
                 lang="no"
-            elif cntnn == max:
+            elif cntnn == maks:
                 lang="nn"
-            elif cnten == max:
+            elif cnten == maks:
                 lang="en"
             else:
                 lang=null
+            #print("lang " + lang)
 
+        with open(jsonfile, 'r') as f:
+            reader = jsonlines.Reader(f)
             for line in reader.iter():
                 item=line
                 if validateitem(item)== False:
@@ -192,6 +199,11 @@ if __name__ == "__main__":
     # extractfromsoundfile("9789180515016_content.mp3","tmpmp3",extractionlist)
     # exit(-1)
     options = parse_args()
-    copysoundfiles(options)
+    #print(str(options.copysoundfiles ))
+
+    if options.copysoundfiles:
+        #exit(-1)
+        copysoundfiles(options)
+    print("making json files")
     makefiles(options)
     #copysoundfiles(options)
