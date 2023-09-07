@@ -9,36 +9,66 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | clean_3 | <empty> | <empty>    |
+| clean_3/audio_books | <empty> | <empty>    |
 | clean_3/fleurs | norwegian_fleurs-test.json |        357 |
 | clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
-| clean_3/nrk_tv_silence | <empty> | <empty>    |
-| clean_3/nrk_tv_transcribe | <empty> | <empty>    |
-| clean_3/nrk_tv_translate | <empty> | <empty>    |
-| clean_3/nrk_tv_veryshort | <empty> | <empty>    |
+| clean_3/nrk_tv | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/short | nrk.json |        633 |
+| clean_3/nrk_tv/clean_3a/short | config.json |         26 |
+| clean_3/nrk_tv/clean_3a/short/log | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/standard | nrk.json |        418 |
+| clean_3/nrk_tv/clean_3a/standard | config.json |         26 |
+| clean_3/nrk_tv/clean_3a/standard/log | <empty> | <empty>    |
+| clean_3/nrk_tv/clean_3a/very_short | <empty> | <empty>    |
+| clean_3/nrk_tv/split_3b | nrk.json |        929 |
 | clean_3/nst | nst_train.json |    299,114 |
 | clean_3/nst | nst_largetest.json |     63,088 |
 | clean_3/nst | nst_validation.json |      1,500 |
 | clean_3/nst | nst_test.json |      1,500 |
+| clean_3/silence | <empty> | <empty>    |
+| clean_3/silence/clean_3b | <empty> | <empty>    |
+| clean_3/silence/copy_3a | <empty> | <empty>    |
 | clean_3/stortinget | stortinget_train.json |    720,870 |
 | clean_3/stortinget | stortinget_test.json |      1,872 |
 | clean_3/stortinget | stortinget_validation.json |      2,041 |
-| **Total** |      | **1,090,505** |
+| **Total** |      | ** 1,092,537** |
 
 ### Directory: inference_4
 | Directory | File | Lines     |
 | --------- | ---- | ---------:|
 | inference_4 | <empty> | <empty>    |
-| inference_4/inference_dataset | nst_train.json |    299,114 |
-| inference_4/inference_dataset | stortinget_train.json |    720,870 |
-| inference_4/inference_dataset | stortinget_test.json |      1,872 |
-| inference_4/inference_dataset | nst_validation.json |      1,500 |
-| inference_4/inference_dataset | stortinget_validation.json |      2,041 |
-| inference_4/inference_dataset | norwegian_fleurs-test.json |        357 |
-| inference_4/inference_dataset | nst_test.json |      1,500 |
-| inference_4/inference_dataset | norwegian_fleurs-validation.json |        163 |
+| inference_4/inference_dataset | <empty> | <empty>    |
+| inference_4/inference_dataset/audio_books | <empty> | <empty>    |
+| inference_4/inference_dataset/audio_books/test | audio_books_test.json |      1,500 |
+| inference_4/inference_dataset/audio_books/train | audio_books_train.json |  1,200,076 |
+| inference_4/inference_dataset/audio_books/validation | audio_books_validation.json |      1,500 |
+| inference_4/inference_dataset/fleurs | <empty> | <empty>    |
+| inference_4/inference_dataset/fleurs/test | <empty> | <empty>    |
+| inference_4/inference_dataset/fleurs/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv/{train} | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_transcribe/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_translate/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nst | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/train | <empty> | <empty>    |
+| inference_4/inference_dataset/nst/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/silence | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/test | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/train | <empty> | <empty>    |
+| inference_4/inference_dataset/silence/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/test | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/train | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget/validation | <empty> | <empty>    |
 | inference_4/inference_result | <empty> | <empty>    |
 | inference_4/processed | <empty> | <empty>    |
-| **Total** |      | **1,027,417** |
+| **Total** |      | ** 1,203,076** |
 
 ### Directory: translation_5
 | Directory | File | Lines     |
@@ -46,40 +76,73 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | translation_5 | <empty> | <empty>    |
 | translation_5/processed | <empty> | <empty>    |
 | translation_5/translation_files | <empty> | <empty>    |
-| **Total** |      | **0** |
+| **Total** |      | **         0** |
+
 
 # Copy Structure
 The following command creates all the necssary folders if they do not exist.
 
 ```bash
-base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-mkdir -p "$base_dir"/{clean_3/{nrk_tv_transcribe/{copy_3a,clean_3b},nrk_tv_translate/{copy_3a,clean_3b},nrk_tv_veryshort/{copy_3a,clean_3b},nrk_tv_silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget},inference_4/{inference_dataset,inference_result,processed},translation_5/{translation_files,processed}}
-Husk at vi ikke trenger å splitte nrk i transcribe og translate. Kutt kataloger. Kutt silence
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
+mkdir -p "$base_dir"/{clean_3/{nrk_tv/{clean_3a/{standard,short,very_short},split_3b,mp3},silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
 
-Make dir nrk/audio
+
 ```
 This should create the following structure:
 ```plaintext
 $base_dir/
 |-- clean_3/
-|   |-- nrk_tv_transcribe/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
-|   |-- nrk_tv_translate/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
-|   |-- nrk_tv_veryshort/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
-|   |-- nrk_tv_silence/
+|   |-- nrk_tv/
+|   |   |-- clean_3a
+|   |   |   |-- standard
+|   |   |   |-- short
+|   |   |   |-- very_short
+|   |   |-- split_3b
+|   |   |-- mp3
+|   |-- silence/
 |   |   |-- copy_3a
 |   |   |-- clean_3b
 |   |-- stortinget
 |   |-- fleurs
 |   |-- nst
 |   |-- stortinget
+|   |-- audio_books
 |-- inference_4/
 |   |-- inference_dataset
+|   |   |-- mp3
+|   |   |   |-- nrk_tv
+|   |   |   |-- silence
+|   |   |   |-- stortinget
+|   |   |   |-- fleurs
+|   |   |   |-- nst
+|   |   |   |-- audio_books
+|   |   |-- nrk_tv
+|   |   |   |-- train
+|   |   |-- nrk_tv_translate
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- nrk_tv_transcribe
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- silence
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- stortinget
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- fleurs
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- nst
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- audio_books
+|   |   |   |-- train
+|   |   |   |-- test
+|   |   |   |-- validation
 |   |-- inference_result
 |   |-- processed
 |-- translation_5/
@@ -115,18 +178,24 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 
 ### NRK TV
 ```bash
-# jq -c 'select(.vtt_folder=="vtt_transcribe_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_transcribe/copy_3a/nrk_tv_transcribe_all.json
-# jq -c 'select(.vtt_folder=="vtt_translate")' ../ncc_speech_corpus/json_2/nrk.json > clean_3/nrk_tv_translate/copy_3a/nrk_tv_translate_all.json
-# Create the config.json with these settings:
-echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/config.json
-echo -e "{\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv_veryshort/config.json
-
-
+# Set working dirs
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/subtitle_processing";
 audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
-python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/audio/
-python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv_veryshort --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv_veryshort/audio/
+archive_file="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/nrk.json";
 
+# Create the config.json with these settings:
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/clean_3a/standard/config.json
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/clean_3a/short/config.json
+
+# Clean the files - Uncomment for fast test files
+# python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/clean_3a/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+# python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/clean_3a/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+python $program_dir/clean.py --input_file $archive_file --output_folder $base_dir/clean_3/nrk_tv/clean_3a/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+python $program_dir/clean.py --input_file $archive_file --output_folder $base_dir/clean_3/nrk_tv/clean_3a/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+
+
+# Concatenate files and remove duplicates (can be extended with extra files)
+cat $base_dir/clean_3/nrk_tv/clean_3a/standard/nrk.json $base_dir/clean_3/nrk_tv/clean_3a/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/split_3b/nrk.json
 
 # Create the audio files
 cat $base_dir/clean_3/nrk_tv/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
