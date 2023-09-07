@@ -38,7 +38,10 @@ def clean_text(text, verbose=False):
             "ô": "ò",
             "«": "",
             "»": "",
-            "–": ""
+            "– ": "",
+            "•": "",
+            "´": "'",
+            "◊": ""
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
@@ -69,7 +72,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Delete line if it contains any bracket and a few other weird characters
-    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text or "−" in text or "-" in text or "–" in text or "ç" in text:
+    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text or "−" in text or "-" in text or "–" in text or "ç" in text or "í" in text or "�" in text:
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
@@ -110,7 +113,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Unhandled
-    allowed_chars = '²³ëüäö»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?@_`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°'
+    allowed_chars = '²³ëüäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?@_`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
         stats["unhandled"] += 1
