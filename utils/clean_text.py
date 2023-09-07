@@ -31,10 +31,10 @@ def clean_text(text):
 
     funcs = [
         double_spacing,
+        remove_dashes,
         too_long_ellipses,
         illegal_ellipses,
         double_punctuation,
-        remove_dashes,
         unicode_cleaning,
         remove_line_breaks,
         remove_tabs,
@@ -51,7 +51,7 @@ def clean_text(text):
     return text
 
 def double_spacing(text):
-    return re.sub(r'  +', ' ', text)
+    return " ".join(text.split())
 
 def too_long_ellipses(text):
     return re.sub(r'\.{3,}', '...', text)
@@ -63,7 +63,7 @@ def double_punctuation(text):
     return re.sub(r'([!?,:;"\'\.\-—])\1+', r'\1', text)
 
 def remove_dashes(text):
-    return re.sub(r'(?<=^|\.\s)-', ' ', text)
+    return re.sub(r'^[-—]\s*', '', text)
 
 def unicode_cleaning(text):
     return ftfy.fix_text(text)
@@ -97,4 +97,3 @@ if __name__ == "__main__":
 
     print("Cleaning completed.")
     print(f"Statistics: {stats}")
-
