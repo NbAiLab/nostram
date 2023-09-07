@@ -10,14 +10,12 @@ def clean_text(text):
     stats = {
         "double_spacing": 0,
         "remove_dashes": 0,
-        "too_long_ellipses": 0,
         "illegal_ellipses": 0,
         "double_punctuation": 0,
         "unicode_cleaning": 0,
         "remove_line_breaks": 0,
         "remove_tabs": 0,
-        "stop_function": 0,
-        "fraction_replace": 0
+        "stop_function": 0
     }
 
     if "nocaptions" in text:
@@ -38,14 +36,8 @@ def clean_text(text):
         stats["remove_dashes"] += 1
         changes_made = True
 
-    # Too long ellipses
-    text = re.sub(r'\.{4,}', '...', text)
-    if text != original_text:
-        stats["too_long_ellipses"] += 1
-        changes_made = True
-
     # Illegal ellipses
-    text = re.sub(r'\.\s*\.\s*\.', '...', text)
+    text = re.sub(r'\.\.\.', '…', text)
     if text != original_text:
         stats["illegal_ellipses"] += 1
         changes_made = True
@@ -57,7 +49,7 @@ def clean_text(text):
         changes_made = True
 
     # Unicode cleaning
-    text = text.replace('’', "'").replace('ò', 'o').replace('è', 'e').replace("1/2", "½").replace("1/4", "¼").replace("3/4", "¾")
+    text = text.replace('’', "'").replace('ò', 'o').replace('ê', 'è').replace('Á', 'A').replace("1/2", "½").replace("1/4", "¼").replace("3/4", "¾")
     if text != original_text:
         stats["unicode_cleaning"] += 1
         changes_made = True
@@ -75,7 +67,7 @@ def clean_text(text):
         changes_made = True
 
     # Stop function
-    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~—’òè/½¼¾ÉÒæøåÆØÅ°'
+    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~—’òèÁ/½¼¾ÉÒæøåÆØÅ°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char and not changes_made:
         stats["stop_function"] += 1
@@ -97,14 +89,12 @@ if __name__ == "__main__":
     total_stats = {
         "double_spacing": 0,
         "remove_dashes": 0,
-        "too_long_ellipses": 0,
         "illegal_ellipses": 0,
         "double_punctuation": 0,
         "unicode_cleaning": 0,
         "remove_line_breaks": 0,
         "remove_tabs": 0,
-        "stop_function": 0,
-        "fraction_replace": 0
+        "stop_function": 0
     }
 
     for index, row in df.iterrows():
