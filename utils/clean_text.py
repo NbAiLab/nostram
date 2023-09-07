@@ -87,7 +87,7 @@ def clean_text(text, verbose=False):
     if contains_emoticon(text):
         stats["delete_line"] = True
         stats["emoticons"] += 1
-        print(f"Line to be deleted due to emoticon - Original: {original_text}")
+        if verbose: print(f"Line to be deleted due to emoticon - Original: {original_text}")
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
@@ -100,8 +100,7 @@ def clean_text(text, verbose=False):
     new_text = ''.join(filter(is_printable, text))
     if new_text != text:
         stats["remove_non_printable"] += 1
-        #if verbose: print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
-        print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
+        if verbose: print(f"Non-printable characters removed - Original: {text} - Result: {new_text}")
         text = new_text
     
     # Illegal ellipses
