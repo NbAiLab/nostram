@@ -33,6 +33,8 @@ def generate_markdown(stats, target_dir):
         total_lines = 0
 
         for dir_path, json_stats in sorted(stats.items()):
+            if "mp3" in dir_path:
+                continue
             if not dir_path.startswith(first_level_dir):
                 continue
 
