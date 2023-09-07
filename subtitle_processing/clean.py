@@ -317,8 +317,8 @@ def combine_to_size(data, target_duration_seconds=26, max_separation_seconds=5):
         # Need an extra iteration to include the last group
         row = data.iloc[i] if i < len(data) else None
         if (row is not None
-                and row.end_time - group[0].start_time < target_duration_seconds * 1000
-                and row.start_time - group[-1].end_time < max_separation_seconds * 1000
+                and 0 < row.end_time - group[0].start_time <= target_duration_seconds * 1000
+                and row.start_time - group[-1].end_time <= max_separation_seconds * 1000
                 and not row[REMOVE_COL] and not group[-1][REMOVE_COL]
                 and detect_lang(row.text) == detect_lang(group[-1].text)):
             group.append(row)
@@ -759,7 +759,7 @@ def main(args):
 
     # Filter out too long posts
     if config['max_duration_seconds']:
-        cond = data['duration'] <= config['max_duration_seconds'] * 1000
+        cond = data['duration'].between(0, config['max_duration_seconds'] * 1000, inclusive="right")
         # data = data[cond]
         data.loc[~cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out too long segments. '
