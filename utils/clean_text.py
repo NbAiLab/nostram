@@ -188,7 +188,7 @@ if __name__ == "__main__":
         "delete_line": False,
         "remove_non_printable": 0,
         "emoticons": 0,
-        "delete_uppercase_words: 0,
+        "delete_uppercase_words": 0,
         "unhandled": 0
     }
     
