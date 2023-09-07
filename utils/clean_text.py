@@ -13,7 +13,8 @@ stats = {
     'remove_dashes': 0,
     'unicode_cleaning': 0,
     'remove_line_breaks': 0,
-    'remove_tabs': 0
+    'remove_tabs': 0,
+    'stop_function': 0
 }
 
 def update_stats_and_print(func, original, cleaned):
@@ -35,7 +36,7 @@ def double_punctuation(text):
     return re.sub(r'\.{2,}', '.', text)
 
 def remove_dashes(text):
-    return re.sub(r'[-—–]\s*', '', text)
+    return re.sub(r'(?<=^|[\.\?\!])\s*[-—–]+(?=[^\d])', ' ', text)
 
 def unicode_cleaning(text):
     return ftfy.fix_text(text)
