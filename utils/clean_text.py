@@ -143,7 +143,8 @@ if __name__ == "__main__":
     output_file = args.output_file
 
     df = pd.read_json(input_file, lines=True)
-
+    print(f"Read dataset with: {len(df)} lines.")
+    
     total_stats = {
         "double_spacing": 0,
         "remove_dashes": 0,
@@ -178,4 +179,5 @@ if __name__ == "__main__":
     df.to_json(output_file, orient='records', lines=True)
 
     print("Cleaning completed.")
+    print(f"Number of remaining lines: {len(df)}.")
     print(f"Statistics: {total_stats}")
