@@ -97,3 +97,4 @@ if __name__ == "__main__":
 
     print("Cleaning completed.")
     print(f"Statistics: {stats}")
+
