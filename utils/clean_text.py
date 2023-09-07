@@ -69,7 +69,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Delete line if it contains any bracket and a few other weird characters
-    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text or "–" in text:
+    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text or "–" in text or "ç" in text:
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
