@@ -6,7 +6,7 @@ import pandas as pd
 # Initialize pandarallel
 pandarallel.initialize()
 
-def clean_text(text):
+def clean_text(text, verbose=False):
     stats = {
         "double_spacing": 0,
         "remove_dashes": 0,
@@ -24,54 +24,36 @@ def clean_text(text):
     original_text = text
     changes_made = False
 
-    # Double spacing
-    text = ' '.join(text.split())
-    if text != original_text:
-        stats["double_spacing"] += 1
-        changes_made = True
+    # Initialize a list for logging verbose output
+    verbose_output = []
 
-    # Remove Dashes
-    text = re.sub(r"^(?:- |— )", "", text)
-    if text != original_text:
-        stats["remove_dashes"] += 1
-        changes_made = True
+    def apply_change(func, text):
+        nonlocal changes_made
+        cleaned_text = func(text)
+        if cleaned_text != text:
+            stats[func.__name__] += 1
+            changes_made = True
+            if verbose:
+                verbose_output.append(f"{func.__name__} - {text} - {cleaned_text}")
+        return cleaned_text
 
-    # Illegal ellipses
-    text = re.sub(r'\.\.\.', '…', text)
-    if text != original_text:
-        stats["illegal_ellipses"] += 1
-        changes_made = True
-
-    # Double punctuation
-    text = re.sub(r'([!\?])\1+', r'\1', text)
-    if text != original_text:
-        stats["double_punctuation"] += 1
-        changes_made = True
-
-    # Unicode cleaning
-    text = text.replace('’', "'").replace('ò', 'o').replace('ê', 'è').replace('Á', 'A').replace("1/2", "½").replace("1/4", "¼").replace("3/4", "¾")
-    if text != original_text:
-        stats["unicode_cleaning"] += 1
-        changes_made = True
-
-    # Remove line breaks
-    text = text.replace("\n", " ").replace("\r", " ")
-    if text != original_text:
-        stats["remove_line_breaks"] += 1
-        changes_made = True
-
-    # Remove tabs
-    text = text.replace("\t", " ")
-    if text != original_text:
-        stats["remove_tabs"] += 1
-        changes_made = True
+    text = apply_change(lambda t: ' '.join(t.split()), text)
+    text = apply_change(lambda t: re.sub(r"^(?:- |— )", "", t), text)
+    text = apply_change(lambda t: re.sub(r'\.\.\.', '…', t), text)
+    text = apply_change(lambda t: re.sub(r'([!\?])\1+', r'\1', t), text)
+    text = apply_change(lambda t: t.replace('’', "'").replace('ò', 'o').replace('é', 'è').replace('ó', 'ò').replace("1/2", "½").replace("1/4", "¼").replace("3/4", "¾"), text)
+    text = apply_change(lambda t: t.replace("\n", " ").replace("\r", " "), text)
+    text = apply_change(lambda t: t.replace("\t", " "), text)
 
     # Stop function
-    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~—’òèÁ/½¼¾ÉÒæøåÆØÅ°'
+    allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'*+,-./:;<=>?@[\\]^_`{|}~—’òèÁ/½¼¾ÉÒæøåÆØÅ°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char and not changes_made:
         stats["stop_function"] += 1
         print(f"Unhandled character: {unhandled_char}. Original text: {original_text}")
+
+    if verbose:
+        print("\n".join(verbose_output))
 
     return text, stats
 
@@ -79,12 +61,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Clean text in a JSON file.')
     parser.add_argument('--input_file', required=True, help='Path to the input JSON file.')
     parser.add_argument('--output_file', required=True, help='Path to the output JSON file.')
+    parser.add_argument('--verbose', action='store_true', help='Verbose output of changes.')
     
     args = parser.parse_args()
-    input_file = args.input_file
-    output_file = args.output_file
-
-    df = pd.read_json(input_file, lines=True)
 
     total_stats = {
         "double_spacing": 0,
@@ -97,14 +76,16 @@ if __name__ == "__main__":
         "stop_function": 0
     }
 
+    df = pd.read_json(args.input_file, lines=True)
+
     for index, row in df.iterrows():
-        cleaned_text, stats = clean_text(row['text'])
+        cleaned_text, stats = clean_text(row['text'], args.verbose)
         df.at[index, 'text'] = cleaned_text
 
         for key in stats:
             total_stats[key] += stats[key]
 
-    df.to_json(output_file, orient='records', lines=True)
+    df.to_json(args.output_file, orient='records', lines=True)
 
     print("Cleaning completed.")
     print(f"Statistics: {total_stats}")
