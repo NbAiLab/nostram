@@ -20,7 +20,7 @@ def clean_text(text, verbose=False):
         "remove_tabs": 0,
         "special_char_replace": 0,
         "delete_line": False,
-        "stop_function": 0
+        "unhandled": 0
     }
 
     def special_char_replace(text):
@@ -103,12 +103,12 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Remove tabs - Original: {text} - Result: {new_text}")
         text = new_text
 
-    # Stop function
+    # Unhandled
     allowed_chars = '»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,-./:;<=>?@_`—’òèÁ½¼¾ÉÒæøåÆØÅ…°'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
     if unhandled_char:
-        stats["stop_function"] += 1
-        if verbose: print(f"Unhandled character - Original: {original_text} - Char: {unhandled_char}")
+        stats["unhandled"] += 1
+        print(f"Unhandled character - Original: {original_text} - Char: {unhandled_char}")
     
     return text, stats
 
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         "remove_tabs": 0,
         "special_char_replace": 0,
         "delete_line": False,
-        "stop_function": 0
+        "unhandled": 0
     }
     
     indices_to_delete = []
