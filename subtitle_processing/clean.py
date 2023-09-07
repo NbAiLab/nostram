@@ -534,10 +534,11 @@ def remove_text_program_duplicates(data: pd.DataFrame, max_duplicates):
     data['program_id_4chars'] = data['program_id'].str[:4]
 
     random_samples = (data.groupby(['program_id_4chars', 'vtt_folder', 'text'])
-                      .parallel_apply(select_random_samples, n=max_duplicates)
-                      .reset_index(drop=True))
-    random_samples = random_samples.drop("program_id_4chars", axis=1)
-    return random_samples
+                      .parallel_apply(select_random_samples, n=max_duplicates))
+    indices = random_samples.index.get_level_values(None)
+    data = data.drop("program_id_4chars", axis=1)
+    data.loc[~data.index.isin(indices), REMOVE_COL] = True
+    return data
 
 
 def main(args):
