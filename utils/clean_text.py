@@ -72,7 +72,7 @@ def clean_text(text, verbose=False):
         text = new_text
 
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "()[{}]ãú−-–çíÍ►™�şû"):
+    if any(char in text for char in "()[{}]ãú−-–çíÍ►™�şûłìð🙌💜💔😔❤|↑"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
