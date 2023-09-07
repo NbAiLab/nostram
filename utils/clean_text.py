@@ -48,12 +48,16 @@ def remove_tabs(text):
     return text.replace('\t', ' ')
 
 def stop_function(text):
-    illegal_chars = re.findall(r'[^a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!" ]', text)
+    if not text.strip():
+        return text
+    illegal_chars = re.findall(r'[^a-zA-ZæøåÆØÅ0-9,.@+?=&%$#§!"’òè ]', text)
     if illegal_chars:
         print(f"Unhandled character. Original text: {text}")
     return text
 
 def clean_text(text):
+    if not text.strip():
+        return text
     original_text = text
 
     funcs = [
