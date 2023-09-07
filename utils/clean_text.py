@@ -38,7 +38,7 @@ def clean_text(text, verbose=False):
             "ô": "ò",
             "«": "",
             "»": "",
-            "– ": ""
+            "–": ""
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
@@ -47,25 +47,12 @@ def clean_text(text, verbose=False):
         return text, stats
 
     original_text = text
-
-    # Delete line if it contains any bracket and a few other weird characters
-    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text:
-        stats["delete_line"] = True
-        if verbose: print(f"Line to be deleted - Original: {original_text}")
-        return text, stats
     
     # Unicode cleaning
     text = ftfy.fix_text(text)
     if text != original_text:
         stats["unicode_cleaning"] += 1
         if verbose: print(f"Unicode cleaning - Original: {original_text} - Result: {text}")
-
-    # Double spacing
-    new_text = ' '.join(text.split())
-    if new_text != text:
-        stats["double_spacing"] += 1
-        if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
-        text = new_text
     
     # Special character replacements
     new_text = special_char_replace(text)
@@ -81,6 +68,12 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
 
+    # Delete line if it contains any bracket and a few other weird characters
+    if "(" in text or ")" in text or "[" in text or "]" in text or "{" in text or "}" in text or "ã" in text or "ú" in text or "–" in text:
+        stats["delete_line"] = True
+        if verbose: print(f"Line to be deleted - Original: {original_text}")
+        return text, stats
+    
     # Illegal ellipses
     new_text = re.sub(r'\.\.\.', '…', text)
     if new_text != text:
@@ -95,6 +88,13 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Double punctuation - Original: {text} - Result: {new_text}")
         text = new_text
 
+    # Double spacing
+    new_text = ' '.join(text.split())
+    if new_text != text:
+        stats["double_spacing"] += 1
+        if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
+        text = new_text
+    
     # Remove line breaks
     new_text = text.replace("\n", " ").replace("\r", " ")
     if new_text != text:
