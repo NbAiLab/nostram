@@ -9,19 +9,7 @@ import unicodedata
 # Initialize pandarallel
 pandarallel.initialize()
 
-def is_printable(char):
-    category = unicodedata.category(char)
-    return not category.startswith("C")
 
-def contains_emoticon(text):
-    for char in text:
-        if unicodedata.category(char) == "So":
-            return True
-    return False
-
-def has_two_uppercase_words(text):
-    uppercase_words = re.findall(r'\b[A-Z]{3,}\b', text)
-    return len(uppercase_words) >= 2
 
 def clean_text(text, verbose=False):
     stats = {
@@ -39,7 +27,21 @@ def clean_text(text, verbose=False):
         "delete_uppercase_words": 0,
         "unhandled": 0
     }
-
+    
+    def is_printable(char):
+        category = unicodedata.category(char)
+        return not category.startswith("C")
+        
+    def contains_emoticon(text):
+        for char in text:
+            if unicodedata.category(char) == "So":
+                return True
+        return False
+    
+    def has_two_uppercase_words(text):
+        uppercase_words = re.findall(r'\b[A-Z]{3,}\b', text)
+        return len(uppercase_words) >= 2
+    
     def special_char_replace(text):
         replacements = {
             "ê": "é",
