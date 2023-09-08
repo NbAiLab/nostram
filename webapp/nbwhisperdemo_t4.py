@@ -6,6 +6,7 @@ import time
 from multiprocessing import Pool
 
 from jax_smi import initialise_tracking; initialise_tracking()
+from fastapi import FastAPI
 import gradio as gr
 import jax.numpy as jnp
 import numpy as np
@@ -38,22 +39,14 @@ titles = {
     "NbAiLab/nb-whisper-large-beta": "NB Whisper Large BETA ⚡️",
 }
 
-# Create the parser
-parser = argparse.ArgumentParser(description='Run the transcription script with a specific checkpoint.')
-parser.add_argument('--checkpoint', type=str, required=True,
-                    help='The checkpoint to use for the model. Must be one of: ' + ', '.join(valid_checkpoints.keys()))
-
-# Parse the arguments
-args = parser.parse_args()
-
 # Check if the checkpoint is valid
-if args.checkpoint not in valid_checkpoints:
+checkpoint = os.environ.get("CHECKPOINT", "NbAiLab/nb-whisper-medium-beta")
+if checkpoint not in valid_checkpoints:
     print(
         f"Error: The specified checkpoint is not supported. Please choose from: {', '.join(valid_checkpoints.keys())}")
     exit(1)
 
 # If the checkpoint is valid, set it, the corresponding batch size, and title
-checkpoint = args.checkpoint
 BATCH_SIZE = valid_checkpoints[checkpoint]
 title = titles[checkpoint]
 
@@ -136,7 +129,7 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
         return seconds
 
 
-if __name__ == "__main__":
+if True:  #__name__ == "__main__":
     pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
     stride_length_s = CHUNK_LENGTH_S / 6
     chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
@@ -312,6 +305,7 @@ if __name__ == "__main__":
         title=title,
         description=description,
         article=article,
+        api_name=None,
     )
 
     audio_chunked = gr.Interface(
@@ -330,6 +324,7 @@ if __name__ == "__main__":
         title=title,
         description=description,
         article=article,
+        api_name="transcribe",
     )
 
     youtube = gr.Interface(
@@ -355,6 +350,7 @@ if __name__ == "__main__":
         cache_examples=False,
         description=description,
         article=article,
+        api_name="transcribe_youtube",
     )
 
     demo = gr.Blocks()
@@ -364,4 +360,7 @@ if __name__ == "__main__":
         gr.TabbedInterface([microphone_chunked, audio_chunked, youtube], ["Microphone", "Audio File", "YouTube"])
 
     demo.queue(concurrency_count=1, max_size=5)
-    demo.launch(server_name="0.0.0.0", show_api=False)
+    app = gr.mount_gradio_app(FastAPI(), demo, path=os.environ.get("SERVER_PATH", '/demo/nb-whisper'))
+    # In a shell (pip install uvicorn)
+    # CHECKPOINT=NbAiLab/... uvicorn nbwhisper_t4:app
+
