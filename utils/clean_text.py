@@ -60,6 +60,9 @@ def clean_text(text, verbose=False):
             "◊": "",
             "⅔" : "2/3",
             "⅛" : "1/8",
+            "⅕" : "1/5",
+            "‰" : "promille"
+            
             
             
         }
@@ -106,7 +109,7 @@ def clean_text(text, verbose=False):
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ãú−-–—‐‒íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ€^Œ¢Ǥ"):
+    if any(char in text for char in "~()[{}]ãú−-–—‐‒íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ€^Œ¢ǤŚ‼"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
