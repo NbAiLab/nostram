@@ -19,7 +19,8 @@ import argparse
 import ftfy
 # from pydub import AudioSegment
 from pandarallel import pandarallel
-from utils import detect_lang
+from util import detect_lang
+from utils.clean_text import clean_text
 
 REMOVE_COL = "**REMOVE**"
 pandarallel.initialize(use_memory_fs=False)
@@ -541,6 +542,12 @@ def remove_text_program_duplicates(data: pd.DataFrame, max_duplicates):
     return data
 
 
+def sanitize(row):
+    new_text, stats = clean_text(row.text)
+    stats["text"] = new_text
+    return pd.Series(stats)
+
+
 def main(args):
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_colwidth", None)
@@ -731,6 +738,12 @@ def main(args):
         # data = data[~cond]
         data.loc[cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out "CPossible". ({exec_time()}) {show_length(data)}')
+
+    stats = data.parallel_apply(sanitize, axis=1)
+    data[REMOVE_COL] = stats["delete_line"]
+    logger.debug(f"\n\n*** Full stats for sanitizing: \n{left_align(stats)}")
+    logger.info(f"*** Sanitized text ({exec_time()}) {show_length(data)}")
+    logger.info(f"*** Total stats: {stats.drop('text', axis=1).sum().to_dict()}")
 
     data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(adjust_overlapping_subtitles)
     data = data.reset_index(drop=True)
