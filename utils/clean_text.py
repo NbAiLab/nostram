@@ -62,7 +62,17 @@ def clean_text(text, verbose=False):
             "⅔" : "2/3",
             "⅛" : "1/8",
             "⅕" : "1/5",
-            "‰" : "promille" 
+            "‰" : "promille",
+            "1 klasse" : "1. klasse",
+            "2 klasse" : "2. klasse",
+            "3 klasse" : "3. klasse",
+            "4 klasse" : "4. klasse",
+            "5 klasse" : "5. klasse",
+            "6 klasse" : "6. klasse",
+            "7 klasse" : "7. klasse",
+            "8 klasse" : "8. klasse",
+            "9 klasse" : "9. klasse",
+            "10 klasse" : "10. klasse"
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
