@@ -63,10 +63,7 @@ def clean_text(text, verbose=False):
             "⅔" : "2/3",
             "⅛" : "1/8",
             "⅕" : "1/5",
-            "‰" : "promille"
-            
-            
-            
+            "‰" : "promille" 
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
