@@ -103,16 +103,14 @@ def clean_text(text, verbose=False):
         text = new_text
         
     # Remove dashes if they start the line
-    def process_text(text, stats, verbose=False):
-        new_text = re.sub(r"^(?:[-−–—‐‒‑˗] )", "", text)
-    
-        if new_text != text:
-            stats["remove_dashes"] += 1
-            if verbose: 
-                print(f"Remove dashes - Original: {text} - Result: {new_text}")
-            text = new_text
+    new_text = re.sub(r"^(?:[-−–—‐‒‑˗] )", "", text)
+
+    if new_text != text:
+        stats["remove_dashes"] += 1
+        if verbose: 
+            print(f"Remove dashes - Original: {text} - Result: {new_text}")
+        text = new_text
         
-    return text
     new_text = re.sub(r"^(?:- |— )", "", text)
     if new_text != text:
         stats["remove_dashes"] += 1
