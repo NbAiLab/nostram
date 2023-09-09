@@ -88,6 +88,13 @@ def clean_text(text, verbose=False):
         stats["unicode_cleaning"] += 1
         if verbose: print(f"Unicode cleaning - Original: {original_text} - Result: {text}")
     
+    # Fix trim and double spacing
+    new_text = ' '.join(text.split())
+    if new_text != text:
+        stats["double_spacing"] += 1
+        if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
+        text = new_text
+    
     # Special character replacements
     new_text = special_char_replace(text)
     if new_text != text:
@@ -95,7 +102,17 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Special character replacement - Original: {text} - Result: {new_text}")
         text = new_text
         
-    # Remove Dashes
+    # Remove dashes if they start the line
+    def process_text(text, stats, verbose=False):
+        new_text = re.sub(r"^(?:[-−–—‐‒‑˗] )", "", text)
+    
+        if new_text != text:
+            stats["remove_dashes"] += 1
+            if verbose: 
+                print(f"Remove dashes - Original: {text} - Result: {new_text}")
+            text = new_text
+        
+    return text
     new_text = re.sub(r"^(?:- |— )", "", text)
     if new_text != text:
         stats["remove_dashes"] += 1
@@ -143,7 +160,7 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Double punctuation - Original: {text} - Result: {new_text}")
         text = new_text
 
-    # Double spacing
+    # Repeat removing of double spacing just in case
     new_text = ' '.join(text.split())
     if new_text != text:
         stats["double_spacing"] += 1
