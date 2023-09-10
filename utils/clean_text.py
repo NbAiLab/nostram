@@ -86,7 +86,8 @@ def clean_text(text, verbose=False):
             start, end = match.span()
             num = text[start:end]
             formatted_num = num 
-    
+            print(formatted_num)
+            
             if ',' in num:  # Don't touch numbers with commas (decimal numbers)
                 formatted_num = num
             elif len(num) == 4:  # Four-digit numbers should remain unchanged
