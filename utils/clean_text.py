@@ -99,10 +99,11 @@ def clean_text(text, verbose=False):
         formatted_text += text[last_index:]
         
         return formatted_text
-        if "nocaptions" in text:
-            return text, stats
-    
-        original_text = text
+        
+    if "nocaptions" in text:
+        return text, stats
+
+    original_text = text
     
     # Unicode cleaning
     text = ftfy.fix_text(text)
