@@ -85,6 +85,7 @@ def clean_text(text, verbose=False):
         for match in re.finditer(r'\b\d+\b', text):
             start, end = match.span()
             num = text[start:end]
+            formatted_num = num 
     
             if ',' in num:  # Don't touch numbers with commas (decimal numbers)
                 formatted_num = num
