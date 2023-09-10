@@ -85,14 +85,13 @@ def clean_text(text, verbose=False):
         for match in re.finditer(r'\b\d+\b', text):
             start, end = match.span()
             num = text[start:end]
-            formatted_num = num
     
             if ',' in num:  # Don't touch numbers with commas (decimal numbers)
                 formatted_num = num
             elif len(num) == 4:  # Four-digit numbers should remain unchanged
                 formatted_num = num
             elif len(num) > 4:  # For numbers with 5 or more digits, format with ' ' as separator
-                formatted_num = '{: }'.format(int(num)).replace(',', ' ')
+                formatted_num = '{:}'.format(int(num)).replace(',', ' ')
     
             formatted_text += text[last_index:start] + formatted_num
             last_index = end
@@ -100,11 +99,10 @@ def clean_text(text, verbose=False):
         formatted_text += text[last_index:]
         
         return formatted_text
+        if "nocaptions" in text:
+            return text, stats
     
-    if "nocaptions" in text:
-        return text, stats
-
-    original_text = text
+        original_text = text
     
     # Unicode cleaning
     text = ftfy.fix_text(text)
