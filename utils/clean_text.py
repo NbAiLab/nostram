@@ -25,6 +25,7 @@ def clean_text(text, verbose=False):
         "remove_non_printable": 0,
         "emoticons": 0,
         "delete_uppercase_words": 0,
+        "format_numbers": 0,
         "unhandled": 0
     }
     
@@ -245,6 +246,7 @@ if __name__ == "__main__":
         "remove_non_printable": 0,
         "emoticons": 0,
         "delete_uppercase_words": 0,
+        "format_numbers": 0,
         "unhandled": 0
     }
     
