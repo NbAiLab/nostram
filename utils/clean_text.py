@@ -77,6 +77,28 @@ def clean_text(text, verbose=False):
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
 
+        def format_numbers(text):
+            formatted_text = ""
+            last_index = 0
+        
+            for match in re.finditer(r'\b\d+\b', text):
+                start, end = match.span()
+                num = text[start:end]
+        
+                if ',' in num:  # Don't touch numbers with commas (decimal numbers)
+                    formatted_num = num
+                elif len(num) == 4:  # Four-digit numbers should remain unchanged
+                    formatted_num = num
+                elif len(num) > 4:  # For numbers with 5 or more digits, format with ' ' as separator
+                    formatted_num = '{: }'.format(int(num)).replace(',', ' ')
+        
+                formatted_text += text[last_index:start] + formatted_num
+                last_index = end
+        
+            formatted_text += text[last_index:]
+            
+            return formatted_text
+    
     if "nocaptions" in text:
         return text, stats
 
@@ -177,7 +199,14 @@ def clean_text(text, verbose=False):
         stats["remove_tabs"] += 1
         if verbose: print(f"Remove tabs - Original: {text} - Result: {new_text}")
         text = new_text
-
+    
+    # Reformat numbers
+    new_text = format_numbers(text)
+    if new_text != text:
+        stats["format_numbers"] += 1
+        print(f"Numbers formatted - Original: {text} - Result: {new_text}")
+        text = new_text
+        
     # Unhandled
     allowed_chars = '½¼¾²³ñëüúäöÖÜÄ»«abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890!"#$%&\'()*+,./:;<=>?¿@`’òÒàÀéÉ½¼¾ÒæøåÆØÅ…°§ÞßÚÎšŠčžŋÇçŽùÑČųµėđÿŧÔţË÷õĐÏŊĐõ'
     unhandled_char = next((c for c in text if c not in allowed_chars), None)
