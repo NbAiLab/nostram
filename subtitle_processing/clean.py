@@ -536,23 +536,18 @@ def select_random_remove_samples(sub_df, n):
 
 
 def remove_text_program_duplicates(data: pd.DataFrame, max_duplicates):
-    print("Adding 4char col" + str(time.time()))
     data['program_id_4chars'] = data['program_id'].str[:4]
 
-    print("Grouping samples " + str(time.time()))
     grouped = data.groupby(['program_id_4chars', 'vtt_folder', 'text'])
-    print("Selecting random samples " + str(time.time()))
+
     random_indices = grouped.parallel_apply(select_random_remove_samples, n=max_duplicates)
     random_indices = random_indices.explode().values
     random_indices = random_indices[~np.isnan(random_indices.astype(float))]
-    # print("Getting indices")
-    # indices = random_samples.index.get_level_values(None)
-    print("Dropping 4char col " + str(time.time()))
+
     data = data.drop("program_id_4chars", axis=1)
-    print("Setting remove col " + str(time.time()))
-    breakpoint()
+
     data.loc[random_indices, REMOVE_COL] = True
-    print("Done " + str(time.time()))
+
     return data
 
 
