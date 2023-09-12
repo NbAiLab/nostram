@@ -25,6 +25,7 @@ def clean_text(text, verbose=False):
         "remove_non_printable": 0,
         "emoticons": 0,
         "delete_uppercase_words": 0,
+        "standardize_dashes": 0,
         "unhandled": 0
     }
     
@@ -76,7 +77,15 @@ def clean_text(text, verbose=False):
         }
         new_text = "".join(replacements.get(c, c) for c in text)
         return new_text
-
+        
+    def standardize_dashes(text):
+        hyphen_like = '‐‑˗'
+        endash_like = '−–—‒'
+    
+        text = re.sub(f'[{hyphen_like}]', '-', text)  # replace with hyphen
+        text = re.sub(f'[{endash_like}]', '–', text)  # replace with en-dash
+    
+        return text
         
     if "nocaptions" in text:
         return text, stats
@@ -94,6 +103,14 @@ def clean_text(text, verbose=False):
     if new_text != text:
         stats["double_spacing"] += 1
         if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
+        text = new_text
+
+    # Standardise slashes
+    new_text = standardize_dashes(text)
+    if new_text != text:
+        stats["standardize_dashes"] += 1
+        if not verbose: 
+            print(f"Dashes standardized - Original: {text} - Result: {new_text}")
         text = new_text
     
     # Special character replacements
@@ -217,6 +234,7 @@ if __name__ == "__main__":
         "remove_non_printable": 0,
         "emoticons": 0,
         "delete_uppercase_words": 0,
+        "standardize_dashes": 0,
         "unhandled": 0
     }
     
