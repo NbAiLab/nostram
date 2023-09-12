@@ -21,7 +21,7 @@ import ftfy
 # from pydub import AudioSegment
 from pandarallel import pandarallel
 from util import detect_lang
-os.chdir('../')
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.clean_text import clean_text
 
 
