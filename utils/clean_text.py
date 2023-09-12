@@ -125,7 +125,7 @@ def clean_text(text, verbose=False):
     new_text = re.sub(r"(^|\. |, |: )[-–]\s", "\\1", text)
     if new_text != text:
         stats["remove_dashes"] += 1
-        if not verbose:
+        if verbose:
             print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
 
