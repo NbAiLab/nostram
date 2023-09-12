@@ -1,6 +1,7 @@
 ######################################################################
 # Cleans up subtitle jsonl files
 #####################################################################
+
 import functools
 import os
 import sys
@@ -20,6 +21,7 @@ import ftfy
 # from pydub import AudioSegment
 from pandarallel import pandarallel
 from util import detect_lang
+os.chdir('../')
 from utils.clean_text import clean_text
 
 
