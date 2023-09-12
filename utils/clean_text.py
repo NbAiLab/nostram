@@ -128,7 +128,6 @@ def clean_text(text, verbose=False):
         if not verbose:
             print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
-    return text, stats
 
 
     # Delete line if it contains any emoticon
