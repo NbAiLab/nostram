@@ -119,20 +119,14 @@ def clean_text(text, verbose=False):
         stats["special_char_replace"] += 1
         if verbose: print(f"Special character replacement - Original: {text} - Result: {new_text}")
         text = new_text
-        
-    # Remove dashes if they start the line
-    new_text = re.sub(r"^(?:[-−–—‐‒‑˗] )", "", text)
 
+    # Remove dashes if they start the line
+    new_text = re.sub(r"^(?:- |– )", "", text)
     if new_text != text:
         stats["remove_dashes"] += 1
         if verbose: print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
-        
-    new_text = re.sub(r"^(?:- |— )", "", text)
-    if new_text != text:
-        stats["remove_dashes"] += 1
-        if verbose: print(f"Remove dashes - Original: {text} - Result: {new_text}")
-        text = new_text
+
 
     # Delete line if it contains any emoticon
     if contains_emoticon(text):
