@@ -750,13 +750,13 @@ def main(args):
         data.loc[cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out "CPossible". ({exec_time()}) {show_length(data)}')
 
-    print("test")
+
     stats = data.parallel_apply(sanitize, axis=1)
     data[REMOVE_COL] = stats["delete_line"]
-    #logger.debug(f"\n\n*** Full stats for sanitizing: \n{left_align(stats)}")
+    logger.debug(f"\n\n*** Full stats for sanitizing: \n{left_align(stats)}")
     logger.info(f"*** Sanitized text ({exec_time()}) {show_length(data)}")
     logger.info(f"*** Total stats: {stats.drop('text', axis=1).sum().to_dict()}")
-    print(test2)
+
     
     data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(adjust_overlapping_subtitles)
     data = data.reset_index(drop=True)
