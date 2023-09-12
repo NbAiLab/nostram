@@ -121,8 +121,9 @@ def clean_text(text, verbose=False):
         text = new_text
     
     
-    # Remove dashes and en-dashes that appear at the start of a line or after '. ', ': ', ', '
-    new_text = re.sub(r"(^|\. |, |: )[-–]\s", "\\1", text)
+    # Find and replace dashes and en-dashes at the start of text, or after '. ', ': ', ', ', '… ', or '? '
+    new_text = re.sub(r"(^|\.\s|,\s|:\s|\…\s|\?\s)([-–]\s)", "\\1", text)
+
     if new_text != text:
         stats["remove_dashes"] += 1
         if verbose:
