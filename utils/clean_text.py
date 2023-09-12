@@ -105,7 +105,7 @@ def clean_text(text, verbose=False):
         if verbose: print(f"Double spacing - Original: {text} - Result: {new_text}")
         text = new_text
 
-    # Standardise slashes
+    # Standardise dashes
     new_text = standardize_dashes(text)
     if new_text != text:
         stats["standardize_dashes"] += 1
