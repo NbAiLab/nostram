@@ -1,8 +1,10 @@
 import argparse
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 import torch
 import torchaudio
+import tqdm
 from torch.utils.data import IterableDataset
 from transformers import pipeline
 
@@ -16,7 +18,7 @@ class AudioDataset(IterableDataset):
         self.audio_files = audio_files
 
     def __iter__(self):
-        for audio_file in self.audio_files:
+        def load(audio_file):
             # Load the audio file
             audio, orig_freq = torchaudio.load(audio_file)
 
@@ -27,7 +29,10 @@ class AudioDataset(IterableDataset):
             audio = audio.mean(dim=0)
 
             # Yield the processed audio
-            yield audio.numpy()
+            return audio.numpy()
+
+        with ThreadPoolExecutor() as ex:
+            yield from ex.map(load, self.audio_files)
 
 
 def main(audio_folder, output_file):
@@ -36,20 +41,21 @@ def main(audio_folder, output_file):
 
     dataset = AudioDataset(files)
 
+    it = tqdm.tqdm(files)
     with open(output_file, "w") as writer:
         writer.write("file,lang,confidence\n")
 
-        predictions = classifier(dataset, chunk_length_s=30, stride_length_s=5, batch_size=64)
+        predictions = classifier(dataset, chunk_length_s=30, stride_length_s=5, batch_size=16)
 
-        for file, detected_langs in zip(files, predictions):
-            print(file, end="")
+        for file, detected_langs in zip(it, predictions):
             detected_lang = max(detected_langs, key=lambda x: x["score"])
             confidence = detected_lang["score"]
             label = detected_lang["label"]
-            print(",", detected_langs)
 
-            writer.write(f"{os.path.basename(file)},{label},{confidence}\n")
+            fname = os.path.basename(file)
+            writer.write(f"{fname},{label},{confidence:.6f}\n")
             writer.flush()
+            it.set_postfix_str(f"{fname}, {label}, {confidence:.6f}")
 
 
 if __name__ == '__main__':

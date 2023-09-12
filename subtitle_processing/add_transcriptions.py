@@ -231,8 +231,6 @@ def main(args):
     translate_df = df[is_translate]
     df = df[is_transcribe]
 
-    assert (is_silence | is_translate | is_transcribe).all()
-
     if args.audio_folder is not None and len(silence_df) > 0:
         # silent_indices = run_vad(df, args.audio_folder)
         # print(f"Silent samples in transcribe: {len(silent_indices)}/{len(df)}")
