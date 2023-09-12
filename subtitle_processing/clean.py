@@ -20,7 +20,7 @@ import ftfy
 # from pydub import AudioSegment
 from pandarallel import pandarallel
 from util import detect_lang
-from ..tools.clean_text import clean_text
+from ..util.clean_text import clean_text
 
 
 REMOVE_COL = "**REMOVE**"
