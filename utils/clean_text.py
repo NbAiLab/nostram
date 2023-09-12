@@ -119,13 +119,16 @@ def clean_text(text, verbose=False):
         stats["special_char_replace"] += 1
         if verbose: print(f"Special character replacement - Original: {text} - Result: {new_text}")
         text = new_text
-
-    # Remove dashes if they start the line
-    new_text = re.sub(r"^(?:- |– )", "", text)
+    
+    
+    # Replace dashes and en-dashes that appear at the start of a line or after '. ', ': ', ', '
+    new_text = re.sub(r"(^|- |\.\s–\s|,\s–\s|:\s–\s)", "\\1", text)
     if new_text != text:
         stats["remove_dashes"] += 1
-        if verbose: print(f"Remove dashes - Original: {text} - Result: {new_text}")
+        if verbose:
+            print(f"Remove dashes - Original: {text} - Result: {new_text}")
         text = new_text
+    return text, stats
 
 
     # Delete line if it contains any emoticon
@@ -143,7 +146,7 @@ def clean_text(text, verbose=False):
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ã−—‐‒íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ€^Œ¢ǤŚ‼¤"):
+    if any(char in text for char in "~()[{}]ã−—‐‒˝íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŦŁÕ€^Œ¢ǤŚ‼¤"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
