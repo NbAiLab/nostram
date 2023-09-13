@@ -84,7 +84,7 @@ The following command creates all the necssary folders if they do not exist.
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
-mkdir -p "$base_dir"/{clean_3/{nrk_tv/{clean_3a/{standard,short,very_short},split_3b,mp3},silence/{copy_3a,clean_3b},stortinget,fleurs,nst,stortinget,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
+mkdir -p "$base_dir"/{clean_3/{nrk_tv/{standard,short,both,mp3},silence,stortinget,fleurs,nst,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
 
 
 ```
@@ -93,15 +93,11 @@ This should create the following structure:
 $base_dir/
 |-- clean_3/
 |   |-- nrk_tv/
-|   |   |-- clean_3a
-|   |   |   |-- standard
-|   |   |   |-- short
-|   |   |   |-- very_short
-|   |   |-- split_3b
+|   |   |-- standard
+|   |   |-- short
+|   |   |-- both
 |   |   |-- mp3
-|   |-- silence/
-|   |   |-- copy_3a
-|   |   |-- clean_3b
+|   |-- silence
 |   |-- stortinget
 |   |-- fleurs
 |   |-- nst
@@ -200,10 +196,10 @@ python $program_dir/clean.py --input_file $archive_file --output_folder $base_di
 
 
 # Concatenate files and remove duplicates (can be extended with extra files)
-cat $base_dir/clean_3/nrk_tv/clean_3a/standard/nrk.json $base_dir/clean_3/nrk_tv/clean_3a/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/split_3b/nrk.json
+cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/both/nrk.json
 
 # Create the audio files
-cat $base_dir/clean_3/nrk_tv/audio/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
+cat $base_dir/clean_3/nrk_tv/mp3/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}'
 ```
 
 > JSON should be validated
