@@ -156,9 +156,17 @@ Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpu
 ### Stortinget, Fleurs and NST
 All data are directly copied from ```ncc_speech_corpus/json_2```. Just some minor renaming and splitting needs to be done.
 ```bash
+clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_test.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_eval.json --output_file $base_dir/clean_3/stortinget/stortinget_validation.json
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_train.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json
+
+
+
 cd $base_dir
 # Stortinget
-cp ../ncc_speech_corpus/json_2/stortinget_*.json clean_3/stortinget/
+# cp ../ncc_speech_corpus/json_2/stortinget_*.json clean_3/stortinget/
 ## Rename Stortinget validation file
 mv clean_3/stortinget/stortinget_eval.json clean_3/stortinget/stortinget_validation.json
 # Fleurs
@@ -177,7 +185,7 @@ sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.
 # Set working dirs
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/subtitle_processing";
 audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
-archive_file="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/nrk.json";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/";
 
 # First run a text_clean since we are using the input for creating timestamps
 # Check this
@@ -191,8 +199,8 @@ echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\
 # Clean the files - Uncomment for fast test files
 # python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/clean_3a/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
 # python $program_dir/clean.py --input_file $base_dir/tull/nrk.json --output_folder $base_dir/clean_3/nrk_tv/clean_3a/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
-python $program_dir/clean.py --input_file $archive_file --output_folder $base_dir/clean_3/nrk_tv/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
-python $program_dir/clean.py --input_file $archive_file --output_folder $base_dir/clean_3/nrk_tv/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
+python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/
 
 
 # Concatenate files and remove duplicates (can be extended with extra files)
