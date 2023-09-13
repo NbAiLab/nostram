@@ -152,10 +152,19 @@ $base_dir/
 Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpus``` and ```ncc_speech_corpus2```.
 
 # clean_3
+### Fleurs
+Fleurs data is copied unmodified from ```ncc_speech_corpus/json_2```. The clean script would have changed several of the transcripts. However, it is kept unchanged here to be able to follow the development over time.
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
+clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
 
-### Stortinget, Fleurs and NST
-All data are directly copied from ```ncc_speech_corpus/json_2```. Just some minor renaming and splitting needs to be done.
+cp $archive_dir/norwegian_fleurs-validation.json $base_dir/clean_3/fleurs/
+cp $archive_dir/norwegian_fleurs-test.json $base_dir/clean_3/fleurs/
+
+### Stortinget and NST
+The ```clean_text-script``` is used to copy data from ```ncc_speech_corpus/json_2```. Just some minor renaming and splitting needs to be done.
 ```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
 clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
 python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_test.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json
@@ -170,8 +179,7 @@ cd $base_dir
 ## Rename Stortinget validation file
 mv clean_3/stortinget/stortinget_eval.json clean_3/stortinget/stortinget_validation.json
 # Fleurs
-cp ../ncc_speech_corpus/json_2/norwegian_fleurs-validation.json clean_3/fleurs/
-cp ../ncc_speech_corpus/json_2/norwegian_fleurs-test.json clean_3/fleurs/
+
 # NST
 cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
 cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/
