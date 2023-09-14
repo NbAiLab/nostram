@@ -125,10 +125,10 @@ $base_dir/
 |   |   |   |-- audio_books
 |   |   |-- nrk_tv
 |   |   |   |-- train
-|   |   |-- nrk_tv_translate
+|   |   |-- nrk_tv_no
 |   |   |   |-- test
 |   |   |   |-- validation
-|   |   |-- nrk_tv_transcribe
+|   |   |-- nrk_tv_nn
 |   |   |   |-- test
 |   |   |   |-- validation
 |   |   |-- silence
@@ -137,6 +137,10 @@ $base_dir/
 |   |   |   |-- validation
 |   |   |-- stortinget
 |   |   |   |-- train
+|   |   |-- stortinget_no
+|   |   |   |-- test
+|   |   |   |-- validation
+|   |   |-- stortinget_nn
 |   |   |   |-- test
 |   |   |   |-- validation
 |   |   |-- fleurs
@@ -207,6 +211,16 @@ python $clean_text_dir/clean_text.py --input_file $archive_dir/nst/train/nst_tra
 sed -n '1,1500p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_test.json;
 sed -n '1501,3000p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_validation.json;
 ```
+### SILENCE
+This can just be copied from ```ncc_speech_corpus2/transcribed_json_3```. No reason to clean.
+```bash
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus2/clean_json_3";
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+
+cp $archive_dir/nrk/nrk_tv_silence.json $base_dir/clean_3/silence/silence.json
+
+```
+
 
 ### NRK TV
 ```bash
@@ -233,7 +247,6 @@ cat $base_dir/clean_3/nrk_tv/mp3/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c
 
 ### Validate all JSON files
 ```bash
-# Set working dirs
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
 eval_samples_nr=1000
@@ -260,23 +273,36 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/au
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/test/audio_books_no_test.json;
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_nn_validation.json;
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_no_validation.json;
+#Silence
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/silence/silence.json;
 
 
 ```
 
 # inference_4
+### Silence
+Copy files, and make the split at the same time
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+shuf "$base_dir/clean_3/silence/silence.json" | awk -v base="$base_dir" 'NR <= 1000 {print > base "/inference_4/inference_dataset/silence/test/silence_test.json"} NR > 1000 && NR <= 2000 {print > base "/inference_4/inference_dataset/silence/validation/silence_validation.json"} NR > 2000 {print > base "/inference_4/inference_dataset/silence/train/silence_train.json"}'
+```
+
 ### Stortinget, Fleurs and NST
-No processing is needed here. Just copy the correct files into a single directory. Skip duplications.
+No processing is needed here. Just copy the correct files into a single directory. 
 
 ```bash
-cd $base_dir
-cp clean_3/stortinget/*.json inference_4/inference_dataset/
-cp clean_3/fleurs/norwegian_fleurs-test.json inference_4/inference_dataset/norwegian_fleurs_test.json
-cp clean_3/fleurs/norwegian_fleurs-validation.json inference_4/inference_dataset/norwegian_fleurs_validation.json
-cp clean_3/fleurs/norwegian_fleurs-train.json inference_4/inference_dataset/norwegian_fleurs_train.json
-cp clean_3/nst/nst_train.json inference_4/inference_dataset/
-cp clean_3/nst/nst_test.json inference_4/inference_dataset/
-cp clean_3/nst/nst_validation.json inference_4/inference_dataset/
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+#Stortinget
+cp $base_dir/clean_3/stortinget/stortinget_train.json $base_dir/inference_4/inference_dataset/stortinget/train/;
+cp $base_dir/clean_3/stortinget/stortinget_test.json $base_dir/inference_4/inference_dataset/stortinget/test/;
+cp $base_dir/clean_3/stortinget/stortinget_validation.json $base_dir/inference_4/inference_dataset/stortinget/validation/;
+#Fleurs
+cp $base_dir/clean_3/fleurs/norwegian_fleurs-test.json $base_dir/inference_4/inference_dataset/fleurs/test/;
+cp $base_dir/clean_3/fleurs/norwegian_fleurs-validation.json $base_dir/inference_4/inference_dataset/fleurs/validation/;
+#NST
+cp $base_dir/clean_3/nst/nst_train.json $base_dir/inference_4/inference_dataset/nst/train/
+cp $base_dir/clean_3/nst/nst_test.json $base_dir/inference_4/inference_dataset/nst/test/
+cp $base_dir/clean_3/nst/nst_validation.json $base_dir/inference_4/inference_dataset/nst/validation/
 ```
 > JSON and mp3 should be validated
 
