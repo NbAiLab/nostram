@@ -58,12 +58,12 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | inference_4/inference_dataset/fleurs/validation | norwegian_fleurs-validation.json |        163 |
 | inference_4/inference_dataset/nrk_tv | <empty> | <empty>    |
 | inference_4/inference_dataset/nrk_tv/{train} | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_transcribe | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_transcribe/test | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_transcribe/validation | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_translate | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_translate/test | <empty> | <empty>    |
-| inference_4/inference_dataset/nrk_tv_translate/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_nn | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_nn/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_nn/validation | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_no | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_no/test | <empty> | <empty>    |
+| inference_4/inference_dataset/nrk_tv_no/validation | <empty> | <empty>    |
 | inference_4/inference_dataset/nst | <empty> | <empty>    |
 | inference_4/inference_dataset/nst/test | nst_test.json |      1,500 |
 | inference_4/inference_dataset/nst/train | nst_train.json |    144,546 |
@@ -73,12 +73,13 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | inference_4/inference_dataset/silence/train | silence_train.json |    107,019 |
 | inference_4/inference_dataset/silence/validation | silence_validation.json |      1,000 |
 | inference_4/inference_dataset/stortinget | <empty> | <empty>    |
-| inference_4/inference_dataset/stortinget/test | stortinget_test.json |      1,520 |
 | inference_4/inference_dataset/stortinget/train | stortinget_train.json |    580,827 |
-| inference_4/inference_dataset/stortinget/validation | stortinget_validation.json |      1,714 |
+| inference_4/inference_dataset/stortinget_no | <empty> | <empty>    |
+| inference_4/inference_dataset/stortinget_no/test | stortinget_no_test.json |      1,402 |
+| inference_4/inference_dataset/stortinget_no/validation | stortinget_validation_test.json |      1,545 |
 | inference_4/inference_result | <empty> | <empty>    |
 | inference_4/processed | <empty> | <empty>    |
-| **Total** |      | ** 1,989,676** |
+| **Total** |      | **1,989,389** |
 
 ### Directory: translation_5
 | Directory | File | Lines     |
