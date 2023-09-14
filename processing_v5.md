@@ -10,29 +10,39 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | --------- | ---- | ---------:|
 | clean_3 | <empty> | <empty>    |
 | clean_3/audio_books | <empty> | <empty>    |
+| clean_3/audio_books/test | audio_books_no_test.json |      1,500 |
+| clean_3/audio_books/test | audio_books_nn_test.json |      1,500 |
+| clean_3/audio_books/train | audio_books_no_train.json |  1,128,637 |
+| clean_3/audio_books/train | audio_books_nn_train.json |     12,208 |
+| clean_3/audio_books/validation | audio_books_nn_validation.json |      1,500 |
+| clean_3/audio_books/validation | audio_books_no_validation.json |      1,500 |
 | clean_3/fleurs | norwegian_fleurs-test.json |        357 |
 | clean_3/fleurs | norwegian_fleurs-validation.json |        163 |
 | clean_3/nrk_tv | <empty> | <empty>    |
-| clean_3/nrk_tv/clean_3a | <empty> | <empty>    |
-| clean_3/nrk_tv/clean_3a/short | nrk.json |        633 |
-| clean_3/nrk_tv/clean_3a/short | config.json |         26 |
-| clean_3/nrk_tv/clean_3a/short/log | <empty> | <empty>    |
-| clean_3/nrk_tv/clean_3a/standard | nrk.json |        418 |
-| clean_3/nrk_tv/clean_3a/standard | config.json |         26 |
-| clean_3/nrk_tv/clean_3a/standard/log | <empty> | <empty>    |
-| clean_3/nrk_tv/clean_3a/very_short | <empty> | <empty>    |
-| clean_3/nrk_tv/split_3b | nrk.json |        929 |
-| clean_3/nst | nst_train.json |    299,114 |
-| clean_3/nst | nst_largetest.json |     63,088 |
+| clean_3/nrk_tv/both | <empty> | <empty>    |
+| clean_3/nrk_tv/short | config.json |         26 |
+| clean_3/nrk_tv/short/log | <empty> | <empty>    |
+| clean_3/nrk_tv/standard | config.json |         26 |
+| clean_3/nrk_tv/standard/log | <empty> | <empty>    |
+| clean_3/nrk_tv_old | <empty> | <empty>    |
+| clean_3/nrk_tv_old/both | nrk.json |          0 |
+| clean_3/nrk_tv_old/short | nrk.json |  7,737,160 |
+| clean_3/nrk_tv_old/short | config.json |         26 |
+| clean_3/nrk_tv_old/short/log | <empty> | <empty>    |
+| clean_3/nrk_tv_old/standard | nrk.json |  4,074,362 |
+| clean_3/nrk_tv_old/standard | config.json |         26 |
+| clean_3/nrk_tv_old/standard/log | <empty> | <empty>    |
+| clean_3/nst | nst_train.json |    144,546 |
+| clean_3/nst | nst_largetest.json |     31,332 |
 | clean_3/nst | nst_validation.json |      1,500 |
 | clean_3/nst | nst_test.json |      1,500 |
 | clean_3/silence | <empty> | <empty>    |
 | clean_3/silence/clean_3b | <empty> | <empty>    |
 | clean_3/silence/copy_3a | <empty> | <empty>    |
-| clean_3/stortinget | stortinget_train.json |    720,870 |
-| clean_3/stortinget | stortinget_test.json |      1,872 |
-| clean_3/stortinget | stortinget_validation.json |      2,041 |
-| **Total** |      | ** 1,092,537** |
+| clean_3/stortinget | stortinget_train.json |    580,827 |
+| clean_3/stortinget | stortinget_test.json |      1,520 |
+| clean_3/stortinget | stortinget_validation.json |      1,714 |
+| **Total** |      | **13,721,930** |
 
 ### Directory: inference_4
 | Directory | File | Lines     |
@@ -41,7 +51,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | inference_4/inference_dataset | <empty> | <empty>    |
 | inference_4/inference_dataset/audio_books | <empty> | <empty>    |
 | inference_4/inference_dataset/audio_books/test | audio_books_test.json |      1,500 |
-| inference_4/inference_dataset/audio_books/train | audio_books_train.json |  1,200,076 |
+| inference_4/inference_dataset/audio_books/train | audio_books_train.json |  1,145,530 |
 | inference_4/inference_dataset/audio_books/validation | audio_books_validation.json |      1,500 |
 | inference_4/inference_dataset/fleurs | <empty> | <empty>    |
 | inference_4/inference_dataset/fleurs/test | <empty> | <empty>    |
@@ -68,7 +78,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | inference_4/inference_dataset/stortinget/validation | <empty> | <empty>    |
 | inference_4/inference_result | <empty> | <empty>    |
 | inference_4/processed | <empty> | <empty>    |
-| **Total** |      | ** 1,203,076** |
+| **Total** |      | ** 1,148,530** |
 
 ### Directory: translation_5
 | Directory | File | Lines     |
@@ -77,6 +87,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | translation_5/processed | <empty> | <empty>    |
 | translation_5/translation_files | <empty> | <empty>    |
 | **Total** |      | **         0** |
+
 
 
 # Copy Structure
