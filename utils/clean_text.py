@@ -146,7 +146,7 @@ def clean_text(text, verbose=False):
         return text, stats
     
     # Delete line if it contains any bracket and a few other weird characters
-    if any(char in text for char in "~()[{}]ã−—‐‒˝íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŁÕ€^Œ¢ǤŚ‼¤"):
+    if any(char in text for char in "~()[{}]ã−—‐‒˝íÍ►™�şûłìð❤|↑·þ☠î›˛†Şİćğвïâý√ˇœ¯←˘ı¨Б¸˙˜С‹țș˚⅓_ūēřū¡£ŁÕ€^Œ¢ǤŚ‼¤Â"):
         stats["delete_line"] = True
         if verbose: print(f"Line to be deleted - Original: {original_text}")
         return text, stats
