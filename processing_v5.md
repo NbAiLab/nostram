@@ -166,15 +166,19 @@ cp $archive_dir/norwegian_fleurs-test.json $base_dir/clean_3/fleurs/;
 ```
 
 ### Stortinget
-The ```clean_text-script``` is used to copy data from ```ncc_speech_corpus/json_2```.
+The ```clean_text-script``` is used to copy data from ```ncc_speech_corpus3/clean_json_3```. Some additional processing is done on this set. For instance have NER been run. 
+
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
-archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus2/clean_json_3";
 
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_test.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json;
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_eval.json --output_file $base_dir/clean_3/stortinget/stortinget_validation.json;
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_train.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget/test/stortinget_test_cleaned.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget/validation/stortinget_validation_cleaned.json --output_file $base_dir/clean_3/stortinget/stortinget_validation.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget/train/stortinget_train_cleaned.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json;
+
+#python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_eval.json --output_file #$base_dir/clean_3/stortinget/stortinget_validation.json;
+#python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_train.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json;
 
 ```
 ### NST
@@ -200,8 +204,8 @@ audio_dir="/nfsmounts/datastore/ncc_speech_corpus/source_1/nrk_annotated/audio";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2/";
 
 # Create the config.json with these settings:
-echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/standard/config.json;
-echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 30,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/short/config.json;
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": true,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 29,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/standard/config.json;
+echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 29,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/short/config.json;
 
 # Clean the files - This takes roughly 4 hours
 python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/;
