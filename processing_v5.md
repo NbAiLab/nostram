@@ -36,13 +36,11 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | clean_3/nst | nst_largetest.json |     31,332 |
 | clean_3/nst | nst_validation.json |      1,500 |
 | clean_3/nst | nst_test.json |      1,500 |
-| clean_3/silence | <empty> | <empty>    |
-| clean_3/silence/clean_3b | <empty> | <empty>    |
-| clean_3/silence/copy_3a | <empty> | <empty>    |
+| clean_3/silence | silence.json |    109,019 |
 | clean_3/stortinget | stortinget_train.json |    580,827 |
 | clean_3/stortinget | stortinget_test.json |      1,520 |
 | clean_3/stortinget | stortinget_validation.json |      1,714 |
-| **Total** |      | **13,721,930** |
+| **Total** |      | **13,830,949** |
 
 ### Directory: inference_4
 | Directory | File | Lines     |
