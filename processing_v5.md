@@ -183,10 +183,6 @@ archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
 python $clean_text_dir/clean_text.py --input_file $archive_dir/nst_test.json --output_file $base_dir/clean_3/nst/nst_largetest.json;
 python $clean_text_dir/clean_text.py --input_file $archive_dir/nst_train.json --output_file $base_dir/clean_3/nst/nst_train.json;
 
-
-#cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
-#cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/nst_train.json
-
 # Reduce the size of the NST validation and test set
 sed -n '1,1500p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_test.json
 sed -n '1501,3000p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_validation.json
