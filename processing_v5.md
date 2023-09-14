@@ -154,38 +154,42 @@ Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpu
 # clean_3
 ### Fleurs
 Fleurs data is copied unmodified from ```ncc_speech_corpus/json_2```. The clean script would have changed several of the transcripts. However, it is kept unchanged here to be able to follow the development over time.
-base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
-clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
-archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
-
-cp $archive_dir/norwegian_fleurs-validation.json $base_dir/clean_3/fleurs/
-cp $archive_dir/norwegian_fleurs-test.json $base_dir/clean_3/fleurs/
-
-### Stortinget and NST
-The ```clean_text-script``` is used to copy data from ```ncc_speech_corpus/json_2```. Just some minor renaming and splitting needs to be done.
 ```bash
-base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
+
+cp $archive_dir/norwegian_fleurs-validation.json $base_dir/clean_3/fleurs/;
+cp $archive_dir/norwegian_fleurs-test.json $base_dir/clean_3/fleurs/;
+```
+
+### Stortinget
+The ```clean_text-script``` is used to copy data from ```ncc_speech_corpus/json_2```.
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_test.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_eval.json --output_file $base_dir/clean_3/stortinget/stortinget_validation.json
-python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_train.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json
+
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_test.json --output_file $base_dir/clean_3/stortinget/stortinget_test.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_eval.json --output_file $base_dir/clean_3/stortinget/stortinget_validation.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/stortinget_train.json --output_file $base_dir/clean_3/stortinget/stortinget_train.json;
+
+```
+### NST
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+clean_text_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
+
+python $clean_text_dir/clean_text.py --input_file $archive_dir/nst_test.json --output_file $base_dir/clean_3/nst/nst_largetest.json;
+python $clean_text_dir/clean_text.py --input_file $archive_dir/nst_train.json --output_file $base_dir/clean_3/nst/nst_train.json;
 
 
+#cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
+#cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/nst_train.json
 
-cd $base_dir
-# Stortinget
-# cp ../ncc_speech_corpus/json_2/stortinget_*.json clean_3/stortinget/
-## Rename Stortinget validation file
-mv clean_3/stortinget/stortinget_eval.json clean_3/stortinget/stortinget_validation.json
-# Fleurs
-
-# NST
-cp ../ncc_speech_corpus/json_2/nst_test.json clean_3/nst/nst_largetest.json
-cp ../ncc_speech_corpus/json_2/nst_train.json clean_3/nst/
 # Reduce the size of the NST validation and test set
-sed -n '1,1500p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_test.json
-sed -n '1501,3000p' clean_3/nst/nst_largetest.json > clean_3/nst/nst_validation.json
+sed -n '1,1500p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_test.json
+sed -n '1501,3000p' $base_dir/clean_3/nst/nst_largetest.json > $base_dir/clean_3/nst/nst_validation.json
 ```
 
 ### NRK TV
