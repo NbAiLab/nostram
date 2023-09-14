@@ -214,7 +214,23 @@ cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nr
 cat $base_dir/clean_3/nrk_tv/mp3/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}';
 ```
 
-> JSON should be validated
+### Validate all JSON files
+```bash
+# Set working dirs
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+eval_samples_nr=1000
+
+# Typically it is not necessary to validate the entire file, since the lines are basically the same
+
+#python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/fleurs/norwegian_fleurs-test.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nrk_tv/both/nrk.json
+#python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_test.json
+#python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_validation.json
+
+
+
+```
 
 # inference_4
 ### Stortinget, Fleurs and NST
