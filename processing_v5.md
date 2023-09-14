@@ -112,7 +112,6 @@ $base_dir/
 |   |-- stortinget
 |   |-- fleurs
 |   |-- nst
-|   |-- stortinget
 |   |-- audio_books
 |-- inference_4/
 |   |-- inference_dataset
@@ -306,5 +305,19 @@ cp $base_dir/clean_3/nst/nst_train.json $base_dir/inference_4/inference_dataset/
 cp $base_dir/clean_3/nst/nst_test.json $base_dir/inference_4/inference_dataset/nst/test/
 cp $base_dir/clean_3/nst/nst_validation.json $base_dir/inference_4/inference_dataset/nst/validation/
 ```
+### MP3
+We will copy the mp3-files from earlier versions
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus2";
+
+cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/inference_dataset/mp3/nst/;
+cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/inference_dataset/mp3/fleurs/;
+cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/inference_dataset/mp3/stortinget/;
+
+# Missing NRK
+# Missing Silence
+```
+
 > JSON and mp3 should be validated
 
