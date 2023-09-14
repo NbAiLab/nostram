@@ -140,9 +140,6 @@ $base_dir/
 |   |   |-- stortinget_no
 |   |   |   |-- test
 |   |   |   |-- validation
-|   |   |-- stortinget_nn
-|   |   |   |-- test
-|   |   |   |-- validation
 |   |   |-- fleurs
 |   |   |   |-- test
 |   |   |   |-- validation
@@ -286,16 +283,21 @@ Copy files, and make the split at the same time
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 shuf "$base_dir/clean_3/silence/silence.json" | awk -v base="$base_dir" 'NR <= 1000 {print > base "/inference_4/inference_dataset/silence/test/silence_test.json"} NR > 1000 && NR <= 2000 {print > base "/inference_4/inference_dataset/silence/validation/silence_validation.json"} NR > 2000 {print > base "/inference_4/inference_dataset/silence/train/silence_train.json"}'
 ```
+### Stortinget
+Here we need to make a test and validation dataset that contains only Norwegian Bokmål
+```bash
+#Stortinget
+cp $base_dir/clean_3/stortinget/stortinget_train.json $base_dir/inference_4/inference_dataset/stortinget/train/;
+jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_test.json > $base_dir/inference_4/inference_dataset/stortinget_no/test/stortinget_no_test.json;
+jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_validation.json > $base_dir/inference_4/inference_dataset/stortinget_no/validation/stortinget_validation_test.json;
+```
 
-### Stortinget, Fleurs and NST
+### Fleurs and NST
 No processing is needed here. Just copy the correct files into a single directory. 
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-#Stortinget
-cp $base_dir/clean_3/stortinget/stortinget_train.json $base_dir/inference_4/inference_dataset/stortinget/train/;
-cp $base_dir/clean_3/stortinget/stortinget_test.json $base_dir/inference_4/inference_dataset/stortinget/test/;
-cp $base_dir/clean_3/stortinget/stortinget_validation.json $base_dir/inference_4/inference_dataset/stortinget/validation/;
+
 #Fleurs
 cp $base_dir/clean_3/fleurs/norwegian_fleurs-test.json $base_dir/inference_4/inference_dataset/fleurs/test/;
 cp $base_dir/clean_3/fleurs/norwegian_fleurs-validation.json $base_dir/inference_4/inference_dataset/fleurs/validation/;
