@@ -148,8 +148,11 @@ $base_dir/
 ```
 
 
-# raw_1 and json_2
+# raw_1 and partly json_2
 Not needed in v5. If needed, content needs to be copied from ```ncc_speech_corpus``` and ```ncc_speech_corpus2```.
+
+# json_2
+Audiobooks are stored in json_2 on a form
 
 # clean_3
 ### Fleurs
