@@ -228,6 +228,14 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nr
 #python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_test.json
 #python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_validation.json
 
+# Audio books
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/train/audio_books_nn_train.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/train/audio_books_no_train.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/test/audio_books_nn_test.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/test/audio_books_no_test.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_nn_validation.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_no_validation.json
+
 
 
 ```
