@@ -87,7 +87,7 @@ The status can be updated by running ```python nostram/utils/json_stats.py /mnt/
 | translation_5 | <empty> | <empty>    |
 | translation_5/processed | <empty> | <empty>    |
 | translation_5/translation_files | <empty> | <empty>    |
-| **Total** |      | **         0** |
+| **Total** |      | ** 0** |
 
 
 
