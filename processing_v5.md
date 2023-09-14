@@ -235,12 +235,12 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/ns
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_test.json
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_validation.json
 
+
+#OK
 #Stortinget
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/stortinget/stortinget_train.json
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/stortinget/stortinget_test.json
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/stortinget/stortinget_validation.json
-
-#OK
 #NRK TV
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nrk_tv/both/nrk.json
 # Audio Books
@@ -250,9 +250,6 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/au
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/test/audio_books_no_test.json;
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_nn_validation.json;
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/audio_books/validation/audio_books_no_validation.json;
-
-
-
 
 
 ```
