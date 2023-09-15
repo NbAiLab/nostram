@@ -230,6 +230,11 @@ python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder 
 # Concatenate files and remove duplicates (can be extended with extra files)
 cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/both/nrk.json;
 
+# We also need to create clean Bokmål test and validation files.
+jq -c 'select(.text_language=="nn")' $base_dir/clean_3/nrk_tv/both/nrk.json > $base_dir/clean_3/nrk_tv/both/nrk_nn.json
+jq -c 'select(.text_language=="no")' $base_dir/clean_3/nrk_tv/both/nrk.json > $base_dir/clean_3/nrk_tv/both/nrk_no.json
+
+
 # Create the audio files
 cat $base_dir/clean_3/nrk_tv/mp3/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}';
 ```
