@@ -286,9 +286,12 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/si
 Here we need to make a test and validation dataset that contains only Norwegian Bokmål
 ```bash
 #Stortinget
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 cp $base_dir/clean_3/stortinget/stortinget_train.json $base_dir/inference_4/inference_dataset/stortinget/train/;
 jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_test.json > $base_dir/inference_4/inference_dataset/stortinget_no/test/stortinget_no_test.json;
-jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_validation.json > $base_dir/inference_4/inference_dataset/stortinget_no/validation/stortinget_validation_test.json;
+jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_validation.json > $base_dir/inference_4/inference_dataset/stortinget_no/validation/stortinget_no_validation.json;
+jq -c 'select(.text_language=="nn")' $base_dir/clean_3/stortinget/stortinget_test.json > $base_dir/inference_4/inference_dataset/stortinget_nn/test/stortinget_nn_test.json;
+jq -c 'select(.text_language=="nn")' $base_dir/clean_3/stortinget/stortinget_validation.json > $base_dir/inference_4/inference_dataset/stortinget_nn/validation/stortinget_nn_validation.json;
 ```
 
 ### Fleurs, NST and NRK
