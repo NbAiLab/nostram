@@ -152,6 +152,10 @@ $base_dir/
 |   |   |   |-- validation
 |   |-- inference_result
 |   |-- processed
+|   |-- inference_corpus
+|   |   |-- train
+|   |   |-- test
+|   |   |-- validation
 |-- translation_5/
     |-- translation_files
     |-- processed
@@ -316,6 +320,19 @@ cp $base_dir/clean_3/nrk_tv/both/nrk_nn_train.json $base_dir/inference_4/inferen
 cp $base_dir/clean_3/nrk_tv/both/nrk_no_train.json $base_dir/inference_4/inference_dataset/nrk_tv/train/
 
 ```
+
+### Copy files to inference_corpus
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+corpus_name="ncc_speech_v5"
+rm $base_dir/inference_4/inference_corpus/$corpus_name/train/*.json
+rm $base_dir/inference_4/inference_corpus/$corpus_name/test/*.json
+rm $base_dir/inference_4/inference_corpus/$corpus_name/validation/*.json
+cp $base_dir/inference_4/inference_dataset/*/train/*.json $base_dir/inference_4/inference_corpus/$corpus_name/train/
+cp $base_dir/inference_4/inference_dataset/*/test/*.json $base_dir/inference_4/inference_corpus/$corpus_name/test/
+cp $base_dir/inference_4/inference_dataset/*/validation/*.json $base_dir/inference_4/inference_corpus/$corpus_name/validation/
+```
+
 ### MP3
 We will copy the mp3-files from earlier versions
 ```bash
