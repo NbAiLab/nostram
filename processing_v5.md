@@ -107,7 +107,6 @@ $base_dir/
 |   |   |-- short
 |   |   |-- both
 |   |   |-- mp3
-|   |-- silence
 |   |-- stortinget
 |   |-- fleurs
 |   |-- nst
@@ -116,7 +115,6 @@ $base_dir/
 |   |-- inference_dataset
 |   |   |-- mp3
 |   |   |   |-- nrk_tv
-|   |   |   |-- silence
 |   |   |   |-- stortinget
 |   |   |   |-- fleurs
 |   |   |   |-- nst
@@ -127,10 +125,6 @@ $base_dir/
 |   |   |   |-- test
 |   |   |   |-- validation
 |   |   |-- nrk_tv_nn
-|   |   |   |-- test
-|   |   |   |-- validation
-|   |   |-- silence
-|   |   |   |-- train
 |   |   |   |-- test
 |   |   |   |-- validation
 |   |   |-- stortinget
