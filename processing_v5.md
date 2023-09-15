@@ -112,13 +112,13 @@ $base_dir/
 |   |-- nst
 |   |-- audio_books
 |-- inference_4/
+|   |-- mp3
+|   |   |-- nrk_tv
+|   |   |-- stortinget
+|   |   |-- fleurs
+|   |   |-- nst
+|   |   |-- audio_books
 |   |-- inference_dataset
-|   |   |-- mp3
-|   |   |   |-- nrk_tv
-|   |   |   |-- stortinget
-|   |   |   |-- fleurs
-|   |   |   |-- nst
-|   |   |   |-- audio_books
 |   |   |-- nrk_tv
 |   |   |   |-- train
 |   |   |-- nrk_tv_no
@@ -307,9 +307,9 @@ We will copy the mp3-files from earlier versions
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus2";
 
-cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/inference_dataset/mp3/nst/;
-cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/inference_dataset/mp3/fleurs/;
-cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/inference_dataset/mp3/stortinget/;
+cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/mp3/nst/;
+cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/mp3/fleurs/;
+cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/mp3/stortinget/;
 
 # Missing NRK
 # Missing Silence
