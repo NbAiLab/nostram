@@ -94,7 +94,7 @@ The following command creates all the necssary folders if they do not exist.
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5"
-mkdir -p "$base_dir"/{clean_3/{nrk_tv/{standard,short,both,mp3},silence,stortinget,fleurs,nst,audio_books},inference_4/{inference_dataset/{mp3/{nrk_tv,silence,stortinget,fleurs,nst,audio_books},nrk_tv/{train},nrk_tv_translate/{test,validation},nrk_tv_transcribe/{test,validation},silence/{train,test,validation},stortinget/{train,test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/{train,test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
+mkdir -p "$base_dir"/{clean_3/{nrk_tv/{standard,short,both,mp3},stortinget,fleurs,nst,audio_books},inference_4/{mp3/{nrk_tv,stortinget,fleurs,nst,audio_books},inference_dataset/{nrk_tv/train,nrk_tv_no/{test,validation},nrk_tv_nn/{test,validation},stortinget/train,stortinget_no/{test,validation},stortinget_nn/{test,validation},fleurs/{test,validation},nst/{train,test,validation},audio_books/train,audio_books_no/{test,validation},audio_books_nn/{test,validation}},inference_result,processed},translation_5/{translation_files,processed}}
 
 
 ```
@@ -237,9 +237,11 @@ python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder 
 # Concatenate files and remove duplicates (can be extended with extra files)
 cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/both/nrk.json;
 
-# We also need to create clean Bokmål test and validation files.
+# We also need to create clean Bokmål/Nynorsk test and validation files.
 jq -c 'select(.text_language=="nn")' $base_dir/clean_3/nrk_tv/both/nrk.json > $base_dir/clean_3/nrk_tv/both/nrk_nn.json
 jq -c 'select(.text_language=="no")' $base_dir/clean_3/nrk_tv/both/nrk.json > $base_dir/clean_3/nrk_tv/both/nrk_no.json
+shuf "$base_dir/clean_3/nrk_tv/both/nrk_nn.json" | awk -v base_dir="$base_dir" 'NR <= 1500 {print > base_dir "/clean_3/nrk_tv/both/nrk_nn_test.json"} NR > 1500 && NR <= 3000 {print > base_dir "/clean_3/nrk_tv/both/nrk_nn_validation.json"} NR > 3000 {print > base_dir "/clean_3/nrk_tv/both/nrk_nn_train.json"}'
+shuf "$base_dir/clean_3/nrk_tv/both/nrk_no.json" | awk -v base_dir="$base_dir" 'NR <= 1500 {print > base_dir "/clean_3/nrk_tv/both/nrk_no_test.json"} NR > 1500 && NR <= 3000 {print > base_dir "/clean_3/nrk_tv/both/nrk_no_validation.json"} NR > 3000 {print > base_dir "/clean_3/nrk_tv/both/nrk_no_train.json"}'
 
 
 # Create the audio files
@@ -279,12 +281,7 @@ python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/si
 ```
 
 # inference_4
-### Silence
-Copy files, and make the split at the same time
-```bash
-base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-shuf "$base_dir/clean_3/silence/silence.json" | awk -v base="$base_dir" 'NR <= 1000 {print > base "/inference_4/inference_dataset/silence/test/silence_test.json"} NR > 1000 && NR <= 2000 {print > base "/inference_4/inference_dataset/silence/validation/silence_validation.json"} NR > 2000 {print > base "/inference_4/inference_dataset/silence/train/silence_train.json"}'
-```
+
 ### Stortinget
 Here we need to make a test and validation dataset that contains only Norwegian Bokmål
 ```bash
@@ -294,8 +291,8 @@ jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_tes
 jq -c 'select(.text_language=="no")' $base_dir/clean_3/stortinget/stortinget_validation.json > $base_dir/inference_4/inference_dataset/stortinget_no/validation/stortinget_validation_test.json;
 ```
 
-### Fleurs and NST
-No processing is needed here. Just copy the correct files into a single directory. 
+### Fleurs, NST and NRK
+No more processing is needed here. Just copy the correct files to the correct folder
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
@@ -307,6 +304,14 @@ cp $base_dir/clean_3/fleurs/norwegian_fleurs-validation.json $base_dir/inference
 cp $base_dir/clean_3/nst/nst_train.json $base_dir/inference_4/inference_dataset/nst/train/
 cp $base_dir/clean_3/nst/nst_test.json $base_dir/inference_4/inference_dataset/nst/test/
 cp $base_dir/clean_3/nst/nst_validation.json $base_dir/inference_4/inference_dataset/nst/validation/
+#NRK
+cp $base_dir/clean_3/nrk_tv/both/nrk_nn_test.json $base_dir/inference_4/inference_dataset/nrk_tv_nn/test/
+cp $base_dir/clean_3/nrk_tv/both/nrk_nn_validation.json $base_dir/inference_4/inference_dataset/nrk_tv_nn/validation/
+cp $base_dir/clean_3/nrk_tv/both/nrk_no_test.json $base_dir/inference_4/inference_dataset/nrk_tv_no/test/
+cp $base_dir/clean_3/nrk_tv/both/nrk_no_validation.json $base_dir/inference_4/inference_dataset/nrk_tv_no/validation/
+cp $base_dir/clean_3/nrk_tv/both/nrk_nn_train.json $base_dir/inference_4/inference_dataset/nrk_tv/train/
+cp $base_dir/clean_3/nrk_tv/both/nrk_no_train.json $base_dir/inference_4/inference_dataset/nrk_tv/train/
+
 ```
 ### MP3
 We will copy the mp3-files from earlier versions
@@ -318,8 +323,6 @@ cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/mp
 cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/mp3/fleurs/;
 cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/mp3/stortinget/;
 
-# Missing NRK
-# Missing Silence
 ```
 
 ### Validate MP3
