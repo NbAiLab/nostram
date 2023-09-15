@@ -132,6 +132,9 @@ $base_dir/
 |   |   |-- stortinget_no
 |   |   |   |-- test
 |   |   |   |-- validation
+|   |   |-- stortinget_nn
+|   |   |   |-- test
+|   |   |   |-- validation
 |   |   |-- fleurs
 |   |   |   |-- test
 |   |   |   |-- validation
