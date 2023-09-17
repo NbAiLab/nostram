@@ -38,8 +38,16 @@ def main(json_file):
     """Main function for processing the JSON file and audio files."""
 
     json_file_path = Path(json_file).resolve()
-    dataset = json_file_path.parts[-3]  # Extract the dataset name
-    audio_path = json_file_path.parents[2] / "audio" / dataset / "audio"
+    datasets = ['audio_books', 'fleurs', 'nrk', 'nst', 'silence', 'stortinget']
+    dataset = next((ds for ds in datasets if ds in json_file), None)
+    if dataset== "nrk":
+        dataset = "nrk_tv"
+
+    if not dataset:
+        print(f"Invalid dataset in {json_file}")
+        exit(-1)
+
+    audio_path = json_file_path.parents[3] / "mp3" / dataset 
 
     # Validate the input arguments
     validate_arguments(json_file, str(audio_path))
@@ -80,7 +88,7 @@ def main(json_file):
                 errors += 1
                 continue
 
-    print(f"\n Checked {checked} mp3-files. Found {errors} errors.")
+    print(f"\n Checked {checked} mp3-files in {json_file}. Found {errors} errors.")
 
 
 if __name__ == "__main__":
