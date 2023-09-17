@@ -358,3 +358,5 @@ corpus="ncc_speech_inference_v5"
 for f in $base_dir/inference_4/inference_corpus/$corpus/*/*.json; do python $program_dir/validate_mp3.py "$f"; done
 ```
 
+# Generate dataset
+Now we are ready to do the generation of the actual dataset.
