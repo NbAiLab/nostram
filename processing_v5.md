@@ -235,8 +235,8 @@ echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\
 echo -e "{\n\t\"max_duplicates_text_program\": 10,\n\t\"min_alphawords_subtitle\": 0,\n\t\"min_length_subtitle\": 1,\n\t\"min_words_subtitle\": 0,\n\t\"normalise_unicode\": true,\n\t\"drop_subtitles_with_encoding_errors\": true,\n\t\"drop_subtitles_with_curly_brackets\": true,\n\t\"simultaneous_subtitles\": \"delete\",\n\t\"task\": [\"transcribe\", \"translate\"],\n\t\"drop_italics\": true,\n\t\"drop_inaudible\": true,\n\t\"drop_invalid_durations\": true,\n\t\"merge_subtitles\": true,\n\t\"drop_multiple_speakers\": false,\n\t\"combine_continued_sentences\": false,\n\t\"make_bigger_segments\": false,\n\t\"target_duration_seconds\": 28,\n\t\"max_duration_seconds\": 29,\n\t\"pad_with_silence\": true,\n\t\"add_empty_captions\": true,\n\t\"detect_lang_text\": true,\n\t\"allow_lang_text\": [\"nob\", \"nno\"],\n\t\"remove_cpossible\": true,\n\t\"max_separation_seconds\": 5\n}" > $base_dir/clean_3/nrk_tv/short/config.json;
 
 # Clean the files - This takes roughly 4 hours
-python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/;
-python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3/;
+python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/standard --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3_standard/;
+python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3_short/;
 
 # Concatenate files and remove duplicates (can be extended with extra files)
 cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/both/nrk.json;
@@ -339,9 +339,10 @@ We will copy the mp3-files from earlier versions
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus2";
 
-cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/mp3/nst/;
-cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/mp3/fleurs/;
-cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/mp3/stortinget/;
+cp -r $archive_dir/transcribed_json_4/audio/nst/audio/* $base_dir/inference_4/mp3/nst/.;
+cp -r $archive_dir/transcribed_json_4/audio/fleurs/audio/*.* $base_dir/inference_4/mp3/fleurs/.;
+cp -r $archive_dir/transcribed_json_4/audio/stortinget/audio/* $base_dir/inference_4/mp3/stortinget/.;
+cp -rf $base_dir/clean_3/nrk_tv/mp3/* $base_dir/inference_4/mp3/nrk_tv/.;
 
 ```
 
