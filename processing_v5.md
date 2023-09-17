@@ -239,6 +239,7 @@ python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder 
 python $program_dir/clean.py --input_file $archive_dir/nrk.json --output_folder $base_dir/clean_3/nrk_tv/short --audio_input_folder $audio_dir  --audio_output_folder $base_dir/clean_3/nrk_tv/mp3_short/;
 
 # Concatenate files and remove duplicates (can be extended with extra files)
+# Not that in the current example these are not the same files as above. This should be changed if it is run again.
 cat $base_dir/clean_3/nrk_tv/standard/nrk.json $base_dir/clean_3/nrk_tv/short/nrk.json | jq -c . | sort -k1,1 -s | awk '!seen[$1]++' > $base_dir/clean_3/nrk_tv/both/nrk.json;
 
 # We also need to create clean Bokmål/Nynorsk test and validation files.
@@ -249,6 +250,7 @@ shuf "$base_dir/clean_3/nrk_tv/both/nrk_no.json" | awk -v base_dir="$base_dir" '
 
 
 # Create the audio files
+# It might be safer to create two folders here, and generate both of them separately
 cat $base_dir/clean_3/nrk_tv/mp3/nrk_process_list.sh | xargs -P 30 -I '{}' sh -c '{}';
 ```
 
