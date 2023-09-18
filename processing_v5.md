@@ -326,7 +326,7 @@ cp $base_dir/clean_3/nrk_tv/both/nrk_no_train.json $base_dir/inference_4/inferen
 ### Copy files to inference_corpus
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-corpus="ncc_speech_inference_v5"
+corpus_name="ncc_speech_inference_v5"
 rm $base_dir/inference_4/inference_corpus/$corpus_name/train/*.json
 rm $base_dir/inference_4/inference_corpus/$corpus_name/test/*.json
 rm $base_dir/inference_4/inference_corpus/$corpus_name/validation/*.json
@@ -353,9 +353,9 @@ Since JSON already is validated, we concentrate on evaluating mp3-files
 ```bash
 program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-corpus="ncc_speech_inference_v5"
+corpus_name="ncc_speech_inference_v5"
 
-for f in $base_dir/inference_4/inference_corpus/$corpus/*/*.json; do python $program_dir/validate_mp3.py "$f"; done
+for f in $base_dir/inference_4/inference_corpus/$corpus_name/*/*.json; do python $program_dir/validate_mp3.py "$f"; done
 ```
 
 # Generate dataset
