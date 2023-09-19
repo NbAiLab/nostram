@@ -18,8 +18,6 @@ def check_text_length(json_line, max_length):
     segments = json_line['timestamped_text'].split('<|')[1:]
     for segment in segments:
         parts = segment.split('|>')
-        if len(parts) != 2:
-            continue
         start_time, text = parts
         if len(text) > max_length:
             print(f"Error: Text too long for ID {json_line['id']}. Max length: {max_length}. Audio duration: {json_line['audio_duration']}. Timestamped text: {json_line['timestamped_text']}")
