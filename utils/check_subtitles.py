@@ -28,18 +28,23 @@ def check_text_length(json_line, max_length):
 
 def check_max_timespan(json_line, max_timespan):
     error_count = 0
-    segments = json_line['timestamped_text'].split('<|')[1:]
-    for i in range(1, len(segments)):
-        parts1 = segments[i - 1].split('|>')
-        parts2 = segments[i].split('|>')
-        if len(parts1) != 2 or len(parts2) != 2:
-            continue
-        start_time1, _ = parts1
-        start_time2, _ = parts2
-        if float(start_time2) - float(start_time1) > max_timespan:
-            print(f"Error: Timespan too long for ID {json_line['id']}. Max timespan: {max_timespan}. Timestamped text: {json_line['timestamped_text']}")
+    segments = json_line['timestamped_text'].split('<|')[1:]  # Skip the first empty string
+    
+    for i in range(0, len(segments), 2):  # Increment by 2 to get pairs
+        start_segment = segments[i]
+        end_segment = segments[i + 1]
+        
+        start_time = start_segment.split('|>')[0]
+        end_time = end_segment.split('|>')[0]
+        
+        timespan = float(end_time) - float(start_time)
+        
+        if timespan > max_timespan:
+            print(f"Error: Timespan too long for ID {json_line['id']}. Actual timespan: {timespan}, Max timespan: {max_timespan}. Timestamped text: {json_line['timestamped_text']}")
             error_count += 1
     return error_count
+
+
 
 def main(input_file, max_length=84, max_timespan=6.0):
     error_counts = Counter()
