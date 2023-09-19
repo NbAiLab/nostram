@@ -13,19 +13,6 @@ def check_timestamp_within_duration(json_line, audio_duration):
             error_count += 1
     return error_count
 
-def check_text_within_timestamp(json_line):
-    error_count = 0
-    segments = json_line['timestamped_text'].split('<|')[1:]
-    for segment in segments:
-        parts = segment.split('|>')
-        if len(parts) != 2:
-            continue
-        start_time, text = parts
-        if not text:
-            print(f"Error: Text not within timestamp for ID {json_line['id']}. Timestamped text: {json_line['timestamped_text']}")
-            error_count += 1
-    return error_count
-
 def check_text_length(json_line, max_length):
     error_count = 0
     segments = json_line['timestamped_text'].split('<|')[1:]
@@ -64,7 +51,6 @@ def main(input_file, max_length=84, max_timespan=6.0):
                 continue
             audio_duration = json_line['audio_duration']
             error_counts['check_timestamp_within_duration'] += check_timestamp_within_duration(json_line, audio_duration)
-            error_counts['check_text_within_timestamp'] += check_text_within_timestamp(json_line)
             error_counts['check_text_length'] += check_text_length(json_line, max_length)
             error_counts['check_max_timespan'] += check_max_timespan(json_line, max_timespan)
 
