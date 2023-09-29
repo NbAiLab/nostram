@@ -52,26 +52,34 @@ def save_json(data, filename):
 
 # Function to find insertions that do not exist in the predictions.
 def find_insertions(target, predictions, min_length=1, max_length=50):
-    target_words = set(str(target).lower().split())
-    ngram_not_in_pred = ""
-    max_length = 0
-    # Loop through each prediction to find insertions.
+    target_words = str(target).lower().split()
+    max_ngram_not_in_pred = ""
+    max_ngram_length = 0
+
+    target_ngrams = set([' '.join(target_words[i:i+n]) for n in range(min_length, max_length + 1) for i in range(len(target_words) - n + 1)])
+
     for prediction in predictions:
         prediction_words = str(prediction).lower().split()
-        ngram_counter = Counter()
-        # Generate n-grams
-        for n in range(min_length, max_length + 1):
-            ngrams = [' '.join(prediction_words[i:i+n]) for i in range(len(prediction_words) - n + 1)]
-            ngram_counter.update(ngrams)
-        # Check if n-grams exist in target
-        for ngram, count in ngram_counter.items():
-            ngram_words = set(ngram.split())
-            if not ngram_words.issubset(target_words):
-                length = len(ngram_words)
-                if length > max_length:
-                    ngram_not_in_target = ngram
-                    max_length = length
-    return ngram_not_in_pred, max_length
+
+        # Generate n-grams for prediction
+        prediction_ngrams = set([' '.join(prediction_words[i:i+n]) for n in range(min_length, max_length + 1) for i in range(len(prediction_words) - n + 1)])
+
+        # Find n-grams in target but not in prediction
+        ngrams_not_in_pred = target_ngrams - prediction_ngrams
+
+        # Update the longest n-gram not in any prediction
+        for ngram in ngrams_not_in_pred:
+            ngram_length = len(ngram.split())
+            if ngram_length > max_ngram_length:
+                max_ngram_length = ngram_length
+                max_ngram_not_in_pred = ngram
+
+    # If all predictions match the target perfectly, max_ngram_length should be 0
+    if max_ngram_length == len(target_words):
+        max_ngram_length = 0
+        max_ngram_not_in_pred = ""
+
+    return max_ngram_not_in_pred, max_ngram_length
 
 # Function to find common n-grams not in target
 def find_common_sequence(predictions, target, min_length=3, max_length=50):
@@ -122,8 +130,8 @@ def analyze_row(row, *config):
     clean_predictions = [clean_text(p) for p in predictions]
     
     # Find insertions and sequences
-    ngram_not_in_pred, max_ngram_not_in_pred = find_insertions(clean_target, predictions, min_length, max_length)
-    ngram_not_in_target, max_ngram_not_in_target = find_common_sequence(predictions, clean_target, min_length, max_length)
+    ngram_not_in_pred, max_ngrams_not_in_pred = find_insertions(clean_target, predictions, min_length, max_length)
+    ngram_not_in_target, max_ngrams_not_in_target = find_common_sequence(predictions, clean_target, min_length, max_length)
     
     # Check if first and last words are predicted
     first_word = clean_target.split()[0] if clean_target else ""
@@ -134,12 +142,12 @@ def analyze_row(row, *config):
     first_word_predicted = int(any(fuzz.ratio(first_word, p.split()[0]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
     last_word_predicted = int(any(fuzz.ratio(last_word, p.split()[-1]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
 
-    fuzz_threshold = 90
-    first_word_predicted_strict = int(any(fuzz.ratio(first_word, p.split()[0]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
-    last_word_predicted_strict = int(any(fuzz.ratio(last_word, p.split()[-1]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
+    #fuzz_threshold = 90
+    #first_word_predicted_strict = int(any(fuzz.ratio(first_word, p.split()[0]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
+    #last_word_predicted_strict = int(any(fuzz.ratio(last_word, p.split()[-1]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
 
-    if first_word_predicted_strict != first_word_predicted:
-        print(f"{first_word} - {clean_predictions}")
+    #if first_word_predicted_strict != first_word_predicted:
+    #    print(f"{first_word} - {clean_predictions}")
     
     # Find min and max words in predictions
     min_words = min(len(p.split()) for p in clean_predictions) if clean_predictions else 0
@@ -163,7 +171,7 @@ def analyze_row(row, *config):
         whisper_wer = 1
     
     # Return results
-    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngram_not_in_target, ngram_not_in_pred, max_ngram_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model])
+    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngrams_not_in_target, ngram_not_in_pred, max_ngrams_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model])
 
 
 # Main function to execute the script
