@@ -51,7 +51,7 @@ def save_json(data, filename):
     logger.info(f'Saved jsonl as "{filename}"')
 
 # Function to find insertions that do not exist in the predictions.
-def find_insertions(target, predictions, min_length=1, max_length=50):
+def find_insertions(target, predictions, min_length=1, max_length=999):
     target_words = str(target).lower().split()
     max_ngram_not_in_pred = ""
     max_ngram_length = 0
@@ -82,7 +82,7 @@ def find_insertions(target, predictions, min_length=1, max_length=50):
     return max_ngram_not_in_pred, max_ngram_length
 
 # Function to find common n-grams not in target
-def find_common_sequence(predictions, target, min_length=3, max_length=50):
+def find_common_sequence(predictions, target, min_length=1, max_length=999):
     # Prepare target words
     target_words = str(target).lower().translate(str.maketrans('', '', string.punctuation)).split()
     def get_ngrams(words, n):
@@ -117,8 +117,8 @@ def clean_text(text):
 # Function to analyze a single row of data
 def analyze_row(row, *config):
     
-    min_length = config[0]['min_seq_length']
-    max_length = config[0]['max_seq_length']
+    #min_length = config[0]['min_seq_length']
+    #max_length = config[0]['max_seq_length']
 
     # Process target and prediction data
    
@@ -130,8 +130,8 @@ def analyze_row(row, *config):
     clean_predictions = [clean_text(p) for p in predictions]
     
     # Find insertions and sequences
-    ngram_not_in_pred, max_ngrams_not_in_pred = find_insertions(clean_target, predictions, min_length, max_length)
-    ngram_not_in_target, max_ngrams_not_in_target = find_common_sequence(predictions, clean_target, min_length, max_length)
+    ngram_not_in_pred, max_ngrams_not_in_pred = find_insertions(clean_target, predictions)
+    ngram_not_in_target, max_ngrams_not_in_target = find_common_sequence(predictions, clean_target)
     
     # Check if first and last words are predicted
     first_word = clean_target.split()[0] if clean_target else ""
@@ -170,8 +170,18 @@ def analyze_row(row, *config):
     if whisper_wer > 1:
         whisper_wer = 1
     
+    if any([
+        first_word_predicted == 0, 
+        last_word_predicted == 0, 
+        max_ngrams_not_in_pred > 3,
+        max_ngrams_not_in_target > 3,
+    ]):
+        delete = 1
+    else:
+        delete = 0
+    
     # Return results
-    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngrams_not_in_target, ngram_not_in_pred, max_ngrams_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model])
+    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngrams_not_in_target, ngram_not_in_pred, max_ngrams_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model, delete])
 
 
 # Main function to execute the script
@@ -212,7 +222,7 @@ def main(args):
     data: pd.DataFrame = load_json(args.input_filename)
     data = data.fillna('')
     
-    new_cols = ['num_words_target', 'max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model']
+    new_cols = ['num_words_target', 'max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model', 'delete']
     for col in reversed(new_cols):
         if col not in data.columns:
             data.insert(data.columns.get_loc('text'), col, 0)
@@ -227,13 +237,21 @@ def main(args):
 
     #data[new_cols] = data.parallel_apply(analyze_row, axis=1, args=(config,))
     
+    # If prune flag is set, keep only approved columns
+    if args.prune:
+        data = data[data['delete'] != 1]
+        approved_cols = ["id", "group_id", "source", "audio_language", "previous_text", "translated_text_no", "translated_text_nn",
+                         "translated_text_en", "translated_text_es", "timestamped_text", "wav2vec_wer", "whisper_wer", "text_language", "text", "verbosity_level"]
+        data = data[approved_cols]
+ 
+    
     # Save it as jsonl
     output_filename = os.path.join(
         args.output_folder, os.path.basename(args.input_filename))
     save_json(data, output_filename)
     logger.info(
         f'*** Finished processing file.'
-        f'\nResult is written to {os.path.join(args.output_folder, os.path.basename(args.input_filename))}. ({exec_time()})')
+        f'\n{len(data)} lines is written to {os.path.join(args.output_folder, os.path.basename(args.input_filename))}. ({exec_time()})')
     
 # Entry point of the script
 if __name__ == "__main__":
@@ -242,6 +260,8 @@ if __name__ == "__main__":
     parser.add_argument("--output_folder", required=True, help="Output folder")
     parser.add_argument('--log_level', required=False, default="INFO",
                         help='Set logging level to DEBUG to get a report on all decisions')
+    parser.add_argument('--prune', action='store_true', default=False,
+                        help='Remove all columns not in the approved list and all lines marked for deletion')
     args = parser.parse_args()
     
         # Invoke logger globally

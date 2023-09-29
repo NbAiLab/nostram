@@ -42,8 +42,11 @@ def calculate_stats(input_file):
             if any([
                 data['first_word_predicted'] == 0, 
                 data['last_word_predicted'] == 0, 
-                data['whisper_wer'] > 0.8, 
-                data['num_words_target']  < data['min_words_predicted'] - buffer or data['num_words_target'] > data['max_words_predicted'] + buffer
+                data['max_ngrams_not_in_pred'] > 3,
+                data['max_ngrams_not_in_target'] > 3,
+                
+                #data['whisper_wer'] > 0.8, 
+                #data['num_words_target']  < data['min_words_predicted'] - buffer or data['num_words_target'] > data['max_words_predicted'] + buffer
             ]):
                 zero_count += 1
                 
@@ -59,11 +62,11 @@ def calculate_stats(input_file):
     # Print percentages
     print(f"Percentage of first_word_predicted being 0: {first_word_percent:.1f}%")
     print(f"Percentage of last_word_predicted being 0: {last_word_percent:.1f}%")
-    print(f"Percentage of whisper_wer above 0.5: {whisper_wer_percent:.1f}%")
+    #print(f"Percentage of whisper_wer above 0.8: {whisper_wer_percent:.1f}%")
     print(f"Percentage of max_ngrams_not_in_pred being above {ngram_max}: {max_ngrams_not_in_pred_percent:.1f}%")
     print(f"Percentage of max_ngrams_not_in_target being above {ngram_max}: {max_ngrams_not_in_target_percent:.1f}%")
-    print(f"Percentage num_words_target is outside min_words_predicted and max_words_predicted: {num_words_target_percent:.1f}%")
-    print(f"Percentage where one of the four specified fields is 0: {zero_percent:.1f}%")
+    #print(f"Percentage num_words_target is outside min_words_predicted and max_words_predicted: {num_words_target_percent:.1f}%")
+    print(f"Percentage where at least one of the specified fields is 0: {zero_percent:.1f}%")
     
     # Plot histogram for whisper_wer
     plt.hist(whisper_wer_values, bins=10, alpha=0.5, color='g')
