@@ -115,6 +115,7 @@ def analyze_row(row, *config):
     # Process target and prediction data
    
     clean_target = clean_text(row['text'])
+    num_words_target = len(clean_target.split())
     lang_cols = config[0]['predictions'][row["text_language"]]
     
     predictions = row[lang_cols]
@@ -129,20 +130,16 @@ def analyze_row(row, *config):
     last_word = clean_target.split()[-1] if clean_target else ""
     
     #Fuzzy match
-    fuzz_threshold = 80
+    fuzz_threshold = config[0]['fuzz_threshold']
     first_word_predicted = int(any(fuzz.ratio(first_word, p.split()[0]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
     last_word_predicted = int(any(fuzz.ratio(last_word, p.split()[-1]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
 
-    
-    #Exact match
-    first_word_predicted_exact = int(any(first_word == p.split()[0] if p.split() else False for p in clean_predictions))
-    last_word_predicted_exact = int(any(last_word == p.split()[-1] if p.split() else False for p in clean_predictions))
- 
-    if first_word_predicted != first_word_predicted_exact:
-        print(f"First word: {first_word} - Clean: {clean_predictions}")
+    fuzz_threshold = 90
+    first_word_predicted_strict = int(any(fuzz.ratio(first_word, p.split()[0]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
+    last_word_predicted_strict = int(any(fuzz.ratio(last_word, p.split()[-1]) >= fuzz_threshold if p.split() else False for p in clean_predictions))
 
-    if last_word_predicted != last_word_predicted_exact:
-        print(f"Last word: {last_word} - Clean: {clean_predictions}")
+    if first_word_predicted_strict != first_word_predicted:
+        print(f"{first_word} - {clean_predictions}")
     
     # Find min and max words in predictions
     min_words = min(len(p.split()) for p in clean_predictions) if clean_predictions else 0
@@ -155,15 +152,18 @@ def analyze_row(row, *config):
     # Find the best of the WER scores and the corresponding model
     if whisper_wer_scores:
         whisper_wer = min(whisper_wer_scores)
+        
         best_model_index = whisper_wer_scores.index(whisper_wer)
         whisper_best_model = whisper_models[best_model_index]
     else:
         whisper_wer = 1
         whisper_best_model = None
-    
+
+    if whisper_wer > 1:
+        whisper_wer = 1
     
     # Return results
-    return pd.Series([max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngram_not_in_target, ngram_not_in_pred, max_ngram_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model])
+    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngram_not_in_target, ngram_not_in_pred, max_ngram_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model])
 
 
 # Main function to execute the script
@@ -204,7 +204,7 @@ def main(args):
     data: pd.DataFrame = load_json(args.input_filename)
     data = data.fillna('')
     
-    new_cols = ['max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model']
+    new_cols = ['num_words_target', 'max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model']
     for col in reversed(new_cols):
         if col not in data.columns:
             data.insert(data.columns.get_loc('text'), col, 0)
