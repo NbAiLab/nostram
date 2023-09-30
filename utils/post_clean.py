@@ -157,6 +157,14 @@ def analyze_row(row, *config):
     # Calculate the WER-score for the tested models (clean_target vs clean_predictions)
     whisper_wer_scores = [wer(clean_target, p) for p in clean_predictions]
     
+    #Check if the word "president" is in at least one of the clean_preditions and not in target
+    president = int(any("president" in p.split() and "president" not in clean_target.split() for p in clean_predictions))
+    if president == 1:
+        print(f"{clean_target} - {clean_predictions}")
+    
+    
+    
+    
     # Find the best of the WER scores and the corresponding model
     if whisper_wer_scores:
         whisper_wer = min(whisper_wer_scores)
@@ -175,13 +183,14 @@ def analyze_row(row, *config):
         last_word_predicted == 0, 
         max_ngrams_not_in_pred > 3,
         max_ngrams_not_in_target > 3,
+        president == 1
     ]):
         delete = 1
     else:
         delete = 0
     
     # Return results
-    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngrams_not_in_target, ngram_not_in_pred, max_ngrams_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model, delete])
+    return pd.Series([num_words_target, max_words, min_words, last_word_predicted, first_word_predicted, ngram_not_in_target, max_ngrams_not_in_target, ngram_not_in_pred, max_ngrams_not_in_pred, whisper_wer, whisper_models, whisper_wer_scores, whisper_best_model, president, delete])
 
 
 # Main function to execute the script
@@ -222,7 +231,7 @@ def main(args):
     data: pd.DataFrame = load_json(args.input_filename)
     data = data.fillna('')
     
-    new_cols = ['num_words_target', 'max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model', 'delete']
+    new_cols = ['num_words_target', 'max_words_predicted', 'min_words_predicted', 'last_word_predicted', 'first_word_predicted', 'ngram_not_in_target','max_ngrams_not_in_target', 'ngram_not_in_pred','max_ngrams_not_in_pred', 'whisper_wer', 'whisper_models', 'whisper_wer_scores', 'whisper_best_model', 'president','delete']
     for col in reversed(new_cols):
         if col not in data.columns:
             data.insert(data.columns.get_loc('text'), col, 0)
