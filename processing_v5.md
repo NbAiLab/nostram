@@ -358,5 +358,31 @@ corpus_name="ncc_speech_inference_v5"
 for f in $base_dir/inference_4/inference_corpus/$corpus_name/*/*.json; do python $program_dir/validate_mp3.py "$f"; done
 ```
 
-# Generate dataset
-Now we are ready to do the generation of the actual dataset.
+# Generate Dataset for Inference
+Now we are ready to do the generation of the actual dataset. Freddy fills in this.
+
+# Run Inference
+To be describe
+
+# Process Inference Results
+### Download
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+bucket="gs://nb-whisper-transcript/";
+
+cd $base_dir/inference_4/inference_result/downloads
+gsutil -m cp -r $bucket/M* .
+```
+### Merge
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged";
+
+cd $result_dir
+for f in $base_dir/inference_4/inference_corpus/ncc_speech_inference_v5/train/a*.json; do python $program_dir/merge_pseudo_labels.py --input_json $f --input_tsv_dir ../downloads/ --output_file "${f##*/}"; done
+for f in $base_dir/inference_4/inference_corpus/ncc_speech_inference_v5/train/n*.json; do python $program_dir/merge_pseudo_labels.py --input_json $f --input_tsv_dir ../downloads/ --output_file "${f##*/}"; done
+for f in $base_dir/inference_4/inference_corpus/ncc_speech_inference_v5/train/s*.json; do python $program_dir/merge_pseudo_labels.py --input_json $f --input_tsv_dir ../downloads/ --output_file "${f##*/}"; done
+
+```
+
