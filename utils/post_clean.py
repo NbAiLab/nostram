@@ -39,7 +39,7 @@ def read_config(cfile):
         with open(cfile, "r") as f:
             config = json.load(f)
     except:
-        logger.info("Error. A valid config-file must exist in the output directory")
+        logger.info("Error. A valid config-file must exist in the output directory. Place in target, and move one level up when finished.")
         exit()
     return config
 
