@@ -390,7 +390,7 @@ for f in $base_dir/inference_4/inference_corpus/ncc_speech_inference_v5/train/s*
 Before processing, we need to copy the right config.json
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-program_dir="/mnt/lv_ai_1_ficino/ml/perk/nostram/utils";
+program_dir="/home/perk/nostram/utils";
 result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v6_clean";
 
 # Clean corpus using unmodified train/validation files (these do not need config.json)
