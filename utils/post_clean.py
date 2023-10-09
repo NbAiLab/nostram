@@ -18,9 +18,24 @@ import json
 import time
 from jiwer import wer
 from fuzzywuzzy import fuzz
+from jsonschema import validate, ValidationError
+
 
 # Initialize the start time
 start_time = time.time()
+
+def get_dtypes_from_schema(schema):
+    properties = schema["properties"]
+    dtypes = {}
+    for key, value in properties.items():
+        if "type" in value:
+            if isinstance(value["type"], list):
+                if "null" in value["type"]:
+                    dtypes[key] = 'object'
+            elif value["type"] == "string":
+                dtypes[key] = str
+    return dtypes
+
 
 # Calculate and return the elapsed execution time
 def exec_time():
@@ -29,8 +44,39 @@ def exec_time():
 
 # Load JSON lines file into a Pandas DataFrame and log the duration
 def load_json(jsonline):
-    data = pd.read_json(jsonline, lines=True)
+    # Define the dataset schema for the input format
+    schema = {
+	    "type": "object",
+	    "properties": {
+            "id": {"type": "string"},
+            "group_id": {"type": ["string", "null"]},
+			"source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "nrk_tv_veryshort","stortinget", "nst", "fleurs", "audio_books"]},
+			"audio_language": {"type": ["string", "null"]},
+			"audio_duration": {"type": "integer"},
+			"previous_text": {"type": ["string", "null"]},
+			"text_language": {"type": "string", "enum": ["no", "nn", "en", "es"]},
+			"text": {"type": "string"},
+			"translated_text_no": {"type": ["string", "null"]},
+			"translated_text_nn": {"type": ["string", "null"]},
+			"translated_text_en": {"type": ["string", "null"]},
+			"translated_text_es": {"type": ["string", "null"]},
+			"timestamped_text": {"type": ["string", "null"]},
+			"wav2vec_wer": {"type": ["number", "null"]},
+			"whisper_wer": {"type": ["number", "null"]},
+			"verbosity_level": {"type": ["integer", "null"], "enum": [1, 2, 3, 4, 5, 6, None]}
+        },
+		"required": ["id", "group_id", "source", "audio_language","previous_text","translated_text_no","translated_text_nn","translated_text_en","translated_text_es","timestamped_text","wav2vec_wer","whisper_wer","text_language", "text","verbosity_level"],
+	    "additionalProperties": False
+    }
+    dtypes = get_dtypes_from_schema(schema)
+    data = pd.read_json(jsonline, lines=True, dtype=dtypes)
+    # Workaround there group_id is set as int
+    string_columns = ['group_id']
+    for col in string_columns:
+        data[col] = data[col].astype(str)
+
     logger.info(f"***  Json parsed. {len(data)} lines. ({exec_time()})")
+    
     return data
 
 # Read configuration from a JSON file. Exit if file is invalid.
@@ -45,6 +91,9 @@ def read_config(cfile):
 
 # Save Pandas DataFrame as a JSON lines file
 def save_json(data, filename):
+    # Replace empty strings with None directly
+    data.replace("", None, inplace=True) 
+    
     with open(filename, "w", encoding="utf-8") as file:
         data.to_json(file, orient="records", lines=True, force_ascii=False)
 
@@ -123,6 +172,7 @@ def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
         "id",
         "group_id",
         "source",
+        "audio_duration",
         "audio_language",
         "previous_text",
         "translated_text_no",

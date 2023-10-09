@@ -36,42 +36,45 @@ def simplify_column_names(df):
     return df
 
 def main(args):
+    print(f"Starting to process {args.input_json}.")
     df_json = pd.read_json(args.input_json, lines=True, dtype={'id': str})
 
-    added_columns = []
+    # Create a dictionary to store the mapping from file_id to model_name
+    update_dict = {}
 
-    with Pool() as pool:
-        tsv_files = glob.glob(os.path.join(args.input_tsv_dir, "**/*.tsv"), recursive=True)
-        tsv_dfs = list(tqdm(pool.imap(read_tsv, tsv_files), total=len(tsv_files)))
-
-    for df_tsv in tsv_dfs:
-        model_name = df_tsv.columns[1]
+    for tsv_file in tqdm(glob.glob(os.path.join(args.input_tsv_dir, "**/*.tsv"), recursive=True)):
+        df_tsv = pd.read_csv(tsv_file, sep='\t', dtype={'file_id': str})
+        model_name = extract_model_name(tsv_file)
         
-        if model_name not in df_json.columns:
-            df_json[model_name] = pd.Series(dtype="object")
-            added_columns.append(model_name)
-        
-        df_json.set_index('id', inplace=True)
-        df_tsv.set_index('file_id', inplace=True)
-        df_json.update(df_tsv)
-        df_json.reset_index(inplace=True)
+        for i, row in df_tsv.iterrows():
+            file_id = row['file_id']
+            if file_id not in update_dict:
+                update_dict[file_id] = {}
+            update_dict[file_id][model_name] = row.iloc[1]
 
-    if not args.do_not_simplify_columns:
-        simplify_column_names(df_json)
+    # Update df_json using update_dict
+    # Create a dictionary to hold the index positions for each file_id
+    index_dict = {row['id']: index for index, row in df_json.iterrows()}
     
+    # Update df_json using update_dict
+    for file_id, updates in update_dict.items():
+        index = index_dict.get(file_id)
+        if index is not None:
+            for model_name, value in updates.items():
+                df_json.at[index, model_name] = value
+
+    df_json = simplify_column_names(df_json)
+
     df_json.to_json(args.output_json, orient='records', lines=True)
 
     print(f"Total rows in the output file: {len(df_json)}")
-    for col in added_columns:
-        simplified_col = col if args.do_not_simplify_columns else mapping.get(col, col)
-        print(f"{simplified_col}: {df_json[simplified_col].count()} non-NaN values")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Merge JSON and TSV files")
     parser.add_argument("--input_json", type=str, required=True, help="Path to the input JSON file")
     parser.add_argument("--input_tsv_dir", type=str, required=True, help="Directory containing input TSV files")
     parser.add_argument("--output_json", type=str, required=True, help="Path to the output JSON file")
-    parser.add_argument("--do_not_simplify_columns", action='store_true', help="Flag to prevent column name simplification")
-
+    
+    
     args = parser.parse_args()
     main(args)
