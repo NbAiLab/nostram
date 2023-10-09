@@ -3,7 +3,6 @@ import os
 import glob
 import pandas as pd
 from tqdm import tqdm
-from multiprocessing import Pool
 
 # Define the mapping of verbose column names to their simplified versions
 mapping = {
@@ -17,50 +16,71 @@ mapping = {
     'ModelH-openai-whisper-medium-English-translate-train-transcription': 'H-en-timestamp'
 }
 
-def read_tsv(tsv_file):
-    df_tsv = pd.read_csv(tsv_file, sep='\t')
-    df_tsv['file_id'] = df_tsv['file_id'].astype(str)
-    model_name = extract_model_name(tsv_file)
-    df_tsv.rename(columns={df_tsv.columns[1]: model_name}, inplace=True)
-    return df_tsv
-
-def extract_model_name(filepath):
-    model_name = filepath.split('-', 2)[-1].rsplit('.', 1)[0]
-    parent_folder = os.path.basename(os.path.dirname(filepath))
-    return f"{parent_folder}-{model_name}"
-
 def simplify_column_names(df):
+    """
+    Simplify the column names of a DataFrame based on a pre-defined mapping.
+    """
     for col in df.columns:
         if col in mapping:
             df.rename(columns={col: mapping[col]}, inplace=True)
     return df
 
+def extract_model_name(filepath):
+    """
+    Extract model name from the filepath.
+    """
+    model_name = filepath.split('-', 2)[-1].rsplit('.', 1)[0]
+    parent_folder = os.path.basename(os.path.dirname(filepath))
+    return f"{parent_folder}-{model_name}"
+
 def main(args):
+    """
+    Main function to read JSON and TSV files, merge them, and save to a new JSON file.
+    """
+    # Read the main JSON DataFrame
     df_json = pd.read_json(args.input_json, lines=True, dtype={'id': str})
 
+    # Initialize a list to store added column names
     added_columns = []
 
-    with Pool() as pool:
-        tsv_files = glob.glob(os.path.join(args.input_tsv_dir, "**/*.tsv"), recursive=True)
-        tsv_dfs = list(tqdm(pool.imap(read_tsv, tsv_files), total=len(tsv_files)))
-
-    for df_tsv in tsv_dfs:
-        model_name = df_tsv.columns[1]
+    # Loop through all TSV files in the input directory and its subdirectories
+    for tsv_file in tqdm(glob.glob(os.path.join(args.input_tsv_dir, "**/*.tsv"), recursive=True)):
         
+        # Read the current TSV DataFrame
+        df_tsv = pd.read_csv(tsv_file, sep='\t')
+        df_tsv['file_id'] = df_tsv['file_id'].astype(str)
+        
+        # Extract model name from the filepath
+        model_name = extract_model_name(tsv_file)
+        
+        # Rename the second column to match the extracted model_name
+        df_tsv.rename(columns={df_tsv.columns[1]: model_name}, inplace=True)
+        
+        # Add a new column to the JSON DataFrame if it doesn't exist
         if model_name not in df_json.columns:
             df_json[model_name] = pd.Series(dtype="object")
             added_columns.append(model_name)
         
-        df_json.set_index('id', inplace=True)
-        df_tsv.set_index('file_id', inplace=True)
-        df_json.update(df_tsv)
-        df_json.reset_index(inplace=True)
-
+        # Merge JSON and TSV DataFrames
+        df_merged = pd.merge(df_json, df_tsv[['file_id', model_name]], left_on='id', right_on='file_id', how='left', suffixes=("", "_new"))
+        
+        # Update values in the main DataFrame
+        df_merged[model_name] = df_merged.apply(lambda row: row[model_name + '_new'] if pd.notna(row[model_name + '_new']) else row[model_name], axis=1)
+        
+        # Drop redundant columns
+        df_merged.drop(columns=[model_name + '_new', 'file_id'], inplace=True)
+        
+        # Update the main DataFrame
+        df_json = df_merged
+    
+    # Simplify column names if the flag is not set
     if not args.do_not_simplify_columns:
         simplify_column_names(df_json)
     
+    # Save the merged DataFrame to a new JSON file
     df_json.to_json(args.output_json, orient='records', lines=True)
 
+    # Print some statistics
     print(f"Total rows in the output file: {len(df_json)}")
     for col in added_columns:
         simplified_col = col if args.do_not_simplify_columns else mapping.get(col, col)
