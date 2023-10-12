@@ -3,19 +3,24 @@ from typing import Optional, List, Set, Union, Tuple
 import fasttext
 from datasets.utils.download_manager import DownloadManager
 
-
 NORDIC_LID_URL = "https://huggingface.co/NbAiLab/nb-nordic-lid/resolve/main/"
 model_name = "nb-nordic-lid.bin"
 
-model = fasttext.load_model(DownloadManager().download(NORDIC_LID_URL + model_name))
-model_labels = set(label[-3:] for label in model.get_labels())
+nordic_model = fasttext.load_model(DownloadManager().download(
+    "https://huggingface.co/NbAiLab/nb-nordic-lid/resolve/main/nb-nordic-lid.bin"
+))
+model_labels = set(label[-3:] for label in nordic_model.get_labels())
+
+nb_nn_model = fasttext.load_model(DownloadManager().download(
+    "https://huggingface.co/NbAiLab/nb-nbnn-lid/tree/main/nb-nbnn-lid.ftz"
+))
 
 
 def detect_lang(
-    text: str,
-    langs: Optional[Union[List, Set]]=None,
-    threshold: float=-1.0,
-    return_proba: bool=False
+        text: str,
+        langs: Optional[Union[List, Set]] = None,
+        threshold: float = -1.0,
+        return_proba: bool = False
 ) -> Union[str, Tuple[str, float]]:
     """
     This function takes in a text string and optional arguments for a list or
@@ -29,7 +34,7 @@ def detect_lang(
 
     Args:
     - text (str): The text to detect the language of.
-    - langs (List or Set, optional): The list or set of languages to detect in 
+    - langs (List or Set, optional): The list or set of languages to detect in
         the text. Defaults to all languages in the model's labels.
     - threshold (float, optional): The minimum probability for a language to be
         considered detected. Defaults to `-1.0`.
@@ -45,7 +50,7 @@ def detect_lang(
         langs = set(langs)
     else:
         langs = model_labels
-    raw_prediction = model.predict(text, threshold=threshold, k=-1)
+    raw_prediction = nordic_model.predict(text, threshold=threshold, k=-1)
     predictions = [
         (label[-3:], min(probability, 1.0))
         for label, probability in zip(*raw_prediction)
@@ -54,12 +59,22 @@ def detect_lang(
     if not predictions:
         return ("und", 1.0) if return_proba else "und"
     else:
-        return predictions[0] if return_proba else predictions[0][0]
+        # Use Bokmål/Nynorsk model if the top prediction is Norwegian
+        norwegian_lang_codes = {"nob", "nno", "nor"}
+        if predictions[0][0] in norwegian_lang_codes:
+            raw_prediction = nb_nn_model.predict(text, threshold=threshold, k=-1)
+            predictions = [
+                (label[-3:], min(probability, 1.0))
+                for label, probability in zip(*raw_prediction)
+                if label[-3:] in norwegian_lang_codes & langs
+            ]
 
+        return predictions[0] if return_proba else predictions[0][0]
 
 
 from pydub import AudioSegment
 import os
+
 
 def extract_mp3_chunk(filename: str, start: int, end: int, output_dir: str) -> bool:
     """
@@ -83,5 +98,3 @@ def extract_mp3_chunk(filename: str, start: int, end: int, output_dir: str) -> b
 
     # Return True if the chunk was saved successfully
     return True
-
-

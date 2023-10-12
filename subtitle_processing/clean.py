@@ -21,9 +21,9 @@ import ftfy
 # from pydub import AudioSegment
 from pandarallel import pandarallel
 from util import detect_lang
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.clean_text import clean_text
-
 
 REMOVE_COL = "**REMOVE**"
 pandarallel.initialize(use_memory_fs=False)
@@ -750,14 +750,12 @@ def main(args):
         data.loc[cond, REMOVE_COL] = True
         logger.info(f'***  Filtered out "CPossible". ({exec_time()}) {show_length(data)}')
 
-
     stats = data.parallel_apply(sanitize, axis=1)
     data[REMOVE_COL] = stats["delete_line"]
     logger.debug(f"\n\n*** Full stats for sanitizing: \n{left_align(stats)}")
     logger.info(f"*** Sanitized text ({exec_time()}) {show_length(data)}")
     logger.info(f"*** Total stats: {stats.drop('text', axis=1).sum().to_dict()}")
 
-    
     data = data.groupby(["program_id", "vtt_folder"]).parallel_apply(adjust_overlapping_subtitles)
     data = data.reset_index(drop=True)
     data["timestamp_text"] = data.parallel_apply(make_timestamp_text, axis=1)
@@ -812,6 +810,7 @@ def main(args):
             mask = slice(None)
 
         if do_lang_detect:
+            # Initially, detect the language of the full program
             program_language = data[mask].groupby(["program_id", "vtt_folder"]) \
                 .parallel_apply(lambda x: detect_lang(x.text.str.cat(sep=" "), return_proba=True))
             program_language = program_language.to_dict()
@@ -831,10 +830,14 @@ def main(args):
                 if isinstance(allowed_langs, str):
                     allowed_langs = [allowed_langs]
 
+                # Assume eng and sme predictions are correct, and that short texts are in program language
                 potential_norwegian = ~data[mask]["lang_text"].isin(["eng", "sme", "nob", "nno"])
-                is_short = data[mask].text.str.split().str.len() <= 5
+                is_short = data[mask].text.str.split().str.len() <= 5  # 5 words or fewer
                 is_prog_norwegian = program_language["language"].isin(["nob", "nno"])
-                inherit_prog_lang = (potential_norwegian | is_short) & is_prog_norwegian
+                is_program_confidence_higher = program_language["confidence"] > languages["confidence"]
+                inherit_prog_lang = ((potential_norwegian | is_short)
+                                     & is_prog_norwegian
+                                     & is_program_confidence_higher)
 
                 data.loc[inherit_prog_lang, "lang_text"] = program_language[inherit_prog_lang]["language"]
                 data.loc[inherit_prog_lang, "lang_text_confidence"] = program_language[inherit_prog_lang]["confidence"]
