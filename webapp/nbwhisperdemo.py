@@ -92,6 +92,12 @@ def format_to_srt(text, timestamps):
         start_time = start_time.replace("[", "").replace(".", ",")
         end_time = end_time.replace(".", ",")
 
+        # We need to convert from the format 00:00,000 to 00:00:00,000
+        if len(start_time) == len("00:00,000"):
+            start_time = f"00:{start_time}"
+        elif len(start_time) == len("0:00:00,000"):
+            start_time = f"0{start_time}"
+
         srt_lines.append(str(counter))
         srt_lines.append(f"{start_time} --> {end_time}")
         srt_lines.append(subtitle_text.strip())
