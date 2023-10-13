@@ -848,7 +848,7 @@ def main(args):
                 invalid_lang = ~data["lang_text"].isin(allowed_langs)
                 data.loc[invalid_lang, REMOVE_COL] = True
 
-            three_to_two = {"nob": "no", "nno": "nn", "eng": "en", "sme": "se"}
+            three_to_two = {"nor": "no", "nob": "no", "nno": "nn", "eng": "en", "sme": "se"}
             data["lang_text"] = data["lang_text"].apply(lambda x: three_to_two.get(x, x))
 
             logger.info(f'***  Removed invalid languages. '

@@ -1,7 +1,11 @@
 from typing import Optional, List, Set, Union, Tuple
 
 import fasttext
-from datasets.utils.download_manager import DownloadManager
+
+try:
+    from datasets.utils.download_manager import DownloadManager
+except ImportError:
+    from datasets.download.download_manager import DownloadManager
 
 NORDIC_LID_URL = "https://huggingface.co/NbAiLab/nb-nordic-lid/resolve/main/"
 model_name = "nb-nordic-lid.bin"
@@ -12,7 +16,7 @@ nordic_model = fasttext.load_model(DownloadManager().download(
 model_labels = set(label[-3:] for label in nordic_model.get_labels())
 
 nb_nn_model = fasttext.load_model(DownloadManager().download(
-    "https://huggingface.co/NbAiLab/nb-nbnn-lid/tree/main/nb-nbnn-lid.ftz"
+    "https://huggingface.co/NbAiLab/nb-nbnn-lid/resolve/main/nb-nbnn-lid.ftz"
 ))
 
 
