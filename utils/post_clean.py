@@ -19,12 +19,13 @@ import time
 from jiwer import wer
 from fuzzywuzzy import fuzz
 from jsonschema import validate, ValidationError
+from typing import Optional, List, Set, Union, Tuple
+
+
 import fasttext
+from datasets.utils.download_manager import DownloadManager
 
 
-nb_nn_model = fasttext.load_model(DownloadManager().download(
-    "https://huggingface.co/NbAiLab/nb-nbnn-lid/tree/main/nb-nbnn-lid.ftz"
-))
 
 # Initialize the start time
 start_time = time.time()
@@ -40,63 +41,6 @@ def get_dtypes_from_schema(schema):
             elif value["type"] == "string":
                 dtypes[key] = str
     return dtypes
-
-
-def detect_lang(
-        text: str,
-        langs: Optional[Union[List, Set]] = None,
-        threshold: float = -1.0,
-        return_proba: bool = False
-) -> Union[str, Tuple[str, float]]:
-    """
-    This function takes in a text string and optional arguments for a list or
-    set of languages to detect, a threshold for minimum probability of language
-    detection, and a boolean for returning the probability of detected language.
-    It uses a pre-defined model to predict the language of the text and returns
-    the detected ISO-639-3 language code as a string. If the return_proba
-    argument is set to True, it will also return a tuple with the language code
-    and the probability of detection. If no language is detected, it will
-    return "und" as the language code.
-
-    Args:
-    - text (str): The text to detect the language of.
-    - langs (List or Set, optional): The list or set of languages to detect in
-        the text. Defaults to all languages in the model's labels.
-    - threshold (float, optional): The minimum probability for a language to be
-        considered detected. Defaults to `-1.0`.
-    - return_proba (bool, optional): Whether to return the language code and
-        probability of detection as a tuple. Defaults to `False`.
-
-    Returns:
-    str or Tuple[str, float]: The detected language code as a string, or a
-        tuple with the language code and probability of detection if
-        return_proba is set to True.
-    """
-
-    if langs:
-        langs = set(langs)
-    else:
-        langs = model_labels
-    raw_prediction = nordic_model.predict(text, threshold=threshold, k=-1)
-    predictions = [
-        (label[-3:], min(probability, 1.0))
-        for label, probability in zip(*raw_prediction)
-        if label[-3:] in langs
-    ]
-    if not predictions:
-        return ("und", 1.0) if return_proba else "und"
-    else:
-        # Use Bokmål/Nynorsk model if the top prediction is Norwegian
-        norwegian_lang_codes = {"nob", "nno", "nor"}
-        if predictions[0][0] in norwegian_lang_codes:
-            raw_prediction = nb_nn_model.predict(text, threshold=threshold, k=-1)
-            predictions = [
-                (label[-3:], min(probability, 1.0))
-                for label, probability in zip(*raw_prediction)
-                if label[-3:] in norwegian_lang_codes & langs
-            ]
-
-        return predictions[0] if return_proba else predictions[0][0]
 
 
 # Calculate and return the elapsed execution time
@@ -225,9 +169,44 @@ def prepare_dataframe_columns(data: pd.DataFrame) -> (pd.DataFrame, list):
             data[col] = 0
     
     return data, new_cols
+
+
+
+
 def correct_language(data: pd.DataFrame, config: dict) -> pd.DataFrame:
-    # Do language magic stuff here
-    print("langauage is corrected. Returning data frame....")
+    # Load the FastText model
+    nb_nn_model = fasttext.load_model(DownloadManager().download("https://huggingface.co/NbAiLab/nb-nbnn-lid/resolve/main/nb-nbnn-lid.ftz"))
+
+    # Function to predict language and return the simplified code along with its confidence
+    def predict_language(text):
+        prediction, confidence = nb_nn_model.predict(text)
+        code = prediction[0][-3:]
+        simplified_code = code[:2]
+        return simplified_code, confidence[0]
+
+    # Group by 'group_id' and concatenate text
+    grouped = data.groupby('group_id')['text'].apply(lambda x: ' '.join(x)).reset_index()
+
+    # Update the text_language field and store confidence for the group
+    grouped[['text_language', 'group_confidence']] = grouped['text'].apply(lambda x: pd.Series(predict_language(x)))
+
+    # Merge back with the original data
+    data = pd.merge(data.drop('text_language', axis=1), grouped[['group_id', 'text_language', 'group_confidence']], on='group_id')
+
+    # Additional step: Update text_language line by line if individual confidence > config["override_group_lang_detect_threshold"]
+    for idx, row in data.iterrows():
+        new_code, individual_confidence = predict_language(row['text'])
+        if individual_confidence > config["override_group_lang_detect_threshold"]:
+            data.at[idx, 'text_language'] = new_code
+
+    return data.drop('group_confidence', axis=1)
+
+# Assuming DownloadManager is defined or imported elsewhere
+
+
+    # Update the text_language field based on the text field
+    data['text_language'] = data.apply(update_and_compare, axis=1)
+    
     return data
 
 def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
