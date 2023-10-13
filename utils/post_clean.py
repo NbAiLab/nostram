@@ -163,6 +163,9 @@ def prepare_dataframe_columns(data: pd.DataFrame) -> (pd.DataFrame, list):
             data[col] = 0
     
     return data, new_cols
+def correct_language(data: pd.DataFrame, config: dict) -> pd.DataFrame:
+    # Do language magic stuff here
+    return data
 
 def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
     # Removes rows and columns from the DataFrame based on predefined conditions.
@@ -467,6 +470,9 @@ def main(args):
     # Prepare dataframe columns
     data, new_cols = prepare_dataframe_columns(data)
 
+    # Fix language codes
+    data = correct_language(data, config)
+    
     # Initialize pandarallel with progress_bar
     pandarallel.initialize(progress_bar=True)
 
