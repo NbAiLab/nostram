@@ -165,6 +165,7 @@ def prepare_dataframe_columns(data: pd.DataFrame) -> (pd.DataFrame, list):
     return data, new_cols
 def correct_language(data: pd.DataFrame, config: dict) -> pd.DataFrame:
     # Do language magic stuff here
+    print("langauage is corrected. Returning data frame....")
     return data
 
 def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
