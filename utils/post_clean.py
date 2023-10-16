@@ -220,10 +220,8 @@ def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
         "audio_duration",
         "audio_language",
         "previous_text",
-        "translated_text_no",
-        "translated_text_nn",
-        "translated_text_en",
-        "translated_text_es",
+        "text_en",
+        "timestamped_text_en",
         "timestamped_text",
         "wav2vec_wer",
         "whisper_wer",
@@ -235,6 +233,14 @@ def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
     # Remove rows where 'delete' column is 1
     data = data[data["delete"] != 1]
 
+    # Remove SettingWithCopyWarning
+    pd.options.mode.chained_assignment = None  # Suppress the warning
+    
+    # Add columns that are not in approved_cols if they exist
+    for column in approved_cols:
+        if column not in data.columns:
+            data[column] = None
+    
     # Keep only approved columns
     data = data[approved_cols]
     
@@ -367,14 +373,15 @@ def clean_text(text):
     return re.sub(r"[^a-zA-ZæøåÆØÅ]", " ", str(text).lower()).strip()
 
 
-# Function to analyze a single row of data
-def analyze_row(row, *config):
+# Function to analyse a single row of data
+def analyse_row(row, *config):
     config = config[0]
-    # min_length = config[0]['min_seq_length']
-    # max_length = config[0]['max_seq_length']
-
+    
+    # No captions shuld be excempt from analysis
+    if not config.get("analyse_nocaptions", False) and row["text"] == "<|nocaptions|>":
+        return pd.Series([0] * 15)  # Return a series with all zeros
+     
     # Process target and prediction data
-
     clean_target = clean_text(row["text"])
     num_words_target = len(clean_target.split())
     lang_cols = config["predictions"][row["text_language"]]
@@ -473,6 +480,15 @@ def analyze_row(row, *config):
     
     delete = 1 if any(conditions) else 0
     
+    # We override all these settings for nrk_tv_translate, and only use the max_wer_translate_threshold
+    if row["source"] == "nrk_tv_translate":
+        if whisper_wer > config["max_wer_translate_threshold"]:
+            delete = 1
+        else:
+            delete = 0
+            
+    
+    
     # Return results
     return pd.Series(
         [
@@ -493,6 +509,38 @@ def analyze_row(row, *config):
             delete,
         ]
     )
+
+import string
+
+def calculate_verbosity_level(row, config):
+    # Get the verbosity prediction column based on text_language
+    text_language = row["text_language"]
+    verbosity_column = config["verbosity_predictions"].get(text_language)
+
+    if verbosity_column:
+        # Extract the content from the specified verbosity column and text
+        verbosity_content = row[verbosity_column]
+        text = row["text"]
+
+        # Remove punctuation and non-alphanumeric characters
+        translator = str.maketrans('', '', string.punctuation)
+        verbosity_content = verbosity_content.translate(translator)
+        text = text.translate(translator)
+
+        # Calculate the number of words in verbosity_content and text
+        words_in_verbosity = len(verbosity_content.split())
+        words_in_text = len(text.split())
+
+        # Ensure there's no division by zero
+        if words_in_text == 0:
+            return 0
+        else:
+            # Calculate the verbosity level as a percentage
+            verbosity_level = (words_in_verbosity / words_in_text) * 100
+            return int(verbosity_level)
+    else:
+        # If no verbosity prediction column is found, return None
+        return None
 
 
 # Main function to execute the script
@@ -519,7 +567,12 @@ def main(args):
     pandarallel.initialize(progress_bar=True)
 
     # Perform parallel analysis
-    data[new_cols] = data.parallel_apply(analyze_row, axis=1, args=(config,))
+    data[new_cols] = data.parallel_apply(analyse_row, axis=1, args=(config,))
+    #data[new_cols] = data.apply(analyse_row, axis=1, args=(config,))
+
+
+    # Calculate verbosity level
+    data["verbosity_level"] = data.parallel_apply(calculate_verbosity_level, axis=1, args=(config,))
 
     # Statistics
     calculate_stats(data, config)
