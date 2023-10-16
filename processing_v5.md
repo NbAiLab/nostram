@@ -389,13 +389,13 @@ Before processing, we need to copy the right config.json
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram/utils";
-result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v6_clean";
+result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v7";
 
 # Clean corpus using unmodified train/validation files (these do not need config.json)
 for f in $base_dir/inference_4/inference_result/merged/*train*.json; do python /home/perk/nostram/utils/post_clean.py --input_filename $f --output_folder $result_dir/train --prune; done
 
 # Very clean corpus
-result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v6_veryclean";
-for f in $base_dir/inference_4/inference_result/merged/*train*.json; do python /home/perk/nostram/utils/post_clean.py --input_filename $f --output_folder $result_dir/train --prune; done
+# result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v6_veryclean";
+# for f in $base_dir/inference_4/inference_result/merged/*train*.json; do python /home/perk/nostram/utils/post_clean.py --input_filename $f --output_folder $result_dir/train --prune; done
 
 ```
