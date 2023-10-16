@@ -405,7 +405,7 @@ We will need some files to translate. We will use the nrk_tv since these are all
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram";
-result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v7/train";
+result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translation_files";
 
 # Extract the parts we want to translate
 jq -c 'select(.source == "nrk_tv" and .text_language=="no")' $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_no_train.json > $result_dir/nrk_no_train_nrk_tv.json
@@ -413,6 +413,7 @@ jq -c 'select(.source == "nrk_tv" and .text_language=="no")' $base_dir/inference
 # This will give a file of roughly 3M lines, or 350M characters. The price is $20 per million characters, so this should be roughly $7k.
 # Lets convert it to the needed tsv-format. Note that this is considerably shorter (in lines), since we are grouping by id
 python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/nrk_no_train_nrk_tv.json --output_file_name $result_dir/nrk_no_train_nrk_tv.tsv
+
 
 
 
