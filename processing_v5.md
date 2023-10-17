@@ -487,8 +487,9 @@ gsutil cp gs://mtrans/nst_train/output/mtrans_nst_train_nst_train_en_translation
 for file in $(ls $translated_dir/*.tsv); do cat $file >> $translated_dir/concatenated_file.tsv; tail -c1 $file | read -r _ || echo >> $translated_dir/concatenated_file.tsv; done
 
 # Do the actual merging. This needs to be done for all the files.
-$base_dir/inference_4/inference_processed/ncc_speech_v7/
+processed_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/processed/train"
 
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nst_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $processed_dir/nst_train.json
 
 TODO create validation script....
 
