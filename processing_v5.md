@@ -431,11 +431,23 @@ python $program_dir/translate/create_translate_tsv.py --input_file_name $result_
 head -n 5000 $result_dir/audio_books_no_train.tsv > $result_dir/audio_books_no_train1.tsv
 tail -n +5001 $result_dir/audio_books_no_train.tsv | head -n 5000 > $result_dir/audio_books_no_train2.tsv
 tail -n +10001 $result_dir/audio_books_no_train.tsv > $result_dir/audio_books_no_train3.tsv
-head -n 5000 stortinget_train_no.tsv > stortinget_train_no1.tsv
-tail -n +5001 stortinget_train_no.tsv > stortinget_train_no2.tsv
+head -n 5000 $result_dir/stortinget_train_no.tsv > $result_dir/stortinget_train_no1.tsv
+tail -n +5001 $result_dir/stortinget_train_no.tsv > $result_dir/stortinget_train_no2.tsv
 
 # Transfer all the files to the Google bucket
+gsutil cp audio_books_no_train1.tsv gs://mtrans/audio_books_no_train1/
+gsutil cp audio_books_no_train2.tsv gs://mtrans/audio_books_no_train2/
+gsutil cp audio_books_no_train3.tsv gs://mtrans/audio_books_no_train3/
+gsutil cp stortinget_train_no1.tsv gs://mtrans/stortinget_train_no1/
+gsutil cp stortinget_train_no2.tsv gs://mtrans/stortinget_train_no2/
+gsutil cp nst_train.tsv gs://mtrans/nst_train/
 
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train1/audio_books_no_train1.tsv --output_bucket_folder gs://mtrans/audio_books_no_train1/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train2/audio_books_no_train2.tsv --output_bucket_folder gs://mtrans/audio_books_no_train2/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train3/audio_books_no_train3.tsv --output_bucket_folder gs://mtrans/audio_books_no_train3/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/stortinget_train_no1/stortinget_train_no1.tsv --output_bucket_folder gs://mtrans/stortinget_train_no1/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/stortinget_train_no2/stortinget_train_no1.tsv --output_bucket_folder gs://mtrans/stortinget_train_no2/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nst_train/nst_train.tsv --output_bucket_folder gs://mtrans/nst_train/output/ --timeout 72000
 
 # Do a sample translation
 gsutil cp small.tsv gs://mtrans/test2/small.tsv
