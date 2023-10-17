@@ -416,7 +416,7 @@ program_dir="/home/perk/nostram";
 result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translation_files";
 translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated"
 processed_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/processed/train"
-final_dir="final_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v7"
+final_dir="final_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/final/ncc_speech_v7"
 
 # Extract the parts we want to translate from NRK
 jq -c 'select(.source == "nrk_tv" and .text_language=="no")' $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_no_train.json > $result_dir/nrk_no_train_nrk_tv.json
@@ -498,11 +498,11 @@ for file in $(ls $translated_dir/*.tsv); do cat $file >> $translated_dir/concate
 
 # Do the actual merging. This needs to be done for all the files.
 python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/audio_books_nn_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/audio_books_nn_train.json
-python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/audio_books_no_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/trainaudio_books_no_train.json
-python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_nn_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/trainnrk_nn_train.json
-python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_no_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/trainnrk_no_train.json
-python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nst_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/trainnst_train.json
-python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/stortinget_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/trainstortinget_train.json
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/audio_books_no_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/audio_books_no_train.json
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_nn_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/nrk_nn_train.json
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_no_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/nrk_no_train.json
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nst_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/nst_train.json
+python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name $base_dir/inference_4/inference_processed/ncc_speech_v7/train/stortinget_train.json --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/train/stortinget_train.json
 
 
 
