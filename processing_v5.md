@@ -421,6 +421,22 @@ jq -c 'select(.source == "stortinget" and .text_language=="no")' $base_dir/infer
 # Lets convert it to the needed tsv-format. Note that this is considerably shorter (in lines), since we are grouping by id
 python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/nrk_no_train_nrk_tv.json --output_file_name $result_dir/nrk_no_train_nrk_tv.tsv
 
+python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/audio_books_no_train.json --output_file_name $result_dir/audio_books_no_train.tsv --target_field text
+
+python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/nst_train.json --output_file_name $result_dir/nst_train.tsv --target_field text
+
+python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/stortinget_train_no.json --output_file_name $result_dir/stortinget_train_no.tsv --target_field text
+
+# Split the fields so they are below the Google Translate limit
+head -n 5000 $result_dir/audio_books_no_train.tsv > $result_dir/audio_books_no_train1.tsv
+tail -n +5001 $result_dir/audio_books_no_train.tsv | head -n 5000 > $result_dir/audio_books_no_train2.tsv
+tail -n +10001 $result_dir/audio_books_no_train.tsv > $result_dir/audio_books_no_train3.tsv
+head -n 5000 stortinget_train_no.tsv > stortinget_train_no1.tsv
+tail -n +5001 stortinget_train_no.tsv > stortinget_train_no2.tsv
+
+# Transfer all the files to the Google bucket
+
+
 # Do a sample translation
 gsutil cp small.tsv gs://mtrans/test2/small.tsv
 ## Update nostram/translate/translate.py
