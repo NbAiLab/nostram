@@ -442,12 +442,56 @@ gsutil cp stortinget_train_no1.tsv gs://mtrans/stortinget_train_no1/
 gsutil cp stortinget_train_no2.tsv gs://mtrans/stortinget_train_no2/
 gsutil cp nst_train.tsv gs://mtrans/nst_train/
 
+# Do the tranalation (there will probably be other codes for nrk in the new run
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part0/nrk_part0.tsv --output_bucket_folder gs://mtrans/nrk_part0/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part1a/nrk_part1a.tsv --output_bucket_folder gs://mtrans/nrk_part1b/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part1b/nrk_part1b.tsv --output_bucket_folder gs://mtrans/nrk_part1b/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part2a/nrk_part2a.tsv --output_bucket_folder gs://mtrans/nrk_part2a/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part2b/nrk_part2b.tsv --output_bucket_folder gs://mtrans/nrk_part2b/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part3a/nrk_part3a.tsv --output_bucket_folder gs://mtrans/nrk_part3a/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part3b/nrk_part3b.tsv --output_bucket_folder gs://mtrans/nrk_part3b/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part4a/nrk_part4a.tsv --output_bucket_folder gs://mtrans/nrk_part4a/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part4b/nrk_part4b.tsv --output_bucket_folder gs://mtrans/nrk_part4b/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part5a/nrk_part5a.tsv --output_bucket_folder gs://mtrans/nrk_part5a/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part5b/nrk_part5b.tsv --output_bucket_folder gs://mtrans/nrk_part5b/output/ --timeout 72000
 python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train1/audio_books_no_train1.tsv --output_bucket_folder gs://mtrans/audio_books_no_train1/output/ --timeout 72000
 python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train2/audio_books_no_train2.tsv --output_bucket_folder gs://mtrans/audio_books_no_train2/output/ --timeout 72000
 python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/audio_books_no_train3/audio_books_no_train3.tsv --output_bucket_folder gs://mtrans/audio_books_no_train3/output/ --timeout 72000
 python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/stortinget_train_no1/stortinget_train_no1.tsv --output_bucket_folder gs://mtrans/stortinget_train_no1/output/ --timeout 72000
-python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/stortinget_train_no2/stortinget_train_no1.tsv --output_bucket_folder gs://mtrans/stortinget_train_no2/output/ --timeout 72000
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/stortinget_train_no2/stortinget_train_no2.tsv --output_bucket_folder gs://mtrans/stortinget_train_no2/output/ --timeout 72000
 python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nst_train/nst_train.tsv --output_bucket_folder gs://mtrans/nst_train/output/ --timeout 72000
+
+# Copy the finished translations locally
+translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated/"
+gsutil cp gs://mtrans/nrk_part0/output/mtrans_nrk_part0_nrk_no_train_nrk_tv_part0_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part1b/output/mtrans_nrk_part1a_nrk_no_train_nrk_tv_part1a_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part1b/output/mtrans_nrk_part1b_nrk_no_train_nrk_tv_part1b_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part2a/output/mtrans_nrk_part2a_nrk_no_train_nrk_tv_part2a_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part2b/output/mtrans_nrk_part2b_nrk_no_train_nrk_tv_part2b_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part3a/output/mtrans_nrk_part3a_nrk_no_train_nrk_tv_part3a_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part3b/output/mtrans_nrk_part3b_nrk_no_train_nrk_tv_part3b_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part4a/output/mtrans_nrk_part4a_nrk_no_train_nrk_tv_part4a_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part4b/output/mtrans_nrk_part4b_nrk_no_train_nrk_tv_part4b_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part5a/output/mtrans_nrk_part5a_nrk_no_train_nrk_tv_part5a_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nrk_part5b/output/mtrans_nrk_part5b_nrk_no_train_nrk_tv_part5b_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/audio_books_no_train1/output/mtrans_audio_books_no_train1_audio_books_no_train1_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/audio_books_no_train2/output/mtrans_audio_books_no_train2_audio_books_no_train2_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/audio_books_no_train3/output/mtrans_audio_books_no_train3_audio_books_no_train3_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/stortinget_train_no1/output/mtrans_stortinget_train_no1_stortinget_train_no1_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/stortinget_train_no2/output/mtrans_stortinget_train_no2_stortinget_train_no2_en_translations.tsv $translated_dir
+gsutil cp gs://mtrans/nst_train/output/mtrans_nst_train_nst_train_en_translations.tsv $translated_dir
+
+# Note that some of these might have a header. This needs to be deleted manually
+
+# Concatenate into one file:
+for file in $(ls $translated_dir/*.tsv); do cat $file >> $translated_dir/concatenated_file.tsv; tail -c1 $file | read -r _ || echo >> $translated_dir/concatenated_file.tsv; done
+
+# Do the actual merging. This needs to be done for all the files.
+$base_dir/inference_4/inference_processed/ncc_speech_v7/
+
+
+TODO create validation script....
+
 
 # Do a sample translation
 gsutil cp small.tsv gs://mtrans/test2/small.tsv
