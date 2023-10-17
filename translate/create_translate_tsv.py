@@ -5,24 +5,23 @@ import os
 def process_file(input_file_name, output_file_name):
     # Read the JSON lines file
     data = pd.read_json(input_file_name, lines=True)
-
-    # Ignore lines with "" in the `text` field
-    data = data[data['text'] != ""]
+    # Ignore lines with "" in the `timestamped_text` field
+    data = data[data['timestamped_text'] != ""]
 
     # Replace None in group_id with "xxx"
     data['group_id'] = data['group_id'].fillna('xxx')
 
-    # Group by group_id and aggregate the id and text fields
+    # Group by group_id and aggregate the id and timestamped_text fields
     aggregated = data.groupby('group_id').agg({
         'id': lambda ids: ','.join(ids),
-        'text': lambda texts: '<p>'.join(texts)
+        'timestamped_text': lambda texts: '<p>'.join(texts)
     }).reset_index()
 
     # Split entries longer than 9000 characters
     result = []
     for _, row in aggregated.iterrows():
         ids = row['id'].split(',')
-        texts = row['text'].split('<p>')
+        texts = row['timestamped_text'].split('<p>')
         current_id = []
         current_text = []
         current_length = 0
@@ -39,7 +38,7 @@ def process_file(input_file_name, output_file_name):
         result.append((','.join(current_id), '<p>'.join(current_text)))
 
     # Convert result to a DataFrame and write it to a TSV file
-    result_df = pd.DataFrame(result, columns=['id', 'text'])
+    result_df = pd.DataFrame(result, columns=['id', 'timestamped_text'])
     result_df.to_csv(output_file_name, sep='\t', index=False)
 
 if __name__ == "__main__":
@@ -54,4 +53,3 @@ if __name__ == "__main__":
 
     process_file(args.input_file_name, args.output_file_name)
     print(f"Successfully processed '{args.input_file_name}' and wrote results to '{args.output_file_name}'.")
-

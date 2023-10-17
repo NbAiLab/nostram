@@ -1,44 +1,25 @@
+import argparse
 from google.cloud import translate
 
-
-def batch_translate_text(
-    input_uri: str = "gs://mtrans/test/nostram_translate_sample_translate_programs_en_translations.tsv",
-    output_uri: str = "gs://mtrans/test/output/",
-    project_id: str = "north-390910",
-    timeout: int = 180
-) -> translate.TranslateTextResponse:
-    """Translates a batch of texts on GCS and stores the result in a GCS location.
-
-    Args:
-        input_uri: The input URI of the texts to be translated.
-        output_uri: The output URI of the translated texts.
-        project_id: The ID of the project that owns the destination bucket.
-        timeout: The timeout for this batch translation operation.
-
-    Returns:
-        The translated texts.
-    """
-
+def batch_translate_text(input_bucket_file: str, output_bucket_folder: str, source_language_code: str = "no", target_language_codes: list = ["en", "es"], timeout: int = 3600) -> None:
     client = translate.TranslationServiceClient()
 
     location = "us-central1"
-    # Supported file types: https://cloud.google.com/translate/docs/supported-formats
-    gcs_source = {"input_uri": input_uri}
-
+    gcs_source = {"input_uri": input_bucket_file}
     input_configs_element = {
         "gcs_source": gcs_source,
         "mime_type": "text/html",  # Can be "text/plain" or "text/html".
     }
-    gcs_destination = {"output_uri_prefix": output_uri}
+    gcs_destination = {"output_uri_prefix": output_bucket_folder}
     output_config = {"gcs_destination": gcs_destination}
+    project_id = "north-390910"  # This should be parameterized if it changes often
     parent = f"projects/{project_id}/locations/{location}"
 
-    # Supported language codes: https://cloud.google.com/translate/docs/languages
     operation = client.batch_translate_text(
         request={
             "parent": parent,
-            "source_language_code": "no",
-            "target_language_codes": ["en","es"],  # Up to 10 language codes here.
+            "source_language_code": source_language_code,
+            "target_language_codes": target_language_codes,
             "input_configs": [input_configs_element],
             "output_config": output_config,
         }
@@ -50,6 +31,13 @@ def batch_translate_text(
     print(f"Total Characters: {response.total_characters}")
     print(f"Translated Characters: {response.translated_characters}")
 
-    return response
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_bucket_file", required=True, help="The input URI of the texts to be translated.")
+    parser.add_argument("--output_bucket_folder", required=True, help="The output URI folder for the translated texts.")
+    parser.add_argument("--source_language_code", default="no", help="The source language code.")
+    parser.add_argument("--target_language_codes", nargs='+', default=["en"], help="The target language codes.")
+    parser.add_argument("--timeout", type=int, default=7200, help="The timeout for this batch translation operation.")
+    args = parser.parse_args()
 
-batch_translate_text()
+    batch_translate_text(args.input_bucket_file, args.output_bucket_folder, args.source_language_code, args.target_language_codes, args.timeout)
