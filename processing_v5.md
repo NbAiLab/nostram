@@ -407,14 +407,42 @@ base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram";
 result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translation_files";
 
-# Extract the parts we want to translate
+# Extract the parts we want to translate from NRK
 jq -c 'select(.source == "nrk_tv" and .text_language=="no")' $base_dir/inference_4/inference_processed/ncc_speech_v7/train/nrk_no_train.json > $result_dir/nrk_no_train_nrk_tv.json
+
+# Do the same for Stortinget
+jq -c 'select(.source == "stortinget" and .text_language=="no")' $base_dir/inference_4/inference_processed/ncc_speech_v7/train/stortinget_train.json > $result_dir/stortinget_train_no.json
+
+# Audio books and nst can just be copies
+
+# nst can just be copied since it is Bokmål only
 
 # This will give a file of roughly 3M lines, or 350M characters. The price is $20 per million characters, so this should be roughly $7k.
 # Lets convert it to the needed tsv-format. Note that this is considerably shorter (in lines), since we are grouping by id
 python $program_dir/translate/create_translate_tsv.py --input_file_name $result_dir/nrk_no_train_nrk_tv.json --output_file_name $result_dir/nrk_no_train_nrk_tv.tsv
 
+# Do a sample translation
+gsutil cp small.tsv gs://mtrans/test2/small.tsv
+## Update nostram/translate/translate.py
+## Start a tmux window so it does not interrupt
+## pip install --upgrade google-cloud-translate
+## python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/test2/small.tsv --output_bucket_folder gs://mtrans/test2/output/ --timeout 7200
+# copy the translated file back
+# gsutil cp gs://mtrans/test2/output/mtrans_test2_small_en_translations.tsv /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translation_files/
+# Merge the files
+# python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name nrk_no_train_nrk_tv.json --input_tsv_file_name mtrans_test2_small_en_translations.tsv --output_file_name nrk_no_train_merged.json
 
+# Now the real thing
+awk '{ print > "nrk_no_train_nrk_tv_part" int((NR-1)/5000) ".tsv" }' nrk_no_train_nrk_tv.tsv
+
+# Sample line - in my previous setup, I needed to make it slightly different (split in 10000 and then in 2 because they were too large.
+gsutil cp nrk_no_train_nrk_tv_part0.tsv gs://mtrans/nrk_part0/
+python $program_dir/translate/translate.py --input_bucket_file gs://mtrans/nrk_part0/nrk_no_train_nrk_tv_part0.tsv --output_bucket_folder gs://mtrans/nrk_part0/output/ --timeout 720000
+# copy all the translated file back
+gsutil -m cp gs://mtrans/nrk*/output/mtrans_*.tsv /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translation_files/
+
+# Merge the files
+# python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_name nrk_no_train_nrk_tv.json --input_tsv_file_name mtrans_test2_small_en_translations.tsv --output_file_name nrk_no_train_merged.json
 
 
 
