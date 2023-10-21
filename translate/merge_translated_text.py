@@ -30,17 +30,17 @@ def process_file(input_json_file_name, input_tsv_file_name, output_file_name):
         for id_, translated_text in zip(ids, translated_texts):
             if id_ == 'id':
                 continue
-            elif id_ not in original:
-                print(f"Error: ID '{id_}' from tsv file was not found in the original json lines file.")
+
+            if id_ not in original:
+                #print(f"Debug: ID {id_} not found in original JSON.")
                 continue
 
-            # Unescape HTML entities
             timestamped_text = html.unescape(translated_text.strip())
-
             clean_text = ' '.join(re.sub(pattern, '', timestamped_text).split())
-
-            original[id_]['timestamped_text_en'] = timestamped_text
             original[id_]['text_en'] = clean_text
+
+            if pattern.search(timestamped_text):
+                original[id_]['timestamped_text_en'] = timestamped_text
 
     with open(output_file_name, 'w') as f:
         for obj in original.values():

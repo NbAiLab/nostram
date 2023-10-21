@@ -33,6 +33,28 @@ schema = {
     "additionalProperties": False
 }
 
+new_schema = {
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "group_id": {"type": ["string", "null"]},
+        "source": {"type": "string", "enum": ["nrk_tv", "nrk_tv_translate", "nrk_tv_silence", "nrk_tv_veryshort","stortinget", "nst", "fleurs", "audio_books"]},
+        "audio_language": {"type": ["string", "null"]},
+        "audio_duration": {"type": "integer"},
+        "previous_text": {"type": ["string", "null"]},
+        "text_language": {"type": "string", "enum": ["no", "nn", "en", "es"]},
+        "text": {"type": "string"},
+        "text_en": {"type": ["string", "null"]},
+        "timestamped_text_en": {"type": ["string", "null"]},
+        "timestamped_text": {"type": ["string", "null"]},
+        "wav2vec_wer": {"type": ["number", "null"]},
+        "whisper_wer": {"type": ["number", "null"]},
+        "verbosity_level": {"type": ["integer", "null"]}
+    },
+    "required": ["id", "group_id", "source", "audio_language","previous_text","timestamped_text_en","text_en","timestamped_text","wav2vec_wer","whisper_wer","text_language", "text","verbosity_level"],
+    "additionalProperties": False
+}
+
 def validate_json_format(data):
     try:
         for item in data:
@@ -45,15 +67,17 @@ def validate_json_format(data):
 
 from tqdm import tqdm
 
-def validate_schema(data):
+
+
+def validate_schema(data, schema_to_use):
     try:
         with tqdm(total=len(data), desc="Validating dataset") as pbar:
             for item in data:
-                validate(item, schema)
+                validate(item, schema_to_use)
                 pbar.update(1)
-        print("\nSUCCESS: No errors in Scream dataset specifications")
+        print("\nSUCCESS: No errors in dataset specifications")
     except ValidationError as e:
-        print(f"ERROR: Invalid data according to Scream dataset specifications: {e}")
+        print(f"ERROR: Invalid data according to dataset specifications: {e}")
         return False
     return True
 
@@ -195,14 +219,22 @@ def convert_milliseconds(ms):
     return f"{hours:,} hours, {minutes} minutes, {seconds} seconds"
 
 def main(args):
+    print(f"Validating dataset '{args.filename}'")
+    
     with open(args.filename, 'r') as f:
         reader = jsonlines.Reader(f)
         data = []
         for line in itertools.islice(reader.iter(), args.n):
             data.append(line)
 
+    success, df = validate_pandas_import(data)
+    if not success:
+        return
+
+    # Automatically select the appropriate schema based on the presence of "text_en" column
+    schema_to_use = new_schema if "text_en" in df.columns else schema
+
     if args.statistics_only:
-        _, df = validate_pandas_import(data)
         if not df.empty:
             calculate_statistics(df, args.detailed)
     else:
@@ -211,17 +243,12 @@ def main(args):
             return
 
         # Scream dataset specifications validation
-        if not validate_schema(data):
-            return
-
-        # Validation for loading into pandas
-        success, df = validate_pandas_import(data)
-        if not success:
+        if not validate_schema(data, schema_to_use):
             return
 
         # Calculate statistics
         calculate_statistics(df, args.detailed)
-
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Validate a Scream dataset.')
     parser.add_argument('filename', type=str, help='the JSONL file to validate')

@@ -201,9 +201,6 @@ def correct_language(data: pd.DataFrame, config: dict) -> pd.DataFrame:
 
     return data.drop('group_confidence', axis=1)
 
-# Assuming DownloadManager is defined or imported elsewhere
-
-
     # Update the text_language field based on the text field
     data['text_language'] = data.apply(update_and_compare, axis=1)
     
@@ -567,13 +564,17 @@ def main(args):
     pandarallel.initialize(progress_bar=True)
 
     # Perform parallel analysis
-    data[new_cols] = data.parallel_apply(analyse_row, axis=1, args=(config,))
-    #data[new_cols] = data.apply(analyse_row, axis=1, args=(config,))
+    # Just a quick hack so that it is able to still process the fleurs files
+    try:
+        data[new_cols] = data.parallel_apply(analyse_row, axis=1, args=(config,))
+        #data[new_cols] = data.apply(analyse_row, axis=1, args=(config,))
 
+        # Calculate verbosity level
+        data["verbosity_level"] = data.parallel_apply(calculate_verbosity_level, axis=1, args=(config,))
 
-    # Calculate verbosity level
-    data["verbosity_level"] = data.parallel_apply(calculate_verbosity_level, axis=1, args=(config,))
-
+    except:
+        print("Error in analysing. Probably because no inference is done. Just skipping this step.")
+    
     # Statistics
     calculate_stats(data, config)
     
