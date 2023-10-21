@@ -14,62 +14,47 @@ tokenizer = AutoTokenizer.from_pretrained("openai/whisper-tiny")
 def process_line(line, max_tokens_text, max_tokens_prev, max_tokens_en, max_tokens_timestamped_text, max_tokens_timestamped_text_en, verbose):
     deletion_reasons = {"text": 0, "previous_text": 0, "text_en": 0, "timestamped_text": 0, "timestamped_text_en": 0}
 
-    try:
-        data = json.loads(line)
-        text = data.get("text", "")
-        previous_text = data.get("previous_text", "")
-        text_en = data.get("text_en", "")
-        timestamped_text = data.get("timestamped_text", "")
-        timestamped_text_en = data.get("timestamped_text_en", "")
+    data = json.loads(line)
+    modified_data = data.copy()  # Create a copy of the data to potentially modify
 
-        # Handle None values
-        fields = [text, previous_text, text_en, timestamped_text, timestamped_text_en]
-        fields = ["" if f is None else f for f in fields]
-        text, previous_text, text_en, timestamped_text, timestamped_text_en = fields
+    delete_line = False
 
-        tokens = {
-            "text": tokenizer.tokenize(text),
-            "previous_text": tokenizer.tokenize(previous_text),
-            "text_en": tokenizer.tokenize(text_en),
-            "timestamped_text": tokenizer.tokenize(timestamped_text),
-            "timestamped_text_en": tokenizer.tokenize(timestamped_text_en)
-        }
+    fields_to_check = {
+        "text": max_tokens_text,
+        "text_en": max_tokens_en,
+        "timestamped_text": max_tokens_timestamped_text,
+        "timestamped_text_en": max_tokens_timestamped_text_en
+    }
 
-        max_tokens = {
-            "text": max_tokens_text,
-            "previous_text": max_tokens_prev,
-            "text_en": max_tokens_en,
-            "timestamped_text": max_tokens_timestamped_text,
-            "timestamped_text_en": max_tokens_timestamped_text_en
-        }
+    for field, max_tokens in fields_to_check.items():
+        current_text = modified_data.get(field, "")
+        if current_text is None:
+            current_text = ""
+        tokens = tokenizer.tokenize(current_text)
 
-        delete_line = False
+        if len(tokens) > max_tokens:
+            deletion_reasons[field] += 1
+            if verbose:
+                print(f"Line exceeds {field} with {len(tokens)} tokens. Content: {line}")
+            else:
+                print(f"Line exceeds {field} with {len(tokens)} tokens.")
+            delete_line = True
 
-        for field, token_list in tokens.items():
-            if len(token_list) > max_tokens[field]:
-                reason = f"Line exceeds {field} with {len(token_list)} tokens."
-                deletion_reasons[field] += 1
+    # Handle previous_text separately
+    prev_text_tokens = tokenizer.tokenize(modified_data.get("previous_text", "") or "")
+    if len(prev_text_tokens) > max_tokens_prev:
+        deletion_reasons["previous_text"] += 1
+        modified_data["previous_text"] = None
+        reason = f"Line exceeds previous_text with {len(prev_text_tokens)} tokens. Setting to None."
+        if verbose:
+            print(reason + f" Original Content: {line}")
+        else:
+            print(reason)
 
-                if field == "previous_text":
-                    data["previous_text"] = None
-                    if verbose:
-                        print(reason + f" Setting to None. Original Content: {line}")
-                    else:
-                        print(reason + " Setting to None.")
-                else:
-                    if verbose:
-                        print(reason + f" Content: {line}")
-                    else:
-                        print(reason)
-                    delete_line = True
-
-        if delete_line:
-            return None, deletion_reasons
-
-        return json.dumps(data), deletion_reasons
-    except Exception as e:
-        print(f"Error processing line: {line}. Reason: {str(e)}")
+    if delete_line:
         return None, deletion_reasons
+
+    return json.dumps(modified_data), deletion_reasons
 
 def main(args):
     # Read the input file
@@ -110,11 +95,13 @@ def main(args):
     modified_prev_text = df['reasons'].apply(lambda x: x["previous_text"]).sum()
     print(f"Modified 'previous_text' by setting to None: {modified_prev_text}")
 
-    processed_lines = df['processed'].dropna().tolist()
+    processed_df = df['processed'].dropna()
+    processed_lines = processed_df.tolist()
 
     if args.output_file:
         with open(args.output_file, "w") as f:
-            f.writelines(processed_lines)
+            for line in processed_lines:
+                f.write(line + "\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Tokenize and filter json-lines data.")
