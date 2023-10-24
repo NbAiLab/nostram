@@ -19,42 +19,51 @@ from whisper_jax import FlaxWhisperPipline
 cc.initialize_cache("./jax_cache")
 
 import argparse
+import re
 
-# Define valid checkpoints, corresponding batch sizes, and titles
+# Define valid checkpoints and corresponding batch sizes
 valid_checkpoints = {
-    "NbAiLab/nb-whisper-tiny-beta": 32,
-    "NbAiLab/nb-whisper-base-beta": 32,
-    "NbAiLab/nb-whisper-small-beta": 32,
-    "NbAiLab/nb-whisper-medium-beta": 32,
-    "NbAiLab/nb-whisper-large-beta": 32,
-}
-
-titles = {
-    "NbAiLab/nb-whisper-tiny-beta": "NB Whisper Tiny BETA ⚡️",
-    "NbAiLab/nb-whisper-base-beta": "NB Whisper Base BETA ⚡️",
-    "NbAiLab/nb-whisper-small-beta": "NB Whisper Small BETA ⚡️",
-    "NbAiLab/nb-whisper-medium-beta": "NB Whisper Medium BETA ⚡️",
-    "NbAiLab/nb-whisper-large-beta": "NB Whisper Large BETA ⚡️",
+    "tiny": 128,
+    "base": 128,
+    "small": 64,
+    "medium": 32,
+    "large": 8,
 }
 
 # Create the parser
 parser = argparse.ArgumentParser(description='Run the transcription script with a specific checkpoint.')
 parser.add_argument('--checkpoint', type=str, required=True,
-                    help='The checkpoint to use for the model. Must be one of: ' + ', '.join(valid_checkpoints.keys()))
+                    help='The checkpoint to use for the model.')
 
 # Parse the arguments
 args = parser.parse_args()
 
 # Check if the checkpoint is valid
-if args.checkpoint not in valid_checkpoints:
-    print(
-        f"Error: The specified checkpoint is not supported. Please choose from: {', '.join(valid_checkpoints.keys())}")
+found_batch_size = None
+for keyword, batch_size in valid_checkpoints.items():
+    if keyword in args.checkpoint.lower():
+        found_batch_size = batch_size
+        break
+
+if found_batch_size is None:
+    print(f"Error: The specified checkpoint is not supported.")
     exit(1)
 
-# If the checkpoint is valid, set it, the corresponding batch size, and title
+# If the checkpoint is valid, set it and the corresponding batch size
 checkpoint = args.checkpoint
-BATCH_SIZE = valid_checkpoints[checkpoint]
-title = titles[checkpoint]
+BATCH_SIZE = found_batch_size
+
+# Generate title from the checkpoint name
+title_parts = checkpoint.split("/")
+title = title_parts[-1]  # Take the part after the slash
+title = title.replace("-", " ")  # Replace hyphens with spaces
+
+# Apply Camel case
+title = re.sub(r"(^|\s)([a-z])", lambda m: m.group(1) + m.group(2).upper(), title)
+
+# Uppercase specific words
+title = title.replace("nb", "NB").replace("beta", "BETA")
+
 
 CHUNK_LENGTH_S = 30
 NUM_PROC = 32
@@ -64,7 +73,7 @@ YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 description = f"This is a demo of the {title}. " \
               "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). "
 
-article = f"Backend running JAX on a TPU v4-8 through the generous support of the " \
+article = f"Backend running JAX on a TPU v5 through the generous support of the " \
           f"[TRC](https://sites.research.google/trc/about/) programme. " \
           f"Whisper JAX [code](https://github.com/sanchit-gandhi/whisper-jax) and Gradio demo by 🤗 Hugging Face."
 
@@ -308,7 +317,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Checkbox(default=False, label="Return timestamps"),
+            gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
@@ -326,7 +335,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Audio(source="upload", optional=True, label="Audio file", type="filepath"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Checkbox(default=False, label="Return timestamps"),
+            gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
@@ -344,7 +353,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Checkbox(default=False, label="Return timestamps"),
+            gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
             gr.outputs.HTML(label="Video"),
@@ -355,9 +364,9 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", False],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", False],
-            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", False]
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", True],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0bk", "Bokmål", True],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", True]
         ],
         cache_examples=False,
         description=description,
