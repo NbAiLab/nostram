@@ -117,6 +117,29 @@ def format_to_srt(text, timestamps):
     return "\n".join(srt_lines)
 
 
+def format_to_vtt(text, timestamps):
+    if not timestamps:
+        return None
+    
+    vtt_lines = ["WEBVTT"]
+    counter = 1
+    for chunk in text.split("\n"):
+        start_time, rest = chunk.split(" -> ")
+        end_time, subtitle_text = rest.split("] ")
+
+        start_time = start_time.replace("[", "").replace(",", ".")
+        end_time = end_time.replace(".", ",").replace(",", ".")
+
+        vtt_lines.append(f"{counter}")
+        vtt_lines.append(f"{start_time} --> {end_time}")
+        vtt_lines.append(subtitle_text.strip())
+        vtt_lines.append("")
+
+        counter += 1
+
+    return "\n".join(vtt_lines)
+
+
 def save_to_temp_file(srt_content, suffix):
     """
     Saves the SRT content to a temporary file and returns the path to that file.
@@ -191,8 +214,8 @@ if __name__ == "__main__":
             language = "nn"
             task = "transcribe"
         else:
-            language = "no"
-            task = "translate"
+            language = "en"
+            task = "transcribe"
 
         model_outputs = []
         start_time = time.time()
@@ -236,17 +259,21 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        text, runtime = tqdm_generate(inputs, language=language,
-                                      return_timestamps=return_timestamps, progress=progress)
+        text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
 
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
-            file_path = save_to_temp_file(srt_content, ".srt")
+            srt_file_path = save_to_temp_file(srt_content, ".srt")
+			
+            vtt_content = format_to_vtt(text, return_timestamps)
+            vtt_file_path = save_to_temp_file(vtt_content, ".vtt")
         else:
-            file_path = save_to_temp_file(text, ".txt")
+            txt_content = text
+            srt_file_path = save_to_temp_file(txt_content, ".txt")
+            vtt_file_path = save_to_temp_file(txt_content, ".txt")
 
-        return text, runtime, file_path
-
+        return text, runtime, srt_file_path, vtt_file_path
+        
 
     def _return_yt_html_embed(yt_url):
         video_id = yt_url.split("?v=")[-1]
@@ -340,7 +367,7 @@ if __name__ == "__main__":
         outputs=[
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download")
+            gr.outputs.File(label="Download"),
         ],
         allow_flagging="never",
         title=title,
@@ -359,7 +386,7 @@ if __name__ == "__main__":
             gr.outputs.HTML(label="Video"),
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download .srt")
+            gr.outputs.File(label="Download")
         ],
         allow_flagging="never",
         title=title,
