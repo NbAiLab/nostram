@@ -279,38 +279,37 @@ if __name__ == "__main__":
 
     def transcribe_chunked_audio(inputs, language, return_timestamps, progress=gr.Progress()):
         progress(0, desc="Loading audio file...")
-        # Existing logging and error handling here
+        logger.info("loading audio file...")
+        if inputs is None:
+            logger.warning("No audio file")
+            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+        file_size_mb = os.stat(inputs).st_size / (1024 * 1024)
+        if file_size_mb > FILE_LIMIT_MB:
+            logger.warning("Max file size exceeded")
+            raise gr.Error(
+                f"File size exceeds file size limit. Got file of size {file_size_mb:.2f}MB for a limit of {FILE_LIMIT_MB}MB."
+            )
 
-        is_api_request = 'GRADIO_API' in os.environ and os.environ['GRADIO_API'] == '1'
-        
-        # Existing logic to load and transcribe audio
-        
+        with open(inputs, "rb") as f:
+            inputs = f.read()
+
+        inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
+        inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
+        logger.info("done loading")
+        text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
+
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
             srt_file_path = save_to_temp_file(srt_content, ".srt")
-            
+			
             vtt_content = format_to_vtt(text, return_timestamps)
             vtt_file_path = save_to_temp_file(vtt_content, ".vtt")
-
-            if is_api_request:
-                with open(vtt_file_path, 'rb') as f:
-                    vtt_content = f.read()
-                vtt_base64_content = base64.b64encode(vtt_content).decode('utf-8')
-                return text, None, vtt_base64_content
-            else:
-                return text, runtime, vtt_file_path
         else:
             txt_content = text
             srt_file_path = save_to_temp_file(txt_content, ".txt")
             vtt_file_path = save_to_temp_file(txt_content, ".txt")
 
-            if is_api_request:
-                with open(vtt_file_path, 'rb') as f:
-                    vtt_content = f.read()
-                vtt_base64_content = base64.b64encode(vtt_content).decode('utf-8')
-                return text, None, vtt_base64_content
-            else:
-                return text, runtime, vtt_file_path
+        return text, runtime, vtt_file_path, srt_file_path
         
 
     def _return_yt_html_embed(yt_url):
