@@ -19,8 +19,8 @@ def process_audio_data(dataset_path, split, model_path, num_examples):
     model.to(device)
 
     # Header for the Markdown table
-    print("| Original Text | Text Language | Language | Prediction |")
-    print("|---------------|---------------|----------|------------|")
+    print("| Original Text | Prediction |")
+    print("|---------------|------------|")
 
     # Process each example in the dataset
     for idx, example in enumerate(dataset):
@@ -35,13 +35,13 @@ def process_audio_data(dataset_path, split, model_path, num_examples):
 
         # Generate the token IDs using the model
         language = example["text_language"]
-        predicted_ids = model.generate(input_features, task="transcribe", language=language, max_new_tokens=256)
+        predicted_ids = model.generate(input_features, task="transcribe", language=language,  return_timestamps=True,max_new_tokens=256)
         
         # Decode the token IDs to get the transcription
-        transcription = processor.batch_decode(predicted_ids, skip_special_tokens=False)[0]
+        transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=True,skip_special_tokens=False)[0]
         
         # Print in the Markdown table format
-        print(f"| {example['text']} | {example['text_language']} | {example['language']} | {transcription} |")
+        print(f"| {example['text']} | {transcription} |")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process audio data using a Whisper model.")
