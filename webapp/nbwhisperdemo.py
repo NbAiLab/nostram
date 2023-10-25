@@ -298,12 +298,12 @@ if __name__ == "__main__":
         logger.info("done loading")
         
         text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
-
+        from flask import request
         is_api_request = 'GRADIO_API' in os.environ and os.environ['GRADIO_API'] == '1'
         logger.info(f"is_api_request: {is_api_request}")
         logger.info(f"GRADIO_API: {os.environ.get('GRADIO_API', 'Not Set')}")
         logger.info(f"Environment variables: {os.environ}")
-
+        logger.info(f"Request: {request}")
 
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
