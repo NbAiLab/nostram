@@ -299,6 +299,7 @@ if __name__ == "__main__":
         text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
 
         is_api_request = 'GRADIO_API' in os.environ and os.environ['GRADIO_API'] == '1'
+        logger.debug(f"is_api_request: {is_api_request}")
 
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
