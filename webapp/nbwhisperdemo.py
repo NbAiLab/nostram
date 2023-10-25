@@ -88,12 +88,22 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
+def convert_to_proper_time_format(time):
+    time_parts = time.split(":")
+    if len(time_parts) == 2:
+        return f"00:{time}"
+    elif len(time_parts) == 3 and len(time_parts[0]) == 1:
+        return f"0{time}"
+    else:
+        return time
+
 def format_to_srt(text, timestamps):
     if not timestamps:
         return None
 
     srt_lines = []
     counter = 1
+
     for chunk in text.split("\n"):
         start_time, rest = chunk.split(" -> ")
         end_time, subtitle_text = rest.split("] ")
@@ -101,11 +111,8 @@ def format_to_srt(text, timestamps):
         start_time = start_time.replace("[", "").replace(".", ",")
         end_time = end_time.replace(".", ",")
 
-        # We need to convert from the format 00:00,000 to 00:00:00,000
-        if len(start_time) == len("00:00,000"):
-            start_time = f"00:{start_time}"
-        elif len(start_time) == len("0:00:00,000"):
-            start_time = f"0{start_time}"
+        start_time = convert_to_proper_time_format(start_time)
+        end_time = convert_to_proper_time_format(end_time)
 
         srt_lines.append(str(counter))
         srt_lines.append(f"{start_time} --> {end_time}")
@@ -115,6 +122,18 @@ def format_to_srt(text, timestamps):
         counter += 1
 
     return "\n".join(srt_lines)
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Format text and timestamps to SRT format.')
+    parser.add_argument('--input_text', required=True, type=str, help='Text to be converted to SRT format.')
+    parser.add_argument('--input_timestamps', type=str, help='Timestamps for the text.')
+    args = parser.parse_args()
+
+    srt_content = format_to_srt(args.input_text, args.input_timestamps)
+    if srt_content:
+        print(srt_content)
 
 
 def format_to_vtt(text, timestamps):
