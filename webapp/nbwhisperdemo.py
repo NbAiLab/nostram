@@ -296,32 +296,20 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        
         text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
-        from flask import request
-        is_api_request = 'GRADIO_API' in os.environ and os.environ['GRADIO_API'] == '1'
-        logger.info(f"is_api_request: {is_api_request}")
-        logger.info(f"GRADIO_API: {os.environ.get('GRADIO_API', 'Not Set')}")
-        logger.info(f"Environment variables: {os.environ}")
-        logger.info(f"Request: {request}")
 
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
+            srt_file_path = save_to_temp_file(srt_content, ".srt")
+			
             vtt_content = format_to_vtt(text, return_timestamps)
-
-            if is_api_request:
-                return text, None, vtt_content
-            else:
-                vtt_file_path = save_to_temp_file(vtt_content, ".vtt")
-                return text, runtime, vtt_file_path
+            vtt_file_path = save_to_temp_file(vtt_content, ".vtt")
         else:
             txt_content = text
-            if is_api_request:
-                return text, None, txt_content
-            else:
-                txt_file_path = save_to_temp_file(txt_content, ".txt")
-                return text, runtime, txt_file_path
+            srt_file_path = save_to_temp_file(txt_content, ".txt")
+            vtt_file_path = save_to_temp_file(txt_content, ".txt")
 
+        return text, runtime, vtt_file_path, srt_file_path
         
 
     def _return_yt_html_embed(yt_url):
