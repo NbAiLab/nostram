@@ -25,7 +25,7 @@ import re
 valid_checkpoints = {
     "tiny": 128,
     "base": 128,
-    "small": 64,
+    "small": 256,
     "medium": 32,
     "large": 8,
 }
