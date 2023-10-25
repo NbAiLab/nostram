@@ -123,18 +123,6 @@ def format_to_srt(text, timestamps):
 
     return "\n".join(srt_lines)
 
-if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser(description='Format text and timestamps to SRT format.')
-    parser.add_argument('--input_text', required=True, type=str, help='Text to be converted to SRT format.')
-    parser.add_argument('--input_timestamps', type=str, help='Timestamps for the text.')
-    args = parser.parse_args()
-
-    srt_content = format_to_srt(args.input_text, args.input_timestamps)
-    if srt_content:
-        print(srt_content)
-
 
 def format_to_vtt(text, timestamps):
     if not timestamps:
