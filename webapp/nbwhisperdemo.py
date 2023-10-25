@@ -296,10 +296,14 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
+        
         text, runtime = tqdm_generate(inputs, language=language,return_timestamps=return_timestamps, progress=progress)
 
         is_api_request = 'GRADIO_API' in os.environ and os.environ['GRADIO_API'] == '1'
         logger.info(f"is_api_request: {is_api_request}")
+        logger.info(f"GRADIO_API: {os.environ.get('GRADIO_API', 'Not Set')}")
+        logger.info(f"Environment variables: {os.environ}")
+
 
         if return_timestamps:
             srt_content = format_to_srt(text, return_timestamps)
