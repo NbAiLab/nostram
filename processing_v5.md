@@ -507,4 +507,16 @@ python /home/perk/nostram/translate/merge_translated_text.py --input_json_file_n
 
 
 ```
+# Styletune_6
+These steps are only for creating the styletuning-dataset.
+
+```bash
+base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
+program_dir="/home/perk/nostram/utils";
+result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
+merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged_test/";
+
+python $program_dir/process_stye --input_folder $merged_dir --output_file $result_dir/nst.jsonl --subcorpus nst
+
+```
 
