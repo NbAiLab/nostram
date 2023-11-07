@@ -525,10 +525,10 @@ python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" 
 python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus clean_verbatim_no
 python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus clean_verbatim_nn
 
-# Do simple deduplication into one single file
-jq -s 'reduce .[] as $item ({}; .[$item.id + $item.task] //= $item) | map(.)' $process_dir/*.jsonl > $transcribe_dir/transcribe.jsonl
+# Do simple deduplication into one single file (this is extremely slow, so only use for small files)
+# jq -s 'reduce .[] as $item ({}; .[$item.id + $item.task] //= $item) | map(.)' $process_dir/*.jsonl > $transcribe_dir/transcribe.jsonl
 
-
+python $program_dir/deduplicate.py --input_folder $process_dir --output_file $transcribe_dir/transcribe.jsonl
 
 ```
 
