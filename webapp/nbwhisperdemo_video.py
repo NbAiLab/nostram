@@ -34,8 +34,7 @@ valid_checkpoints = {
 
 # Create the parser
 parser = argparse.ArgumentParser(description='Run the transcription script with a specific checkpoint.')
-parser.add_argument('--checkpoint', type=str,
-                    help='The checkpoint to use for the model.', default="NbAiLab/nb-whisper-tiny-beta")  # FIXME
+parser.add_argument('--checkpoint', type=str, help='The checkpoint to use for the model.', required=True)
 
 # Parse the arguments
 args = parser.parse_args()
@@ -58,21 +57,21 @@ BATCH_SIZE = found_batch_size
 # Generate title from the checkpoint name
 title_parts = checkpoint.split("/")
 title = title_parts[-1]  # Take the part after the slash
-title = title.replace("-", " ")  # Replace hyphens with spaces
+title = title.replace("-", " ").lower()  # Replace hyphens with spaces
 
-# Apply Camel case
-title = re.sub(r"(^|\s)([a-z])", lambda m: m.group(1) + m.group(2).upper(), title)
-
-# Uppercase specific words
-title = title.replace("nb", "NB").replace("beta", "BETA")
+title = title.title()
+title = title.replace("Nb Whisper", "NB-Whisper")
+title = title.replace("Beta", "(beta)")
+title = title.replace("Rc", "RC")
 
 CHUNK_LENGTH_S = 30
 NUM_PROC = 32
 FILE_LIMIT_MB = 1000
 YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
 
-description = f"This is a demo of the {title}. " \
-              "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/). "
+description = f"This is a demo of the {title} model.<br>" \
+              "The model is trained by the [AI-Lab at the National Library of Norway](https://ai.nb.no/).<br>" \
+              "Please submit feedback [here](https://forms.gle/cCQzdox9N2ENDczV7)."
 
 article = f"Backend running JAX on a TPU v5 through the generous support of the " \
           f"[TRC](https://sites.research.google/trc/about/) programme. " \
@@ -103,7 +102,18 @@ def format_to_vtt(text, timestamps):
     if not timestamps:
         return None
 
-    vtt_lines = ["WEBVTT"]
+    vtt_lines = [
+        f"WEBVTT",
+        "",
+        "NOTE",
+        f"Denne transkripsjonen er autogenerert av Nasjonalbibliotekets {title} basert på OpenAIs Whisper-modell.",
+        f"Se detaljer og last ned modellen her: https://huggingface.co/{checkpoint}.",
+        "",
+        "0",
+        "00:00:00.000 --> 00:00:06.000",
+        f"(Automatisk teksting av {title})",
+        ""
+    ]
     counter = 1
     for chunk in text.split("\n"):
         try:
@@ -119,9 +129,16 @@ def format_to_vtt(text, timestamps):
         start_time = convert_to_proper_time_format(start_time)
         end_time = convert_to_proper_time_format(end_time)
 
+        # Don't let the disclaimer overlap with the first subtitle
+        if start_time.startswith("00:00:0") and int(start_time[7]) < 6:
+            vtt_lines[7] = vtt_lines[7].replace("00:00:06.000", start_time)
+
+        subtitle_text = subtitle_text.strip()
+        subtitle_text = subtitle_text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
         vtt_lines.append(str(counter))
         vtt_lines.append(f"{start_time} --> {end_time}")
-        vtt_lines.append(subtitle_text.strip())
+        vtt_lines.append(subtitle_text)
         vtt_lines.append("")
 
         counter += 1
@@ -154,29 +171,6 @@ def format_to_srt(text, timestamps):
         counter += 1
 
     return "\n".join(srt_lines)
-
-
-def format_to_vtt(text, timestamps):
-    if not timestamps:
-        return None
-
-    vtt_lines = ["WEBVTT"]
-    counter = 1
-    for chunk in text.split("\n"):
-        start_time, rest = chunk.split(" -> ")
-        end_time, subtitle_text = rest.split("] ")
-
-        start_time = start_time.replace("[", "").replace(",", ".")
-        end_time = end_time.replace(".", ",").replace(",", ".")
-
-        vtt_lines.append(f"{counter}")
-        vtt_lines.append(f"{start_time} --> {end_time}")
-        vtt_lines.append(subtitle_text.strip())
-        vtt_lines.append("")
-
-        counter += 1
-
-    return "\n".join(vtt_lines)
 
 
 def save_to_temp_file(srt_content, suffix):
@@ -293,9 +287,6 @@ if __name__ == "__main__":
                 f"File size exceeds file size limit. Got file of size {file_size_mb:.2f}MB for a limit of {FILE_LIMIT_MB}MB."
             )
 
-        with open(file_path, "rb") as f:
-            file_contents = f.read()
-
         if file_path.endswith(".mp4"):
             # Load video file
             video = AudioSegment.from_file(file_path, "mp4")
@@ -305,7 +296,17 @@ if __name__ == "__main__":
             video.export(audio_path_pydub, format="wav")
             with open(audio_path_pydub, "rb") as f:
                 file_contents = f.read()
-            os.remove(audio_path_pydub)
+            # os.remove(audio_path_pydub)
+        else:
+            with open(file_path, "rb") as f:
+                file_contents = f.read()
+
+            # Save all-black video to display subtitles on
+            video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
+            ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720   -i {file_path} '
+                          f'-shortest -fflags +shortest {video_file_path}')
+            os.system(ffmpeg_cmd)
+            file_path = video_file_path
 
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
@@ -325,11 +326,13 @@ if __name__ == "__main__":
 
         if file_path.endswith(".mp4"):
             value = [file_path, vtt_file_path] if return_timestamps else file_path
-            o0 = youtube.output_components[1].update(visible=True, value=value)
+            o0 = youtube.output_components[0].update(visible=True, value=value)
+            o1 = youtube.output_components[1].update(visible=False)
         else:
             o0 = youtube.output_components[1].update(visible=False)
+            o1 = youtube.output_components[1].update(visible=True, value=file_path)
 
-        return o0, text, runtime, vtt_file_path, srt_file_path
+        return o0, o1, text, runtime, vtt_file_path, srt_file_path
 
 
     def _return_yt_html_embed(yt_url):
@@ -371,7 +374,8 @@ if __name__ == "__main__":
                 raise gr.Error(str(err))
 
 
-    def transcribe_youtube(yt_url, language, return_timestamps, use_youtube_player, progress=gr.Progress()):
+    def transcribe_youtube(yt_url, language, return_timestamps, progress=gr.Progress()):
+        use_youtube_player = False
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
         html_embed_str = _return_yt_html_embed(yt_url)
@@ -431,6 +435,7 @@ if __name__ == "__main__":
         ],
         outputs=[
             gr.Video(label="Video", visible=False),
+            gr.Audio(label="Audio", visible=False),
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
             gr.outputs.File(label="Download"),
@@ -447,7 +452,7 @@ if __name__ == "__main__":
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
-            gr.inputs.Checkbox(default=False, label="Use YouTube player"),
+            # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
         outputs=[
             gr.outputs.HTML(label="Video"),
