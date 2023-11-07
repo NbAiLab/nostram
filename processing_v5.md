@@ -512,11 +512,38 @@ These steps are only for creating the styletuning-dataset.
 
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
-program_dir="/home/perk/nostram/styletuning";
-result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
-merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged_test/";
+program_dir="/home/perk/nostram";
+process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
+process_semantic_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style";
+translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated"
+merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged/";
+dedup_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/dedup_style";
+post_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/post_style";
+final_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/final_style";
 
-python $program_dir/process_style.py --input_folder $merged_dir --output_file $result_dir/nst.jsonl --subcorpus nst
+# Create verbose-transcribe
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus nst
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus ellipses
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus hesitation
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_no
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_nn
 
+# Create semantic-translate
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus nst_semantic
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus audio_books_semantic
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus stortinget_semantic
+
+# Do simple deduplication into one single file
+python $program_dir/styletuning/deduplicate.py --input_folder $process_verbose_dir --output_file $dedup_dir/transcribe.jsonl
+python $program_dir/styletuning/deduplicate.py --input_folder $process_semantic_dir --output_file $dedup_dir/translate.jsonl
+
+# Process and prune
+# First copy a valid config-file from a previous file.
+python $program_dir/utils/post_clean.py --input_filename $dedup_dir/transcribe.jsonl --output_folder $post_dir --prune
+python $program_dir/utils/post_clean.py --input_filename $dedup_dir/translate.jsonl --output_folder $post_dir --prune
+
+# Translate
+python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/transcribe.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/transcribe.jsonl
+python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/translate.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/translate.jsonl
 ```
 
