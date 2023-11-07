@@ -513,10 +513,22 @@ These steps are only for creating the styletuning-dataset.
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram/styletuning";
-result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
-merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged_test/";
+process_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
+merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged/";
+transcribe_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/transcribe_style";
 
-python $program_dir/process_style.py --input_folder $merged_dir --output_file $result_dir/nst.jsonl --subcorpus nst
+
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus nst
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus ellipses
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus hesitation
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus nst
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus clean_verbatim_no
+python $program_dir/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_dir" --subcorpus clean_verbatim_nn
+
+# Do simple deduplication into one single file
+jq -s 'reduce .[] as $item ({}; .[$item.id + $item.task] //= $item) | map(.)' $process_dir/*.jsonl > $transcribe_dir/transcribe.jsonl
+
+
 
 ```
 
