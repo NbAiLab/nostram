@@ -1,6 +1,7 @@
 import logging
 import math
 import os
+import shutil
 import tempfile
 import time
 from multiprocessing import Pool
@@ -98,9 +99,12 @@ def convert_to_proper_time_format(time):
         return time
 
 
-def format_to_vtt(text, timestamps):
+def format_to_vtt(text, timestamps, style=None):
     if not timestamps:
         return None
+
+    if style is None:
+        style = ""
 
     vtt_lines = [
         f"WEBVTT",
@@ -110,7 +114,7 @@ def format_to_vtt(text, timestamps):
         f"Se detaljer og last ned modellen her: https://huggingface.co/{checkpoint}.",
         "",
         "0",
-        "00:00:00.000 --> 00:00:06.000",
+        f"00:00:00.000 --> 00:00:06.000 {style}".strip(),
         f"(Automatisk teksting av {title})",
         ""
     ]
@@ -136,14 +140,39 @@ def format_to_vtt(text, timestamps):
         subtitle_text = subtitle_text.strip()
         subtitle_text = subtitle_text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
+        subtitle_text = split_long_lines(subtitle_text)
+
         vtt_lines.append(str(counter))
-        vtt_lines.append(f"{start_time} --> {end_time}")
+        vtt_lines.append(f"{start_time} --> {end_time} {style}".strip())
         vtt_lines.append(subtitle_text)
         vtt_lines.append("")
 
         counter += 1
 
     return "\n".join(vtt_lines)
+
+
+def split_long_lines(subtitle_text):
+    lines = 1 + len(subtitle_text) // 60
+    if lines > 1:
+        original_text = subtitle_text
+        # Split into multiple lines
+        words = subtitle_text.split(" ")
+        total_len = len(subtitle_text)
+        target_len = total_len / lines
+
+        word_len = [len(word) + 1 for word in words if word]
+        totals = np.cumsum(word_len)
+
+        indices = []
+        for l in range(lines - 1):
+            idx = np.argmin(np.abs((l + 1) * target_len - totals))
+            indices.append(idx + 1)
+
+        subtitle_text = "\n".join(" ".join(words[i:j]) for i, j in zip([None] + indices, indices + [None]))
+        if original_text != subtitle_text.replace("\n", " "):
+            print("Hei")
+    return subtitle_text
 
 
 def format_to_srt(text, timestamps):
@@ -171,16 +200,6 @@ def format_to_srt(text, timestamps):
         counter += 1
 
     return "\n".join(srt_lines)
-
-
-def save_to_temp_file(srt_content, suffix):
-    """
-    Saves the SRT content to a temporary file and returns the path to that file.
-    """
-    # Create a temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, mode="w") as f:
-        f.write(srt_content)
-    return f.name
 
 
 def identity(batch):
@@ -274,12 +293,14 @@ if __name__ == "__main__":
 
 
     def transcribe_chunked_audio(file, language, return_timestamps, progress=gr.Progress()):
+        tmpdirname = tempfile.mkdtemp()
         progress(0, desc="Loading audio file...")
         logger.info("loading audio file...")
         if file is None:
             logger.warning("No audio file")
             raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-        file_path = file.name
+        file_path = os.path.join(tmpdirname, file.name)
+        shutil.move(file.name, file_path)
         file_size_mb = os.stat(file_path).st_size / (1024 * 1024)
         if file_size_mb > FILE_LIMIT_MB:
             logger.warning("Max file size exceeded")
@@ -296,43 +317,49 @@ if __name__ == "__main__":
             video.export(audio_path_pydub, format="wav")
             with open(audio_path_pydub, "rb") as f:
                 file_contents = f.read()
-            # os.remove(audio_path_pydub)
+            # os.remove(audio_path_pydub) # not needed anymore since it's in the temp directory
         else:
             with open(file_path, "rb") as f:
                 file_contents = f.read()
 
             # Save all-black video to display subtitles on
             video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
-            ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720   -i {file_path} '
-                          f'-shortest -fflags +shortest {video_file_path}')
+            ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" '
+                          f'-shortest -fflags +shortest -loglevel error "{video_file_path}"')
             os.system(ffmpeg_cmd)
             file_path = video_file_path
 
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        text, runtime = tqdm_generate(inputs, language=language, return_timestamps=return_timestamps, progress=progress)
+        text, runtime = tqdm_generate(inputs, language=language, return_timestamps=return_timestamps,
+                                      progress=progress)
 
         if return_timestamps:
-            srt_content = format_to_srt(text, return_timestamps)
-            srt_file_path = save_to_temp_file(srt_content, ".srt")
-
-            vtt_content = format_to_vtt(text, return_timestamps)
-            vtt_file_path = save_to_temp_file(vtt_content, ".vtt")
+            transcript_content = format_to_vtt(text, return_timestamps,
+                                               style="line:50% align:center position:50% size:100%")
+            subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
+            with open(subtitle_display, "w") as f:
+                f.write(transcript_content)
+            transcript_content = format_to_vtt(text, return_timestamps)
+            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
-            txt_content = text
-            srt_file_path = save_to_temp_file(txt_content, ".txt")
-            vtt_file_path = save_to_temp_file(txt_content, ".txt")
+            transcript_content = text
+            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
+            subtitle_display = None
+
+        with open(transcript_file_path, "w") as f:
+            f.write(transcript_content)
 
         if file_path.endswith(".mp4"):
-            value = [file_path, vtt_file_path] if return_timestamps else file_path
+            value = [file_path, subtitle_display] if subtitle_display is not None else file_path
             o0 = youtube.output_components[0].update(visible=True, value=value)
             o1 = youtube.output_components[1].update(visible=False)
         else:
             o0 = youtube.output_components[1].update(visible=False)
             o1 = youtube.output_components[1].update(visible=True, value=file_path)
 
-        return o0, o1, text, runtime, vtt_file_path, srt_file_path
+        return o0, o1, text, runtime, transcript_file_path
 
 
     def _return_yt_html_embed(yt_url):
@@ -344,7 +371,7 @@ if __name__ == "__main__":
         return HTML_str
 
 
-    def download_yt_audio(yt_url, filename, video=False):
+    def download_yt_audio(yt_url, folder, video=False):
         info_loader = youtube_dl.YoutubeDL()
         try:
             info = info_loader.extract_info(yt_url, download=False)
@@ -365,13 +392,18 @@ if __name__ == "__main__":
             file_length_hms = time.strftime("%HH:%MM:%SS", time.gmtime(file_length_s))
             raise gr.Error(f"Maximum YouTube length is {yt_length_limit_hms}, got {file_length_hms} YouTube video.")
 
+        fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}.mp4")
+
         video = "bestvideo[height <=? 720]" if video else "worstvideo"
-        ydl_opts = {"outtmpl": filename, "format": f"{video}[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"}
+        ydl_opts = {"outtmpl": fpath, "format": f"{video}[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"}
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
                 ydl.download([yt_url])
             except youtube_dl.utils.ExtractorError as err:
                 raise gr.Error(str(err))
+
+        # Return ID
+        return fpath
 
 
     def transcribe_youtube(yt_url, language, return_timestamps, progress=gr.Progress()):
@@ -379,9 +411,9 @@ if __name__ == "__main__":
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
         html_embed_str = _return_yt_html_embed(yt_url)
-        with tempfile.NamedTemporaryFile(delete=True, suffix=".mp4", mode="wb") as f:
-            video_filepath = f.name  # We just use it to generate a path
-        download_yt_audio(yt_url, video_filepath, video=return_timestamps)
+
+        tmpdirname = tempfile.mkdtemp()
+        video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
 
         with open(video_filepath, "rb") as f:
             inputs = f.read()
@@ -393,19 +425,24 @@ if __name__ == "__main__":
                                       return_timestamps=return_timestamps, progress=progress)
 
         if return_timestamps:
-            vtt_content = format_to_vtt(text, return_timestamps)
-            vtt_filepath = save_to_temp_file(vtt_content, ".vtt")
+            transcript_content = format_to_vtt(text, return_timestamps)
+            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", video_filepath)
         else:
-            vtt_filepath = save_to_temp_file(text, ".txt")
+            transcript_content = text
+            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", video_filepath)
+
+        with open(transcript_file_path, "w") as f:
+            f.write(transcript_content)
 
         if use_youtube_player:
             o0 = youtube.output_components[0].update(visible=True, value=html_embed_str)
             o1 = youtube.output_components[1].update(visible=False)
         else:
             o0 = youtube.output_components[0].update(visible=False)
-            value = [video_filepath, vtt_filepath] if return_timestamps else video_filepath
+            value = [video_filepath, transcript_file_path] if return_timestamps else video_filepath
             o1 = youtube.output_components[1].update(visible=True, value=value)
-        return o0, o1, text, runtime, vtt_filepath
+
+        return o0, o1, text, runtime, transcript_file_path
 
 
     microphone_chunked = gr.Interface(
