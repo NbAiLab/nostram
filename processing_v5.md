@@ -545,5 +545,17 @@ python $program_dir/utils/post_clean.py --input_filename $dedup_dir/translate.js
 # Translate
 python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/transcribe.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/transcribe.jsonl
 python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/translate.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/translate.jsonl
+
+# Create dataset
+mkdir $base_dir/styletune_6/ncc_speech_styling_v1/
+mkdir $base_dir/styletune_6/ncc_speech_styling_v1/train/
+mkdir $base_dir/styletune_6/ncc_speech_styling_v1/test/
+mkdir $base_dir/styletune_6/ncc_speech_styling_v1/validation
+cp $base_dir/styletune_6/final_style/*.jsonl $base_dir/styletune_6/ncc_speech_styling_v1/train/
+
+for f in $base_dir/translation_5/final/test/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/test/"$(basename "$f")"; done
+for f in $base_dir/translation_5/final/validation/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/validation/"$(basename "$f")"; done
+
+
 ```
 
