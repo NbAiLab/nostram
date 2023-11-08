@@ -557,18 +557,16 @@ cp $base_dir/styletune_6/final_style/*.jsonl $base_dir/styletune_6/ncc_speech_st
 for f in $base_dir/translation_5/final/test/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/test/"$(basename "$f")"; done
 for f in $base_dir/translation_5/final/validation/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/validation/"$(basename "$f")"; done
 
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/test/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/test/"$(basename "$f")"; done
 
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/validation/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/validation/"$(basename "$f")"; done
-cp -r $base_dir/inference_4/inference_processed/test  $base_dir/styletune_6/.
-find  $base_dir/styletune_6/test -name "*.json" -delete
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/test/*.json;do mkdir $base_dir/styletune_6/test/$(basename "$f" | cut -d. -f1);done
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/test/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/test/$(basename "$f" | cut -d. -f1)/"$(basename "$f")"; done
+cp -r $base_dir/translation_5/final/test  $base_dir/styletune_6/.
+find  $base_dir/styletune_6/test -name "*.json*" -delete
 
-cp -r $base_dir/inference_4/inference_processed/validation  $base_dir/styletune_6/.
+for f in $base_dir/translation_5/final/ncc_speech_v7/test/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/test/$(basename "$f" | cut -d. -f1)/"$(basename "$f")"; done
+
+cp -r $base_dir/translation_5/final/validation  $base_dir/styletune_6/.
 find  $base_dir/styletune_6/validation -name "*.json*" -delete
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/validation/*.json;do mkdir $base_dir/styletune_6/validation/$(basename "$f" | cut -d. -f1);done
-for f in $base_dir/inference_4/inference_processed/ncc_speech_v6_unclean/validation/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/validation/$(basename "$f" | cut -d. -f1)/"$(basename "$f")"; done
+
+for f in $base_dir/translation_5/final/ncc_speech_v7/validation/*.json; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/validation/$(basename "$f" | cut -d. -f1)/"$(basename "$f")"; done
 
 
 
