@@ -554,20 +554,20 @@ mkdir $base_dir/styletune_6/ncc_speech_styling_v1/validation
 cp $base_dir/styletune_6/final_style/*.jsonl $base_dir/styletune_6/ncc_speech_styling_v1/train/
 
 
-for f in $base_dir/translation_5/final/ncc_speech_v7/test/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/test/"$(basename "$f")"; done
-for f in $base_dir/translation_5/final/ncc_speech_v7/validation/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/validation/"$(basename "$f")"; done
+for f in $base_dir/translation_5/final/ncc_speech_v7/test/*.jsonl; do jq -c '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/test/"$(basename "$f")"; done
+for f in $base_dir/translation_5/final/ncc_speech_v7/validation/*.jsonl; do jq -c '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/ncc_speech_styling_v1/validation/"$(basename "$f")"; done
 
 
 cp -r $base_dir/translation_5/final/test  $base_dir/styletune_6/.
 find  $base_dir/styletune_6/test -name "*.json*" -delete
 
-for f in $base_dir/styletune_6/ncc_speech_styling_v1/test/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/test/$(basename "$f" | cut -d. -f1| rev|cut -d_ -f 2- |rev)/"$(basename "$f")"; done
+for f in $base_dir/styletune_6/ncc_speech_styling_v1/test/*.jsonl; do jq -c '.' "$f" > $base_dir/styletune_6/test/$(basename "$f" | cut -d. -f1| rev|cut -d_ -f 2- |rev)/"$(basename "$f")"; done
 
 
 cp -r $base_dir/translation_5/final/validation  $base_dir/styletune_6/.
 find  $base_dir/styletune_6/validation -name "*.json*" -delete
 
-for f in $base_dir/styletune_6/ncc_speech_styling_v1/validation/*.jsonl; do jq '. + {"task": "transcribe"}' "$f" > $base_dir/styletune_6/validation/$(basename "$f" | cut -d. -f1| rev|cut -d_ -f 2- |rev)/"$(basename "$f")"; done
+for f in $base_dir/styletune_6/ncc_speech_styling_v1/validation/*.jsonl; do jq -c '.' "$f" > $base_dir/styletune_6/validation/$(basename "$f" | cut -d. -f1| rev|cut -d_ -f 2- |rev)/"$(basename "$f")"; done
 
 
 ```
