@@ -264,8 +264,8 @@ eval_samples_nr=1000
 # Typically it is not necessary to validate the entire file, since all the lines in a file has the same structure
 
 #Fleurs
-python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/fleurs/norwegian_fleurs-test.json
-python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/fleurs/norwegian_fleurs-validation.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/fleurs/norwegian_fleurs_test.json
+python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/fleurs/norwegian_fleurs_validation.json
 #NST
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_train.json
 python $program_dir/validate_dataset.py -n $eval_samples_nr $base_dir/clean_3/nst/nst_test.json
@@ -308,8 +308,8 @@ No more processing is needed here. Just copy the correct files to the correct fo
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 
 #Fleurs
-cp $base_dir/clean_3/fleurs/norwegian_fleurs-test.json $base_dir/inference_4/inference_dataset/fleurs/test/;
-cp $base_dir/clean_3/fleurs/norwegian_fleurs-validation.json $base_dir/inference_4/inference_dataset/fleurs/validation/;
+cp $base_dir/clean_3/fleurs/norwegian_fleurs_test.json $base_dir/inference_4/inference_dataset/fleurs/test/;
+cp $base_dir/clean_3/fleurs/norwegian_fleurs_validation.json $base_dir/inference_4/inference_dataset/fleurs/validation/;
 #NST
 cp $base_dir/clean_3/nst/nst_train.json $base_dir/inference_4/inference_dataset/nst/train/
 cp $base_dir/clean_3/nst/nst_test.json $base_dir/inference_4/inference_dataset/nst/test/
@@ -399,8 +399,8 @@ for f in $base_dir/inference_4/inference_result/merged/*train*.json; do python /
 for f in $base_dir/inference_4/inference_result/merged/*train*.json; do python /home/perk/nostram/utils/post_clean.py --input_filename $f --output_folder $result_dir/train --prune; done
 
 #And the Fleurs files
-python /home/perk/nostram/utils/post_clean.py --input_filename /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/test/fleurs/norwegian_fleurs-test.json --output_folder $result_dir/test --prune
-python /home/perk/nostram/utils/post_clean.py --input_filename /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/validation/fleurs/norwegian_fleurs-validation.json --output_folder $result_dir/validation --prune
+python /home/perk/nostram/utils/post_clean.py --input_filename /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/test/fleurs/norwegian_fleurs_test.json --output_folder $result_dir/test --prune
+python /home/perk/nostram/utils/post_clean.py --input_filename /mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/validation/fleurs/norwegian_fleurs_validation.json --output_folder $result_dir/validation --prune
 
 # Very clean corpus
 # result_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_processed/ncc_speech_v6_veryclean";
