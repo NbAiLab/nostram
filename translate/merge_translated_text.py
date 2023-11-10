@@ -15,7 +15,7 @@ def process_file(input_json_file_name, input_tsv_file_name, output_file_name):
     except pd.errors.EmptyDataError:
         print(f"The input tsv file '{input_tsv_file_name}' is empty.")
         return
-
+  
     pattern = re.compile(r'<\|.*?\|>')
 
     for row in tqdm(translated.itertuples(), total=translated.shape[0]):

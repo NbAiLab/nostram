@@ -31,11 +31,46 @@ def get_wer(data, language):
             return 1  # Return maximum WER to indicate an invalid comparison
         return min(wer(reference_d, text), wer(reference_e, text))
 
+# Function to compute WER for different language references
+def get_wer_semantic(data, language):
+    text = clean_text(data.get("text", "").strip())
+    if not text:  # Check if the text is empty
+        return 1  # Return maximum WER to indicate an invalid comparison
+    if language == "no":
+        reference_a = clean_text(data.get("C-no-medium", ""))
+        if not reference_a:  # Check if either reference is empty
+            return 1  # Return maximum WER to indicate an invalid comparison
+        return wer(reference_a, text)
+    elif language == "nn":
+        reference_b = clean_text(data.get("F-no-medium", ""))
+        if not reference_b:  # Check if either reference is empty
+            return 1  # Return maximum WER to indicate an invalid comparison
+        return wer(reference_b, text)
+
 def process_line(data, subcorpus):
     if subcorpus == 'nst' and data.get("source") == "nst":
         if get_wer(data, "no") <= 0.1:
             data["task"] = "transcribe"
             return data
+        
+    elif subcorpus == 'nst_semantic' and data.get("source") == "nst":
+        if get_wer(data, "no") <= 0.1:
+            data["task"] = "translate"
+            return data
+    
+    elif subcorpus == 'audio_books_semantic' and data.get("source") == "audio_books":
+        text = data.get("text", "").strip()
+        if not (text and text[0].isupper() and text[-1] in ".?!"):
+            return None
+        if get_wer(data, data.get("text_language")) == 0:
+            data["task"] = "translate"
+            return data 
+    
+    elif subcorpus == 'stortinget_semantic' and data.get("source") == "stortinget":
+        if get_wer_semantic(data, "no") == 0:
+            data["task"] = "translate"
+            return data    
+        
     elif subcorpus == 'ellipses':
         text = data.get("text", "")
         if text.startswith("…"):
@@ -44,7 +79,7 @@ def process_line(data, subcorpus):
             if get_wer(data, "no") <= 0.1 or get_wer(data, "nn") <= 0.1:
                 data["task"] = "transcribe"
                 return data
-
+            
     elif subcorpus == 'hesitation':
         hesitation_patterns = [r'\b(ehh?|ehm|mmm?)\b', r'\bEee\b']
         text = data.get("text", "")
@@ -99,7 +134,7 @@ def main():
     parser.add_argument('--input_pattern', type=str, required=True, help='Pattern for input JSON lines files.')
     parser.add_argument('--output_folder', type=str, required=True, help='Output folder for the processed JSON lines file.')
     parser.add_argument('--subcorpus', type=str, required=True, help='Subcorpus routine to use.',
-                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn'])
+                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn','nst_semantic', 'audio_books_semantic','stortinget_semantic'])
 
     args = parser.parse_args()
 

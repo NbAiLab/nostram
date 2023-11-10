@@ -6,7 +6,7 @@ from datasets import load_dataset
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
-def process_audio_data(dataset_path, split, model_path, num_examples):
+def process_audio_data(dataset_path, split, model_path, num_examples,task, language):
     # Load the dataset using the datasets library
     dataset = load_dataset(dataset_path, split=split, streaming=True)
 
@@ -34,8 +34,11 @@ def process_audio_data(dataset_path, split, model_path, num_examples):
         input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
 
         # Generate the token IDs using the model
+        if language == "auto":
+            language = example["text_language"]
+        
         language = example["text_language"]
-        predicted_ids = model.generate(input_features, task="transcribe", language=language,  return_timestamps=True,max_new_tokens=256)
+        predicted_ids = model.generate(input_features, task=task, language=language,  return_timestamps=True,max_new_tokens=256)
         
         # Decode the token IDs to get the transcription
         transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=True,skip_special_tokens=False)[0]
@@ -49,6 +52,10 @@ if __name__ == "__main__":
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=10, help="Number of examples to process.")
+    parser.add_argument("--task", type=str, default="transcribe", help="Transcribe or translate.")
+    parser.add_argument("--language", type=str, default="auto", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
+
+
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.model_path, args.num_examples)
+    process_audio_data(args.dataset_path, args.split, args.model_path, args.num_examples, args.task, args.language)

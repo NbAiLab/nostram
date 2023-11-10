@@ -214,6 +214,7 @@ def prune_dataframe(data: pd.DataFrame) -> pd.DataFrame:
         "id",
         "group_id",
         "source",
+        "task",
         "audio_duration",
         "audio_language",
         "previous_text",
