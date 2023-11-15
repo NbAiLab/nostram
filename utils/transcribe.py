@@ -3,7 +3,7 @@ import tempfile
 from transformers import pipeline
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
 
-def main(model_path, audio_path, commit_hash=None, task):
+def main(model_path, audio_path, commit_hash=None,task="transcribe"):
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Load the model and processor
         if commit_hash:
@@ -30,7 +30,7 @@ def main(model_path, audio_path, commit_hash=None, task):
         word_count = len(text.split())
 
         print("Transcribed Text:\n", text)
-        print("\nWord Count:", word_count)
+        print(f"\nWord Count: {word_count}. Commit hash: {commit_hash}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Speech to Text Transcription")
