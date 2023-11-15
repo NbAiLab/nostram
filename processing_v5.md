@@ -513,13 +513,15 @@ These steps are only for creating the styletuning-dataset.
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram";
-process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
+process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_verbose_style";
 process_semantic_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style";
 translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated"
 merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged/";
 dedup_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/dedup_style";
 post_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/post_style";
 final_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/final_style";
+single_speaker_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/single_speaker_style";
+archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
 
 # Create verbose-transcribe
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus nst
@@ -527,11 +529,15 @@ python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*t
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus hesitation
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_no
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_nn
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus silence_verbatim
 
 # Create semantic-translate
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus nst_semantic
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus audio_books_semantic
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus stortinget_semantic
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_no
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_nn
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus silence_verbatim
 
 # Do simple deduplication into one single file
 python $program_dir/styletuning/deduplicate.py --input_folder $process_verbose_dir --output_file $dedup_dir/transcribe.jsonl
@@ -545,6 +551,10 @@ python $program_dir/utils/post_clean.py --input_filename $dedup_dir/translate.js
 # Translate
 python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/transcribe.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/transcribe.jsonl
 python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir/translate.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir/translate.jsonl
+
+# Rolv-Arild Single Speaker Magic
+python $program_dir/utils/remove_multiple_speakers.py --input_original_json $archive_dir/nrk.json --input_cleaned_json $final_dir/transcribe.jsonl --output_file_name $single_speaker_dir/transcribe.jsonl
+python $program_dir/utils/remove_multiple_speakers.py --input_original_json $archive_dir/nrk.json --input_cleaned_json $final_dir/translate.jsonl --output_file_name $single_speaker_dir/translate.jsonl
 
 # Create dataset
 mkdir $base_dir/styletune_6/ncc_speech_styling_v1/
