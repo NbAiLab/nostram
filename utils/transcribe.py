@@ -36,10 +36,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Speech to Text Transcription")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the Whisper model")
     parser.add_argument("--audio_path", type=str, required=True, help="Path to the audio file")
-    parser.add_argument("--audio_path", type=str, required=True, help="Path to the audio file")
     parser.add_argument("--task", type=str, default="transcribe", choices=["transcribe", "translate"], help="Task to perform: 'transcribe' or 'translate' (default: transcribe)")
-
-
     parser.add_argument("--commit_hash", type=str, default=None, help="Specific commit hash for the model (optional)")
     args = parser.parse_args()
 
