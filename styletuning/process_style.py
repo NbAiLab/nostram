@@ -166,7 +166,6 @@ def process_line(data, subcorpus):
         if data.get("source") != "nrk_tv_silence":
             return None    
         
-        data["text"] = text
         data["task"] = "translate"
         return data 
 
@@ -174,7 +173,6 @@ def process_line(data, subcorpus):
         if data.get("source") != "nrk_tv_silence":
             return None    
         
-        data["text"] = text
         data["task"] = "transcribe"
         return data 
      
