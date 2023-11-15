@@ -517,7 +517,7 @@ if __name__ == "__main__":
 
     with demo:
         gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)
-        gr.TabbedInterface([microphone_chunked, audio_chunked, youtube], ["Microphone", "File", "YouTube"])
+        gr.TabbedInterface([audio_chunked, youtube], ["File", "YouTube"])
 
     demo.queue(concurrency_count=1, max_size=5)
     demo.launch(server_name="0.0.0.0", share=True, show_api=True)
