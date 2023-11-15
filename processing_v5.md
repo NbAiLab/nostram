@@ -513,7 +513,7 @@ These steps are only for creating the styletuning-dataset.
 ```bash
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram";
-process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_style";
+process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_verbose_style";
 process_semantic_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style";
 translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated"
 merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged/";
@@ -529,11 +529,15 @@ python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*t
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus hesitation
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_no
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus clean_verbatim_nn
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_verbose_dir" --subcorpus silence_verbatim
 
 # Create semantic-translate
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus nst_semantic
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus audio_books_semantic
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus stortinget_semantic
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_no
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_nn
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus silence_verbatim
 
 # Do simple deduplication into one single file
 python $program_dir/styletuning/deduplicate.py --input_folder $process_verbose_dir --output_file $dedup_dir/transcribe.jsonl
