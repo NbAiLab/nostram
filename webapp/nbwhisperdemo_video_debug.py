@@ -292,7 +292,7 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(file, language, return_timestamps, progress=gr.Progress()):
+    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
         tmpdirname = tempfile.mkdtemp()
         progress(0, desc="Loading audio file...")
         logger.info("loading audio file...")
@@ -332,7 +332,7 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        text, runtime = tqdm_generate(inputs, language=language, return_timestamps=return_timestamps,
+        text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
                                       progress=progress)
 
         if return_timestamps:
@@ -406,7 +406,7 @@ if __name__ == "__main__":
         return fpath
 
 
-    def transcribe_youtube(yt_url, language, return_timestamps, progress=gr.Progress()):
+    def transcribe_youtube(yt_url, language, task, return_timestamps, progress=gr.Progress()):
         use_youtube_player = False
         progress(0, desc="Loading audio file...")
         logger.info("loading youtube file...")
@@ -421,7 +421,7 @@ if __name__ == "__main__":
         inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading...")
-        text, runtime = tqdm_generate(inputs, language=language,
+        text, runtime = tqdm_generate(inputs, language=language, task=task,
                                       return_timestamps=return_timestamps, progress=progress)
 
         if return_timestamps:
@@ -504,9 +504,9 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", True, False],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", True, False],
-            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", True, False]
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbose",True, False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbose",True, False],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic",True, False]
         ],
         cache_examples=False,
         description=description,
