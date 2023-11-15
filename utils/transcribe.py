@@ -14,6 +14,7 @@ def main(model_path, audio_path, commit_hash=None):
             config = WhisperConfig.from_pretrained(model_path, from_flax=True)
             model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=True)
             processor = WhisperProcessor.from_pretrained(model_path, from_flax=True)
+            commit_hash="None"
 
         # Save the model, processor, and config in the tmp directory
         config.save_pretrained(tmp_dir)
@@ -30,7 +31,7 @@ def main(model_path, audio_path, commit_hash=None):
         word_count = len(text.split())
 
         print("Transcribed Text:\n", text)
-        print("\nWord Count:", word_count)
+        print(f"\nWord Count: {word_count}. Commit hash: {commit_hash}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Speech to Text Transcription")
