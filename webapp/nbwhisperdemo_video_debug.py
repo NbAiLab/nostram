@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
         model_outputs = []
         start_time = time.time()
-        logger.info("transcribing...")
+        logger.info(f"transcribing... {language} {task}")
         # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
             model_outputs.append(
