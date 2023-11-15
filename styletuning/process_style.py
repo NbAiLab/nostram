@@ -163,7 +163,7 @@ def process_line(data, subcorpus):
             return data   
     
     elif subcorpus == 'silence_semantic':
-        if data.get("source") != "nrk_silence":
+        if data.get("source") != "nrk_tv_silence":
             return None    
         
         data["text"] = text
@@ -171,7 +171,7 @@ def process_line(data, subcorpus):
         return data 
 
     elif subcorpus == 'silence_verbatim':
-        if data.get("source") != "nrk_silence":
+        if data.get("source") != "nrk_tv_silence":
             return None    
         
         data["text"] = text
@@ -198,7 +198,7 @@ def main():
     parser.add_argument('--input_pattern', type=str, required=True, help='Pattern for input JSON lines files.')
     parser.add_argument('--output_folder', type=str, required=True, help='Output folder for the processed JSON lines file.')
     parser.add_argument('--subcorpus', type=str, required=True, help='Subcorpus routine to use.',
-                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn','nst_semantic', 'audio_books_semantic','stortinget_semantic','clean_semantic_nrk_no','clean_semantic_nrk_nn'])
+                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn','nst_semantic', 'audio_books_semantic','stortinget_semantic','clean_semantic_nrk_no','clean_semantic_nrk_nn','silence_verbatim','silence_semantic'])
 
     args = parser.parse_args()
 
