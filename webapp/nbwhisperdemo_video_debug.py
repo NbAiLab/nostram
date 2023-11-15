@@ -288,7 +288,8 @@ if __name__ == "__main__":
                 for chunk in timestamps
             ]
             text = "\n".join(str(feature) for feature in timestamps)
-        logger.info("done post-processing")
+        logger.info(f"done post-processing")
+        logger.info(f"transcribed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
         return text, runtime
 
 
