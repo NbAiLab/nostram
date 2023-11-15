@@ -3,7 +3,7 @@ import tempfile
 from transformers import pipeline
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
 
-def main(model_path, audio_path, commit_hash=None, task):
+def main(model_path, audio_path, commit_hash=None,task="transcribe"):
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Load the model and processor
         if commit_hash:
