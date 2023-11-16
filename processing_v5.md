@@ -514,13 +514,24 @@ These steps are only for creating the styletuning-dataset.
 base_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5";
 program_dir="/home/perk/nostram";
 process_verbose_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_verbose_style";
+process_verbose_dir_v3_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_verbose_style_v3_v4";
 process_semantic_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style";
+process_semantic_dir_v3="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style_v3";
+process_semantic_dir_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/process_semantic_style_v4";
 translated_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/translation_5/translated"
 merged_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/inference_4/inference_result/merged/";
 dedup_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/dedup_style";
+dedup_dir_v3="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/dedup_style_v3";
+dedup_dir_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/dedup_style_v4";
 post_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/post_style";
+post_dir_v3="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/post_style_v3";
+post_dir_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/post_style_v4";
 final_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/final_style";
+final_dir_v3="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/final_style_v3";
+final_dir_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/final_style_v4";
 single_speaker_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/single_speaker_style";
+single_speaker_dir_v3="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/single_speaker_style_v3";
+single_speaker_dir_v4="/mnt/lv_ai_1_ficino/ml/ncc_speech_v5/styletune_6/single_speaker_style_v4";
 archive_dir="/mnt/lv_ai_1_ficino/ml/ncc_speech_corpus/json_2";
 
 # Create verbose-transcribe
@@ -538,6 +549,30 @@ python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*t
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_no
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus clean_semantic_nrk_nn
 python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir" --subcorpus silence_verbatim
+
+############################
+#### Start alternative code#
+# Create v3 of the semantic-translate
+# This is just giving all the samples where the non-verbose wer is 0
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir_v3" --subcorpus all_semantic
+# Create v4 that is even stricter. Here we do not allow data if the verbose model is correct
+python $program_dir/styletuning/process_style.py --input_pattern "$merged_dir/*train*.json" --output_folder "$process_semantic_dir_v4" --subcorpus all_semantic_no_verbatim
+# Dedup
+python $program_dir/styletuning/deduplicate.py --input_folder $process_semantic_dir_v3 --output_file $dedup_dir_v3/translate.jsonl
+python $program_dir/styletuning/deduplicate.py --input_folder $process_semantic_dir_v4 --output_file $dedup_dir_v4/translate.jsonl
+# Process and prune (Here we should just make sure nothing is deleted, so modify the config.json accordingly
+python $program_dir/utils/post_clean.py --input_filename $dedup_dir_v3/translate.jsonl --output_folder $post_dir_v3 --prune
+python $program_dir/utils/post_clean.py --input_filename $dedup_dir_v4/translate.jsonl --output_folder $post_dir_v4 --prune
+# Translate
+python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir_v3/translate.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir_v3/translate.jsonl
+python $program_dir/translate/merge_translated_text.py --input_json_file_name $post_dir_v4/translate.jsonl --input_tsv_file_name $translated_dir/concatenated_file.tsv --output_file_name $final_dir_v4/translate.jsonl
+# Single Speaker
+python $program_dir/utils/remove_multiple_speakers.py --input_original_json $archive_dir/nrk.json --input_cleaned_json $final_dir_v3/translate.jsonl --output_file_name $single_speaker_dir_v3/translate.jsonl
+python $program_dir/utils/remove_multiple_speakers.py --input_original_json $archive_dir/nrk.json --input_cleaned_json $final_dir_v4/translate.jsonl --output_file_name $single_speaker_dir_v4/translate.jsonl
+
+
+##### End alternative code
+#################################
 
 # Do simple deduplication into one single file
 python $program_dir/styletuning/deduplicate.py --input_folder $process_verbose_dir --output_file $dedup_dir/transcribe.jsonl
