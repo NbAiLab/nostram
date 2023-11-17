@@ -319,6 +319,10 @@ if __name__ == "__main__":
 
 
     def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
+        if file is None:
+            logger.warning("No audio file provided")
+            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+        
         file_contents, file_path = prepare_audio_for_transcription(file)
 
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
