@@ -316,26 +316,9 @@ if __name__ == "__main__":
             file_path = video_file_path
 
         return file_contents, file_path
-
-
-    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
-        if file is None:
-            logger.warning("No audio file provided")
-            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-        
-        file_contents, file_path = prepare_audio_for_transcription(file)
-
-        inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
-        inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
-        logger.info("done loading")
-        
-        
-        text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
-                                      progress=progress)
-                    
+    def create_transcript_file(text, file_path, return_timestamps):
         if return_timestamps:
-            transcript_content = format_to_vtt(text, return_timestamps,
-                                               style="line:50% align:center position:50% size:100%")
+            transcript_content = format_to_vtt(text, return_timestamps, style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
@@ -348,6 +331,26 @@ if __name__ == "__main__":
 
         with open(transcript_file_path, "w") as f:
             f.write(transcript_content)
+
+        return transcript_file_path, subtitle_display
+    
+    def perform_transcription(file_contents, language, task, return_timestamps, progress):
+        inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
+        inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
+        logger.info("done loading")
+        
+        text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps, progress=progress)
+        return text, runtime
+
+
+    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
+        if file is None:
+            logger.warning("No audio file provided")
+            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+        
+        file_contents, file_path = prepare_audio_for_transcription(file)
+        text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
+        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
         if file_path.endswith(".mp4"):
             value = [file_path, subtitle_display] if subtitle_display is not None else file_path
