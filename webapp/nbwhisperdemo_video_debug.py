@@ -324,8 +324,8 @@ if __name__ == "__main__":
                 verbatim_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task=verbatim_task, language=language, return_timestamps=True)
                 )
+                breakpoint()
                 semantic_outputs.append(
-                    breakpoint()
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task=semantic_task, language=language, return_timestamps=True)
                 )
             else:
