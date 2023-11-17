@@ -292,47 +292,40 @@ if __name__ == "__main__":
         logger.info(f"transcribed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
         return text, runtime
 
-
-    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
+    def prepare_audio_for_transcription(file):
         tmpdirname = tempfile.mkdtemp()
-        progress(0, desc="Loading audio file...")
-        logger.info("loading audio file...")
-        if file is None:
-            logger.warning("No audio file")
-            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
         file_path = os.path.join(tmpdirname, file.name)
         shutil.move(file.name, file_path)
         file_size_mb = os.stat(file_path).st_size / (1024 * 1024)
         if file_size_mb > FILE_LIMIT_MB:
-            logger.warning("Max file size exceeded")
-            raise gr.Error(
-                f"File size exceeds file size limit. Got file of size {file_size_mb:.2f}MB for a limit of {FILE_LIMIT_MB}MB."
-            )
+            raise Exception(f"File size exceeds limit: {file_size_mb:.2f}MB / {FILE_LIMIT_MB}MB")
 
         if file_path.endswith(".mp4"):
-            # Load video file
             video = AudioSegment.from_file(file_path, "mp4")
-
-            # Export audio as MP3
             audio_path_pydub = file_path.replace(".mp4", ".wav")
             video.export(audio_path_pydub, format="wav")
             with open(audio_path_pydub, "rb") as f:
                 file_contents = f.read()
-            # os.remove(audio_path_pydub) # not needed anymore since it's in the temp directory
         else:
             with open(file_path, "rb") as f:
                 file_contents = f.read()
-
-            # Save all-black video to display subtitles on
             video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
-            ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" '
-                          f'-shortest -fflags +shortest -loglevel error "{video_file_path}"')
+            ffmpeg_cmd = f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" ' \
+                        f'-shortest -fflags +shortest -loglevel error "{video_file_path}"'
             os.system(ffmpeg_cmd)
             file_path = video_file_path
+
+        return file_contents, file_path
+
+
+    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
+        file_contents, file_path = prepare_audio_for_transcription(file)
 
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
+        
+        
         text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
                                       progress=progress)
                     
@@ -470,7 +463,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
