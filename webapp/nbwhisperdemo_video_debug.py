@@ -306,6 +306,7 @@ if __name__ == "__main__":
             
         if task == "Verbatim":
             task = "transcribe"
+            
         if task == "Semantic":
             task = "transcribe"
         
@@ -582,7 +583,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Verbatim"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Semantic"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
