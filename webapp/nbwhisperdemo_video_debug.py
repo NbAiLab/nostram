@@ -335,10 +335,8 @@ if __name__ == "__main__":
         logger.info("done loading")
         text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
                                       progress=progress)
-        if task=="Both":
-            prefix = "Verbatim:\n"
-        else:
-            prefix = ""
+        
+        prefix = f"{task} transcription: \n\n" if task == "Verbatim" else f"{task} translation: \n\n"
             
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps,
