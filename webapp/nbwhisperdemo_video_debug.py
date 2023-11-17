@@ -306,11 +306,11 @@ if __name__ == "__main__":
             
         if task == "Verbatim":
             task = "transcribe"
-        elif task == "Semantic":
+        if task == "Semantic":
             task = "transcribe"
         
         start_time = time.time()
-        logger.info(f"transcribing... {language} {task}")
+        logger.info(f"transcribing... language:{language}, task:{task}")
         model_outputs = []
         # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
         verbatim_outputs = []
