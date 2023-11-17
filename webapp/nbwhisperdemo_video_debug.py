@@ -167,22 +167,22 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
                 break
 
         # Split lines into groups of 3 (index, timestamp, text)
-        return [lines[i:i+3] for i in range(start_index, len(lines), 3)]
+        return [lines[i:i+3] for i in range(start_index, len(lines), 3)], start_index
+
+    # Extract subtitles from both files
+    subtitles1, start_index1 = extract_subtitles(vtt_file1)
+    subtitles2, _ = extract_subtitles(vtt_file2)
 
     def sort_subtitles(subtitles):
         # Sort by the start time in the timestamp
         return sorted(subtitles, key=lambda x: x[1])
-
-    # Extract subtitles from both files
-    subtitles1 = extract_subtitles(vtt_file1)
-    subtitles2 = extract_subtitles(vtt_file2)
 
     # Merge and sort subtitles
     merged_subtitles = sort_subtitles(subtitles1 + subtitles2)
 
     # Read header from the first file
     with open(vtt_file1, 'r') as file:
-        header = ''.join(file.readlines()[:start_index])
+        header = ''.join(file.readlines()[:start_index1])
 
     # Combine header and sorted subtitle groups
     combined_vtt = header + ''.join([''.join(group) for group in merged_subtitles])
