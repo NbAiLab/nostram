@@ -293,61 +293,83 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
-        tmpdirname = tempfile.mkdtemp()
-        progress(0, desc="Loading audio file...")
-        logger.info("loading audio file...")
-        if file is None:
-            logger.warning("No audio file")
-            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-        file_path = os.path.join(tmpdirname, file.name)
-        shutil.move(file.name, file_path)
-        file_size_mb = os.stat(file_path).st_size / (1024 * 1024)
-        if file_size_mb > FILE_LIMIT_MB:
-            logger.warning("Max file size exceeded")
-            raise gr.Error(
-                f"File size exceeds file size limit. Got file of size {file_size_mb:.2f}MB for a limit of {FILE_LIMIT_MB}MB."
-            )
+def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
+    tmpdirname = tempfile.mkdtemp()
+    progress(0, desc="Loading audio file...")
+    logger.info("loading audio file...")
+    if file is None:
+        logger.warning("No audio file")
+        raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+    file_path = os.path.join(tmpdirname, file.name)
+    shutil.move(file.name, file_path)
+    file_size_mb = os.stat(file_path).st_size / (1024 * 1024)
+    if file_size_mb > FILE_LIMIT_MB:
+        logger.warning("Max file size exceeded")
+        raise gr.Error(
+            f"File size exceeds file size limit. Got file of size {file_size_mb:.2f}MB for a limit of {FILE_LIMIT_MB}MB."
+        )
 
-        if file_path.endswith(".mp4"):
-            # Load video file
-            video = AudioSegment.from_file(file_path, "mp4")
+    if file_path.endswith(".mp4"):
+        # Load video file
+        video = AudioSegment.from_file(file_path, "mp4")
 
-            # Export audio as MP3
-            audio_path_pydub = file_path.replace(".mp4", ".wav")
-            video.export(audio_path_pydub, format="wav")
-            with open(audio_path_pydub, "rb") as f:
-                file_contents = f.read()
-            # os.remove(audio_path_pydub) # not needed anymore since it's in the temp directory
-        else:
-            with open(file_path, "rb") as f:
-                file_contents = f.read()
+        # Export audio as MP3
+        audio_path_pydub = file_path.replace(".mp4", ".wav")
+        video.export(audio_path_pydub, format="wav")
+        with open(audio_path_pydub, "rb") as f:
+            file_contents = f.read()
+    else:
+        with open(file_path, "rb") as f:
+            file_contents = f.read()
 
-            # Save all-black video to display subtitles on
-            video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
-            ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" '
-                          f'-shortest -fflags +shortest -loglevel error "{video_file_path}"')
-            os.system(ffmpeg_cmd)
-            file_path = video_file_path
+        # Save all-black video to display subtitles on
+        video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
+        ffmpeg_cmd = (f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" '
+                      f'-shortest -fflags +shortest -loglevel error "{video_file_path}"')
+        os.system(ffmpeg_cmd)
+        file_path = video_file_path
 
-        inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
-        inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
-        logger.info("done loading")
+    inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
+    inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
+    logger.info("done loading")
+
+    # Handling the 'Both' option
+    if task == "Both":
+        # Verbatim Transcription
+        text_verbatim, runtime_verbatim = tqdm_generate(
+            inputs, language=language, task="transcribe", return_timestamps=return_timestamps, progress=progress
+        )
+        vtt_verbatim = format_to_vtt(text_verbatim, return_timestamps, style="line:10% align:center position:50% size:100%")
+        vtt_verbatim_path = re.sub(r"\.[^.]+$", "_verbatim.vtt", file_path)
+        with open(vtt_verbatim_path, "w") as f:
+            f.write(vtt_verbatim)
+
+        # Semantic Transcription
+        text_semantic, runtime_semantic = tqdm_generate(
+            inputs, language=language, task="translate", return_timestamps=return_timestamps, progress=progress
+        )
+        vtt_semantic = format_to_vtt(text_semantic, return_timestamps, style="line:90% align:center position:50% size:100%")
+        vtt_semantic_path = re.sub(r"\.[^.]+$", "_semantic.vtt", file_path)
+        with open(vtt_semantic_path, "w") as f:
+            f.write(vtt_semantic)
+
+        # Return paths to both VTT files along with other relevant data
+        return o0, o1, text_verbatim, runtime_verbatim, vtt_verbatim_path, text_semantic, runtime_semantic, vtt_semantic_path
+
+    else:     
         text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
                                       progress=progress)
-        
-        prefix = f"{task} transcription: \n\n" if task == "Verbatim" else f"{task} translation: \n\n"
-            
+                    
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps,
                                                style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
-            transcript_content = prefix + format_to_vtt(text, return_timestamps)
+            transcript_content = format_to_vtt(text, return_timestamps)
             transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
-            transcript_content = prefix + text
+            transcript_content = text
             transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
             subtitle_display = None
 
@@ -472,7 +494,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
