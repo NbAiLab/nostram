@@ -308,7 +308,7 @@ if __name__ == "__main__":
             task = "transcribe"
             
         if task == "Semantic":
-            task = "transcribe"
+            task = "translate"
         
         start_time = time.time()
         logger.info(f"transcribing... language:{language}, task:{task}")
