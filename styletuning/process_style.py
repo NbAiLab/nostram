@@ -42,7 +42,7 @@ def get_wer_semantic(data, language):
             return 1  # Return maximum WER to indicate an invalid comparison
         return wer(reference_a, text)
     elif language == "nn":
-        reference_b = clean_text(data.get("F-no-medium", ""))
+        reference_b = clean_text(data.get("F-nn-medium", ""))
         if not reference_b:  # Check if either reference is empty
             return 1  # Return maximum WER to indicate an invalid comparison
         return wer(reference_b, text)
@@ -169,13 +169,42 @@ def process_line(data, subcorpus):
         data["task"] = "translate"
         return data 
 
-    elif subcorpus == 'silence_verbatim':
-        if data.get("source") != "nrk_tv_silence":
-            return None    
+    elif subcorpus == 'all_semantic':
+        hesitation_patterns = [r'\b(ehh?|ehm|mmm?)\b', r'\bEee\b']
+        text = data.get("text", "")
+        if any(re.search(pattern, text, re.IGNORECASE) for pattern in hesitation_patterns):
+            return None
+
+        if "…" in text:
+            return None
+
+        text = data.get("text", "").strip()
+        if not (text and text[0].isupper() and text[-1] in ".?!"):
+            return None
+
+        if get_wer_semantic(data, data.get("text_language")) == 0:
+            data["text"] = text
+            data["task"] = "translate"
+            return data
         
-        data["task"] = "transcribe"
-        return data 
-     
+    elif subcorpus == 'all_semantic_no_verbatim':
+        hesitation_patterns = [r'\b(ehh?|ehm|mmm?)\b', r'\bEee\b']
+        text = data.get("text", "")
+        if any(re.search(pattern, text, re.IGNORECASE) for pattern in hesitation_patterns):
+            return None
+
+        if "…" in text:
+            return None
+
+        text = data.get("text", "").strip()
+        if not (text and text[0].isupper() and text[-1] in ".?!"):
+            return None
+
+        if get_wer_semantic(data, data.get("text_language")) == 0 and get_wer(data, data.get("text_language")) != 0:
+            data["text"] = text
+            data["task"] = "translate"
+            return data
+   
     return None
 
 def read_files(input_pattern, output_folder, subcorpus):
@@ -196,7 +225,7 @@ def main():
     parser.add_argument('--input_pattern', type=str, required=True, help='Pattern for input JSON lines files.')
     parser.add_argument('--output_folder', type=str, required=True, help='Output folder for the processed JSON lines file.')
     parser.add_argument('--subcorpus', type=str, required=True, help='Subcorpus routine to use.',
-                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn','nst_semantic', 'audio_books_semantic','stortinget_semantic','clean_semantic_nrk_no','clean_semantic_nrk_nn','silence_verbatim','silence_semantic'])
+                        choices=['nst', 'ellipses', 'hesitation', 'clean_verbatim_no', 'clean_verbatim_nn','nst_semantic', 'audio_books_semantic','stortinget_semantic','clean_semantic_nrk_no','clean_semantic_nrk_nn','silence_verbatim','silence_semantic','all_semantic','all_semantic_no_verbatim'])
 
     args = parser.parse_args()
 

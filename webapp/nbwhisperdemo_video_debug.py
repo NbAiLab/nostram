@@ -264,7 +264,7 @@ if __name__ == "__main__":
         else:
             language = "en"
             
-        if task == "Verbose":
+        if task == "Verbatim":
             task = "transcribe"
         else:
             task = "translate"
@@ -335,17 +335,21 @@ if __name__ == "__main__":
         logger.info("done loading")
         text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
                                       progress=progress)
-
+        if task=="Both":
+            prefix = "Verbatim:\n"
+        else:
+            prefix = ""
+            
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps,
                                                style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
-            transcript_content = format_to_vtt(text, return_timestamps)
+            transcript_content = prefix + format_to_vtt(text, return_timestamps)
             transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
-            transcript_content = text
+            transcript_content = prefix + text
             transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
             subtitle_display = None
 
@@ -451,7 +455,7 @@ if __name__ == "__main__":
     #     inputs=[
     #         gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
     #         gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-    #         gr.inputs.Radio(["Verbose", "Semantic"], label="Transcription style", default="Verbose"),
+    #         gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
     #         gr.inputs.Checkbox(default=True, label="Return timestamps"),
     #     ],
     #     outputs=[
@@ -470,7 +474,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbose", "Semantic"], label="Transcription style", default="Verbose"),
+            gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
@@ -491,7 +495,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbose", "Semantic"], label="Transcription style", default="Verbose"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
@@ -505,8 +509,8 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbose",True, False],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbose",True, False],
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbatim",True, False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim",True, False],
             ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic",True, False]
         ],
         cache_examples=False,
