@@ -154,6 +154,46 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
     return "\n".join(vtt_lines)
 
 
+def merge_and_sort_subtitles(vtt_file1, vtt_file2):
+    def extract_subtitles(vtt_file):
+        with open(vtt_file, 'r') as file:
+            lines = file.readlines()
+
+        # Find the index where actual subtitles start
+        start_index = 0
+        for i, line in enumerate(lines):
+            if "-->" in line:
+                start_index = i - 1
+                break
+
+        # Split lines into groups of 3 (index, timestamp, text)
+        return [lines[i:i+3] for i in range(start_index, len(lines), 3)]
+
+    def sort_subtitles(subtitles):
+        # Sort by the start time in the timestamp
+        return sorted(subtitles, key=lambda x: x[1])
+
+    # Extract subtitles from both files
+    subtitles1 = extract_subtitles(vtt_file1)
+    subtitles2 = extract_subtitles(vtt_file2)
+
+    # Merge and sort subtitles
+    merged_subtitles = sort_subtitles(subtitles1 + subtitles2)
+
+    # Read header from the first file
+    with open(vtt_file1, 'r') as file:
+        header = ''.join(file.readlines()[:start_index])
+
+    # Combine header and sorted subtitle groups
+    combined_vtt = header + ''.join([''.join(group) for group in merged_subtitles])
+
+    return combined_vtt
+
+# Example usage
+combined_vtt_content = merge_and_sort_subtitles('path_to_first_vtt_file.vtt', 'path_to_second_vtt_file.vtt')
+# The combined_vtt_content can then be written to a file or used as needed.
+
+
 def split_long_lines(subtitle_text):
     lines = 1 + len(subtitle_text) // 60
     if lines > 1:
@@ -383,6 +423,31 @@ if __name__ == "__main__":
             raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
         
         file_contents, file_path = prepare_audio_for_transcription(file)
+        
+        if task == "Both":
+            # Transcribe for Verbatim
+            verbatim_text, _ = perform_transcription(file_contents, language, "Verbatim", return_timestamps, progress)
+            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path, return_timestamps)
+
+            # Transcribe for Semantic
+            semantic_text, runtime = perform_transcription(file_contents, language, "Semantic", return_timestamps, progress)
+            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps)
+
+            # Merge and sort subtitles
+            merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
+
+            # Combine the texts for display in UI
+            text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
+
+            # Use the merged subtitles for display and download options
+            subtitle_display = merged_subtitles  # This needs to be formatted for display in UI
+            transcript_file_path = None  # Since individual files are available for download, not the merged one
+        else:
+            # Handle as before for Verbatim or Semantic only
+            text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
+            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
+
+        
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
