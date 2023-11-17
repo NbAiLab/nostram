@@ -189,10 +189,6 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
 
     return combined_vtt
 
-# Example usage
-combined_vtt_content = merge_and_sort_subtitles('path_to_first_vtt_file.vtt', 'path_to_second_vtt_file.vtt')
-# The combined_vtt_content can then be written to a file or used as needed.
-
 
 def split_long_lines(subtitle_text):
     lines = 1 + len(subtitle_text) // 60
@@ -390,6 +386,7 @@ if __name__ == "__main__":
             file_path = video_file_path
 
         return file_contents, file_path
+    
     def create_transcript_file(text, file_path, return_timestamps):
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps, style="line:50% align:center position:50% size:100%")
