@@ -97,13 +97,17 @@ def convert_to_proper_time_format(time):
         return time
 
 
-def format_to_vtt(text, timestamps, style=None):
+def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
     if not timestamps:
         return None
 
-    if style is None:
-        style = ""
+    # Define styles for different types of transcriptions
+    verbatim_style = "line:10% align:center position:50% size:100%"
+    semantic_style = "line:90% align:center position:50% size:100%"
 
+    # Set style based on transcription type
+    style = verbatim_style if transcription_type == "verbatim" else semantic_style
+    
     vtt_lines = [
         f"WEBVTT",
         "",
@@ -264,32 +268,62 @@ if __name__ == "__main__":
         else:
             language = "en"
             
-        if task == "Verbatim":
-            task = "transcribe"
+        if task == "Both":
+            verbatim_task = "transcribe"
+            semantic_task = "translate"
+        elif task == "Verbatim":
+            verbatim_task = semantic_task = "transcribe"
         else:
-            task = "translate"
+            verbatim_task = semantic_task = "translate"
 
-        model_outputs = []
+        
         start_time = time.time()
         logger.info(f"transcribing... {language} {task}")
+        model_outputs = []
         # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
+        verbatim_outputs = []
+        semantic_outputs = []
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-            model_outputs.append(
-                pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language=language, return_timestamps=True))
+            if task == "Both":
+                verbatim_outputs.append(
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=verbatim_task, language=language, return_timestamps=True)
+                )
+                semantic_outputs.append(
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=semantic_task, language=language, return_timestamps=True)
+                )
+            else:
+                model_outputs.append(
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=verbatim_task, language=language, return_timestamps=True)
+                )      
+
+            
         runtime = time.time() - start_time
         logger.info("done transcription")
         logger.info("post-processing...")
-        post_processed = pipeline.postprocess(model_outputs, return_timestamps=True)
-        text = post_processed["text"]
-        if return_timestamps:
-            timestamps = post_processed.get("chunks")
-            timestamps = [
-                f"[{format_timestamp(chunk['timestamp'][0])} -> {format_timestamp(chunk['timestamp'][1])}] {chunk['text']}"
-                for chunk in timestamps
-            ]
-            text = "\n".join(str(feature) for feature in timestamps)
-        logger.info(f"done post-processing")
-        logger.info(f"transcribed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
+        
+        # Post-process and combine results if 'Both' is selected
+        if task == "Both":
+            verbatim_post_processed = pipeline.postprocess(verbatim_outputs, return_timestamps=True)
+            semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=True)
+
+            verbatim_text = verbatim_post_processed["text"]
+            semantic_text = semantic_post_processed["text"]
+
+            combined_text = f"Verbatim Transcription:\n{verbatim_text}\n\nSemantic Transcription:\n{semantic_text}"
+            text = combined_text
+        else:
+            post_processed = pipeline.postprocess(model_outputs, return_timestamps=True)
+            text = post_processed["text"]
+            if return_timestamps:
+                timestamps = post_processed.get("chunks")
+                timestamps = [
+                    f"[{format_timestamp(chunk['timestamp'][0])} -> {format_timestamp(chunk['timestamp'][1])}] {chunk['text']}"
+                    for chunk in timestamps
+                ]
+                text = "\n".join(str(feature) for feature in timestamps)
+            logger.info(f"done post-processing")
+            logger.info(f"transcribed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
+            
         return text, runtime
 
     def prepare_audio_for_transcription(file):
