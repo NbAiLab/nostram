@@ -320,11 +320,11 @@ if __name__ == "__main__":
             if task == "Verbatim":
                 model_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
-                }
+                )
             elif task == "Semantic":
                 model_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
-                }
+                )
             elif task == "Both":
                 verbatim_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
