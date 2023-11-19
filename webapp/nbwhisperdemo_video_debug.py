@@ -304,26 +304,21 @@ if __name__ == "__main__":
         else:
             language = "en"
             
-        if task == "Verbatim":
-            task = "transcribe"
-            
-        if task == "Semantic":
-            task = "translate"
         
         start_time = time.time()
         logger.info(f"transcribing... language:{language}, task:{task}")
+
+        # Decide on the processing task
+        processing_task = "transcribe" if task == "Verbatim" else "translate" if task == "Semantic" else None
+
         model_outputs = []
-        # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
         verbatim_outputs = []
         semantic_outputs = []
+
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-            if task == "Verbatim":
+            if task == "Verbatim" or task == "Semantic":
                 model_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
-                )
-            elif task == "Semantic":
-                model_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=processing_task, language=language, return_timestamps=True)
                 )
             elif task == "Both":
                 verbatim_outputs.append(
@@ -332,7 +327,6 @@ if __name__ == "__main__":
                 semantic_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
                 )
-
             
         runtime = time.time() - start_time
         logger.info("done transcription")
