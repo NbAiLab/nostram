@@ -287,9 +287,7 @@ if __name__ == "__main__":
         all_chunk_start_idx = np.arange(0, inputs_len, step)
         num_samples = len(all_chunk_start_idx)
         num_batches = math.ceil(num_samples / BATCH_SIZE)
-        dummy_batches = list(
-            range(num_batches)
-        )  # Gradio progress bar not compatible with generator, see https://github.com/gradio-app/gradio/issues/3841
+        dummy_batches = list(range(num_batches))  # Gradio progress bar not compatible with generator
 
         dataloader = pipeline.preprocess_batch(inputs, chunk_length_s=CHUNK_LENGTH_S, batch_size=BATCH_SIZE)
         progress(0, desc="Pre-processing audio file...")
@@ -303,58 +301,45 @@ if __name__ == "__main__":
             language = "nn"
         else:
             language = "en"
-            
         
         start_time = time.time()
-        logger.info(f"transcribing... language:{language}, task:{task}")
-
-        # Decide on the processing task
-        processing_task = "transcribe" if task == "Verbatim" else "translate" if task == "Semantic" else None
-
-        model_outputs = []
+        logger.info(f"Starting task: {task}... language: {language}")
         verbatim_outputs = []
         semantic_outputs = []
 
-        for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-            if task == "Verbatim" or task == "Semantic":
-                model_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=processing_task, language=language, return_timestamps=True)
-                )
-            elif task == "Both":
+        # Verbatim (transcribe) loop
+        if task in ["Verbatim", "Both"]:
+            for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
                 verbatim_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
                 )
+
+        # Semantic (translate) loop
+        if task in ["Semantic", "Both"]:
+            for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Translating...")):
                 semantic_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
                 )
-            
-        runtime = time.time() - start_time
-        logger.info("done transcription")
-        logger.info("post-processing...")
         
-        # Post-process and combine results if 'Both' is selected
-        if task == "Both":
+        runtime = time.time() - start_time
+        logger.info("done with tasks")
+        logger.info("post-processing...")
+
+        # Post-process and combine results
+        combined_text = ""
+        if task in ["Verbatim", "Both"]:
             verbatim_post_processed = pipeline.postprocess(verbatim_outputs, return_timestamps=True)
-            semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=True)
-
             verbatim_text = verbatim_post_processed["text"]
+            combined_text += f"Verbatim Transcription:\n{verbatim_text}\n\n"
+        
+        if task in ["Semantic", "Both"]:
+            semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=True)
             semantic_text = semantic_post_processed["text"]
+            combined_text += f"Semantic Transcription:\n{semantic_text}"
 
-            combined_text = f"Verbatim Transcription:\n{verbatim_text}\n\nSemantic Transcription:\n{semantic_text}"
-            text = combined_text
-        else:
-            post_processed = pipeline.postprocess(model_outputs, return_timestamps=True)
-            text = post_processed["text"]
-            if return_timestamps:
-                timestamps = post_processed.get("chunks")
-                timestamps = [
-                    f"[{format_timestamp(chunk['timestamp'][0])} -> {format_timestamp(chunk['timestamp'][1])}] {chunk['text']}"
-                    for chunk in timestamps
-                ]
-                text = "\n".join(str(feature) for feature in timestamps)
-            logger.info(f"done post-processing")
-            logger.info(f"transcribed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
-            
+        text = combined_text.strip()
+        logger.info(f"Processed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
+        
         return text, runtime
 
     def prepare_audio_for_transcription(file):
