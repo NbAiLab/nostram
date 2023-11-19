@@ -304,11 +304,6 @@ if __name__ == "__main__":
         else:
             language = "en"
             
-        if task == "Verbatim":
-            task = "transcribe"
-            
-        if task == "Semantic":
-            task = "translate"
         
         start_time = time.time()
         logger.info(f"transcribing... language:{language}, task:{task}")
@@ -317,17 +312,18 @@ if __name__ == "__main__":
         verbatim_outputs = []
         semantic_outputs = []
         for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-            if task == "Both":
+            if task == "Verbatim":
+                model_outputs = pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
+            elif task == "Semantic":
+                model_outputs = pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
+            elif task == "Both":
                 verbatim_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=True)
                 )
                 semantic_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=True)
                 )
-            else:
-                model_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language=language, return_timestamps=True)
-                )      
+
             
         runtime = time.time() - start_time
         logger.info("done transcription")
