@@ -189,13 +189,13 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
                 current_subtitle.append(line)
         if current_subtitle:
             subtitles.append(current_subtitle)
-
+        
         # Save subtitles to a temporary file
         temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
         with os.fdopen(temp_fd, 'w') as temp_file:
             for subtitle in subtitles:
                 temp_file.writelines(subtitle)
-
+        
         return temp_path, start_index
 
     # Extract subtitles from both files
