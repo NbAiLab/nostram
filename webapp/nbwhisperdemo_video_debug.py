@@ -112,9 +112,9 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
 
     # Set style based on transcription type
     if transcription_style == "verbatim":
-        style = "line:10% align:center position:50% size:100%"
+        style = "line:20% align:center position:50% size:100%"
     elif transcription_style == "semantic":
-        style = "line:90% align:center position:50% size:100%"
+        style = "line:80% align:center position:50% size:100%"
 
     vtt_lines = [
         f"WEBVTT",
