@@ -88,16 +88,19 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-def convert_to_proper_time_format(time):
-    time_parts = time.split(":")
-    if len(time_parts) == 2:
-        return f"00:{time}"
-    elif len(time_parts) == 3 and len(time_parts[0]) == 1:
-        return f"0{time}"
+def convert_to_proper_time_format(time_str):
+    """
+    Converts time string to proper VTT time format.
+    """
+    if len(time_str) == 8:
+        return time_str + ".000"
+    elif len(time_str) > 8:
+        return time_str
     else:
-        return time
+        raise ValueError(f"Invalid time format: {time_str}")
 
 
+# Updated format_to_vtt function
 def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
     if not timestamps:
         return None
@@ -113,12 +116,11 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
         f"WEBVTT",
         "",
         "NOTE",
-        f"Denne transkripsjonen er autogenerert av Nasjonalbibliotekets {title} basert på OpenAIs Whisper-modell.",
-        f"Se detaljer og last ned modellen her: https://huggingface.co/{checkpoint}.",
+        "Denne transkripsjonen er autogenerert og kan inneholde feil.",
         "",
         "0",
         f"00:00:00.000 --> 00:00:06.000 {style}".strip(),
-        f"(Automatisk teksting av {title})",
+        "(Automatisk teksting)",
         ""
     ]
     counter = 1
@@ -155,6 +157,7 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
     return "\n".join(vtt_lines)
 
 
+# Updated merge_and_sort_subtitles function
 def merge_and_sort_subtitles(vtt_file1, vtt_file2):
     def extract_subtitles(vtt_file):
         with open(vtt_file, 'r') as file:
@@ -174,44 +177,39 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
     subtitles2, _ = extract_subtitles(vtt_file2)
 
-    def sort_subtitles(subtitles):
-        # Sort by the start time in the timestamp
-        return sorted(subtitles, key=lambda x: x[1])
+    # Merge subtitles without sorting as overlapping is allowed
+    merged_subtitles = subtitles1 + subtitles2
 
-    # Merge and sort subtitles
-    merged_subtitles = sort_subtitles(subtitles1 + subtitles2)
+    # Update numbering for merged subtitles
+    for idx, group in enumerate(merged_subtitles, start=1):
+        group[0] = f"{idx}\n"
 
     # Read header from the first file
     with open(vtt_file1, 'r') as file:
         header = ''.join(file.readlines()[:start_index1])
 
-    # Combine header and sorted subtitle groups
+    # Combine header and merged subtitle groups
     combined_vtt = header + ''.join([''.join(group) for group in merged_subtitles])
 
     return combined_vtt
 
+def split_long_lines(text, max_length=75):
+    """
+    Splits long lines into shorter lines of specified maximum length.
+    """
+    words = text.split()
+    lines = []
+    current_line = ""
+    for word in words:
+        if len(current_line) + len(word) + 1 <= max_length:
+            current_line += (" " + word).strip()
+        else:
+            lines.append(current_line)
+            current_line = word
+    if current_line:
+        lines.append(current_line)
+    return '\n'.join(lines)
 
-def split_long_lines(subtitle_text):
-    lines = 1 + len(subtitle_text) // 60
-    if lines > 1:
-        original_text = subtitle_text
-        # Split into multiple lines
-        words = subtitle_text.split(" ")
-        total_len = len(subtitle_text)
-        target_len = total_len / lines
-
-        word_len = [len(word) + 1 for word in words if word]
-        totals = np.cumsum(word_len)
-
-        indices = []
-        for l in range(lines - 1):
-            idx = np.argmin(np.abs((l + 1) * target_len - totals))
-            indices.append(idx + 1)
-
-        subtitle_text = "\n".join(" ".join(words[i:j]) for i, j in zip([None] + indices, indices + [None]))
-        if original_text != subtitle_text.replace("\n", " "):
-            print("Hei")
-    return subtitle_text
 
 
 def format_to_srt(text, timestamps):
