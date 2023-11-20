@@ -95,7 +95,7 @@ def convert_to_proper_time_format(time_str):
     if time_str is None or time_str == "None":
         logging.warning("Received None for time_str in convert_to_proper_time_format.")
         return "99:00:00.000"
-    
+
     if len(time_str) == 8:
         return time_str + ".000"
     elif len(time_str) > 8:
@@ -106,7 +106,6 @@ def convert_to_proper_time_format(time_str):
 
 # Updated format_to_vtt function
 def format_to_vtt(text, timestamps, transcription_style, style=""):
-
     if not timestamps:
         return None
 
@@ -145,7 +144,7 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
         if end_time is None:
             logging.warning(f"End time is None for chunk: {chunk}")
             continue
-        
+
         # Don't let the disclaimer overlap with the first subtitle
         if start_time.startswith("00:00:0") and int(start_time[7]) < 6:
             vtt_lines[7] = vtt_lines[7].replace("00:00:06.000", start_time)
@@ -189,7 +188,7 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
                 current_subtitle.append(line)
         if current_subtitle:
             subtitles.append(current_subtitle)
-        
+
         return subtitles, start_index
 
     # Extract subtitles from both files
@@ -215,8 +214,9 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
     with os.fdopen(temp_fd, 'w') as temp_file:
         for subtitle in combined_vtt:
             temp_file.writelines(subtitle)
-    
+
     return temp_path
+
 
 def split_long_lines(text, max_length=75):
     """
@@ -285,7 +285,8 @@ if __name__ == "__main__":
     logger.info(f"compiled in {compile_time}s")
 
 
-    def tqdm_generate(inputs: dict, language: str, task: str, return_timestamps: bool, progress: gr.Progress) -> Tuple[str, float]:
+    def tqdm_generate(inputs: dict, language: str, task: str, return_timestamps: bool, progress: gr.Progress) -> Tuple[
+        str, float]:
         inputs_len = inputs["array"].shape[0]
         all_chunk_start_idx = np.arange(0, inputs_len, step)
         num_samples = len(all_chunk_start_idx)
@@ -304,7 +305,7 @@ if __name__ == "__main__":
             language = "nn"
         else:
             language = "en"
-        
+
         start_time = time.time()
         logger.info(f"Starting task: {task}... language: {language}")
         verbatim_outputs = []
@@ -314,16 +315,18 @@ if __name__ == "__main__":
         if task in ["Verbatim", "Both"]:
             for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
                 verbatim_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=return_timestamps)
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language,
+                                     return_timestamps=return_timestamps)
                 )
 
         # Semantic (translate) loop
         if task in ["Semantic", "Both"]:
             for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Translating...")):
                 semantic_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=return_timestamps)
+                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language,
+                                     return_timestamps=return_timestamps)
                 )
-        
+
         runtime = time.time() - start_time
         logger.info("done with tasks")
         logger.info("post-processing...")
@@ -338,7 +341,7 @@ if __name__ == "__main__":
             if return_timestamps:
                 combined_timestamps.extend(verbatim_post_processed.get("chunks", []))
             combined_text += verbatim_text
-        
+
         if task in ["Semantic", "Both"]:
             semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=return_timestamps)
             semantic_text = semantic_post_processed["text"]
@@ -353,8 +356,10 @@ if __name__ == "__main__":
             ]
             combined_text = "\n".join(timestamps_text)
 
-        logger.info(f"Processed {len(combined_text.split())} words and {len(combined_text)} characters in {runtime:.2f}s")
+        logger.info(
+            f"Processed {len(combined_text.split())} words and {len(combined_text)} characters in {runtime:.2f}s")
         return combined_text.strip(), runtime
+
 
     def prepare_audio_for_transcription(file):
         tmpdirname = tempfile.mkdtemp()
@@ -375,16 +380,18 @@ if __name__ == "__main__":
                 file_contents = f.read()
             video_file_path = re.sub(r"\.[^.]+$", ".mp4", file_path)
             ffmpeg_cmd = f'ffmpeg -y -f lavfi -i color=c=black:s=1280x720 -i "{file_path}" ' \
-                        f'-shortest -fflags +shortest -loglevel error "{video_file_path}"'
+                         f'-shortest -fflags +shortest -loglevel error "{video_file_path}"'
             os.system(ffmpeg_cmd)
             file_path = video_file_path
 
         return file_contents, file_path
-    
+
+
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
         if return_timestamps:
             # Formatting for middle-aligned subtitles
-            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None, style="line:50% align:center position:50% size:100%")
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,
+                                               style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
@@ -402,44 +409,69 @@ if __name__ == "__main__":
             f.write(transcript_content)
 
         return transcript_file_path, subtitle_display
-    
+
+
     def perform_transcription(file_contents, language, task, return_timestamps, progress):
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
         logger.info("done loading")
-        
-        text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps, progress=progress)
+
+        text, runtime = tqdm_generate(inputs, language=language, task=task, return_timestamps=return_timestamps,
+                                      progress=progress)
         return text, runtime
 
 
-    def transcribe_chunked_audio(file, language, task, return_timestamps, progress=gr.Progress()):
-        if file is None:
-            logger.warning("No audio file provided")
-            raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-        
+    def transcribe_chunked_audio(file_or_yt_url, language, task, return_timestamps, progress=gr.Progress()):
+        if isinstance(file_or_yt_url, str):
+            yt_url = file_or_yt_url
+            use_youtube_player = False
+            progress(0, desc="Loading audio file...")
+            logger.info("loading youtube file...")
+            html_embed_str = _return_yt_html_embed(yt_url)
+
+            tmpdirname = tempfile.mkdtemp()
+            video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
+
+            file = video_filepath
+
+            logger.info("done loading...")
+        else:
+            file = file_or_yt_url
+            if file_or_yt_url is None:
+                logger.warning("No audio file provided")
+                raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+
         file_contents, file_path = prepare_audio_for_transcription(file)
-        
+
         if task == "Both":
             # Transcribe for Verbatim
             verbatim_text, _ = perform_transcription(file_contents, language, "Verbatim", return_timestamps, progress)
-            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path, return_timestamps, transcription_style="verbatim")
+            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path,
+                                                                                  return_timestamps,
+                                                                                  transcription_style="verbatim")
 
             # Transcribe for Semantic
-            semantic_text, runtime = perform_transcription(file_contents, language, "Semantic", return_timestamps, progress)
-            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
+            semantic_text, runtime = perform_transcription(file_contents, language, "Semantic", return_timestamps,
+                                                           progress)
+            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path,
+                                                                                  return_timestamps,
+                                                                                  transcription_style="semantic")
 
             # Merge and sort subtitles
             subtitle_display = transcript_file_path = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
-                        
+
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
+            o4 = youtube.output_components[4].update(visible=False, value=transcript_file_path)
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
+            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps,
+                                                                            transcription_style=task)
+            o4 = youtube.output_components[4].update(visible=True, value=transcript_file_path)
 
-        #text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        #transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
+        # text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
+        # transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
         if file_path.endswith(".mp4"):
             value = [file_path, subtitle_display] if subtitle_display is not None else file_path
@@ -449,7 +481,7 @@ if __name__ == "__main__":
             o0 = youtube.output_components[1].update(visible=False)
             o1 = youtube.output_components[1].update(visible=True, value=file_path)
 
-        return o0, o1, text, runtime, transcript_file_path
+        return o0, o1, text, runtime, o4
 
 
     def _return_yt_html_embed(yt_url):
@@ -496,45 +528,6 @@ if __name__ == "__main__":
         return fpath
 
 
-    def transcribe_youtube(yt_url, language, task, return_timestamps, progress=gr.Progress()):
-        use_youtube_player = False
-        progress(0, desc="Loading audio file...")
-        logger.info("loading youtube file...")
-        html_embed_str = _return_yt_html_embed(yt_url)
-
-        tmpdirname = tempfile.mkdtemp()
-        video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
-
-        with open(video_filepath, "rb") as f:
-            inputs = f.read()
-
-        inputs = ffmpeg_read(inputs, pipeline.feature_extractor.sampling_rate)
-        inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
-        logger.info("done loading...")
-        text, runtime = tqdm_generate(inputs, language=language, task=task,
-                                      return_timestamps=return_timestamps, progress=progress)
-
-        if return_timestamps:
-            transcript_content = format_to_vtt(text, return_timestamps)
-            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", video_filepath)
-        else:
-            transcript_content = text
-            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", video_filepath)
-
-        with open(transcript_file_path, "w") as f:
-            f.write(transcript_content)
-
-        if use_youtube_player:
-            o0 = youtube.output_components[0].update(visible=True, value=html_embed_str)
-            o1 = youtube.output_components[1].update(visible=False)
-        else:
-            o0 = youtube.output_components[0].update(visible=False)
-            value = [video_filepath, transcript_file_path] if return_timestamps else video_filepath
-            o1 = youtube.output_components[1].update(visible=True, value=value)
-
-        return o0, o1, text, runtime, transcript_file_path
-
-
     # microphone_chunked = gr.Interface(
     #     fn=transcribe_chunked_audio,
     #     inputs=[
@@ -576,7 +569,7 @@ if __name__ == "__main__":
     )
 
     youtube = gr.Interface(
-        fn=transcribe_youtube,
+        fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
@@ -594,9 +587,9 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbatim",True, False],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim",True, False],
-            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic",True, False]
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbatim", True, False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim", True, False],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic", True, False]
         ],
         cache_examples=False,
         description=description,
