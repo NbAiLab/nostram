@@ -426,7 +426,7 @@ if __name__ == "__main__":
             semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
 
             # Merge and sort subtitles
-            subtitle_display = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
+            subtitle_display = transcript_file_path = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
             
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
