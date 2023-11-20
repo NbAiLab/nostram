@@ -383,10 +383,10 @@ if __name__ == "__main__":
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
-            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
+            transcript_file_path = transcription_style+"_"+re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
             transcript_content = text
-            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
+            transcript_file_path = transcription_style+"_"+re.sub(r"\.[^.]+$", ".txt", file_path)
             subtitle_display = None
 
         with open(transcript_file_path, "w") as f:
