@@ -106,6 +106,8 @@ def convert_to_proper_time_format(time_str):
 
 # Updated format_to_vtt function
 def format_to_vtt(text, timestamps, transcription_style="verbatim", style=""):
+    print("hallo")
+    print(transcription_style)
     if not timestamps:
         return None
 
@@ -115,6 +117,8 @@ def format_to_vtt(text, timestamps, transcription_style="verbatim", style=""):
 
     # Set style based on transcription type
     style = verbatim_style if transcription_style == "verbatim" else semantic_style
+    
+    print(style)
     
     vtt_lines = [
         f"WEBVTT",
@@ -376,8 +380,6 @@ if __name__ == "__main__":
         return file_contents, file_path
     
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
-        print("hei")
-        print(transcription_style)
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
