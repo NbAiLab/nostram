@@ -210,7 +210,6 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
     # Combine header and merged subtitle groups
     combined_vtt = header + ''.join([''.join(group) for group in merged_subtitles])
 
-    breakpoint()
     # Save subtitles to a temporary file
     temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
     with os.fdopen(temp_fd, 'w') as temp_file:
@@ -384,16 +383,19 @@ if __name__ == "__main__":
     
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
         if return_timestamps:
-            
-            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,style="line:50% align:center position:50% size:100%")
+            # Formatting for middle-aligned subtitles
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None, style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
+
+            # Formatting for regular subtitles with transcription style
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
-            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.vtt", file_path)
         else:
+            # Handling non-timestamped text
             transcript_content = text
-            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.txt", file_path)
             subtitle_display = None
 
         with open(transcript_file_path, "w") as f:
