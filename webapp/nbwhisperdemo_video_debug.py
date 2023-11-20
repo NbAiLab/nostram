@@ -428,20 +428,13 @@ if __name__ == "__main__":
             # Merge and sort subtitles
             subtitle_display = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
             
-            breakpoint()
-            
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
-
-            # Use the merged subtitles for display and download options
-            subtitle_display = merged_subtitles  # This needs to be formatted for display in UI
-            transcript_file_path = None  # Since individual files are available for download, not the merged one
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
             transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
-        
         #text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         #transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
