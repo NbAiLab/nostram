@@ -374,26 +374,30 @@ if __name__ == "__main__":
             file_path = video_file_path
 
         return file_contents, file_path
-    
+        
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
         if return_timestamps:
-            
-            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,style="line:50% align:center position:50% size:100%")
+            # Formatting for middle-aligned subtitles
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None, style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
+
+            # Formatting for regular subtitles with transcription style
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
-            transcript_file_path = transcription_style+"_"+re.sub(r"\.[^.]+$", ".vtt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.vtt", file_path)
         else:
+            # Handling non-timestamped text
             transcript_content = text
-            transcript_file_path = transcription_style+"_"+re.sub(r"\.[^.]+$", ".txt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.txt", file_path)
             subtitle_display = None
 
         with open(transcript_file_path, "w") as f:
             f.write(transcript_content)
 
         return transcript_file_path, subtitle_display
-    
+
+        
     def perform_transcription(file_contents, language, task, return_timestamps, progress):
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
@@ -421,7 +425,6 @@ if __name__ == "__main__":
 
             # Merge and sort subtitles
             merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
-            breakpoint()
             
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
