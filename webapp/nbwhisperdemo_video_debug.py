@@ -178,12 +178,23 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
                 start_index = i - 1
                 break
 
-        # Split lines into groups of 3 (index, timestamp, text)
-        return [lines[i:i+3] for i in range(start_index, len(lines), 3)], start_index
+        # Extract subtitles
+        subtitles = []
+        current_subtitle = []
+        for line in lines[start_index:]:
+            if line.strip().isdigit() and current_subtitle:
+                subtitles.append(current_subtitle)
+                current_subtitle = [line]
+            else:
+                current_subtitle.append(line)
+        if current_subtitle:
+            subtitles.append(current_subtitle)
+        
+        return subtitles, start_index
 
     # Extract subtitles from both files
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
-    subtitles2, start_index2 = extract_subtitles(vtt_file2)
+    subtitles2, _ = extract_subtitles(vtt_file2)
 
     # Merge subtitles without sorting as overlapping is allowed
     merged_subtitles = subtitles1 + subtitles2
