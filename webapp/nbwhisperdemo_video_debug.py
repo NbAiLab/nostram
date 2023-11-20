@@ -363,8 +363,8 @@ if __name__ == "__main__":
 
     def prepare_audio_for_transcription(file):
         tmpdirname = tempfile.mkdtemp()
-        file_path = os.path.join(tmpdirname, file.name)
-        shutil.move(file.name, file_path)
+        file_path = os.path.join(tmpdirname, file)
+        shutil.move(file, file_path)
         file_size_mb = os.stat(file_path).st_size / (1024 * 1024)
         if file_size_mb > FILE_LIMIT_MB:
             raise Exception(f"File size exceeds limit: {file_size_mb:.2f}MB / {FILE_LIMIT_MB}MB")
@@ -436,10 +436,10 @@ if __name__ == "__main__":
 
             logger.info("done loading...")
         else:
-            file = file_or_yt_url
             if file_or_yt_url is None:
                 logger.warning("No audio file provided")
                 raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+            file = file_or_yt_url.name
 
         file_contents, file_path = prepare_audio_for_transcription(file)
 
