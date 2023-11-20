@@ -210,6 +210,7 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
     # Combine header and merged subtitle groups
     combined_vtt = header + ''.join([''.join(group) for group in merged_subtitles])
 
+    breakpoint()
     # Save subtitles to a temporary file
     temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
     with os.fdopen(temp_fd, 'w') as temp_file:
@@ -427,9 +428,7 @@ if __name__ == "__main__":
 
             # Merge and sort subtitles
             subtitle_display = transcript_file_path = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
-            
-            breakpoint()
-            
+                        
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
         else:
