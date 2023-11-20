@@ -190,13 +190,7 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
         if current_subtitle:
             subtitles.append(current_subtitle)
         
-        # Save subtitles to a temporary file
-        temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
-        with os.fdopen(temp_fd, 'w') as temp_file:
-            for subtitle in subtitles:
-                temp_file.writelines(subtitle)
-        
-        return temp_path, start_index
+        return subtitles, start_index
 
     # Extract subtitles from both files
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
@@ -380,30 +374,26 @@ if __name__ == "__main__":
             file_path = video_file_path
 
         return file_contents, file_path
-        
+    
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
         if return_timestamps:
-            # Formatting for middle-aligned subtitles
-            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None, style="line:50% align:center position:50% size:100%")
+            
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,style="line:50% align:center position:50% size:100%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
-
-            # Formatting for regular subtitles with transcription style
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
-            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.vtt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
-            # Handling non-timestamped text
             transcript_content = text
-            transcript_file_path = re.sub(r"\.[^.]+$", f"_{transcription_style}.txt", file_path)
+            transcript_file_path = re.sub(r"\.[^.]+$", ".txt", file_path)
             subtitle_display = None
 
         with open(transcript_file_path, "w") as f:
             f.write(transcript_content)
 
         return transcript_file_path, subtitle_display
-
-        
+    
     def perform_transcription(file_contents, language, task, return_timestamps, progress):
         inputs = ffmpeg_read(file_contents, pipeline.feature_extractor.sampling_rate)
         inputs = {"array": inputs, "sampling_rate": pipeline.feature_extractor.sampling_rate}
@@ -430,11 +420,14 @@ if __name__ == "__main__":
             semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
 
             # Merge and sort subtitles
-            subtitle_display = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
+            merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
             
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
 
+            # Use the merged subtitles for display and download options
+            subtitle_display = merged_subtitles  # This needs to be formatted for display in UI
+            transcript_file_path = None  # Since individual files are available for download, not the merged one
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
