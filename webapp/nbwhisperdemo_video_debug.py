@@ -106,8 +106,7 @@ def convert_to_proper_time_format(time_str):
 
 # Updated format_to_vtt function
 def format_to_vtt(text, timestamps, transcription_style, style=""):
-    print("hallo")
-    print(transcription_style)
+
     if not timestamps:
         return None
 
@@ -116,9 +115,7 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
         style = "line:10% align:center position:50% size:100%"
     elif transcription_style == "semantic":
         style = "line:90% align:center position:50% size:100%"
-  
-    print(style)
-    
+
     vtt_lines = [
         f"WEBVTT",
         "",
@@ -424,7 +421,8 @@ if __name__ == "__main__":
 
             # Merge and sort subtitles
             merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
-
+            breakpoint()
+            
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
 
