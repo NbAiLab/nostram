@@ -105,7 +105,7 @@ def convert_to_proper_time_format(time_str):
 
 
 # Updated format_to_vtt function
-def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
+def format_to_vtt(text, timestamps, transcription_style="verbatim", style=""):
     if not timestamps:
         return None
 
@@ -114,7 +114,8 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
     semantic_style = "line:90% align:center position:50% size:100%"
 
     # Set style based on transcription type
-    style = verbatim_style if transcription_type == "verbatim" else semantic_style
+    if not style="":
+        style = verbatim_style if transcription_style == "verbatim" else semantic_style
     
     vtt_lines = [
         f"WEBVTT",
@@ -375,9 +376,9 @@ if __name__ == "__main__":
 
         return file_contents, file_path
     
-    def create_transcript_file(text, file_path, return_timestamps):
+    def create_transcript_file(text, file_path, return_timestamps, transcription_style="verbatim"):
         if return_timestamps:
-            transcript_content = format_to_vtt(text, return_timestamps, style="line:50% align:center position:50% size:100%")
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
@@ -412,11 +413,11 @@ if __name__ == "__main__":
         if task == "Both":
             # Transcribe for Verbatim
             verbatim_text, _ = perform_transcription(file_contents, language, "Verbatim", return_timestamps, progress)
-            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path, return_timestamps)
+            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path, return_timestamps, transcription_style="verbatim")
 
             # Transcribe for Semantic
             semantic_text, runtime = perform_transcription(file_contents, language, "Semantic", return_timestamps, progress)
-            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps)
+            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
 
             # Merge and sort subtitles
             merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
@@ -430,7 +431,7 @@ if __name__ == "__main__":
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
+            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
         
         #text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
