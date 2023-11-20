@@ -111,13 +111,12 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
     if not timestamps:
         return None
 
-    # Define styles for different types of transcriptions
-    verbatim_style = "line:10% align:center position:50% size:100%"
-    semantic_style = "line:90% align:center position:50% size:100%"
-
     # Set style based on transcription type
-    style = verbatim_style if transcription_style == "verbatim" else semantic_style
-    
+    if transcription_style == "verbatim":
+        style = "line:10% align:center position:50% size:100%"
+    elif transcription_style == "semantic":
+        style = "line:90% align:center position:50% size:100%"
+  
     print(style)
     
     vtt_lines = [
