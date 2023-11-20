@@ -380,6 +380,7 @@ if __name__ == "__main__":
         return file_contents, file_path
     
     def create_transcript_file(text, file_path, return_timestamps, transcription_style="semantic"):
+        print(f"Creating transcript file for {transcription_style}")
         if return_timestamps:
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
