@@ -437,8 +437,8 @@ if __name__ == "__main__":
             transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
         
-        text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
+        #text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
+        #transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
 
         if file_path.endswith(".mp4"):
             value = [file_path, subtitle_display] if subtitle_display is not None else file_path

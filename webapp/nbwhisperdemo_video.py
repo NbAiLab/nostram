@@ -244,12 +244,14 @@ if __name__ == "__main__":
     logger.info(f"compiled in {compile_time}s")
 
 
-    def tqdm_generate(inputs: dict, language: str, task: str, return_timestamps: bool, progress: gr.Progress) -> Tuple[str, float]:
+    def tqdm_generate(inputs: dict, language: str, return_timestamps: bool, progress: gr.Progress):
         inputs_len = inputs["array"].shape[0]
         all_chunk_start_idx = np.arange(0, inputs_len, step)
         num_samples = len(all_chunk_start_idx)
         num_batches = math.ceil(num_samples / BATCH_SIZE)
-        dummy_batches = list(range(num_batches))  # Gradio progress bar not compatible with generator
+        dummy_batches = list(
+            range(num_batches)
+        )  # Gradio progress bar not compatible with generator, see https://github.com/gradio-app/gradio/issues/3841
 
         dataloader = pipeline.preprocess_batch(inputs, chunk_length_s=CHUNK_LENGTH_S, batch_size=BATCH_SIZE)
         progress(0, desc="Pre-processing audio file...")
@@ -259,61 +261,36 @@ if __name__ == "__main__":
 
         if language == "Bokmål":
             language = "no"
+            task = "transcribe"
         elif language == "Nynorsk":
             language = "nn"
+            task = "transcribe"
         else:
             language = "en"
-        
+            task = "transcribe"
+
+        model_outputs = []
         start_time = time.time()
-        logger.info(f"Starting task: {task}... language: {language}")
-        verbatim_outputs = []
-        semantic_outputs = []
-
-        # Verbatim (transcribe) loop
-        if task in ["Verbatim", "Both"]:
-            for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
-                verbatim_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language, return_timestamps=return_timestamps)
-                )
-
-        # Semantic (translate) loop
-        if task in ["Semantic", "Both"]:
-            for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Translating...")):
-                semantic_outputs.append(
-                    pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language, return_timestamps=return_timestamps)
-                )
-        
+        logger.info("transcribing...")
+        # iterate over our chunked audio samples - always predict timestamps to reduce hallucinations
+        for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
+            model_outputs.append(
+                pipeline.forward(batch, batch_size=BATCH_SIZE, task=task, language=language, return_timestamps=True))
         runtime = time.time() - start_time
-        logger.info("done with tasks")
+        logger.info("done transcription")
         logger.info("post-processing...")
-
-        # Post-process and combine results
-        combined_text = ""
-        combined_timestamps = []
-
-        if task in ["Verbatim", "Both"]:
-            verbatim_post_processed = pipeline.postprocess(verbatim_outputs, return_timestamps=return_timestamps)
-            verbatim_text = verbatim_post_processed["text"]
-            if return_timestamps:
-                combined_timestamps.extend(verbatim_post_processed.get("chunks", []))
-            combined_text += verbatim_text
-        
-        if task in ["Semantic", "Both"]:
-            semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=return_timestamps)
-            semantic_text = semantic_post_processed["text"]
-            if return_timestamps:
-                combined_timestamps.extend(semantic_post_processed.get("chunks", []))
-            combined_text += semantic_text
-
+        post_processed = pipeline.postprocess(model_outputs, return_timestamps=True)
+        text = post_processed["text"]
         if return_timestamps:
-            timestamps_text = [
+            timestamps = post_processed.get("chunks")
+            timestamps = [
                 f"[{format_timestamp(chunk['timestamp'][0])} -> {format_timestamp(chunk['timestamp'][1])}] {chunk['text']}"
-                for chunk in combined_timestamps
+                for chunk in timestamps
             ]
-            combined_text = "\n".join(timestamps_text)
+            text = "\n".join(str(feature) for feature in timestamps)
+        logger.info("done post-processing")
+        return text, runtime
 
-        logger.info(f"Processed {len(combined_text.split())} words and {len(combined_text)} characters in {runtime:.2f}s")
-        return combined_text.strip(), runtime
 
     def transcribe_chunked_audio(file, language, return_timestamps, progress=gr.Progress()):
         tmpdirname = tempfile.mkdtemp()
