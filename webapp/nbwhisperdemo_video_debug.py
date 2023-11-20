@@ -90,8 +90,12 @@ logger.addHandler(ch)
 
 def convert_to_proper_time_format(time_str):
     """
-    Converts time string to proper VTT time format.
+    Converts time string to proper VTT time format. Returns a default format if input is None.
     """
+    if time_str is None:
+        logging.warning("Received None for time_str in convert_to_proper_time_format.")
+        return "00:00:00.000"
+    
     if len(time_str) == 8:
         return time_str + ".000"
     elif len(time_str) > 8:
@@ -129,7 +133,7 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
             start_time, rest = chunk.split(" -> ")
             end_time, subtitle_text = rest.split("] ")
         except ValueError:
-            print(f"Skipping malformed chunk: {chunk}")
+            logging.warning(f"Skipping malformed chunk: {chunk}")
             continue
 
         start_time = start_time.replace("[", "").replace(",", ".")
@@ -138,6 +142,10 @@ def format_to_vtt(text, timestamps, transcription_type="verbatim", style=""):
         start_time = convert_to_proper_time_format(start_time)
         end_time = convert_to_proper_time_format(end_time)
 
+        if end_time is None:
+            logging.warning(f"End time is None for chunk: {chunk}")
+            continue
+        
         # Don't let the disclaimer overlap with the first subtitle
         if start_time.startswith("00:00:0") and int(start_time[7]) < 6:
             vtt_lines[7] = vtt_lines[7].replace("00:00:06.000", start_time)
