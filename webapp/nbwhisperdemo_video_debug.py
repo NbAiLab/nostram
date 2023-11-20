@@ -105,7 +105,7 @@ def convert_to_proper_time_format(time_str):
 
 
 # Updated format_to_vtt function
-def format_to_vtt(text, timestamps, transcription_style="verbatim", style=""):
+def format_to_vtt(text, timestamps, transcription_style, style=""):
     print("hallo")
     print(transcription_style)
     if not timestamps:
