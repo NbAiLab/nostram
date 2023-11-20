@@ -381,7 +381,7 @@ if __name__ == "__main__":
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
-            transcript_content = format_to_vtt(text, return_timestamps)
+            transcript_content = format_to_vtt(text, return_timestamps, transcription_style=transcription_style)
             transcript_file_path = re.sub(r"\.[^.]+$", ".vtt", file_path)
         else:
             transcript_content = text
