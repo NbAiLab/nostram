@@ -578,7 +578,7 @@ if __name__ == "__main__":
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
         outputs=[
-            gr.outputs.HTML(label="Video"),
+            # gr.outputs.HTML(label="Video"),
             gr.outputs.Video(label="Video"),
             gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
             gr.outputs.Textbox(label="Transcription Time (s)"),
