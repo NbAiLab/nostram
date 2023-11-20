@@ -119,11 +119,12 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
         f"WEBVTT",
         "",
         "NOTE",
-        "Denne transkripsjonen er autogenerert og kan inneholde feil.",
+        f"Denne transkripsjonen er autogenerert av Nasjonalbibliotekets {title} basert på OpenAIs Whisper-modell.",
+        f"Se detaljer og last ned modellen her: https://huggingface.co/{checkpoint}.",
         "",
         "0",
         f"00:00:00.000 --> 00:00:06.000 {style}".strip(),
-        "(Automatisk teksting)",
+        f"(Automatisk teksting av {title})",
         ""
     ]
     counter = 1
@@ -461,7 +462,7 @@ if __name__ == "__main__":
             subtitle_display = transcript_file_path = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
 
             # Combine the texts for display in UI
-            text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
+            text = "Verbatim transcript:\n" + verbatim_text + "\n\n" + "Semantic transcript:\n" + semantic_text
             o4 = youtube.output_components[4].update(visible=False, value=transcript_file_path)
         else:
             # Handle as before for Verbatim or Semantic only
