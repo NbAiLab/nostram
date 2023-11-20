@@ -189,8 +189,14 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
                 current_subtitle.append(line)
         if current_subtitle:
             subtitles.append(current_subtitle)
-        
-        return subtitles, start_index
+
+        # Save subtitles to a temporary file
+        temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
+        with os.fdopen(temp_fd, 'w') as temp_file:
+            for subtitle in subtitles:
+                temp_file.writelines(subtitle)
+
+        return temp_path, start_index
 
     # Extract subtitles from both files
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
@@ -424,14 +430,11 @@ if __name__ == "__main__":
             semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
 
             # Merge and sort subtitles
-            merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
+            subtitle_display = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
             
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
 
-            # Use the merged subtitles for display and download options
-            subtitle_display = merged_subtitles  # This needs to be formatted for display in UI
-            transcript_file_path = None  # Since individual files are available for download, not the merged one
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
