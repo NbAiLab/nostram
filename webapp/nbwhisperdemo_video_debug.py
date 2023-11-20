@@ -190,7 +190,13 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
         if current_subtitle:
             subtitles.append(current_subtitle)
         
-        return subtitles, start_index
+        # Save subtitles to a temporary file
+        temp_fd, temp_path = tempfile.mkstemp(suffix='.vtt')
+        with os.fdopen(temp_fd, 'w') as temp_file:
+            for subtitle in subtitles:
+                temp_file.writelines(subtitle)
+
+        return subtitles, temp_path, start_index
 
     # Extract subtitles from both files
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
@@ -420,7 +426,7 @@ if __name__ == "__main__":
             semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path, return_timestamps, transcription_style="semantic")
 
             # Merge and sort subtitles
-            merged_subtitles = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
+            merged_subtitles, subtitle_display = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
             
             breakpoint()
             
