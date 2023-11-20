@@ -342,6 +342,8 @@ if __name__ == "__main__":
         text = combined_text.strip()
         logger.info(f"Processed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
         
+        breakpoint()
+        
         return text, runtime
 
     def prepare_audio_for_transcription(file):
