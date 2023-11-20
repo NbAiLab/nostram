@@ -330,12 +330,14 @@ if __name__ == "__main__":
         if task in ["Verbatim", "Both"]:
             verbatim_post_processed = pipeline.postprocess(verbatim_outputs, return_timestamps=True)
             verbatim_text = verbatim_post_processed["text"]
-            combined_text += f"Verbatim Transcription:\n{verbatim_text}\n\n"
+            combined_text+= verbatim_text
+            #combined_text += f"Verbatim Transcription:\n{verbatim_text}\n\n"
         
         if task in ["Semantic", "Both"]:
             semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=True)
             semantic_text = semantic_post_processed["text"]
-            combined_text += f"Semantic Transcription:\n{semantic_text}"
+            combined_text += semantic_text
+            #combined_text += f"Semantic Transcription:\n{semantic_text}"
 
         text = combined_text.strip()
         logger.info(f"Processed {len(text.split())} words and {len(text)} characters in {runtime:.2f}s")
