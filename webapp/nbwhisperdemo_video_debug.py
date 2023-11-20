@@ -92,9 +92,9 @@ def convert_to_proper_time_format(time_str):
     """
     Converts time string to proper VTT time format. Returns a default format if input is None.
     """
-    if time_str is None:
+    if time_str is None or time_str == "None":
         logging.warning("Received None for time_str in convert_to_proper_time_format.")
-        return "00:00:00.000"
+        return "99:00:00.000"
     
     if len(time_str) == 8:
         return time_str + ".000"
