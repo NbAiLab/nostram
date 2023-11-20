@@ -462,13 +462,13 @@ if __name__ == "__main__":
 
             # Combine the texts for display in UI
             text = "Verbatim translation:\n" + verbatim_text + "\n\n" + "Semantic translation:\n" + semantic_text
-            o4 = youtube.output_components[3].update(visible=False, value=transcript_file_path)
+            o4 = youtube.output_components[4].update(visible=False, value=transcript_file_path)
         else:
             # Handle as before for Verbatim or Semantic only
             text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
             transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps,
                                                                             transcription_style=task)
-            o4 = youtube.output_components[3].update(visible=True, value=transcript_file_path)
+            o4 = youtube.output_components[4].update(visible=True, value=transcript_file_path)
 
         # text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         # transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
