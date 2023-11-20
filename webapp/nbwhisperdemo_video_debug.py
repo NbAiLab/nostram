@@ -183,7 +183,7 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
 
     # Extract subtitles from both files
     subtitles1, start_index1 = extract_subtitles(vtt_file1)
-    subtitles2, _ = extract_subtitles(vtt_file2)
+    subtitles2, start_index2 = extract_subtitles(vtt_file2)
 
     # Merge subtitles without sorting as overlapping is allowed
     merged_subtitles = subtitles1 + subtitles2
@@ -224,33 +224,6 @@ def split_long_lines(text, max_length=75):
         lines.append(current_line)
 
     return '\n'.join(lines)
-
-
-def format_to_srt(text, timestamps):
-    if not timestamps:
-        return None
-
-    srt_lines = []
-    counter = 1
-
-    for chunk in text.split("\n"):
-        start_time, rest = chunk.split(" -> ")
-        end_time, subtitle_text = rest.split("] ")
-
-        start_time = start_time.replace("[", "").replace(".", ",")
-        end_time = end_time.replace(".", ",")
-
-        start_time = convert_to_proper_time_format(start_time)
-        end_time = convert_to_proper_time_format(end_time)
-
-        srt_lines.append(str(counter))
-        srt_lines.append(f"{start_time} --> {end_time}")
-        srt_lines.append(subtitle_text.strip())
-        srt_lines.append("")
-
-        counter += 1
-
-    return "\n".join(srt_lines)
 
 
 def identity(batch):
