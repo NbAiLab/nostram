@@ -203,21 +203,27 @@ def merge_and_sort_subtitles(vtt_file1, vtt_file2):
 
 def split_long_lines(text, max_length=75):
     """
-    Splits long lines into shorter lines of specified maximum length.
+    Splits long lines into shorter lines of specified maximum length, ensuring spaces are preserved.
     """
     words = text.split()
     lines = []
     current_line = ""
+
     for word in words:
+        # Check if adding the next word exceeds the max length
         if len(current_line) + len(word) + 1 <= max_length:
-            current_line += (" " + word).strip()
+            # Append the word with a space, or no space if it's the first word in the line
+            current_line = f"{current_line} {word}".strip()
         else:
+            # Line has reached max length, start a new line
             lines.append(current_line)
             current_line = word
+
+    # Add the last line if it's not empty
     if current_line:
         lines.append(current_line)
-    return '\n'.join(lines)
 
+    return '\n'.join(lines)
 
 
 def format_to_srt(text, timestamps):
