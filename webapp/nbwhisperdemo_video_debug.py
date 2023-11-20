@@ -241,8 +241,8 @@ def identity(batch):
     return batch
 
 
-# Copied from https://github.com/openai/whisper/blob/c09a7ae299c4c34c5839a76380ae407e7d785914/whisper/utils.py#L50
-def format_timestamp(seconds: float, always_include_hours: bool = False, decimal_marker: str = "."):
+# Modified from https://github.com/openai/whisper/blob/c09a7ae299c4c34c5839a76380ae407e7d785914/whisper/utils.py#L50
+def format_timestamp(seconds: float, always_include_hours: bool = True, decimal_marker: str = "."):
     if seconds is not None:
         milliseconds = round(seconds * 1000.0)
 
@@ -255,7 +255,7 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
         seconds = milliseconds // 1_000
         milliseconds -= seconds * 1_000
 
-        hours_marker = f"{hours:02d}:" if always_include_hours or hours > 0 else ""
+        hours_marker = f"{hours:02d}:"
         return f"{hours_marker}{minutes:02d}:{seconds:02d}{decimal_marker}{milliseconds:03d}"
     else:
         # we have a malformed timestamp so just return it as is
