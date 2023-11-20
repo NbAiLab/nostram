@@ -114,7 +114,7 @@ def format_to_vtt(text, timestamps, transcription_style="verbatim", style=""):
     semantic_style = "line:90% align:center position:50% size:100%"
 
     # Set style based on transcription type
-    if not style="":
+    if not style=="":
         style = verbatim_style if transcription_style == "verbatim" else semantic_style
     
     vtt_lines = [
