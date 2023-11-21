@@ -16,6 +16,7 @@ from transformers.models.whisper.tokenization_whisper import TO_LANGUAGE_CODE
 from transformers.pipelines.audio_utils import ffmpeg_read
 import tempfile
 import base64
+import subprocess
 from typing import Tuple
 
 from whisper_jax import FlaxWhisperPipline
