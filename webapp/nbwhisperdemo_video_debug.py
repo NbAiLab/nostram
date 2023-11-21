@@ -531,7 +531,12 @@ if __name__ == "__main__":
             blurred_fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}_blurred.mp4")
             ffmpeg_cmd = [
                 'ffmpeg', '-i', fpath, '-filter_complex',
-                '[0:v]split=2[upper][lower];[lower]crop=iw:ih/2:0:ih/2,boxblur=10[blurred];[upper][blurred]overlay=0:H/2',
+                '[0:v]split=3[original][top][bottom];' +
+                '[top]crop=iw:ih/4:0:0,boxblur=5[top_blurred];' +
+                '[bottom]crop=iw:ih/4:0:ih*3/4,boxblur=10[bottom_blurred];' +
+                '[original][top_blurred]overlay=0:0[blurred_top];' +
+                '[blurred_top][bottom_blurred]overlay=0:H*3/4',
+                '-c:v', 'libx264', '-preset', 'fast', '-threads', '4',
                 blurred_fpath
             ]
             try:
