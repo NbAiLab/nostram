@@ -423,7 +423,7 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(file_or_yt_url, language, task, return_timestamps, progress=gr.Progress()):
+    def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
         if isinstance(file_or_yt_url, str):
             yt_url = file_or_yt_url
             use_youtube_player = False
@@ -578,8 +578,8 @@ if __name__ == "__main__":
         fn=transcribe_chunked_audio,
         inputs=[
             gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
-            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription style", default="Verbatim"),
+            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", default="Bokmål"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
@@ -598,9 +598,9 @@ if __name__ == "__main__":
     youtube = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
-            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription style", default="Semantic"),
+            gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube or Twitter/X video here", label="YouTube or Twitter/X URL"),
+            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", default="Bokmål"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Semantic"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
@@ -619,7 +619,7 @@ if __name__ == "__main__":
             ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim", True, False],
             ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic", True, False]
         ],
-        cache_examples=False,
+        cache_examples=True,
         description=description,
         article=article,
     )
