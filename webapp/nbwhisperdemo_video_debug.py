@@ -615,9 +615,9 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbatim", True, False],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim", True, False],
-            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic", True, False]
+            ["https://www.youtube.com/watch?v=_uv74o8hG30"],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk"],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU"]
         ],
         cache_examples=False,
         description=description,
