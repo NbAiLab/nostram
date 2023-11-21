@@ -517,7 +517,7 @@ if __name__ == "__main__":
 
         fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}.mp4")
 
-        video = "bestvideo[height <=? 720]" if video else "worstvideo"
+        video = "bestvideo[height <=? 480]" if video else "worstvideo"
         ydl_opts = {"outtmpl": fpath, "format": f"{video}[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"}
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
@@ -525,6 +525,25 @@ if __name__ == "__main__":
             except youtube_dl.utils.ExtractorError as err:
                 raise gr.Error(str(err))
 
+        # Process video with FFmpeg if video==True
+        if video:
+            blurred_fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}_blurred.mp4")
+            ffmpeg_cmd = [
+                'ffmpeg', '-i', fpath, '-filter_complex',
+                '[0:v]split=2[upper][lower];[lower]crop=iw:ih/2:0:ih/2,boxblur=10[blurred];[upper][blurred]overlay=0:H/2',
+                blurred_fpath
+            ]
+            try:
+                subprocess.run(ffmpeg_cmd, check=True)
+            except subprocess.CalledProcessError as err:
+                raise gr.Error(f"FFmpeg processing failed: {err}")
+
+            # Optionally, remove the original unblurred video file
+            # os.remove(fpath)
+
+            # Return the path to the blurred video
+            return blurred_fpath
+        
         # Return ID
         return fpath
 
