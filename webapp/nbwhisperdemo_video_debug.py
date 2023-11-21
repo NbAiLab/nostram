@@ -625,7 +625,7 @@ if __name__ == "__main__":
             ["https://www.youtube.com/watch?v=x0Fsn4I54C0", "Bokmål", "Verbatim", True, False]
             
         ],
-        cache_examples=False,
+        cache_examples=True,
         description=description,
         article=article,
     )
