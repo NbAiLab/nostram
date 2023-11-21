@@ -314,7 +314,7 @@ if __name__ == "__main__":
         semantic_outputs = []
 
         # Verbatim (transcribe) loop
-        if task in ["Verbatim", "Both"]:
+        if task in ["Verbatim", "Compare"]:
             for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Transcribing...")):
                 verbatim_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="transcribe", language=language,
@@ -322,7 +322,7 @@ if __name__ == "__main__":
                 )
 
         # Semantic (translate) loop
-        if task in ["Semantic", "Both"]:
+        if task in ["Semantic", "Compare"]:
             for batch, _ in zip(dataloader, progress.tqdm(dummy_batches, desc="Translating...")):
                 semantic_outputs.append(
                     pipeline.forward(batch, batch_size=BATCH_SIZE, task="translate", language=language,
@@ -337,14 +337,14 @@ if __name__ == "__main__":
         combined_text = ""
         combined_timestamps = []
 
-        if task in ["Verbatim", "Both"]:
+        if task in ["Verbatim", "Compare"]:
             verbatim_post_processed = pipeline.postprocess(verbatim_outputs, return_timestamps=return_timestamps)
             verbatim_text = verbatim_post_processed["text"]
             if return_timestamps:
                 combined_timestamps.extend(verbatim_post_processed.get("chunks", []))
             combined_text += verbatim_text
 
-        if task in ["Semantic", "Both"]:
+        if task in ["Semantic", "Compare"]:
             semantic_post_processed = pipeline.postprocess(semantic_outputs, return_timestamps=return_timestamps)
             semantic_text = semantic_post_processed["text"]
             if return_timestamps:
@@ -432,8 +432,8 @@ if __name__ == "__main__":
             html_embed_str = _return_yt_html_embed(yt_url)
 
             tmpdirname = tempfile.mkdtemp()
-            video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
-
+            blurred = True if task == "Compare" else False    
+            video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps, blurred=blurred)
             file = video_filepath
 
             logger.info("done loading...")
@@ -445,7 +445,7 @@ if __name__ == "__main__":
 
         file_contents, file_path = prepare_audio_for_transcription(file)
 
-        if task == "Both":
+        if task == "Compare":
             # Transcribe for Verbatim
             verbatim_text, _ = perform_transcription(file_contents, language, "Verbatim", return_timestamps, progress)
             verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path,
@@ -495,7 +495,7 @@ if __name__ == "__main__":
         return HTML_str
 
 
-    def download_yt_audio(yt_url, folder, video=False):
+    def download_yt_audio(yt_url, folder, video=False, blurred=False):
         info_loader = youtube_dl.YoutubeDL()
         try:
             info = info_loader.extract_info(yt_url, download=False)
@@ -527,19 +527,19 @@ if __name__ == "__main__":
                 raise gr.Error(str(err))
 
         # Process video with FFmpeg if video==True
-        if video:
+        if blurred:
             blurred_fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}_blurred.mp4")
             ffmpeg_cmd = [
                 'ffmpeg', '-i', fpath, '-filter_complex',
                 '[0:v]split=3[original][top][bottom];' +
-                '[top]crop=iw:ih/4:0:0,boxblur=5[top_blurred];' +
-                '[bottom]crop=iw:ih/4:0:ih*3/4,boxblur=5[bottom_blurred];' +
+                '[top]crop=iw:ih/3:0:0,boxblur=5[top_blurred];' +  # Crop top 33%
+                '[bottom]crop=iw:ih/3:0:ih*2/3,boxblur=5[bottom_blurred];' +  # Crop bottom 33%
                 '[original][top_blurred]overlay=0:0[blurred_top];' +
-                '[blurred_top][bottom_blurred]overlay=0:H*3/4,' +
-                'drawtext=text=\'Verbose:\':fontfile=/path/to/font.ttf:fontsize=24:fontcolor=white:x=(w*0.10):y=(h*0.05)',
+                '[blurred_top][bottom_blurred]overlay=0:H*2/3',  # Overlay at the bottom 33%
                 '-c:v', 'libx264', '-preset', 'fast', '-threads', '4',
                 blurred_fpath
             ]
+
             try:
                 subprocess.run(ffmpeg_cmd, check=True)
             except subprocess.CalledProcessError as err:
@@ -579,7 +579,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Verbatim"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription style", default="Verbatim"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
         ],
         outputs=[
@@ -600,7 +600,7 @@ if __name__ == "__main__":
         inputs=[
             gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube video here", label="YouTube URL"),
             gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-            gr.inputs.Radio(["Verbatim", "Semantic", "Both"], label="Transcription style", default="Semantic"),
+            gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription style", default="Semantic"),
             gr.inputs.Checkbox(default=True, label="Return timestamps"),
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
