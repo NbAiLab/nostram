@@ -533,9 +533,10 @@ if __name__ == "__main__":
                 'ffmpeg', '-i', fpath, '-filter_complex',
                 '[0:v]split=3[original][top][bottom];' +
                 '[top]crop=iw:ih/4:0:0,boxblur=5[top_blurred];' +
-                '[bottom]crop=iw:ih/4:0:ih*3/4,boxblur=10[bottom_blurred];' +
+                '[bottom]crop=iw:ih/4:0:ih*3/4,boxblur=5[bottom_blurred];' +
                 '[original][top_blurred]overlay=0:0[blurred_top];' +
-                '[blurred_top][bottom_blurred]overlay=0:H*3/4',
+                '[blurred_top][bottom_blurred]overlay=0:H*3/4,' +
+                'drawtext=text=\'Verbose:\':fontfile=/path/to/font.ttf:fontsize=24:fontcolor=white:x=(w*0.10):y=(h*0.05)',
                 '-c:v', 'libx264', '-preset', 'fast', '-threads', '4',
                 blurred_fpath
             ]
