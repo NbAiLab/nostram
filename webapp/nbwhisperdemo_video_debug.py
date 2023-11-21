@@ -428,7 +428,7 @@ if __name__ == "__main__":
             yt_url = file_or_yt_url
             use_youtube_player = False
             progress(0, desc="Loading audio file...")
-            logger.info("loading youtube file...")
+            logger.info(f"loading youtube file... {description}")
             html_embed_str = _return_yt_html_embed(yt_url)
 
             tmpdirname = tempfile.mkdtemp()
