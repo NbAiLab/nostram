@@ -393,7 +393,7 @@ if __name__ == "__main__":
         if return_timestamps:
             # Formatting for middle-aligned subtitles
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,
-                                               style="line:50% align:center position:50% size:80%")
+                                               style="line:50% align:center position:100% size:80%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
