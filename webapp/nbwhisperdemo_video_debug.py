@@ -423,7 +423,7 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
+    def transcribe_chunked_audio(file_or_yt_url, description="",language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
         if isinstance(file_or_yt_url, str):
             yt_url = file_or_yt_url
             use_youtube_player = False
