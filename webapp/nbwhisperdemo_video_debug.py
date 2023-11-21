@@ -423,12 +423,12 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    def transcribe_chunked_audio(file_or_yt_url, description="",language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
+    def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
         if isinstance(file_or_yt_url, str):
             yt_url = file_or_yt_url
             use_youtube_player = False
             progress(0, desc="Loading audio file...")
-            logger.info(f"loading youtube file... {description}")
+            logger.info("loading youtube file...")
             html_embed_str = _return_yt_html_embed(yt_url)
 
             tmpdirname = tempfile.mkdtemp()
@@ -615,9 +615,9 @@ if __name__ == "__main__":
         allow_flagging="never",
         title=title,
         examples=[
-            ["https://www.youtube.com/watch?v=_uv74o8hG30", "A video about something"],
-            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål"],
-            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål"]
+            ["https://www.youtube.com/watch?v=_uv74o8hG30", "Bokmål", "Verbatim", True, False],
+            ["https://www.youtube.com/watch?v=JtbZWIcj0kbk", "Bokmål", "Verbatim", True, False],
+            ["https://www.youtube.com/watch?v=vauTloX4HkU", "Bokmål", "Semantic", True, False]
         ],
         cache_examples=False,
         description=description,
