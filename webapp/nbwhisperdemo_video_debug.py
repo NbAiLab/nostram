@@ -112,9 +112,9 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
 
     # Set style based on transcription type
     if transcription_style == "verbatim":
-        style = "line:20% align:center position:50% size:100%"
+        style = "line:20% align:center position:50% size:80%"
     elif transcription_style == "semantic":
-        style = "line:80% align:center position:50% size:100%"
+        style = "line:80% align:center position:50% size:80%"
 
     vtt_lines = [
         f"WEBVTT",
@@ -393,7 +393,7 @@ if __name__ == "__main__":
         if return_timestamps:
             # Formatting for middle-aligned subtitles
             transcript_content = format_to_vtt(text, return_timestamps, transcription_style=None,
-                                               style="line:50% align:center position:50% size:100%")
+                                               style="line:50% align:center position:50% size:80%")
             subtitle_display = re.sub(r"\.[^.]+$", "_middle.vtt", file_path)
             with open(subtitle_display, "w") as f:
                 f.write(transcript_content)
