@@ -4,6 +4,21 @@ from transformers import WhisperProcessor, WhisperForConditionalGeneration
 import torch
 from datasets import load_dataset
 import os
+import warnings
+import logging
+
+# Suppress specific warning categories
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+
+# Set TensorFlow logging to error level only
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logging (1 = INFO, 2 = WARNING, 3 = ERROR)
+logging.getLogger('tensorflow').setLevel(logging.ERROR)
+
+# Set other logging levels
+logging.getLogger('transformers').setLevel(logging.ERROR)
+logging.getLogger('datasets').setLevel(logging.ERROR)
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
 def process_audio_data(dataset_path, split, model_path, num_examples, task, language):
