@@ -3,6 +3,19 @@ import tempfile
 from transformers import pipeline
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
 
+# Suppress specific warning categories
+warnings.filterwarnings('ignore', category=UserWarning)
+warnings.filterwarnings('ignore', category=FutureWarning)
+
+# Set TensorFlow logging to error level only
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logging (1 = INFO, 2 = WARNING, 3 = ERROR)
+logging.getLogger('tensorflow').setLevel(logging.ERROR)
+
+# Set other logging levels
+logging.getLogger('transformers').setLevel(logging.ERROR)
+logging.getLogger('datasets').setLevel(logging.ERROR)
+
+
 def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no",num_beams=1,chunk_length=30):
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Load the model and processor
@@ -26,7 +39,6 @@ def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no
         # Process the audio and print results
         result = asr(audio_path, return_timestamps=True, chunk_length_s=chunk_length, generate_kwargs={'task': task, 'language': language, 'num_beams': num_beams})
         
-        breakpoint()
         text = result['text']
         word_count = len(text.split())
 
