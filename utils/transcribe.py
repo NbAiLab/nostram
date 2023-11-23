@@ -2,6 +2,9 @@ import argparse
 import tempfile
 from transformers import pipeline
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
+import os
+import warnings
+import logging
 
 # Suppress specific warning categories
 warnings.filterwarnings('ignore', category=UserWarning)
