@@ -16,7 +16,7 @@ logging.getLogger('transformers').setLevel(logging.ERROR)
 logging.getLogger('datasets').setLevel(logging.ERROR)
 
 
-def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no",num_beams=1,chunk_length=30):
+def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no",num_beams=1,chunk_length=30,no_text=False):
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Load the model and processor
         if commit_hash:
@@ -41,8 +41,10 @@ def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no
         
         text = result['text']
         word_count = len(text.split())
-
-        print("Transcribed Text:\n", text)
+        
+        if not no_text:
+            print("Transcribed Text:\n", text)
+        
         print(f"\nWord Count: {word_count}. Commit hash: {commit_hash}")
 
 if __name__ == "__main__":
@@ -51,9 +53,10 @@ if __name__ == "__main__":
     parser.add_argument("--audio_path", type=str, required=True, help="Path to the audio file")
     parser.add_argument("--num_beams", type=int, default=1, help="Number of beams (default: 1)")
     parser.add_argument("--chunk_length", type=int, default=30, help="Chunk length (default: 30)")
+    parser.add_argument("--no_text", action='store_true', help="Do not print the text, just the word count (default: False)")
     parser.add_argument("--task", type=str, default="transcribe", choices=["transcribe", "translate"], help="Task to perform: 'transcribe' or 'translate' (default: transcribe)")
     parser.add_argument("--language", type=str, default="no", choices=["no", "nn", "en"], help="Target language: 'no', 'nn' or 'translate' (default: no)")
     parser.add_argument("--commit_hash", type=str, default=None, help="Specific commit hash for the model (optional)")
     args = parser.parse_args()
 
-    main(args.model_path, args.audio_path, args.commit_hash,args.task,args.language,args.num_beams,args.chunk_length)
+    main(args.model_path, args.audio_path, args.commit_hash,args.task,args.language,args.num_beams,args.chunk_length,args.no_text)
