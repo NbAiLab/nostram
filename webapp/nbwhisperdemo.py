@@ -271,7 +271,7 @@ def format_timestamp(seconds: float, always_include_hours: bool = True, decimal_
 
 
 if __name__ == "__main__":
-    pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE)
+    pipeline = FlaxWhisperPipline(checkpoint, dtype=jnp.bfloat16, batch_size=BATCH_SIZE, from_flax=True)
     stride_length_s = CHUNK_LENGTH_S / 6
     chunk_len = round(CHUNK_LENGTH_S * pipeline.feature_extractor.sampling_rate)
     stride_left = stride_right = round(stride_length_s * pipeline.feature_extractor.sampling_rate)
