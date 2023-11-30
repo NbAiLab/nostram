@@ -282,7 +282,7 @@ if __name__ == "__main__":
     logger.info("compiling forward call...")
     start = time.time()
     # random_inputs = {"input_features": np.ones((BATCH_SIZE, 80, 3000))}
-
+    breakpoint()
     random_inputs = {
         "input_features": np.ones(
             BATCH_SIZE, pipeline.model.config.num_mel_bins, 2 * pipeline.model.config.max_source_positions
