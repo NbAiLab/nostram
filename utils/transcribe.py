@@ -8,6 +8,12 @@ import logging
 import sys
 import contextlib
 
+# Setting environment variables
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+os.environ['TCMALLOC_VERBOSE'] = '0'
+os.environ['TCMALLOC_LARGE_ALLOC_REPORT_THRESHOLD'] = '10000000000'
+
+
 # Define suppress_tf_cpp_errors as a context manager
 @contextlib.contextmanager
 def suppress_tf_cpp_errors():
