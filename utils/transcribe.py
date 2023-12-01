@@ -1,22 +1,31 @@
 import argparse
 import tempfile
-from transformers import pipeline
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
 import os
 import warnings
 import logging
+import sys
+
+# Function to suppress TensorFlow C++ backend errors
+def suppress_tf_cpp_errors():
+    stderr = sys.stderr
+    sys.stderr = open(os.devnull, 'w')
+    yield
+    sys.stderr.close()
+    sys.stderr = stderr
 
 # Suppress specific warning categories
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', category=FutureWarning)
 
-# Set TensorFlow logging to error level only
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logging (1 = INFO, 2 = WARNING, 3 = ERROR)
+# Suppress TensorFlow Python logging
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
 # Set other logging levels
 logging.getLogger('transformers').setLevel(logging.ERROR)
 logging.getLogger('datasets').setLevel(logging.ERROR)
+
 
 
 def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no",num_beams=1,chunk_length=30,no_text=False):
