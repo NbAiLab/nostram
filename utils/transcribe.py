@@ -6,14 +6,18 @@ import os
 import warnings
 import logging
 import sys
+import contextlib
 
-# Function to suppress TensorFlow C++ backend errors
+# Define suppress_tf_cpp_errors as a context manager
+@contextlib.contextmanager
 def suppress_tf_cpp_errors():
-    stderr = sys.stderr
+    original_stderr = sys.stderr
     sys.stderr = open(os.devnull, 'w')
-    yield
-    sys.stderr.close()
-    sys.stderr = stderr
+    try:
+        yield
+    finally:
+        sys.stderr.close()
+        sys.stderr = original_stderr
 
 # Suppress specific warning categories
 warnings.filterwarnings('ignore', category=UserWarning)
@@ -27,10 +31,9 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)
 logging.getLogger('transformers').setLevel(logging.ERROR)
 logging.getLogger('datasets').setLevel(logging.ERROR)
 
-
 def main(model_path, audio_path, commit_hash=None, task="transcribe", language="no", num_beams=1, chunk_length=30, no_text=False):
     with suppress_tf_cpp_errors(), tempfile.TemporaryDirectory() as tmp_dir:
-    
+
         # Load the model and processor
         if commit_hash:
             config = WhisperConfig.from_pretrained(model_path, revision=commit_hash, from_flax=True)
