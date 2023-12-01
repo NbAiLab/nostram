@@ -1,3 +1,4 @@
+from transformers import pipeline
 import argparse
 import tempfile
 from transformers import WhisperProcessor, WhisperForConditionalGeneration, WhisperConfig
@@ -25,7 +26,6 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)
 # Set other logging levels
 logging.getLogger('transformers').setLevel(logging.ERROR)
 logging.getLogger('datasets').setLevel(logging.ERROR)
-
 
 
 def main(model_path, audio_path, commit_hash=None,task="transcribe",language="no",num_beams=1,chunk_length=30,no_text=False):
