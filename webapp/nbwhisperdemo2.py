@@ -537,8 +537,8 @@ if __name__ == "__main__":
             gr.Checkbox(value=True, label="Return timestamps"),
         ],
         outputs=[
-            gr.Video(label="Video", visible=False),
-            gr.Audio(label="Audio", visible=False),
+            gr.Video(label="Video", visible=True),
+            gr.Audio(label="Audio", visible=True),
             gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
             gr.Textbox(label="Transcription Time (s)"),
             gr.File(label="Download"),
