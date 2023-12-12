@@ -567,7 +567,7 @@ if __name__ == "__main__":
     microphone_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
+            gr.Audio(sources=["microphone"], type="filepath"),
             gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", value="Bokmål"),
             #gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
             gr.Checkbox(value=True, label="Return timestamps"),
