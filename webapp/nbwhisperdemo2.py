@@ -441,7 +441,7 @@ if __name__ == "__main__":
             html_embed_str = _return_yt_html_embed(yt_url)
 
             tmpdirname = tempfile.mkdtemp()
-            video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps, blurred=blurred)
+            video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
             file = video_filepath
 
             logger.info("done loading...")
@@ -483,7 +483,7 @@ if __name__ == "__main__":
         return HTML_str
 
 
-    def download_yt_audio(yt_url, folder, video=False, blurred=False):
+    def download_yt_audio(yt_url, folder, video=False):
         info_loader = youtube_dl.YoutubeDL()
         try:
             info = info_loader.extract_info(yt_url, download=False)
@@ -514,31 +514,6 @@ if __name__ == "__main__":
             except youtube_dl.utils.ExtractorError as err:
                 raise gr.Error(str(err))
 
-        # Process video with FFmpeg if video==True
-        if blurred:
-            blurred_fpath = os.path.join(folder, f"{info['id'].replace('.', '_')}_blurred.mp4")
-            ffmpeg_cmd = [
-                'ffmpeg', '-i', fpath, '-filter_complex',
-                '[0:v]split=3[original][top][bottom];' +
-                '[top]crop=iw:ih/3:0:0,boxblur=5[top_blurred];' +  # Crop top 33%
-                '[bottom]crop=iw:ih/3:0:ih*2/3,boxblur=5[bottom_blurred];' +  # Crop bottom 33%
-                '[original][top_blurred]overlay=0:0[blurred_top];' +
-                '[blurred_top][bottom_blurred]overlay=0:H*2/3',  # Overlay at the bottom 33%
-                '-c:v', 'libx264', '-preset', 'fast', '-threads', '4',
-                blurred_fpath
-            ]
-
-            try:
-                subprocess.run(ffmpeg_cmd, check=True)
-            except subprocess.CalledProcessError as err:
-                raise gr.Error(f"FFmpeg processing failed: {err}")
-
-            # Optionally, remove the original unblurred video file
-            # os.remove(fpath)
-
-            # Return the path to the blurred video
-            return blurred_fpath
-        
         # Return ID
         return fpath
 
