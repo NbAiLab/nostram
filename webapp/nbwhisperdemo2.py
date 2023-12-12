@@ -539,7 +539,7 @@ if __name__ == "__main__":
     audio_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
+            gr.Audio(sources=["upload","microphone"], label="Audio file", type="filepath"),
             gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
             # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
             gr.Checkbox(value=True, label="Return timestamps"),
@@ -596,7 +596,7 @@ if __name__ == "__main__":
 
     with demo:
         gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)
-        gr.TabbedInterface([microphone_chunked,audio_chunked, youtube], ["Microphone", "File", "YouTube"])
+        gr.TabbedInterface([audio_chunked, youtube], ["File", "YouTube"])
 
     demo.queue(max_size=10)
     demo.launch(server_name="0.0.0.0", show_api=True)
