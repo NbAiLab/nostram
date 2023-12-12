@@ -443,10 +443,10 @@ if __name__ == "__main__":
             file_contents, file_path = prepare_audio_for_transcription(video_filepath)
         else:
             # Handle local file upload
-            if file_or_yt_url is None:
+            if file_or_yt_url is None or (hasattr(file_or_yt_url, 'name') and not os.path.isfile(file_or_yt_url.name)):
                 logger.warning("No audio file provided")
                 raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-            file = file_or_yt_url.name
+            file = file_or_yt_url.name if hasattr(file_or_yt_url, 'name') else file_or_yt_url
             file_contents, file_path = prepare_audio_for_transcription(file)
 
         # Perform transcription
@@ -463,7 +463,6 @@ if __name__ == "__main__":
             o1 = youtube.output_components[1].update(visible=True, value=file_path)
 
         return o0, o1, text, runtime, transcript_file_path
-
 
     def _return_yt_html_embed(yt_url):
         video_id = yt_url.split("?v=")[-1]
