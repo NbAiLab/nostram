@@ -453,7 +453,6 @@ if __name__ == "__main__":
 
         # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        breakpoint()
         
         if return_timestamps:
             transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
@@ -462,7 +461,8 @@ if __name__ == "__main__":
 
         # Prepare return values based on file type
         video_output, audio_output = (file_path, None) if file_path.endswith(".mp4") else (None, file_path)
-
+        
+        breakpoint()
         return video_output, audio_output, text, runtime, transcript_file_path
 
     def _return_yt_html_embed(yt_url):
