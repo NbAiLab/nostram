@@ -124,10 +124,12 @@ def format_to_vtt(text, timestamps, transcription_style, style=""):
         f"Se detaljer og last ned modellen her: https://huggingface.co/{checkpoint}.",
         "",
         "0",
-        f"00:00:00.000 --> 00:00:06.000 {style}".strip(),
-        f"(Automatisk teksting av {title})",
         ""
     ]
+    # Removed
+    #         f"00:00:00.000 --> 00:00:06.000 {style}".strip(),
+    #     f"(Automatisk teksting av {title})",
+    
     counter = 1
     for chunk in text.split("\n"):
         try:
