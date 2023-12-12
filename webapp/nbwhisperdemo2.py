@@ -453,7 +453,8 @@ if __name__ == "__main__":
 
         # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-
+        breakpoint()
+        
         if return_timestamps:
             transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
         else:
