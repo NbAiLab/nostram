@@ -67,7 +67,7 @@ title = title.replace("Nb Whisper", "NB-Whisper")
 title = title.replace("Beta", "(beta)")
 title = title.replace("Rc", "RC")
 
-CHUNK_LENGTH_S = 30
+CHUNK_LENGTH_S = 25
 NUM_PROC = 32
 FILE_LIMIT_MB = 1000
 YT_LENGTH_LIMIT_S = 10800  # limit to 3 hour YouTube files
