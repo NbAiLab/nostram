@@ -449,8 +449,10 @@ if __name__ == "__main__":
             else:
                 # It's a microphone input
                 file_path = file_or_yt_url  # file_or_yt_url is the file path for microphone input
-
-    # Perform transcription
+        
+        file_contents, file_path = prepare_audio_for_transcription(file_path)
+        
+        # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
