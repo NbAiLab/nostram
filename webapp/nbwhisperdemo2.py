@@ -430,9 +430,8 @@ if __name__ == "__main__":
 
 
     def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", return_timestamps=True, progress=gr.Progress()):
-        task = "Verbatim"  # Set the task as required, hardcoding for now
+        task = "Verbatim"
 
-        # Check if the input is a YouTube URL or a local file
         if isinstance(file_or_yt_url, str) and file_or_yt_url.startswith("http"):
             # Handle YouTube URL input
             yt_url = file_or_yt_url
@@ -441,34 +440,29 @@ if __name__ == "__main__":
             tmpdirname = tempfile.mkdtemp()
             video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
             file_contents, file_path = prepare_audio_for_transcription(video_filepath)
+        elif hasattr(file_or_yt_url, 'name'):
+            # Handle file upload
+            file_path = file_or_yt_url.name
+            file_contents, file_path = prepare_audio_for_transcription(file_path)
+        elif os.path.isfile(file_or_yt_url):
+            # Handle microphone input as file path
+            file_path = file_or_yt_url
+            file_contents, file_path = prepare_audio_for_transcription(file_path)
         else:
-            # Handle local file upload or microphone input
-            if hasattr(file_or_yt_url, 'name'):
-                # It's a file upload
-                file_path = file_or_yt_url.name
-            else:
-                # It's a microphone input
-                file_path = file_or_yt_url  # file_or_yt_url is the file path for microphone input
-        
-        file_contents, file_path = prepare_audio_for_transcription(file_path)
-        
+            raise gr.Error("Invalid input: not a YouTube URL, file upload, or microphone file path.")
+
         # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
+
+        if return_timestamps:
+            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
+        else:
+            transcript_file_path = None
 
         # Prepare return values based on file type
-        if file_path.endswith(".mp4"):
-            video_output = file_path  # Video component will handle both video and audio
-            audio_output = None
-        else:
-            video_output = None
-            audio_output = file_path  # Audio component for audio files
+        video_output, audio_output = (file_path, None) if file_path.endswith(".mp4") else (None, file_path)
 
-        transcription_output = text
-        runtime_output = runtime
-        file_download_output = transcript_file_path if transcript_file_path else None  # Ensure this is a valid file path or None
-
-        return video_output, audio_output, transcription_output, runtime_output, file_download_output
+        return video_output, audio_output, text, runtime, transcript_file_path
 
     def _return_yt_html_embed(yt_url):
         video_id = yt_url.split("?v=")[-1]
