@@ -453,16 +453,19 @@ if __name__ == "__main__":
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
-        # Set output based on file type
+        # Prepare return values based on file type
         if file_path.endswith(".mp4"):
-            value = [file_path, subtitle_display] if subtitle_display is not None else file_path
-            o0 = youtube.output_components[0].update(visible=True, value=value)
-            o1 = youtube.output_components[1].update(visible=False)
+            video_output = file_path  # Video component will handle both video and audio
+            audio_output = None
         else:
-            o0 = youtube.output_components[0].update(visible=False)
-            o1 = youtube.output_components[1].update(visible=True, value=file_path)
+            video_output = None
+            audio_output = file_path  # Audio component for audio files
 
-        return o0, o1, text, runtime, transcript_file_path
+        transcription_output = text
+        runtime_output = runtime
+        file_download_output = transcript_file_path
+
+        return video_output, audio_output, transcription_output, runtime_output, file_download_output
 
     def _return_yt_html_embed(yt_url):
         video_id = yt_url.split("?v=")[-1]
