@@ -521,7 +521,6 @@ if __name__ == "__main__":
         inputs=[
             gr.Audio(sources=["microphone"], type="filepath"),
             gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", value="Bokmål"),
-            #gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
             gr.Checkbox(value=True, label="Return timestamps"),
         ],
         outputs=[
