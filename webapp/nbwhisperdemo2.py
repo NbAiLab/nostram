@@ -432,7 +432,7 @@ if __name__ == "__main__":
     # def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
     def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", return_timestamps=True, progress=gr.Progress()):
         # Hardcoding in this version
-        task = "Semantic"
+        task = "Verbatim"
         if isinstance(file_or_yt_url, str):
             yt_url = file_or_yt_url
             use_youtube_player = False
@@ -441,7 +441,6 @@ if __name__ == "__main__":
             html_embed_str = _return_yt_html_embed(yt_url)
 
             tmpdirname = tempfile.mkdtemp()
-            blurred = True if task == "Compare" else False    
             video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps, blurred=blurred)
             file = video_filepath
 
@@ -449,37 +448,17 @@ if __name__ == "__main__":
         else:
             if file_or_yt_url is None:
                 logger.warning("No audio file provided")
-                raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
+                raise gr.Error("The audio file is not yet uploaded.")
             file = file_or_yt_url.name
 
         file_contents, file_path = prepare_audio_for_transcription(file)
 
-        if task == "Compare":
-            # Transcribe for Verbatim
-            verbatim_text, _ = perform_transcription(file_contents, language, "Verbatim", return_timestamps, progress)
-            verbatim_vtt_path, verbatim_subtitle_display = create_transcript_file(verbatim_text, file_path,
-                                                                                  return_timestamps,
-                                                                                  transcription_style="verbatim")
 
-            # Transcribe for Semantic
-            semantic_text, runtime = perform_transcription(file_contents, language, "Semantic", return_timestamps,
-                                                           progress)
-            semantic_vtt_path, semantic_subtitle_display = create_transcript_file(semantic_text, file_path,
-                                                                                  return_timestamps,
-                                                                                  transcription_style="semantic")
-
-            # Merge and sort subtitles
-            subtitle_display = transcript_file_path = merge_and_sort_subtitles(verbatim_vtt_path, semantic_vtt_path)
-
-            # Combine the texts for display in UI
-            text = "Verbatim transcript:\n" + verbatim_text + "\n\n" + "Semantic transcript:\n" + semantic_text
-            o4 = youtube.output_components[4].update(visible=False, value=transcript_file_path)
-        else:
-            # Handle as before for Verbatim or Semantic only
-            text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-            transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps,
-                                                                            transcription_style=task)
-            o4 = youtube.output_components[4].update(visible=True, value=transcript_file_path)
+        # Handle as before for Verbatim or Semantic only
+        text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
+        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps,
+                                                                        transcription_style=task)
+        o4 = youtube.output_components[4].update(visible=True, value=transcript_file_path)
 
         # text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         # transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
