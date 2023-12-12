@@ -449,7 +449,7 @@ if __name__ == "__main__":
             file = file_or_yt_url.name if hasattr(file_or_yt_url, 'name') else file_or_yt_url
             file_contents, file_path = prepare_audio_for_transcription(file)
 
-        # Perform transcription
+    # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
@@ -463,7 +463,7 @@ if __name__ == "__main__":
 
         transcription_output = text
         runtime_output = runtime
-        file_download_output = transcript_file_path
+        file_download_output = transcript_file_path if transcript_file_path else None  # Ensure this is a valid file path or None
 
         return video_output, audio_output, transcription_output, runtime_output, file_download_output
 
