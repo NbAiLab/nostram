@@ -459,9 +459,16 @@ if __name__ == "__main__":
         else:
             transcript_file_path = None
 
-        # Prepare return values based on file type
-        video_output, audio_output = (file_path, None) if file_path.endswith(".mp4") else (None, file_path)
-        
+        # Update video component with video file and subtitle file
+        if file_path.endswith(".mp4"):
+            # If subtitle_display is not None, include it in the value
+            video_output_value = [file_path, subtitle_display] if subtitle_display else file_path
+            video_output = video_output_value
+        else:
+            video_output = None
+
+        audio_output = file_path if not file_path.endswith(".mp4") else None
+
         return video_output, audio_output, text, runtime, transcript_file_path
 
     def _return_yt_html_embed(yt_url):
