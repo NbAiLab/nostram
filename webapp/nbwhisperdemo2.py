@@ -564,45 +564,45 @@ if __name__ == "__main__":
         return fpath
 
 
-    microphone_chunked = gr.Interface(
-        fn=transcribe_chunked_audio,
-        inputs=[
-            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
-            gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", value="Bokmål"),
-            #gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
-            gr.Checkbox(value=True, label="Return timestamps"),
-        ],
-        outputs=[
-            gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
-            gr.Textbox(label="Transcription Time (s)"),
-            gr.File(label="Download")
-        ],
-        allow_flagging="never",
-        title=title,
-        description=description,
-        article=article,
-    )
-
-    # audio_chunked = gr.Interface(
+    # microphone_chunked = gr.Interface(
     #     fn=transcribe_chunked_audio,
     #     inputs=[
-    #         gr.Audio(sources=["upload","microphone"], label="Audio file", type="filepath"),
-    #         gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
-    #         # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
+    #         gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
+    #         gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", value="Bokmål"),
+    #         #gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
     #         gr.Checkbox(value=True, label="Return timestamps"),
     #     ],
     #     outputs=[
-    #         gr.Video(label="Video", visible=False),
-    #         gr.Audio(label="Audio", visible=False),
     #         gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
     #         gr.Textbox(label="Transcription Time (s)"),
-    #         gr.File(label="Download"),
+    #         gr.File(label="Download")
     #     ],
     #     allow_flagging="never",
     #     title=title,
     #     description=description,
     #     article=article,
     # )
+
+    audio_chunked = gr.Interface(
+        fn=transcribe_chunked_audio,
+        inputs=[
+            gr.Audio(sources=["upload","microphone"], label="Audio file", type="filepath"),
+            gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
+            # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
+            gr.Checkbox(value=True, label="Return timestamps"),
+        ],
+        outputs=[
+            gr.Video(label="Video", visible=False),
+            gr.Audio(label="Audio", visible=False),
+            gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
+            gr.Textbox(label="Transcription Time (s)"),
+            gr.File(label="Download"),
+        ],
+        allow_flagging="never",
+        title=title,
+        description=description,
+        article=article,
+    )
 
     youtube = gr.Interface(
         fn=transcribe_chunked_audio,
