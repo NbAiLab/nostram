@@ -462,7 +462,7 @@ if __name__ == "__main__":
         # Update video component with video file and subtitle file
         if file_path.endswith(".mp4"):
             # If subtitle_display is not None, include it in the value
-            video_output_value = [file_path, subtitle_display] if subtitle_display else file_path
+            video_output_value = file_path
             video_output = video_output_value
         else:
             video_output = None
