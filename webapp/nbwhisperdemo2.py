@@ -432,7 +432,8 @@ if __name__ == "__main__":
     def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", return_timestamps=True, progress=gr.Progress()):
         task = "Verbatim"  # Set the task as required, hardcoding for now
 
-        if isinstance(file_or_yt_url, str):
+        # Check if the input is a YouTube URL or a local file
+        if isinstance(file_or_yt_url, str) and file_or_yt_url.startswith("http"):
             # Handle YouTube URL input
             yt_url = file_or_yt_url
             progress(0, desc="Loading YouTube audio...")
@@ -452,6 +453,7 @@ if __name__ == "__main__":
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
         transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
+        # Set output based on file type
         if file_path.endswith(".mp4"):
             value = [file_path, subtitle_display] if subtitle_display is not None else file_path
             o0 = youtube.output_components[0].update(visible=True, value=value)
@@ -529,7 +531,7 @@ if __name__ == "__main__":
     audio_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.Audio(sources=["upload","microphone"], label="Audio file", type="filepath"),
+            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
             gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
             # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
             gr.Checkbox(value=True, label="Return timestamps"),
