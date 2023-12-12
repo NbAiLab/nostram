@@ -429,49 +429,38 @@ if __name__ == "__main__":
         return text, runtime
 
 
-    # def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", task="Semantic", return_timestamps=True, progress=gr.Progress()):
     def transcribe_chunked_audio(file_or_yt_url, language="Bokmål", return_timestamps=True, progress=gr.Progress()):
-        # Hardcoding in this version
-        task = "Verbatim"
-        if isinstance(file_or_yt_url, str):
-            yt_url = file_or_yt_url
-            use_youtube_player = False
-            progress(0, desc="Loading audio file...")
-            logger.info("loading youtube file...")
-            html_embed_str = _return_yt_html_embed(yt_url)
+        task = "Verbatim"  # Set the task as required, hardcoding for now
 
+        if isinstance(file_or_yt_url, str):
+            # Handle YouTube URL input
+            yt_url = file_or_yt_url
+            progress(0, desc="Loading YouTube audio...")
+            logger.info("loading YouTube audio...")
             tmpdirname = tempfile.mkdtemp()
             video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
-            file = video_filepath
-
-            logger.info("done loading...")
+            file_contents, file_path = prepare_audio_for_transcription(video_filepath)
         else:
+            # Handle local file upload
             if file_or_yt_url is None:
                 logger.warning("No audio file provided")
-                raise gr.Error("The audio file is not yet uploaded.")
+                raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
             file = file_or_yt_url.name
+            file_contents, file_path = prepare_audio_for_transcription(file)
 
-        file_contents, file_path = prepare_audio_for_transcription(file)
-
-
-        # Handle as before for Verbatim or Semantic only
+        # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps,
-                                                                        transcription_style=task)
-        o4 = youtube.output_components[4].update(visible=True, value=transcript_file_path)
-
-        # text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
-        # transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps)
+        transcript_file_path, subtitle_display = create_transcript_file(text, file_path, return_timestamps, transcription_style=task)
 
         if file_path.endswith(".mp4"):
             value = [file_path, subtitle_display] if subtitle_display is not None else file_path
             o0 = youtube.output_components[0].update(visible=True, value=value)
             o1 = youtube.output_components[1].update(visible=False)
         else:
-            o0 = youtube.output_components[1].update(visible=False)
+            o0 = youtube.output_components[0].update(visible=False)
             o1 = youtube.output_components[1].update(visible=True, value=file_path)
 
-        return o0, o1, text, runtime, o4
+        return o0, o1, text, runtime, transcript_file_path
 
 
     def _return_yt_html_embed(yt_url):
