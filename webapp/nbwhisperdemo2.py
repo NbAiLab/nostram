@@ -564,39 +564,39 @@ if __name__ == "__main__":
         return fpath
 
 
-    # microphone_chunked = gr.Interface(
-    #     fn=transcribe_chunked_audio,
-    #     inputs=[
-    #         gr.inputs.Audio(source="microphone", optional=True, type="filepath"),
-    #         gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", default="Bokmål"),
-    #         gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
-    #         gr.inputs.Checkbox(default=True, label="Return timestamps"),
-    #     ],
-    #     outputs=[
-    #         gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
-    #         gr.outputs.Textbox(label="Transcription Time (s)"),
-    #         gr.outputs.File(label="Download")
-    #     ],
-    #     allow_flagging="never",
-    #     title=title,
-    #     description=description,
-    #     article=article,
-    # )
+    microphone_chunked = gr.Interface(
+        fn=transcribe_chunked_audio,
+        inputs=[
+            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
+            gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output language", value="Bokmål"),
+            #gr.inputs.Radio(["Verbatim", "Semantic"], label="Transcription style", default="Verbatim"),
+            gr.Checkbox(value=True, label="Return timestamps"),
+        ],
+        outputs=[
+            gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
+            gr.Textbox(label="Transcription Time (s)"),
+            gr.File(label="Download")
+        ],
+        allow_flagging="never",
+        title=title,
+        description=description,
+        article=article,
+    )
 
     audio_chunked = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.inputs.File(optional=True, label="File (audio/video)", type="file"),
-            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", default="Bokmål"),
+            gr.Audio(sources=["upload"], label="Audio file", type="filepath"),
+            gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
             # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Verbatim"),
-            gr.inputs.Checkbox(default=True, label="Return timestamps"),
+            gr.Checkbox(value=True, label="Return timestamps"),
         ],
         outputs=[
             gr.Video(label="Video", visible=False),
             gr.Audio(label="Audio", visible=False),
-            gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
-            gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download"),
+            gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
+            gr.Textbox(label="Transcription Time (s)"),
+            gr.File(label="Download"),
         ],
         allow_flagging="never",
         title=title,
@@ -607,19 +607,19 @@ if __name__ == "__main__":
     youtube = gr.Interface(
         fn=transcribe_chunked_audio,
         inputs=[
-            gr.inputs.Textbox(lines=1, placeholder="Paste the URL to a YouTube or Twitter/X video here", label="YouTube or Twitter/X URL"),
-            gr.inputs.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", default="Bokmål"),
+            gr.Textbox(lines=1, placeholder="Paste the URL to a YouTube or Twitter/X video here", label="YouTube or Twitter/X URL"),
+            gr.Radio(["Bokmål", "Nynorsk", "English"], label="Output Language", value="Bokmål"),
             # gr.inputs.Radio(["Verbatim", "Semantic", "Compare"], label="Transcription Style", default="Semantic"),
-            gr.inputs.Checkbox(default=True, label="Return timestamps"),
+            gr.Checkbox(value=True, label="Return timestamps"),
             # gr.inputs.Checkbox(default=False, label="Use YouTube player"),
         ],
         outputs=[
             # gr.outputs.HTML(label="Video"),
-            gr.outputs.Video(label="Video"),
+            gr.Video(label="Video"),
             gr.Audio(label="Audio", visible=False),
-            gr.outputs.Textbox(label="Transcription").style(show_copy_button=True),
-            gr.outputs.Textbox(label="Transcription Time (s)"),
-            gr.outputs.File(label="Download"),
+            gr.Textbox(label="Transcription", (show_copy_button=True, show_label=True),
+            gr.Textbox(label="Transcription Time (s)"),
+            gr.File(label="Download"),
         ],
         allow_flagging="never",
         title=title,
@@ -645,5 +645,5 @@ if __name__ == "__main__":
         gr.Image("nb-logo-full-cropped.png", show_label=False, interactive=False, height=100, container=False)
         gr.TabbedInterface([audio_chunked, youtube], ["File", "YouTube"])
 
-    demo.queue(concurrency_count=2, max_size=10)
-    demo.launch(server_name="0.0.0.0", share=True, show_api=True)
+    demo.queue(max_size=10)
+    demo.launch(server_name="0.0.0.0", show_api=True)
