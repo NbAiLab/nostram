@@ -442,12 +442,13 @@ if __name__ == "__main__":
             video_filepath = download_yt_audio(yt_url, tmpdirname, video=return_timestamps)
             file_contents, file_path = prepare_audio_for_transcription(video_filepath)
         else:
-            # Handle local file upload
-            if file_or_yt_url is None or (hasattr(file_or_yt_url, 'name') and not os.path.isfile(file_or_yt_url.name)):
-                logger.warning("No audio file provided")
-                raise gr.Error("No audio file submitted! Please upload an audio file before submitting your request.")
-            file = file_or_yt_url.name if hasattr(file_or_yt_url, 'name') else file_or_yt_url
-            file_contents, file_path = prepare_audio_for_transcription(file)
+            # Handle local file upload or microphone input
+            if hasattr(file_or_yt_url, 'name'):
+                # It's a file upload
+                file_path = file_or_yt_url.name
+            else:
+                # It's a microphone input
+                file_path = file_or_yt_url  # file_or_yt_url is the file path for microphone input
 
     # Perform transcription
         text, runtime = perform_transcription(file_contents, language, task, return_timestamps, progress)
