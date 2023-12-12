@@ -617,7 +617,7 @@ if __name__ == "__main__":
             # gr.outputs.HTML(label="Video"),
             gr.Video(label="Video"),
             gr.Audio(label="Audio", visible=False),
-            gr.Textbox(label="Transcription", (show_copy_button=True, show_label=True),
+            gr.Textbox(label="Transcription", show_copy_button=True, show_label=True),
             gr.Textbox(label="Transcription Time (s)"),
             gr.File(label="Download"),
         ],
