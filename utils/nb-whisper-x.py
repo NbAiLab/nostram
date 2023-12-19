@@ -10,7 +10,7 @@ def transcribe_audio(audio_file, language, model_size, output_format):
     batch_size = 16  # Reduce if low on GPU mem. Higher means faster
 
     # Selecting the correct model based on language and model size
-    whisper_model = "NbAiLabBeta/nb-whisper-tiny" if model_size == "tiny" else "openai/whisper-" + model_size
+    whisper_model = "NbAiLabBeta/nb-whisper-tiny" if model_size == "tiny" else "NbAiLabBeta/nb-whisper-" + model_size
     wav2vec_model = "NbAiLab/nb-wav2vec2-1b-bokmaal" if language == "no" else (
         "NbAiLab/nb-wav2vec2-300m-nynorsk" if language == "nn" else None)
 
