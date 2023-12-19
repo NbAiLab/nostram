@@ -21,9 +21,9 @@ def transcribe_audio(audio_file, language, model_size, output_format):
     print(json.dumps(result["segments"], indent=4))  # Before alignment
 
     # Cleaning up resources
-    gc.collect()
-    torch.cuda.empty_cache()
-    del model
+    # gc.collect()
+    # torch.cuda.empty_cache()
+    # del model
 
     # 2. Align whisper output
     if wav2vec_model:
@@ -32,9 +32,9 @@ def transcribe_audio(audio_file, language, model_size, output_format):
         print(json.dumps(result["segments"], indent=4))  # After alignment
 
         # Cleaning up resources
-        gc.collect()
-        torch.cuda.empty_cache()
-        del model_a
+        # gc.collect()
+        # torch.cuda.empty_cache()
+        # del model_a
 
     # 3. Assign speaker labels
     diarize_model = whisperx.DiarizationPipeline(device=device)
