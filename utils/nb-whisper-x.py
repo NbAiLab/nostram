@@ -7,7 +7,7 @@ import torch
 def transcribe_audio(audio_file, language, model_size, output_format):
     device = "cuda"
     compute_type = "float16"  # Change to "int8" if low on GPU mem (may reduce accuracy)
-    batch_size = 16  # Reduce if low on GPU mem. Higher means faster
+    batch_size = 32  # Reduce if low on GPU mem. Higher means faster
 
     # Selecting the correct model based on language and model size
     whisper_model = "NbAiLabBeta/nb-whisper-tiny" if model_size == "tiny" else "NbAiLabBeta/nb-whisper-" + model_size
