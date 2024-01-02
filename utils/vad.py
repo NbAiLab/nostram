@@ -281,7 +281,7 @@ if __name__ == "__main__":
                     if os.path.isfile(mp3_file_path):
                         has_voice = vd.process_file(mp3_file_path, None, args.aggressive, args.pause, args.chunked)
                         if has_voice:
-                            print(f'{mp3_file_path}: {has_voice}')
+                            print(f'{mp3_file_path}')
                         else:
                             print(f'No voice detected.')
                     else:
