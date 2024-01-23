@@ -191,28 +191,38 @@ class VoiceDetector:
         return start_s, current_s, to_process
 
     def convert_file(self, source, tmpdir=None, duration=None):
-        import subprocess
         import tempfile
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=tmpdir) as f:
             output_file = f.name
-        cmd = ["ffmpeg", "-i", source, "-loglevel", "error", "-y", "-ac", "1", "-ar", "16000"]
+        cmd = ["ffmpeg", "-i", source, "-loglevel", "error", "-y", "-ac", "1", "-ar", "16000", output_file]
         if duration:
             cmd.extend(["-t", duration])
-        cmd.append(output_file)
-        subprocess.run(cmd, check=True)
+        
+        try:
+            result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as e:
+            print(f"Error processing file {source}: {e.output.decode()}")
+            return None  # Return None or appropriate value to indicate error
+
         return output_file
-
+    
     def process_file(self, src, dst=None, aggressive=2, min_pause=0.5, chunked=False):
-
         converted = False
         if not os.path.splitext(src)[1] == ".wav":
-            src = self.convert_file(src)
+            converted_src = self.convert_file(src)
+            if converted_src is None:  # Check if conversion failed
+                return False  # Return False as the file could not be processed
+            src = converted_src
             converted = True
 
-        with open(src, "rb") as f:
-            f.read(44)  # skip header
-            audio_data = f.read()
-            sample_rate = 16000
+        try:
+            with open(src, "rb") as f:
+                f.read(44)  # skip header
+                audio_data = f.read()
+                sample_rate = 16000
+        except IOError as e:
+            print(f"Error opening file {src}: {e}")
+            return False  # Return False as there was an error in reading the file
 
         if converted:
             os.remove(src)
@@ -228,12 +238,11 @@ class VoiceDetector:
         while True:
             final = current_ts == content_len
             chunk = audio_data[math.floor(start_ts * sample_rate * 2):
-                               math.floor(current_ts * sample_rate * 2)]
+                            math.floor(current_ts * sample_rate * 2)]
             start_ts, current_ts, segments = vd.get_regions(chunk, start_ts, current_ts,
                                                             min_pause=min_pause,
                                                             final=final)
             current_ts = min(content_len, current_ts)
-            # We remove segments that are "overwritten" by a larger segment
             if len(all_segments) > 0:
                 if segments and all_segments[-1]["start"] == segments[0]["start"]:
                     all_segments.pop()
@@ -281,9 +290,11 @@ if __name__ == "__main__":
                     if os.path.isfile(mp3_file_path):
                         has_voice = vd.process_file(mp3_file_path, None, args.aggressive, args.pause, args.chunked)
                         if has_voice:
-                            print(f'{mp3_file_path}')
+                            # print(f'{mp3_file_path}')
+                            print(f'{id}')
                         else:
-                            print(f'No voice detected.')
+                            ...
+                            #print(f'No voice detected.')
                     else:
                         print(f"Error: File not found - {mp3_file_path}")
                         
