@@ -26,10 +26,10 @@ def calculate_wer(reference, hypothesis):
     """Calculate Word Error Rate between reference and hypothesis."""
     return wer(reference, hypothesis)
 
-def process_audio_data(dataset_path, split, model_path, num_examples, task, language, print_predictions, calculate_wer_flag):
+def process_audio_data(dataset_path, split, model_path, num_examples, task, language, print_predictions, calculate_wer):
     dataset = load_dataset(dataset_path, split=split, streaming=True)
-    processor = WhisperProcessor.from_pretrained(model_path, from_flax=True)
-    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=True)
+    processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
+    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=False)
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -70,6 +70,6 @@ if __name__ == "__main__":
 
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.model_path, args.num_examples, args.task, args.language)
+    process_audio_data(args.dataset_path, args.split, args.model_path, args.num_examples, args.task, args.language,args.print_predictions, args.calculate_wer)
 
 
