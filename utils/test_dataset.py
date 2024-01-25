@@ -78,7 +78,7 @@ if __name__ == "__main__":
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=10, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
-    parser.add_argument("--language", type=str, default="auto", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
+    parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
 
