@@ -44,7 +44,21 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
         sampling_rate = example["audio"]["sampling_rate"]
         input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
 
-        # [Existing prediction generation code...]
+        if task != "both":
+            # Generate the token IDs using the model for either transcription or translation
+            predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256)
+            transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+            print(f"| {example['text']} | {transcription} |")
+        else:
+            # Perform both transcription and translation
+            transcribe_ids = model.generate(input_features, task="transcribe", language=language, return_timestamps=True, max_new_tokens=256)
+            transcribe_text = processor.batch_decode(transcribe_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+
+            translate_ids = model.generate(input_features, task="translate", language=language, return_timestamps=True, max_new_tokens=256)
+            translate_text = processor.batch_decode(translate_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+
+            equal = transcribe_text == translate_text
+            print(f"| {example['text']} | {transcribe_text} | {translate_text} | {equal} |")
 
         if print_predictions:
             print(f"| {example['text']} | {transcription} |")
