@@ -51,10 +51,12 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
     example_count = 0
     
     for idx, example in enumerate(dataset):
-        example_count += 1
-        if idx > num_examples:
+        
+        if idx >= num_examples - 1:
             break
-
+        
+        example_count += 1
+        
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
         sampling_rate = example["audio"]["sampling_rate"]
         input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
