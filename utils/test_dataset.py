@@ -48,8 +48,10 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
 
     references = []
     predictions = []
-
+    example_count = 0
+    
     for idx, example in enumerate(dataset):
+        example_count += 1
         if idx >= num_examples:
             break
 
@@ -69,7 +71,7 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
 
     if calculate_wer_flag:
         overall_wer = calculate_wer(references, predictions)
-        print(f"Average WER: {overall_wer:.2f}")
+        print(f"Average WER for {example_count}: {overall_wer:.2f}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process audio data using a Whisper model.")
