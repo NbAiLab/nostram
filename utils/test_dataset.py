@@ -52,7 +52,7 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
     
     for idx, example in enumerate(dataset):
         
-        if idx >= num_examples - 1:
+        if idx >= num_examples:
             break
         
         example_count += 1
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
-    parser.add_argument("--num_examples", type=int, default=10, help="Number of examples to process.")
+    parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
