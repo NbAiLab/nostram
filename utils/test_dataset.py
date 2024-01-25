@@ -49,10 +49,10 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
         if print_predictions:
             print(f"| {example['text']} | {transcription} |")
 
-        if calculate_wer_flag:
+        if calculate_wer:
             total_wer += calculate_wer(example['text'], transcription)
 
-    if calculate_wer_flag:
+    if calculate_wer:
         average_wer = total_wer / num_examples
         print(f"Average WER: {average_wer:.2f}")
 
