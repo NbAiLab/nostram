@@ -22,7 +22,7 @@ logging.getLogger('datasets').setLevel(logging.ERROR)
 # Just needed if the dataset requires authentication
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
-def calculate_wer(reference, hypothesis):
+def calculate_word_error_rate(reference, hypothesis):
     """Calculate Word Error Rate between reference and hypothesis."""
     return wer(reference, hypothesis)
 
@@ -53,7 +53,7 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
             print(f"| {example['text']} | {transcription} |")
 
         if calculate_wer:
-            total_wer += calculate_wer(example['text'], transcription)
+            total_wer += calculate_word_error_rate(example['text'], transcription)
 
     if calculate_wer:
         average_wer = total_wer / num_examples
