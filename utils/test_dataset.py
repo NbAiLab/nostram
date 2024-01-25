@@ -52,7 +52,7 @@ def process_audio_data(dataset_path, split, model_path, num_examples, task, lang
     
     for idx, example in enumerate(dataset):
         example_count += 1
-        if idx >= num_examples:
+        if idx > num_examples:
             break
 
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
