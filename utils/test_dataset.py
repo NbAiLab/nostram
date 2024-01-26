@@ -79,9 +79,11 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
 
         if save_file:
             result = {
-                "model_path": model_path,
                 "dataset_path": dataset_path,
+                "model_path": model_path,
+                "name": name,
                 "split": split,
+                "language": language,
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
                 "wer": overall_wer
