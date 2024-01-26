@@ -104,4 +104,4 @@ if __name__ == "__main__":
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.model_path, args.subset,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
+    process_audio_data(args.dataset_path, args.split, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
