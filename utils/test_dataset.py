@@ -41,8 +41,7 @@ def calculate_wer(references, predictions):
     return jiwer.wer(normalized_references, normalized_predictions)
 
 def process_audio_data(dataset_path, split, model_path, data_dir, num_examples, task, language, print_predictions, calculate_wer_flag, save_file):
-    breakpoint()
-    dataset = load_dataset(dataset_path, data_dir=data_dir, split=split, streaming=True)
+    dataset = load_dataset(dataset_path, data_dir=data_dir, split=split, streaming=False)
     
     processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
     model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=False)
