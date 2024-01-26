@@ -1,9 +1,5 @@
-## Old script - use eval_model.py instead
-
-
 import argparse
 import numpy as np
-from transformers import WhisperProcessor, WhisperForConditionalGeneration
 import torch
 from datasets import load_dataset
 import os
@@ -12,6 +8,7 @@ import jiwer
 import json
 from datetime import datetime
 import logging
+from transformers import WhisperProcessor, WhisperForConditionalGeneration
 
 # Suppress specific warning categories
 warnings.filterwarnings('ignore', category=UserWarning)
@@ -43,13 +40,34 @@ def calculate_wer(references, predictions):
     normalized_predictions = [normalizer(pred) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
+def load_model_and_processor(model_path, model_type):
+    if model_type == 'whisper':
+        processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
+        model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=False)
+    elif model_type == 'wav2vec2':
+        from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
+        processor = Wav2Vec2Processor.from_pretrained(model_path)
+        model = Wav2Vec2ForCTC.from_pretrained(model_path)
+    else:
+        raise ValueError("Unsupported model type")
+    return processor, model
+
+def transcribe_with_model(processor, model, input_features, model_type, device):
+    if model_type == 'whisper':
+        predicted_ids = model.generate(input_features, task='transcribe', language='no', return_timestamps=True, max_new_tokens=256)
+        transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+    elif model_type == 'wav2vec2':
+        input_values = processor(input_features, sampling_rate=16000, return_tensors="pt").input_values.to(device)
+        logits = model(input_values).logits
+        predicted_ids = torch.argmax(logits, dim=-1)
+        transcription = processor.batch_decode(predicted_ids)[0]
+    return transcription
+
+def process_audio_data(dataset_path, split, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, model_type):
 
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
-    
-    processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
-    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=False)
+    processor, model = load_model_and_processor(model_path, model_type)
     
     device = torch.device(f"cuda:{device}" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -63,11 +81,7 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
             break
         processed_examples += 1
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
-        sampling_rate = example["audio"]["sampling_rate"]
-        input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
-
-        predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256)
-        transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+        transcription = transcribe_with_model(processor, model, waveform, model_type, device)
 
         if print_predictions:
             print(f"| {example['text']} | {transcription} |")
@@ -78,7 +92,7 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
 
     if calculate_wer_flag:
         overall_wer = calculate_wer(references, predictions)
-        print(f"Average WER for {processed_examples} examples: {overall_wer*100:.1f}")
+        print(f"Average WER for {processed_examples}: {overall_wer * 100:.1f}%")
 
         if save_file:
             result = {
@@ -89,24 +103,25 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
                 "language": language,
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
-                "wer": overall_wer
+                "wer": overall_wer * 100
             }
             with open(save_file, 'a') as f:
                 f.write(json.dumps(result) + "\n")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process audio data using a Whisper model.")
+    parser = argparse.ArgumentParser(description="Process audio data using a Whisper or Wav2Vec model.")
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
-    parser.add_argument("--name", type=str, required=False, default="",help="Name of the dataset subset.")
+    parser.add_argument("--name", type=str, required=False, default="", help="Name of the dataset subset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
-    parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
+    parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
-    parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
+    parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to.")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
-    
+    parser.add_argument("--model_type", type=str, choices=['whisper', 'wav2vec2'], default='whisper', help="Type of the model to use ('whisper' or 'wav2vec2').")
+
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
+    process_audio_data(args.dataset_path, args.split, args.model_path, args.name, args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.model_type)
