@@ -40,11 +40,9 @@ def calculate_wer(references, predictions):
     normalized_predictions = [normalizer(pred) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, model_path, subset, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
-    if subset !="":
-        dataset = load_dataset(dataset_path, subset, split=split, streaming=True)
-    else:
-        dataset = load_dataset(dataset_path, split=split, streaming=True)
+def process_audio_data(dataset_path, split, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
+
+    dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
     
     processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
@@ -94,7 +92,7 @@ def process_audio_data(dataset_path, split, model_path, subset, num_examples, ta
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process audio data using a Whisper model.")
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
-    parser.add_argument("--subset", type=str, required=False, default="",help="Path to the dataset subset.")
+    parser.add_argument("--name", type=str, required=False, default="",help="Name of the dataset subset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
