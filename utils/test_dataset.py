@@ -75,7 +75,7 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
 
     if calculate_wer_flag:
         overall_wer = calculate_wer(references, predictions)
-        print(f"Average WER for {processed_examples}: {overall_wer*100:.1f}")
+        print(f"Average WER for {processed_examples} examples: {overall_wer*100:.1f}")
 
         if save_file:
             result = {
