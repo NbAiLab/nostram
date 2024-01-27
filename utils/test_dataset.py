@@ -99,7 +99,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
     parser.add_argument("--name", type=str, required=False, default="",help="Name of the dataset subset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
-    parser.add_argument("--text_field", type=str, required=True, default="text" help="Field where the text is stored in the dataset.")
+    parser.add_argument("--text_field", type=str, required=True, default="text", help="Field where the text is stored in the dataset.")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
