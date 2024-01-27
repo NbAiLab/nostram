@@ -43,7 +43,7 @@ def calculate_wer(references, predictions):
     normalized_predictions = [normalizer(pred) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
+def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
 
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
@@ -70,10 +70,10 @@ def process_audio_data(dataset_path, split, model_path, name, num_examples, task
         transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
 
         if print_predictions:
-            print(f"| {example['text']} | {transcription} |")
+            print(f"| {example[text_field]} | {transcription} |")
 
         if calculate_wer_flag:
-            references.append(example['text'])
+            references.append(example[text_field])
             predictions.append(transcription)
 
     if calculate_wer_flag:
@@ -99,6 +99,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
     parser.add_argument("--name", type=str, required=False, default="",help="Name of the dataset subset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
+    parser.add_argument("--text_field", type=str, required=True, default="text" help="Field where the text is stored in the dataset.")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
@@ -109,4 +110,4 @@ if __name__ == "__main__":
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
