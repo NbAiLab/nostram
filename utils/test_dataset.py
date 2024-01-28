@@ -106,7 +106,7 @@ if __name__ == "__main__":
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
-    parser.add_argument("--from_flax", action="store_false", help="Use flax weights.")
+    parser.add_argument("--from_flax", action="store_true", help="Use flax weights.")
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
