@@ -43,13 +43,13 @@ def calculate_wer(references, predictions):
     normalized_predictions = [normalizer(pred) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file):
+def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax):
 
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
     
-    processor = WhisperProcessor.from_pretrained(model_path, from_flax=False)
-    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=False)
+    processor = WhisperProcessor.from_pretrained(model_path, from_flax=from_flax)
+    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=from_flax)
     
     device = torch.device(f"cuda:{device}" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -106,8 +106,9 @@ if __name__ == "__main__":
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
+    parser.add_argument("--from_flax", action="store_false", help="Use flax weights.")
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file)
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax)
