@@ -64,6 +64,11 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         processed_examples += 1
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
         sampling_rate = example["audio"]["sampling_rate"]
+        
+        if sampling_rate != 16000:
+            waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
+            sampling_rate = 16000  # Update the sampling rate
+        
         input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
 
         predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256)
