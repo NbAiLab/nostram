@@ -31,7 +31,7 @@ def normalizer(text, extra_clean=False):
     before_clean = text
     if extra_clean:
         # Remove specific words and text within star brackets
-        text = re.sub(r'\b(emm|hmm|heh|eee|mmm)\b', '', text)
+        text = re.sub(r'\b(emm|hmm|heh|eee|mmm|qqq)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
 
     # If the text is empty after cleaning, use the original text
