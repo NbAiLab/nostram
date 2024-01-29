@@ -77,7 +77,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
                 "language": "N/A",
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
-                "wer": overall_wer * 100
+                "wer": overall_wer
             }
             with open(save_file, 'a') as f:
                 f.write(json.dumps(result) + "\n")
