@@ -105,6 +105,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         if save_file:
             result = {
                 "dataset_path": dataset_path,
+                "extra_clean": extra_clean,
                 "model_path": model_path,
                 "name": name,
                 "split": split,
