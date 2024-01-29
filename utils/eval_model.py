@@ -11,6 +11,8 @@ import logging
 import librosa
 import re
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC, WhisperProcessor, WhisperForConditionalGeneration
+from transformers import pipeline
+
 
 # Suppress specific warning categories
 #warnings.filterwarnings('ignore', category=UserWarning)
@@ -47,7 +49,6 @@ def normalizer(text, extra_clean=False):
         jiwer.RemoveWhiteSpace(replace_by_space=True)
     ])
 
-    print(text)
     return transformation(text)
 
 def calculate_wer(references, predictions, extra_clean=False):
@@ -73,10 +74,10 @@ def transcribe_with_model(processor, model, waveform, sampling_rate, model_type,
         predicted_ids = model.generate(input_features, task='transcribe', language='no', return_timestamps=True, max_new_tokens=256)
         transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
     elif model_type == 'wav2vec2':
-        input_values = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_values.to(device)
-        logits = model(input_values).logits
-        predicted_ids = torch.argmax(logits, dim=-1)
-        transcription = processor.batch_decode(predicted_ids)[0]
+        # Use pipeline for Wav2Vec2
+        pipe = pipeline(model=model, tokenizer=processor)
+        transcription = pipe(waveform, sampling_rate=sampling_rate)[0]['text']
+
     return transcription
 
 def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, extra_clean, model_type):
