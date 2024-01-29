@@ -52,6 +52,8 @@ def normalizer(text, extra_clean=False):
 def calculate_wer(references, predictions, extra_clean=False):
     normalized_references = [normalizer(ref, extra_clean) for ref in references]
     normalized_predictions = [normalizer(pred, extra_clean) for pred in predictions]
+    print(f"{normalized_references}-{normalized_predictions}")
+    
     return jiwer.wer(normalized_references, normalized_predictions)
 
 def load_model_and_processor(model_path, model_type, from_flax):
