@@ -101,4 +101,10 @@ if __name__ == "__main__":
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Wav2Vec2 model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
-    parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set
+    parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
+    parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to.")
+    parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
+    parser.add_argument("--extra_clean", action="store_true", help="Apply extra cleaning to the text for hesitations and star brackets.")
+
+    args = parser.parse_args()
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name, args.num_examples, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.extra_clean)
