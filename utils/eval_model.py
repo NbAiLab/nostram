@@ -47,12 +47,12 @@ def normalizer(text, extra_clean=False):
         jiwer.RemoveWhiteSpace(replace_by_space=True)
     ])
 
+    print(text)
     return transformation(text)
 
 def calculate_wer(references, predictions, extra_clean=False):
     normalized_references = [normalizer(ref, extra_clean) for ref in references]
     normalized_predictions = [normalizer(pred, extra_clean) for pred in predictions]
-    print(f"{normalized_references}-{normalized_predictions}")
     
     return jiwer.wer(normalized_references, normalized_predictions)
 
