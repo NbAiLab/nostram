@@ -31,14 +31,18 @@ logging.getLogger('datasets').setLevel(logging.ERROR)
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
 def normalizer(text, extra_clean=False):
-    pretext = text
+    before_clean = text
     if extra_clean:
         # Remove specific words and text within star brackets
         text = re.sub(r'\b(emm|hmm|heh|eee|mmm)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
 
-    if pretext != text:
-        print(f"Text cleaned from '{pretext}' to '{text}'")
+    # If the text is empty after cleaning, use the original text
+    if text == "":
+        text = before_clean
+        
+    #if pretext != text:
+    #    print(f"Text cleaned from:\n '{pretext}'\n to\n '{text}'")
     
     # Standard transformations
     transformation = jiwer.Compose([
