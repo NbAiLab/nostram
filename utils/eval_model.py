@@ -13,16 +13,16 @@ import re
 from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC, WhisperProcessor, WhisperForConditionalGeneration
 
 # Suppress specific warning categories
-warnings.filterwarnings('ignore', category=UserWarning)
-warnings.filterwarnings('ignore', category=FutureWarning)
+#warnings.filterwarnings('ignore', category=UserWarning)
+#warnings.filterwarnings('ignore', category=FutureWarning)
 
 # Set TensorFlow logging to error level only
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-logging.getLogger('tensorflow').setLevel(logging.ERROR)
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+#logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
 # Set other logging levels
-logging.getLogger('transformers').setLevel(logging.ERROR)
-logging.getLogger('datasets').setLevel(logging.ERROR)
+#logging.getLogger('transformers').setLevel(logging.ERROR)
+#logging.getLogger('datasets').setLevel(logging.ERROR)
 
 # Just needed if the dataset requires authentication
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
