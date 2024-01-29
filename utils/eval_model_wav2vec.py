@@ -1,6 +1,5 @@
 import argparse
 import numpy as np
-import torch
 from datasets import load_dataset
 import os
 import warnings
@@ -9,7 +8,7 @@ import json
 from datetime import datetime
 import librosa
 import re
-from transformers import Wav2Vec2Processor, pipeline
+from transformers import pipeline
 
 # Suppress specific warning categories
 warnings.filterwarnings('ignore', category=UserWarning)
@@ -39,15 +38,9 @@ def calculate_wer(references, predictions, extra_clean=False):
     normalized_predictions = [normalizer(pred, extra_clean) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def transcribe_with_model(asr_pipeline, waveform, processor):
-    input_values = processor(waveform, return_tensors="pt", padding=True).input_values
-    transcription = asr_pipeline(input_values)[0]['text']
-    return transcription
-
 def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, print_predictions, calculate_wer_flag, device, save_file, extra_clean):
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
-    processor = Wav2Vec2Processor.from_pretrained(model_path)
     asr_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
 
     references = []
@@ -60,11 +53,8 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         processed_examples += 1
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
         sampling_rate = example["audio"]["sampling_rate"]
-        
-        if sampling_rate != 16000:
-            waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
 
-        transcription = transcribe_with_model(asr_pipeline, waveform, processor)
+        transcription = asr_pipeline(waveform, sampling_rate=sampling_rate)[0]['text']
 
         if print_predictions:
             print(f"| {example[text_field]} | {transcription} |")
