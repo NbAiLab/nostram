@@ -54,7 +54,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
         sampling_rate = example["audio"]["sampling_rate"]
 
-        transcription = asr_pipeline(waveform, sampling_rate=sampling_rate)[0]['text']
+        transcription = asr_pipeline(waveform)[0]['text']
 
         if print_predictions:
             print(f"| {example[text_field]} | {transcription} |")
