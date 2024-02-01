@@ -52,7 +52,11 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
             break
         processed_examples += 1
         waveform = np.array(example["audio"]["array"], dtype=np.float32)
-        #sampling_rate = example["audio"]["sampling_rate"]
+        sampling_rate = example["audio"]["sampling_rate"]
+
+        if sampling_rate != 16000:
+            waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
+            sampling_rate = 16000
 
         transcription = asr_pipeline(waveform)['text']
 
