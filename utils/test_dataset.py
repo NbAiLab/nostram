@@ -60,7 +60,7 @@ def calculate_wer(references, predictions,extra_clean=False):
     normalized_predictions = [normalizer(pred, extra_clean) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, extra_clean):
+def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams, extra_clean):
 
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
@@ -88,7 +88,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         
         input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
 
-        predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256)
+        predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256, num_beams=num_beams)
         transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
 
         if print_predictions:
@@ -112,6 +112,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
                 "language": language,
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
+                "num_beams": num_beams,
                 "wer": overall_wer
             }
             with open(save_file, 'a') as f:
@@ -125,6 +126,7 @@ if __name__ == "__main__":
     parser.add_argument("--text_field", type=str, default="text", help="Field where the text is stored in the dataset.")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
+    parser.add_argument("--num_beams", type=int, default=1, help="Number of beams.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
@@ -135,4 +137,4 @@ if __name__ == "__main__":
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax, args.extra_clean)
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax, args.num_beams,args.extra_clean)
