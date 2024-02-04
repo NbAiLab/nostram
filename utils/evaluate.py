@@ -67,7 +67,7 @@ def calculate_wer(references, predictions, extra_clean=False, super_normalize=Fa
 
 def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, 
                        print_predictions, calculate_wer_flag, device, save_file, num_beams=1,
-                       extra_clean=False, super_normalize=False):
+                       extra_clean=False, super_normalize=False, model_type="whisper"):
     """
     Process audio data from a dataset using a Whisper model pipeline and calculate WER if requested.
     
@@ -77,7 +77,17 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
     device = 0 if torch.cuda.is_available() else -1
-    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
+    
+    if model_type == 'whisper':
+        model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
+        generate_kwargs = {'task': task, 'language': language, device=device}
+    elif model_type == 'wav2vec':
+        # Note: Adjust the pipeline task if necessary for wav2vec
+        model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
+        generate_kwargs = {}
+        
+    if num_beams > 1:
+            generate_kwargs['num_beams'] = num_beams
 
     references, predictions = [], []
     processed_examples = 0
@@ -91,12 +101,8 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         
         if sampling_rate != 16000:
             waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
-        
-        generate_kwargs = {'task': task, 'language': language}
-        if num_beams > 1:
-            generate_kwargs['num_beams'] = num_beams
 
-        transcription = whisper_pipeline(waveform, generate_kwargs=generate_kwargs)["text"]
+        transcription = model_pipeline(waveform, **generate_kwargs)["text"]
 
 
         if print_predictions:
@@ -143,8 +149,10 @@ if __name__ == "__main__":
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     parser.add_argument("--num_beams", type=int, default=1, help="Number of beams to use for decoding.")
+    parser.add_argument("--model_type", type=str, default="whisper", help="Model type: 'whisper' or 'wav2vec'.")
+
     
     args = parser.parse_args()
     process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,
                        args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer,
-                       args.device, args.save_file, args.extra_clean, args.super_normalize, args.num_beams)
+                       args.device, args.save_file, args.extra_clean, args.super_normalize, args.num_beams, args.model_type)
