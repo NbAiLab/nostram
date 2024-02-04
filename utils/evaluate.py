@@ -6,9 +6,9 @@ from datasets import load_dataset
 from transformers import pipeline
 
 # Set up logging to report only errors and suppress specific warnings for cleaner output.
-logging.basicConfig(level=logging.ERROR)
-warnings.filterwarnings('ignore', category=(UserWarning, FutureWarning))
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+#logging.basicConfig(level=logging.ERROR)
+#warnings.filterwarnings('ignore', category=(UserWarning, FutureWarning))
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # Set environment variable for Google Cloud authentication if needed for dataset access.
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
