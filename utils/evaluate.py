@@ -80,7 +80,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
     
     if model_type == 'whisper':
         model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
-        generate_kwargs = {'task': task, 'language': language, device=device}
+        generate_kwargs = {'task': task, 'language': language}
     elif model_type == 'wav2vec':
         # Note: Adjust the pipeline task if necessary for wav2vec
         model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
