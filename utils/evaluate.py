@@ -66,7 +66,7 @@ def calculate_wer(references, predictions, extra_clean=False, super_normalize=Fa
     return jiwer.wer(normalized_references, normalized_predictions)
 
 def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, 
-                       print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams=1,
+                       print_predictions, calculate_wer_flag, device, save_file, num_beams=1,
                        extra_clean=False, super_normalize=False):
     """
     Process audio data from a dataset using a Whisper model pipeline and calculate WER if requested.
@@ -77,7 +77,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
     device = 0 if torch.cuda.is_available() else -1
-    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device, from_flax=from_flax)
+    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
 
     references, predictions = [], []
     processed_examples = 0
@@ -134,7 +134,6 @@ if __name__ == "__main__":
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
-    parser.add_argument("--from_flax", action="store_true", help="Use flax weights.")
     parser.add_argument("--extra_clean", action="store_true", help="Cleans the text for hesitations and star brackets")
     parser.add_argument("--super_normalize", action="store_true", help="Uses the normalisation from the Wav2Vec article")
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
@@ -144,4 +143,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,
                        args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer,
-                       args.device, args.save_file, args.from_flax, args.extra_clean, args.super_normalize, args.num_beams)
+                       args.device, args.save_file, args.extra_clean, args.super_normalize, args.num_beams)
