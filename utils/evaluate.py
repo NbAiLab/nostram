@@ -1,51 +1,42 @@
-## Old script - use eval_model.py instead
-
-
-import argparse
+import argparse, json, logging, os, re, warnings
+import torch, librosa, jiwer
 import numpy as np
-from transformers import WhisperProcessor, WhisperForConditionalGeneration
-import torch
-from datasets import load_dataset
-import os
-import warnings
-import jiwer
-import json
 from datetime import datetime
-import logging
-import librosa
-import re
+from datasets import load_dataset
+from transformers import pipeline
 
-# Suppress specific warning categories
-warnings.filterwarnings('ignore', category=UserWarning)
-warnings.filterwarnings('ignore', category=FutureWarning)
-
-# Set TensorFlow logging to error level only
+# Set up logging to report only errors and suppress specific warnings for cleaner output.
+logging.basicConfig(level=logging.ERROR)
+warnings.filterwarnings('ignore', category=(UserWarning, FutureWarning))
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-logging.getLogger('tensorflow').setLevel(logging.ERROR)
 
-# Set other logging levels
-logging.getLogger('transformers').setLevel(logging.ERROR)
-logging.getLogger('datasets').setLevel(logging.ERROR)
-
-# Just needed if the dataset requires authentication
+# Set environment variable for Google Cloud authentication if needed for dataset access.
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
 def normalizer(text, extra_clean=False, super_normalize=False):
+    """
+    Normalize the given text by applying various transformations.
+    
+    Args:
+    text (str): The text to be normalized.
+    extra_clean (bool): If True, removes specific words and text within star brackets.
+    super_normalize (bool): If True, applies additional normalization (implementation pending).
+
+    Returns:
+    str: The normalized text.
+    """
     before_clean = text
     if extra_clean:
-        # Remove specific words and text within star brackets        
         text = re.sub(r'\b(emm|hmm|heh|eee|mmm|qqq)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
 
-    # If the text is empty after cleaning, use the original text
     if text == "":
         text = before_clean
     
     if super_normalize:
-        # Will be written later
-        ...
+        # Implementation pending
+        pass
       
-    # Standard transformations
     transformation = jiwer.Compose([
         jiwer.ToLowerCase(),
         jiwer.RemoveMultipleSpaces(),
@@ -56,24 +47,39 @@ def normalizer(text, extra_clean=False, super_normalize=False):
 
     return transformation(text)
 
-def calculate_wer(references, predictions,extra_clean=False,super_normalize=False):
+def calculate_wer(references, predictions, extra_clean=False, super_normalize=False):
+    """
+    Calculate the Word Error Rate (WER) between reference and predicted texts.
+    
+    Args:
+    references (list): The list of reference texts.
+    predictions (list): The list of predicted texts.
+    extra_clean (bool): Apply extra cleaning to texts.
+    super_normalize (bool): Apply super normalization to texts.
+
+    Returns:
+    float: The calculated WER.
+    """
     normalized_references = [normalizer(ref, extra_clean, super_normalize) for ref in references]
     normalized_predictions = [normalizer(pred, extra_clean, super_normalize) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams, extra_clean=False, super_normalize=False):
-
+def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, 
+                       print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams=1,
+                       extra_clean=False, super_normalize=False):
+    """
+    Process audio data from a dataset using a Whisper model pipeline and calculate WER if requested.
+    
+    Args:
+    see the argparse arguments below
+    """
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
-
     
-    processor = WhisperProcessor.from_pretrained(model_path, from_flax=from_flax)
-    model = WhisperForConditionalGeneration.from_pretrained(model_path, from_flax=from_flax)
-    
-    device = torch.device(f"cuda:{device}" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+    device = 0 if torch.cuda.is_available() else -1
+    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, from_flax=from_flax, device=device, 
+                                config={"task": task, "language": language, "num_beams": num_beams})
 
-    references = []
-    predictions = []
+    references, predictions = [], []
     processed_examples = 0
     
     for idx, example in enumerate(dataset):
@@ -85,12 +91,8 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         
         if sampling_rate != 16000:
             waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
-            sampling_rate = 16000  # Update the sampling rate
         
-        input_features = processor(waveform, sampling_rate=sampling_rate, return_tensors="pt").input_features.to(device)
-
-        predicted_ids = model.generate(input_features, task=task, language=language, return_timestamps=True, max_new_tokens=256, num_beams=num_beams)
-        transcription = processor.batch_decode(predicted_ids, decode_with_timestamps=False, skip_special_tokens=True)[0]
+        transcription = whisper_pipeline(waveform)["text"]
 
         if print_predictions:
             print(f"| {example[text_field]} | {transcription} |")
@@ -113,21 +115,20 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
                 "language": language,
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
-                "num_beams": num_beams,
-                "wer": overall_wer
+                "wer": overall_wer,
+                "num_beams": num_beams
             }
             with open(save_file, 'a') as f:
                 f.write(json.dumps(result) + "\n")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process audio data using a Whisper model.")
+    parser = argparse.ArgumentParser(description="Process audio data using a Whisper model pipeline.")
     parser.add_argument("--dataset_path", type=str, required=True, help="Path or identifier to the dataset.")
-    parser.add_argument("--name", type=str, required=False, default="",help="Name of the dataset subset.")
+    parser.add_argument("--name", type=str, required=False, default="", help="Name of the dataset subset.")
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
     parser.add_argument("--text_field", type=str, default="text", help="Field where the text is stored in the dataset.")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
-    parser.add_argument("--num_beams", type=int, default=1, help="Number of beams.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
     parser.add_argument("--print_predictions", action="store_true", help="Print predictions if set.")
@@ -137,6 +138,9 @@ if __name__ == "__main__":
     parser.add_argument("--super_normalize", action="store_true", help="Uses the normalisation from the Wav2Vec article")
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
+    parser.add_argument("--num_beams", type=int, default=1, help="Number of beams to use for decoding.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax, args.num_beams,args.extra_clean,args.super_normalize)
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,
+                       args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer,
+                       args.device, args.save_file, args.from_flax, args.extra_clean, args.super_normalize, args.num_beams)
