@@ -30,20 +30,22 @@ logging.getLogger('datasets').setLevel(logging.ERROR)
 # Just needed if the dataset requires authentication
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy.json"
 
-def normalizer(text, extra_clean=False):
+def normalizer(text, extra_clean=False, super_normalize=False):
     before_clean = text
     if extra_clean:
         # Remove specific words and text within star brackets
+        TODO here as well!!!
+        
         text = re.sub(r'\b(emm|hmm|heh|eee|mmm|qqq)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
 
     # If the text is empty after cleaning, use the original text
     if text == "":
         text = before_clean
-        
-    #if pretext != text:
-    #    print(f"Text cleaned from:\n '{pretext}'\n to\n '{text}'")
     
+    if super_normalize:
+        ...
+      
     # Standard transformations
     transformation = jiwer.Compose([
         jiwer.ToLowerCase(),
@@ -55,12 +57,12 @@ def normalizer(text, extra_clean=False):
 
     return transformation(text)
 
-def calculate_wer(references, predictions,extra_clean=False):
-    normalized_references = [normalizer(ref, extra_clean) for ref in references]
-    normalized_predictions = [normalizer(pred, extra_clean) for pred in predictions]
+def calculate_wer(references, predictions,extra_clean=False,super_normalize=False):
+    normalized_references = [normalizer(ref, extra_clean, super_normalize) for ref in references]
+    normalized_predictions = [normalizer(pred, extra_clean, super_normalize) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams, extra_clean):
+def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, print_predictions, calculate_wer_flag, device, save_file, from_flax, num_beams, extra_clean=False, super_normalize=False):
 
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
 
@@ -99,7 +101,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
             predictions.append(transcription)
 
     if calculate_wer_flag:
-        overall_wer = calculate_wer(references, predictions, extra_clean)
+        overall_wer = calculate_wer(references, predictions, extra_clean, super_normalize)
         print(f"Average WER for {processed_examples} examples: {overall_wer*100:.1f}")
 
         if save_file:
@@ -133,8 +135,9 @@ if __name__ == "__main__":
     parser.add_argument("--calculate_wer", action="store_true", help="Calculate WER if set.")
     parser.add_argument("--from_flax", action="store_true", help="Use flax weights.")
     parser.add_argument("--extra_clean", action="store_true", help="Cleans the text for hesitations and star brackets")
+    parser.add_argument("--super_normalize", action="store_true", help="Uses the normalisation from the Wav2Vec article")
     parser.add_argument("--device", type=int, required=False, default=0, help="For GPU only. The device to load the model to")
     parser.add_argument("--save_file", type=str, help="Path to save results in JSON Lines format.")
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax, args.num_beams,args.extra_clean)
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer, args.device, args.save_file, args.from_flax, args.num_beams,args.extra_clean,args.super_normalize)
