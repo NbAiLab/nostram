@@ -92,7 +92,11 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         if sampling_rate != 16000:
             waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
         
-        transcription = whisper_pipeline(waveform, generate_kwargs={'num_beams': num_beams, 'task': task, 'language': language})["text"]
+        generate_kwargs = {'task': task, 'language': language}
+        if num_beams > 1:
+            generate_kwargs['num_beams'] = num_beams
+
+        transcription = whisper_pipeline(waveform, generate_kwargs=generate_kwargs)["text"]
 
 
         if print_predictions:
