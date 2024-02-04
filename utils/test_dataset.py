@@ -33,9 +33,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/perk/service_account_nancy
 def normalizer(text, extra_clean=False, super_normalize=False):
     before_clean = text
     if extra_clean:
-        # Remove specific words and text within star brackets
-        TODO here as well!!!
-        
+        # Remove specific words and text within star brackets        
         text = re.sub(r'\b(emm|hmm|heh|eee|mmm|qqq)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
 
@@ -44,6 +42,7 @@ def normalizer(text, extra_clean=False, super_normalize=False):
         text = before_clean
     
     if super_normalize:
+        # Will be written later
         ...
       
     # Standard transformations
