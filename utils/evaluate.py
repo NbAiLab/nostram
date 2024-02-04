@@ -66,8 +66,8 @@ def calculate_wer(references, predictions, extra_clean=False, super_normalize=Fa
     return jiwer.wer(normalized_references, normalized_predictions)
 
 def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, 
-                       print_predictions, calculate_wer_flag, device, save_file, num_beams=1,
-                       extra_clean=False, super_normalize=False, model_type="whisper"):
+                       print_predictions, calculate_wer_flag, device, save_file, 
+                       extra_clean=False, super_normalize=False, num_beams=1, model_type="whisper"):
     """
     Process audio data from a dataset using a Whisper model pipeline and calculate WER if requested.
     
