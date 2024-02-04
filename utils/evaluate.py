@@ -77,8 +77,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
     device = 0 if torch.cuda.is_available() else -1
-    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, from_flax=from_flax, device=device, 
-                                config={"task": task, "language": language, "num_beams": num_beams})
+    whisper_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device, from_flax=from_flax)
 
     references, predictions = [], []
     processed_examples = 0
@@ -93,7 +92,8 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
         if sampling_rate != 16000:
             waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
         
-        transcription = whisper_pipeline(waveform)["text"]
+        transcription = whisper_pipeline(waveform, generate_kwargs={'num_beams': num_beams, 'task': task, 'language': language})["text"]
+
 
         if print_predictions:
             print(f"| {example[text_field]} | {transcription} |")
