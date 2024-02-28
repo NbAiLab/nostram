@@ -4,4 +4,6 @@ Denne siden gir oversikt over hvem som leverer løsninger basert på NB-Whisper.
 Hvis du ønsker å nevnes på siden, send en epost til [per.kummervold@nb.no](mailto:per.kummervold@nb.no). Inkluder ett avsnitt med beskrivelse av løsningen, gjerne med linker. Vi setter pris på om beskrivelsen er relativt nøytral.
 
 ## JoJo
-Mac program for å transkribere tale. Støtter NB-Whisper. Sjekk ut: [JoJo](https://apps.apple.com/no/app/jojo-transcribe/id1659864300?mt=12]).
+Mac-app for å transkribere tale til tekst, med støtte for retting og eksport i flere formater, der alt skjer lokalt på din egen maskin. Finn den i [App Store](https://apps.apple.com/no/app/jojo-transcribe/id1659864300?mt=12]).
+
+
