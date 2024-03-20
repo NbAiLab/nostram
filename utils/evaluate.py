@@ -3,7 +3,7 @@ import torch, librosa, jiwer
 import numpy as np
 from datetime import datetime
 from datasets import load_dataset
-from transformers import pipeline
+from transformers import pipeline, WhisperForConditionalGeneration
 
 # Set up logging to report only errors and suppress specific warnings for cleaner output.
 logging.basicConfig(level=logging.ERROR)
@@ -65,7 +65,7 @@ def calculate_wer(references, predictions, extra_clean=False, super_normalize=Fa
     normalized_predictions = [normalizer(pred, extra_clean, super_normalize) for pred in predictions]
     return jiwer.wer(normalized_references, normalized_predictions)
 
-def process_audio_data(dataset_path, split, text_field, model_path, name, num_examples, task, language, 
+def process_audio_data(dataset_path, split, text_field, model_path, revision, name, num_examples, task, language, 
                        print_predictions, calculate_wer_flag, device, save_file, 
                        extra_clean=False, super_normalize=False, num_beams=1, model_type="whisper"):
     """
@@ -79,11 +79,12 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
     device = 0 if torch.cuda.is_available() else -1
     
     if model_type == 'whisper':
-        model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
+        model = WhisperForConditionalGeneration.from_pretrained(model_path, revision=revision, from_flax=True)
+        model_pipeline = pipeline("automatic-speech-recognition", model=model, device=device)
         generate_kwargs = {'task': task, 'language': language}
     elif model_type == 'wav2vec':
         # Note: Adjust the pipeline task if necessary for wav2vec
-        model_pipeline = pipeline("automatic-speech-recognition", model=model_path, device=device)
+        model_pipeline = pipeline("automatic-speech-recognition", model=model_path, revision=revision, device=device)
         generate_kwargs = {}
         
     if num_beams > 1:
@@ -121,6 +122,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, name, num_ex
                 "dataset_path": dataset_path,
                 "extra_clean": extra_clean,
                 "model_path": model_path,
+                "revision": revision,
                 "name": name,
                 "split": split,
                 "language": language,
@@ -139,6 +141,7 @@ if __name__ == "__main__":
     parser.add_argument("--split", type=str, required=True, help="Dataset split to use (train, test, validation).")
     parser.add_argument("--text_field", type=str, default="text", help="Field where the text is stored in the dataset.")
     parser.add_argument("--model_path", type=str, required=True, help="Path to the pre-trained Whisper model.")
+    parser.add_argument("--revision", type=str, required=False, default="main", help="Model revision.")
     parser.add_argument("--num_examples", type=int, default=999999999, help="Number of examples to process.")
     parser.add_argument("--task", type=str, default="transcribe", help="Transcribe, translate or both.")
     parser.add_argument("--language", type=str, default="no", help="Specify language (ie no, nn or en) if you want to override the setting in the dataset.")
@@ -153,6 +156,6 @@ if __name__ == "__main__":
 
     
     args = parser.parse_args()
-    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.name,
+    process_audio_data(args.dataset_path, args.split, args.text_field, args.model_path, args.revision, args.name,
                        args.num_examples, args.task, args.language, args.print_predictions, args.calculate_wer,
                        args.device, args.save_file, args.extra_clean, args.super_normalize, args.num_beams, args.model_type)
