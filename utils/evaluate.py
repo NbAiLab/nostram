@@ -3,7 +3,7 @@ import torch, librosa, jiwer
 import numpy as np
 from datetime import datetime
 from datasets import load_dataset
-from transformers import pipeline, WhisperForConditionalGeneration
+from transformers import pipeline, AutoFeatureExtractor, WhisperProcessor, WhisperTokenizer, WhisperForConditionalGeneration
 
 # Set up logging to report only errors and suppress specific warnings for cleaner output.
 logging.basicConfig(level=logging.ERROR)
@@ -77,10 +77,14 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
     device = 0 if torch.cuda.is_available() else -1
-    
+    print(f"Device={device}")
+
     if model_type == 'whisper':
         model = WhisperForConditionalGeneration.from_pretrained(model_path, revision=revision, from_flax=True)
-        model_pipeline = pipeline("automatic-speech-recognition", model=model, device=device)
+        processor = WhisperProcessor.from_pretrained(model_path)
+        tokenizer = WhisperTokenizer.from_pretrained(model_path)
+        feature_extractor = AutoFeatureExtractor.from_pretrained(model_path) 
+        model_pipeline = pipeline("automatic-speech-recognition", model=model, tokenizer=tokenizer, feature_extractor=feature_extractor, device=device)
         generate_kwargs = {'task': task, 'language': language}
     elif model_type == 'wav2vec':
         # Note: Adjust the pipeline task if necessary for wav2vec
