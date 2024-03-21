@@ -106,8 +106,8 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
         
         if sampling_rate != 16000:
             waveform = librosa.resample(waveform, orig_sr=sampling_rate, target_sr=16000)
-
-        transcription = model_pipeline(waveform, generate_kwargs=generate_kwargs)[text_field]
+        
+        transcription = model_pipeline(waveform, generate_kwargs=generate_kwargs)[text]
 
 
         if print_predictions:
