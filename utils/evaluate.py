@@ -76,7 +76,7 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
     """
     dataset = load_dataset(dataset_path, name=name, split=split, streaming=True)
     
-    device = 0 if torch.cuda.is_available() else -1
+    device = device if torch.cuda.is_available() else -1
     print(f"Device={device}")
 
     if model_type == 'whisper':
