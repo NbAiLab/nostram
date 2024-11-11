@@ -1,6 +1,7 @@
 import argparse, json, logging, os, re, warnings
 import torch, librosa, jiwer
 import numpy as np
+import time
 from datetime import datetime
 from datasets import load_dataset
 from transformers import pipeline, AutoFeatureExtractor, WhisperProcessor, WhisperTokenizer, WhisperForConditionalGeneration
@@ -26,14 +27,15 @@ def normalizer(text, extra_clean=False, super_normalize=False):
     Returns:
     str: The normalized text.
     """
+
     before_clean = text
     if extra_clean:
         text = re.sub(r'\b(emm|hmm|heh|eee|mmm|qqq)\b', '', text)
         text = re.sub(r'<[^>]*>', '', text)
-
-    if text == "":
-        text = before_clean
     
+    if text!=before_clean:
+        print("Something happened")
+
     if super_normalize:
         # Implementation pending
         pass
@@ -97,6 +99,9 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
     references, predictions = [], []
     processed_examples = 0
     
+    # Start timing the processing loop
+    start_time = time.time()
+
     for idx, example in enumerate(dataset):
         if idx >= num_examples:
             break
@@ -116,6 +121,10 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
         if calculate_wer_flag:
             references.append(example[text_field])
             predictions.append(transcription)
+    
+    # Stop timing
+    end_time = time.time()
+    processing_time = end_time - start_time
 
     if calculate_wer_flag:
         overall_wer = calculate_wer(references, predictions, extra_clean, super_normalize)
@@ -133,10 +142,13 @@ def process_audio_data(dataset_path, split, text_field, model_path, revision, na
                 "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                 "example_count": processed_examples,
                 "wer": overall_wer,
-                "num_beams": num_beams
+                "num_beams": num_beams,
+                "processing_time": processing_time  # Include the processing time here
             }
             with open(save_file, 'a') as f:
                 f.write(json.dumps(result) + "\n")
+    # Print processing time for verification
+    print(f"Processing time for {processed_examples} examples: {processing_time:.2f} seconds")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process audio data using a Whisper model pipeline.")
