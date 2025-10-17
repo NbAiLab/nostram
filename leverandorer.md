@@ -12,3 +12,5 @@ __[Skriveriet.no](https://skriveriet.no)__ tilbyr transkripsjonstjenester av lyd
 ## Autotekst
 [Autotekst](https://www.uio.no/tjenester/it/lyd-video/autotekst/) er en UiO-utviklet tjeneste for transkribering av tale til tekst. Hele tjenesten kjører på UiOs servere, og ingen data forlater UiOs infrastruktur. Fri bruk av UiOs ansatte og studenter. Tilgang kan kjøpes av alle ikke-kommersielle aktører, og mange institusjoner har allerede ingått avtale.
 
+## transkribere.no
+[transkribere.no](https://transkribere.no) is a fast and accurate transcription of audio files based on NB-Whisper. Accountless upload, EU hosting, automatic deletion within 24 hours.
