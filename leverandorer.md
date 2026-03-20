@@ -14,3 +14,6 @@ __[Skriveriet.no](https://skriveriet.no)__ tilbyr transkripsjonstjenester av lyd
 
 ## transkribere.no
 [transkribere.no](https://transkribere.no) is a fast and accurate transcription of audio files based on NB-Whisper. Accountless upload, EU hosting, automatic deletion within 24 hours.
+
+## LocalWhisper
+[LocalWhisper](https://github.com/tomahg/LocalWhisper) er en gratis og åpen kildekode Windows-app som lar deg diktere tekst direkte inn i alle applikasjoner ved hjelp av en global hurtigtast. Alt kjører lokalt, NB-Whisper-modellen hostes på din egen maskinvare, og ingen lyd forlater nettverket ditt. Støtter også transkribering av lydfiler.
