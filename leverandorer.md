@@ -20,3 +20,6 @@ __[Skriveriet.no](https://skriveriet.no)__ tilbyr transkripsjonstjenester av lyd
 
 ## Kviskr
 [Kviskr](https://kviskr.no) er en Mac-app som lar deg diktere tekst direkte inn i alle applikasjoner: hold inne en hurtigtast, snakk og slipp. Talegjenkjenningen kjører lokalt med NB-Whisper, og appen støtter både bokmål og nynorsk. Støtter også transkribering av lydfiler. Krever Mac med Apple Silicon.
+
+## norsk-tale
+[norsk-tale](https://github.com/avalyset/norsk-tale) er et gratis, åpent tillegg (Apache-2.0) til Claude Code som gir norsk diktering og transkribering av lydfiler med NB-Whisper. Talegjenkjenningen kjører lokalt med whisper.cpp, og lyden forlater ikke maskinen. Tillegget har valg mellom bokmål og nynorsk, og en deterministisk retting av egennavn med logg over hver endring. Testet på macOS. Arkivert med DOI [10.5281/zenodo.23473248](https://doi.org/10.5281/zenodo.23473248).
