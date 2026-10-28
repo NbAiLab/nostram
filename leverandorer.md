@@ -23,3 +23,6 @@ __[Skriveriet.no](https://skriveriet.no)__ tilbyr transkripsjonstjenester av lyd
 
 ## norsk-tale
 [norsk-tale](https://github.com/avalyset/norsk-tale) er et gratis, åpent tillegg (Apache-2.0) til Claude Code som gir norsk diktering og transkribering av lydfiler med NB-Whisper. Talegjenkjenningen kjører lokalt med whisper.cpp, og lyden forlater ikke maskinen. Tillegget har valg mellom bokmål og nynorsk, og en deterministisk retting av egennavn med logg over hver endring. Testet på macOS. Arkivert med DOI [10.5281/zenodo.23473248](https://doi.org/10.5281/zenodo.23473248).
+
+## arkivklarering
+[arkivklarering](https://github.com/avalyset/arkivklarering-public) er et åpent verktøy (AGPL-3.0-or-later) for klarering før publisering av norske lokalradio- og fortellerarkiv. Det kjører lokalt, transkriberer med NB-Whisper large og large verbatim i to lag og foreslår flagg for personopplysninger. Et menneske vurderer og avgjør alt. Arkivert med DOI [10.5281/zenodo.23723666](https://doi.org/10.5281/zenodo.23723666).
